@@ -1,7 +1,7 @@
 package io.zipcoder.casino;
 
 public interface PlayForMoney {
-    void bet();
+    void placeBet(double betAmount );
 
     void resolveBets();
 }

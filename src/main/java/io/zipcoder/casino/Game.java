@@ -1,17 +1,20 @@
 package io.zipcoder.casino;
 
+import java.util.ArrayList;
+
 public class Game {
     private int round;
-    private Player currentPlayer;
-    private Player[] players;
+    private ArrayList<Player> players = new ArrayList<Player>();
 
     public void startRound() {
+
     }
 
-    public Player setActivePlayer() {
-        return null;
+    public void addPlayer(Player player){
+        players.add(player);
     }
 
-    public void endRound() {
+    public boolean isEndRound() {
+        return false;
     }
 }
