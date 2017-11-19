@@ -14,17 +14,24 @@ public class Craps extends Game implements PlayForMoney {
 
     }
 
+    public boolean passBetWinsComeOut(int roll) {
+        return (roll == 7 || roll == 11);
+    }
+
+    public boolean passBetLosesComeOut(int roll){
+        return (roll == 2 || roll == 3 || roll == 12);
+
+    }
+
     public boolean passBetWins(int roll) {
-        if (isComeOut && (roll == 7 || roll == 11)) {return true;}
-            else if (!isComeOut && (roll == point)) {return true;}
-        return false;
+        return(roll == this.point);
     }
 
     public boolean passBetLoses(int roll){
-        if (isComeOut && (roll == 2 || roll == 3 || roll == 12)) {return true;}
-        else if (!isComeOut && (roll == 7)) {return true;}
-        return false;
+        return (roll == 7);
     }
+
+
 
 
     public boolean dontPassWins(int roll){
@@ -54,7 +61,15 @@ public class Craps extends Game implements PlayForMoney {
         isComeOut = comeOut;
     }
 
+    public boolean getIsComeOut(){
+        return isComeOut;
+    }
+
     public void setPoint(Integer point) {
         this.point = point;
+    }
+
+    public int getPoint() {
+        return point;
     }
 }

@@ -11,12 +11,14 @@ public class CrapsPlayerTest {
     public void roll2DiceTest(){
 
         CrapsPlayer shooter = new CrapsPlayer();
-        Dice dice = new Dice();
 
         Integer actual = shooter.roll2Dice();
-
         Assert.assertTrue(actual <13 && actual > 0);
 
+        for(int i =0; i < 1000000; i++){
+            actual = shooter.roll2Dice();
+            Assert.assertTrue(actual <13 && actual > 0);
+        }
     }
 
 }

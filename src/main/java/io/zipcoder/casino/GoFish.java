@@ -1,12 +1,21 @@
-//package io.zipcoder.casino;
-//
-//public class GoFish extends Game {
-//    private Integer[] score;
-//    private Deck gameDeck;
-//
-//    public void requestCard() {
-//    }
-//
-//    public void giveCardToPlayer() {
-//    }
-//}
+package io.zipcoder.casino;
+
+import java.util.ArrayList;
+
+public class GoFish extends Game {
+    private Deck gameDeck;
+
+    public GoFish(){
+        this.gameDeck = new Deck();
+        gameDeck.shuffle();
+    }
+
+    public Deck getGameDeck() {
+        return gameDeck;
+    }
+
+    public Player endGameDeclareWinner(){
+        return null;
+    }
+
+}

@@ -30,21 +30,29 @@ public class Console {
             Integer roll = shooter.roll2Dice();
             shooter.printRoll();
             gameOn.setComeOut(true);
-            if((!(gameOn.passBetWins(roll)) && !(gameOn.passBetLoses(roll)))){
+            if(!gameOn.passBetWinsComeOut(roll) && !gameOn.passBetLosesComeOut(roll)){
                 do{
                     System.out.println("Roll again!");
-                  //  gameOn.setComeOut(false);
+                    if(gameOn.getIsComeOut()){
+                        gameOn.setPoint(roll);
+                    }
                     roll = shooter.roll2Dice();
                     shooter.printRoll();
-                }while(!(gameOn.passBetWins(roll)) && !(gameOn.passBetLoses(roll)));
+                    gameOn.setComeOut(false);
+                }while(roll != 7 && roll !=gameOn.getPoint());
             }
-            if(gameOn.passBetWins(roll)){
+            else if(gameOn.passBetWinsComeOut(roll)){
                 System.out.println("You win! Added " + passLineBet + " to your bank.");
 
-            }else if(gameOn.passBetLoses(roll)) {
-                System.out.println("You you lose.");
+            }else if(gameOn.passBetLosesComeOut(roll)) {
+                System.out.println("You lose.");
             }
 
+            if(gameOn.passBetWins(roll)){
+                System.out.println("You win! Added " + passLineBet + " to your bank.");
+            }else if(gameOn.passBetLoses(roll)){
+                System.out.println("You lose.");
+            }
 
 
 
