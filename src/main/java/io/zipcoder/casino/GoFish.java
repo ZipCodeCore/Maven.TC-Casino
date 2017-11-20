@@ -4,20 +4,23 @@ import io.zipcoder.casino.Console.Console;
 import io.zipcoder.casino.Deck.Card;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GoFish extends CardGame {
 
-    private int playerBookCount = 0;
-    private int dealerBookCount = 0;
-    Player dealer = new Player("Dealer", 0, 6);
+    GoFishPlayer player;
+    GoFishPlayer dealer;
 
-    public GoFish() {
 
+    public GoFish(Player player) {
+        this.player = new GoFishPlayer(player);
+        Player dealer = new Player("Dealer",0,0);
+        this.dealer = new GoFishPlayer(dealer);
     }
 
     public void goFishStart() {
-        deal(casinoplayer, dealer, 7);
+        deal(player,dealer,7);
         playerTurn();
 
 
@@ -26,22 +29,32 @@ public class GoFish extends CardGame {
     private void playerTurn() {
         boolean playing = true;
         while (playing) {
-            Console.print(casinoplayer.getStringDisplayHand());
+            Console.print(player.getStringDisplayHand());
             Card askCard = getCard("Give me all your: ");
-            if (isCardInHand(askCard, dealer.getPlayerHand())) {
-                dealer.getPlayerHand().remove(askCard);
-                casinoplayer.addCard(askCard);
+            if (isCardInHand(askCard, dealer.getHand())) {
+                dealer.getHand().remove(askCard);
+                player.addCard(askCard);
             } else {
                 Console.print("GO FISH!");
-                giveCard(casinoplayer);
+                giveCard(player);
                 playing = false;
             }
+        checkForBooks(player);
         }
     }
 
 
     private boolean dealerAsk() {
-        return false;
+        boolean playing = true;
+        while(playing){
+            dealerFindCard()
+
+        }
+    }
+
+    private Card dealerFindCard(){
+
+        return null;
     }
 
     private boolean isCardInHand(Card askCard, ArrayList<Card> hand) {
@@ -66,17 +79,17 @@ public class GoFish extends CardGame {
 
     }
 
-    private Card checkForBooks(Player player) {
-        ArrayList<Card> hand = player.getPlayerHand();
-        for (Card card1 : hand) {
+    private Card checkForBooks(GoFishPlayer player) {
+
+        for (Card card1 : player.getHand()) {
             int num = 0;
-            for (Card card2 : hand)
+            for (Card card2 : player.getHand())
                 if (card1 == card2)
                     num++;
             if (num == 4) {
                 for (int i = 0; i < 4; i++)
-                    hand.remove(card1);
-                //ADD TO PLAYER BOOK COUNT
+                    player.getHand().remove(card1);
+                player.setBookCounter(1);
                 return card1;
             }
         }
@@ -85,9 +98,9 @@ public class GoFish extends CardGame {
     }
 
     private void compareBooks() {
-        if (playerBookCount > dealerBookCount) {
+        if (player.getBookCounter() > dealer.getBookCounter()) {
             System.out.println("You win!");
-        } else if (playerBookCount < dealerBookCount) {
+        } else if (player.getBookCounter() < dealer.getBookCounter()) {
             System.out.println("You lose!");
         } else {
             System.out.println("Tie!");
