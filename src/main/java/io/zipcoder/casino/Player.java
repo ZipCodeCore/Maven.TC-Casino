@@ -1,5 +1,7 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.Deck.Card;
+
 import java.util.ArrayList;
 
 public class Player {
