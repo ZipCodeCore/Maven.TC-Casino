@@ -14,76 +14,70 @@ public class Craps extends Casino implements Gamble {
     public void start() {
         double playerCash = casinoplayer.balance;
         boolean play = true;
-        while (play == true) {
+        while (play) {
 
-            System.out.println("Player cash: " + playerCash);
+            Console.print("Player cash: " + playerCash);
             double bet;
 
             do {
                 bet = Console.getDouble("Place your bet: ");
-            } while (bet > playerCash);
+            } while (takeBet(bet));
 
             int rollONE = roll();
             int target = rollONE;
 
             if (rollONE == 7 || rollONE == 11) {
-                playerCash += bet * 2;
-                System.out.println("You win!");
+                playerCash += bet;
+                Console.print("You win!");
             } else if (rollONE == 2 || rollONE == 3 || rollONE == 12) {
                 playerCash -= bet;
-                System.out.println("You lose!");
+                Console.print("You lose!");
             } else {
-                System.out.println("Target is now " + rollONE);
+                Console.print("Target is now " + rollONE);
                 int rollTWO = roll();
                 while (rollTWO != 7) {
                     if (rollTWO == rollONE) {
-                        System.out.println("You win!");
-                        playerCash += bet * 2;
+                        Console.print("You win!");
+                        playerCash += bet;
                         break;
                     } else {
-                        System.out.println("Target is " + rollONE);
+                        Console.print("Target is " + rollONE);
                     }
                     rollTWO = roll();
                 }
                 if (rollTWO == 7) {
-                    System.out.println("You lose!");
+                    Console.print("You lose!");
                     playerCash -= bet;
                 }
             }
-            System.out.println("Press enter to play again");
-            try {
-                System.in.read();
-
-            } catch (Exception e) {
-                play = false;
-            }
-
+            play = playAgain();
         }
+
     }
 
 
         public int roll() {
-        System.out.println("Press Enter key to roll");
-        //logger.info("Rolling...");
-        try {
-            System.in.read();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Console.print("Press Enter key to roll");
+        input.nextLine();
         int dice1 = (int) (Math.random() * 6) + 1;
         int dice2 = (int) (Math.random() * 6) + 1;
 
         int sum = dice1 + dice2;
 
-        System.out.println("You rolled " + dice1 + " and " + dice2 + "\n");
-        System.out.println("Rolled " + sum);
+        Console.print("You rolled " + dice1 + " and " + dice2);
+        Console.print("Rolled " + sum);
         return sum;
+    }
+
+    private boolean playAgain(){
+        String userinput = Console.getString("Play again? Y/N");
+        return !userinput.equalsIgnoreCase("N") && !userinput.equalsIgnoreCase("no");
     }
 
 
     @Override
-    public void takeBet(double playerbet) {
-
+    public boolean takeBet(double bet) {
+        return bet > casinoplayer.balance;
     }
 
 
