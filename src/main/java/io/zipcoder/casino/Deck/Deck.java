@@ -1,9 +1,7 @@
 package io.zipcoder.casino.Deck;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.EnumSet;
 
 public class Deck {
 
@@ -43,7 +41,7 @@ public class Deck {
                 else
                     cards.add(new Card(suit, 10, Card.suitSymbols[suit.ordinal()], Card.faceSymbols[value - 10]));
 
-                cards.get(cards.size()-1).setGoFishValue(value);
+                cards.get(cards.size()-1).setGoFishValue(GoFishValue.values()[value-1]);
             }
         }
     }
