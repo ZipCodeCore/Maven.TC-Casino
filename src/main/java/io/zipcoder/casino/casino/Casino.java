@@ -1,9 +1,20 @@
 package io.zipcoder.casino.casino;
 
+import io.zipcoder.casino.nuts_n_bolts.Player;
 
 public class Casino {
 
-    private Double playerMoney;
+    private static Casino INSTANCE = null;
+    private Player player;
+
+    private Casino(){}
+
+    public static Casino getInstance(){
+        if(INSTANCE == null){
+            INSTANCE = new Casino();
+        }
+        return INSTANCE;
+    }
 
     public void startCasino(){}
 
@@ -11,6 +22,6 @@ public class Casino {
         //switch case to game of choice
     }
 
-
+    private void exitCasino(){}
 
 }

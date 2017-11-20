@@ -1,9 +1,8 @@
 package io.zipcoder.casino.games.gofish;
 
 import io.zipcoder.casino.nuts_n_bolts.Player;
+import io.zipcoder.casino.nuts_n_bolts.cards.PlayingCard;
 
-public class GoFishPlayer extends Player {
-    public GoFishPlayer(String name) {
-        super(name);
-    }
-}
+import java.util.ArrayList;
+
+

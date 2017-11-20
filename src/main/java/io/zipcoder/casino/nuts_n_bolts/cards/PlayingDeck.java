@@ -10,8 +10,13 @@ public class PlayingDeck {
 
     public void shuffle(){}
 
-    public void populate(){}
+    public void reset(){}
 
     public void countLeft(){}
+
+    public PlayingCard draw(){
+        //remove the card you drew from the deck
+        return null;
+    }
 
 }
