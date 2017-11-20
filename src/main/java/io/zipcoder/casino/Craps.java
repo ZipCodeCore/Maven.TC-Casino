@@ -4,11 +4,9 @@ import io.zipcoder.casino.Console.Console;
 import io.zipcoder.casino.Interfaces.Gamble;
 import io.zipcoder.casino.Interfaces.Game;
 
-
 import java.util.Scanner;
-import java.util.logging.Logger;
 
-public class Craps extends Casino implements Gamble {
+public class Craps extends Casino implements Gamble,Game {
     Scanner input = new Scanner(System.in);
     Player crapsplayer;
     //double playerCash = crapsplayer.balance; null pointer
@@ -19,7 +17,7 @@ public class Craps extends Casino implements Gamble {
         this.crapsplayer = player;
     }
 
-    void start() {
+    public boolean play() {
         boolean play = true;
 
         while (play) {
@@ -55,6 +53,7 @@ public class Craps extends Casino implements Gamble {
             play = playAgain();
         }
         crapsplayer.setBalance(crapsplayer.balance);
+        return false;
     }
 
 
