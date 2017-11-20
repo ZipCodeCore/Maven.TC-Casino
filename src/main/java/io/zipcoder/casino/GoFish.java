@@ -5,7 +5,6 @@ import io.zipcoder.casino.Deck.Card;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class GoFish extends CardGame {
 
@@ -15,79 +14,86 @@ public class GoFish extends CardGame {
 
     public GoFish(Player player) {
         this.player = new GoFishPlayer(player);
-        Player dealer = new Player("Dealer",0,0);
+        Player dealer = new Player("Dealer", 0, 0);
         this.dealer = new GoFishPlayer(dealer);
     }
 
     public void goFishStart() {
-        deal(player,dealer,7);
-        playerTurn();
+        deal(player, dealer, 7);
+        boolean playing = true;
+        while (playing) {
+            playerTurn();
+            dealerTurn();
+            playing = checkForWin();
+        }
 
+    }
 
+    private boolean checkForWin() {
+        if (deck.getAllCards().size() == 0) {
+            compareBooks();
+            return false;
+        }
+        return true;
     }
 
     private void playerTurn() {
         boolean playing = true;
         while (playing) {
+            checkForBooks(player);
             Console.print(player.getStringDisplayHand());
-            Card askCard = getCard("Give me all your: ");
+            String askCard = Console.getString("Enter card you are looking for: ");
             if (isCardInHand(askCard, dealer.getHand())) {
-                dealer.getHand().remove(askCard);
-                player.addCard(askCard);
+                swapCard(dealer, player, askCard);
             } else {
                 Console.print("GO FISH!");
                 giveCard(player);
                 playing = false;
             }
-        checkForBooks(player);
         }
     }
 
 
     private void dealerTurn() {
         boolean playing = true;
-        while(playing){
-            Console.print("Opponent looking for card..");
+        while (playing) {
+            checkForBooks(dealer);
+            Console.print("Opponent looking for card...");
             Card dealerCard = dealerFindCard();
             Console.print("Do you have any: " + dealerCard.getGoFishValue() + " ?");
-            if(isCardInHand(dealerCard, player.getHand())){
-                player.getHand().remove(dealerCard);
-                dealer.addCard(dealerCard);
-            } else{
+            if (isCardInHand(dealerCard.getGoFishValue(), player.getHand())) {
+                swapCard(player, dealer, dealerCard.getGoFishValue());
+            } else {
                 Console.print("Guess I'll go fish...");
                 giveCard(dealer);
                 playing = false;
             }
 
+
         }
     }
 
-    private Card dealerFindCard(){
+    private Card dealerFindCard() {
         Random r = new Random();
         int x = r.nextInt(dealer.getHand().size());
         return dealer.getHand().get(x);
     }
 
-    private boolean isCardInHand(Card askCard, ArrayList<Card> hand) {
+    private boolean isCardInHand(String askCard, ArrayList<Card> hand) {
         for (Card card : hand) {
-            if (card.getValue().equals(askCard.getValue())) {
+            if (askCard.equals(card.getGoFishValue())) {
                 return true;
             }
         }
         return false;
     }
 
-    private Card getCard(String prompt) {
-        String input = Console.getString("Give me all your: ");
-        
+    private void swapCard(CardPlayer player1, CardPlayer player2, String cardValue) {
+        for (Card card : player1.getHand()) {
+            if (cardValue.equals(card.getGoFishValue())) {
+                player2.addCard(player1.removeCard(card));
+            }
         }
-
-        return null;
-
-    }
-
-    private void removeCard(Card card, ArrayList<Card> hand) {
-
     }
 
     private Card checkForBooks(GoFishPlayer player) {

@@ -31,13 +31,22 @@ public class CrapsTest {
     }
 
     @Test
-    public void takeBetTest(){
+    public void takeBetTestFalse(){
         boolean expected = false;
 
         boolean actual = test.takeBet(2500);
 
         Assert.assertEquals(expected,actual);
     }
+    @Test
+    public void takeBetTestTrue(){
+        boolean expected = true;
+
+        boolean actual = test.takeBet(5500);
+
+        Assert.assertEquals(expected,actual);
+    }
+
 }
 
 

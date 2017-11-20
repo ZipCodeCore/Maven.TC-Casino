@@ -38,4 +38,15 @@ public class CardPlayer extends Player{
         return output;
     }
 
+    public Card removeCard(Card cardToRemove){
+        for(Card card : hand){
+            if(card == cardToRemove){
+                hand.remove(cardToRemove);
+                return card;
+            }
+
+        }
+        return null;
+    }
+
 }
