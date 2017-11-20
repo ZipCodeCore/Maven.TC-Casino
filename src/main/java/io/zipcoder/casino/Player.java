@@ -47,4 +47,26 @@ public class Player {
     public void setPlayerHand(ArrayList<Card> playerHand) {
         this.playerHand = playerHand;
     }
+
+    public void addCard(Card card){
+        playerHand.add(card);
+    }
+
+    public void clearHand(){
+        playerHand.clear();
+    }
+
+    public String getStringDisplayHand(){
+        String output = "";
+        Card card;
+        for (int i=0; i<playerHand.size(); i++)
+        {
+            card=playerHand.get(i);
+            if (i!=playerHand.size()-1)
+                output += card.getTopCardRepresentation();
+            else
+                output+= card.toString();
+        }
+        return output;
+    }
 }
