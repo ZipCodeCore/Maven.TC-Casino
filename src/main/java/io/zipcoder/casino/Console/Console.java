@@ -1,10 +1,11 @@
 package io.zipcoder.casino.Console;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Console {
+public class Console extends ArrayList<String> {
 
     public static String getString(String prompt) {
         Scanner input = new Scanner(System.in);
@@ -41,6 +42,17 @@ public class Console {
             }
             print("Invalid input");
         }
+    }
+
+    @Override
+    public boolean contains(Object object){
+        String string = (String)object;
+        for (String str: this){
+            if(str.equalsIgnoreCase(string)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

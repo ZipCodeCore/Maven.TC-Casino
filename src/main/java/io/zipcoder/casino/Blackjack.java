@@ -35,7 +35,7 @@ public class Blackjack extends CardGame{
         if(playAgain()){
             play();
         }else{
-            //gameOptions();
+            gameOptions();
         }
     }
 
@@ -77,7 +77,7 @@ public class Blackjack extends CardGame{
     }
 
     public void getBet(){
-        Console.print("You current balance is "+casinoplayer.getBalance());
+        Console.print("You current balance is "+format.format(casinoplayer.getBalance()));
         double bet;
         while(true){
             bet = Console.getDouble("How much would you like bet?");
