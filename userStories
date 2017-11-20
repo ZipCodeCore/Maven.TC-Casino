@@ -6,41 +6,102 @@
 
 -As a blackjack player I want to play blackjack.
     -As a blackjack player I want to start a game
+            test can create a game (Blackjack)
+            test can add a players to the game (Game)
+            test existance of a deck (BlackJack, Deck)
+            test existace of a hand (Blackjack, player)
+     - As a blackjack player I want to bet before I get the cards
+            test the bank balance of the player is sufficient to bet (BlackJack, Player)
+             and the player's pot in the game is increased (BlackJack)
+              the player money decrease by the bet amount (Player)
+
+
     -As a blackjack player I want look at my cards.
-    -As a blackjack player I want to know my bank account balance.
+        test when the player deal/ hit, it can view the cards (Player)
+
+    -As a blackjack player I want to know my bank account balance
+            test before you place a bet, it can check the balance (Player)
     -As a blackjack player I want to hit so that I can get a card.
+        test when hit the player gets additional card (Player)
+        test the deck will remove the same card (Blackjack)
     -As a blackjack player I would like to stand and see if I win my bet.
+        show  sum of the player card when stands (Player)
+        check if the sum will beat the dealer (Blackjack)
+
     (As a blackjack player I would like to raise my bet if I have a good hand)
     -As a blackjack player I would like to exit the game with my winnings.
+            test the player has all the money it win before exit (Player)
+             test the game return null value for the player after the player exist (BlackJack)
 
 
 -As a blackjack dealer I would like to deal in a however many players would like to join my game.
+    test when the game starts the player/s receive cards (Player)
 -As a blackjack dealer I would like to hit on everything up to 17.
+        test the dealer hit only if the score is less than 17 (Blackjack)
 (As a blackjack dealer I would also like to hit on a "soft" 17,
         i.e. a hand containing an ace and one or more other cards totaling six.)
--As a blackjack dealer I would like to take bets from players.
--As a blackjack dealer I would like to payout winning bets from winning players.
 -As a blackjack dealer I would like to reveal my cards at the end of each round.
+        test the hand of the dealer are visible for the player (dealer)
 -As a blackjack dealer I would like to determine winners / loser / pushers at the end of each round.
+        test the highest score less than 22 win the game (Blackjack)
 
 
 -As a gofish player I would like to start a game.
--As a gofish I would like to draw 7 cards.
+
+  test can create a game (GoFish)
+            test can add a players to the game (GoFish)
+            test existance of a deck (GoFish, Deck)
+            test existace of a hand (GoFish, GoFishPlayer)
+
+-As a gofish I would like to draw 7 cards (GoFish)
+    test that the first 7 cards from the deck are in my hand
+    test that these cards are removed from the deck
+
 -As a gofish player I would like to ask my opponent for a particular card.
+     test boolean on the other player whether or not has the card asked
+
 -As a gofish player I would like to score a point when I have a book to lay down.
+      test I have 4 cards of the same Rank, I remove the cards from my hand
+      test my score incremented one point.
+
 -As a gofish player I would like to draw a card when my opponent doesn't have what I requested.
+        test I GoFish and draw a card from the deck
+
 -As a gofish player I would like to give a card that has been requested.
+        test the card is removed from my hand and it's add to the requested hand.
 -As a gofish player I would like to see the final score when the deck is empty.
+        test which player has the biggest amount of points
 
 -As a gofish bot. I would like to ask for the card that I have the most of
     (or that that has been asked of me).
+    test the goFish bot request a card of rank that it's on its hand
 -As a gofish programmer I would like a display method for my bot, for testing purposes only.
 
 
 -As a craps player I would like to start the game.
--As a craps I bet on a dice roll.
+    test can add a players to the game (Game)
+
+-As a craps I bet on a dice roll
+ test the bank balance of the player is sufficient to bet (Craps, CrapsPlayer)
+             and the player's pot in the game is increased (Craps)
+              the player money decrease by the bet amount (Player)
+
 -As a craps player I want to roll the dice.
--As a craps player I would like to bet on the pass line.
+    test dice are rolling and returning values
+
+-As craps player I would like to win my pass bet when I roll a 7 or 11 on the comeout.
+    test a sum of 7 or 11 in the first roll will win the game
+    test the money of the player increase by the amount of the bet
+-As a craps player I would to like to lose my pass bet when I roll a 2, 3 or 12 on the comeout.
+    test 2,3,12 will make the player loose the game
+    test the money of the player decrease by the bet amount
+-As a craps player I would like to win my pass bet when I have rolled anything but a 7, 11, 2, 3, 12,
+to set a point and rolled that point.
+        test the player is able to roll the dice untill it get a sum of the point or 7
+        test the money of the player increase by the amount of the bet if the sum equals the point
+-As a craps player I would like to lose my pass bet when I have rolled a 7.
+              test 7 will make the player loose the game
+            test the money of the player decrease by the bet amount
 -As a craps player I would like to bet on the don't pass line.
 (As a craps player I would like make "come" bets)
 (As a craps player I would like make "don't come bets")
