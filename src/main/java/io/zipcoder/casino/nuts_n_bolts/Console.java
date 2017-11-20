@@ -3,6 +3,9 @@ package io.zipcoder.casino.nuts_n_bolts;
 import java.util.Scanner;
 
 public class Console {
+
+}
+
 /*
     private static final double MIN_BET_ALLOWED=0.01;
 
@@ -198,4 +201,3 @@ public class Console {
 
 
     }*/
-}
