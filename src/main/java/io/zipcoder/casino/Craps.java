@@ -8,16 +8,15 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Craps extends Casino implements Gamble {
-    Logger logger = Logger.getGlobal();
     Scanner input = new Scanner(System.in);
+    double playerCash = casinoplayer.balance;
+    double bet;
 
-    public void start() {
-        double playerCash = casinoplayer.balance;
+    void start() {
         boolean play = true;
         while (play) {
 
             Console.print("Player cash: " + playerCash);
-            double bet;
 
             do {
                 bet = Console.getDouble("Place your bet: ");
@@ -27,10 +26,10 @@ public class Craps extends Casino implements Gamble {
             int target = rollONE;
 
             if (rollONE == 7 || rollONE == 11) {
-                playerCash += bet;
+                playerWin(bet);
                 Console.print("You win!");
             } else if (rollONE == 2 || rollONE == 3 || rollONE == 12) {
-                playerCash -= bet;
+                playerLose(bet);
                 Console.print("You lose!");
             } else {
                 Console.print("Target is now " + rollONE);
@@ -38,7 +37,7 @@ public class Craps extends Casino implements Gamble {
                 while (rollTWO != 7) {
                     if (rollTWO == rollONE) {
                         Console.print("You win!");
-                        playerCash += bet;
+                        playerWin(bet);
                         break;
                     } else {
                         Console.print("Target is " + rollONE);
@@ -47,16 +46,16 @@ public class Craps extends Casino implements Gamble {
                 }
                 if (rollTWO == 7) {
                     Console.print("You lose!");
-                    playerCash -= bet;
+                    playerLose(bet);
                 }
             }
             play = playAgain();
         }
-
+        casinoplayer.setBalance(playerCash);
     }
 
 
-        public int roll() {
+    public int roll() {
         Console.print("Press Enter key to roll");
         input.nextLine();
         int dice1 = (int) (Math.random() * 6) + 1;
@@ -69,7 +68,7 @@ public class Craps extends Casino implements Gamble {
         return sum;
     }
 
-    private boolean playAgain(){
+    private boolean playAgain() {
         String userinput = Console.getString("Play again? Y/N");
         return !userinput.equalsIgnoreCase("N") && !userinput.equalsIgnoreCase("no");
     }
@@ -78,6 +77,14 @@ public class Craps extends Casino implements Gamble {
     @Override
     public boolean takeBet(double bet) {
         return bet > casinoplayer.balance;
+    }
+
+    public void playerLose(double bet) {
+        playerCash -= bet;
+    }
+
+    public void playerWin(double bet) {
+        playerCash += bet;
     }
 
 
