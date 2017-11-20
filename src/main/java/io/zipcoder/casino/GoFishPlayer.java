@@ -7,8 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GoFishPlayer extends CardPlayer {
-    private int score;
-    private ArrayList<Card> hand = new ArrayList<Card>();
+
 
 
     public Card drawCard(Deck deck) {
@@ -43,9 +42,8 @@ public class GoFishPlayer extends CardPlayer {
 
     public Suit checkFourOfAKind(){
 
-        Stream<Card> handStream = hand.stream()
-                                        .collect(Collectors.toMap(Rank.values() , p->p,(p,q) ->p)).values()
-                                        .stream();
+      //  Stream<Card> handStream = hand.stream().
+
         /*  int diamonds = 0;
         int spades = 0;
         int hearts = 0;
@@ -72,10 +70,10 @@ public class GoFishPlayer extends CardPlayer {
 
     }*/
 
-    public void drawFiveCards(Deck deck){
-        for(int i = 0; i<5; i++){
-            hand.add(drawCard(deck));
-        }
+//    public void drawFiveCards(Deck deck){
+//        for(int i = 0; i<5; i++){
+//            hand.add(drawCard(deck));
+//        }
 
 
     }
