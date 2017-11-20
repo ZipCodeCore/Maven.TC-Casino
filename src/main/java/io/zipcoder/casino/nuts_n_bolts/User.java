@@ -2,27 +2,20 @@ package io.zipcoder.casino.nuts_n_bolts;
 
 public class User {
 
-    protected String name;
-    protected Double money;
+    private String name;
+    private MoneyContainer wallet;
 
     public User(String name, Double money){
         this.name = name;
+        this.wallet.addMoney(money);
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    public Double getMoney() {
-        return money;
-    }
-
-    public void gainMoney(Double money){
-
-    }
-
-    public void loseMoney(Double money){
-        //check to see if money < this.money
+    public MoneyContainer getWallet() {
+        return this.wallet;
     }
 }
 
@@ -69,9 +62,7 @@ public class User {
         return score;
     }
 
-    public ArrayList<Card> getHand() {
-        return hand;
-    }
+
 
     // blackjack hit
     public void addToHand(Card card) {

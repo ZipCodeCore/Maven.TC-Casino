@@ -2,7 +2,7 @@ package io.zipcoder.casino.nuts_n_bolts;
 
 import io.zipcoder.casino.games.Gamble;
 
-public class Pot {
+public class MoneyContainer {
 
     private Double money = 0d;
 
@@ -10,13 +10,13 @@ public class Pot {
         return money;
     }
 
-    public void addToPot(Double money) {
+    public void addMoney(Double money) {
         if (money>0) {
             this.money += money;
         }
     }
 
-    public Double takeOutOfPot (Double money){
+    public Double takeOutMoney (Double money){
         if (money>0 && money<=this.money){
             this.money-=money;
             return money;
@@ -24,7 +24,7 @@ public class Pot {
         return 0.0;
     }
 
-    public Double takeAllOutOfPot(){
+    public Double takeAllMoney(){
         double moneyHolder = this.money;
         this.money=0.0;
         return moneyHolder;

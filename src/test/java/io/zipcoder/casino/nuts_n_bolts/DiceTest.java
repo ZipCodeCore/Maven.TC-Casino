@@ -11,7 +11,7 @@ public class DiceTest {
     @Test
     public void testDiceCreation(){
         ArrayList<Integer> oneToSix = new ArrayList<>();
-        for (int i=1; i<7; i++){
+        for (int i=1; i<=6; i++){
             oneToSix.add(i);
         }
         Dice<Integer> standardDice = new Dice<>(oneToSix);
@@ -40,7 +40,7 @@ public class DiceTest {
     @Test
     public void testDiceRoll(){
         ArrayList<Integer> oneToSix = new ArrayList<>();
-        for (int i=1; i<7; i++){
+        for (int i=1; i<=6; i++){
             oneToSix.add(i);
         }
         Dice<Integer> standardDice = new Dice<>(oneToSix);
