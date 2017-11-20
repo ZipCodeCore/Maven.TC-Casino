@@ -7,13 +7,12 @@ import io.zipcoder.casino.Interfaces.Gamble;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-public class Craps implements Gamble{
+public class Craps extends Casino implements Gamble {
     Logger logger = Logger.getGlobal();
     Scanner input = new Scanner(System.in);
 
-    //    public void start() {
-    public static void main(String[] args) {
-        double playerCash = player.balance;
+    public void start() {
+        double playerCash = casinoplayer.balance;
         boolean play = true;
         while (play == true) {
 
@@ -63,8 +62,7 @@ public class Craps implements Gamble{
     }
 
 
-    //    public int roll() {
-    public static int roll() {
+        public int roll() {
         System.out.println("Press Enter key to roll");
         //logger.info("Rolling...");
         try {
