@@ -11,7 +11,7 @@ public class CrapsTest {
 
     @Test
     public void rollTest() {
-
+        test.start();
 
     }
 
