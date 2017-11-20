@@ -26,7 +26,9 @@ public class Console {
             }
         } while (true);
     }
-
+    public static void print(String prompt){
+        System.out.println(prompt);
+    }
 
 
 }
