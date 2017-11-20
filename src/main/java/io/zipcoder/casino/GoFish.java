@@ -2,7 +2,7 @@ package io.zipcoder.casino;
 
 import java.util.ArrayList;
 
-public class GoFish extends Game {
+public class GoFish extends CardGame {
     private Deck gameDeck;
 
     public GoFish(){

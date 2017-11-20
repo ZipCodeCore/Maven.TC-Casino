@@ -1,8 +1,12 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class GoFishPlayer extends Player {
+public class GoFishPlayer extends CardPlayer {
     private int score;
     private ArrayList<Card> hand = new ArrayList<Card>();
 
@@ -37,13 +41,41 @@ public class GoFishPlayer extends Player {
         return null;
     }
 
-    public boolean checkFourOfAKind(){
-        for(Card card: hand){
-            
-        }
-    }
+    public Suit checkFourOfAKind(){
 
-    public void drawFiveCards(){
+        Stream<Card> handStream = hand.stream().
+
+        /*  int diamonds = 0;
+        int spades = 0;
+        int hearts = 0;
+        int clubs =0;
+
+        for(Card card: hand){
+            if (card.getSuit() == Suit.DIAMOND) {
+                diamonds++;
+                if (diamonds == 4) return Suit.DIAMOND;
+            }
+            if (card.getSuit() == Suit.HEART){
+                hearts++;
+                if (hearts == 4) return Suit.HEART;
+            }
+            if (card.getSuit() == Suit.CLUB) {
+                clubs++;
+                if (clubs == 4) return Suit.CLUB;
+            }
+            if (card.getSuit() == Suit.SPADE) {
+                spades++;
+                if (spades == 4) return Suit.SPADE;
+            }
+        }return null;
+
+    }*/
+
+    public void drawFiveCards(Deck deck){
+        for(int i = 0; i<5; i++){
+            hand.add(drawCard(deck));
+        }
+
 
     }
 

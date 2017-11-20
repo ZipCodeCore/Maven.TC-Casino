@@ -33,12 +33,6 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
-    public Card nextAvailableCard(){
-
-        return null;
-    }
-
-
     public Integer getDeckSize() {
         return cards.size();
     }

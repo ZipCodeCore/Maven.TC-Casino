@@ -5,7 +5,7 @@ public class Craps extends Game implements PlayForMoney {
     private BetType betType;
     private double betAmount;
     private boolean isComeOut;
-    private Integer point;
+    private Integer point=0;
     private Integer comePoint;
 
     public void startRound(double betAmount){
