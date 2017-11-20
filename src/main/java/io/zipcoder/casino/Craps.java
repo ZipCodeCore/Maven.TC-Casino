@@ -22,7 +22,8 @@ public class Craps extends Casino implements Gamble, Game {
         Console.print("Welcome to Craps");
 
         while (play) {
-            Console.print("Player balance: " + crapsplayer.balance);
+
+            Console.print("Player balance: " + format.format(crapsplayer.balance));
 
             takeBet();
 
@@ -42,7 +43,8 @@ public class Craps extends Casino implements Gamble, Game {
             play = playAgain();
         }
         crapsplayer.setBalance(crapsplayer.balance);
-        return play;
+        gameOptions();
+        return true;
     }
 
 
