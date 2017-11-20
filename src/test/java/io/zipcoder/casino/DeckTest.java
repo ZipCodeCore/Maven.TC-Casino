@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class DeckTest {
+    Deck deck = new Deck();
+
 
     @Test
     public void constructorTest(){
-        Deck deck = new Deck();
-
         ArrayList<Card> cards = deck.getCards();
 
         String expected = "a bunch of cards";
@@ -27,7 +27,6 @@ public class DeckTest {
 
     @Test
     public void shuffleTest() throws Exception {
-        Deck deck = new Deck();
         deck.shuffle();
         ArrayList<Card> cards = deck.getCards();
 
@@ -41,7 +40,9 @@ public class DeckTest {
 
         Assert.assertEquals(expected, actual);
 
+    }
 
+    public void testPop() {
     }
 
 

@@ -17,4 +17,8 @@ public class Game {
     public boolean isEndRound() {
         return false;
     }
+
+    public void startGame(){
+
+    }
 }

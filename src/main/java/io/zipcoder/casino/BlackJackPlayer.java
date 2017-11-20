@@ -1,12 +1,25 @@
 package io.zipcoder.casino;
 
 public class BlackJackPlayer extends CardPlayer {
-    private Card[] hand;
+    private Hand hand;
 
-    public void hit() {
+
+    public void startGame(Deck deck) {
+        
     }
 
-    public void stay() {
+    public double showBalance() {
+
     }
+
+    public Card hit(Deck deck) {
+        return deck.pop();
+    }
+
+    public boolean stay() {
+
+        return true;
+    }
+
 
 }
