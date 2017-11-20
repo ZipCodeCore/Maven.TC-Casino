@@ -1,12 +1,13 @@
 package io.zipcoder.casino.PlayerTest;
 
-import io.zipcoder.casino.Player.Player;
+
+import io.zipcoder.casino.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class PlayerTest {
 
-    Player testPlayer = new Player("wes",21);
+    Player testPlayer = new Player("wes",5000,21);
 
     @Test
     public void getRollTest(){

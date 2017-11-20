@@ -2,6 +2,7 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.Console.Console;
 import io.zipcoder.casino.Interfaces.Gamble;
+import io.zipcoder.casino.Interfaces.Game;
 
 
 import java.util.Scanner;
@@ -88,6 +89,4 @@ public class Craps extends Casino implements Gamble {
         Console.print("You win!");
         crapsplayer.balance += bet;
     }
-
-
 }
