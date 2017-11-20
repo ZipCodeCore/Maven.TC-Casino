@@ -7,7 +7,7 @@ import io.zipcoder.casino.Deck.Deck;
 abstract class CardGame extends Casino{
     Deck deck = new Deck();
 
-    public void deal(Player player,Player dealer,int amount){
+    public void deal(CardPlayer player,CardPlayer dealer,int amount){
         clearHands(player,dealer);
         for(int i =0;i<amount;i++){
             dealer.addCard(deck.getCard());
@@ -15,7 +15,7 @@ abstract class CardGame extends Casino{
         }
     }
 
-    public boolean giveCard(Player player){
+    public boolean giveCard(CardPlayer player){
         Card addCard = deck.getCard();
         if(addCard != null){
             player.addCard(deck.getCard());
@@ -24,13 +24,13 @@ abstract class CardGame extends Casino{
         return false;
     }
 
-    public void clearHands(Player player,Player dealer){
+    public void clearHands(CardPlayer player,CardPlayer dealer){
         player.clearHand();
         dealer.clearHand();
 
     }
 
-    public void printHand(Player player){
+    public void printHand(CardPlayer player){
         Console.print("You have\n"+ player.getStringDisplayHand());
     }
 

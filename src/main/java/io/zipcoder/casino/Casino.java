@@ -1,11 +1,18 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.Console.Console;
+
 public class Casino {
 
-    Player casinoplayer = new Player();
-    public void startCasino(){
+    //Console console = new Console();
 
+    static Player casinoplayer;
+
+
+    public void startCasino(){
+        casinoplayer= new Player("testPlayer",1000,21);
+        new Blackjack(casinoplayer).start();
     }
 
 
