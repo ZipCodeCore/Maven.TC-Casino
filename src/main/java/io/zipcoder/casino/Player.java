@@ -12,8 +12,6 @@ public class Player {
         return name;
     }
 
-    public boolean isWinner() {
-        return false;
-    }
+
 
 }

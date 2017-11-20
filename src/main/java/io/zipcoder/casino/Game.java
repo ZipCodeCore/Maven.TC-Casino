@@ -2,13 +2,12 @@ package io.zipcoder.casino;
 
 import java.util.ArrayList;
 
-public class Game {
-    private int round;
+public abstract class Game {
+    private int playerTurn;
+
     private ArrayList<Player> players = new ArrayList<Player>();
 
-    public void startRound() {
-
-    }
+    public abstract void startPlayerTurn();
 
     public void addPlayer(Player player){
         players.add(player);
