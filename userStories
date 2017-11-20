@@ -1,0 +1,48 @@
+-As user I want to be able choose between blackjack, craps and go fish.
+-As a user I want to set my profile.
+-As a user I want to play anonymously.
+
+-As a blackjack player I want to place a bet on a blackjack hand.
+
+-As a blackjack player I want to play blackjack.
+    -As a blackjack player I want to start a game
+    -As a blackjack player I want look at my cards.
+    -As a blackjack player I want to know my bank account balance.
+    -As a blackjack player I want to hit so that I can get a card.
+    -As a blackjack player I would like to stand and see if I win my bet.
+    (As a blackjack player I would like to raise my bet if I have a good hand)
+    -As a blackjack player I would like to exit the game with my winnings.
+
+
+-As a blackjack dealer I would like to deal in a however many players would like to join my game.
+-As a blackjack dealer I would like to hit on everything up to 17.
+(As a blackjack dealer I would also like to hit on a "soft" 17,
+        i.e. a hand containing an ace and one or more other cards totaling six.)
+-As a blackjack dealer I would like to take bets from players.
+-As a blackjack dealer I would like to payout winning bets from winning players.
+-As a blackjack dealer I would like to reveal my cards at the end of each round.
+-As a blackjack dealer I would like to determine winners / loser / pushers at the end of each round.
+
+
+-As a gofish player I would like to start a game.
+-As a gofish I would like to draw 7 cards.
+-As a gofish player I would like to ask my opponent for a particular card.
+-As a gofish player I would like to score a point when I have a book to lay down.
+-As a gofish player I would like to draw a card when my opponent doesn't have what I requested.
+-As a gofish player I would like to give a card that has been requested.
+-As a gofish player I would like to see the final score when the deck is empty.
+
+-As a gofish bot. I would like to ask for the card that I have the most of
+    (or that that has been asked of me).
+-As a gofish programmer I would like a display method for my bot, for testing purposes only.
+
+
+-As a craps player I would like to start the game.
+-As a craps I bet on a dice roll.
+-As a craps player I want to roll the dice.
+-As a craps player I would like to bet on the pass line.
+-As a craps player I would like to bet on the don't pass line.
+(As a craps player I would like make "come" bets)
+(As a craps player I would like make "don't come bets")
+-As a craps player I would like take my winnings and go home.
+(As a craps player I would like to borrow money from the casino when I run out.)
