@@ -36,4 +36,16 @@ public class Console {
         System.out.println(input);
     }
 
-} // End Utilities.Console class
+    public static void displayPlayerHandAndScore(Player userPlayer) {
+        Card card;
+        for (int i=0; i< userPlayer.getHand().size(); i++)
+        {
+            card = userPlayer.getHand().get(i);
+            if (i!=userPlayer.getHand().size()-1)
+                System.out.print(card.getTopCardRepresentation());
+            else
+                System.out.println(card.toString());
+        }
+    }
+
+}

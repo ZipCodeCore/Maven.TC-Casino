@@ -1,8 +1,8 @@
 package io.zipcoder.casino;
 
 public abstract class CardGames implements Game {
-    private Player player;
-    private Deck deck;
+    protected Player player;
+    protected Deck deck;
 
     public CardGames() {
         player = new Player();

@@ -17,6 +17,7 @@ public class CasinoMenu extends Menu {
     public void userMenuSelection(String input) {
         switch (gamesEnums.valueOf(input)){
             case BLACKJACK:
+                BlackJackMenu.run();
                 break;
             case CRAPS:
                 break;

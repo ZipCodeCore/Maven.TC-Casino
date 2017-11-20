@@ -1,11 +1,11 @@
 package io.zipcoder.casino.ConcreteMenus;
 
-public class goFishMenu extends Menu {
-    public static final goFishMenu INSTANCE = new goFishMenu();
+public class GoFishMenu extends Menu {
+    public static final GoFishMenu INSTANCE = new GoFishMenu();
 
     public enum goFishMenuEnums {LOOKATYOURHAND, PICKANAME, }
 
-    public goFishMenu() {
+    public GoFishMenu() {
         super(goFishMenuEnums.values());
     }
 
