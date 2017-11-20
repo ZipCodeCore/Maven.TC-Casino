@@ -9,6 +9,7 @@ abstract class CardGame extends Casino{
 
     public void deal(CardPlayer player,CardPlayer dealer,int amount){
         clearHands(player,dealer);
+        deck.shuffle();
         for(int i =0;i<amount;i++){
             dealer.addCard(deck.getCard());
             player.addCard(deck.getCard());
