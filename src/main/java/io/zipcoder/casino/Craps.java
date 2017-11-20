@@ -2,21 +2,26 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.Console.Console;
 import io.zipcoder.casino.Interfaces.Gamble;
-
+import io.zipcoder.casino.Interfaces.Game;
 
 import java.util.Scanner;
-import java.util.logging.Logger;
 
-public class Craps extends Casino implements Gamble {
+public class Craps extends Casino implements Gamble,Game {
     Scanner input = new Scanner(System.in);
-    double playerCash = casinoplayer.balance;
+    Player crapsplayer;
+    //double playerCash = crapsplayer.balance; null pointer
     double bet;
 
-    void start() {
+
+    public Craps(Player player) {
+        this.crapsplayer = player;
+    }
+
+    public boolean play() {
         boolean play = true;
 
         while (play) {
-            Console.print("Player balance: " + playerCash);
+            Console.print("Player balance: " + crapsplayer.balance);
 
             do {
                 bet = Console.getDouble("Place your bet: ");
@@ -47,7 +52,8 @@ public class Craps extends Casino implements Gamble {
             }
             play = playAgain();
         }
-        casinoplayer.setBalance(playerCash);
+        crapsplayer.setBalance(crapsplayer.balance);
+        return false;
     }
 
 
@@ -69,21 +75,17 @@ public class Craps extends Casino implements Gamble {
         return !userinput.equalsIgnoreCase("N") && !userinput.equalsIgnoreCase("no");
     }
 
-
-    @Override
     public boolean takeBet(double bet) {
-        return bet > casinoplayer.balance;
+        return bet > crapsplayer.balance;
     }
 
     public void playerLose(double bet) {
-        Console.print("Yon win!");
-        playerCash -= bet;
+        Console.print("You lose!");
+        crapsplayer.balance -= bet;
     }
 
     public void playerWin(double bet) {
-        Console.print("You lose!");
-        playerCash += bet;
+        Console.print("You win!");
+        crapsplayer.balance += bet;
     }
-
-
 }
