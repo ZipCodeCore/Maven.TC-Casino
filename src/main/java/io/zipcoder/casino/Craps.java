@@ -6,7 +6,7 @@ import io.zipcoder.casino.Interfaces.Game;
 
 import java.util.Scanner;
 
-public class Craps extends Casino implements Gamble,Game {
+public class Craps extends Casino implements Gamble, Game {
     Scanner input = new Scanner(System.in);
     Player crapsplayer;
     //double playerCash = crapsplayer.balance; null pointer
@@ -19,13 +19,12 @@ public class Craps extends Casino implements Gamble,Game {
 
     public boolean play() {
         boolean play = true;
+        Console.print("Welcome to Craps");
 
         while (play) {
             Console.print("Player balance: " + crapsplayer.balance);
 
-            do {
-                bet = Console.getDouble("Place your bet: ");
-            } while (takeBet(bet));
+            takeBet();
 
             int rollONE = roll();
             int target = rollONE;
@@ -37,23 +36,13 @@ public class Craps extends Casino implements Gamble,Game {
             } else {
                 Console.print("Target is now " + rollONE);
                 int rollTWO = roll();
-                while (rollTWO != 7) {
-                    if (rollTWO == rollONE) {
-                        playerWin(bet);
-                        break;
-                    } else {
-                        Console.print("Target is " + rollONE);
-                    }
-                    rollTWO = roll();
-                }
-                if (rollTWO == 7) {
-                    playerLose(bet);
-                }
+                checkRollTwo(rollTWO, rollONE);
+
             }
             play = playAgain();
         }
         crapsplayer.setBalance(crapsplayer.balance);
-        return false;
+        return play;
     }
 
 
@@ -70,13 +59,34 @@ public class Craps extends Casino implements Gamble,Game {
         return sum;
     }
 
+    public int checkRollTwo(int rollTWO, int rollONE) {
+        while (rollTWO != 7) {
+            if (rollTWO == rollONE) {
+                playerWin(bet);
+                break;
+            } else {
+                Console.print("Target is " + rollONE);
+                if (rollTWO == 7) {
+                    playerLose(bet);
+                    break;
+                }
+
+            }
+            rollTWO = roll();
+        }
+        return rollTWO;
+    }
+
     private boolean playAgain() {
         String userinput = Console.getString("Play again? Y/N");
         return !userinput.equalsIgnoreCase("N") && !userinput.equalsIgnoreCase("no");
     }
 
-    public boolean takeBet(double bet) {
-        return bet > crapsplayer.balance;
+    public double takeBet() {
+        do {
+            bet = Console.getDouble("Place your bet: ");
+        } while (bet > crapsplayer.balance);
+        return bet;
     }
 
     public void playerLose(double bet) {
