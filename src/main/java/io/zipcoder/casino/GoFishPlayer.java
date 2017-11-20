@@ -43,8 +43,9 @@ public class GoFishPlayer extends CardPlayer {
 
     public Suit checkFourOfAKind(){
 
-        Stream<Card> handStream = hand.stream().
-
+        Stream<Card> handStream = hand.stream()
+                                        .collect(Collectors.toMap(Rank.values() , p->p,(p,q) ->p)).values()
+                                        .stream();
         /*  int diamonds = 0;
         int spades = 0;
         int hearts = 0;

@@ -3,16 +3,67 @@ package io.zipcoder.casino;
 public class Craps extends Game implements PlayForMoney {
     private Bank house;
     private BetType betType;
-    private double betAmount;
+    private Double playerBet;
     private boolean isComeOut;
     private Integer point=0;
     private Integer comePoint;
 
-    public void startRound(double betAmount){
-        isComeOut = true;
+    public void getDiceRoll(CrapsPlayer player){
+        player.roll2Dice();
+    }
 
+
+    /*
+    if (play.equals("y")){
+            Integer roll = shooter.roll2Dice();
+            shooter.printRoll();
+            gameOn.setComeOut(true);
+            if(!gameOn.passBetWinsComeOut(roll) && !gameOn.passBetLosesComeOut(roll)){
+                do{
+                    System.out.println("Roll again!");
+                    if(gameOn.getIsComeOut()){
+                        gameOn.setPoint(roll);
+                    }
+                    roll = shooter.roll2Dice();
+                    shooter.printRoll();
+                    gameOn.setComeOut(false);
+                }while(roll != 7 && roll !=gameOn.getPoint());
+            }
+            else if(gameOn.passBetWinsComeOut(roll)){
+                System.out.println("You win! Added " + passLineBet + " to your bank.");
+
+            }else if(gameOn.passBetLosesComeOut(roll)) {
+                System.out.println("You lose.");
+            }
+
+            if(gameOn.passBetWins(roll)){
+                System.out.println("You win! Added " + passLineBet + " to your bank.");
+            }else if(gameOn.passBetLoses(roll)){
+                System.out.println("You lose.");
+            }
+
+     */
+
+
+
+    public void takeBets(CrapsPlayer player){
 
     }
+
+    public void isWinner(){
+
+    }
+
+    public void crapsRound(){
+        //take bets
+
+        //roll dice
+
+        //determine winner loop if none.
+
+    }
+
+
 
     public boolean passBetWinsComeOut(int roll) {
         return (roll == 7 || roll == 11);
@@ -46,7 +97,7 @@ public class Craps extends Game implements PlayForMoney {
     }
 
     public void placeBet(double betAmount) {
-        this.betAmount = betAmount;
+        this.playerBet = betAmount;
     }
 
     public void rollAgain(){
