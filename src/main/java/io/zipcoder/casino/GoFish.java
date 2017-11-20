@@ -44,17 +44,28 @@ public class GoFish extends CardGame {
     }
 
 
-    private boolean dealerAsk() {
+    private void dealerTurn() {
         boolean playing = true;
         while(playing){
-            dealerFindCard()
+            Console.print("Opponent looking for card..");
+            Card dealerCard = dealerFindCard();
+            Console.print("Do you have any: " + dealerCard.getGoFishValue() + " ?");
+            if(isCardInHand(dealerCard, player.getHand())){
+                player.getHand().remove(dealerCard);
+                dealer.addCard(dealerCard);
+            } else{
+                Console.print("Guess I'll go fish...");
+                giveCard(dealer);
+                playing = false;
+            }
 
         }
     }
 
     private Card dealerFindCard(){
-
-        return null;
+        Random r = new Random();
+        int x = r.nextInt(dealer.getHand().size());
+        return dealer.getHand().get(x);
     }
 
     private boolean isCardInHand(Card askCard, ArrayList<Card> hand) {
@@ -68,7 +79,7 @@ public class GoFish extends CardGame {
 
     private Card getCard(String prompt) {
         String input = Console.getString("Give me all your: ");
-
+        
         }
 
         return null;

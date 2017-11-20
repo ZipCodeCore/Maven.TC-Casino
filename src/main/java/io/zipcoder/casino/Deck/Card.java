@@ -7,7 +7,7 @@ public class Card
     public static String[] suitSymbols = {"♡", "♢", "♧", "♤"};
     public static String[] faceSymbols = {"A", "J", "Q", "K"};
     private Integer value;
-    private Integer goFishValue;
+    private GoFishValue goFishValue;
     private String topCardRepresentation;
     private String bottomCardRepresentation;
     private static String middleCardRepresentation="|     |\n";
@@ -39,11 +39,11 @@ public class Card
                 " ----- \n";
     }
 
-    public Integer getGoFishValue() {
+    public GoFishValue getGoFishValue() {
         return goFishValue;
     }
 
-    public void setGoFishValue(Integer goFishValue) {
+    public void setGoFishValue(GoFishValue goFishValue) {
         this.goFishValue = goFishValue;
     }
 
