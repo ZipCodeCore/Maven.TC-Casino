@@ -1,21 +1,28 @@
 package io.zipcoder.casino.nuts_n_bolts;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class Dice<E> {
 
-    private E[] sides;
+    private ArrayList<E> sides;
 
-    public Dice(E... sides){
-        this.sides = sides;
+
+    public Dice(ArrayList<E> sides){
+        this.sides=sides;
     }
 
-    public E[] getAllSides(){
-        return null;
+    public ArrayList<E> getAllSides(){
+        return sides;
     }
 
     public E rollDie(){
-        return null;
+
+        Random rando = new Random();
+        int numOfSides = sides.size();
+
+        return sides.get(rando.nextInt(numOfSides));
     }
 
 }
