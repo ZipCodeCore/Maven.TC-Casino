@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class Player {
     public String name;
     public double balance;
-    public double age;
+    public int age;
     public ArrayList<Card> playerHand = new ArrayList<Card>();
 
-    public Player(String name, double balance, double age){
+    public Player(String name, double balance, int age){
         this.name = name;
         this.balance = balance;
         this.age = age;
@@ -32,11 +32,11 @@ public class Player {
         this.balance = balance;
     }
 
-    public double getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(double age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
