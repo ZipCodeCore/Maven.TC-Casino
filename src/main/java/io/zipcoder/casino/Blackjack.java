@@ -47,7 +47,7 @@ public class Blackjack extends CardGame{
     public void checkWin(){
         if(playerWins()){
             Console.print("Player wins\n");
-            casinoplayer.addToBalance(pot*2);
+            casinoplayer.addToBalance(pot);
         }else{
             Console.print("Dealer wins\n");
         }
