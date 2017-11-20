@@ -13,7 +13,7 @@ public class Craps implements Gamble{
 
     //    public void start() {
     public static void main(String[] args) {
-        double playerCash = 1000;
+        double playerCash = player.balance;
         boolean play = true;
         while (play == true) {
 
