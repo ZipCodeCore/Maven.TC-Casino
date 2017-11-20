@@ -4,7 +4,7 @@ import io.zipcoder.casino.Console.Console;
 import io.zipcoder.casino.Deck.Card;
 import io.zipcoder.casino.Deck.Deck;
 
-abstract class CardGame {
+abstract class CardGame extends Casino{
     Deck deck = new Deck();
 
     public void deal(Player player,Player dealer,int amount){
