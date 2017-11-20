@@ -2,8 +2,8 @@ package io.zipcoder.casino.games.blackjack;
 
 import io.zipcoder.casino.games.CardGame;
 import io.zipcoder.casino.games.Gamble;
+import io.zipcoder.casino.nuts_n_bolts.MoneyContainer;
 import io.zipcoder.casino.nuts_n_bolts.User;
-import io.zipcoder.casino.nuts_n_bolts.Pot;
 import io.zipcoder.casino.nuts_n_bolts.cards.PlayingCard;
 import io.zipcoder.casino.nuts_n_bolts.cards.PlayingDeck;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class BlackJack extends CardGame implements Gamble {
 
-    private Pot pot;
+    private MoneyContainer pot;
     private ArrayList<BlackJackPlayer> users;
 
     @Override
