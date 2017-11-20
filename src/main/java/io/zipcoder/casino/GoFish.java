@@ -5,30 +5,36 @@ import io.zipcoder.casino.Deck.Card;
 
 import java.util.ArrayList;
 
-public class GoFish {
+public class GoFish extends CardGame {
 
     private int playerBookCount = 0;
     private int dealerBookCount = 0;
 
-    public GoFish(){}
 
-    private boolean playerAsk(){
-        return false;
+    public GoFish(){
+
+    }
+
+    private void playerAsk(){
+
     }
 
     private boolean dealerAsk(){
         return false;
     }
 
-    private void searchHand(Card askCard, ArrayList<Card> hand){
+    private boolean isCardInHand(Card askCard, ArrayList<Card> hand){
         for(Card card:hand){
             if(card.fishValue = askCard.fishValue){
-                return card;
+                return true;
             }
         }
-
+        return false;
     }
 
+    private void removeCard(Card card, ArrayList<Card> hand){
+
+    }
     private void compareBooks(){
         if(playerBooks > dealerBooks){
             System.out.println("You win!");
