@@ -23,29 +23,29 @@ public class GoFish extends CardGame {
         return false;
     }
 
-//    private boolean isCardInHand(Card askCard, ArrayList<Card> hand){
-//        for(Card card:hand){
-//            if(card.fishValue = askCard.fishValue){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    private void removeCard(Card card, ArrayList<Card> hand){
-//
-//    }
-//    private void compareBooks(){
-//        if(playerBooks > dealerBooks){
-//            System.out.println("You win!");
-//        }
-//        else if(playerBooks < dealerBooks){
-//            System.out.println("You lose!");
-//        }
-//        else{
-//            System.out.println("Tie!");
-//        }
-//    }
+    private boolean isCardInHand(Card askCard, ArrayList<Card> hand){
+        for(Card card:hand){
+            if(card.fishValue = askCard.fishValue){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void removeCard(Card card, ArrayList<Card> hand){
+
+    }
+    private void compareBooks(){
+        if(playerBooks > dealerBooks){
+            System.out.println("You win!");
+        }
+        else if(playerBooks < dealerBooks){
+            System.out.println("You lose!");
+        }
+        else{
+            System.out.println("Tie!");
+        }
+    }
 
 
 }
