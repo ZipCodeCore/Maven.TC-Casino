@@ -14,14 +14,23 @@ public class Craps implements Game, Gamble {
     //roll to decide first, highest wins
     //both make a bet -> pot
     //decide if bet is pass or don't pass
-    //player throwin dice = shooter
+    //player throwing dice = shooter
     //roll 2 dice 7/11 on first roll -> win
     // 2/3/12 on first roll -> lose
     //come/don't come bets
 
     private ArrayList<CrapsPlayer> players;
-    private Dice<Integer> dice = new Dice<>(1,2,3,4,5,6);
+    private Dice<Integer> dice;
     private Pot pot;
+
+    public Craps(){
+        ArrayList<Integer> oneToSix = new ArrayList<>();
+        for (int i=2; i<13; i++)
+        {
+            oneToSix.add(i);
+        }
+        dice=new Dice<>(oneToSix);
+    }
 
     public void play() {
 
