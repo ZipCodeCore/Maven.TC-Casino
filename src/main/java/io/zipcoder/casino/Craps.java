@@ -2,7 +2,6 @@ package io.zipcoder.casino;
 
 public class Craps extends Game implements PlayForMoney {
     private Bank house;
-    private BetType betType;
     private double betAmount;
     private boolean isComeOut;
     private Integer point=0;
@@ -41,9 +40,9 @@ public class Craps extends Game implements PlayForMoney {
         //refactor to add push condition for 12
     }
 
-    public void setBetType(BetType betType) {
-        this.betType = betType;
-    }
+//    public void setBetType(BetType betType) {
+//        this.betType = betType;
+//    }
 
     public void placeBet(double betAmount) {
         this.betAmount = betAmount;

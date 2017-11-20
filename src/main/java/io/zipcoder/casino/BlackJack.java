@@ -1,17 +1,16 @@
 package io.zipcoder.casino;
 
 public class BlackJack extends CardGame implements PlayForMoney {
-
-
-
     private Bank house;
     private Deck gameDeck;
 
-    public void scoreHand() {
 
+    public Deck getDeckCards(){
+
+        return
     }
 
-    public void addPlayers(Player player) {
+    public void scoreHand() {
 
     }
 
@@ -23,9 +22,6 @@ public class BlackJack extends CardGame implements PlayForMoney {
 
     }
 
-    public void bet(BetType betType, double betAmount) {
-
-    }
 
     public void placeBet(double betAmount) {
 
@@ -35,5 +31,6 @@ public class BlackJack extends CardGame implements PlayForMoney {
     }
 
     public void dealNewHand() {
+
     }
 }
