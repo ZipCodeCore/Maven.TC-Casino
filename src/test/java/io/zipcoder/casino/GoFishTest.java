@@ -1,14 +1,17 @@
-//package io.zipcoder.casino;
-//
-//import org.junit.Assert;
-//import org.junit.Test;
-//
-//import static org.junit.Assert.*;
-//
-//public class GoFishTest {
-//    @Test
-//    public void getGameDeck() throws Exception {
-//    }
+package io.zipcoder.casino;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class GoFishTest {
+    @Test
+    public void createGoFishGameTest() throws Exception {
+
+       ;
+
+    }
 //
 //    @Test
 //    public void checkForPairsTest() throws Exception{
@@ -44,5 +47,5 @@
 //        player2.drawFiveCards(gameOn.getGameDeck());
 //
 //    }
-//
-//}
+
+}
