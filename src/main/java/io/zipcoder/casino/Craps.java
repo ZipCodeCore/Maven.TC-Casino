@@ -14,9 +14,9 @@ public class Craps extends Casino implements Gamble {
 
     void start() {
         boolean play = true;
-        while (play) {
 
-            Console.print("Player cash: " + playerCash);
+        while (play) {
+            Console.print("Player balance: " + playerCash);
 
             do {
                 bet = Console.getDouble("Place your bet: ");
@@ -27,16 +27,13 @@ public class Craps extends Casino implements Gamble {
 
             if (rollONE == 7 || rollONE == 11) {
                 playerWin(bet);
-                Console.print("You win!");
             } else if (rollONE == 2 || rollONE == 3 || rollONE == 12) {
                 playerLose(bet);
-                Console.print("You lose!");
             } else {
                 Console.print("Target is now " + rollONE);
                 int rollTWO = roll();
                 while (rollTWO != 7) {
                     if (rollTWO == rollONE) {
-                        Console.print("You win!");
                         playerWin(bet);
                         break;
                     } else {
@@ -45,7 +42,6 @@ public class Craps extends Casino implements Gamble {
                     rollTWO = roll();
                 }
                 if (rollTWO == 7) {
-                    Console.print("You lose!");
                     playerLose(bet);
                 }
             }
@@ -80,10 +76,12 @@ public class Craps extends Casino implements Gamble {
     }
 
     public void playerLose(double bet) {
+        Console.print("Yon win!");
         playerCash -= bet;
     }
 
     public void playerWin(double bet) {
+        Console.print("You lose!");
         playerCash += bet;
     }
 
