@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>io.zipcoder.casino</OriginalElement>
+  <nodes>
+    <node x="1021.4375" y="2119.0">io.zipcoder.casino.BlackJackConsole</node>
+    <node x="1328.5878472222225" y="1801.0">io.zipcoder.casino.Console</node>
+    <node x="1564.3875" y="2743.0">io.zipcoder.casino.Main</node>
+    <node x="1514.8875" y="2486.0">io.zipcoder.casino.Casino</node>
+    <node x="1888.795115740741" y="713.5">io.zipcoder.casino.Game</node>
+    <node x="1895.5878472222225" y="1900.0">io.zipcoder.casino.CrapsPlayer</node>
+    <node x="522.5250000000001" y="713.5">io.zipcoder.casino.StandardDeck</node>
+    <node x="879.7960185185185" y="1867.0">io.zipcoder.casino.BlackJackPlayer</node>
+    <node x="926.5878472222225" y="1434.0">io.zipcoder.casino.BlackJack</node>
+    <node x="21.5" y="1111.0">io.zipcoder.casino.GoFishPlayer</node>
+    <node x="2387.716851851852" y="0.0">io.zipcoder.casino.Menu</node>
+    <node x="2691.716851851852" y="0.0">io.zipcoder.casino.Utilities</node>
+    <node x="1502.0878472222225" y="1166.5">io.zipcoder.casino.Gamble</node>
+    <node x="176.33856481481496" y="2119.0">io.zipcoder.casino.GoFishConsole</node>
+    <node x="341.89182870370416" y="0.0">io.zipcoder.casino.Card</node>
+    <node x="977.5878472222225" y="614.0">io.zipcoder.casino.Player</node>
+    <node x="1936.8378472222223" y="1412.0">io.zipcoder.casino.Craps</node>
+    <node x="210.75" y="221.0">io.zipcoder.casino.CardPile</node>
+    <node x="1990.0" y="2163.0">io.zipcoder.casino.CrapsConsole</node>
+    <node x="310.08351851851853" y="1456.0">io.zipcoder.casino.GoFish</node>
+    <node x="487.66701388888913" y="1045.0">io.zipcoder.casino.CardGame</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="io.zipcoder.casino.StandardDeck" target="io.zipcoder.casino.CardPile">
+      <point x="-83.33333333333326" y="-26.0" />
+      <point x="564.1916666666668" y="554.0" />
+      <point x="392.08333333333326" y="554.0" />
+      <point x="53.33333333333326" y="136.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CardPile" target="io.zipcoder.casino.Card">
+      <point x="64.0" y="-136.5" />
+      <point x="402.75" y="201.0" />
+      <point x="455.89182870370416" y="201.0" />
+      <point x="0.0" y="70.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFish" target="io.zipcoder.casino.GoFishPlayer">
+      <point x="-133.60000000000002" y="-125.5" />
+      <point x="343.4835185185185" y="1392.0" />
+      <point x="281.9" y="1392.0" />
+      <point x="74.39999999999998" y="92.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishPlayer" target="io.zipcoder.casino.GoFish">
+      <point x="148.79999999999995" y="92.5" />
+      <point x="356.29999999999995" y="1392.0" />
+      <point x="410.28351851851846" y="1392.0" />
+      <point x="-66.80000000000007" y="-125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CrapsConsole" target="io.zipcoder.casino.Console">
+      <point x="-100.1875" y="-114.5" />
+      <point x="2004.3125" y="2099.0" />
+      <point x="1820.8878472222225" y="2099.0" />
+      <point x="218.79999999999995" y="114.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishConsole" target="io.zipcoder.casino.GoFish">
+      <point x="76.25" y="-158.5" />
+      <point x="405.08856481481496" y="2069.0" />
+      <point x="486.33856481481496" y="2069.0" />
+      <point x="486.33856481481496" y="1781.0" />
+      <point x="588.4168518518519" y="1781.0" />
+      <point x="111.33333333333337" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Casino" target="io.zipcoder.casino.BlackJackConsole">
+      <point x="-71.25" y="-103.5" />
+      <point x="1586.1375" y="2456.0" />
+      <point x="1172.9375" y="2456.0" />
+      <point x="0.0" y="158.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Console" target="io.zipcoder.casino.Game">
+      <point x="136.75" y="-114.0" />
+      <point x="1738.8378472222225" y="1781.0" />
+      <point x="1712.5878472222225" y="1781.0" />
+      <point x="1712.5878472222225" y="1025.0" />
+      <point x="1948.045115740741" y="1025.0" />
+      <point x="-19.75" y="26.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishPlayer" target="io.zipcoder.casino.Card">
+      <point x="-93.0" y="-92.5" />
+      <point x="114.5" y="1025.0" />
+      <point x="154.97534722222258" y="1025.0" />
+      <point x="154.97534722222258" y="181.0" />
+      <point x="405.22516203703753" y="181.0" />
+      <point x="-50.66666666666663" y="70.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CardGame" target="io.zipcoder.casino.Player">
+      <point x="108.14999999999998" y="-158.5" />
+      <point x="750.317013888889" y="965.0" />
+      <point x="1036.2128472222225" y="965.0" />
+      <point x="-75.375" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishConsole" target="io.zipcoder.casino.Card">
+      <point x="-137.25" y="-158.5" />
+      <point x="191.58856481481496" y="2099.0" />
+      <point x="0.0" y="2099.0" />
+      <point x="0.0" y="161.0" />
+      <point x="354.5584953703708" y="161.0" />
+      <point x="-101.33333333333337" y="70.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Casino" target="io.zipcoder.casino.GoFishConsole">
+      <point x="-118.75" y="-103.5" />
+      <point x="1538.6375" y="2466.0" />
+      <point x="328.83856481481496" y="2466.0" />
+      <point x="0.0" y="158.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Console" target="io.zipcoder.casino.Player">
+      <point x="-136.75" y="-114.0" />
+      <point x="1465.3378472222225" y="1781.0" />
+      <point x="1491.5878472222225" y="1781.0" />
+      <point x="1491.5878472222225" y="985.0" />
+      <point x="1170.2128472222225" y="985.0" />
+      <point x="58.625" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJack" target="io.zipcoder.casino.CardGame">
+      <point x="-152.39999999999986" y="-147.5" />
+      <point x="964.6878472222227" y="1382.0" />
+      <point x="719.4170138888892" y="1382.0" />
+      <point x="77.25" y="158.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CardGame" target="io.zipcoder.casino.CardPile">
+      <point x="-139.0499999999999" y="-158.5" />
+      <point x="503.11701388888923" y="925.0" />
+      <point x="415.0" y="925.0" />
+      <point x="415.0" y="584.0" />
+      <point x="328.08333333333326" y="584.0" />
+      <point x="-10.666666666666742" y="136.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CrapsPlayer" target="io.zipcoder.casino.Craps">
+      <point x="30.75" y="-15.0" />
+      <point x="1987.8378472222225" y="1781.0" />
+      <point x="1978.9628472222223" y="1781.0" />
+      <point x="-126.375" y="169.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CrapsConsole" target="io.zipcoder.casino.Player">
+      <point x="100.1875" y="-114.5" />
+      <point x="2204.6875" y="2099.0" />
+      <point x="2284.337847222222" y="2099.0" />
+      <point x="2284.337847222222" y="935.0" />
+      <point x="1237.2128472222225" y="935.0" />
+      <point x="125.625" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.StandardDeck" target="io.zipcoder.casino.Card">
+      <point x="0.0" y="-26.0" />
+      <point x="647.5250000000001" y="594.0" />
+      <point x="657.1617824074076" y="594.0" />
+      <point x="657.1617824074076" y="201.0" />
+      <point x="506.5584953703708" y="201.0" />
+      <point x="50.66666666666663" y="70.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFish" target="io.zipcoder.casino.Player">
+      <point x="133.60000000000002" y="-125.5" />
+      <point x="610.6835185185186" y="1392.0" />
+      <point x="833.6968981481483" y="1392.0" />
+      <point x="833.6968981481483" y="975.0" />
+      <point x="1052.9628472222225" y="975.0" />
+      <point x="-58.625" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Casino" target="io.zipcoder.casino.Game">
+      <point x="118.75" y="-103.5" />
+      <point x="1776.1375" y="2466.0" />
+      <point x="2342.716851851852" y="2466.0" />
+      <point x="2342.716851851852" y="925.0" />
+      <point x="2027.045115740741" y="925.0" />
+      <point x="59.25" y="26.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFish" target="io.zipcoder.casino.CardPile">
+      <point x="0.0" y="-125.5" />
+      <point x="477.08351851851853" y="1382.0" />
+      <point x="404.0" y="1382.0" />
+      <point x="404.0" y="594.0" />
+      <point x="306.75" y="594.0" />
+      <point x="-32.0" y="136.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishPlayer" target="io.zipcoder.casino.Player">
+      <point x="155.0" y="-92.5" />
+      <point x="362.5" y="935.0" />
+      <point x="985.9628472222225" y="935.0" />
+      <point x="-125.625" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishPlayer" target="io.zipcoder.casino.CardPile">
+      <point x="93.0" y="-92.5" />
+      <point x="300.5" y="1015.0" />
+      <point x="220.58351851851853" y="1015.0" />
+      <point x="220.58351851851853" y="594.0" />
+      <point x="285.41666666666663" y="594.0" />
+      <point x="-53.33333333333337" y="136.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Casino" target="io.zipcoder.casino.Console">
+      <point x="-23.75" y="-103.5" />
+      <point x="1633.6375" y="2466.0" />
+      <point x="1643.1177314814815" y="2466.0" />
+      <point x="1643.1177314814815" y="2099.0" />
+      <point x="1602.0878472222225" y="2099.0" />
+      <point x="0.0" y="114.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.CardGame" target="io.zipcoder.casino.Game">
+      <point x="139.04999999999995" y="-158.5" />
+      <point x="781.2170138888891" y="1015.0" />
+      <point x="1908.545115740741" y="1015.0" />
+      <point x="-59.25" y="26.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJackConsole" target="io.zipcoder.casino.Console">
+      <point x="132.5625" y="-158.5" />
+      <point x="1305.5" y="2099.0" />
+      <point x="1492.6878472222224" y="2099.0" />
+      <point x="-109.40000000000009" y="114.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJackConsole" target="io.zipcoder.casino.Player">
+      <point x="94.68750000000003" y="-158.5" />
+      <point x="1267.625" y="2079.0" />
+      <point x="1318.0878472222225" y="2079.0" />
+      <point x="1318.0878472222225" y="995.0" />
+      <point x="1153.4628472222225" y="995.0" />
+      <point x="41.875" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Main" target="io.zipcoder.casino.Casino">
+      <point x="0.0" y="-26.0" />
+      <point x="0.0" y="103.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJackPlayer" target="io.zipcoder.casino.Player">
+      <point x="-74.0" y="-48.0" />
+      <point x="916.7960185185185" y="1781.0" />
+      <point x="882.1170138888892" y="1781.0" />
+      <point x="882.1170138888892" y="995.0" />
+      <point x="1086.4628472222225" y="995.0" />
+      <point x="-25.125" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CardGame" target="io.zipcoder.casino.Card">
+      <point x="-46.35000000000002" y="-158.5" />
+      <point x="595.817013888889" y="895.0" />
+      <point x="495.75000000000006" y="895.0" />
+      <point x="495.75000000000006" y="201.0" />
+      <point x="481.22516203703753" y="201.0" />
+      <point x="25.33333333333337" y="70.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Player" target="io.zipcoder.casino.CardPile">
+      <point x="-33.5" y="-125.5" />
+      <point x="1078.0878472222225" y="534.0" />
+      <point x="434.7499999999999" y="534.0" />
+      <point x="95.99999999999989" y="136.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CardGame" target="io.zipcoder.casino.StandardDeck">
+      <point x="-15.449999999999932" y="-158.5" />
+      <point x="626.7170138888891" y="885.0" />
+      <point x="585.0250000000001" y="885.0" />
+      <point x="-62.5" y="26.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishConsole" target="io.zipcoder.casino.Player">
+      <point x="106.75" y="-158.5" />
+      <point x="435.58856481481496" y="2079.0" />
+      <point x="844.6968981481483" y="2079.0" />
+      <point x="844.6968981481483" y="985.0" />
+      <point x="1069.7128472222225" y="985.0" />
+      <point x="-41.875" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishConsole" target="io.zipcoder.casino.CardPile">
+      <point x="-106.75" y="-158.5" />
+      <point x="222.08856481481496" y="2089.0" />
+      <point x="11.0" y="2089.0" />
+      <point x="11.0" y="564.0" />
+      <point x="221.41666666666674" y="564.0" />
+      <point x="-117.33333333333326" y="136.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CrapsConsole" target="io.zipcoder.casino.Craps">
+      <point x="71.5625" y="-114.5" />
+      <point x="2176.0625" y="2099.0" />
+      <point x="2159.0625" y="2099.0" />
+      <point x="2159.0625" y="1781.0" />
+      <point x="2231.712847222222" y="1781.0" />
+      <point x="126.375" y="169.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Craps" target="io.zipcoder.casino.Game">
+      <point x="126.375" y="-169.5" />
+      <point x="2231.712847222222" y="1392.0" />
+      <point x="2167.2326157407406" y="1392.0" />
+      <point x="2167.2326157407406" y="945.0" />
+      <point x="1987.545115740741" y="945.0" />
+      <point x="19.75" y="26.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJackConsole" target="io.zipcoder.casino.BlackJackPlayer">
+      <point x="-56.8125" y="-158.5" />
+      <point x="1116.125" y="2059.0" />
+      <point x="1064.7960185185184" y="2059.0" />
+      <point x="74.0" y="48.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJack" target="io.zipcoder.casino.Gamble">
+      <point x="152.4000000000001" y="-147.5" />
+      <point x="1269.4878472222226" y="1392.0" />
+      <point x="1552.0878472222225" y="1392.0" />
+      <point x="-50.0" y="37.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.Craps" target="io.zipcoder.casino.Player">
+      <point x="-42.125" y="-169.5" />
+      <point x="2063.212847222222" y="1392.0" />
+      <point x="2110.591851851852" y="1392.0" />
+      <point x="2110.591851851852" y="965.0" />
+      <point x="1203.7128472222225" y="965.0" />
+      <point x="92.125" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Player" target="io.zipcoder.casino.Card">
+      <point x="100.5" y="-125.5" />
+      <point x="1212.0878472222225" y="514.0" />
+      <point x="939.1668518518519" y="514.0" />
+      <point x="939.1668518518519" y="181.0" />
+      <point x="557.2251620370374" y="181.0" />
+      <point x="101.33333333333326" y="70.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CrapsPlayer" target="io.zipcoder.casino.Player">
+      <point x="-30.75" y="-15.0" />
+      <point x="1926.3378472222225" y="975.0" />
+      <point x="1186.9628472222225" y="975.0" />
+      <point x="75.375" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJack" target="io.zipcoder.casino.BlackJackPlayer">
+      <point x="-76.20000000000005" y="147.5" />
+      <point x="1040.8878472222225" y="1781.0" />
+      <point x="1064.7960185185184" y="1781.0" />
+      <point x="74.0" y="-48.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJack" target="io.zipcoder.casino.Player">
+      <point x="0.0" y="-147.5" />
+      <point x="1117.0878472222225" y="1005.0" />
+      <point x="1119.9628472222225" y="1005.0" />
+      <point x="8.375" y="125.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJackConsole" target="io.zipcoder.casino.BlackJack">
+      <point x="-18.9375" y="-158.5" />
+      <point x="1154.0" y="2079.0" />
+      <point x="1149.0168518518517" y="2079.0" />
+      <point x="1149.0168518518517" y="1781.0" />
+      <point x="1117.0878472222225" y="1781.0" />
+      <point x="0.0" y="147.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Craps" target="io.zipcoder.casino.Gamble">
+      <point x="-126.375" y="-169.5" />
+      <point x="1978.9628472222223" y="1392.0" />
+      <point x="1652.0878472222225" y="1392.0" />
+      <point x="50.0" y="37.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishConsole" target="io.zipcoder.casino.GoFishPlayer">
+      <point x="-76.25" y="-158.5" />
+      <point x="252.58856481481496" y="2079.0" />
+      <point x="113.43351851851844" y="2079.0" />
+      <point x="113.43351851851844" y="1392.0" />
+      <point x="58.700000000000045" y="1392.0" />
+      <point x="-148.79999999999995" y="92.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFish" target="io.zipcoder.casino.CardGame">
+      <point x="66.79999999999995" y="-125.5" />
+      <point x="543.8835185185185" y="1392.0" />
+      <point x="564.9170138888892" y="1392.0" />
+      <point x="-77.25" y="158.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishConsole" target="io.zipcoder.casino.Console">
+      <point x="137.25" y="-158.5" />
+      <point x="466.08856481481496" y="2089.0" />
+      <point x="1383.2878472222226" y="2089.0" />
+      <point x="-218.79999999999995" y="114.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.CrapsConsole" target="io.zipcoder.casino.CrapsPlayer">
+      <point x="-42.9375" y="-114.5" />
+      <point x="2061.5625" y="2079.0" />
+      <point x="1957.0878472222225" y="2079.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJackPlayer" target="io.zipcoder.casino.BlackJack">
+      <point x="0.0" y="-48.0" />
+      <point x="990.7960185185185" y="1781.0" />
+      <point x="964.6878472222224" y="1781.0" />
+      <point x="-152.39999999999998" y="147.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.Casino" target="io.zipcoder.casino.CrapsConsole">
+      <point x="71.25" y="-103.5" />
+      <point x="1728.6375" y="2456.0" />
+      <point x="2104.5" y="2456.0" />
+      <point x="0.0" y="114.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6154362416107383" x="1450.8691384950926" y="1381.9367502726282" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
