@@ -20,10 +20,11 @@ public class Craps implements Game, Gamble {
     //come/don't come bets
 
     private ArrayList<CrapsPlayer> players;
-    //private Dice<Integer> dice = new Dice<>(1,2,3,4,5,6);
     private Dice<Integer> dice;
+    private boolean isPointSet = false;
+    private boolean isPlayerTurn = false;
+    private int point=0;
     private MoneyContainer mainPot;
-    private MoneyContainer sidePot;
 
     public Craps(){
         ArrayList<Integer> twoToTwelve = new ArrayList<>();
@@ -34,7 +35,10 @@ public class Craps implements Game, Gamble {
         dice=new Dice<>(twoToTwelve);
     }
 
-    public void play() {
+    public boolean play(String userInput) {
+        return ("Y".equalsIgnoreCase(userInput));
+    }
+
 /*
         roll to determine who goes first (high/low)
             Player makes a pass or dontPass bet into the mainPot
@@ -52,15 +56,41 @@ public class Craps implements Game, Gamble {
             Next player gets the dice
 
  */
+
+
+    private void rollHighLow(){
+        int playerRoll;
+        int botRoll;
+
+        do {
+            playerRoll = dice.rollDie();
+            botRoll = dice.rollDie();
+        }while (playerRoll==botRoll);
+
+        isPlayerTurn=(playerRoll>botRoll);
+
     }
+
+    private void crapsBetting(){
+        if (!isPointSet){
+            //do pass don'tPass betting to main pot
+
+        }
+        else
+        {
+            //offer sideBet chance
+        }
+    }
+
+
 
     @Override
     public void takeBet(Double bet) {
-
+        mainPot.addMoney(bet*2);
     }
 
     @Override
-    public void settleBet() {
+    public Double settleBet() {
 
     }
 
