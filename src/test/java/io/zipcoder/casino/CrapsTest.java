@@ -29,7 +29,6 @@ public class CrapsTest {
 
         Assert.assertEquals(expected, actual, 0);
     }
-
 }
 
 
