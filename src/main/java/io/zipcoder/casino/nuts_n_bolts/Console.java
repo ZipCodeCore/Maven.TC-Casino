@@ -1,11 +1,83 @@
 package io.zipcoder.casino.nuts_n_bolts;
 
+import io.zipcoder.casino.games.Gamble;
+import io.zipcoder.casino.games.Game;
+import io.zipcoder.casino.games.craps.Craps;
 import java.util.Scanner;
+import static io.zipcoder.casino.nuts_n_bolts.Input.getPositiveDoubleInput;
+import static io.zipcoder.casino.nuts_n_bolts.Input.getStringInput;
 
 public class Console {
 
-}
+    private Game game = new Craps();
+    private User player;
+    private static Scanner scanner = new Scanner(System.in);
 
+    public Console(Game game, User user) {
+        this.game = game;
+        this.player = user;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public void setUser(User user) {
+        this.player = user;
+    }
+
+    public void run() {
+        System.out.println("Welcome to the " + game.getClass().getSimpleName() + " table!");
+
+        if (game instanceof Gamble) {
+            do {//betting game logic
+
+
+
+
+                playerBets();
+                
+
+
+
+
+            } while (game.play(continuePlaying()));
+        } else {
+
+            do {//non betting game logic
+
+            } while (game.play(continuePlaying()));
+        }
+
+    }
+
+
+    private String continuePlaying() {
+        return (getStringInput("Continue playing? "));
+    }
+
+    private void displayPlayerMoney(){
+        System.out.println("You have $" + player.getWallet().getMoney());
+    }
+
+    private void playerBets(){
+        double betAmount;
+
+        do{
+            displayPlayerMoney();
+            betAmount=getBetAmount();
+        }while (betAmount>player.getWallet().getMoney());
+
+        game.takeBet(betAmount);
+
+    }
+
+    private Double getBetAmount(){
+        return (getPositiveDoubleInput("How much do you want to bet? "));
+
+    }
+
+}
 /*
     private static final double MIN_BET_ALLOWED=0.01;
 
@@ -35,7 +107,6 @@ public class Console {
         System.out.println("\nYou have $"+forceTwoDecimalDouble(userPlayer.getMoney().toString()));
 
         do {
-            game.start();
             playerBets(userPlayer);
             displayPlayerHandAndScore(userPlayer);
             displayDealerCardShowing();

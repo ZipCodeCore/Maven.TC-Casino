@@ -14,26 +14,83 @@ public class Craps implements Game, Gamble {
     //roll to decide first, highest wins
     //both make a bet -> pot
     //decide if bet is pass or don't pass
-    //player throwin dice = shooter
+    //player throwing dice = shooter
     //roll 2 dice 7/11 on first roll -> win
     // 2/3/12 on first roll -> lose
     //come/don't come bets
 
     private ArrayList<CrapsPlayer> players;
-    //private Dice<Integer> dice = new Dice<>(1,2,3,4,5,6);
-    private MoneyContainer pot;
+    private Dice<Integer> dice;
+    private boolean isPointSet = false;
+    private boolean isPlayerTurn = false;
+    private int point=0;
+    private MoneyContainer mainPot;
 
-    public void play() {
+    public Craps(){
+        ArrayList<Integer> twoToTwelve = new ArrayList<>();
+        for (int i=2; i<13; i++)
+        {
+            twoToTwelve.add(i);
+        }
+        dice=new Dice<>(twoToTwelve);
+    }
+
+    public boolean play(String userInput) {
+        return ("Y".equalsIgnoreCase(userInput));
+    }
+
+/*
+        roll to determine who goes first (high/low)
+            Player makes a pass or dontPass bet into the mainPot
+            initialThrow (comeOutRoll) to win or point.
+                resolve if pass, dontPass, or point (7,11 is pass) (2,3,12 is dontPass).
+                    //Player wins/loses their opponent's stake in the pot
+                    //Opponent needs to bet again before next roll
+                    //Same, inverse
+            if point, can make side bets on the point (6/8, 5/9, 10/4)
+                If roller gets his point, he wins mainPot and sidePot.
+                If roller rolls side number, he only wins sidePot.
+                    Another sideBet can be made after the first sideBet is won
+
+                If roller craps (7) out, nonRoller wins mainPot and sidePot
+            Next player gets the dice
+
+ */
+
+
+    private void rollHighLow(){
+        int playerRoll;
+        int botRoll;
+
+        do {
+            playerRoll = dice.rollDie();
+            botRoll = dice.rollDie();
+        }while (playerRoll==botRoll);
+
+        isPlayerTurn=(playerRoll>botRoll);
 
     }
+
+    private void crapsBetting(){
+        if (!isPointSet){
+            //do pass don'tPass betting to main pot
+
+        }
+        else
+        {
+            //offer sideBet chance
+        }
+    }
+
+
 
     @Override
     public void takeBet(Double bet) {
-
+        mainPot.addMoney(bet*2);
     }
 
     @Override
-    public void settleBet() {
+    public Double settleBet() {
 
     }
 
