@@ -3,10 +3,14 @@ package io.zipcoder.casino.nuts_n_bolts;
 public class User {
 
     private String name;
-    private MoneyContainer wallet;
+    private MoneyContainer wallet = new MoneyContainer();
+
+    public User(String name){
+        this.name = name;
+    }
 
     public User(String name, Double money){
-        this.name = name;
+        this(name);
         this.wallet.addMoney(money);
     }
 

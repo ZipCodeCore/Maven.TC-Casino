@@ -68,7 +68,7 @@ public class Console {
             betAmount=getBetAmount();
         }while (betAmount>player.getWallet().getMoney());
 
-        game.takeBet(betAmount);
+        //game.takeBet(betAmount);
 
     }
 
