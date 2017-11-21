@@ -32,6 +32,10 @@ public class Console {
         return output;
     }
 
+    public static void print(boolean input) {
+        System.out.println(input);
+    }
+
     public static void print(int input) {
         System.out.println(input);
     }

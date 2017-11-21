@@ -68,7 +68,7 @@ public class GoFish extends CardGames {
     }
 
     public void displayHand(Player aPlayer) {
-        Console.print("This is "+aPlayer.getName()+"'s hand: ");
+        Console.print("\nThis is "+aPlayer.getName()+"'s hand: ");
         sortPlayerHand(aPlayer);
 
         for (int x = 0; x < aPlayer.getHand().size(); x++) {
@@ -109,10 +109,10 @@ public class GoFish extends CardGames {
         return isCardFound;
     }
 
-    private Card defineAskedForCard() {
+    private Card getPlayerToAskAndPickCardToAskFor() {
         displayOpponentsNames();
         playerPicked();
-        displayHand(playerPicked);
+        displayHand(playerPicked);   //UNCOMMENT OUT THIS WHEN YOU DON'T WANT NOT SHOW OPPONENTS HAND
         return pickCardToAskFor(currentPlayer);
     }
 
@@ -123,7 +123,7 @@ public class GoFish extends CardGames {
                 Card theCardFound = playerPicked.getHand().get(x);
                 currentPlayer.addToHand(theCardFound);
                 playerPickedHand.remove(theCardFound);
-                Console.print("\nYay! " + playerPicked.getName() + " had a " + theCardFound.toString() + "!\n");
+                Console.print("\nYay! " + playerPicked.getName() + " had a " + theCardFound.toString() + "!");
                 x--;
                 cardFound = true;
             }
@@ -133,19 +133,19 @@ public class GoFish extends CardGames {
 
     public void cardFoundInHand(boolean isCardInHand) {
         if (isCardInHand) {
-            displayHand(currentPlayer);
+            //displayHand(currentPlayer);
             checkForPairOf4(currentPlayer);
-            checkForCardInHand();
+            aRound();
         }
     }
 
     public void cardNotFoundInHand(boolean isCardInHand) {
-        if (isCardInHand) {
+        if (!isCardInHand) {
             if (deck.getAllCards().size() > 0) {
                 Console.print("\nGo Fish, you got it wrong hahahaha\n");
                 Card cardDrawnFromDeck = deck.getCard();
                 Console.print("You just drew a " + cardDrawnFromDeck+"\n");
-                Console.print("There are "+deck.getAllCards().size() + " cards left in the deck.");
+                Console.print("There are "+deck.getAllCards().size() + " cards left in the deck.\n");
                 currentPlayer.addToHand(cardDrawnFromDeck);
                 drewCardAskedFor(cardDrawnFromDeck, this.cardAskedFor);
             }
@@ -156,7 +156,7 @@ public class GoFish extends CardGames {
         if (cardPicked.equals(cardDrawnFromDeck)) {
             displayHand(currentPlayer);
             checkForPairOf4(currentPlayer);
-            checkForCardInHand();
+            aRound();
         }
     }
 
@@ -191,75 +191,20 @@ public class GoFish extends CardGames {
             }
         }
 
-//        ArrayList<Card> cardlist = aPlayer.getHand();
-//        for (int i = 0; i< cardlist.size(); i++) {
-//            Card card = cardlist.get(i);
-//            System.out.println(returnFaceValue(myMap) + " " + card.toString().substring(0, 2));
-//            System.out.println(returnFaceValue(myMap).equals(card.toString().substring(0, 2)));
-//        }
+        myMap.forEach((faceValue,cardCount) -> {
+            if (cardCount.equals(4)) {
+                aPlayer.setHand(aPlayer.getHand().stream().filter(card -> !card.toString().substring(0,2)
+                        .equals(faceValue)).collect(Collectors.toCollection(ArrayList::new)));
 
-//        ArrayList<Card> newHand = aPlayer.getHand().stream()
-//                .filter(card -> !returnFaceValue(myMap)
-//                        .equals(card.toString().substring(0, 2)))
-//                .collect(Collectors.toCollection(ArrayList::new));
-//
-//        System.out.println(Arrays.toString(newHand.toArray()));
-//
-//        aPlayer.setHand(newHand);
-
-        aPlayer.setHand(aPlayer.getHand().stream()
-                .filter(a -> returnFaceValue(myMap)).collect(Collectors.toCollection(ArrayList::new)));
-
-
-                //.filter()
-                //.equals(card.toString().substring(0, 2)))
-                //
-
-        //myMap = aPlayer.getHand();
-
-        displayHand(aPlayer);
-
+                numOfCompletedSuits++;
+                currentPlayer.addPointToScore();
+                Console.print("\nYay! You just got a completed set of four" + faceValue + "'s. " +
+                        "Your current score " + currentPlayer.getName() + ", is " + currentPlayer.getScore()+".");
+                Console.print("You get to go again!\n");
+            }
+        });
     }
 
-
-    private boolean returnFaceValue(Map<String, Integer> myMap) {
-        if (myMap.get(" A") == 4) {
-            return true;
-        }
-        else {
-            return false;
-        }
-
-    }
-     
-
-
-//    private String returnFaceValue(Map<String, Integer> myMap) {
-//        String faceValue = "";
-//        Integer countNumber = 0;
-//        for (Map.Entry<String, Integer> pair : myMap.entrySet()) {
-//            countNumber = pair.getValue();
-//            faceValue = pair.getKey();
-//            if (countNumber.equals(4)) {
-//                numOfCompletedSuits++;
-//                currentPlayer.addPointToScore();
-//                Console.print("Yay! You just got a completed set of four " + faceValue + ". " +
-//                        "Your current score " + currentPlayer.getName() + ", is " + currentPlayer.getScore());
-//                Console.print("The size of the hashmap is: " + myMap.size());
-//                //myMap.remove(faceValue);
-//                //IF YOU DON'T REMOVE FROM MAP IT GIVES YOU THE RIGHT AMOUNT OF CARDS IN THE END.
-//                break;
-//
-//            }
-//        }
-//        return faceValue;
-//    }
-
-//    numOfOpponents(); only run once
-//    decideOrderOfPlayers(); only run once
-//    dealFirstRound(); only run once
-//    displayHand(currentPlayer); run multiple times
-//    checkForCardInHand(); run multiple times
 
     @Override
     public void play() {
@@ -268,30 +213,30 @@ public class GoFish extends CardGames {
         dealFirstRound();
 
 
-        int trueValueOfLoop = 0;
-
         while (numOfCompletedSuits<13) {
+            for (int x = 0; x < playersList.size(); x++) {
+                if (x == playersList.size()-1) {
+                    x = 0;
+                }
 
-            if (trueValueOfLoop == playersList.size()) {
-                trueValueOfLoop = 0;
-            }
-            for (int x = trueValueOfLoop; x < playersList.size(); x++) {
                 currentPlayer = playersList.get(x);
                 Console.print("TESTING THIS SHIT OUTTTTTTTTTT.");
                 Console.print("It is now " + currentPlayer.getName() + "'s turn!");
-                displayHand(currentPlayer);
-                this.cardAskedFor = defineAskedForCard();
-                boolean isCardInHand = checkForCardInHand();
-                cardFoundInHand(isCardInHand);
-                cardNotFoundInHand(isCardInHand);
-
-                displayHand(currentPlayer);
-
-                break;
+                aRound();
             }
         }
 
         // method to check and see who has the highest score or tie
 
+    }
+
+    private void aRound() {
+        displayHand(currentPlayer);
+        this.cardAskedFor = getPlayerToAskAndPickCardToAskFor();
+        boolean isCardInHand = checkForCardInHand();
+        cardFoundInHand(isCardInHand);
+        cardNotFoundInHand(isCardInHand);
+        checkForPairOf4(currentPlayer);
+        //displayHand(currentPlayer);
     }
 }
