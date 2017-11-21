@@ -2,6 +2,8 @@ package io.zipcoder.casino;
 
 public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparable<BlackjackPlayer>, Gamble {
 
+
+
     BlackjackPlayer(String name, Double money) {
         super(name, money);
     }

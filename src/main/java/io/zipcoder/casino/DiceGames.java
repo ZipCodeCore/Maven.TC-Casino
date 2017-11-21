@@ -1,4 +1,6 @@
 package io.zipcoder.casino;
 
-public class DiceGames {
+public class DiceGames extends Game {
+    void start() {
+    }
 }
