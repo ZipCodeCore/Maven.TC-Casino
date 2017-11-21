@@ -9,43 +9,18 @@ import java.util.stream.Stream;
 public class GoFishPlayer extends CardPlayer {
 
 
-
     public Card drawCard(Deck deck) {
         Card playerCard = deck.getCards().remove(0);
         return playerCard;
     }
 
-    public void addCardToHand(Card card) {
-        hand.add(card);
-    }
-
-    public ArrayList<Card> getHand() {
-        return hand;
-    }
-
-    public boolean checkHandForCard(Rank rank) {
-        for (Card card : hand) {
-            if (card.getRank() == rank) return true;
-        }
-        return false;
-
-    }
-
-    public Card giveCard(Rank rank) {
-        for (Card card : hand) {
-            if (card.getRank() == rank) {
-                hand.remove(card);
-                return card;
-            }
-        }
-        return null;
-    }
 }
 
    /* public Suit checkFourOfAKind(){
 
 
      Stream<Card> handStream = hand.stream();
+>>>>>>> a373b1c3249a98a037ab65243ba0b3172174ebb5
 
         *//*  int diamonds = 0;
         int spades = 0;
@@ -77,9 +52,6 @@ public class GoFishPlayer extends CardPlayer {
 //        for(int i = 0; i<5; i++){
 //            hand.add(drawCard(deck));
 //        }
-
-
-    }
 
 
 }

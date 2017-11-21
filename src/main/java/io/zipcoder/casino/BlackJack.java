@@ -26,13 +26,18 @@ public class BlackJack extends CardGame implements PlayForMoney {
     public void resolveBets() {
     }
 
+    public void bet(CrapsBetType betType, double betAmount) {
+
+    }
+
+    public void takeBet(Double betAmount) {
+
+    }
     public void dealNewHand() {
 
     }
 
     public double betInplay() {
-
-
         return 0;
     }
 

@@ -3,9 +3,8 @@ package io.zipcoder.casino;
 public class Craps extends Game implements PlayForMoney {
     private Bank house;
 
-    private double betAmount;
-
-    private BetType betType;
+    private CrapsBetType betType;
+    private Double playerBet;
     private boolean isComeOut;
     private Integer point=0;
     private Integer comePoint;
@@ -14,6 +13,18 @@ public class Craps extends Game implements PlayForMoney {
         player.roll2Dice();
     }
 
+    public void startPlayerTurn() {
+
+
+    }
+    public void takeBet(Double betAmount) {
+        this.playerBet = betAmount;
+    }
+
+
+    public Double getPlayerBet() {
+        return playerBet;
+    }
 
     /*
     if (play.equals("y")){
@@ -42,15 +53,9 @@ public class Craps extends Game implements PlayForMoney {
                 System.out.println("You win! Added " + passLineBet + " to your bank.");
             }else if(gameOn.passBetLoses(roll)){
                 System.out.println("You lose.");
-            }
-
-     */
+            }*/
 
 
-
-    public void takeBets(CrapsPlayer player){
-
-    }
 
     public void isWinner(){
 
@@ -67,9 +72,7 @@ public class Craps extends Game implements PlayForMoney {
 
 
 
-    public boolean passBetWinsComeOut(int roll) {
-        return (roll == 7 || roll == 11);
-    }
+ /*
 
     public boolean passBetLosesComeOut(int roll){
         return (roll == 2 || roll == 3 || roll == 12);
@@ -82,7 +85,7 @@ public class Craps extends Game implements PlayForMoney {
 
     public boolean passBetLoses(int roll){
         return (roll == 7);
-    }
+    }*/
 
 
 
@@ -94,15 +97,21 @@ public class Craps extends Game implements PlayForMoney {
         //refactor to add push condition for 12
     }
 
-//    public void setBetType(BetType betType) {
-//        this.betType = betType;
-//    }
+
+    public void setBetType(CrapsBetType betType) {
+        this.betType = betType;
+    }
 
     public void placeBet(double betAmount) {
         this.playerBet = betAmount;
     }
 
     public void rollAgain(){
+
+    }
+
+
+    public void takeBet(double betAmount) {
 
     }
 
@@ -124,5 +133,33 @@ public class Craps extends Game implements PlayForMoney {
 
     public int getPoint() {
         return point;
+    }
+
+    public boolean isBetWinComeOut(int roll, CrapsBetType betType) {
+        if(betType == CrapsBetType.PASSLINE)
+            return (roll == 7 || roll == 11);
+        if (betType == CrapsBetType.DONTPASS)
+            return (roll == 2 || roll == 3);
+        return false;
+
+    }
+
+    public boolean isBetLossComeOut(int roll, CrapsBetType betType) {
+        if(betType == CrapsBetType.PASSLINE)
+            return (roll == 2 || roll == 3 || roll ==12);
+        if (betType == CrapsBetType.DONTPASS)
+            return (roll == 7 || roll == 11);
+        return false;
+
+    }
+
+
+    public CrapsBetType getBetType() {
+        return betType;
+    }
+
+    public boolean isNoResultRoll(int roll, CrapsBetType betType) {
+        return !isBetWinComeOut(roll, betType) && !isBetLossComeOut(roll,betType);
+
     }
 }

@@ -1,24 +1,20 @@
 package io.zipcoder.casino;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class CrapsPlayerTest {
 
     @Test
-    public void roll2DiceTest(){
+    public void shouldReturnAvalueBetween2AND12WhileRollingDiceTest(){
 
         CrapsPlayer shooter = new CrapsPlayer();
 
         Integer actual = shooter.roll2Dice();
-        Assert.assertTrue(actual <13 && actual > 0);
-
-        for(int i =0; i < 1000000; i++){
-            actual = shooter.roll2Dice();
-            Assert.assertTrue(actual <13 && actual > 0);
-        }
+        assertTrue(actual <13 && actual > 2);
     }
+
+
 
 }
