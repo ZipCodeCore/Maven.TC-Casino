@@ -24,6 +24,7 @@ public class BlackJackPlayer extends CardPlayer {
 
     }
 
+
     public Card hit(Deck deck) {
         return deck.pop();
     }
@@ -32,6 +33,7 @@ public class BlackJackPlayer extends CardPlayer {
 
         return true;
     }
+
 
 
 }

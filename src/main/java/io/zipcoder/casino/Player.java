@@ -21,7 +21,9 @@ public class Player {
         return name;
     }
 
+
     public double getBank() {
         return bank;
     }
+
 }

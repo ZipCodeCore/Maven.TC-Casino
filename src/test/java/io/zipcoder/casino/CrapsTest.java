@@ -11,6 +11,18 @@ public class CrapsTest {
     }
 
     @Test
+    // as a craps player I would like to roll again if I my roll
+    // doesn't win or lose
+    public boolean rollAgain(){
+        Craps gameOn = new Craps();
+        Integer =
+
+        if(!gameOn.passBetWins()&& passBetLosesTest();)
+
+    }
+
+
+    @Test
     public void passBetWinsTest() throws Exception {
         Craps game = new Craps();
         game.setComeOut(true);
