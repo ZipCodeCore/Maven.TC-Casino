@@ -42,9 +42,10 @@ public class GoFish {
     class GoFishPlayer {
 
         private User user;
-        private Hand hand;
-        private PlayingValue askedValue = null;
 
+        private Hand hand;
+
+        private PlayingValue askedValue = null;
         GoFishPlayer(User user){
             this.user = user;
             this.hand = new Hand();
@@ -54,15 +55,31 @@ public class GoFish {
             return user;
         }
 
+        public Hand getHand() {
+            return hand;
+        }
+
         PlayingValue getAskedValue() {
             return askedValue;
         }
 
-        Boolean askForValue(GoFishPlayer other, PlayingValue value){
-            return null;
+        Integer askForValue(GoFishPlayer other, PlayingValue value){
+            this.askedValue = value;
+            return other.checkIfHandHasValue(value);
         }
 
-        void getCards(GoFishPlayer other, PlayingValue value){}
+        Integer checkIfHandHasValue(PlayingValue value) {
+            Integer valueCount = 0;
+            for (PlayingCard card :
+                    this.getHand().getAllCards()) {
+                if (value.equals(card.getValue())) {
+                    valueCount++;
+                }
+            }
+            return valueCount;
+        }
+
+        void takeCards(GoFishPlayer other, PlayingValue value){}
 
         void nullAskedValue(){
 
