@@ -2,7 +2,7 @@ package io.zipcoder.casino.games.gofish;
 
 import io.zipcoder.casino.games.CardGame;
 import io.zipcoder.casino.nuts_n_bolts.User;
-import io.zipcoder.casino.nuts_n_bolts.cards.PlayingCard;
+import io.zipcoder.casino.nuts_n_bolts.cards.Hand;
 import io.zipcoder.casino.nuts_n_bolts.cards.PlayingValue;
 
 import java.util.ArrayList;
@@ -25,12 +25,16 @@ public class GoFish extends CardGame {
 
     private void shufflePlayerOrder(){}
 
-    private void isHandEmpty(){}
+    private Boolean lastPlayerHandEmpty(){
+        return null;
+    }
+
+    private void declareWinner(){}
 
     private class GoFishPlayer {
 
         private User user;
-        private ArrayList<PlayingCard> hand = new ArrayList<>();
+        private Hand hand = new Hand();
         private PlayingValue askedValue = null;
 
         public GoFishPlayer(User user){
@@ -43,7 +47,9 @@ public class GoFish extends CardGame {
 
         private void drawCard(){}
 
-        private Boolean hasFourOfKind(){}
+        private Boolean hasFourOfKind(){
+            return null;
+        }
 
         private void discardFourOfKind(){}
 

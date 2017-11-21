@@ -1,33 +1,27 @@
 package io.zipcoder.casino.nuts_n_bolts;
 
-public class UserTest {
-}
+import org.junit.Assert;
+import org.junit.Test;
 
+public class UserTest {
+
+    @Test
+    public void getNameTest() {
+        User testUser = new User("Test Dummy", 1000d);
+        String expected = "Test Dummy";
+
+        String actual = testUser.getName();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+}
 
 /*
 *
-    @Test
-    public void getNameTest() {
-        //: Given
-        Player testPlayer = new Player("Gabriela");
-        String expected = "Gabriela";
 
-        //: When
-        String actual = testPlayer.getName();
 
-        //: Then
-        Assert.assertEquals(expected, actual);
-    }
 
-    @Test
-    public void getMoneyTest(){
-        Player testPlayer = new Player("Claude");
-        Double expected = 500d;
-
-        Double actual = testPlayer.getMoney();
-
-        Assert.assertEquals(expected, actual);
-    }
 
     @Test
     public void getScoreTest(){

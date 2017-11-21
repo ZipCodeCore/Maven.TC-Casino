@@ -3,7 +3,7 @@ package io.zipcoder.casino.games.craps;
 import io.zipcoder.casino.games.Gamble;
 import io.zipcoder.casino.games.Game;
 import io.zipcoder.casino.nuts_n_bolts.Dice;
-import io.zipcoder.casino.nuts_n_bolts.Pot;
+import io.zipcoder.casino.nuts_n_bolts.MoneyContainer;
 import io.zipcoder.casino.nuts_n_bolts.User;
 
 import java.util.ArrayList;
@@ -20,9 +20,10 @@ public class Craps implements Game, Gamble {
     //come/don't come bets
 
     private ArrayList<CrapsPlayer> players;
+    //private Dice<Integer> dice = new Dice<>(1,2,3,4,5,6);
     private Dice<Integer> dice;
-    private Pot mainPot;
-    private Pot sidePot;
+    private MoneyContainer mainPot;
+    private MoneyContainer sidePot;
 
     public Craps(){
         ArrayList<Integer> twoToTwelve = new ArrayList<>();

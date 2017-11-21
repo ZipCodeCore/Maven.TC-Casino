@@ -1,11 +1,11 @@
 package io.zipcoder.casino.casino;
 
-import io.zipcoder.casino.nuts_n_bolts.Player;
+import io.zipcoder.casino.nuts_n_bolts.User;
 
 public class Casino {
 
     private static Casino INSTANCE = null;
-    private Player player;
+    private User user;
 
     private Casino(){}
 
