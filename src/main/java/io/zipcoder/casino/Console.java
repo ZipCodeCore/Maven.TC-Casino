@@ -43,4 +43,16 @@ public class Console {
 
 
     }
+
+//    public static double checkForNullPointer(Double toBeChecked){
+//        do {
+//            try {
+//                return toBeChecked;
+//            } catch (NullPointerException npe){
+//                toBeChecked = CurrencyConverter.getCurrencyRates(getUserInputInteger("Invalid response. Please try again."));
+//                continue;
+//            }
+//        }
+//        while (true);
+//    }
 }

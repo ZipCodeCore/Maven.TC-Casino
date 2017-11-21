@@ -22,4 +22,8 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Comparable<Craps
         return null;
 
     }
+
+    public static void firstRoll(){
+
+    }
 }
