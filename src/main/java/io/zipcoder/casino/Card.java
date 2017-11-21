@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public class Card implements Comparable{
+public class Card extends Object implements Comparable{
     private Suit suit;
     public static String[] suitSymbols = {"♡", "♢", "♧", "♤"};
     public static String[] faceSymbols = {"A", "J", "Q", "K"};
@@ -54,5 +54,18 @@ public class Card implements Comparable{
     @Override
     public int compareTo(Object o) {
         return this.compareTo(o);
+    }
+
+    public boolean equals(Card aCard) {
+
+        String cardOne = this.toString().substring(0,2);
+        String cardTwo = aCard.toString().substring(0,2);
+
+        if (cardOne.equalsIgnoreCase(cardTwo)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

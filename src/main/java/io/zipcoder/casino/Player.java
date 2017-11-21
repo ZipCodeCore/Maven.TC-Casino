@@ -91,4 +91,8 @@ public class Player {
     public void receiveWinnings(Double amount) {
         money += amount;
     }
+
+    public void addPointToScore() {
+        score++;
+    }
 }
