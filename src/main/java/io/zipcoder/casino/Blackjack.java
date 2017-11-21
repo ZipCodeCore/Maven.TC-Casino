@@ -62,7 +62,7 @@ public class Blackjack extends CardGame{
             printHand(player);
             Console.print("Score of "+player.getScore() + "\n");
             hitOrStay = Console.getValidString("Would you like to hit or stay?","hit","stay");
-            if("hit".equalsIgnoreCase(hitOrStay)){
+            if("hit".equalsIgnoreCase(hitOrStay) && player.hand.size()<5){
                 player.addCard(deck.getCard());
             }else {
                 return;
