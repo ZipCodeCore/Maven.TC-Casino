@@ -1,21 +1,25 @@
 package io.zipcoder.casino;
 
-public class CrapsPlayer extends Player implements Gamble {
+public class CrapsPlayer extends Player<CrapsPlayer> implements Comparable<CrapsPlayer> ,Gamble {
+
 
     void addToList(CrapsPlayer player) {
         this.players.add(player);
     }
 
-    void addToList(Comparable player) {
-
-    }
 
     CrapsPlayer(String name, Double money) {
         super(name, money);
     }
 
 
-    public void bet() {
+
+    public int compareTo(CrapsPlayer o) {
+        return 0;
+    }
+
+    public Double bet() {
+        return null;
 
     }
 }
