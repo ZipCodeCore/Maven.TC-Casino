@@ -11,4 +11,8 @@ public class Craps extends DiceGames {
         return dice1 + dice2;
     }
 
+    public void testGit(){
+        
+    }
+
 }
