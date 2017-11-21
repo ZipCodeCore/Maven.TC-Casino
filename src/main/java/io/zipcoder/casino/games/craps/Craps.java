@@ -19,26 +19,26 @@ public class Craps implements Game, Gamble {
     // 2/3/12 on first roll -> lose
     //come/don't come bets
 
-    private User player;
     private Dice<Integer> dice;
+    private CrapPointPair pair;
     private boolean isPointSet = false;
+    private boolean playerWonBet = false;
+    private boolean sidePairRolled = false;
+    private boolean playerWonSide = false;
     private boolean isPlayerTurn = false;
     private int point=0;
     private MoneyContainer mainPot;
 
-    public Craps(User user){
+    public Craps(){
         ArrayList<Integer> twoToTwelve = new ArrayList<>();
         for (int i=2; i<13; i++)
         {
             twoToTwelve.add(i);
         }
         dice=new Dice<>(twoToTwelve);
-        player = user;
     }
 
     public boolean play(String userInput) {
-
-
         return ("Y".equalsIgnoreCase(userInput));
     }
 
@@ -59,10 +59,10 @@ public class Craps implements Game, Gamble {
             Next player gets the dice
 
  */
-    public String initialRoll(){
+
+    public String initialRoll(double mainStake){
         String returnMe="";
         int rollResult = dice.rollDie();
-        double initialStake=mainPot.getMoney() / 2.0;
 
         if (isPlayerTurn) {
             returnMe += "You rolled a " + rollResult;
@@ -73,31 +73,91 @@ public class Craps implements Game, Gamble {
 
         if (rollResult==7 || rollResult==11){
             if (isPlayerTurn) {
-                returnMe+=" and won "+initialStake;
-                player.getWallet().addMoney(mainPot.takeOutMoney(initialStake));
+                returnMe+=" and you won "+mainStake;
+                playerWonBet=true;
             }
             else {
-                returnMe+=" and lost "+initialStake;
-                mainPot.takeOutMoney(initialStake);
+                returnMe+=" and you lost "+mainStake;
+                playerWonBet=false;
             }
         }
         else if (rollResult==2 || rollResult==3 || rollResult==12){
             if (isPlayerTurn) {
-                returnMe+=" and lost "+initialStake;
-                mainPot.takeOutMoney(initialStake);
+                returnMe+=" and you lost "+mainStake;
+                playerWonBet=false;
             }
             else {
-                returnMe+=" and won "+initialStake;
-                player.getWallet().addMoney(mainPot.takeOutMoney(initialStake));
+                returnMe+=" and you won "+mainStake;
+                playerWonBet=true;
             }
         }
         else{
             point=rollResult;
+            assignPair();
             isPointSet=true;
             returnMe+=" which makes "+point+" the new point.";
         }
         returnMe+="  There is "+mainPot.getMoney()+" in the pot.";
         return returnMe;
+    }
+
+    public String subsequentRolls(double sideStake){
+        String returnMe="";
+        int rollResult = dice.rollDie();
+
+        if ((rollResult == point) && (isPlayerTurn)){
+            returnMe+="You rolled "+rollResult+" and got the point! You won everything!";
+            playerWonBet=true;
+            playerWonSide=true;
+            sidePairRolled=true;
+        } else
+            if ((rollResult == point) && (!isPlayerTurn)){
+                returnMe+="Opponent rolled "+rollResult+" and got the point. You lost everything!";
+                playerWonBet=false;
+                playerWonSide=false;
+                sidePairRolled=true;
+            } else
+                if ((rollResult==7) && (isPlayerTurn)){
+                    returnMe+="You crapped out. You lost everything!";
+                    playerWonBet=false;
+                    playerWonSide=false;
+                    sidePairRolled=true;
+                } else
+                    if ((rollResult==7) && (!isPlayerTurn)){
+                        returnMe+="Your opponent crapped out! You won everything!";
+                        playerWonBet=true;
+                        playerWonSide=true;
+                        sidePairRolled=true;
+                    } else{
+                        if (pair.isInPair(rollResult)){
+                            sidePairRolled=true;
+                            if (isPlayerTurn){
+                                returnMe+="You rolled "+rollResult+" and won the side bet of "+sideStake+". ";
+                                playerWonSide=true;
+                            }
+                            else {
+                                returnMe+="Your opponent rolled "+rollResult+" and won the side bet of "+sideStake+". ";
+                                playerWonSide=false;
+                            }
+                        } else{
+                            returnMe+=""+rollResult+" was rolled. Rolling again. ";
+                        }
+                    }
+        return returnMe;
+    }
+
+    public String pairText(){
+        return(pair.text);
+    }
+
+    private CrapPointPair assignPair() {
+
+        for(CrapPointPair p : CrapPointPair.values()) {
+            if (p.a==point || p.b==point) {
+                return p;
+            }
+        }
+        return null;
     }
 
     public void rollHighLow(){
@@ -113,12 +173,61 @@ public class Craps implements Game, Gamble {
 
     }
 
+    public int getPoint(){
+        return point;
+    }
+
+    public boolean getIsPlayerTurn(){
+        return isPlayerTurn;
+    }
+
+    public boolean getIsPointSet(){
+        return isPointSet;
+    }
+
+    public boolean getPlayerWonSide() {
+        return playerWonSide;
+    }
+
+    public boolean getSidePairRolled() {
+        return sidePairRolled;
+    }
+
     public void takeBet(Double bet) {
-        mainPot.addMoney(bet*2);
+        mainPot.addMoney(bet);
+    }
+
+    public boolean getPlayerWonBet(){
+        return playerWonBet;
     }
 
     public Double settleBet() {
+        return mainPot.takeOutMoney(mainPot.getMoney()/2);
+    }
+
+    public Double cashOutPot(){
         return mainPot.takeAllMoney();
+    }
+
+    private enum CrapPointPair {
+        sixEight(6, 8, "6-8"),
+        fiveNine(5, 9, "5-9"),
+        tenFour(10, 4, "10-4");
+
+        int a;
+        int b;
+        String text;
+
+        CrapPointPair(int a, int b, String text) {
+            this.a = a;
+            this.b = b;
+            this.text=text;
+        }
+
+        boolean isInPair(int a) {
+            return (this.a==a || this.b==a);
+        }
+
     }
 
 }

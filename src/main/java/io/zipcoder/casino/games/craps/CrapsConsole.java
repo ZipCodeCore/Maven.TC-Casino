@@ -2,6 +2,7 @@ package io.zipcoder.casino.games.craps;
 
 import io.zipcoder.casino.games.Gamble;
 import io.zipcoder.casino.games.Game;
+import io.zipcoder.casino.nuts_n_bolts.Console;
 import io.zipcoder.casino.nuts_n_bolts.User;
 
 import java.util.Scanner;
@@ -9,73 +10,125 @@ import java.util.Scanner;
 import static io.zipcoder.casino.nuts_n_bolts.Input.getPositiveDoubleInput;
 import static io.zipcoder.casino.nuts_n_bolts.Input.getStringInput;
 
-public class CrapsConsole {
+public class CrapsConsole{
 
-    private Craps game = new Craps();
-    private User player;
-    private static Scanner scanner = new Scanner(System.in);
+    Craps game = new Craps();
 
+    User player = new User(getStringInput("What is your name? "),
+                           getPositiveDoubleInput("What's in your wallet? "));
+    double currentBet=0;
+    String strResponse="";
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
+    public void run(){
 
-    public void setUser(User user) {
-        this.player = user;
-    }
+        System.out.println("Hello "+player.getName()+ ", and welcome to the "
+                            +game.getClass().getSimpleName()+" table.");
 
-    public void run() {
-        System.out.println("Welcome to the " + game.getClass().getSimpleName() + " table!");
+        game.rollHighLow();
+///////
+        strResponse=getStringInput("I have to ask: are you sure you want to stay at the table? [Y/N] ");
 
-        if (game instanceof Gamble) {
-            do {//betting game logic
-
-
-
-
-                playerBets();
-
-
-
-
-
-            } while (game.play(continuePlaying()));
-        } else {
-
-            do {//non betting game logic
-
-            } while (game.play(continuePlaying()));
+        if (game.getIsPlayerTurn()){
+            currentBet=getPositiveDoubleInput("It's your turn to roll! Make a bet: ");
+        } else{
+            currentBet=getPositiveDoubleInput("It's your opponent's turn to roll. Make a bet: ");
         }
+        game.takeBet(player.getWallet().takeOutMoney(currentBet));
+        game.takeBet(currentBet);// Once for player, once for house
+///////
+        while (game.play(strResponse)){
 
-    }
+            System.out.println(game.initialRoll());
+
+            if(game.getPlayerWonBet()) {
+                player.getWallet().addMoney(game.settleBet());
+            } else if (!game.getPlayerWonBet() && !game.getIsPointSet()) {
+                game.takeBet(player.getWallet().takeOutMoney(currentBet));
+            }
+
+            if (game.getIsPointSet()){
+                currentBet=getPositiveDoubleInput("Current point is "+game.getPoint()+" and" +
+                        " current pair is "+game.pairText()+". Your bet? ");
+                game.takeBet(player.getWallet().takeOutMoney(currentBet));
+                game.takeBet(currentBet);// Once for player, once for house
+
+                while (game.getPoint()!=0){
+                    System.out.println(game.subsequentRolls(currentBet));
+                    if (game.getPlayerWonBet()){
+                        player.getWallet().addMoney(game.cashOutPot());
+                    } else if (game.getPlayerWonSide()){
+                        player.getWallet().addMoney();
+                    }
+
+                }
+            }
 
 
-    private String continuePlaying() {
-        return (getStringInput("Continue playing? "));
-    }
-
-    private void displayPlayerMoney(){
-        System.out.println("You have $" + player.getWallet().getMoney());
-    }
-
-    private void playerBets(){
-        double betAmount;
-
-        do{
-            displayPlayerMoney();
-            betAmount=getBetAmount();
-        }while (betAmount>player.getWallet().getMoney());
-
-        game.takeBet(betAmount);
-
-    }
-
-    private Double getBetAmount(){
-        return (getPositiveDoubleInput("How much do you want to bet? "));
-
-    }
-
-}
+//    private Craps game = new Craps();
+//    private User player;
+//    private static Scanner scanner = new Scanner(System.in);
+//
+//
+//    public void setGame(Game game) {
+//        this.game = game;
+//    }
+//
+//    public void setUser(User user) {
+//        this.player = user;
+//    }
+//
+//    public void run() {
+//        System.out.println("Welcome to the " + game.getClass().getSimpleName() + " table!");
+//
+//        if (game instanceof Gamble) {
+//            do {//betting game logic
+//
+//
+//
+//
+//                playerBets();
+//
+//
+//
+//
+//
+//            } while (game.play(continuePlaying()));
+//        } else {
+//
+//            do {//non betting game logic
+//
+//            } while (game.play(continuePlaying()));
+//        }
+//
+//    }
+//
+//
+//    private String continuePlaying() {
+//        return (getStringInput("Continue playing? "));
+//    }
+//
+//    private void displayPlayerMoney(){
+//        System.out.println("You have $" + player.getWallet().getMoney());
+//    }
+//
+//    private void playerBets(){
+//        double betAmount;
+//
+//        do{
+//            displayPlayerMoney();
+//            betAmount=getBetAmount();
+//        }while (betAmount>player.getWallet().getMoney());
+//
+//        game.takeBet(betAmount);
+//
+//    }
+//
+//    private Double getBetAmount(){
+//        return (getPositiveDoubleInput("How much do you want to bet? "));
+//
+//    }
+//
+//}
 /*
     private static final double MIN_BET_ALLOWED=0.01;
 
@@ -270,3 +323,4 @@ public class CrapsConsole {
 
 
     }*/
+}
