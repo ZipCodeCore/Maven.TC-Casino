@@ -13,37 +13,16 @@ public class GoFishPlayer extends CardPlayer {
         Card playerCard = deck.getCards().remove(0);
         return playerCard;
     }
-/*
-    public void addCardToHand(Card card){
-        hand.add(card);
-    }
 
-    public ArrayList<Card> getHand() {
-        return hand;
-    }
+}
 
-    public boolean checkHandForCard(Rank rank){
-        for(Card card: hand){
-            if(card.getRank() == rank) return true;
-        }return false;
+   /* public Suit checkFourOfAKind(){
 
-    }
 
-    public Card giveCard(Rank rank){
-        for(Card card: hand){
-            if(card.getRank() == rank){
-                hand.remove(card);
-                return card;
-            }
-        }
-        return null;
-    }*/
+     Stream<Card> handStream = hand.stream();
+>>>>>>> a373b1c3249a98a037ab65243ba0b3172174ebb5
 
-    //  public Suit checkFourOfAKind() {
-
-    //  Stream<Card> handStream = hand.stream().
-
-        /*  int diamonds = 0;
+        *//*  int diamonds = 0;
         int spades = 0;
         int hearts = 0;
         int clubs =0;
@@ -67,7 +46,7 @@ public class GoFishPlayer extends CardPlayer {
             }
         }return null;
 
-    }*/
+
 
 //    public void drawFiveCards(Deck deck){
 //        for(int i = 0; i<5; i++){
@@ -76,3 +55,4 @@ public class GoFishPlayer extends CardPlayer {
 
 
 }
+*/

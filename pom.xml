@@ -21,6 +21,9 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a373b1c3249a98a037ab65243ba0b3172174ebb5
     </dependencies>
 </project>
