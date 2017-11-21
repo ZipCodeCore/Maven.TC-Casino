@@ -1,14 +1,8 @@
 package io.zipcoder.casino;
 
-public class GoFishPlayer extends Player {
+public class GoFishPlayer {
 
-    @Override
-    void addToList(GoFishPlayer player) {
-        this.players.add(player);
-    }
+*
 
-    GoFishPlayer(String name) {
-        super(name);
-    }
 
 }
