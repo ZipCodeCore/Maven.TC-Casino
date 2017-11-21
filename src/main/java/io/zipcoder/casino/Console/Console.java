@@ -33,17 +33,6 @@ public class Console extends ArrayList<String> {
     }
 
 
-    public static String getValidString(String prompt,String... validInputs){
-        String input;
-        while(true){
-            input = getString(prompt);
-            if (Arrays.asList(validInputs).contains(input)){
-                return input;
-            }
-            print("Invalid input");
-        }
-    }
-
     @Override
     public boolean contains(Object object){
         String string = (String)object;
@@ -53,6 +42,17 @@ public class Console extends ArrayList<String> {
             }
         }
         return false;
+    }
+
+    public static String getValidString(String prompt,String... validInputs){
+        String input;
+        while(true){
+            input = getString(prompt);
+            if (Arrays.asList(validInputs).contains(input)){
+                return input;
+            }
+            print("Invalid input");
+        }
     }
 
 }

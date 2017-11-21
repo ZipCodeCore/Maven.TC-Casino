@@ -1,5 +1,7 @@
 package io.zipcoder.casino.Deck;
 
+import io.zipcoder.casino.Blackjack;
+import io.zipcoder.casino.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -43,6 +45,16 @@ public class DeckTest {
         System.out.println(actual);
 
         Assert.assertFalse(expected == actual);
+    }
+
+    @Test
+    public void goFistValueTest(){
+        Player testPlayer = new Player("wes",21,1000);
+        Blackjack testGame = new Blackjack(testPlayer);
+        testGame.deal(testGame.getPlayer(),testGame.getDealer(),5);
+        for(Card card:testGame.getPlayer().getHand()){
+            System.out.println(card.getGoFishValue());
+        }
     }
 
 }

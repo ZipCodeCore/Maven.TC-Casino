@@ -1,8 +1,9 @@
 package io.zipcoder.casino;
 
 import io.zipcoder.casino.Console.Console;
+import io.zipcoder.casino.Interfaces.Gamble;
 
-public class Blackjack extends CardGame{
+public class Blackjack extends CardGame implements Gamble{
     BlackjackPlayer player;
     BlackjackDealer dealer;
     private double pot = 0;
@@ -26,8 +27,8 @@ public class Blackjack extends CardGame{
     }
 
     public void play(){
-        clearPot();
-        getBet();
+        pot = takeBet();
+        System.out.println(pot);
         deal(player,dealer,2);
         askForHitOrStay();
         dealerPlay();
@@ -61,8 +62,11 @@ public class Blackjack extends CardGame{
         do{
             printHand(player);
             Console.print("Score of "+player.getScore() + "\n");
+            if(player.getScore()>=21){
+                return;
+            }
             hitOrStay = Console.getValidString("Would you like to hit or stay?","hit","stay");
-            if("hit".equalsIgnoreCase(hitOrStay) && player.hand.size()<5){
+            if("hit".equalsIgnoreCase(hitOrStay)){
                 player.addCard(deck.getCard());
             }else {
                 return;
@@ -76,35 +80,17 @@ public class Blackjack extends CardGame{
         }
     }
 
-    public void getBet(){
+    public double takeBet(){
         Console.print("You current balance is "+format.format(casinoplayer.getBalance()));
         double bet;
         while(true){
             bet = Console.getDouble("How much would you like bet?");
-            if(validBet(bet)){
-                addToPot(bet);
-                break;
+            if(casinoplayer.getBalance() >= bet){
+                casinoplayer.addToBalance(-1*bet);
+                return bet;
             }
             Console.print("Invalid bet");
         }
-        casinoplayer.addToBalance(-1*bet);
-        addToPot(bet);
-    }
-
-    public boolean validBet(double bet){
-        return casinoplayer.getBalance() >= bet;
-    }
-
-    public void addToPot(double amount) {
-        pot += amount;
-    }
-
-    public double getPot() {
-        return pot;
-    }
-
-    public void clearPot(){
-        pot = 0;
     }
 
     public boolean playerWins(){
