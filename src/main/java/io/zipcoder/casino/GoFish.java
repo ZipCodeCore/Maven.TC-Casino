@@ -19,21 +19,23 @@ public class GoFish extends CardGame {
     }
 
     public void goFishStart() {
-        deal(player, dealer, 7);
         deck.shuffle();
+        deal(player, dealer, 7);
+        Console.print("Welcome to GoFish " + player.name + "!");
         boolean playing = true;
         while (playing) {
             playerTurn();
             dealerTurn();
             playing = checkForWin();
         }
-
+        gameOptions();
     }
 
     private boolean checkForWin() {
         if (deck.getAllCards().size() == 0) {
             compareBooks();
             return false;
+
         }
         return true;
     }
@@ -68,7 +70,7 @@ public class GoFish extends CardGame {
             checkForBooks(dealer);
             Console.print("Opponent looking for card...");
             Card dealerCard = dealerFindCard();
-            Console.print("Do you have any: " + dealerCard.getGoFishValue() + " ?");
+            Console.print("Do you have any: " + dealerCard.getGoFishValue() + "'S ?");
             if (isCardInHand(dealerCard.getGoFishValue(), player.getHand())) {
                 swapCard(player, dealer, dealerCard.getGoFishValue());
             } else {
@@ -81,7 +83,7 @@ public class GoFish extends CardGame {
 
     private Card dealerFindCard() {
         Random r = new Random();
-        int x = r.nextInt(dealer.getHand().size() + 1);
+        int x = r.nextInt(dealer.getHand().size() - 1);
         return dealer.getHand().get(x);
     }
 
