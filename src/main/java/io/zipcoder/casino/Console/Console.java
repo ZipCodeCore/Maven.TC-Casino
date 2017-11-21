@@ -11,7 +11,6 @@ public class Console extends ArrayList<String> {
         Scanner input = new Scanner(System.in);
         System.out.println(prompt);
         String userinput = input.nextLine();
-        input.close();
         return userinput;
     }
 
