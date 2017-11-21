@@ -5,7 +5,7 @@ public class DiceGames {
      public void chooseDiceGame(){
          int userInput = Console.getUserInputInteger("Which dice game 1 or 2.");
          if(userInput == 1){
-             startCraps;
+             startCraps();
          }
      } if else (userInput == 2){
 
@@ -34,6 +34,6 @@ public class DiceGames {
 
 
             String userInput = Console.getUserInputString("Do wyou wnat to continue yes or no?");
-        }while (userInput.equalsIgnoreCase("yes"));
+        }while (userInput.equalsIgnoreCase("no"));
     }
 }
