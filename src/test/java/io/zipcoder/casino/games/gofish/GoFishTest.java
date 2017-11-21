@@ -50,6 +50,19 @@ public class GoFishTest {
     }
 
     @Test
+    public void nullAskedValueTest(){
+        User user = new User("Uncle Bob", 1000000d);
+        GoFish goFish = new GoFish(user);
+
+        goFish.getPlayer().askForValue(goFish.getDealer(), PlayingValue.QUEEN);
+
+        goFish.getPlayer().nullAskedValue();
+        PlayingValue actual = goFish.getPlayer().getAskedValue();
+
+        Assert.assertNull(actual);
+    }
+
+    @Test
     public void askingForValueTrueTest(){
         User user = new User("Uncle Bob", 1000000d);
         GoFish goFish = new GoFish(user);
@@ -81,5 +94,31 @@ public class GoFishTest {
 
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void takeCardsTest(){
+        User user = new User("Uncle Bob", 1000000d);
+        GoFish goFish = new GoFish(user);
+
+        for (int i = 0; i < 5; i++) {
+            goFish.getDealer().getHand().addCard(new PlayingCard(PlayingSuit.CLUB, PlayingValue.KING));
+        }
+
+        int beforeDealer = goFish.getDealer().checkIfHandHasValue(PlayingValue.KING);
+        int beforePlayer = goFish.getPlayer().checkIfHandHasValue(PlayingValue.KING);
+
+        Assert.assertEquals(5, beforeDealer);
+        Assert.assertEquals(0, beforePlayer);
+
+        goFish.getPlayer().takeCardsFromOther(goFish.getDealer(), PlayingValue.KING);
+
+        int afterDealer = goFish.getDealer().checkIfHandHasValue(PlayingValue.KING);
+        int afterPlayer = goFish.getPlayer().checkIfHandHasValue(PlayingValue.KING);
+
+        Assert.assertEquals(0, afterDealer);
+        Assert.assertEquals(5, afterPlayer);
+    }
+
+
 
 }
