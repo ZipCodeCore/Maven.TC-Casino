@@ -1,10 +1,16 @@
 package io.zipcoder.casino;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class PlayerTest {
-    Player player = new Player();
+    Player player;
+
+    @Before
+    public void setUp(){
+        player = new BlackJackPlayer("aName", 500D);
+    }
 
     @Test
     public void getNameTest() throws Exception {
@@ -36,17 +42,6 @@ public class PlayerTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void hasMoneyToMakeBetTest(){
-        Assert.assertTrue(player.hasMoneyToMakeBet(250.0));
-        Assert.assertFalse(player.hasMoneyToMakeBet(1000.0));
-    }
 
-    @Test
-    public void receiveWinnings() {
-        Double expected = 800.0;
-        player.receiveWinnings(300.0);
-        Double actual = player.getMoney();
-        Assert.assertEquals(expected, actual);
-    }
+
 }

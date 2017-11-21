@@ -19,7 +19,7 @@ public class Deck {
         Card card = cards.get(0);
         cards.remove(0);
         return card;
-    }
+    }//move to CardGamePlayer class??
 
 
     public void populate() {
@@ -54,7 +54,6 @@ public class Deck {
         }
     }
 
-    //may need, may not need.......
     public void createDeck() {
         if (isDeckEmpty()) {
             populate();
