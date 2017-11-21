@@ -6,11 +6,11 @@ import org.junit.Test;
 import static io.zipcoder.casino.Card.Suit.*;
 import static io.zipcoder.casino.Card.FaceValue.*;
 
-public class PlayerTest {
+public class CardPlayerTest {
 
     @Test
     public void addCardToHandTest() {
-        Player player = new Player("");
+        CardPlayer player = new CardPlayer("");
         Card twoOfClubs = new Card(TWO, CLUBS);
 
         player.addCardToHand(twoOfClubs);
@@ -20,7 +20,7 @@ public class PlayerTest {
 
     @Test
     public void addCardsToHandTest() {
-        Player player = new Player("");
+        CardPlayer player = new CardPlayer("");
         Card twoOfClubs = new Card(TWO, CLUBS);
         Card threeOfClubs = new Card(THREE, CLUBS);
         CardPile cards = new CardPile();

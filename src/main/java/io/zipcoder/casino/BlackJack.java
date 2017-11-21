@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import static io.zipcoder.casino.Card.FaceValue.*;
 
-public class BlackJack extends CardGame implements Gamble {
+public class BlackJack extends CardGame<BlackJack> implements Gamble {
 
     public final int MIN_NUMBER_OF_PLAYERS = 1;
     public final int MAX_NUMBER_OF_PLAYERS = 7;

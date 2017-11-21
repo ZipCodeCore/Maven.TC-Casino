@@ -59,45 +59,52 @@ public class GoFishConsole extends Console {
     }
 
     public Integer playerTakeTurn(GoFishPlayer player) {
-        if(player.getHand().numCards() > 0) {
-            String enter = getUserInput("Press enter to show cards:");
-            Card.FaceValue value = getCardValueSelection();
-            GoFishPlayer playerToAsk = getPlayerToAsk();
-            if(value.equals(Card.FaceValue.SIX)) {
-                System.out.printf("Asking %s, do you have any %ses?\n", playerToAsk.getName(), value.name().toLowerCase());
+        int totalBooksPlayed = 0;
+        boolean continueFishing = true;
+        while(continueFishing) {
+            if (player.getHand().numCards() > 0) {
+                String enter = getUserInput("Press enter to show cards:");
+                Card.FaceValue value = getCardValueSelection();
+                GoFishPlayer playerToAsk = getPlayerToAsk();
+                if (value.equals(Card.FaceValue.SIX)) {
+                    System.out.printf("Asking %s, do you have any %ses?\n", playerToAsk.getName(), value.name().toLowerCase());
+                } else {
+                    System.out.printf("Asking %s, do you have any %ss?\n", playerToAsk.getName(), value.name().toLowerCase());
+                }
+                boolean otherPlayerHasCardsToGive = currentPlayer.fishForCards(playerToAsk, value);
+                if (otherPlayerHasCardsToGive) {
+                    CardPile fished = playerToAsk.handOverAllCardsRequested(value);
+                    currentPlayer.addCardsToHand(fished);
+                    System.out.printf("Received %d cards from %s\n", fished.numCards(), playerToAsk.getName());
+                } else {
+                    System.out.printf("Sorry, %s does not have any to give, go fish\n", playerToAsk.getName());
+                    continueFishing = false;
+                    if (game.getStockPile().numCards() > 0) {
+                        game.playerGoFish(currentPlayer);
+                    } else {
+                        System.out.println("No more cards to draw");
+                    }
+                }
             } else {
-                System.out.printf("Asking %s, do you have any %ss?\n", playerToAsk.getName(), value.name().toLowerCase());
-            }
-            boolean otherPlayerHasCardsToGive = currentPlayer.fishForCards(playerToAsk, value);
-            if(otherPlayerHasCardsToGive) {
-                CardPile fished = playerToAsk.handOverAllCardsRequested(value);
-                currentPlayer.addCardsToHand(fished);
-                System.out.printf("Received %d cards from %s\n", fished.numCards(), playerToAsk.getName());
-            } else {
-                System.out.printf("Sorry, %s does not have any to give, go fish\n", playerToAsk.getName());
-                if(game.getStockPile().numCards() > 0) {
+                System.out.println("You have no cards, go fish");
+                continueFishing = false;
+                if (game.getStockPile().numCards() > 0) {
                     game.playerGoFish(currentPlayer);
                 } else {
                     System.out.println("No more cards to draw");
                 }
             }
-        } else {
-            System.out.println("You have no cards, go fish");
-            if(game.getStockPile().numCards() > 0) {
-                game.playerGoFish(currentPlayer);
-            } else {
-                System.out.println("No more cards to draw");
+            int numBooksPlayed = currentPlayer.playPotentialBooksInHand();
+            totalBooksPlayed += numBooksPlayed;
+            if (numBooksPlayed > 0) {
+                String output = "Books played: ";
+                for (int i = 0; i < numBooksPlayed; i++) {
+                    output += String.format("[ %s ] ", currentPlayer.getBooks().get(currentPlayer.getBooks().size() - numBooksPlayed + i));
+                }
+                System.out.println(output);
             }
         }
-        int numBooksPlayed = currentPlayer.playPotentialBooksInHand();
-        if(numBooksPlayed > 0) {
-            String output = "Books played: ";
-            for(int i = 0; i < numBooksPlayed; i++) {
-                output += String.format("[ %s ] ", currentPlayer.getBooks().get(currentPlayer.getBooks().size() - numBooksPlayed + i));
-            }
-            System.out.println(output);
-        }
-        return numBooksPlayed;
+        return totalBooksPlayed;
     }
 
     public void displayFinalCards() {

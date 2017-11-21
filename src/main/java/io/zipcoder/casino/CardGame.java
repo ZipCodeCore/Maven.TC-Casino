@@ -46,5 +46,9 @@ public abstract class CardGame<T extends Game> extends Game {
         cards.getCards().clear();
     }
 
+    public CardPile getDiscardPile() {
+        return discardPile;
+    }
+
     public abstract void setPointValues();
 }

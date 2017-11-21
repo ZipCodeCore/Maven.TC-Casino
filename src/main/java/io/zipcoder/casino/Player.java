@@ -4,29 +4,21 @@ public class Player<T extends Game> {
 
     private String name;
     private Double money;
-    private CardPile hand = new CardPile();
 
     public Player(String name) {
         this.name = name;
     }
 
-    public void addCardToHand(Card card) {
-        hand.addCardToPile(card);
+    public void bet(Double money) {
+        this.money -= money;
     }
 
-    public void addCardsToHand(CardPile cardPile) {
-        hand.addCardsToPile(cardPile);
+    public void receiveWinnings(Double money) {
+        this.money += money;
     }
 
-    public boolean hasCardsOfRank(Card.FaceValue rank) {
-        CardPile hand = this.getHand();
-        for(Card.Suit suit : Card.Suit.values()) {
-            Card cardToCheck = new Card(rank, suit);
-            if(hand.contains(cardToCheck)) {
-                return true;
-            }
-        }
-        return false;
+    public void cashOut() {
+        money = 0.0;
     }
 
     public String getName() {
@@ -39,21 +31,5 @@ public class Player<T extends Game> {
 
     public void setMoney(Double money) {
         this.money = money;
-    }
-
-    public void receiveWinnings(Double money) {
-        this.money += money;
-    }
-
-    public void bet(Double money) {
-        this.money -= money;
-    }
-
-    public CardPile getHand() {
-        return hand;
-    }
-
-    public void cashOut() {
-        money = 0.0;
     }
 }

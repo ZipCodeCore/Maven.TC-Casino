@@ -3,7 +3,7 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GoFishPlayer extends Player<GoFish> {
+public class GoFishPlayer extends CardPlayer<GoFish> {
 
     private ArrayList<CardPile> books = new ArrayList<>();
 

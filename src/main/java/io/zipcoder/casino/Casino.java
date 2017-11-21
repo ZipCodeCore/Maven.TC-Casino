@@ -15,7 +15,9 @@ public class Casino {
         gameConsoles.add(new CrapsConsole());
         gameConsoles.add(new GoFishConsole());
 
-        selectGameToPlay();
+        while(true) {
+            selectGameToPlay();
+        }
     }
 
     public static void selectGameToPlay() {
