@@ -59,11 +59,45 @@ public class Craps implements Game, Gamble {
             Next player gets the dice
 
  */
-    private void initialRoll(){
+    public String initialRoll(){
+        String returnMe="";
         int rollResult = dice.rollDie();
-        if ((rollResult==7 || rollResult==11) && isPlayerTurn){
-            
+        double initialStake=mainPot.getMoney() / 2.0;
+
+        if (isPlayerTurn) {
+            returnMe += "You rolled a " + rollResult;
         }
+        else{
+            returnMe += "Your opponent rolled a "+rollResult;
+        }
+
+        if (rollResult==7 || rollResult==11){
+            if (isPlayerTurn) {
+                returnMe+=" and won "+initialStake;
+                player.getWallet().addMoney(mainPot.takeOutMoney(initialStake));
+            }
+            else {
+                returnMe+=" and lost "+initialStake;
+                mainPot.takeOutMoney(initialStake);
+            }
+        }
+        else if (rollResult==2 || rollResult==3 || rollResult==12){
+            if (isPlayerTurn) {
+                returnMe+=" and lost "+initialStake;
+                mainPot.takeOutMoney(initialStake);
+            }
+            else {
+                returnMe+=" and won "+initialStake;
+                player.getWallet().addMoney(mainPot.takeOutMoney(initialStake));
+            }
+        }
+        else{
+            point=rollResult;
+            isPointSet=true;
+            returnMe+=" which makes "+point+" the new point.";
+        }
+        returnMe+="  There is "+mainPot.getMoney()+" in the pot.";
+        return returnMe;
     }
 
     public void rollHighLow(){
