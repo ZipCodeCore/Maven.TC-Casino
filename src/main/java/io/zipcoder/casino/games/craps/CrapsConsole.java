@@ -1,22 +1,20 @@
-package io.zipcoder.casino.nuts_n_bolts;
+package io.zipcoder.casino.games.craps;
 
 import io.zipcoder.casino.games.Gamble;
 import io.zipcoder.casino.games.Game;
-import io.zipcoder.casino.games.craps.Craps;
+import io.zipcoder.casino.nuts_n_bolts.User;
+
 import java.util.Scanner;
+
 import static io.zipcoder.casino.nuts_n_bolts.Input.getPositiveDoubleInput;
 import static io.zipcoder.casino.nuts_n_bolts.Input.getStringInput;
 
-public class Console {
+public class CrapsConsole {
 
-    private Game game = new Craps();
+    private Craps game = new Craps();
     private User player;
     private static Scanner scanner = new Scanner(System.in);
 
-    public Console(Game game, User user) {
-        this.game = game;
-        this.player = user;
-    }
 
     public void setGame(Game game) {
         this.game = game;
