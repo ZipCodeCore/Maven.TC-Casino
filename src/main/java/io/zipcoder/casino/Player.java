@@ -1,36 +1,28 @@
 package io.zipcoder.casino;
 
 
-public class Player {
+public abstract class Player {
     private String name;
-    private Double money;
+    protected Double money;
 
     public Player() {
         name = "Player";
         money = 500.0;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Double getMoney(){
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Double money){
+    public void setMoney(Double money) {
         this.money = money;
-    }
-
-    public boolean hasMoneyToMakeBet(Double amount) {
-        return (amount <= money);
-    }
-
-    public void receiveWinnings(Double winnings) {
-        money += winnings;
     }
 }
