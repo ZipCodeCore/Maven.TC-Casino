@@ -18,6 +18,17 @@ public class Player<T extends Game> {
         hand.addCardsToPile(cardPile);
     }
 
+    public boolean hasCardsOfRank(Card.FaceValue rank) {
+        CardPile hand = this.getHand();
+        for(Card.Suit suit : Card.Suit.values()) {
+            Card cardToCheck = new Card(rank, suit);
+            if(hand.contains(cardToCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getName() {
         return name;
     }
@@ -28,6 +39,14 @@ public class Player<T extends Game> {
 
     public void setMoney(Double money) {
         this.money = money;
+    }
+
+    public void receiveWinnings(Double money) {
+        this.money += money;
+    }
+
+    public void bet(Double money) {
+        this.money -= money;
     }
 
     public CardPile getHand() {

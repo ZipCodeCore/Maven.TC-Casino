@@ -1,5 +1,7 @@
 package io.zipcoder.casino;
 
+import static io.zipcoder.casino.Card.FaceValue.ACE;
+
 public class BlackJackPlayer extends Player<BlackJack> {
 
     public BlackJackPlayer(String name) {
@@ -7,15 +9,6 @@ public class BlackJackPlayer extends Player<BlackJack> {
     }
 
     public boolean hasAceInHand() {
-        return false;
+        return hasCardsOfRank(ACE);
     }
-
-    public boolean hasBust() {
-        return false;
-    }
-
-    public Integer calculatePoints() {
-        return 0;
-    }
-
 }

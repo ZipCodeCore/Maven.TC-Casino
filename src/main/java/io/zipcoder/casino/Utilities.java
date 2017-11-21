@@ -48,8 +48,17 @@ public class Utilities {
     }
 
     public static Integer getIntegerInput(String prompt) {
-        Double userDoubleInput = getDoubleInput(prompt);
-        Integer userIntegerInput = (int) Math.round(userDoubleInput);
+        boolean isValidInput = false;
+        Integer userIntegerInput = 0;
+        while(!isValidInput) {
+            Double userDoubleInput = getDoubleInput(prompt);
+            userIntegerInput = (int) Math.round(userDoubleInput);
+            if(Math.abs(userDoubleInput - userIntegerInput) == 0) {
+                isValidInput = true;
+            } else {
+                System.out.println("Please enter an integer");
+            }
+        }
         return userIntegerInput;
     }
 
@@ -81,5 +90,25 @@ public class Utilities {
             }
         }
         return userAmountInput;
+    }
+
+    public static boolean getYesOrNoInput(String prompt) {
+        boolean input = false;
+        boolean isValidInput = false;
+        while(!isValidInput) {
+            String userInput = getUserInput(prompt);
+            if("Y".equalsIgnoreCase(userInput)) {
+                input = true;
+                isValidInput = true;
+            }
+            else if("N".equalsIgnoreCase(userInput)) {
+                input = false;
+                isValidInput = true;
+            }
+            else {
+                System.out.println("Invalid input, must enter Y or N");
+            }
+        }
+        return input;
     }
 }

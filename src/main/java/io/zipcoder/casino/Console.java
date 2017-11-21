@@ -38,21 +38,24 @@ public abstract class Console {
         return names;
     }
 
-    public void getPlayerChips(ArrayList<Player<? extends Game>> players) {
+    public void getPlayerChips(Game game) {
+        ArrayList<Player<? extends Game>> players = game.getPlayers();
         int i = 1;
         for(Player player : players) {
             Double amount = getMoneyInput(String.format("Player %d, %s, how much money do you have in chips?", i, player.getName()));
             player.setMoney(amount);
+            i++;
         }
     }
 
-    public void playRoundsUntilAllPlayersCashOut(ArrayList<Player<? extends Game>> players) {
-        while(atLeastOnePlayerHasMoney(players)) {
+    public void playRoundsUntilAllPlayersCashOut(Game game) {
+        while(atLeastOnePlayerHasMoney(game)) {
             playRound();
         }
     }
 
-    public boolean atLeastOnePlayerHasMoney(ArrayList<Player<? extends Game>> players) {
+    public boolean atLeastOnePlayerHasMoney(Game game) {
+        ArrayList<Player<? extends Game>> players = game.getPlayers();
         for(Player player : players) {
             if(player.getMoney() > 0) {
                 return true;

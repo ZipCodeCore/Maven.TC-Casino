@@ -3,6 +3,8 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 
+import static io.zipcoder.casino.Utilities.*;
+
 public class GoFishConsole extends Console {
 
     private String nameOfGame = "Go Fish";
@@ -25,10 +27,10 @@ public class GoFishConsole extends Console {
 
     @Override
     public void setUpGame() {
-        System.out.printf("Welcome to %s\n", game.getClass().getSimpleName());
+        printMenuName(String.format("Welcome to %s", nameOfGame));
         int numPlayers = getNumPlayers(game.MIN_NUMBER_OF_PLAYERS, game.MAX_NUMBER_OF_PLAYERS);
         ArrayList<String> playerNames = getPlayerNames(numPlayers);
-        ArrayList<Player<GoFish>> players = new ArrayList<>();
+        ArrayList<GoFishPlayer> players = new ArrayList<>();
         for(String name : playerNames) {
             GoFishPlayer player = new GoFishPlayer(name);
             players.add(player);
@@ -43,7 +45,7 @@ public class GoFishConsole extends Console {
 
         int currentPlayerIndex = 0;
         while(numBooksPlayed < ALL_BOOKS_PLAYED) {
-            currentPlayer = (GoFishPlayer) game.getPlayers().get(currentPlayerIndex);
+            currentPlayer = game.getPlayers().get(currentPlayerIndex);
             System.out.printf("Player %d turn:\n", currentPlayerIndex+1);
             numBooksPlayed += playerTakeTurn(currentPlayer);
             currentPlayerIndex++;
@@ -100,7 +102,7 @@ public class GoFishConsole extends Console {
 
     public void displayFinalCards() {
         for(int i = 0; i < game.getNumPlayers(); i++) {
-            GoFishPlayer goFishPlayer = (GoFishPlayer) game.getPlayers().get(i);
+            GoFishPlayer goFishPlayer = game.getPlayers().get(i);
             System.out.printf("Player %d, %s: ", i+1, goFishPlayer.getName());
             for(CardPile book : goFishPlayer.getBooks()) {
                 System.out.printf("[ %s ] ", book);
@@ -147,7 +149,8 @@ public class GoFishConsole extends Console {
 
     public GoFishPlayer getPlayerToAsk() {
         StringJoiner stringJoiner = new StringJoiner(" ] * [ ", "[ ", " ]\n");
-        for(Player<GoFish> player : game.getPlayers()) {
+        ArrayList<GoFishPlayer> players = game.getPlayers();
+        for(GoFishPlayer player : players) {
             if(!player.equals(currentPlayer)) {
                 stringJoiner.add(String.format("%s (%d cards in hand)", player.getName(), player.getHand().numCards()));
             }
@@ -157,9 +160,9 @@ public class GoFishConsole extends Console {
         GoFishPlayer otherPlayer = null;
         while(!isValidInput) {
             String input = getUserInput("Select another player to fish for cards from:");
-            for(Player<GoFish> player : game.getPlayers()) {
+            for(GoFishPlayer player : players) {
                 if(!player.equals(currentPlayer) && player.getName().equalsIgnoreCase(input)) {
-                    otherPlayer = (GoFishPlayer) player;
+                    otherPlayer = player;
                     isValidInput = true;
                 }
             }

@@ -2,9 +2,7 @@ package io.zipcoder.casino;
 
 import java.util.ArrayList;
 
-public abstract class CardGame<T extends Game> implements Game {
-
-    private ArrayList<Player<T>> players = new ArrayList<Player<T>>();
+public abstract class CardGame<T extends Game> extends Game {
 
     private int numStandardDecks;
     private CardPile setOfAllCards = new CardPile();
@@ -23,24 +21,14 @@ public abstract class CardGame<T extends Game> implements Game {
         stockPile.shuffle();
     }
 
-    public ArrayList<Player<T>> getPlayers() {
-        return players;
-    }
-
-    public int getNumPlayers() {
-        return players.size();
-    }
-
-    public void addPlayers(ArrayList<Player<T>> players) {
-        this.players = players;
-    }
-
-    public boolean play() {
-        return false;
-    }
-
     public void shuffleDiscardPileBackToStock() {
+        discardPile.shuffle();
+        stockPile.addCardsToPile(discardPile);
+        clearDiscardPile();
+    }
 
+    private void clearDiscardPile() {
+        discardPile.getCards().clear();
     }
 
     public CardPile getStockPile() {
@@ -51,6 +39,11 @@ public abstract class CardGame<T extends Game> implements Game {
         Card topCard = stockPile.getCard(0);
         stockPile.removeCard(topCard);
         return topCard;
+    }
+
+    public void discardCards(CardPile cards) {
+        discardPile.addCardsToPile(cards);
+        cards.getCards().clear();
     }
 
     public abstract void setPointValues();

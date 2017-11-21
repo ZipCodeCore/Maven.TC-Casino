@@ -22,6 +22,11 @@ public class Card {
         return suit;
     }
 
+    @Override
+    public String toString() {
+        return faceValue.getIcon() + suit.getIcon();
+    }
+
     public enum FaceValue {
         ACE ("A"),
         TWO ("2"),

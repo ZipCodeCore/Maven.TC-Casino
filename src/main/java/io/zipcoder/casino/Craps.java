@@ -1,57 +1,96 @@
 package io.zipcoder.casino;
 
-import javafx.util.Pair;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Craps implements Game, Gamble{
+public class Craps extends Game implements Gamble{
 
     public final int MIN_NUMBER_OF_PLAYERS = 1;
     public final int MAX_NUMBER_OF_PLAYERS = 8;
 
-    private ArrayList<Player<Craps>> players = new ArrayList<>();
-    private Pair<Integer, Integer> dice = new Pair<>(1, 1);
+    private Dice dice = new Dice(2);
+    private Integer point;
 
-    public void addPlayers(ArrayList<Player<Craps>> players) {
-        this.players = players;
-    }
+    private HashMap<Player<Craps>, Double> bets = new HashMap<Player<Craps>, Double>();
+    private ArrayList<CrapsPlayer> playersOnPass = new ArrayList<>();
+    private ArrayList<CrapsPlayer> playersOnDontPass = new ArrayList<>();
+    private boolean passBetsWin = true;
 
-    public ArrayList<Player<Craps>> getPlayers() {
-        return players;
-    }
-
-    public int getNumPlayers() {
-        return players.size();
-    }
-
-    public void rollDice() {
-
+    @Override
+    public ArrayList<CrapsPlayer> getPlayers() {
+        return (ArrayList<CrapsPlayer>) players;
     }
 
     public Integer getSumOfDice() {
-        return 0;
+        return getValueOfDieOne() + getValueOfDieTwo();
     }
 
     public Integer getValueOfDieOne() {
-        return dice.getKey();
+        return dice.getDice().get(0).getValue();
     }
 
     public Integer getValueOfDieTwo() {
-        return dice.getValue();
+        return dice.getDice().get(1).getValue();
+    }
+
+    public Dice getDice() {
+        return dice;
+    }
+
+    public void rollDice() {
+        dice.rollDice();
+    }
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
+
+    public boolean isPassBetsWin() {
+        return passBetsWin;
+    }
+
+    public void setPassBetsWin(boolean passBetsWin) {
+        this.passBetsWin = passBetsWin;
     }
 
     @Override
-    public boolean play() {
-        return false;
-    }
-
-    @Override
-    public void takeBet(Double amount) {
-
+    public void takeBet(Player player, Double amount) {
+        bets.put(player, amount);
+        player.bet(amount);
     }
 
     @Override
     public void payOutBets() {
+        if(passBetsWin) {
+            for(CrapsPlayer player : playersOnPass) {
+                Double amountWon = bets.get(player) * 2;
+                player.receiveWinnings(amountWon);
+            }
+        }
+        else {
+            for(CrapsPlayer player : playersOnDontPass) {
+                Double amountWon = bets.get(player) * 2;
+                player.receiveWinnings(amountWon);
+            }
+        }
+        clearAllBets();
+    }
 
+    public void clearAllBets() {
+        bets.clear();
+        playersOnPass.clear();
+        playersOnDontPass.clear();
+    }
+
+    public void putPlayerOnPass(CrapsPlayer player) {
+        playersOnPass.add(player);
+    }
+
+    public void putPlayerOnDontPass(CrapsPlayer player) {
+        playersOnDontPass.add(player);
     }
 }

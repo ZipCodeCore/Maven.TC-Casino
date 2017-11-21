@@ -19,17 +19,6 @@ public class GoFishPlayer extends Player<GoFish> {
         }
     }
 
-    public boolean hasCardsOfRank(Card.FaceValue rank) {
-        CardPile hand = this.getHand();
-        for(Card.Suit suit : Card.Suit.values()) {
-            Card cardToCheck = new Card(rank, suit);
-            if(hand.contains(cardToCheck)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public CardPile handOverAllCardsRequested(Card.FaceValue rank) {
         CardPile toHandOver = new CardPile();
         for(Card card : this.getHand().getCards()) {

@@ -19,6 +19,11 @@ public class GoFish extends CardGame<GoFish> {
         setPointValues();
     }
 
+    @Override
+    public ArrayList<GoFishPlayer> getPlayers() {
+        return (ArrayList<GoFishPlayer>) players;
+    }
+
     public void setNumInitialCards() {
         numPlayers = getNumPlayers();
         if(numPlayers >= MIN_NUMBER_OF_PLAYERS && numPlayers <= 3) {
@@ -30,8 +35,7 @@ public class GoFish extends CardGame<GoFish> {
 
     public void dealInitialCards() {
         for(int i = 0; i < numInitialCards; i++) {
-            for(Player<GoFish> player : getPlayers()) {
-                GoFishPlayer goFishPlayer = (GoFishPlayer) player;
+            for(GoFishPlayer goFishPlayer : getPlayers()) {
                 goFishPlayer.addCardToHand(drawFromStock());
             }
         }
@@ -44,14 +48,14 @@ public class GoFish extends CardGame<GoFish> {
     public GoFishPlayer determineWinner() {
         int maxPoints = 0;
         GoFishPlayer winner = null;
-        for(Player<GoFish> player : getPlayers()) {
-            GoFishPlayer goFishPlayer = (GoFishPlayer) player;
+        for(GoFishPlayer goFishPlayer : getPlayers()) {
             int score = 0;
             for(CardPile book : goFishPlayer.getBooks()) {
                 score += pointValues.get(book.getCard(0).getFaceValue());
             }
             if(score > maxPoints) {
                 winner = goFishPlayer;
+                maxPoints = score;
             }
         }
         return winner;

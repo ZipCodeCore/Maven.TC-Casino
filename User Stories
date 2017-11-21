@@ -1,0 +1,116 @@
+1) As the system, I want the names of all games to be displayed at the beginning so that a player
+may enter their selection.
+
+2) As a player, I want to select a game so that I can play it.
+
+3) As a player or group of players, I want to input how many players are playing the game so that
+the right number of players are playing the game.
+
+4) As the system, I want to limit the number of players for Go Fish to be 2 to 5 so that there are
+enough cards for each player.
+
+5) As the system, I want to limit the number of players for BlackJack to be 1 to 7 so that there are
+enough cards for each player.
+
+6) As the system, I want to limit the number of players for Craps to be 1 to 8 so that there are not
+too many people at one table waiting for their turn.
+
+7) As a player, I want to input my name so that my name is displayed during the game.
+
+8) As a player, I want to take turns in order of the names inputted so that the game is fair.
+
+9) As the system, I want to set the number of cards dealt based on the number of players so that
+there are enough cards for each player.
+
+10) As a Go Fish player, I want to play a full game that ends with a winner displayed so that I can
+win a game.
+
+11) As a Go Fish player, I want to see my hand of cards so that I can make a decision on which value of
+card to ask for.
+
+12) As a Go Fish player, I want to see how many cards the other players have so that I can make a
+decision on which player to ask for cards from.
+
+13) As a Go Fish player, I want to ask another player for cards of a rank that I have and receive any
+cards of that rank that they have so that I can potentially make four of a kind.
+
+14) As a Go Fish player, I want to play the books (four of a kind) I have in my hand, so that my hand
+will only have the cards of the ranks I still need.
+
+15) As a Go Fish player, I want to draw a card from the stock pile if the player I ask does not have
+the cards I ask for so that I follow the rules of the game.
+
+16) As a Go Fish player, I want to draw a card from the stock pile if I do not have any cards in my
+hand so that I follow the rules of the game.
+
+17) As the system, I want the stock pile to stay empty when it is empty and inform players that there
+are no cards left when they try to draw, so that only the cards from the original 52-card deck
+are in play.
+
+18) As a Go Fish player, I want all books that have been played to be displayed at the end of the game
+so that I can see who has which books.
+
+19) As a Go Fish player, I want the winner to be displayed after the books are displayed so that
+somebody is the winner of the game.
+
+20) As the system, I want to set the point values for each rank of card so that I can calculate the
+score of each player at the end of the game.
+
+21) As a player of any gambling type of game, I want to give the game the money I have in chips so
+that I can make bets.
+
+22) As a player of any gambling type of game, I want to make bets at the beginning of each round
+so that I may win or lose each round.
+
+23) As a player of any gambling type of game, I want to receive double my bet if I win and lose my
+bet if I lose, so that the bets reset after each round.
+
+24) As a player of any gambling type of game, I want to be able to cash out at the end of each round
+if I don't want to play anymore, so that the game will continue without me.
+
+25) As the system, I want the gambling games to play a new round as long as there is at least one
+player who has not cashed out or lost all their money so that the players who have money get
+to keep playing.
+
+26) As a BlackJack player I want to see my hand of cards so that I can make a decision of whether
+to hit or stay.
+
+27) As a BlackJack player I want to be able to hit if my score is less than 21 so that I can
+possibly get a score closer to 21.
+
+28) As a BlackJack player I want to lose my bet if I bust over 21, so that the game is fair.
+
+29) As a BlackJack dealer I want to display one face up card of mine while the players are making
+bets and hitting/staying until they are finished so that everyone has the same information.
+
+30) As a BlackJack dealer I want to hit after all players are finished their turns and continue to
+hit until my score is a hard 17 or higher.
+
+31) As the system, I want the BlackJack cards used in the previous round to go in the discard pile,
+and deal the next round from the stock pile.
+
+32) As the system, I want the BlackJack discard pile to be shuffled and put back in the stock if the
+stock is empty.
+
+33) As a Craps player, I want to make a bet on pass or don't pass if it is my turn to roll so that
+I may win or lose that round.
+
+34) As a Craps player, I want to be able to make a bet on pass or don't pass if it is not my turn
+to roll so that I may win or lose that round.
+
+35) As a Craps player, I want to be able to skip betting if it is not my turn to roll so that I
+do not win or lose that round.
+
+36) As a Craps player, I want to win my pass bet and lose my don't pass bet if the come out roll is
+a 7 or 11 so that I follow the rules of the game.
+
+37) As a Craps player, I want to lose my pass bet and win my don't pass bet if the come out roll is
+a 2, 3, or 12 so that I follow the rules of the game.
+
+38) As a Craps player, I want to win my pass bet and lose my don't pass bet if the come out roll is
+a 4, 5, 6, 8, 9, 10, or 11, and that number is rolled again before a 7 so that I follow the
+rules of the game.
+
+39) As a Craps player, I want to lose my pass bet and win my don't pass bet if the come out roll is
+a 4, 5, 6, 8, 9, 10, or 11, and a 7 is rolled before that number is rolled again so that I
+follow the rules of the game.
