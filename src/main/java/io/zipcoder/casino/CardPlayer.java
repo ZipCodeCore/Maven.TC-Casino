@@ -49,4 +49,8 @@ public class CardPlayer extends Player{
         return null;
     }
 
+    public void setHand(ArrayList<Card> hand){
+        this.hand = hand;
+    }
+
 }

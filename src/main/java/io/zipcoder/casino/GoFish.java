@@ -3,8 +3,8 @@ package io.zipcoder.casino;
 import io.zipcoder.casino.Console.Console;
 import io.zipcoder.casino.Deck.Card;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class GoFish extends CardGame {
 
@@ -20,6 +20,7 @@ public class GoFish extends CardGame {
 
     public void goFishStart() {
         deal(player, dealer, 7);
+        deck.shuffle();
         boolean playing = true;
         while (playing) {
             playerTurn();
@@ -39,12 +40,18 @@ public class GoFish extends CardGame {
 
     private void playerTurn() {
         boolean playing = true;
+        checkHandSize(player);
         while (playing) {
             checkForBooks(player);
             Console.print(player.getStringDisplayHand());
-            String askCard = Console.getString("Enter card you are looking for: ");
-            if (isCardInHand(askCard, dealer.getHand())) {
+            String askCard;
+            do {
+                askCard = Console.getString("Enter card you are looking for: ");
+            } while (!isCardInHand(askCard.toUpperCase(), player.getHand()));
+
+            if (isCardInHand(askCard.toUpperCase(), dealer.getHand())) {
                 swapCard(dealer, player, askCard);
+                Console.print("You got a match!");
             } else {
                 Console.print("GO FISH!");
                 giveCard(player);
@@ -56,6 +63,7 @@ public class GoFish extends CardGame {
 
     private void dealerTurn() {
         boolean playing = true;
+        checkHandSize(dealer);
         while (playing) {
             checkForBooks(dealer);
             Console.print("Opponent looking for card...");
@@ -68,51 +76,67 @@ public class GoFish extends CardGame {
                 giveCard(dealer);
                 playing = false;
             }
-
-
         }
     }
 
     private Card dealerFindCard() {
         Random r = new Random();
-        int x = r.nextInt(dealer.getHand().size());
+        int x = r.nextInt(dealer.getHand().size() + 1);
         return dealer.getHand().get(x);
     }
 
-    private boolean isCardInHand(String askCard, ArrayList<Card> hand) {
+    public boolean isCardInHand(String askCard, ArrayList<Card> hand) {
         for (Card card : hand) {
-            if (askCard.equals(card.getGoFishValue())) {
+            if (card.getGoFishValue().equals(askCard)) {
                 return true;
             }
         }
         return false;
     }
 
-    private void swapCard(CardPlayer player1, CardPlayer player2, String cardValue) {
-        for (Card card : player1.getHand()) {
-            if (cardValue.equals(card.getGoFishValue())) {
-                player2.addCard(player1.removeCard(card));
+    private void swapCard(CardPlayer fromPlayer, CardPlayer toPlayer, String cardValue) {
+        ArrayList<Card> newHand = new ArrayList<>();
+        for (Card card : fromPlayer.getHand()) {
+            if (cardValue.equalsIgnoreCase(card.getGoFishValue())) {
+                toPlayer.addCard(card);
+            } else {
+                newHand.add(card);
+            }
+        }
+        fromPlayer.setHand(newHand);
+    }
+
+    public void checkForBooks(GoFishPlayer player) {
+        for (Map.Entry<String, Integer> entry : getHandMap(player).entrySet()) {
+            if (entry.getValue() == 4) {
+                player.addBookCounter(1);
+                removeBooks(player, entry.getKey());
             }
         }
     }
 
-    private Card checkForBooks(GoFishPlayer player) {
-
-        for (Card card1 : player.getHand()) {
-            int num = 0;
-            for (Card card2 : player.getHand())
-                if (card1 == card2)
-                    num++;
-            if (num == 4) {
-                for (int i = 0; i < 4; i++)
-                    player.getHand().remove(card1);
-                player.setBookCounter(1);
-                return card1;
+    public HashMap<String, Integer> getHandMap(GoFishPlayer player) {
+        HashMap<String, Integer> handMap = new HashMap<>();
+        for (Card card : player.getHand()) {
+            if (!handMap.containsKey(card.getGoFishValue())) {
+                handMap.put(card.getGoFishValue(), 1);
+            } else {
+                handMap.put(card.getGoFishValue(), handMap.get(card.getGoFishValue()) + 1);
             }
         }
-        return null;
-
+        return handMap;
     }
+
+    public void removeBooks(GoFishPlayer player, String cardValue) {
+        ArrayList<Card> newHand = new ArrayList<>();
+        for (Card card : player.getHand()) {
+            if (!cardValue.equals(card.getGoFishValue())) {
+                newHand.add(card);
+            }
+        }
+        player.setHand(newHand);
+    }
+
 
     private void compareBooks() {
         if (player.getBookCounter() > dealer.getBookCounter()) {
@@ -120,7 +144,13 @@ public class GoFish extends CardGame {
         } else if (player.getBookCounter() < dealer.getBookCounter()) {
             System.out.println("You lose!");
         } else {
-            System.out.println("Tie!");
+            System.out.println("LET US FIGHT TO THE DEATH " + player.name.toUpperCase());
+        }
+    }
+
+    private void checkHandSize(CardPlayer player) {
+        if (player.getHand().size() < 1) {
+            giveCard(player);
         }
     }
 

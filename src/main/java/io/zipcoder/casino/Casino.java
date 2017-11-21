@@ -13,7 +13,8 @@ public class Casino {
 
     public void startCasino(){
         casinoplayer= new Player("testPlayer",1000,21);
-        new Blackjack(casinoplayer).start();
+//        new Blackjack(casinoplayer).start();
+        new Craps(casinoplayer).play();
 
     }
 
