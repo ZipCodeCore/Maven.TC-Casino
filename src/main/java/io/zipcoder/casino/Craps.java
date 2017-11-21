@@ -38,7 +38,9 @@ public class Craps extends Casino implements Gamble, Game {
                 Console.print("Target is now " + rollONE);
                 int rollTWO = roll();
                 checkRollTwo(rollTWO, rollONE);
-
+                if (rollTWO == 7) {
+                    playerLose(bet);
+                }
             }
             play = playAgain();
         }
@@ -68,11 +70,6 @@ public class Craps extends Casino implements Gamble, Game {
                 break;
             } else {
                 Console.print("Target is " + rollONE);
-                if (rollTWO == 7) {
-                    playerLose(bet);
-                    break;
-                }
-
             }
             rollTWO = roll();
         }
