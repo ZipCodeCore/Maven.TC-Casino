@@ -9,12 +9,11 @@ import java.util.stream.Stream;
 public class GoFishPlayer extends CardPlayer {
 
 
-
     public Card drawCard(Deck deck) {
         Card playerCard = deck.getCards().remove(0);
         return playerCard;
     }
-
+/*
     public void addCardToHand(Card card){
         hand.add(card);
     }
@@ -38,11 +37,11 @@ public class GoFishPlayer extends CardPlayer {
             }
         }
         return null;
-    }
+    }*/
 
-    public Suit checkFourOfAKind(){
+    //  public Suit checkFourOfAKind() {
 
-      //  Stream<Card> handStream = hand.stream().
+    //  Stream<Card> handStream = hand.stream().
 
         /*  int diamonds = 0;
         int spades = 0;
@@ -74,9 +73,6 @@ public class GoFishPlayer extends CardPlayer {
 //        for(int i = 0; i<5; i++){
 //            hand.add(drawCard(deck));
 //        }
-
-
-    }
 
 
 }

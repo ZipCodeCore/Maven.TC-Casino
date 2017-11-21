@@ -26,6 +26,14 @@ public class Console {
         System.out.println("S to shoot");
         String play = getAnyKey();
 
+     /*   if(playerWantsToPlay(promptPlayer())){
+            Integer roll = shooter.roll2Dice();
+            showResultsOfRoll(shooter)
+            gameOn.setComeOut(true);
+            if(comeOutRollIsNeitherWinNorLose(roll)){
+
+            }
+        }
         if (play.equals("y")){
             Integer roll = shooter.roll2Dice();
             shooter.printRoll();
@@ -57,7 +65,7 @@ public class Console {
 
 
 
-            }
+            }*/
 
 
   //      boolean won = isWinner(bet, roll):
@@ -69,9 +77,6 @@ public class Console {
         return true;
     }
 
-    private BetType getBet() {
-        return null;
-    }
 
     public void playBlackJack() {
     }
@@ -99,6 +104,12 @@ public class Console {
 
         return dblInput;
     }
+
+/*
+    comeOutRollIsNeitherWinNorLose(int roll){
+        return game.comeOutPassBet(roll) && gemae.comeOutPassLoss(roll)
+                ////
+    }*/
 }
 
 
