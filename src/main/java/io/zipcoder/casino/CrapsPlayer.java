@@ -19,4 +19,8 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Comparable<Craps
     public Double bet() {
         return null;
     }
+
+    public static void firstRoll(){
+
+    }
 }
