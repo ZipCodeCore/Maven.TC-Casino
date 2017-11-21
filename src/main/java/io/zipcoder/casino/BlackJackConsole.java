@@ -68,6 +68,7 @@ public class BlackJackConsole extends Console {
             System.out.printf("Your cards: %s\n", player.getHand());
             finishedTurn = hitOrStay();
         }
+        System.out.println();
     }
 
     public void makeBet(BlackJackPlayer player) {
@@ -86,6 +87,10 @@ public class BlackJackConsole extends Console {
     }
 
     public boolean hitOrStay() {
+        if(game.calculatePlayerScore(currentPlayer) == 21) {
+            System.out.println("21!!");
+            return true;
+        }
         boolean toHit = getYesOrNoInput("Do you want to hit? Y or N");
         if(toHit) {
             game.dealCardToHand(currentPlayer);
@@ -110,11 +115,12 @@ public class BlackJackConsole extends Console {
         System.out.printf("\nDealer score: %d %s\n", game.calculatePlayerScore(game.getDealer()),
                 game.getDealer().getHand());
         for(BlackJackPlayer player : game.getPlayers()) {
-            if(game.getBets().containsKey(currentPlayer)) {
+            if(game.getBets().containsKey(player)) {
                 System.out.printf("%s score: %d %s\n", player.getName(), game.calculatePlayerScore(player),
                         player.getHand());
             }
         }
+        System.out.println();
     }
 
     public void payOutBets() {

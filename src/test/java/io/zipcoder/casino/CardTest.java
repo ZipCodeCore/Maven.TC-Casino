@@ -20,7 +20,17 @@ public class CardTest {
     public void testIcons() {
         Card tenOfDiamonds = new Card(TEN, DIAMONDS);
         String expected = "10\u2666";
-        String actual = tenOfDiamonds.getFaceValue().getIcon() + tenOfDiamonds.getSuit().getIcon();
+        String actual = tenOfDiamonds.toString();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void matchesTest() {
+        Card tenOfDiamonds = new Card(TEN, DIAMONDS);
+        Card tenOfDiamonds2 = new Card(TEN, DIAMONDS);
+        Card tenOfHearts = new Card(TEN, HEARTS);
+
+        Assert.assertTrue(tenOfDiamonds.matches(tenOfDiamonds2));
+        Assert.assertFalse(tenOfDiamonds.matches(tenOfHearts));
     }
 }

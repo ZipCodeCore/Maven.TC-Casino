@@ -3,10 +3,57 @@ package io.zipcoder.casino;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static io.zipcoder.casino.Card.Suit.*;
 import static io.zipcoder.casino.Card.FaceValue.*;
 
 public class GoFishPlayerTest {
+
+    @Test
+    public void fishForCardsTest() {
+        GoFish game = new GoFish();
+        GoFishPlayer player1 = new GoFishPlayer("A");
+        GoFishPlayer player2 = new GoFishPlayer("B");
+        GoFishPlayer player3 = new GoFishPlayer("C");
+        ArrayList<GoFishPlayer> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        game.addPlayers(players);
+
+        player1.addCardToHand(new Card(NINE, HEARTS));
+        player2.addCardToHand(new Card(NINE, CLUBS));
+        player3.addCardToHand(new Card(FOUR, HEARTS));
+
+        Assert.assertTrue(player1.fishForCards(player2, NINE));
+        Assert.assertFalse(player1.fishForCards(player3, NINE));
+    }
+
+    @Test
+    public void playPotentialBooksInHand() {
+        GoFish game = new GoFish();
+        GoFishPlayer player1 = new GoFishPlayer("A");
+        GoFishPlayer player2 = new GoFishPlayer("B");
+        GoFishPlayer player3 = new GoFishPlayer("C");
+        ArrayList<GoFishPlayer> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        game.addPlayers(players);
+
+        CardPile nines = new CardPile();
+        for(Card.Suit suit : Card.Suit.values()) {
+            nines.addCardToPile(new Card(NINE, suit));
+        }
+
+        player1.addCardsToHand(nines);
+
+        int actualNumBooksPlayed = player1.playPotentialBooksInHand();
+        Assert.assertEquals(1, actualNumBooksPlayed);
+        Assert.assertEquals(1, player1.getBooks().size());
+        Assert.assertEquals(0, player1.getHand().numCards());
+    }
 
     @Test
     public void goFishTest() {
@@ -17,28 +64,6 @@ public class GoFishPlayerTest {
         goFishPlayer.goFish(randomCard);
 
         Assert.assertTrue(goFishPlayer.getHand().contains(randomCard));
-    }
-
-    @Test
-    public void hasCardsOfRankTest() {
-        GoFishPlayer goFishPlayer = new GoFishPlayer("Billy");
-        Card nineOfDiamonds = new Card(NINE, DIAMONDS);
-        Card eightOfClubs = new Card(EIGHT, CLUBS);
-        goFishPlayer.addCardToHand(nineOfDiamonds);
-        goFishPlayer.addCardToHand(eightOfClubs);
-
-        Assert.assertTrue(goFishPlayer.hasCardsOfRank(NINE));
-    }
-
-    @Test
-    public void doesNotHaveCardsOfRankTest() {
-        GoFishPlayer goFishPlayer = new GoFishPlayer("Carol");
-        Card nineOfDiamonds = new Card(NINE, DIAMONDS);
-        Card eightOfClubs = new Card(EIGHT, CLUBS);
-        goFishPlayer.addCardToHand(nineOfDiamonds);
-        goFishPlayer.addCardToHand(eightOfClubs);
-
-        Assert.assertFalse(goFishPlayer.hasCardsOfRank(SEVEN));
     }
 
     @Test

@@ -7,7 +7,6 @@ import static io.zipcoder.casino.Utilities.*;
 
 public class Casino {
 
-    public ArrayList<Game> games;
     private static ArrayList<Console> gameConsoles = new ArrayList<>();
 
     public static void startCasino() {

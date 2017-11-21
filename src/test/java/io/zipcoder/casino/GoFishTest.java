@@ -18,6 +18,47 @@ public class GoFishTest {
     }
 
     @Test
+    public void dealInitialCards() {
+        GoFish game = new GoFish();
+        GoFishPlayer player1 = new GoFishPlayer("A");
+        GoFishPlayer player2 = new GoFishPlayer("B");
+        GoFishPlayer player3 = new GoFishPlayer("C");
+        ArrayList<GoFishPlayer> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        game.addPlayers(players);
+
+        game.setNumInitialCards();
+        game.dealInitialCards();
+
+        for(GoFishPlayer player : game.getPlayers()) {
+            Assert.assertEquals(7, player.getHand().numCards());
+        }
+    }
+
+    @Test
+    public void goFishTest() {
+        GoFish game = new GoFish();
+        GoFishPlayer player1 = new GoFishPlayer("A");
+        GoFishPlayer player2 = new GoFishPlayer("B");
+        GoFishPlayer player3 = new GoFishPlayer("C");
+        ArrayList<GoFishPlayer> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        game.addPlayers(players);
+
+        game.setNumInitialCards();
+        game.dealInitialCards();
+
+        int numInitialCards = player1.getHand().numCards();
+        game.playerGoFish(player1);
+
+        Assert.assertEquals(numInitialCards + 1, player1.getHand().numCards());
+    }
+
+    @Test
     public void determineWinnerTest() {
         GoFish game = new GoFish();
         GoFishPlayer player1 = new GoFishPlayer("A");

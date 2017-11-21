@@ -81,15 +81,17 @@ public class BlackJack extends CardGame<BlackJack> implements Gamble {
     public void determineWinners() {
         if(playerHasBust(dealer)) {
             for(BlackJackPlayer player : getPlayers()) {
-                if (!playerHasBust(player)) {
-                    winners.add(player);
+                if(bets.containsKey(player)) {
+                    if (!playerHasBust(player)) {
+                        winners.add(player);
+                    }
                 }
             }
         }
         else {
             for(BlackJackPlayer player : getPlayers()) {
                 if(bets.containsKey(player)) {
-                    if (calculatePlayerScore(player) > calculatePlayerScore(dealer)) {
+                    if (!playerHasBust(player) && calculatePlayerScore(player) > calculatePlayerScore(dealer)) {
                         winners.add(player);
                     } else if (calculatePlayerScore(player).equals(calculatePlayerScore(dealer))) {
                         push.add(player);
@@ -125,6 +127,14 @@ public class BlackJack extends CardGame<BlackJack> implements Gamble {
 
     public HashMap<Player<BlackJack>, Double> getBets() {
         return bets;
+    }
+
+    public ArrayList<BlackJackPlayer> getWinners() {
+        return winners;
+    }
+
+    public ArrayList<BlackJackPlayer> getPush() {
+        return push;
     }
 
     @Override

@@ -5,12 +5,12 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        BlackJackPlayerTest.class,
         BlackJackTest.class,
         CardGameTest.class,
         CardPileTest.class,
         CardPlayerTest.class,
         CardTest.class,
-        CasinoTest.class,
         CrapsTest.class,
         DiceTest.class,
         GoFishPlayerTest.class,

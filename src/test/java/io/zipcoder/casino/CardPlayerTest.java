@@ -31,4 +31,26 @@ public class CardPlayerTest {
 
         Assert.assertTrue(player.getHand().containsAll(cards));
     }
+
+    @Test
+    public void hasCardsOfRankTest() {
+        CardPlayer player = new CardPlayer("");
+        Card nineOfDiamonds = new Card(NINE, DIAMONDS);
+        Card eightOfClubs = new Card(EIGHT, CLUBS);
+        player.addCardToHand(nineOfDiamonds);
+        player.addCardToHand(eightOfClubs);
+
+        Assert.assertTrue(player.hasCardsOfRank(NINE));
+    }
+
+    @Test
+    public void doesNotHaveCardsOfRankTest() {
+        CardPlayer player = new CardPlayer("");
+        Card nineOfDiamonds = new Card(NINE, DIAMONDS);
+        Card eightOfClubs = new Card(EIGHT, CLUBS);
+        player.addCardToHand(nineOfDiamonds);
+        player.addCardToHand(eightOfClubs);
+
+        Assert.assertFalse(player.hasCardsOfRank(SEVEN));
+    }
 }

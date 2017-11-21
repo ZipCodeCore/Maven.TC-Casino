@@ -6,7 +6,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static io.zipcoder.casino.Card.FaceValue.ACE;
+import static io.zipcoder.casino.Card.FaceValue.FIVE;
 import static io.zipcoder.casino.Card.FaceValue.JACK;
+import static io.zipcoder.casino.Card.Suit.CLUBS;
 import static io.zipcoder.casino.Card.Suit.DIAMONDS;
 import static io.zipcoder.casino.Card.Suit.SPADES;
 
@@ -117,8 +119,135 @@ public class BlackJackTest {
 
         Card aceOfSpades = new Card(ACE, SPADES);
         Card jackOfDiamonds = new Card(JACK, DIAMONDS);
+        Card fiveOfClubs = new Card(FIVE, CLUBS);
 
         player1.addCardToHand(aceOfSpades);
         player1.addCardToHand(jackOfDiamonds);
+
+        Assert.assertEquals(Integer.valueOf(21), game.calculatePlayerScore(player1));
+
+        player2.addCardToHand(aceOfSpades);
+        player2.addCardToHand(jackOfDiamonds);
+        player2.addCardToHand(jackOfDiamonds);
+        player2.addCardToHand(fiveOfClubs);
+
+        Assert.assertEquals(Integer.valueOf(26), game.calculatePlayerScore(player2));
+    }
+
+    @Test
+    public void playerHasBustTest() {
+        BlackJack game = new BlackJack(4);
+
+        ArrayList<BlackJackPlayer> players = new ArrayList<>();
+        BlackJackPlayer player1 = new BlackJackPlayer("Apple");
+        BlackJackPlayer player2 = new BlackJackPlayer("Banana");
+        players.add(player1);
+        players.add(player2);
+        game.addPlayers(players);
+
+        Card aceOfSpades = new Card(ACE, SPADES);
+        Card jackOfDiamonds = new Card(JACK, DIAMONDS);
+        Card fiveOfClubs = new Card(FIVE, CLUBS);
+
+        player1.addCardToHand(jackOfDiamonds);
+        player1.addCardToHand(jackOfDiamonds);
+        player1.addCardToHand(fiveOfClubs);
+
+        Assert.assertTrue(game.playerHasBust(player1));
+    }
+
+    @Test
+    public void determineWinnersTest() {
+        BlackJack game = new BlackJack(4);
+
+        ArrayList<BlackJackPlayer> players = new ArrayList<>();
+        BlackJackPlayer player1 = new BlackJackPlayer("Apple");
+        BlackJackPlayer player2 = new BlackJackPlayer("Banana");
+        BlackJackPlayer player3 = new BlackJackPlayer("Crouton");
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        game.addPlayers(players);
+
+        player1.setMoney(100.0);
+        player2.setMoney(100.0);
+        player3.setMoney(100.0);
+        game.takeBet(player1, 100.0);
+        game.takeBet(player2, 100.0);
+        game.takeBet(player3, 100.0);
+
+        Card aceOfSpades = new Card(ACE, SPADES);
+        Card jackOfDiamonds = new Card(JACK, DIAMONDS);
+        Card fiveOfClubs = new Card(FIVE, CLUBS);
+
+        game.getDealer().addCardToHand(jackOfDiamonds);
+        game.getDealer().addCardToHand(jackOfDiamonds);
+
+        player1.addCardToHand(aceOfSpades);
+        player1.addCardToHand(jackOfDiamonds);
+
+        player2.addCardToHand(aceOfSpades);
+        player2.addCardToHand(jackOfDiamonds);
+        player2.addCardToHand(jackOfDiamonds);
+        player2.addCardToHand(fiveOfClubs);
+
+        player3.addCardToHand(fiveOfClubs);
+        player3.addCardToHand(fiveOfClubs);
+        player3.addCardToHand(fiveOfClubs);
+        player3.addCardToHand(fiveOfClubs);
+
+        game.determineWinners();
+
+        Assert.assertEquals(player1, game.getWinners().get(0));
+        Assert.assertEquals(player3, game.getPush().get(0));
+    }
+
+    @Test
+    public void payOutBetsTest() {
+        BlackJack game = new BlackJack(4);
+
+        ArrayList<BlackJackPlayer> players = new ArrayList<>();
+        BlackJackPlayer player1 = new BlackJackPlayer("Apple");
+        BlackJackPlayer player2 = new BlackJackPlayer("Banana");
+        BlackJackPlayer player3 = new BlackJackPlayer("Crouton");
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        game.addPlayers(players);
+
+        player1.setMoney(100.0);
+        player2.setMoney(100.0);
+        player3.setMoney(100.0);
+        game.takeBet(player1, 100.0);
+        game.takeBet(player2, 100.0);
+        game.takeBet(player3, 100.0);
+
+        Card aceOfSpades = new Card(ACE, SPADES);
+        Card jackOfDiamonds = new Card(JACK, DIAMONDS);
+        Card fiveOfClubs = new Card(FIVE, CLUBS);
+
+        game.getDealer().addCardToHand(jackOfDiamonds);
+        game.getDealer().addCardToHand(jackOfDiamonds);
+
+        player1.addCardToHand(aceOfSpades);
+        player1.addCardToHand(jackOfDiamonds);
+
+        player2.addCardToHand(aceOfSpades);
+        player2.addCardToHand(jackOfDiamonds);
+        player2.addCardToHand(jackOfDiamonds);
+        player2.addCardToHand(fiveOfClubs);
+
+        player3.addCardToHand(fiveOfClubs);
+        player3.addCardToHand(fiveOfClubs);
+        player3.addCardToHand(fiveOfClubs);
+        player3.addCardToHand(fiveOfClubs);
+
+        game.determineWinners();
+
+        game.payOutBets();
+
+        Assert.assertEquals(Double.valueOf(200), player1.getMoney());
+        Assert.assertEquals(Double.valueOf(0), player2.getMoney());
+        Assert.assertEquals(Double.valueOf(100), player3.getMoney());
     }
 }
