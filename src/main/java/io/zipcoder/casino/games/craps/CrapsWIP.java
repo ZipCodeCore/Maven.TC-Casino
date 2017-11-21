@@ -69,6 +69,7 @@ public class CrapsWIP implements Gamble, Game {
     public void changePlayerTurn(){
         isPlayerTurn=!isPlayerTurn;
     }
+    public boolean getPlayerTurn(){return isPlayerTurn;}
 
     public int getPoint(){return point;}
 
@@ -117,7 +118,7 @@ public class CrapsWIP implements Gamble, Game {
                       }
 
     }
-    
+
     @Override
     public boolean play(String userInput) {
         return ("Y".equalsIgnoreCase(userInput));
