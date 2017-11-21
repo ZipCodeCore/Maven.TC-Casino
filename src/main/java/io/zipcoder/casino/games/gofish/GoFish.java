@@ -1,57 +1,82 @@
 package io.zipcoder.casino.games.gofish;
 
-import io.zipcoder.casino.games.CardGame;
 import io.zipcoder.casino.nuts_n_bolts.User;
 import io.zipcoder.casino.nuts_n_bolts.cards.Hand;
+import io.zipcoder.casino.nuts_n_bolts.cards.PlayingCard;
+import io.zipcoder.casino.nuts_n_bolts.cards.PlayingDeck;
 import io.zipcoder.casino.nuts_n_bolts.cards.PlayingValue;
 
-import java.util.ArrayList;
+public class GoFish {
 
-public class GoFish extends CardGame {
+    private GoFishPlayer player;
 
-    private ArrayList<GoFishPlayer> players;
+    private GoFishPlayer dealer;
 
-    public GoFish(Integer numberOfCompPlayers){
-
+    private PlayingDeck deck;
+    public GoFish(User user){
+        this.player = new GoFishPlayer(user);
+        this.dealer = createCompPlayer();
+        this.deck = new PlayingDeck();
     }
 
-    public void play() {
-
+    GoFishPlayer createCompPlayer(){
+        return new GoFishPlayer(new User("Dealer"));
     }
 
-    private GoFishPlayer createCompPlayer(){
-        return null;
+    Boolean lastPlayerHandEmpty(GoFishPlayer player){
+        return this.getPlayer().hand.isHandEmpty();
     }
 
-    private void shufflePlayerOrder(){}
-
-    private Boolean lastPlayerHandEmpty(){
-        return null;
+    public GoFishPlayer getPlayer() {
+        return player;
     }
 
-    private void declareWinner(){}
+    public GoFishPlayer getDealer() {
+        return dealer;
+    }
 
-    private class GoFishPlayer {
+    public PlayingDeck getDeck() {
+        return deck;
+    }
+
+    class GoFishPlayer {
 
         private User user;
-        private Hand hand = new Hand();
+        private Hand hand;
         private PlayingValue askedValue = null;
 
-        public GoFishPlayer(User user){
+        GoFishPlayer(User user){
             this.user = user;
+            this.hand = new Hand();
         }
 
-        public void askForCards(GoFishPlayer other, PlayingValue value){}
+        User getUser() {
+            return user;
+        }
 
-        private void getCards(GoFishPlayer other, PlayingValue value){}
+        PlayingValue getAskedValue() {
+            return askedValue;
+        }
 
-        private void drawCard(){}
-
-        private Boolean hasFourOfKind(){
+        Boolean askForValue(GoFishPlayer other, PlayingValue value){
             return null;
         }
 
-        private void discardFourOfKind(){}
+        void getCards(GoFishPlayer other, PlayingValue value){}
+
+        void nullAskedValue(){
+
+        }
+
+        PlayingCard drawCard(){
+            return null;
+        }
+
+        Boolean hasFourOfKind(){
+            return null;
+        }
+
+        void discardFourOfKind(){}
 
     }
 }
