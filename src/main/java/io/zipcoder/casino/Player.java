@@ -10,6 +10,10 @@ abstract class Player<E extends Comparable<E>> {
     private Hand playerHand;
     private double bet;
 
+    public String getName() {
+        return name;
+    }
+
     private void bet(double bet){
      this.bet = bet;
     }
@@ -27,5 +31,13 @@ abstract class Player<E extends Comparable<E>> {
 
     Player(String name){
         this.name = name;
+    }
+
+    @Override
+    public String toString(){
+        String returnString = "";
+        for(int i = 0; i < players.size(); i++)
+            returnString += players.get(i);
+        return returnString;
     }
 }

@@ -9,15 +9,28 @@ public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparab
     }
 
 
-    void addToList(BlackjackPlayer player) {
+    public void addToList(BlackjackPlayer player) {
         players.add(player);
+    }
+
+    public boolean hitStay(String userAnswer){
+        if(userAnswer.equalsIgnoreCase("yes")){
+            return true;
+        }
+        return false;
+    }
+
+    public Double bet() {
+        return null;
     }
 
     public int compareTo(BlackjackPlayer o) {
         return 0;
     }
 
-    public Double bet() {
-        return null;
+    public Hand getHand(){
+        Hand hand = new Hand();
+        hand.blackjackHand();
+        return hand;
     }
 }
