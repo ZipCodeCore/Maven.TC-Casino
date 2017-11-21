@@ -91,7 +91,7 @@ public class Craps implements Game, Gamble {
 
     @Override
     public Double settleBet() {
-
+        return null;
     }
 
     private class CrapsPlayer {

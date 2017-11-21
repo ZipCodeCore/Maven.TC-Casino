@@ -5,7 +5,6 @@ import io.zipcoder.casino.games.Gamble;
 import io.zipcoder.casino.nuts_n_bolts.MoneyContainer;
 import io.zipcoder.casino.nuts_n_bolts.User;
 import io.zipcoder.casino.nuts_n_bolts.cards.PlayingCard;
-import io.zipcoder.casino.nuts_n_bolts.cards.PlayingDeck;
 
 import java.util.ArrayList;
 
@@ -15,22 +14,21 @@ public class BlackJack extends CardGame implements Gamble {
     private ArrayList<BlackJackPlayer> users;
 
     @Override
-    public void play() {
-
-    }
-
-    @Override
     public void takeBet(Double bet) {
         //match biggest bet
     }
 
     @Override
-    public void settleBet() {
-
+    public Double settleBet() {
+        return null;
     }
 
     public void evaluatePointsInHand(){}
 
+    @Override
+    public boolean play(String userInput) {
+        return false;
+    }
 
 
     //setup game:
