@@ -69,10 +69,6 @@ public class Console {
         return true;
     }
 
-    private BetType getBet() {
-        return null;
-    }
-
     public void playBlackJack() {
     }
 
