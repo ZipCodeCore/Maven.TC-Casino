@@ -1,4 +1,6 @@
 package io.zipcoder.casino;
 
-public class Gamble {
+interface Gamble {
+
+    public Double bet();
 }

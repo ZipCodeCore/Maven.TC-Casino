@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public class GoFishPlayer extends Player {
+public class GoFishPlayer extends Player<GoFishPlayer> implements Comparable<GoFishPlayer> {
 
     @Override
     void addToList(GoFishPlayer player) {
@@ -11,4 +11,7 @@ public class GoFishPlayer extends Player {
         super(name);
     }
 
+    public int compareTo(GoFishPlayer o) {
+        return 0;
+    }
 }
