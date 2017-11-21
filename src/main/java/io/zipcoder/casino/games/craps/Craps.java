@@ -21,19 +21,36 @@ public class Craps implements Game, Gamble {
 
     private ArrayList<CrapsPlayer> players;
     private Dice<Integer> dice;
-    private Pot pot;
+    private Pot mainPot;
+    private Pot sidePot;
 
     public Craps(){
-        ArrayList<Integer> oneToSix = new ArrayList<>();
+        ArrayList<Integer> twoToTwelve = new ArrayList<>();
         for (int i=2; i<13; i++)
         {
-            oneToSix.add(i);
+            twoToTwelve.add(i);
         }
-        dice=new Dice<>(oneToSix);
+        dice=new Dice<>(twoToTwelve);
     }
 
     public void play() {
+/*
+        roll to determine who goes first (high/low)
+            Player makes a pass or dontPass bet into the mainPot
+            initialThrow (comeOutRoll) to win or point.
+                resolve if pass, dontPass, or point (7,11 is pass) (2,3,12 is dontPass).
+                    //Player wins/loses their opponent's stake in the pot
+                    //Opponent needs to bet again before next roll
+                    //Same, inverse
+            if point, can make side bets on the point (6/8, 5/9, 10/4)
+                If roller gets his point, he wins mainPot and sidePot.
+                If roller rolls side number, he only wins sidePot.
+                    Another sideBet can be made after the first sideBet is won
 
+                If roller craps (7) out, nonRoller wins mainPot and sidePot
+            Next player gets the dice
+
+ */
     }
 
     @Override
