@@ -14,7 +14,7 @@ public class Console {
         Craps gameOn = new Craps();
 
         System.out.println("New shooter.");
-        CrapsPlayer shooter = new CrapsPlayer();
+        CrapsPlayer shooter = new CrapsPlayer("panther");
         gameOn.addPlayer(shooter);
 
         System.out.println("Place your bets. pass line only for the moment");

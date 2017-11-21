@@ -14,7 +14,7 @@ public class GameTest {
     @Test
     public void addPlayerTest() {
 
-        Player raul = new Player();
+        Player raul = new Player("el pato");
         game.addPlayer(raul);
         int expected = 1;
         int actual = game.getPlayers().size();

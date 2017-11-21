@@ -4,6 +4,10 @@ public class CrapsPlayer extends Player {
     private Bank wallet;
     private Integer[] currentRoll = new Integer[2];
 
+    public CrapsPlayer(String name) {
+        super(name);
+    }
+
     public Integer roll2Dice() {
 
         int rollOne = (int) (Math.random()*6)+1;

@@ -17,7 +17,7 @@ public class BlackJackPlayerTest {
 
     @Test(expected = IllegalStateException.class)
     public void shouldThrowIllegalStateExceptionWhenDeckIsNull() {
-        BlackJackPlayer blackJackPlayer = new BlackJackPlayer();
+        BlackJackPlayer blackJackPlayer = new BlackJackPlayer("el pato");
         Deck deck = null;
         blackJackPlayer.startGame(deck);
         Assert.assertNull(deck);
@@ -26,7 +26,7 @@ public class BlackJackPlayerTest {
     @Test
     public void placeBetTest() {
 
-        BlackJackPlayer blackJackPlayer = new BlackJackPlayer();
+        BlackJackPlayer blackJackPlayer = new BlackJackPlayer("el pato");
         blackJackPlayer.setBet(10);
         double actual = 10;
         double expected = blackJack.betReceiveFromPlayers();// 10

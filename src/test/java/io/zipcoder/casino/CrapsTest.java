@@ -14,7 +14,7 @@ public class CrapsTest {
     @Test
     public void shouldAskPlayerTypeOfBet(){
         Craps craps = new Craps();
-        CrapsPlayer crapsPlayer = new CrapsPlayer();
+        CrapsPlayer crapsPlayer = new CrapsPlayer("el Pato");
 
         CrapsBetType expected = CrapsBetType.PASSLINE;
         craps.setBetType(CrapsBetType.PASSLINE);
@@ -25,7 +25,7 @@ public class CrapsTest {
     @Test
     public void shouldTakePlayerMoneyAndSetBetAmount(){
         Craps craps = new Craps();
-        CrapsPlayer crapsPlayer = new CrapsPlayer();
+        CrapsPlayer crapsPlayer = new CrapsPlayer("el Pato");
 
         Double expected = 50.0;
         craps.takeBet(expected);
@@ -55,7 +55,7 @@ public class CrapsTest {
     }
 
     @Test
-    public void isLossOnComeRoll(){
+    public void isLossOnComeOutRoll(){
         //given betType
         Craps craps = new Craps();
         craps.setBetType(CrapsBetType.DONTPASS);
@@ -105,17 +105,37 @@ public class CrapsTest {
 
 
     @Test
-    public void shouldDetermineIfPlayerWinsLosesOrSetsPointUponRoll(){
-        //given betType, roll
+    public void TestPointSetUponNoResultComeoutRoll(){
 
-        // when each of three diff scenarios are rolled
+        Craps craps = new Craps();
+        craps.setBetType(CrapsBetType.DONTPASS);
+        CrapsBetType dontPass = craps.getBetType();
 
-        // then Win/Lose/PointSet
+        boolean flag = craps.isNoResultRoll(4, dontPass);
+
+        Integer expected_point = 4;
+        Integer actual_point = craps.getPoint();
+
+        Assert.assertEquals(expected_point,actual_point);
+
     }
 
     @Test
     public void determineIfPlayerWinsOrLosesAfterPointHasBeenSet(){
         //given betType, roll
+        Craps craps = new Craps();
+        craps.setBetType(CrapsBetType.DONTPASS);
+        CrapsBetType dontPass = craps.getBetType();
+
+        boolean flag = craps.isNoResultRoll(4, dontPass);
+
+        Assert.assertTrue(craps.isBetWin(7, CrapsBetType.DONTPASS));
+        Assert.assertTrue(craps.isBetLoss(4, CrapsBetType.DONTPASS));
+        Assert.assertTrue(craps.isBetLoss(5, CrapsBetType.DONTPASS));
+        Assert.assertTrue(craps.isBetLoss(6, CrapsBetType.DONTPASS));
+
+        Assert.assertTrue(craps.isBetLoss(7, CrapsBetType.PASSLINE));
+        Assert.assertTrue(craps.isBetWin(4, CrapsBetType.PASSLINE));
     }
 
 

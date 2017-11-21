@@ -4,6 +4,10 @@ public class BlackJackPlayer extends CardPlayer {
 
     private double bet;
 
+    public BlackJackPlayer(String name) {
+        super(name);
+    }
+
     public void startGame(Deck deck) {
         if (deck == null) {
             throw new IllegalStateException("Deck is null");

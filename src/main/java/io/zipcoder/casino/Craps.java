@@ -6,10 +6,10 @@ public class Craps extends Game implements PlayForMoney {
     private CrapsBetType betType;
     private Double playerBet;
     private boolean isComeOut;
-    private Integer point=0;
+    private Integer point = 0;
     private Integer comePoint;
 
-    public void getDiceRoll(CrapsPlayer player){
+    public void getDiceRoll(CrapsPlayer player) {
         player.roll2Dice();
     }
 
@@ -17,8 +17,13 @@ public class Craps extends Game implements PlayForMoney {
 
 
     }
+
     public void takeBet(Double betAmount) {
         this.playerBet = betAmount;
+    }
+
+    public double betReceiveFromPlayers() {
+        return 0;
     }
 
 
@@ -56,12 +61,11 @@ public class Craps extends Game implements PlayForMoney {
             }*/
 
 
-
-    public void isWinner(){
+    public void isWinner() {
 
     }
 
-    public void crapsRound(){
+    public void crapsRound() {
         //take bets
 
         //roll dice
@@ -88,11 +92,12 @@ public class Craps extends Game implements PlayForMoney {
     }*/
 
 
-
-
-    public boolean dontPassWins(int roll){
-        if (isComeOut && (roll == 2 || roll == 3)) {return true;}
-        else if (!isComeOut && (roll == 7)) {return true;}
+    public boolean dontPassWins(int roll) {
+        if (isComeOut && (roll == 2 || roll == 3)) {
+            return true;
+        } else if (!isComeOut && (roll == 7)) {
+            return true;
+        }
         return false;
         //refactor to add push condition for 12
     }
@@ -106,7 +111,7 @@ public class Craps extends Game implements PlayForMoney {
         this.playerBet = betAmount;
     }
 
-    public void rollAgain(){
+    public void rollAgain() {
 
     }
 
@@ -123,7 +128,7 @@ public class Craps extends Game implements PlayForMoney {
         isComeOut = comeOut;
     }
 
-    public boolean getIsComeOut(){
+    public boolean getIsComeOut() {
         return isComeOut;
     }
 
@@ -136,7 +141,7 @@ public class Craps extends Game implements PlayForMoney {
     }
 
     public boolean isBetWinComeOut(int roll, CrapsBetType betType) {
-        if(betType == CrapsBetType.PASSLINE)
+        if (betType == CrapsBetType.PASSLINE)
             return (roll == 7 || roll == 11);
         if (betType == CrapsBetType.DONTPASS)
             return (roll == 2 || roll == 3);
@@ -145,8 +150,8 @@ public class Craps extends Game implements PlayForMoney {
     }
 
     public boolean isBetLossComeOut(int roll, CrapsBetType betType) {
-        if(betType == CrapsBetType.PASSLINE)
-            return (roll == 2 || roll == 3 || roll ==12);
+        if (betType == CrapsBetType.PASSLINE)
+            return (roll == 2 || roll == 3 || roll == 12);
         if (betType == CrapsBetType.DONTPASS)
             return (roll == 7 || roll == 11);
         return false;
@@ -159,7 +164,21 @@ public class Craps extends Game implements PlayForMoney {
     }
 
     public boolean isNoResultRoll(int roll, CrapsBetType betType) {
-        return !isBetWinComeOut(roll, betType) && !isBetLossComeOut(roll,betType);
+        setPoint(roll);
+        return !isBetWinComeOut(roll, betType) && !isBetLossComeOut(roll, betType);
 
     }
+
+    public boolean isBetWin(int roll, CrapsBetType betType) {
+        if (betType == CrapsBetType.PASSLINE)
+            return (roll == this.point);
+        if (betType == CrapsBetType.DONTPASS)
+            return (roll == 7);
+        return false;
+    }
+
+    public boolean isBetLoss(int roll, CrapsBetType betType) {
+        return (!isBetWin(roll, betType));
+    }
 }
+

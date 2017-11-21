@@ -11,8 +11,8 @@ public class BlackJackTest {
 
     @Test
     public void playersAddTest(){
-        Player abrar = new Player();
-        Player greg = new Player();
+        Player abrar = new Player("el pato");
+        Player greg = new Player("el pato");
         blackJack.addPlayer(abrar);
         blackJack.addPlayer(greg);
         int expected = 2;

@@ -3,11 +3,14 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class GoFishPlayer extends CardPlayer {
 
+
+    public GoFishPlayer(String name) {
+        super(name);
+    }
 
     public Card drawCard(Deck deck) {
         Card playerCard = deck.getCards().remove(0);
