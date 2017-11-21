@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class Casino {
-    DecimalFormat format = new DecimalFormat(".00");
+    DecimalFormat format = new DecimalFormat("0.00");
     static Player casinoplayer;
 
     public void startCasino(){
@@ -22,7 +22,7 @@ public class Casino {
     }
 
     public void gameOptions(){
-        String[] gameOptionList = {"Craps","Blackjack","Go Fish"};
+        String[] gameOptionList = {"CRAPS","BLACKJACK","GO FISH"};
         Console.print("Game options:\n"+ Arrays.asList(gameOptionList).toString());
         String input = Console.getValidString("What game would you like to play?",gameOptionList);
         switch(input.toLowerCase()){
