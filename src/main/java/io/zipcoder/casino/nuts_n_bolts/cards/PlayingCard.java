@@ -10,6 +10,11 @@ public class PlayingCard {
         this.value = value;
     }
 
+    @Override
+    public String toString(){
+        return "" + this.value + this.suit;
+    }
+
     public PlayingSuit getSuit() {
         return suit;
     }

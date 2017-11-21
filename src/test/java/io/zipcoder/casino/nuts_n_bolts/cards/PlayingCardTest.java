@@ -5,26 +5,26 @@ import org.junit.Test;
 
 public class PlayingCardTest {
 
-    /*
+
     @Test
     public void testCardGetValue(){
-        Card card = new Card(Suit.HEARTS, 2);
+        PlayingCard card = new PlayingCard(PlayingSuit.HEART, PlayingValue.SIX);
 
-        Integer expected=2;
-        Integer actual=card.getValue();
+        PlayingValue expected = PlayingValue.SIX;
+        PlayingValue actual = card.getValue();
 
         Assert.assertTrue(actual.equals(expected));
     }
 
     @Test
     public void testCardGetSuit(){
-        Card card = new Card(Suit.HEARTS, 2);
+        PlayingCard card = new PlayingCard(PlayingSuit.HEART, PlayingValue.SIX);
 
-        Suit expected = Suit.HEARTS;
-        Suit actual = card.getSuit();
+        PlayingSuit expected = PlayingSuit.HEART;
+        PlayingSuit actual = card.getSuit();
 
         Assert.assertTrue(expected.equals(actual));
     }
-    */
+
 
 }
