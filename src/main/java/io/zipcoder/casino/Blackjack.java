@@ -35,7 +35,7 @@ public class Blackjack extends CardGame{
         if(playAgain()){
             play();
         }else{
-            //gameOptions();
+            gameOptions();
         }
     }
 
@@ -47,7 +47,7 @@ public class Blackjack extends CardGame{
     public void checkWin(){
         if(playerWins()){
             Console.print("Player wins\n");
-            casinoplayer.addToBalance(pot*2);
+            casinoplayer.addToBalance(pot);
         }else{
             Console.print("Dealer wins\n");
         }
@@ -62,7 +62,7 @@ public class Blackjack extends CardGame{
             printHand(player);
             Console.print("Score of "+player.getScore() + "\n");
             hitOrStay = Console.getValidString("Would you like to hit or stay?","hit","stay");
-            if("hit".equalsIgnoreCase(hitOrStay)){
+            if("hit".equalsIgnoreCase(hitOrStay) && player.hand.size()<5){
                 player.addCard(deck.getCard());
             }else {
                 return;
@@ -77,7 +77,7 @@ public class Blackjack extends CardGame{
     }
 
     public void getBet(){
-        Console.print("You current balance is "+casinoplayer.getBalance());
+        Console.print("You current balance is "+format.format(casinoplayer.getBalance()));
         double bet;
         while(true){
             bet = Console.getDouble("How much would you like bet?");

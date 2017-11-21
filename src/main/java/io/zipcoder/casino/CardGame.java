@@ -7,9 +7,10 @@ import io.zipcoder.casino.Deck.Deck;
 abstract class CardGame extends Casino {
     Deck deck = new Deck();
 
-    public void deal(CardPlayer player, CardPlayer dealer, int amount) {
-        clearHands(player, dealer);
-        for (int i = 0; i < amount; i++) {
+    public void deal(CardPlayer player,CardPlayer dealer,int amount){
+        clearHands(player,dealer);
+        deck.shuffle();
+        for(int i =0;i<amount;i++){
             dealer.addCard(deck.getCard());
             player.addCard(deck.getCard());
         }
