@@ -14,14 +14,11 @@ public class DeckTest {
     @Test
     public void constructorTest(){
         ArrayList<Card> cards = deck.getCards();
-
         String expected = "a bunch of cards";
-        String actual = "***output***\n";
-
+        String actual = "***output***\n ";
         for(Card card: cards){
             actual +=(card.getRank() + " of " + card.getSuit()+"s\n");
         }
-
         Assert.assertEquals(expected, actual);
     }
 
@@ -42,7 +39,8 @@ public class DeckTest {
 
     }
 
-    public void testPop() {
+    public void testPop(){
+
     }
 
 

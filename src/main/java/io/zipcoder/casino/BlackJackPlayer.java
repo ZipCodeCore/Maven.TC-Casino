@@ -2,8 +2,20 @@ package io.zipcoder.casino;
 
 public class BlackJackPlayer extends CardPlayer {
 
-    public void startGame(Deck deck) {
+    private double bet;
 
+    public void startGame(Deck deck) {
+        if (deck == null) {
+            throw new IllegalStateException("Deck is null");
+        }
+    }
+
+    public void setBet(double amount){
+        this.bet = amount;
+    }
+
+    public double getBet() {
+        return bet;
     }
 
     public double showBalance() {
