@@ -11,11 +11,11 @@ public class Console extends ArrayList<String> {
         Scanner input = new Scanner(System.in);
         System.out.println(prompt);
         String userinput = input.nextLine();
+        input.close();
         return userinput;
     }
 
     public static double getDouble(String prompt) {
-
         do {
             try {
                 Scanner input = new Scanner(System.in);

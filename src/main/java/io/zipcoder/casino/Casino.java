@@ -31,7 +31,7 @@ public class Casino {
                 new Blackjack(casinoplayer).start();
                 break;
             case "go fish":
-                // go fish start
+                new GoFish(casinoplayer).goFishStart();
                 break;
             case "craps":
                 validAge();
