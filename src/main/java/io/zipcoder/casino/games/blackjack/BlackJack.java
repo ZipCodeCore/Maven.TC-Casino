@@ -33,7 +33,7 @@ public class BlackJack extends CardGame implements Gamble {
 
     //setup game:
     //enter user, enter dealer, get fresh deck
-    //start game
+    //run game
     //make bet
     //deal 2 cards each, dealer shows one
     //hit or stay?
@@ -97,7 +97,7 @@ public class BlackJack extends CardGame implements Gamble {
         return dealer;
     }
 
-    public void start() {
+    public void run() {
 
         //Deal two cards to the player and the dealer
         for (int i = 0; i < 2; i++)
