@@ -1,16 +1,11 @@
 package io.zipcoder.casino;
 
-public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparable<BlackjackPlayer>, Gamble {
+public class BlackjackPlayer extends Player<BlackjackPlayer> implements Gamble {
 
     BlackjackPlayer(String name, Double money) {
         super(name, money);
     }
     public int score;
-
-
-    public void addToList(BlackjackPlayer player) {
-        players.add(player);
-    }
 
     public boolean hitStay(String userAnswer){
         if(userAnswer.equalsIgnoreCase("yes")){
@@ -27,9 +22,4 @@ public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparab
         return 0;
     }
 
-    public Hand getHand(){
-        Hand hand = new Hand();
-        hand.blackjackHand();
-        return hand;
     }
-}

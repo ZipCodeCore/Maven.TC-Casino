@@ -2,12 +2,10 @@ package io.zipcoder.casino;
 
 import java.util.ArrayList;
 
-abstract class Player<E extends Comparable<E>> {
+abstract class Player<E> {
 
     private String name;
     private Double money;
-    protected ArrayList<E> players;
-    private Hand playerHand;
     private double bet;
 
     public String getName() {
@@ -18,12 +16,6 @@ abstract class Player<E extends Comparable<E>> {
      this.bet = bet;
     }
 
-    public Player<E> findPlayer(String name){
-        return null;
-    }
-
-    abstract void addToList(E player);
-
     Player(String name, Double money){
         this.name = name;
         this.money = money;
@@ -33,11 +25,4 @@ abstract class Player<E extends Comparable<E>> {
         this.name = name;
     }
 
-    @Override
-    public String toString(){
-        String returnString = "";
-        for(int i = 0; i < players.size(); i++)
-            returnString += players.get(i);
-        return returnString;
-    }
 }
