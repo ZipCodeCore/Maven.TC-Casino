@@ -32,7 +32,11 @@ public class CrapsConsoleWIP {
             pointSet=resolveInitialThrow(game.initialThrow());
         }
         //Now we're on secondaryThrows
-        secondaryBet();
+        while (!pointMet) {//Continue to bet until the roller
+                    //meets their point or craps out
+            secondaryBet();
+            pointMet=resolveSecondaryThrow(game.secondaryThrow());
+        }
     }
 
     private void initialBet(){
@@ -129,6 +133,32 @@ public class CrapsConsoleWIP {
         }
     }
 
+    private boolean resolveSecondaryThrow(int resultOfThrownDice){
+        switch (resultOfThrownDice) {
+
+            case 0: {//Not a point, not a spread, not a crap. Roll again
+                return false;
+            }
+            case 1: {//Point met. Pay out to thrower, reset bools and betVars
+                resolveSecondaryThrowBet(resultOfThrownDice);
+                return true;
+            }
+            case -1: {//Crap. Pay out to non-thrower, reset bools and betVars
+                return true;
+            }
+            default: {//Pair made, pay sideBet to non-thrower.
+                return false;
+            }
+        }//end switch
+    }
+    private void resolveSecondaryThrowBet(int a){
+        if (a==1){//Point met, pay out thrower from mainPot and sidePot
+            if (game.getPlayerTurn()) {//if player is the thrower
+                player.getWallet().addMoney(game.emptyPot());
+                player.getWallet().addMoney(game.emptySidePot());
+            }
+        }
+    }
     private void welcomePlayer(){
         System.out.println("Hello, "+player.getName()+". Welcome to the "+game.getClass().getSimpleName()+" table.");
     }

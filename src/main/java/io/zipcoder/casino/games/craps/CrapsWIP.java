@@ -103,7 +103,7 @@ public class CrapsWIP implements Gamble, Game {
         }
 
     }
-    public Integer subsequentThrow(){//returns -1 if crapped out,
+    public Integer secondaryThrow(){//returns -1 if crapped out,
                                     //returns 1 if point met
                                     //returns 0 if nothing met
                                     //returns any other number if pair met
