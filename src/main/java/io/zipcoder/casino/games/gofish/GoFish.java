@@ -6,6 +6,10 @@ import io.zipcoder.casino.nuts_n_bolts.cards.PlayingCard;
 import io.zipcoder.casino.nuts_n_bolts.cards.PlayingDeck;
 import io.zipcoder.casino.nuts_n_bolts.cards.PlayingValue;
 
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class GoFish {
 
     private GoFishPlayer player;
@@ -24,7 +28,7 @@ public class GoFish {
     }
 
     Boolean lastPlayerHandEmpty(GoFishPlayer player){
-        return this.getPlayer().hand.isHandEmpty();
+        return player.hand.isHandEmpty();
     }
 
     public GoFishPlayer getPlayer() {
@@ -39,12 +43,17 @@ public class GoFish {
         return deck;
     }
 
+    public void run() {
+
+    }
+
     class GoFishPlayer {
 
         private User user;
-        private Hand hand;
-        private PlayingValue askedValue = null;
 
+        private Hand hand;
+
+        private PlayingValue askedValue = null;
         GoFishPlayer(User user){
             this.user = user;
             this.hand = new Hand();
@@ -54,29 +63,64 @@ public class GoFish {
             return user;
         }
 
+        public Hand getHand() {
+            return hand;
+        }
+
         PlayingValue getAskedValue() {
             return askedValue;
         }
 
-        Boolean askForValue(GoFishPlayer other, PlayingValue value){
-            return null;
+        Integer askForValue(GoFishPlayer other, PlayingValue value){
+            this.askedValue = value;
+            return other.checkIfHandHasValue(value);
         }
 
-        void getCards(GoFishPlayer other, PlayingValue value){}
+        Integer checkIfHandHasValue(PlayingValue value) {
+            return getAllOfValue(value).size();
+        }
+
+        private ArrayList<PlayingCard> getAllOfValue(PlayingValue value) {
+            return (ArrayList<PlayingCard>) this.getHand().getAllCards().stream().
+                    filter(card -> value.equals(card.getValue())).collect(Collectors.toList());
+        }
+
+        void takeCardsFromOther(GoFishPlayer other, PlayingValue value){
+            ArrayList<PlayingCard> movingCards = other.getAllOfValue(value);
+                other.getHand().getAllCards().removeAll(movingCards);
+                this.getHand().getAllCards().addAll(movingCards);
+        }
 
         void nullAskedValue(){
-
+            this.askedValue = null;
         }
 
         PlayingCard drawCard(){
-            return null;
+            PlayingCard drawnCard;
+            drawnCard = deck.getAndRemoveCard();
+            hand.addCard(drawnCard);
+            return drawnCard;
         }
 
-        Boolean hasFourOfKind(){
-            return null;
-        }
+        PlayingValue fourOfKindValue(){
+            HashMap<PlayingValue, Integer> count = new HashMap<>();
+            PlayingValue hasFour = null;
+            for (PlayingCard card : this.getHand().getAllCards()) {
+                if (count.containsKey(card.getValue())) {
+                    count.put(card.getValue(), (count.get(card.getValue()) + 1));
+                    if (count.get(card.getValue()) == 4) {
+                        hasFour = card.getValue();
+                    }
+                } else {
+                    count.put(card.getValue(), 1);
+                }
+            }
+            return hasFour;
+            }
 
-        void discardFourOfKind(){}
+        void discardFourOfKind(PlayingValue value){
+            this.getHand().getAllCards().removeIf(card -> card.getValue() == value);
+        }
 
     }
 }

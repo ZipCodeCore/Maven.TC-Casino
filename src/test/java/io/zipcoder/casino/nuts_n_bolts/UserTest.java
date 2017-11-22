@@ -15,6 +15,16 @@ public class UserTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void getWalletTest(){
+        User testUser = new User("Test Dummy", 1000d);
+        Double expected = 1000d;
+
+        Double actual = testUser.getWallet().getMoney();
+
+        Assert.assertEquals(expected, actual);
+    }
+
 }
 
 /*
