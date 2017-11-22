@@ -16,6 +16,5 @@ public class GoFish extends CardGames {
         player.dealGoFishHAnd(goFishPlayers, goFishDeck);
 
 
-
     }
 }

@@ -6,11 +6,14 @@ enum CardValue {
 
     private final int CardsValue;
 
-    CardValue(int cardNumber){
+    CardValue(int cardNumber) {
         this.CardsValue = cardNumber;
     }
 
-     int getValue(){
+    int getValue() {
         return CardsValue;
     }
+
+    //I had to remove some stuff from this class and put it elsewhere for proper implementation and proper Blackjack
+    //behavior
 }

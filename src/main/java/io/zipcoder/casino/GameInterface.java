@@ -2,7 +2,7 @@ package io.zipcoder.casino;
 
 public class GameInterface {
 
-    public static void playCraps(){
+    public static void playCraps() {
         String playAgain;
         do {
 
@@ -11,42 +11,17 @@ public class GameInterface {
             first.firstRoll();
             playAgain = Console.getUserInputString("Do you want to continue playing?");
             first.getName();
-        }while(playAgain.equals("no"));
-
-
-
-
-
-
-
-
+        } while (playAgain.equals("no"));
 
 
     }
 
-    public static void playBlakcjack(){
-
-
-
-
-
-
-
+    public static void playBlakcjack() {
 
 
     }
 
-    public static void playGoFish(){
-
-
-
-
-
-
-
-
-
-
+    public static void playGoFish() {
 
 
     }

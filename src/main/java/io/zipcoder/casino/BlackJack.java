@@ -6,7 +6,7 @@ public class BlackJack extends CardGames {
 
     private ArrayList<BlackjackPlayer> blackjackPlayers = new ArrayList<>();
     private Player activePlayer;
-    //This constant can be used if a player/dealer gets blackjack
+    //This constant can be used in console/actual game-play if a player/dealer gets blackjack
     private static final int BLACKJACK = 21;
     private Deck deck;
 
@@ -28,7 +28,7 @@ public class BlackJack extends CardGames {
 
     public void giveCardToPlayer() {
         Card card = this.deck.dealOneRandomCard();
-        //this.activePlayer.addCardToHand(card);
+        this.activePlayer.addCardToHand(card);
     }
 
     public void endTurn() {
@@ -38,11 +38,13 @@ public class BlackJack extends CardGames {
         }
     }
 
+    //Below methods used primarily in testing and will be useful in implementation of actual game-play via console
+
     public ArrayList<BlackjackPlayer> getPlayers() {
         return blackjackPlayers;
     }
 
-    public Player getPlayerAtIndex(int index) {
+    public BlackjackPlayer getPlayerAtIndex(int index) {
         return blackjackPlayers.get(index);
     }
 

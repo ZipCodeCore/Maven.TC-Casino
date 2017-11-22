@@ -31,7 +31,7 @@ public class Game {
             userInputInt = Console.getUserInputInteger("\nWhat type of game would you like to play?" +
                     "\nPlease enter 1 for card game or 2 for dice game");
 
-            switch (userInputInt){
+            switch (userInputInt) {
                 case 0:
                     break;
                 case 1:
@@ -42,13 +42,13 @@ public class Game {
                     DiceGames diceGames = new DiceGames();
                     diceGames.chooseGameType();
                     break;
-                    default:
-                        System.out.println("You entered an invalid choose :-(\n");
+                default:
+                    System.out.println("You entered an invalid choose :-(\n");
             }
 
             userInputString = Console.getUserInputString("Would you like to leave the game area?\n" +
                     "Please enter yes or no.");
 
-        }while(userInputString.equalsIgnoreCase("no"));
+        } while (userInputString.equalsIgnoreCase("no"));
     }
 }

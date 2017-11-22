@@ -6,21 +6,21 @@ abstract class Player<E> {
     protected Double money;
     protected double bet;
 
-    Player(String name, Double money){
+    Player(String name, Double money) {
         this.name = name;
         this.money = money;
     }
 
-    Player(String name){
-        this.name = name;
+    Player() {
     }
 
     public String getName() {
         return name;
     }
 
-    private void bet(double bet){
-     this.bet = bet;
+    private void bet(double bet) {
+        this.bet = bet;
     }
 
+    public abstract void addCardToHand(Card card);
 }

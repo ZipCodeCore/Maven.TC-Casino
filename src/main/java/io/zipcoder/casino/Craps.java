@@ -1,4 +1,5 @@
 package io.zipcoder.casino;
+
 import java.util.*;
 
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ public class Craps extends DiceGames {
         return dice1 + dice2;
     }
 
-    public void testGit(){
-        
+    public void testGit() {
+
     }
 
 }

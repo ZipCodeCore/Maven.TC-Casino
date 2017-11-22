@@ -2,6 +2,8 @@ package io.zipcoder.casino;
 
 interface Gamble {
 
-    public Double bet();
+
+    //needed to add parameters to this method since my bet method in Blackjack uses it and needed these parameters
+    public Double bet(Double bet);
 
 }

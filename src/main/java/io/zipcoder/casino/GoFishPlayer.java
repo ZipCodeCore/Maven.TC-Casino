@@ -5,21 +5,25 @@ import java.util.ArrayList;
 
 public class GoFishPlayer extends Player<GoFishPlayer> implements Gamble {
 
-    ArrayList<Card> hand;
+    private ArrayList<Card> cardsInHand;
 
-    GoFishPlayer(String name) {
-        super(name);
+    GoFishPlayer (String name) {
+        this.name = name;
     }
 
     public void dealGoFishHAnd(ArrayList<GoFishPlayer> players, Deck deck) {
         for (int i = 1; i <= 5; i++) {
             for (GoFishPlayer player : players)
-                player.hand.add(deck.dealOneRandomCard());
+                player.cardsInHand.add(deck.dealOneRandomCard());
         }
     }
 
     @Override
-    public Double bet(){
+    public Double bet(Double bet) {
         return null;
+    }
+
+    public void addCardToHand(Card newCard) {
+        cardsInHand.add(newCard);
     }
 }
