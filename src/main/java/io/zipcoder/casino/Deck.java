@@ -7,7 +7,7 @@ public class Deck {
 
     private ArrayList<Card> cards;
 
-    public Deck(){
+    public Deck() {
         this.cards = new ArrayList<Card>();
     }
 
@@ -23,18 +23,18 @@ public class Deck {
     @Override
     public String toString() {
         String output = "";
-        for (Card card : cards){
+        for (Card card : cards) {
             output += card.getValue() + " of " + card.getSuit() + "\n";
         }
         output = output.trim();
         return output;
     }
 
-    public int getSize(){
+    public int getSize() {
         return cards.size();
     }
 
-    public void shuffle(){
+    public void shuffle() {
         ArrayList<Card> tmpDeck = new ArrayList<Card>();
         Random random = new Random();
         int randomCardIndex = 0;
@@ -49,12 +49,11 @@ public class Deck {
         this.cards = tmpDeck;
     }
 
-    public Card giveCard(){
+    public Card giveCard() {
         Card cardToReturn;
         cardToReturn = cards.remove(cards.size() - 1);
         return cardToReturn;
     }
 
-    
 
 }
