@@ -1,22 +1,29 @@
 package io.zipcoder.casino.nuts_n_bolts.cards;
-import org.junit.Test;
-package io.zipcoder.casino.casino;
+
 import org.junit.Assert;
+import org.junit.Test;
 
 public class PlayingCardTest {
 
+
     @Test
-    public void getSuitTest(){
-        PlayingCard cardOne = new PlayingCard(PlayingSuit.CLUB, 4);
-        Assert.assertEquals(4, cardOne.getSuit());
+    public void testCardGetValue(){
+        PlayingCard card = new PlayingCard(PlayingSuit.HEART, PlayingValue.SIX);
+
+        PlayingValue expected = PlayingValue.SIX;
+        PlayingValue actual = card.getValue();
+
+        Assert.assertTrue(actual.equals(expected));
     }
 
-
     @Test
-    public void getValueTest(){
-        PlayingCard cardTwo = new PlayingCard(PlayingSuit.HEART,2);
+    public void testCardGetSuit(){
+        PlayingCard card = new PlayingCard(PlayingSuit.HEART, PlayingValue.SIX);
 
-        Assert.assertEquals(6, cardTwo.getValue());
+        PlayingSuit expected = PlayingSuit.HEART;
+        PlayingSuit actual = card.getSuit();
+
+        Assert.assertTrue(expected.equals(actual));
     }
 
 
