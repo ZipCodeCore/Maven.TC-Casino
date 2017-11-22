@@ -38,14 +38,6 @@ public class BlackJack extends CardGames {
         }
     }
 
-    public ArrayList<BlackjackPlayer> getPlayers() {
-        return blackjackPlayers;
-    }
-
-    public Player getPlayerAtIndex(int index) {
-        return blackjackPlayers.get(index);
-    }
-
     public void setActivePlayer(BlackjackPlayer blackjackPlayer) {
         this.activePlayer = blackjackPlayer;
     }
@@ -53,5 +45,4 @@ public class BlackJack extends CardGames {
     public Player getActivePlayer() {
         return activePlayer;
     }
-
 }

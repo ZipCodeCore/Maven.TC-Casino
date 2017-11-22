@@ -2,6 +2,7 @@ package io.zipcoder.casino;
 
 public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble {
 
+
     CrapsPlayer(String name, Double money) {
         super(name, money);
     }
@@ -12,4 +13,5 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble {
 
     public static void firstRoll(){
     }
+
 }
