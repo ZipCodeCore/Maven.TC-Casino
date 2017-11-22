@@ -72,6 +72,9 @@ public class CrapsWIP implements Gamble, Game {
     public boolean getPlayerTurn(){return isPlayerTurn;}
 
     public int getPoint(){return point;}
+    public String getPair(){
+        return(pair.text);
+    }
 
     public Integer initialThrow(){ //returns -1 if 2/3/12
                                     // 1 if 7/11,
@@ -116,7 +119,6 @@ public class CrapsWIP implements Gamble, Game {
                 } else{
                         return 0;//Neutral.
                       }
-
     }
 
     @Override
