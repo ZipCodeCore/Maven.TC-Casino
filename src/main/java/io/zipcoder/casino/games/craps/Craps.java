@@ -81,6 +81,13 @@ public class Craps implements Gamble, Game {
     public String getPair(){
         return(pair.text);
     }
+    public int getNumberRolled(){return numberRolled;}
+    public MoneyContainer getSidePot() {
+        return sidePot;
+    }
+    public MoneyContainer getMainPot() {
+        return mainPot;
+    }
 
     public Integer initialThrow(){ //returns -1 if 2/3/12
                                     // 1 if 7/11,
@@ -143,10 +150,16 @@ public class Craps implements Gamble, Game {
             returnMe+="Point is "+point+" and we are making side bets on "+pair.text+"\n";
         }
 
+        if (numberRolled!=0){
+            returnMe+="Last roll was "+numberRolled+"\n";
+        }
+        else{
+            returnMe+="Nobody has rolled yet\n";
+        }
+
         returnMe+="Main pot is "+defaultFormat.format(mainPot.getMoney())+"\n";
         returnMe+="Side pot is "+defaultFormat.format(sidePot.getMoney())+"\n";
 
-        returnMe+="Last roll was "+numberRolled+"\n";
 
         return returnMe;
     }
