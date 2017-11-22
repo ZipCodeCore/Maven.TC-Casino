@@ -43,6 +43,10 @@ public class GoFish {
         return deck;
     }
 
+    public void start() {
+
+    }
+
     class GoFishPlayer {
 
         private User user;

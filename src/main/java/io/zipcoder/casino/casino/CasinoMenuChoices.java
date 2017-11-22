@@ -1,9 +1,10 @@
 package io.zipcoder.casino.casino;
 
-public enum Games {
+public enum CasinoMenuChoices {
 
     CRAPS,
     GOFISH,
-    BLACKJACK
+    BLACKJACK,
+    EXIT
 
 }

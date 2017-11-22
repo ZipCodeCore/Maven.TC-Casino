@@ -8,6 +8,20 @@ public class Hand {
 
     public Hand(){}
 
+    @Override
+    public String toString(){
+        if(isHandEmpty()){
+            return "If there's nothing in your hand, is it a hand?";
+        } else {
+            String output = "";
+            for (PlayingCard card :
+                    cards) {
+                output += " ["+card+"] ";
+            }
+            return output;
+        }
+    }
+
     public ArrayList<PlayingCard> getAllCards() {
         return cards;
     }

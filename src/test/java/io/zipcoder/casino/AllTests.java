@@ -19,7 +19,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        CasinoTest.class,
+        //CasinoTest.class,
         BlackJackTest.class,
         BlackJackPlayerTest.class,
         CrapsTest.class,
@@ -29,7 +29,7 @@ import org.junit.runners.Suite;
         HandTest.class,
         PlayingCardTest.class,
         PlayingDeckTest.class,
-        ConsoleTest.class,
+        //ConsoleTest.class,
         DiceTest.class,
         MoneyContainerTest.class,
         UserTest.class
