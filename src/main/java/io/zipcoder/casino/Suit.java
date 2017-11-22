@@ -10,7 +10,7 @@ public enum Suit {
         this.suitSymbols = symbol;
     }
 
-    public String getSuitSymbols() {
+    public String getSuit() {
         return suitSymbols;
     }
 }
