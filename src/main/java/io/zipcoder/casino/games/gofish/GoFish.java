@@ -43,7 +43,7 @@ public class GoFish {
         return deck;
     }
 
-    public void start() {
+    public void run() {
 
     }
 
