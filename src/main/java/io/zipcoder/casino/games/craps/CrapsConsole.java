@@ -135,8 +135,8 @@ public class CrapsConsole {
             resolveInitialThrowBet(resultOfThrownDice);
             return false;
         }
-        //point was set and we move onto the
-        // next step in the game
+        //Point for the first time
+        firstPointRolled();
         return true;
     }
     private void resolveInitialThrowBet(int a){
@@ -164,7 +164,7 @@ public class CrapsConsole {
     private boolean resolveSecondaryThrow(int resultOfThrownDice){
         switch (resultOfThrownDice) {
 
-            case 0: {//Not a point, not a spread, not a crap. Roll again
+            case 0: {//Not a point, not a pair, not a crap. Roll again
                 neitherWinsAnyPot();
                 return false;
             }
@@ -176,6 +176,7 @@ public class CrapsConsole {
                 return true;
             }
             default: {//Pair made, pay sideBet to non-thrower.
+                resolveSecondaryThrowBet(resultOfThrownDice);
                 return false;
             }
         }//end switch
@@ -232,6 +233,13 @@ public class CrapsConsole {
         enterAnyKeyToContinue();
     }
 
+    private void firstPointRolled(){
+        System.out.println(game.getNumberRolled()+" was rolled... that's our new point.");
+        System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet now.");
+        printPots();
+        enterAnyKeyToContinue();
+
+    }
     private void neitherWinsAnyPot(){
         System.out.println("A "+game.getNumberRolled()+" was rolled... nothing special.");
         System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet now.");
@@ -306,13 +314,13 @@ public class CrapsConsole {
         resetFlags();
         game.changePlayerTurn();
     }
-
     private void resetFlags() {
         mainPotBet=0;
         sidePotBet=0;
         pointSet=false;
         pointMet=false;
         crappedOut=false;
+        game.resetTurn();
     }
 
     private void printPots() {
