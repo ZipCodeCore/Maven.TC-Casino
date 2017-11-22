@@ -17,8 +17,8 @@ public class Dice {
         System.out.println("Dice one is " + dice1 + ", dice two is " + dice2 +". The total value of roll dice is " +(dice1+dice2));
         return dice1 + dice2;
     }
-    public DicePlayer passDice(String name){
-        DicePlayer newDicePlayer = new DicePlayer(name);
-        return newDicePlayer;
-    }
+//    public DicePlayer passDice(String name){
+//        DicePlayer newDicePlayer = new DicePlayer(name);
+//        return newDicePlayer;
+//    }
 }
