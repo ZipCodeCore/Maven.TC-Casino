@@ -4,6 +4,7 @@ package io.zipcoder.casino.games.craps;
 import io.zipcoder.casino.nuts_n_bolts.User;
 import java.util.Random;
 import static io.zipcoder.casino.nuts_n_bolts.Input.getPositiveDoubleInput;
+import static io.zipcoder.casino.nuts_n_bolts.Input.getStringInput;
 
 public class CrapsConsoleWIP {
 
@@ -26,17 +27,19 @@ public class CrapsConsoleWIP {
     public void run(){
         welcomePlayer();
         game.determineFirstRoller();
-        while (!pointSet) {//Continue to bet until the roller
-                        //throws a point instead of a win/loss.
-            initialBet();
-            pointSet=resolveInitialThrow(game.initialThrow());
-        }
-        //Now we're on secondaryThrows
-        while (!pointMet) {//Continue to bet until the roller
-                    //meets their point or craps out
-            secondaryBet();
-            pointMet=resolveSecondaryThrow(game.secondaryThrow());
-        }
+        do {
+            while (!pointSet) {//Continue to bet until the roller
+                            //throws a point instead of a win/loss.
+                initialBet();
+                pointSet = resolveInitialThrow(game.initialThrow());
+            }
+            while (!pointMet) {//Continue to bet until the roller
+                            //meets their point or craps out
+                secondaryBet();
+                pointMet = resolveSecondaryThrow(game.secondaryThrow());
+            }
+            changeTurns();//Reset flags, change active player
+        }while(game.play(getStringInput("Continue playing? [Y/N] ")));
     }
 
     private void initialBet(){
@@ -153,14 +156,64 @@ public class CrapsConsoleWIP {
     }
     private void resolveSecondaryThrowBet(int a){
         if (a==1){//Point met, pay out thrower from mainPot and sidePot
-            if (game.getPlayerTurn()) {//if player is the thrower
-                player.getWallet().addMoney(game.emptyPot());
-                player.getWallet().addMoney(game.emptySidePot());
+            if (game.getPlayerTurn())
+            {//if player is the thrower, give them the pots and then reset bet vars
+                playerWinsBothPots();
             }
-        }
+            else//if player is not the thrower, empty pot and reset bet vars
+            {
+                playerLosesBothPots();
+            }
+        } else
+            if(a==-1)//Crapped out. Pay out the non-thrower from mainPot and sidePot
+            {
+                if (game.getPlayerTurn())
+                {
+                    playerLosesBothPots();
+                }
+                else
+                {
+                    playerWinsBothPots();
+                }
+            } else//Won the pair, but not the point. Pay non-thrower the sidePot
+                {
+                    if (game.getPlayerTurn())
+                    {
+                        sidePotBet=game.emptySidePot();
+                        sidePotBet=0;
+                    }
+                    else
+                    {
+                        player.getWallet().addMoney(game.emptySidePot());
+                        sidePotBet=0;
+                    }
+                }
     }
+
+    private void playerLosesBothPots() {
+        mainPotBet=game.emptyPot();
+        sidePotBet=game.emptySidePot();
+
+        mainPotBet=0;
+        sidePotBet=0;
+    }
+    private void playerWinsBothPots() {
+        player.getWallet().addMoney(game.emptyPot());
+        player.getWallet().addMoney(game.emptySidePot());
+
+        mainPotBet=0;
+        sidePotBet=0;
+    }
+
     private void welcomePlayer(){
         System.out.println("Hello, "+player.getName()+". Welcome to the "+game.getClass().getSimpleName()+" table.");
+    }
+    private void changeTurns(){
+        mainPotBet=0;
+        sidePotBet=0;
+        pointSet=false;
+        pointMet=false;
+        game.changePlayerTurn();
     }
 
 }
