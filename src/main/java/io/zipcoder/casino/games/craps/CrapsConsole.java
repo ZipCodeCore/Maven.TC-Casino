@@ -61,6 +61,7 @@ public class CrapsConsole {
     }
     private void playerInitialBets() {
         do {
+            System.out.println(game.toString());
             mainPotBet = getPositiveDoubleInput
                     ("How much would you like to bet? ");
         }while (player.getWallet().getMoney()<mainPotBet);
@@ -69,20 +70,23 @@ public class CrapsConsole {
         game.takeBet(mainPotBet);//house bet matches
     }
     private void playerInitialBets(Double betToMatch){
-        System.out.println("You have to match "+betToMatch);
         game.takeBet(betToMatch);//house bet to match
+
+        System.out.println(game.toString());
+        System.out.println("You have to match "+betToMatch);
+
         game.takeBet(player.getWallet().takeOutMoney(betToMatch));//player matches bet
         mainPotBet=betToMatch;
     }
 
     private double generateBotBet(){
-        return(rando.nextDouble()*
+        return(Math.pow(rando.nextDouble(),2)*
                 (rando.nextInt(player.getWallet().getMoney().intValue()))+1);
     }
 
     private void secondaryBet(){
-        System.out.println("The point is set at "+game.getPoint()+" and side" +
-                " bets will be made on "+game.getPair()+". ");
+        System.out.println(game.toString());
+
         if (game.getPlayerTurn())
         {
             playerSecondaryBets();
@@ -102,8 +106,11 @@ public class CrapsConsole {
         game.takeSideBet(sidePotBet);//house bet matches
     }
     private void playerSecondaryBets(Double betToMatch){
-        System.out.println("You have to match "+betToMatch);
         game.takeSideBet(betToMatch);//house bet to match
+
+        System.out.println(game.toString());
+        System.out.println("You have to match "+betToMatch);
+
         game.takeSideBet(player.getWallet().takeOutMoney(betToMatch));//player matches bet
         sidePotBet=betToMatch;
     }
@@ -139,6 +146,7 @@ public class CrapsConsole {
                 player.getWallet().addMoney(game.emptyPot());
             }
         }
+        System.out.println(game.toString());
     }
 
     private boolean resolveSecondaryThrow(int resultOfThrownDice){
@@ -164,6 +172,7 @@ public class CrapsConsole {
             if (game.getPlayerTurn())
             {//if player is the thrower, give them the pots and then reset bet vars
                 playerWinsBothPots();
+
             }
             else//if player is not the thrower, empty pot and reset bet vars
             {
@@ -193,6 +202,7 @@ public class CrapsConsole {
                         sidePotBet=0;
                     }
                 }
+        System.out.println(game.toString());
     }
 
     private void playerLosesBothPots() {
