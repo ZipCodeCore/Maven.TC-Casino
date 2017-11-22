@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparable<BlackjackPlayer>, Gamble {
 
-    private String name;
+    public String name;
     private Double money;
     private ArrayList<Card> cardsInHand;
 
     BlackjackPlayer(String name, Double money) {
-        super.name = name;
-        super.money = money;
+        this.name = name;
+        this.money = money;
         this.cardsInHand = new ArrayList<>();
+
     }
 
     public boolean hitStay(String userAnswer) {
@@ -21,10 +22,7 @@ public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparab
         return false;
     }
 
-    public Double bet() {
-        return null;
-    }
-
+    //Stubbed this method out b/c may be needed in console/actual game-play integration... delete it if not...
     public int compareTo(BlackjackPlayer p) {
         return 0;
     }
@@ -59,9 +57,9 @@ public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparab
         int acesCount = 0;
 
         for (Card card : cardsInHand) {
-            if (CardValue.getValue() == 11)
+            if (card.getCardsValue() == 11)
                 acesCount++;
-            total += CardValue.getValue();
+            total += card.getCardsValue();
         }
 
         if (total > 21) {

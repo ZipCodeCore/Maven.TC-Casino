@@ -9,7 +9,9 @@ public class Deck {
 
     private ArrayList<Card> cards = new ArrayList();
 
-    Deck() {
+    public void populate() {
+        cards = new ArrayList();
+
         for (Suit suit : Suit.values()) {
             for (CardValue cardValue : CardValue.values()) {
                 cards.add(new Card(suit, cardValue));
@@ -17,10 +19,6 @@ public class Deck {
         }
     }
 
-    public void populate() {
-        cards = new ArrayList();
-
-    }
 
     public Card dealOneRandomCard() {
         Card topCard = cards.get(0);

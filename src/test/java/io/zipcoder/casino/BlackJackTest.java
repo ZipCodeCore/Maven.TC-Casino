@@ -21,7 +21,7 @@ public class BlackJackTest {
     public void giveCardToPlayerTest() {
 
         blackjack.start();
-        Player dealer = blackjack.getPlayerAtIndex(0);
+        BlackjackPlayer dealer = blackjack.getPlayerAtIndex(0);
         blackjack.giveCardToPlayer();
         ArrayList cards = dealer.getHandList();
 

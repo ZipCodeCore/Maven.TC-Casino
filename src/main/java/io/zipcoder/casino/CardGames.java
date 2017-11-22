@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public class CardGames extends Game{
+public class CardGames extends Game {
 
     private int userInputInt;
     private String userInputString;
@@ -30,7 +30,7 @@ public class CardGames extends Game{
             userInputInt = Console.getUserInputInteger("What type of card game would you like to play?" +
                     "\nPlease enter 1 for go fish and 2 for black jack.");
 
-            switch (userInputInt){
+            switch (userInputInt) {
                 case 0:
                     break;
                 case 1:
@@ -45,7 +45,7 @@ public class CardGames extends Game{
 
             userInputString = Console.getUserInputString("Would you like to leave the the card game area?" +
                     "\nPlease enter yes or no.");
-        }while(userInputString.equalsIgnoreCase("no"));
+        } while (userInputString.equalsIgnoreCase("no"));
 
         Game game = new Game();
         game.chooseGameType();

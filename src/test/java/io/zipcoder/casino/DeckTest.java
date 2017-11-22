@@ -7,31 +7,25 @@ public class DeckTest {
 
     Deck deck = new Deck();
 
-
     @Test
-    void getCardsTest() {
+    public void populateTest() {
 
         deck.populate();
-        Card expected = new Card(Suit.CLUB, CardValue.Ace);
+        String expected = "♤";
+        Integer expected2 = CardValue.King.getValue();
+        Integer expected3 = 52;
 
-        Card actual = deck.getCardByIndex(0);
+        String actual = deck.getCardByIndex(51).getSuitSymbols();
+        Integer actual2 = deck.getCardByIndex(51).getCardsValue();
+        Integer actual3 = deck.getDeckSize();
 
         Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected2, actual2);
+        Assert.assertEquals(expected3, actual3);
     }
 
     @Test
-    void getDeckSizeTest() {
-
-        deck.populate();
-        Integer expected = 52;
-
-        Integer actual = deck.getDeckSize();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    void giveCardTest() {
+    public void dealOneRandomCardTest() {
 
         deck.populate();
         Card expected = deck.getCardByIndex(0);
@@ -44,36 +38,29 @@ public class DeckTest {
     }
 
     @Test
-    void getCardTest() {
+    public void getDeckSizeTest() {
 
         deck.populate();
-        Suit expected_suit = Suit.CLUB;
-        Integer expected_rank = CardValue.Ace.getValue();
+        Integer expected = 52;
+
+        Integer actual = deck.getDeckSize();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getCardTest() {
+
+        deck.populate();
+        String expected = "♧";
+        Integer expected2 = CardValue.Ace.getValue();
 
         String actual = deck.getCardByIndex(0).getSuitSymbols();
         Integer actual2 = deck.getCardByIndex(0).getCardsValue();
 
 
-        Assert.assertEquals(expected_suit, actual);
-        Assert.assertEquals(expected_rank, actual2);
+        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected2, actual2);
 
     }
-
-    @Test
-    void populateTest() {
-
-        deck.populate();
-        Suit expected_suit = Suit.SPADE;
-        Integer expected_rank = CardValue.King.getValue();
-        Integer expected_size = 52;
-
-        String actual = deck.getCardByIndex(51).getSuitSymbols();
-        Integer actual2 = deck.getCardByIndex(51).getCardsValue();
-        Integer actual3 = deck.getDeckSize();
-
-        Assert.assertEquals(expected_suit, actual);
-        Assert.assertEquals(expected_rank, actual2);
-        Assert.assertEquals(expected_size, actual3);
-    }
-
 }

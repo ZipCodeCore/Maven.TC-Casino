@@ -8,39 +8,18 @@ public class BlackjackPlayerTest {
     BlackjackPlayer blackjackPlayer = new BlackjackPlayer("Josh", 500.00);
 
     @Test
-    public void getNameTest() {
-        String expected = "Josh";
-
-        String actual = blackjackPlayer.getName();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void checkBalanceTest() {
-        Double expected = 100.0;
+        Double expected = 500.0;
         Double actual = blackjackPlayer.checkBalance();
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void wagerTest() {
+    public void betTest() {
         Double expected = 10.0;
 
         Double actual = blackjackPlayer.bet(10.0);
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void checkBalanceAfterWagerTest() {
-
-        Double expected = 100.0;
-
-        blackjackPlayer.bet(100.0);
-
-        Double actual = blackjackPlayer.checkBalance();
 
         Assert.assertEquals(expected, actual);
     }
@@ -59,41 +38,36 @@ public class BlackjackPlayerTest {
     }
 
     @Test
-    public void getHandValueTest() {
+    public void checkBalanceAfterBetTest() {
 
-        Card card = new Card(Suit.SPADE, CardValue.Ace);
-        Card card2 = new Card(Suit.HEART, CardValue.Ten);
-        blackjackPlayer.addCardToHand(card);
+        Double expected = 400.0;
 
-        int expected = 1;
+        blackjackPlayer.bet(100.0);
 
-        int actual = blackjackPlayer.getHandValue();
+        Double actual = blackjackPlayer.checkBalance();
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void getHandValueTestAces() {
+    public void getHandValueTest() {
 
 
-        Card card = new Card(Suit.SPADE, CardValue.Two);
+        Card card = new Card(Suit.HEART, CardValue.Ten);
+        blackjackPlayer.addCardToHand(card);
 
-        for (int i = 0; i < 5; i++)
-            blackjackPlayer.addCardToHand(card);
-
-        blackjackPlayer.addCardToHand(new Card(Suit.DIAMOND, CardValue.Ace));
-        blackjackPlayer.addCardToHand(new Card(Suit.DIAMOND, CardValue.Ace));
-
-        int expected = 15;
+        int expected = 10;
 
         int actual = blackjackPlayer.getHandValue();
 
+
         Assert.assertEquals(expected, actual);
+
     }
 
     @Test
     public void getWinningsTest() {
-        Double expected = 100.0;
+        Double expected = 1100.0;
 
         blackjackPlayer.addWinnings(600.0);
         Double actual = blackjackPlayer.checkBalance();

@@ -6,23 +6,23 @@ import org.junit.Test;
 public class CardTest {
 
     @Test
-    public void Card() {
+    public void getCardsValueTest() {
 
         Card card = new Card(Suit.CLUB, CardValue.Ace);
         int expected = 11;
 
-        int actual = CardValue.getValue();
+        int actual = card.getCardsValue();
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void CardSuit() {
+    public void getSuitSymbolTest() {
 
         Card card = new Card(Suit.HEART, CardValue.Ace);
-        Suit expected = Suit.HEART;
+        String expected = "♡";
 
-        Suit actual = Suit.getSuit();
+        String actual = card.getSuitSymbols();
 
         Assert.assertEquals(expected, actual);
 

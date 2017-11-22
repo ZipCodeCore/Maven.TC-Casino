@@ -6,15 +6,15 @@ enum CardValue {
 
     private int CardsValue;
 
-    CardValue(int cardNumber){
+    CardValue(int cardNumber) {
         this.CardsValue = cardNumber;
     }
 
-     static int getValue(){
+
+    int getValue() {
         return CardsValue;
     }
 
-    public void setCardsValue(int cardsValue) {
-        CardsValue = cardsValue;
-    }
-}
+    //I had to remove some stuff from this class and put it elsewhere for proper implementation and proper Blackjack
+    //behavior
+
