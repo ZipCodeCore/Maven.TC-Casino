@@ -212,11 +212,18 @@ public class CrapsConsole {
 
     }
 
+    private void displayOpponentBetting(){
+
+    }
+    private void displayPlayerBetting(){
+
+    }
+
     private void neitherWinsAnyPot(){
         System.out.println("A "+game.getNumberRolled()+" was rolled... nothing special.");
         System.out.println("You have "+player.getWallet().getMoney()+" in your wallet now.");
         printPots();
-        enterToContinue();
+        enterAnyKeyToContinue();
     }
     private void playerWinsSidePot(){
 
@@ -228,7 +235,7 @@ public class CrapsConsole {
         System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet now");
         printPots();
 
-        enterToContinue();
+        enterAnyKeyToContinue();
 
         sidePotBet=0;
     }
@@ -242,7 +249,7 @@ public class CrapsConsole {
         System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet now");
         printPots();
 
-        enterToContinue();
+        enterAnyKeyToContinue();
 
         sidePotBet=0;
     }
@@ -257,7 +264,7 @@ public class CrapsConsole {
         System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet now");
         printPots();
 
-        enterToContinue();
+        enterAnyKeyToContinue();
 
         mainPotBet=0;
         sidePotBet=0;
@@ -274,7 +281,7 @@ public class CrapsConsole {
         System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet now");
         printPots();
 
-        enterToContinue();
+        enterAnyKeyToContinue();
         mainPotBet=0;
         sidePotBet=0;
     }
@@ -293,8 +300,8 @@ public class CrapsConsole {
         System.out.println(defaultFormat.format(game.getMainPot().getMoney())+" now in Main Pot");
         System.out.println(defaultFormat.format(game.getSidePot().getMoney())+" now in Side Pot");
     }
-    private void enterToContinue(){
-        String dumped = getStringInput("Press [Enter/Return] to continue: ");
+    private void enterAnyKeyToContinue(){
+        String dump = getStringInput("Enter any key to continue: ");
     }
 
 }
