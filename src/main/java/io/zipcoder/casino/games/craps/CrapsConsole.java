@@ -21,6 +21,7 @@ public class CrapsConsole {
     private double sidePotBet;
     private boolean pointSet=false;
     private boolean pointMet=false;
+    private boolean crappedOut=false;
     private Random rando=new Random();
     private NumberFormat defaultFormat;
 
@@ -47,15 +48,21 @@ public class CrapsConsole {
                 secondaryBet();
                 pointMet = resolveSecondaryThrow(game.secondaryThrow());
             }
-            changeTurns();//Reset flags, change active player
+            if (crappedOut) {
+                changeTurns();//Reset flags, change active player
+            } else{
+                resetFlags();
+            }
         }while(game.play(getStringInput("Continue playing? [Y/N] ")));
     }
 
     private void initialBet(){
 
+        System.out.println(game.toString());
+
         if (game.getPlayerTurn())
         {
-            playerInitialBets(generateBotBet());
+            opponentInitialBets(generateBotBet());
         }
         else
         {
@@ -65,24 +72,22 @@ public class CrapsConsole {
     }
     private void playerInitialBets() {
         do {
-///////////////
-            System.out.println(game.toString());
             mainPotBet = getPositiveDoubleInput
                     ("How much would you like to bet? ");
-///////////////
         }while (player.getWallet().getMoney()<mainPotBet);
 
         game.takeBet(player.getWallet().takeOutMoney(mainPotBet));//player bet
         game.takeBet(mainPotBet);//house bet matches
+
+        displayPlayerBetting(mainPotBet);
+
     }
-    private void playerInitialBets(Double betToMatch){
+    private void opponentInitialBets(Double betToMatch){
         game.takeBet(betToMatch);//house bet to match
-///////////////
-        System.out.println(game.toString());
-        System.out.println("You have to match "+betToMatch);
-///////////////
         game.takeBet(player.getWallet().takeOutMoney(betToMatch));//player matches bet
         mainPotBet=betToMatch;
+
+        displayOpponentBetting(betToMatch);
     }
 
     private double generateBotBet(){
@@ -91,12 +96,12 @@ public class CrapsConsole {
     }
 
     private void secondaryBet(){
-///////////////
+
         System.out.println(game.toString());
-///////////////
+
         if (game.getPlayerTurn())
         {
-            playerSecondaryBets(generateBotBet());
+            opponentSecondaryBets(generateBotBet());
         }
         else
         {
@@ -104,23 +109,24 @@ public class CrapsConsole {
         }
     }
     private void playerSecondaryBets(){
+
         do {
-///////////////
             sidePotBet = getPositiveDoubleInput
                     ("How much would you like to bet? ");
-///////////////
         }while (player.getWallet().getMoney()< sidePotBet);
 
         game.takeSideBet(player.getWallet().takeOutMoney(sidePotBet));//player bet
         game.takeSideBet(sidePotBet);//house bet matches
+
+        displayPlayerBetting(sidePotBet);
     }
-    private void playerSecondaryBets(Double betToMatch){
+    private void opponentSecondaryBets(Double betToMatch){
+
         game.takeSideBet(betToMatch);//house bet to match
-///////////////
-        System.out.println("You have to match "+betToMatch);
-///////////////
         game.takeSideBet(player.getWallet().takeOutMoney(betToMatch));//player matches bet
         sidePotBet=betToMatch;
+
+        displayOpponentBetting(betToMatch);
     }
 
     private boolean resolveInitialThrow(int resultOfThrownDice){
@@ -136,27 +142,23 @@ public class CrapsConsole {
     private void resolveInitialThrowBet(int a){
         if (a==1){
             if (game.getPlayerTurn()){//If the thrower is the player and they won, pay them
-                player.getWallet().addMoney(game.emptyPot());
-                //Player wins the pot and we go back to bet again
+                playerWinsBothPots();//Player wins the pot and we go back to bet again
             }
             else//If the bot is the thrower, empty the pot
             {
-                mainPotBet=game.emptyPot();//mainPotBet will be overwritten in the next
+                opponentWinsBothPots();//mainPotBet will be overwritten in the next
                                 //function call, so we can use it here to catch this
                                 //method's return
             }
         }
         else {
             if (game.getPlayerTurn()) {//If the thrower is the player and they lost, empty the pot and bet again
-                mainPotBet=game.emptyPot();
+                opponentWinsBothPots();
             }
             else{//if the bot is the thrower and they lost, pay the player
-                player.getWallet().addMoney(game.emptyPot());
+                playerWinsBothPots();
             }
         }
-///////////////
-        System.out.println(game.toString());
-///////////////
     }
 
     private boolean resolveSecondaryThrow(int resultOfThrownDice){
@@ -166,7 +168,9 @@ public class CrapsConsole {
                 neitherWinsAnyPot();
                 return false;
             }
-            case -1://Crapped out. pay non-thrower
+            case -1: {//Crapped out. pay non-thrower
+                crappedOut=true;
+            }
             case 1 : {//Point met. Pay out to thrower
                 resolveSecondaryThrowBet(resultOfThrownDice);
                 return true;
@@ -209,25 +213,34 @@ public class CrapsConsole {
                         opponentWinsSidePot();
                     }
                 }
-
     }
 
-    private void displayOpponentBetting(){
-
+    private void displayOpponentBetting(double passedOpponentBet){//Called _AFTER_ the money transfers have already taken place
+//        System.out.println(game.toString()); //Move to betting logic in order to make it consistent with displayPlayerBetting()
+        System.out.println("Opponent bets "+defaultFormat.format(passedOpponentBet));
+        System.out.println("You match "+defaultFormat.format(passedOpponentBet));
+        System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet");
+        printPots();
+        enterAnyKeyToContinue();
     }
-    private void displayPlayerBetting(){
-
+    private void displayPlayerBetting(double passedPlayerBet){//Called _AFTER_ the money transfers have already taken place
+                                                             //_AND_ after the player enters their bet amount
+        System.out.println("You bet "+defaultFormat.format(passedPlayerBet));
+        System.out.println("Opponent matches "+defaultFormat.format(passedPlayerBet));
+        System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet");
+        printPots();
+        enterAnyKeyToContinue();
     }
 
     private void neitherWinsAnyPot(){
         System.out.println("A "+game.getNumberRolled()+" was rolled... nothing special.");
-        System.out.println("You have "+player.getWallet().getMoney()+" in your wallet now.");
+        System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet now.");
         printPots();
         enterAnyKeyToContinue();
     }
     private void playerWinsSidePot(){
 
-        System.out.println("You rolled "+game.getNumberRolled()+" and won the Side Pot!");
+        System.out.println("A "+game.getNumberRolled()+" was rolled, and you won the Side Pot!");
         System.out.println(defaultFormat.format(game.getSidePot().getMoney())+" from Side Pot");
 
         player.getWallet().addMoney(game.emptySidePot());
@@ -241,7 +254,7 @@ public class CrapsConsole {
     }
     private void opponentWinsSidePot(){
 
-        System.out.println("Opponent rolled "+game.getNumberRolled()+" and won the Side Pot!");
+        System.out.println("A "+game.getNumberRolled()+" was rolled, and your opponent won the Side Pot!");
         System.out.println(defaultFormat.format(game.getSidePot().getMoney())+" from Side Pot");
 
         sidePotBet=game.emptySidePot();
@@ -254,7 +267,7 @@ public class CrapsConsole {
         sidePotBet=0;
     }
     private void opponentWinsBothPots() {
-        System.out.println("Opponent rolled "+game.getNumberRolled()+" and won everything!");
+        System.out.println("A "+game.getNumberRolled()+" was rolled, and your opponent won everything!");
         System.out.println(defaultFormat.format(game.getMainPot().getMoney())+" from Main Pot");
         System.out.println(defaultFormat.format(game.getSidePot().getMoney())+" from Side Pot");
 
@@ -271,7 +284,7 @@ public class CrapsConsole {
     }
     private void playerWinsBothPots() {
 
-        System.out.println("You rolled "+game.getNumberRolled()+" and won everything!");
+        System.out.println("A "+game.getNumberRolled()+" was rolled, and you won everything!");
         System.out.println(defaultFormat.format(game.getMainPot().getMoney())+" from Main Pot");
         System.out.println(defaultFormat.format(game.getSidePot().getMoney())+" from Side Pot");
 
@@ -290,12 +303,18 @@ public class CrapsConsole {
         System.out.println("Hello, "+player.getName()+". Welcome to the "+game.getClass().getSimpleName()+" table.");
     }
     private void changeTurns(){
+        resetFlags();
+        game.changePlayerTurn();
+    }
+
+    private void resetFlags() {
         mainPotBet=0;
         sidePotBet=0;
         pointSet=false;
         pointMet=false;
-        game.changePlayerTurn();
+        crappedOut=false;
     }
+
     private void printPots() {
         System.out.println(defaultFormat.format(game.getMainPot().getMoney())+" now in Main Pot");
         System.out.println(defaultFormat.format(game.getSidePot().getMoney())+" now in Side Pot");

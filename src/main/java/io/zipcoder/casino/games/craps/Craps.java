@@ -74,6 +74,7 @@ public class Craps implements Gamble, Game {
     }
     public void changePlayerTurn(){
         isPlayerTurn=!isPlayerTurn;
+        numberRolled=0;
     }
     public boolean getPlayerTurn(){return isPlayerTurn;}
 
