@@ -38,7 +38,7 @@ public class BlackJack extends CardGames {
         }
     }
 
-    //Below methods used primarily in testing and will be useful in implementation of actual game-play via console
+    //Below methods used primarily in testing and will be useful in implementation of actual gameplay via console
 
     public ArrayList<BlackjackPlayer> getPlayers() {
         return blackjackPlayers;
