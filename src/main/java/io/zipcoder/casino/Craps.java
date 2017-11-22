@@ -4,9 +4,10 @@ import java.util.*;
 
 import java.util.ArrayList;
 
-public class Craps extends DiceGames {
+public class Craps extends DiceGames implements Dice {
 
     ArrayList<CrapsPlayer> crapsPlayers;
+
 
     public static int roll() {
         Random diceRoll = new Random();
@@ -19,5 +20,6 @@ public class Craps extends DiceGames {
     public void testGit() {
 
     }
+
 
 }

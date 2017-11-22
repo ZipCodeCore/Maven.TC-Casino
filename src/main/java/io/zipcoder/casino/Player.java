@@ -6,7 +6,8 @@ abstract class Player<E> {
     protected Double money;
     protected double bet;
 
-    Player(String name, Double money) {
+
+    Player(String name, Double money){
         this.name = name;
         this.money = money;
     }

@@ -38,6 +38,7 @@ public class BlackJack extends CardGames {
         }
     }
 
+
     //Below methods used primarily in testing and will be useful in implementation of actual gameplay via console
 
     public ArrayList<BlackjackPlayer> getPlayers() {
@@ -48,6 +49,7 @@ public class BlackJack extends CardGames {
         return blackjackPlayers.get(index);
     }
 
+
     public void setActivePlayer(BlackjackPlayer blackjackPlayer) {
         this.activePlayer = blackjackPlayer;
     }
@@ -55,5 +57,4 @@ public class BlackJack extends CardGames {
     public Player getActivePlayer() {
         return activePlayer;
     }
-
 }
