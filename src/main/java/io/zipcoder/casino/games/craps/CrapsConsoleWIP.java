@@ -8,6 +8,11 @@ import static io.zipcoder.casino.nuts_n_bolts.Input.getStringInput;
 
 public class CrapsConsoleWIP {
 
+    public static void main(String[] args){
+        CrapsConsoleWIP console = new CrapsConsoleWIP();
+        console.run();
+    }
+
     private CrapsWIP game = new CrapsWIP();
     private User player;
     private double mainPotBet;
