@@ -9,11 +9,6 @@ import static io.zipcoder.casino.nuts_n_bolts.Input.getStringInput;
 
 public class BlackJackConsole {
 
-    public static void main(String[] args){
-        BlackJackConsole console = new BlackJackConsole();
-        console.run();
-    }
-
     private BlackJack game = new BlackJack();
     private User player;
     private double potBet;
