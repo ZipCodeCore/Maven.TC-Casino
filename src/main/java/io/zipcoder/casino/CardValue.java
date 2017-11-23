@@ -14,6 +14,7 @@ enum CardValue {
     int getValue() {
         return CardsValue;
     }
+}
 
     //I had to remove some stuff from this class and put it elsewhere for proper implementation and proper Blackjack
     //behavior

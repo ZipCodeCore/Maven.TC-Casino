@@ -16,7 +16,7 @@ public class GameInterface {
 
     }
 
-    public static void playBlakcjack() {
+    public static void playBlackjack() {
 
 
     }

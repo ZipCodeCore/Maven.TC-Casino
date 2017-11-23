@@ -2,7 +2,8 @@ package io.zipcoder.casino;
 
 public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
 
-
+    private String name;
+    private Double money;
     private Card cardsInHand;
 
     CrapsPlayer(String name, Double money) {
@@ -10,12 +11,6 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
     }
 
 
-    public Double bet(Double bet) {
-        return null;
-    }
-
-    public static void firstRoll() {
-    }
 
     //We won't be using this method of course, since Craps is a dice game, but I HAD to put this Override method here
     //to fulfill a contract we entered with our arrangement of abstracts and interfaces... it's just one of those
@@ -23,13 +18,12 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
     @Override
     public void addCardToHand(Card newCard) {
         cardsInHand.add(newCard);
-
-    private String name;
-    private Double money;
-
-    public Double bet() {
-        return null;
     }
+
+
+//    public Double bet() {
+//        return null;
+//    }
 
     public Double bet(Double bet) {
         money -= bet;

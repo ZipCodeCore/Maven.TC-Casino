@@ -37,7 +37,7 @@ public class CardGames extends Game {
                     GameInterface.playGoFish();
                     break;
                 case 2:
-                    GameInterface.playBlakcjack();
+                    GameInterface.playBlackjack();
                     break;
                 default:
                     System.out.println("You entered an invalid response :-(\n");
