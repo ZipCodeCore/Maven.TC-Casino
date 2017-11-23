@@ -32,5 +32,6 @@ public class GoFish extends CardGames {
     public void giveCardToPlayer() {
         Card card = this.goFishDeck.dealOneRandomCard();
         this.activePlayer1.addCardToHand(card);
+        this.activePlayer2.addCardToHand(card);
     }
 }

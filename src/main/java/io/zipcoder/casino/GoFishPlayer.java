@@ -27,9 +27,18 @@ public class GoFishPlayer extends Player<GoFishPlayer> implements Comparable<GoF
         return cardsInHand;
     }
 
+    public String viewHand() {
+        String handString = "";
+        for (Card card : cardsInHand) {
+            handString += card.toString();
+        }
+        return handString;
+    }
 
 
-//    public Double bet(Double bet) {
+
+
+    //    public Double bet(Double bet) {
 //        return null;
 //    }
     //Stubbed this method out b/c may be needed in console/actual game-play integration... delete it if not...
