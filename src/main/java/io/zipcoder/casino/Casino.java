@@ -3,7 +3,7 @@ package io.zipcoder.casino;
 public class Casino {
     public static void main(String[] args) {
         int option;
-        Player player1;
+        CardPlayer player1;
         String name;
         Double money;
         BlackJack blackJack = new BlackJack();
@@ -22,7 +22,8 @@ public class Casino {
                 case 2:
                     name = Console.getStringInput("Enter your name");
                     player1 = new CardPlayer(name, 100.00);
-                    goFish.startGame(player1);
+                    int numberOfComputers = Display.howManyComputers();
+                    goFish.startGame(player1, numberOfComputers);
                     break;
                 case 3:
                     break;
