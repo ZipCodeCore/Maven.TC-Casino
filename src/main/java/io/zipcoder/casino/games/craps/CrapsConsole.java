@@ -10,11 +10,6 @@ import static io.zipcoder.casino.nuts_n_bolts.Input.getStringInput;
 
 public class CrapsConsole {
 
-    public static void main(String[] args){
-        CrapsConsole console = new CrapsConsole();
-        console.run();
-    }
-
     private Craps game = new Craps();
     private User player;
     private double mainPotBet;
