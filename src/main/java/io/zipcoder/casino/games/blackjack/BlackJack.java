@@ -62,7 +62,7 @@ public class BlackJack extends CardGame implements Gamble {
         return playerScore;
     }
 
-    public Integer getDealerScore() {
+    private Integer getDealerScore() {
         dealerScore = 0;
         ArrayList<PlayingCard> handArray = dealer.getAllCards();
 
@@ -71,6 +71,10 @@ public class BlackJack extends CardGame implements Gamble {
         }
 
         return dealerScore;
+    }
+
+    public Integer getDealerScoreShowing(){
+        return (cardScore(dealer.getAllCards().get(0), 0));
     }
 
     private Integer cardScore(PlayingCard c, int score) {
@@ -116,13 +120,37 @@ public class BlackJack extends CardGame implements Gamble {
         dealerScore = getDealerScore();
     }
 
-    public boolean playerWon() {
-        return (    ((playerScore > dealerScore) &&
-                            (playerScore <= 21)) &&
-                    dealerScore>21);
+    public void dealerHitUntilFinished(){
+        while (getDealerScore()<=17){
+            dealer.addCard(deck.getAndRemoveCard());
+        }
     }
 
+    public boolean playerWins(){
+        return (((getPlayerScore()>getDealerScore())&&(getPlayerScore()<=21)) ||
+                (getDealerScore()>21 && getPlayerScore()<=21));
+    }
 
+    @Override
+    public String toString(){
+        String returnMe="";
+
+        returnMe+="---\nOpponent\n---\n"+getDealerScore()+"---\n";
+        for (PlayingCard c : player.getAllCards()){
+            returnMe+=c.toString()+"\n";
+        }
+
+        returnMe+="\n\n\nPot: "+pot.getMoney()+"\n\n\n\n";
+
+        returnMe+="---\nYou\n---\n"+getPlayerScore()+"---\n";
+        for (PlayingCard c : player.getAllCards()){
+            returnMe+=c.toString()+"\n";
+        }
+
+        returnMe+="\n\n";
+
+        return returnMe;
+    }
 
     public boolean play(String userInput) {
         return ("Y".equalsIgnoreCase(userInput));
