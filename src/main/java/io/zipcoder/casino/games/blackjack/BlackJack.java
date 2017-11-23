@@ -121,7 +121,7 @@ public class BlackJack extends CardGame implements Gamble {
     }
 
     public void dealerHitUntilFinished(){
-        while (getDealerScore()<=17){
+        while (getDealerScore()<=17 && getPlayerScore()<=21){
             dealer.addCard(deck.getAndRemoveCard());
         }
     }
@@ -131,18 +131,39 @@ public class BlackJack extends CardGame implements Gamble {
                 (getDealerScore()>21 && getPlayerScore()<=21));
     }
 
-    @Override
-    public String toString(){
+    public String finalTableDisplay(){
         String returnMe="";
 
-        returnMe+="---\nOpponent\n---\n"+getDealerScore()+"---\n";
+        returnMe+="---\nOpponent\n---\n"+getDealerScore()+" Showing\n---\n";
+        for (PlayingCard c : dealer.getAllCards()){
+            returnMe+=c.toString()+"\n";
+        }
+
+
+        returnMe+="\nPot: "+pot.getMoney()+"\n\n";
+
+        returnMe+="---\nYou\n---\n"+getPlayerScore()+"\n---\n";
         for (PlayingCard c : player.getAllCards()){
             returnMe+=c.toString()+"\n";
         }
 
-        returnMe+="\n\n\nPot: "+pot.getMoney()+"\n\n\n\n";
+        returnMe+="\n\n";
 
-        returnMe+="---\nYou\n---\n"+getPlayerScore()+"---\n";
+        return returnMe;
+    }
+
+    @Override
+    public String toString(){
+        String returnMe="";
+
+        returnMe+="---\nOpponent\n---\n"+getDealerScoreShowing()+" Showing\n---\n";
+        returnMe+=dealer.getAllCards().get(0).toString()+"\n";
+        returnMe+="[]\n";
+
+
+        returnMe+="\nPot: "+pot.getMoney()+"\n\n";
+
+        returnMe+="---\nYou\n---\n"+getPlayerScore()+"\n---\n";
         for (PlayingCard c : player.getAllCards()){
             returnMe+=c.toString()+"\n";
         }
