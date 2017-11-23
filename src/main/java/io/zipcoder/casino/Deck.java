@@ -37,7 +37,7 @@ public class Deck {
     public void shuffle() {
         ArrayList<Card> tmpDeck = new ArrayList<Card>();
         Random random = new Random();
-        int randomCardIndex = 0;
+        int randomCardIndex;
         int originalSize = this.cards.size();
 
         for (int i = 0; i < originalSize; i++) {
