@@ -34,4 +34,17 @@ public class GoFish extends CardGames {
         this.activePlayer1.addCardToHand(card);
         this.activePlayer2.addCardToHand(card);
     }
+
+    public ArrayList<GoFishPlayer> getPlayers() {
+        return goFishPlayers;
+    }
+
+    public GoFishPlayer getPlayerAtIndex(int index) {
+        return goFishPlayers.get(index);
+    }
+
+
+    public Player getActivePlayer() {
+        return activePlayer1;
+    }
 }
