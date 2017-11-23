@@ -38,7 +38,7 @@ public class GoFish extends CardGame {
         CardPlayer computerPlayer;
 
         ArrayList<String> computerNames = new ArrayList<String>();
-        computerNames.add("Moose");
+        computerNames.add("Jack");
         computerNames.add("Lina");
         computerNames.add("Marin");
 
