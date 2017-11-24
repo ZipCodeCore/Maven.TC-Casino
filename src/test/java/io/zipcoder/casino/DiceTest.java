@@ -8,6 +8,6 @@ public class DiceTest {
     @Test
     public void testRollDice(){
         int actual = dice.rollDice();
-        Assert.assertEquals(0,actual);
+        Assert.assertNotEquals(0,actual);
     }
 }
