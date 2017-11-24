@@ -106,6 +106,4 @@ public class BlackJack extends CardPlayer implements Gamble{
         }
         return sum;
     }
-
-
 }

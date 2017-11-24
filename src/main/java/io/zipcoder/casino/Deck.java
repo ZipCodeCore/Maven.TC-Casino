@@ -31,13 +31,13 @@ public class Deck {
     }
 
     public int getSize() {
-        return cards.size();
+        return this.cards.size();
     }
 
     public void shuffle() {
         ArrayList<Card> tmpDeck = new ArrayList<Card>();
         Random random = new Random();
-        int randomCardIndex = 0;
+        int randomCardIndex;
         int originalSize = this.cards.size();
 
         for (int i = 0; i < originalSize; i++) {
@@ -48,9 +48,16 @@ public class Deck {
 
         this.cards = tmpDeck;
     }
-    public Card giveCard(){
-        return cards.remove(cards.size()-1);
+    public Card giveCard() {
+        return cards.remove(cards.size() - 1);
     }
+
+    public Card deal() {
+        Card cardToReturn;
+        cardToReturn = this.cards.remove(this.cards.size() - 1);
+        return cardToReturn;
+    }
+
 
 
 }

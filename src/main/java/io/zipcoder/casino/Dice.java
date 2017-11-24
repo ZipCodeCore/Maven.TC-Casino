@@ -2,7 +2,7 @@ package io.zipcoder.casino;
 
 import java.util.Random;
 
-public class Dice {
+public class Dice extends Craps{
 
     private int diceValue;
 
@@ -17,8 +17,8 @@ public class Dice {
         System.out.println("Dice one is " + dice1 + ", dice two is " + dice2 +". The total value of roll dice is " +(dice1+dice2));
         return dice1 + dice2;
     }
-    public DicePlayer passDice(String name){
-        DicePlayer newDicePlayer = new DicePlayer(name);
+    public DicePlayer passDice(String name, Double money){
+        DicePlayer newDicePlayer = new DicePlayer(name, money);
         return newDicePlayer;
     }
 }
