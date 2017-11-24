@@ -1,6 +1,10 @@
 package io.zipcoder.casino;
 
+import java.util.ArrayList;
+
 public class Craps implements Game, Gamble{
+
+    ArrayList<DicePlayer> players = new ArrayList<DicePlayer>();
 
     public boolean wonRound(){
         int win=0;
@@ -34,9 +38,8 @@ public class Craps implements Game, Gamble{
 
     public void takeBet(Double playerMoney) {
         //if player wins, playerMoney doubles and add to player's total money amount, otherwise deducts the playerMoney from player's money
-        double betMoney;
         if(wonRound()){
-            betMoney=playerMoney*2;
+            =playerMoney*2;
         }
 //        else{
 //            Player.getMoney-playerMoney

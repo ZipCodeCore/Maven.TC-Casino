@@ -4,8 +4,13 @@ public abstract class Person {
     String name;
     Double money;
 
+    public Person(String name, Double money){
+        this.name = name;
+        this.money = money;
+    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
