@@ -46,7 +46,7 @@ public class DeckTest {
         playingDeck.createFullDeck();
 
         Card expected = new Card(Suit.SPADE, Value.ACE);
-        Card actual = playingDeck.giveCard();
+        Card actual = playingDeck.deal();
 
         Assert.assertEquals(expected, actual);
     }
@@ -56,12 +56,13 @@ public class DeckTest {
         Deck playingDeck = new Deck();
         playingDeck.createFullDeck();
 
-        playingDeck.giveCard();
+        playingDeck.deal();
 
         int expected = 51;
         int actual = playingDeck.getSize();
 
         Assert.assertEquals(expected, actual);
     }
+
 
 }

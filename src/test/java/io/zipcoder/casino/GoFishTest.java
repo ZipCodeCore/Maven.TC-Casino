@@ -3,10 +3,6 @@ package io.zipcoder.casino;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
-
 public class GoFishTest {
 
     @Test
@@ -16,24 +12,10 @@ public class GoFishTest {
         goFish.startGame(chewy, 2);
 
         String expected = "";
-        String actual = goFish.playersToString();
+        String actual = goFish.goFishDeck.toString();
 
         Assert.assertEquals(expected, actual);
     }
-
-    //Single card deal test
-//    @Test
-//    public void dealCardsTest(){
-//        GoFish goFish = new GoFish();
-//        goFish.goFishDeck.createFullDeck();
-//        CardPlayer chewy = new CardPlayer("Chewy", 100.00);
-//
-//        Card expected = new Card(Suit.SPADE, Value.THREE);
-//        Card actual = goFish.dealCards();
-//
-//        Assert.assertEquals(expected, actual);
-//
-//    }
 
     @Test
     public void giveGoFishCard(){
@@ -42,7 +24,7 @@ public class GoFishTest {
         CardPlayer chewy = new CardPlayer("Chewy", 100.00);
 
         Card expected = new Card(Suit.HEART, Value.EIGHT);
-        Card actual = goFish.goFishDeck.giveCard();
+        Card actual = goFish.goFishDeck.deal();
 
         Assert.assertEquals(expected, actual);
 
@@ -51,14 +33,65 @@ public class GoFishTest {
     @Test
     public void dealCardsTest(){
         GoFish goFish = new GoFish();
-        goFish.goFishDeck.createFullDeck();
         CardPlayer chewy = new CardPlayer("Chewy", 100.00);
 
-        goFish.startGame(chewy, 1);
-        goFish.dealCards();
+        goFish.startGame(chewy, 3);
 
-        int expected = 8;
-        int actual = goFish.players.get(0).getHand().size();
+        String expected = "";
+
+        String actual = "";
+        for (CardPlayer player : goFish.players){
+            actual += player.toString() + "\n\n";
+        }
+        actual += goFish.goFishDeck.getSize();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    // Single run test
+    @Test
+    public void pickFirstPlayerTest(){
+        GoFish goFish = new GoFish();
+        CardPlayer chewy = new CardPlayer("Chewy", 100.00);
+
+        goFish.startGame(chewy, 3);
+
+        String expected = "";
+
+        String actual = goFish.pickCurrentPlayer().getName();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void askForCardTest(){
+        GoFish goFish = new GoFish();
+        CardPlayer chewy = new CardPlayer("Chewy", 100.00);
+
+        goFish.startGame(chewy, 3);
+        System.out.println(goFish.players.get(1).toString());
+
+        boolean expected = false;
+        boolean actual = goFish.askForCard(goFish.players.get(1), "FIVE");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    // loop to test multiple starts
+    @Test
+    public void pickFirstPlayerTest2(){
+//        GoFish goFish = new GoFish();
+//        CardPlayer chewy = new CardPlayer("Chewy", 100.00);
+
+        String expected = "";
+        String actual = "";
+
+        for (int i = 0; i < 10; i++){
+            GoFish goFish = new GoFish();
+            CardPlayer chewy = new CardPlayer("Chewy", 100.00);
+            goFish.startGame(chewy, 3);
+            actual += goFish.pickCurrentPlayer().getName() + "\n";
+        }
 
         Assert.assertEquals(expected, actual);
     }

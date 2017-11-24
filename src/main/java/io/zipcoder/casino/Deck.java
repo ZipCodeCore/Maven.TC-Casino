@@ -31,7 +31,7 @@ public class Deck {
     }
 
     public int getSize() {
-        return cards.size();
+        return this.cards.size();
     }
 
     public void shuffle() {
@@ -49,11 +49,12 @@ public class Deck {
         this.cards = tmpDeck;
     }
 
-    public Card giveCard() {
+    public Card deal() {
         Card cardToReturn;
-        cardToReturn = cards.remove(cards.size() - 1);
+        cardToReturn = this.cards.remove(this.cards.size() - 1);
         return cardToReturn;
     }
+
 
 
 }
