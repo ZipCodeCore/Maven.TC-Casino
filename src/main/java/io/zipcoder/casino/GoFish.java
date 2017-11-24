@@ -1,6 +1,7 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GoFish extends CardGame {
 
@@ -9,6 +10,7 @@ public class GoFish extends CardGame {
     ArrayList<Integer> score = new ArrayList<Integer>();
     ArrayList<Card> booksPlayed = new ArrayList<Card>();
     Deck goFishDeck = new Deck();
+    CardPlayer playerToAct;
 
 
 
@@ -25,12 +27,14 @@ public class GoFish extends CardGame {
     }
 
     public void dealCards(){
-        for (int numberOfCardsToDeal = 0; numberOfCardsToDeal < 5; numberOfCardsToDeal++) {
+
+        for (int i = 0; i < 5; i++) {
             for (CardPlayer player : players) {
-                Card newCard = goFishDeck.giveCard();
-                player.takeCard(newCard);
+                Card topCard = goFishDeck.deal();
+                player.takeCard(topCard);
             }
         }
+
     }
 
     public void generateComputerPlayers(int numberOfComputerPlayers){
@@ -40,7 +44,7 @@ public class GoFish extends CardGame {
         ArrayList<String> computerNames = new ArrayList<String>();
         computerNames.add("Moose");
         computerNames.add("Lina");
-        computerNames.add("Marin");
+        computerNames.add("Merin");
 
         for (int i = 0; i < numberOfComputerPlayers; i++){
             computerPlayer = new CardPlayer(computerNames.get(i), 200.00);
@@ -67,8 +71,89 @@ public class GoFish extends CardGame {
             score.add(0);
         }
 
+        goFishDeck.shuffle();
         dealCards();
 
+        // make user always first for testing
+        // fix when done
+        //playerToAct = pickCurrentPlayer();
+        playerToAct = currentUser;
+
+        String playersHand = currentUser.getHand().toString() + "\n";
+        System.out.println(playersHand);
+
+        while (playerToAct == currentUser){
+
+            boolean yourTurn = true;
+            while (yourTurn) {
+
+                CardPlayer playerToAsk = choosePlayerToAsk();
+                String cardToAskFor = chooseCard();
+
+                boolean playerHasCard = askForCard(playerToAsk, cardToAskFor);
+                while (playerHasCard) {
+
+                    for (Card card : playerToAsk.getHand()) {
+                        if (cardToAskFor.equals(card.getValue().toString())) {
+                            currentUser.takeCard(playerToAsk.givePlayerCard(card));
+                        }
+                    }
+
+                    playerToAsk = choosePlayerToAsk();
+                    cardToAskFor = chooseCard();
+                    playerHasCard = askForCard(playerToAsk, cardToAskFor);
+
+                }
+
+                Card topCard = goFishDeck.deal();
+                currentUser.takeCard(topCard);
+
+                if (!(topCard.getValue().toString().equals(cardToAskFor))) {
+                    yourTurn = false;
+                }
+                playerToAct = playerToAsk;
+            }
+
+
+        }
+
+    }
+
+    public String chooseCard(){
+        String answer = Display.chooseCard(currentUser.getHand());
+        return answer;
+    }
+
+
+
+    public boolean askForCard(CardPlayer playerToAsk, String cardToAskFor){
+        boolean hasCard = false;
+        ArrayList<String> handValues = new ArrayList<String>();
+        for (Card card : playerToAsk.getHand()){
+            handValues.add(card.getValue().toString());
+        }
+        if (handValues.contains(cardToAskFor)){
+            hasCard = true;
+        }
+        return hasCard;
+    }
+
+    public CardPlayer choosePlayerToAsk(){
+        String answer = Display.choosePlayerToAsk(players);
+        CardPlayer playerToAsk = null;
+        for (CardPlayer player : players){
+            if (answer.equalsIgnoreCase(player.getName())){
+                playerToAsk = player;
+            }
+        }
+        return playerToAsk;
+    }
+
+    public CardPlayer pickCurrentPlayer(){
+        Random random = new Random();
+        int indexOfPlayer = random.nextInt(players.size());
+        CardPlayer firstPlayer = players.get(indexOfPlayer);
+        return firstPlayer;
     }
 
     public String playersToString() {
