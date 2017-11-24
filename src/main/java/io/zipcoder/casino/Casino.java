@@ -3,29 +3,28 @@ package io.zipcoder.casino;
 public class Casino {
     public static void main(String[] args) {
         int option;
-        CardPlayer player1;
+        Player player1;
         String name;
         Double money;
         BlackJack blackJack = new BlackJack();
-        GoFish goFish = new GoFish();
         System.out.println("Welcome to Casio App");
         do {
-            option = Console.getIntegerInput("What game you want to play?\n 1. BlackJack" +
-                    "\n 2. Go Fish\n 3. Craps\n 0. To exit from the App");
+            option = Console.getIntegerInput("What game you want to play Card / Dice \n 1. To play Card game" +
+                    "\n 2. To play Dice game.\n 0. To exit from the App");
             switch (option) {
                 case 1:
                     name = Console.getStringInput("Enter your name");
-                    money = Console.getDoubleInput("Enter the amount you want to play with");
-                    player1 = new CardPlayer(name, money);
+                    money = Console.getDoubleInput("Add money in your account");
+                    player1 = new Player(name, money);
                     blackJack.startGame(player1);
                     break;
                 case 2:
                     name = Console.getStringInput("Enter your name");
-                    player1 = new CardPlayer(name, 100.00);
-                    int numberOfComputers = Display.howManyComputers();
-                    goFish.startGame(player1, numberOfComputers);
+
                     break;
                 case 3:
+                    break;
+                case 0:
                     break;
             }
         } while (option != 0);
