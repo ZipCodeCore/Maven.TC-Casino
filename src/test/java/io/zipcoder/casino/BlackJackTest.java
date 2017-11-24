@@ -11,8 +11,8 @@ public class BlackJackTest {
 
     @Test
     public void startTest() {
-
-        int expected = 2;
+        //Have to expect 1 player (dealer) because other player is created at runtime via user-inputted name/money
+        int expected = 1;
         int actual = blackjack.getPlayers().size();
         Assert.assertEquals(expected, actual);
     }

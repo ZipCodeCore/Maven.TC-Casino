@@ -6,7 +6,7 @@ public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparab
 
     public String name;
     private Double money;
-    private ArrayList<Card> cardsInHand;
+    private static ArrayList<Card> cardsInHand;
 
     BlackjackPlayer(String name, Double money) {
         this.name = name;
@@ -44,7 +44,7 @@ public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparab
         cardsInHand.add(newCard);
     }
 
-    public String viewHand() {
+    public static String viewHand() {
         String handString = "";
         for (Card card : cardsInHand) {
             handString += card.toString();
