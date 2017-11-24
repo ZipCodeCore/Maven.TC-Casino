@@ -1,9 +1,15 @@
 package io.zipcoder.casino;
 
 public class Player extends Person {
-
-    public void player(String name, Double money){
-        this.name = name;
-        this.money = money;
+    public Player() {
     }
+
+    public Player(String name) {
+        super(name);
+    }
+
+    public Player(String name, Double money) {
+        super(name, money);
+    }
+
 }

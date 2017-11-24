@@ -3,6 +3,17 @@ package io.zipcoder.casino;
 public abstract class Person {
     String name;
     Double money;
+    public Person(){
+
+    }
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public Person(String name, Double money) {
+        this.name = name;
+        this.money = money;
+    }
 
     public String getName() {
         return name;

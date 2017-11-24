@@ -14,13 +14,17 @@ public class Casino {
             switch (option) {
                 case 1:
                     name = Console.getStringInput("Enter your name");
-                    money = Console.getDoubleInput("Enter the amount you want to play with");
-                    player1 = new CardPlayer(name, money);
+                    money = Console.getDoubleInput("Add money in your account");
+                    player1 = new Player(name, money);
                     blackJack.startGame(player1);
                     break;
                 case 2:
+                    name = Console.getStringInput("Enter your name");
+
                     break;
                 case 3:
+                    break;
+                case 0:
                     break;
             }
         } while (option != 0);

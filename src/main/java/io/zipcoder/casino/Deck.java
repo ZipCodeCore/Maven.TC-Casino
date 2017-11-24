@@ -6,18 +6,18 @@ import java.util.Random;
 public class Deck {
 
     private ArrayList<Card> cards;
-
     public Deck() {
         this.cards = new ArrayList<Card>();
     }
 
-    public void createFullDeck() {
+    public ArrayList<Card> createFullDeck() {
 
         for (Suit cardSuit : Suit.values()) {
             for (Value cardValue : Value.values()) {
                 this.cards.add(new Card(cardSuit, cardValue));
             }
         }
+        return cards;
     }
 
     @Override
@@ -48,11 +48,8 @@ public class Deck {
 
         this.cards = tmpDeck;
     }
-
-    public Card giveCard() {
-        Card cardToReturn;
-        cardToReturn = cards.remove(cards.size() - 1);
-        return cardToReturn;
+    public Card giveCard(){
+        return cards.remove(cards.size()-1);
     }
 
 
