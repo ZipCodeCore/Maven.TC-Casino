@@ -83,10 +83,6 @@ public class Craps implements Gamble, Game {
 
     public boolean getPlayerTurn(){return isPlayerTurn;}
 
-    public int getPoint(){return point;}
-    public String getPair(){
-        return(pair.text);
-    }
     public int getNumberRolled(){return numberRolled;}
     public MoneyContainer getSidePot() {
         return sidePot;

@@ -1,7 +1,6 @@
 package io.zipcoder.casino;
 
 import io.zipcoder.casino.games.blackjack.BlackJackTest;
-import io.zipcoder.casino.games.craps.CrapsPlayerTest;
 import io.zipcoder.casino.games.craps.CrapsTest;
 import io.zipcoder.casino.games.gofish.GoFishPlayerTest;
 import io.zipcoder.casino.games.gofish.GoFishTest;
@@ -19,13 +18,12 @@ import org.junit.runners.Suite;
         //CasinoTest.class,
         BlackJackTest.class,
         CrapsTest.class,
-        CrapsPlayerTest.class,
         GoFishTest.class,
         GoFishPlayerTest.class,
         HandTest.class,
         PlayingCardTest.class,
         PlayingDeckTest.class,
-        //ConsoleTest.class,
+        //ConsoleTest.class,}
         DiceTest.class,
         MoneyContainerTest.class,
         UserTest.class
