@@ -119,6 +119,7 @@ public class BlackJack extends CardGame<BlackJack> implements Gamble {
         clearAllBets();
     }
 
+    @Override
     public void clearAllBets() {
         bets.clear();
         winners.clear();

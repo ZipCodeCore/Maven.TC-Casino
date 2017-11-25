@@ -80,6 +80,7 @@ public class Craps extends Game implements Gamble{
         clearAllBets();
     }
 
+    @Override
     public void clearAllBets() {
         bets.clear();
         playersOnPass.clear();
