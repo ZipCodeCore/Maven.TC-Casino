@@ -4,21 +4,20 @@ import java.util.ArrayList;
 
 public class BlackJack extends CardGames {
 
-    private ArrayList<BlackjackPlayer> blackjackPlayers = new ArrayList<>();
-    private Player activePlayer;
+    private static ArrayList<BlackjackPlayer> blackjackPlayers = new ArrayList<>();
+    private static Player activePlayer;
     //This constant can be used in console/actual game-play if a player/dealer gets blackjack
     private static final int BLACKJACK = 21;
-    private Deck deck;
+    private static Deck deck;
 
     public BlackJack() {
         start();
     }
 
-    protected void start() {
+    protected static void start() {
+
         BlackjackPlayer dealer = new BlackjackPlayer("dealer", 500.0);
-        BlackjackPlayer josh = new BlackjackPlayer("Josh", 500.0);
         blackjackPlayers.add(dealer);
-        blackjackPlayers.add(josh);
         activePlayer = dealer;
         deck = new Deck();
         deck.populate();
@@ -26,22 +25,21 @@ public class BlackJack extends CardGames {
         giveCardToPlayer();
     }
 
-    public void giveCardToPlayer() {
-        Card card = this.deck.dealOneRandomCard();
-        this.activePlayer.addCardToHand(card);
+    public static void giveCardToPlayer() {
+        Card card = deck.dealOneRandomCard();
+        activePlayer.addCardToHand(card);
     }
 
     public void endTurn() {
         for (BlackjackPlayer blackjackPlayer : blackjackPlayers) {
             if (!activePlayer.equals(blackjackPlayer))
-                this.activePlayer = blackjackPlayer;
+                activePlayer = blackjackPlayer;
         }
     }
 
+    //Below methods used primarily in testing and will be useful in implementation of actual game-play via console
 
-    //Below methods used primarily in testing and will be useful in implementation of actual gameplay via console
-
-    public ArrayList<BlackjackPlayer> getPlayers() {
+    public static ArrayList<BlackjackPlayer> getPlayers() {
         return blackjackPlayers;
     }
 
@@ -49,12 +47,12 @@ public class BlackJack extends CardGames {
         return blackjackPlayers.get(index);
     }
 
-
     public void setActivePlayer(BlackjackPlayer blackjackPlayer) {
-        this.activePlayer = blackjackPlayer;
+        activePlayer = blackjackPlayer;
     }
 
     public Player getActivePlayer() {
         return activePlayer;
     }
+
 }
