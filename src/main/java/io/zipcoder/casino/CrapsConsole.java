@@ -21,7 +21,7 @@ public class CrapsConsole {
             craps.setPlayerBet(getEnforcedPositiveDoubleInput());
 
             promptPlayerForRoll();
-            Integer roll = getRoll(crapsPlayer);
+            Integer roll = crapsPlayer.roll2Dice();
             crapsPlayer.printRoll();
 
             rollComeout(craps, crapsPlayer, roll);
@@ -39,7 +39,8 @@ public class CrapsConsole {
 
         while(true){
             promptPlayerForRoll();
-            roll = getRoll(crapsPlayer);
+            roll = crapsPlayer.roll2Dice();
+
             crapsPlayer.printRoll();
             if(craps.isBetWin(roll, craps.getBetType())){
                 craps.playerWins(crapsPlayer);
@@ -62,13 +63,9 @@ public class CrapsConsole {
     }
 
 
-    private Integer getRoll(CrapsPlayer crapsPlayer) {
-        getUserInput();
-        return crapsPlayer.roll2Dice();
-    }
-
     private void promptPlayerForRoll() {
         System.out.println("Ready? Enter to roll");
+        getUserInput();
     }
 
     private void promptPlayerForBet() {
@@ -78,16 +75,22 @@ public class CrapsConsole {
 
     private static CrapsBetType getBetTypeInput() {
         Scanner scan = new Scanner(System.in);
-        String input = scan.next();
-
-        while(true){
+        String input;
+        do{
+            input = scan.next();
+            if(!input.equalsIgnoreCase("pass")&&!input.equalsIgnoreCase("dont")){
+                System.out.println("Please enter 'pass' or 'dont.'");
+            }
+        }while(!input.equalsIgnoreCase("pass")&&!input.equalsIgnoreCase("dont"));
 
         if(input.equalsIgnoreCase("pass")){
             return CrapsBetType.PASSLINE;
         }else if(input.equalsIgnoreCase("dont")){
             return CrapsBetType.DONTPASS;
-            }
         }
+
+
+        return null;
     }
 
     private static void promptPlayerForBetType() {
@@ -96,20 +99,21 @@ public class CrapsConsole {
     }
 
     private static void askIfPlayerWantsToPlay() {
-        System.out.println("Ready to play some craps? Win big and make a bunch of friends along the way!\n" +
+        System.out.println("Ready to play some craps? Win big with small dice!\n" +
                             "Feeling lucky...? 'y' or 'n'" );
 
     }
 
     public static boolean getBooleanInput() {
         Scanner scan = new Scanner(System.in);
-        String input = scan.next();
-
-        if(input.equalsIgnoreCase("y")){
-            return true;
-        }else{
-            return false;
-        }
+        String input;
+        do{
+            input = scan.next();
+            if(!input.equalsIgnoreCase("y")&&!input.equalsIgnoreCase("n")){
+                System.out.println("Please enter 'y' or 'n.'");
+            }
+        }while(!input.equalsIgnoreCase("y")&&!input.equalsIgnoreCase("n"));
+        return input.equalsIgnoreCase("y");
     }
 
     public static String getUserInput() {
