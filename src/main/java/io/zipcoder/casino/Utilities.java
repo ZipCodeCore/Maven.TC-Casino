@@ -84,7 +84,11 @@ public class Utilities {
         while(!isValidInput) {
             userAmountInput = getDoubleInput(prompt);
             if(userAmountInput >= 0) {
-                isValidInput = true;
+                if(userAmountInput * 100 - Math.floor(userAmountInput * 100) == 0) {
+                    isValidInput = true;
+                } else {
+                    System.out.println("Must enter an amount with up to two decimal places in accuracy");
+                }
             } else {
                 System.out.println("Must enter a positive amount");
             }

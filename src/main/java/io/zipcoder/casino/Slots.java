@@ -58,7 +58,7 @@ public class Slots extends Game implements Gamble {
             }
             else {
                 for(SlotsPlayer player : getPlayers()) {
-                    Double amountWon = bets.get(player) * 1.5;
+                    Double amountWon = Math.floor(bets.get(player) * 1.5 * 100) / 100;
                     player.receiveWinnings(amountWon);
                     System.out.printf("You win $%.2f\n", amountWon);
                 }
