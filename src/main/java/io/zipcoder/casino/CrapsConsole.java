@@ -2,10 +2,12 @@ package io.zipcoder.casino;
 
 import java.util.Scanner;
 
+import static io.zipcoder.casino.Console.casinoHome;
+
 public class CrapsConsole {
 
 
-    public void playCraps(){
+    public static void playCraps(){
         Craps craps = new Craps();
         CrapsPlayer crapsPlayer = new CrapsPlayer();
 
@@ -28,11 +30,11 @@ public class CrapsConsole {
 
             playGame = askPlayAgain();
             }
-
+        casinoHome();
         }
 
 
-    private void rollPointRound(Craps craps, CrapsPlayer crapsPlayer, Integer roll) {
+    private static void rollPointRound(Craps craps, CrapsPlayer crapsPlayer, Integer roll) {
 
         craps.setPoint(roll);
         System.out.println("Point is set at " + roll);
@@ -52,7 +54,7 @@ public class CrapsConsole {
         }
     }
 
-    private void rollComeout(Craps craps, CrapsPlayer crapsPlayer, Integer roll) {
+    private static void rollComeout(Craps craps, CrapsPlayer crapsPlayer, Integer roll) {
             if(craps.isBetWinComeOut(roll, craps.getBetType())){
                 craps.playerWins(crapsPlayer);
             }else if (craps.isBetLossComeOut(roll, craps.getBetType())){
@@ -63,12 +65,12 @@ public class CrapsConsole {
     }
 
 
-    private void promptPlayerForRoll() {
+    private static void promptPlayerForRoll() {
         System.out.println("Ready? Enter to roll");
         getUserInput();
     }
 
-    private void promptPlayerForBet() {
+    private static void promptPlayerForBet() {
         System.out.println("How much do you want to bet?");
 
     }
@@ -146,7 +148,7 @@ public class CrapsConsole {
         return (true);
     }
 
-    private boolean askPlayAgain() {
+    private static boolean askPlayAgain() {
         System.out.println("Play again?");
         return getBooleanInput();
     }
