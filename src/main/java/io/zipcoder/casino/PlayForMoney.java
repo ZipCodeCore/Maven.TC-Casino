@@ -1,11 +1,8 @@
 package io.zipcoder.casino;
 
 public interface PlayForMoney {
-    void takeBet(Double betAmount );
 
+    double makeBet(Double amount);
 
-
-    double betReceiveFromPlayers();
-
-    void resolveBets();
+    double collectWinnings(boolean isWin);
 }

@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public class BlackJackPlayer extends CardPlayer {
+public class BlackJackPlayer extends CardPlayer implements PlayForMoney {
 
     private double bet;
 
@@ -39,5 +39,11 @@ public class BlackJackPlayer extends CardPlayer {
     }
 
 
+    public double makeBet(Double amount) {
+        return 0;
+    }
 
+    public double collectWinnings(boolean isWin) {
+        return 0;
+    }
 }

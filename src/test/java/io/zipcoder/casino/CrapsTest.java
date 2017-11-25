@@ -142,6 +142,36 @@ public class CrapsTest {
 
     @Test
     public void paysOutPlayerThatHasWon(){
+        //given
+        Craps craps = new Craps();
+        CrapsPlayer crapsPlayer = new CrapsPlayer("el pato");
+        crapsPlayer.setWallet(500.0);
+        //when
+        crapsPlayer.makeBet(100.0, craps);
+        boolean wins = craps.isBetWinComeOut(7, CrapsBetType.PASSLINE);
+
+        //then
+        double expected = 600;
+        double actual = craps.resolveBet(crapsPlayer, true);
+
+        Assert.assertTrue(expected ==actual);
+
+    }
+
+    @Test
+    public void takeMoneyFromPlayerThatHasLost(){
+        //given
+        Craps craps = new Craps();
+        CrapsPlayer crapsPlayer = new CrapsPlayer("el pato");
+        crapsPlayer.setWallet(500.0);
+        //when
+        crapsPlayer.makeBet(100.0, craps);
+        boolean flag = craps.isBetWinComeOut(7, CrapsBetType.PASSLINE);
+        double expected = 600;
+        double actual = craps.resolveBet(crapsPlayer,flag);
+
+        //then
+        Assert.assertTrue(expected ==actual);
 
     }
 

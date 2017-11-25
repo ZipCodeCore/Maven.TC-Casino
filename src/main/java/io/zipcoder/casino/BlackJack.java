@@ -51,4 +51,12 @@ public class BlackJack extends CardGame implements PlayForMoney {
     public void scoreHand() {
 
     }
+
+    public double makeBet(Double amount) {
+        return 0;
+    }
+
+    public double collectWinnings(boolean isWin) {
+        return 0;
+    }
 }
