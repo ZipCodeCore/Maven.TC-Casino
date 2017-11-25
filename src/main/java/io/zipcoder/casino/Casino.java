@@ -13,6 +13,7 @@ public class Casino {
         gameConsoles.add(new BlackJackConsole());
         gameConsoles.add(new CrapsConsole());
         gameConsoles.add(new GoFishConsole());
+        gameConsoles.add(new SlotsConsole());
 
         while(true) {
             selectGameToPlay();
@@ -43,6 +44,9 @@ public class Casino {
             case "GO FISH":
                 startGoFish();
                 break;
+            case "SLOTS":
+                startSlots();
+                break;
             case "EXIT":
                 System.exit(0);
                 break;
@@ -59,5 +63,9 @@ public class Casino {
 
     public static void startGoFish() {
         gameConsoles.get(2).start();
+    }
+
+    public static void startSlots() {
+        gameConsoles.get(3).start();
     }
 }
