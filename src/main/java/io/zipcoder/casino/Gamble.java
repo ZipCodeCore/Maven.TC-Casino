@@ -10,7 +10,7 @@ public interface Gamble {
 
     public void placeBet(Double money);
 
-    public boolean hasMoneyToMakeBet(Double amount);
+    public boolean hasMoneyToMakeBet(Double moneyToBet);
 
     public void cashInWinnings();
 
