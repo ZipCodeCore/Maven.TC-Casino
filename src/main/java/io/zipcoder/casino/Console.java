@@ -19,7 +19,7 @@ public class Console {
     }
 
 
-    private static void selectGame() {
+    public static void selectGame() {
         System.out.println("Which of our fine games would you like to try first?\n" +
                             "Enter 'blackjack' or 'b' to play BlackJack\n" +
                             "Enter 'craps' or 'c' to play Craps\n" +

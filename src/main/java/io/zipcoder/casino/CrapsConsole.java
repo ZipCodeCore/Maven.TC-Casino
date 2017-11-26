@@ -2,7 +2,7 @@ package io.zipcoder.casino;
 
 import java.util.Scanner;
 
-import static io.zipcoder.casino.Console.casinoHome;
+import static io.zipcoder.casino.Console.selectGame;
 
 public class CrapsConsole {
 
@@ -30,7 +30,8 @@ public class CrapsConsole {
 
             playGame = askPlayAgain();
             }
-        casinoHome();
+
+        selectGame();
         }
 
 
