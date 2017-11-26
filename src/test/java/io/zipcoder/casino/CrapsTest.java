@@ -59,6 +59,7 @@ public class CrapsTest {
         Double expected;
         Double actual;
         Assert.assertFalse();
+        Assert.a
     }
 
     @Test
