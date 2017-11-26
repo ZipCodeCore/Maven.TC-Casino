@@ -37,6 +37,7 @@ public class Craps extends Die implements Gamble {
         }
     }
 
+
     public boolean hasMoneyToMakeBet(Double amount) {
         if (crapsPlayer.getMoney() == 0.0) {
             return false;
