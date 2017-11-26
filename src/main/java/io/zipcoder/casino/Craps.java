@@ -30,7 +30,8 @@ public class Craps extends DicePlayer implements Gamble {
     public void placeBet(Double moneyToBet) {
         if (hasMoneyToMakeBet(moneyToBet)) {
             setPot(moneyToBet);
-            crapsPlayer.setMoney(crapsPlayer.getMoney() - moneyToBet);
+            Double tempMoney = crapsPlayer.getMoney();
+            crapsPlayer.setMoney(tempMoney - moneyToBet);
         } else { //would we want to throw an exception here instead...
             System.out.println("You do not have enough money to make a bet! Your current balance is " + crapsPlayer.getMoney());
         }
@@ -69,13 +70,15 @@ public class Craps extends DicePlayer implements Gamble {
             if (die.diceTotal() == getPoint()) {
                 cashInWinnings();
                 result = "You win!" + die.diceTotal();
+                break;
             } else if (die.diceTotal() == 7 || die.diceTotal() == 11) {
                 setPot(0.0);
                 result = "You lose!" + die.diceTotal();
+                break;
             } else {
-                result =  "Rolling again" + die.diceTotal();
+                result =  "Rolling again" + die.diceTotal(); //suspicious....
             }
-        } while (die.diceTotal() != point);
+        } while (die.diceTotal() != getPoint());
 
         return result;
     }
