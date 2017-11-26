@@ -4,14 +4,14 @@ public class Craps extends DicePlayer implements Gamble {
 
     private int point;
     private Double pot = 0.0;
-    DicePlayer crapsPlayer = new DicePlayer();
+    DicePlayer crapsPlayer = new Craps();
 
     public Craps() {
         this.point = 0;
         die.rollDice();
     }
 
-    public int getPoint() { 
+    public int getPoint() {
         return point;
     }
 
@@ -68,6 +68,9 @@ public class Craps extends DicePlayer implements Gamble {
 //
 //    }
 }
+
+
+if (crapsGame.firstRoll == )
 
 //logic:
 //make a bet
