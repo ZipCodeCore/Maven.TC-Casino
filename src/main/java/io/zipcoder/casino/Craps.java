@@ -24,49 +24,64 @@ public class Craps extends DicePlayer implements Gamble {
     }
 
     public Double getPot() {
-        return pot;
+        return pot; 
     }
 
     public void placeBet(Double moneyToBet) {
-        if (hasMoneyToMakeBet(crapsPlayer.getMoney())) {
+        if (hasMoneyToMakeBet(moneyToBet)) {
             setPot(moneyToBet);
-            //subtract their bet for their money
-            crapsPlayer.setMoney(crapsPlayer.getMoney() - moneyToBet);
+            Double tempMoney = crapsPlayer.getMoney();
+            crapsPlayer.setMoney(tempMoney - moneyToBet);
         } else { //would we want to throw an exception here instead...
             System.out.println("You do not have enough money to make a bet! Your current balance is " + crapsPlayer.getMoney());
         }
     }
 
-    public boolean hasMoneyToMakeBet(Double amount) {
-        if (crapsPlayer.getMoney() == 0.0) {
+
+    public boolean hasMoneyToMakeBet(Double moneyToBet) {
+        if (crapsPlayer.getMoney() < moneyToBet) {
             return false;
         }
         return true;
     }
 
-    public void cashInWinnings() {  //how do we determine that the player wins or losses?
-        crapsPlayer.setMoney(crapsPlayer.getMoney() + getPot()*2);
+    public void cashInWinnings() {
+        crapsPlayer.setMoney(crapsPlayer.getMoney() + getPot() * 2);
     }
 
-    //have a while loop in the CrapsConsole
-    public int firstRoll() {
-        if (die.diceTotal() == 7 || die.diceTotal() ==  11) {
-            cashInWinnings(); //cashInWinnings  //what if they already have money? add to the money they already have
-            return die.diceTotal();
-        }
-        else if (die.diceTotal() == 2 || die.diceTotal() == 3 || die.diceTotal() ==12 ) {
+    public String firstRoll() {
+        if (die.diceTotal() == 7 || die.diceTotal() == 11) {
+            cashInWinnings();//cashInWinnings  //what if they already have money? add to the money they already have
+            return "You win!" + die.diceTotal();
+        } else if (die.diceTotal() == 2 || die.diceTotal() == 3 || die.diceTotal() == 12) {
             setPot(0.0);
-            return die.diceTotal();
-        }
-        else {
+            return "You lose!" + die.diceTotal();
+
+        } else {
             point = die.diceTotal();
-            return die.diceTotal();
+            return "New target roll" + die.diceTotal();
         }
     }
 
-//    public int secondRoll() {
-//
-//    }
+    public String secondRoll() {
+        String result;
+        do {
+            die.rollDice();
+            if (die.diceTotal() == getPoint()) {
+                cashInWinnings();
+                result = "You win!" + die.diceTotal();
+                break;
+            } else if (die.diceTotal() == 7 || die.diceTotal() == 11) {
+                setPot(0.0);
+                result = "You lose!" + die.diceTotal();
+                break;
+            } else {
+                result =  "Rolling again" + die.diceTotal(); //suspicious....
+            }
+        } while (die.diceTotal() != getPoint());
+
+        return result;
+    }
 }
 
 

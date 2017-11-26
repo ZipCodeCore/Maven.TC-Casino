@@ -13,6 +13,14 @@ public class Die {
         die2 = (int) (Math.random()*6) + 1;
     }
 
+    public void setDie1(int die1) {
+        this.die1 = die1;
+    }
+
+    public void setDie2(int die2) {
+        this.die2 = die2;
+    }
+
     public int getDie1() {
         return die1;
     }
