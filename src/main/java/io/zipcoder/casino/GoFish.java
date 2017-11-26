@@ -11,51 +11,44 @@ public class GoFish extends GoFishGame {
 
     public static void goFishRun() {
 
-
-
-
-
-
-                int i =0;
-
-            do {
+                    String response = "no";
                 System.out.print("Welcome to the <GoFish> table!\n" +
                         "Insert nick name you want to use for the game? \n\n");
                 goFishGame.getGoFishPlayer().setName(InPutConsole.getInput());
-                goFishGame.startGame();
-                goFishGame.playerHand();
-                goFishGame.computerHand();
+                do{   goFishGame.startGame();
+               // goFishGame.playerHand();
+               // goFishGame.computerHand();
 
                 while (!goFishGame.getDeck().isEmpty()) {
                     System.out.println("Insert the rank of the card you want to request: ");
                     String rank = InPutConsole.getInput();
-                    //goFishGame.checkPlayersCardRequestForGameRule(rank);
-
                     goFishGame.askComputerHandForACard(rank);
+
+                   // goFishGame.removeBookedCard();
                     goFishGame.playerHandDisplay();
                     goFishGame.goFishingPlayer();
-                    // goFishGame.removeBookedCard();
                     goFishGame.checkIfComputerHandHasAcard();
                     goFishGame.askPlayerForACard(goFishGame.computerCardToRequest());
                     goFishGame.goFishingComputer();
+                   // goFishGame.countBooksInComputerHand();
+                    // goFishGame.removeBookedCard();
                     // goFishGame.removeComputerBookedCard();
+                    //goFishGame.checkPlayersCardRequestForGameRule(rank);
+                    // goFishGame.removeBookedCard();
 
                 }
-                System.out.println("The deck has finished");
-                System.out.println("Computer score is " + goFishGame.getComputerPlayer().getScore());
-                System.out.println(goFishGame.getGoFishPlayer().getName() + " score is " + goFishGame.getGoFishPlayer().getScore());
+
+                System.out.println("The game is over. Computer score is " +
+                        goFishGame.countBooksInComputerHand());
+                System.out.println(goFishGame.getGoFishPlayer().getName() +
+                        " score is " +  goFishGame.countBooksInPlayerHand());
                 goFishGame.decideWiner();
                 System.out.println("Do you want to play again?");
-                String response = InPutConsole.getInput();
-                if (response.toUpperCase().equalsIgnoreCase("yes")){
-                    GoFish.goFishRun();
+                 response = InPutConsole.getInput();
+//                if (response.toUpperCase().equalsIgnoreCase("yes")){
+//                    goFishGame.startGame();
 
-            }
-
-                else{
-                    i=1;
-                    }
-            } while (i==0);
+            } while (response.equalsIgnoreCase("yes"));
         System.out.println("Bye bye, visit us again");
     }
 

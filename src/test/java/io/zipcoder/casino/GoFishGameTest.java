@@ -310,43 +310,42 @@ public class GoFishGameTest {
 
     }
 
-    @Test
-
-    public void playerHandBookTest(){
-        Card card1 = new Card(Rank.TWO, Suit.CLUB);
-        Card card2 = new Card(Rank.TWO, Suit.HEART);
-        Card card3 = new Card(Rank.TWO, Suit.DIAMOND);
-        Card card4 = new Card(Rank.TWO, Suit.SPADE);
-        Card card5 = new Card(Rank.THREE, Suit.SPADE);
-        Card card6 = new Card(Rank.THREE, Suit.CLUB);
-        Card card7 = new Card(Rank.THREE, Suit.HEART);
-        Card card8 = new Card(Rank.THREE, Suit.SPADE);
-
-        ArrayList<Card> playerHand1 = new ArrayList<>();
-        playerHand1.add(card1);
-        playerHand1.add(card2);
-        playerHand1.add(card3);
-        playerHand1.add(card4);
-        playerHand1.add(card5);
-        playerHand1.add(card6);
-        playerHand1.add(card7);
-        playerHand1.add(card8);
-
-        System.out.println(playerHand1.size());
-        goFishGame.setPlayerHand(playerHand1);
-
-       // goFishGame.checkPlayerHandForBook();
-        goFishGame.removeBookedCard();
-
-        System.out.println(playerHand1.size());
-        System.out.println(goFishGame.getGoFishPlayer().getScore());
-       // System.out.println(playerHand1.get(0));
-       // System.out.println(playerHand1);
-
-
-
-
-    }
+//    @Test
+//
+//    public void playerHandBookTest(){
+//        Card card1 = new Card(Rank.TWO, Suit.CLUB);
+//        Card card2 = new Card(Rank.TWO, Suit.HEART);
+//        Card card3 = new Card(Rank.TWO, Suit.DIAMOND);
+//        Card card4 = new Card(Rank.TWO, Suit.SPADE);
+//        Card card5 = new Card(Rank.THREE, Suit.SPADE);
+//        Card card6 = new Card(Rank.THREE, Suit.CLUB);
+//        Card card7 = new Card(Rank.THREE, Suit.HEART);
+//
+//
+//        ArrayList<Card> playerHand1 = new ArrayList<>();
+//        playerHand1.add(card1);
+//        playerHand1.add(card2);
+//        playerHand1.add(card3);
+//        playerHand1.add(card4);
+//        playerHand1.add(card5);
+//        playerHand1.add(card6);
+//        playerHand1.add(card7);
+//
+//        int actual = 7;
+//       int expected1= playerHand1.size();
+//        goFishGame.setPlayerHand(playerHand1);
+//
+//       // goFishGame.checkPlayerHandForBook();
+//        goFishGame.removeBookedCard();
+//        System.out.println(goFishGame.countBooksInPlayerHand());
+//
+//       int actual2=  playerHand1.size();
+//       int expected =3;
+//
+//
+//
+//
+//    }
 
     @Test
 
@@ -388,7 +387,33 @@ public class GoFishGameTest {
 
 
     }
+    @Test
+    public void playerHandBookTest() {
+        Card card1 = new Card(Rank.TWO , Suit.CLUB);
+        Card card2 = new Card(Rank.THREE , Suit.HEART);
+        Card card3 = new Card(Rank.TWO , Suit.DIAMOND);
+        Card card4 = new Card(Rank.TWO , Suit.SPADE);
+        Card card5 = new Card(Rank.THREE , Suit.SPADE);
+        Card card6 = new Card(Rank.THREE , Suit.CLUB);
+        Card card7 = new Card(Rank.TWO , Suit.HEART);
+        Card card8 = new Card(Rank.THREE , Suit.SPADE);
 
+        ArrayList<Card> playerHand1 = new ArrayList<>();
+        playerHand1.add(card1);
+        playerHand1.add(card2);
+        playerHand1.add(card3);
+        playerHand1.add(card4);
+        playerHand1.add(card5);
+        playerHand1.add(card6);
+        playerHand1.add(card7);
+        playerHand1.add(card8);
+
+        System.out.println(playerHand1.size());
+        goFishGame.setPlayerHand(playerHand1);
+
+        System.out.println(goFishGame.countBooksInPlayerHand());
+        // goFishGame.removeBookedCard();
+    }
     @Test
    public  void decideWinnerTest() {
       goFishGame.getComputerPlayer().setScore(10);
