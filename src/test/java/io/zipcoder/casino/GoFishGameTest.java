@@ -5,10 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 
-import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.mock;
 /*-
 
 
@@ -46,7 +43,7 @@ public class GoFishGameTest {
     @Test(expected = IllegalStateException.class)
     public void shouldThrowExceptionWhenDeckIsNullStartingGame() {
         goFishGame.setDeck(null);
-        GoFishPlayer goFishPlayer = mock(GoFishPlayer.class);
+        GoFishPlayer goFishPlayer = new GoFishPlayer();
         goFishGame.startGame();
     }
     @Test

@@ -3,7 +3,7 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 
 
-    public abstract class Game extends Exception {
+    public class Game extends Exception {
     private int playerTurn;
 
     private ArrayList<Player> players = new ArrayList<Player>();

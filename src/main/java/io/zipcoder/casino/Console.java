@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.WeakHashMap;
 
 import static io.zipcoder.casino.CrapsConsole.playCraps;
+import static io.zipcoder.casino.GoFish.goFishRun;
 
 public class Console {
 
@@ -49,7 +50,7 @@ public class Console {
             playCraps();
         }
         else if(input.equalsIgnoreCase("gofish")||input.equalsIgnoreCase("g")){
-            playCraps();
+            goFishRun();
         }else if(input.equalsIgnoreCase("exit")){
             System.exit(0);
         }
