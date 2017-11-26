@@ -318,12 +318,12 @@ public class GoFishGameTest {
 
     public void playerHandBookTest(){
         Card card1 = new Card(Rank.TWO, Suit.CLUB);
-        Card card2 = new Card(Rank.TWO, Suit.HEART);
+        Card card2 = new Card(Rank.THREE, Suit.HEART);
         Card card3 = new Card(Rank.TWO, Suit.DIAMOND);
         Card card4 = new Card(Rank.TWO, Suit.SPADE);
         Card card5 = new Card(Rank.THREE, Suit.SPADE);
         Card card6 = new Card(Rank.THREE, Suit.CLUB);
-        Card card7 = new Card(Rank.THREE, Suit.HEART);
+        Card card7 = new Card(Rank.TWO, Suit.HEART);
         Card card8 = new Card(Rank.THREE, Suit.SPADE);
 
         ArrayList<Card> playerHand1 = new ArrayList<>();
@@ -339,8 +339,8 @@ public class GoFishGameTest {
         System.out.println(playerHand1.size());
         goFishGame.setPlayerHand(playerHand1);
 
-       // goFishGame.checkPlayerHandForBook();
-        goFishGame.removeBookedCard();
+        System.out.println(goFishGame.countBooksInPlayerHand());
+       // goFishGame.removeBookedCard();
 
         System.out.println(playerHand1.size());
         System.out.println(goFishGame.getGoFishPlayer().getScore());
