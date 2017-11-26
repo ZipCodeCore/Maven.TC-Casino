@@ -1,17 +1,17 @@
 package io.zipcoder.casino;
 
-public class Craps extends Die implements Gamble {
+public class Craps extends DicePlayer implements Gamble {
 
     private int point;
     private Double pot = 0.0;
-    Player crapsPlayer = new Player();
+    DicePlayer crapsPlayer = new DicePlayer();
 
     public Craps() {
         this.point = 0;
-        rollDice();
+        die.rollDice();
     }
 
-    public int getPoint() {
+    public int getPoint() { 
         return point;
     }
 
@@ -50,17 +50,17 @@ public class Craps extends Die implements Gamble {
 
     //have a while loop in the CrapsConsole
     public int firstRoll() {
-        if (diceTotal() == 7 || diceTotal() ==  11) {
+        if (die.diceTotal() == 7 || die.diceTotal() ==  11) {
             cashInWinnings(); //cashInWinnings  //what if they already have money? add to the money they already have
-            return diceTotal(); 
+            return die.diceTotal();
         }
-        else if (diceTotal() == 2 || diceTotal() == 3 || diceTotal() ==12 ) {
+        else if (die.diceTotal() == 2 || die.diceTotal() == 3 || die.diceTotal() ==12 ) {
             setPot(0.0);
-            return diceTotal();
+            return die.diceTotal();
         }
         else {
-            point = diceTotal();
-            return diceTotal();
+            point = die.diceTotal();
+            return die.diceTotal();
         }
     }
 
