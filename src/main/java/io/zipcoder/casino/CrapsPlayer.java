@@ -18,12 +18,16 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
         return bet;
     }
 
+    public void addWinnings(Double winnings) {
+        money += winnings;
+    }
+
     static int point = 0;
 
     public static int shooter = Dice.rollDice(2);
     public static String gameMessage = " ";
 
-    public static void firstRoll(){
+    public static String firstRoll(){
 
             switch (shooter) {
                 case 7:
@@ -41,9 +45,10 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
                     gameMessage ="Your point has be set to: " + point + " Please roll again.";
                     break;
              }
-        System.out.println(gameMessage);
-        System.out.println(shooter);
-        System.out.println(point);
+//        System.out.println(gameMessage);
+//        System.out.println(shooter);
+//        System.out.println(point);
+        return gameMessage;
 
      }
 
@@ -70,15 +75,16 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
                     break;
             }
         }
-        System.out.println(gameMessage);
-        System.out.println(shooter);
-        System.out.println(point);
+//        System.out.println(gameMessage);
+//        System.out.println(shooter);
+//        System.out.println(point);
 
     }
 
 
 
-   public static void main(String[] args) {
-
-        nextRoll();
-    }}
+//   public static void main(String[] args) {
+//
+//        nextRoll();
+//    }
+}
