@@ -5,12 +5,15 @@ import io.zipcoder.casino.games.Game;
 import io.zipcoder.casino.nuts_n_bolts.Dice;
 import io.zipcoder.casino.nuts_n_bolts.MoneyContainer;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Craps implements Gamble, Game {
 
+    private NumberFormat defaultFormat;
     private CrapPointPair pair;
     private Dice<Integer> dice;
+    private int numberRolled;
     private MoneyContainer mainPot;
     private MoneyContainer sidePot;
     private boolean isPlayerTurn;
@@ -21,9 +24,12 @@ public class Craps implements Gamble, Game {
         for (int i=2; i<13; i++){
             twoToTwelve.add(i);
         }
+        defaultFormat=NumberFormat.getCurrencyInstance();
         dice = new Dice(twoToTwelve);
         mainPot=new MoneyContainer();
         sidePot=new MoneyContainer();
+        numberRolled=0;
+        point=0;
         determineFirstRoller();
     }
 
@@ -68,18 +74,27 @@ public class Craps implements Gamble, Game {
     }
     public void changePlayerTurn(){
         isPlayerTurn=!isPlayerTurn;
+        resetTurn();
     }
+    public void resetTurn() {
+        numberRolled=0;
+        point=0;
+    }
+
     public boolean getPlayerTurn(){return isPlayerTurn;}
 
-    public int getPoint(){return point;}
-    public String getPair(){
-        return(pair.text);
+    public int getNumberRolled(){return numberRolled;}
+    public MoneyContainer getSidePot() {
+        return sidePot;
+    }
+    public MoneyContainer getMainPot() {
+        return mainPot;
     }
 
     public Integer initialThrow(){ //returns -1 if 2/3/12
                                     // 1 if 7/11,
                                     // 0 if point set
-        int numberRolled = dice.rollDie();
+        numberRolled = dice.rollDie();
 
         switch (numberRolled){
             case  2:
@@ -107,7 +122,7 @@ public class Craps implements Gamble, Game {
                                     //returns 1 if point met
                                     //returns 0 if nothing met
                                     //returns any other number if pair met
-        int numberRolled=dice.rollDie();
+        numberRolled=dice.rollDie();
 
         if (numberRolled==point){//Won round
             return 1;
@@ -121,6 +136,35 @@ public class Craps implements Gamble, Game {
                       }
     }
 
+    @Override
+    public String toString(){
+        String returnMe="";
+
+        if (isPlayerTurn){
+            returnMe+="It is your turn\n";
+        } else{
+            returnMe+="It is your opponent's turn\n";
+        }
+
+        if (point==0){
+            returnMe+="Point has not been set, and so we do not have a pair to side bet on\n";
+        } else{
+            returnMe+="Point is "+point+" and we are making side bets on "+pair.text+"\n";
+        }
+
+        if (numberRolled!=0){
+            returnMe+="Last roll was "+numberRolled+"\n";
+        }
+        else{
+            returnMe+="Nobody has rolled yet\n";
+        }
+
+        returnMe+="Main pot is "+defaultFormat.format(mainPot.getMoney())+"\n";
+        returnMe+="Side pot is "+defaultFormat.format(sidePot.getMoney())+"\n";
+
+
+        return returnMe;
+    }
     @Override
     public boolean play(String userInput) {
         return ("Y".equalsIgnoreCase(userInput));

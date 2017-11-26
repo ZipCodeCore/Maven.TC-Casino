@@ -1,13 +1,9 @@
 package io.zipcoder.casino;
 
-import io.zipcoder.casino.casino.CasinoTest;
-import io.zipcoder.casino.games.blackjack.BlackJackPlayerTest;
 import io.zipcoder.casino.games.blackjack.BlackJackTest;
-import io.zipcoder.casino.games.craps.CrapsPlayerTest;
 import io.zipcoder.casino.games.craps.CrapsTest;
 import io.zipcoder.casino.games.gofish.GoFishPlayerTest;
 import io.zipcoder.casino.games.gofish.GoFishTest;
-import io.zipcoder.casino.nuts_n_bolts.ConsoleTest;
 import io.zipcoder.casino.nuts_n_bolts.DiceTest;
 import io.zipcoder.casino.nuts_n_bolts.MoneyContainerTest;
 import io.zipcoder.casino.nuts_n_bolts.UserTest;
@@ -21,15 +17,13 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         //CasinoTest.class,
         BlackJackTest.class,
-        BlackJackPlayerTest.class,
         CrapsTest.class,
-        CrapsPlayerTest.class,
         GoFishTest.class,
         GoFishPlayerTest.class,
         HandTest.class,
         PlayingCardTest.class,
         PlayingDeckTest.class,
-        //ConsoleTest.class,
+        //ConsoleTest.class,}
         DiceTest.class,
         MoneyContainerTest.class,
         UserTest.class
