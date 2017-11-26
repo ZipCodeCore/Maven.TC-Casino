@@ -95,57 +95,28 @@ public class GoFishGameTest {
     @Test
 
     public void playerHandDisplayTest() {
-//        Card card = new Card(Rank.EIGHT, Suit.SPADE);
-//        Card card1 = new Card(Rank.SEVEN, Suit.CLUB);
-//        Card card3 = new Card(Rank.SEVEN, Suit.HEART);
-//        Card card2 = new Card(Rank.ACE, Suit.CLUB);
-//        ArrayList<Card> playerHand1 = new ArrayList<>();
-//        playerHand1.add(card);
-//        playerHand1.add(card1);
-//        playerHand1.add(card2);
-//        playerHand1.add(card3);
-//
-//        goFishGame.setPlayerHand(playerHand1);
-//
-//        String expected = "You have {7=1, 8=1}";
-//
-//        String actual = goFishGame.playerHandDisplay().toString();
-//
-//        //  Map<String, Long> playerMap = goFishGame.playerHandDisplay();
-//        ArrayList<Card> cards = goFishGame.playerHand();
-//        // System.out.println(playerMap.values());
-//        System.out.println(cards.size());
+        Card card = new Card(Rank.EIGHT, Suit.SPADE);
+        Card card1 = new Card(Rank.SEVEN, Suit.CLUB);
+        Card card3 = new Card(Rank.SEVEN, Suit.HEART);
+        Card card2 = new Card(Rank.ACE, Suit.CLUB);
+        ArrayList<Card> playerHand1 = new ArrayList<>();
+        playerHand1.add(card);
+        playerHand1.add(card1);
+        playerHand1.add(card2);
+        playerHand1.add(card3);
 
-      // String[] rank = {"7", "8","9", "10", "J"};
+        goFishGame.setPlayerHand(playerHand1);
 
-      //  for (int i = 0; i < goFishGame.getPlayerHand().size()-1; i++) {
-           // String rank = goFishGame.getComputerHand().get(i).getRank().getSymbol();
-          //  for (Iterator<Card> iter = cards.iterator(); iter.hasNext(); ){
-               // Rank rank = iter.next().getRank();
-      //  for(int i =0; i<goFishGame.getPlayerHand().size(); i++){
-          //  String rank = goFishGame.getPlayerHand().get(i).getRank().getSymbol();
-            int z =0;
-        int count = 0;
-        int score = 0;
+        String expected = "You have {7=1, 8=1}";
+
+        String actual = goFishGame.playerHandDisplay().toString();
+
+        //  Map<String, Long> playerMap = goFishGame.playerHandDisplay();
         ArrayList<Card> cards = goFishGame.playerHand();
-            while(z<goFishGame.getPlayerHand().size()){
-                String rank = goFishGame.getPlayerHand().get(z).getRank().getSymbol();
-                for (Iterator<Card> it = cards.iterator(); it.hasNext(); ) {
+        // System.out.println(playerMap.values());
+        System.out.println(cards.size());
 
-                if (it.next().getRank().getSymbol().equalsIgnoreCase(rank)) {
-                    count++;
-                    if (count == 3)
-                        score++;
-                        it.remove();
 
-                }
-            }
-            z++;
-       }
-            System.out.println("count is " + count);
-            System.out.println("score is " + score);
-
-            System.out.println(cards);
 
 
     }
@@ -190,26 +161,26 @@ public class GoFishGameTest {
         Assert.assertEquals(expected, actual);
     }
 
-  /*  @Test
-    public void checkPlayerCanTakeCardFromComputerTest() {    // tested by viewing the console and passed the test.
-        goFishGame.getDeck();
-        goFishGame.playerHand();
-        Card card0 = new Card(Rank.SIX, Suit.SPADE);
-        Card card = new Card(Rank.SEVEN, Suit.SPADE);
-
-
-        ArrayList<Card> computerHand1 = new ArrayList<>();
-        computerHand1.add(card0);
-        computerHand1.add(card);
-
-
-        goFishGame.setComputerHand(computerHand1);
-
-        String expected = " The computer has 7\nYour hand is [5♧, 10♤, 9♧, 3♧, 6♢, 9♢, J♧, 7♧]\n" +
-                "Insert the next card you want: ";
-
-        goFishGame.askComputerHandForACard("7");
-    }*/
+//  @Test
+//    public void checkPlayerCanTakeCardFromComputerTest() {    // tested by viewing the console and passed the test.
+//        goFishGame.getDeck();
+//        goFishGame.playerHand();
+//        Card card0 = new Card(Rank.SIX, Suit.SPADE);
+//        Card card = new Card(Rank.SEVEN, Suit.SPADE);
+//
+//
+//        ArrayList<Card> computerHand1 = new ArrayList<>();
+//        computerHand1.add(card0);
+//        computerHand1.add(card);
+//
+//
+//        goFishGame.setComputerHand(computerHand1);
+//
+//        String expected = " The computer has 7\nYour hand is [5♧, 10♤, 9♧, 3♧, 6♢, 9♢, J♧, 7♧]\n" +
+//                "Insert the next card you want: ";
+//
+//        goFishGame.askComputerHandForACard("7");
+//    }
 
 
     @Test
@@ -237,43 +208,65 @@ public class GoFishGameTest {
 
     }
 
-//    @Test
-//
-//    public void checkPlayersCardRequestForInputBoundary() {
-//        Card card1 = new Card(Rank.SIX, Suit.HEART);
-//        Card card = new Card(Rank.SEVEN, Suit.DIAMOND);
-//        ArrayList<Card> playerHand1 = new ArrayList<>();
-//        playerHand1.add(card1);
-//        playerHand1.add(card);
-//
-//        goFishGame.setPlayerHand(playerHand1);
-//        Boolean expected = true;
-//        Boolean actual = goFishGame.checkPlayersCardRequestForInputBoundary("9");
-//        Assert.assertEquals(expected, actual);
-//        Boolean expected2 = false;
-//        Boolean actual2 = goFishGame.checkPlayersCardRequestForInputBoundary("12");
-//        Assert.assertEquals(expected2, actual2);
-//    }
+    @Test
 
-//    @Test
-//    public void checkPlayersCardRequestForGameRuleTest(){
-//        Card card1 = new Card(Rank.SIX, Suit.HEART);
-//        Card card = new Card(Rank.SEVEN, Suit.DIAMOND);
-//
-//        ArrayList<Card> playerHand1 = new ArrayList<>();
-//        playerHand1.add(card1);
-//        playerHand1.add(card);
-//
-//        goFishGame.setPlayerHand(playerHand1);
-//
-//        Boolean expected = false;
-//        Boolean actual = goFishGame.checkPlayersCardRequestForGameRule("10");
-//        Assert.assertEquals(expected, actual);
-//
-//        Boolean expected2 = true;
-//        Boolean actual2 = goFishGame.checkPlayersCardRequestForGameRule("7");
-//        Assert.assertEquals(expected2, actual2);
-//    }
+    public void checkPlayersCardRequestForInputBoundary() {
+        Card card1 = new Card(Rank.SIX, Suit.HEART);
+        Card card = new Card(Rank.SEVEN, Suit.DIAMOND);
+        ArrayList<Card> playerHand1 = new ArrayList<>();
+        playerHand1.add(card1);
+        playerHand1.add(card);
+
+        goFishGame.setPlayerHand(playerHand1);
+        Boolean expected = true;
+        Boolean actual = goFishGame.checkPlayersCardRequestForInputBoundary("9");
+        Assert.assertEquals(expected, actual);
+        Boolean expected2 = false;
+        Boolean actual2 = goFishGame.checkPlayersCardRequestForInputBoundary("12");
+        Assert.assertEquals(expected2, actual2);
+    }
+
+    @Test
+    public void checkPlayersCardRequestForGameRuleTest(){
+        Card card1 = new Card(Rank.SIX, Suit.HEART);
+        Card card = new Card(Rank.SEVEN, Suit.DIAMOND);
+
+        ArrayList<Card> playerHand1 = new ArrayList<>();
+        playerHand1.add(card1);
+        playerHand1.add(card);
+
+        goFishGame.setPlayerHand(playerHand1);
+
+        Boolean expected = false;
+       Boolean actual = goFishGame.checkPlayersCardRequestForGameRule("10");
+        Assert.assertEquals(expected, actual);
+       Boolean actual3 = playerHand1.get(1).getRank().getSymbol().equalsIgnoreCase("7");
+
+        Boolean expected2 = true;
+       Boolean actual2 = goFishGame.checkPlayersCardRequestForGameRule("7");
+       Assert.assertEquals(expected2, actual2);
+    }
+
+    @Test
+    public void checkInputTest(){
+        Card card1 = new Card(Rank.SIX, Suit.HEART);
+        Card card = new Card(Rank.SEVEN, Suit.DIAMOND);
+
+        ArrayList<Card> playerHand1 = new ArrayList<>();
+        playerHand1.add(card1);
+        playerHand1.add(card);
+
+        goFishGame.setPlayerHand(playerHand1);
+
+        Boolean expected = false;
+        Boolean actual = goFishGame.checkInput("10");
+        Assert.assertEquals(expected, actual);
+        Boolean actual3 = playerHand1.get(1).getRank().getSymbol().equalsIgnoreCase("7");
+
+        Boolean expected2 = true;
+        Boolean actual2 = goFishGame.checkInput("7");
+        Assert.assertEquals(expected2, actual2);
+    }
 
     @Test
 

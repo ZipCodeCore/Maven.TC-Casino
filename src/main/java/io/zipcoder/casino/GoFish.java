@@ -29,6 +29,7 @@ public class GoFish extends GoFishGame {
                 while (!goFishGame.getDeck().isEmpty()) {
                     System.out.println("Insert the rank of the card you want to request: ");
                     String rank = InPutConsole.getInput();
+                    //goFishGame.checkPlayersCardRequestForGameRule(rank);
 
                     goFishGame.askComputerHandForACard(rank);
                     goFishGame.playerHandDisplay();

@@ -275,7 +275,7 @@ public class GoFishGame extends CardGame {
 
     public Card checkComputerHandForBook() {
         int count = 0;
-        Card card = null;µ
+        Card card = null;
         //ArrayList<Card> toBeRemoved=new ArrayList<>();
         //int score = getGoFishPlayer().getScore();
 
@@ -318,43 +318,63 @@ public class GoFishGame extends CardGame {
 
     }
 
-//    public void checkPlayersCardRequestForInputBoundary(String input) {
-//        Boolean checkResult = true;
-//        if ((Integer.parseInt(input) > 2 && Integer.parseInt(input) < 12)
-//                || (input.toString().toUpperCase().equals("K"))
-//                || (input.toString().toUpperCase().equals("J")) ||
-//                (input.toString().toUpperCase().equals("Q"))) {
-//                       checkPlayersCardRequestForGameRule(input);
-//        } else {
+    public Boolean checkPlayersCardRequestForInputBoundary(String input) {
+        Boolean checkResult = false;
+        if ((Integer.parseInt(input) > 2 && Integer.parseInt(input) < 12)
+                || (input.toString().toUpperCase().equals("K"))
+                || (input.toString().toUpperCase().equals("J")) ||
+                (input.toString().toUpperCase().equals("Q"))) {
+                    checkResult = true;
+                       checkPlayersCardRequestForGameRule(input);
+        } else {
+                checkResult = false;
+
+        }
+
+
+        return checkResult;
+
+    }
+
+
+    public Boolean checkPlayersCardRequestForGameRule(String input) {
+        Boolean checkresult = false;
+        for (int i = 0; i < getPlayerHand().size(); i++) {
+            if (input.equals(getPlayerHand().get(i).getRank().getSymbol())) {
+                checkresult = true;
+               //askComputerHandForACard(input);
+                break;
+
+            }
+             else {
+
+                checkresult = false;
+            }
+
+        }
 //
-//               System.out.println("Insert proper value");
-//        }
-//
-//    }
-//
-//
-//    public void checkPlayersCardRequestForGameRule(String input) {
-//       // Boolean checkresult = false;
-//        for (int i = 0; i < getPlayerHand().size(); i++) {
-//            if (input.equals(getPlayerHand().get(i).getRank().getSymbol())) {
-//                askComputerHandForACard(input);
-//            }
-//              System.out.println("You cannot request for card not in hand");
-//                break;
-//
-//        }
-//
-//
-//    }
-//
-//    public void checkInput(String input) {
-//
-//
-//        while (checkPlayersCardRequestForInputBoundary(input) && checkPlayersCardRequestForGameRule(input)) {
-//                 System.out.println("Insert proper value");
-//        }
-//       askComputerHandForACard(input);
-//    }
+       return checkresult;
+
+
+    }
+
+    public Boolean checkInput(String input) {
+Boolean checkResult = false;
+
+        while (checkResult==false)
+               if( checkPlayersCardRequestForInputBoundary(input) && checkPlayersCardRequestForGameRule(input)) {
+                   checkResult = true;
+                   askComputerHandForACard(input);
+               }
+               else{
+            checkResult = false;
+
+
+        }
+
+        return checkResult;
+
+    }
 
 
     public void increaseComputerScore() {
