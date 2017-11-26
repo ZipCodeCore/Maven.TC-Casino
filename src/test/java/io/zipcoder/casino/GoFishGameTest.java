@@ -237,43 +237,43 @@ public class GoFishGameTest {
 
     }
 
-    @Test
+//    @Test
+//
+//    public void checkPlayersCardRequestForInputBoundary() {
+//        Card card1 = new Card(Rank.SIX, Suit.HEART);
+//        Card card = new Card(Rank.SEVEN, Suit.DIAMOND);
+//        ArrayList<Card> playerHand1 = new ArrayList<>();
+//        playerHand1.add(card1);
+//        playerHand1.add(card);
+//
+//        goFishGame.setPlayerHand(playerHand1);
+//        Boolean expected = true;
+//        Boolean actual = goFishGame.checkPlayersCardRequestForInputBoundary("9");
+//        Assert.assertEquals(expected, actual);
+//        Boolean expected2 = false;
+//        Boolean actual2 = goFishGame.checkPlayersCardRequestForInputBoundary("12");
+//        Assert.assertEquals(expected2, actual2);
+//    }
 
-    public void checkPlayersCardRequestForInputBoundary() {
-        Card card1 = new Card(Rank.SIX, Suit.HEART);
-        Card card = new Card(Rank.SEVEN, Suit.DIAMOND);
-        ArrayList<Card> playerHand1 = new ArrayList<>();
-        playerHand1.add(card1);
-        playerHand1.add(card);
-
-        goFishGame.setPlayerHand(playerHand1);
-        Boolean expected = true;
-        Boolean actual = goFishGame.checkPlayersCardRequestForInputBoundary("9");
-        Assert.assertEquals(expected, actual);
-        Boolean expected2 = false;
-        Boolean actual2 = goFishGame.checkPlayersCardRequestForInputBoundary("12");
-        Assert.assertEquals(expected2, actual2);
-    }
-
-    @Test
-    public void checkPlayersCardRequestForGameRuleTest(){
-        Card card1 = new Card(Rank.SIX, Suit.HEART);
-        Card card = new Card(Rank.SEVEN, Suit.DIAMOND);
-
-        ArrayList<Card> playerHand1 = new ArrayList<>();
-        playerHand1.add(card1);
-        playerHand1.add(card);
-
-        goFishGame.setPlayerHand(playerHand1);
-
-        Boolean expected = false;
-        Boolean actual = goFishGame.checkPlayersCardRequestForGameRule("10");
-        Assert.assertEquals(expected, actual);
-
-        Boolean expected2 = true;
-        Boolean actual2 = goFishGame.checkPlayersCardRequestForGameRule("7");
-        Assert.assertEquals(expected2, actual2);
-    }
+//    @Test
+//    public void checkPlayersCardRequestForGameRuleTest(){
+//        Card card1 = new Card(Rank.SIX, Suit.HEART);
+//        Card card = new Card(Rank.SEVEN, Suit.DIAMOND);
+//
+//        ArrayList<Card> playerHand1 = new ArrayList<>();
+//        playerHand1.add(card1);
+//        playerHand1.add(card);
+//
+//        goFishGame.setPlayerHand(playerHand1);
+//
+//        Boolean expected = false;
+//        Boolean actual = goFishGame.checkPlayersCardRequestForGameRule("10");
+//        Assert.assertEquals(expected, actual);
+//
+//        Boolean expected2 = true;
+//        Boolean actual2 = goFishGame.checkPlayersCardRequestForGameRule("7");
+//        Assert.assertEquals(expected2, actual2);
+//    }
 
     @Test
 
@@ -320,14 +320,14 @@ public class GoFishGameTest {
     @Test
 
     public void playerHandBookTest(){
-        Card card1 = new Card(Rank.SIX, Suit.CLUB);
-        Card card2 = new Card(Rank.SEVEN, Suit.HEART);
-        Card card3 = new Card(Rank.SIX, Suit.DIAMOND);
-        Card card4 = new Card(Rank.EIGHT, Suit.HEART);
-        Card card5 = new Card(Rank.SIX, Suit.SPADE);
-        Card card6 = new Card(Rank.SEVEN, Suit.CLUB);
-        Card card7 = new Card(Rank.SIX, Suit.HEART);
-        Card card8 = new Card(Rank.FIVE, Suit.SPADE);
+        Card card1 = new Card(Rank.TWO, Suit.CLUB);
+        Card card2 = new Card(Rank.TWO, Suit.HEART);
+        Card card3 = new Card(Rank.TWO, Suit.DIAMOND);
+        Card card4 = new Card(Rank.TWO, Suit.SPADE);
+        Card card5 = new Card(Rank.THREE, Suit.SPADE);
+        Card card6 = new Card(Rank.THREE, Suit.CLUB);
+        Card card7 = new Card(Rank.THREE, Suit.HEART);
+        Card card8 = new Card(Rank.THREE, Suit.SPADE);
 
         ArrayList<Card> playerHand1 = new ArrayList<>();
         playerHand1.add(card1);
@@ -339,15 +339,70 @@ public class GoFishGameTest {
         playerHand1.add(card7);
         playerHand1.add(card8);
 
-
+        System.out.println(playerHand1.size());
         goFishGame.setPlayerHand(playerHand1);
 
        // goFishGame.checkPlayerHandForBook();
+        goFishGame.removeBookedCard();
+
         System.out.println(playerHand1.size());
-        System.out.println(playerHand1.get(0));
+        System.out.println(goFishGame.getGoFishPlayer().getScore());
+       // System.out.println(playerHand1.get(0));
+       // System.out.println(playerHand1);
 
 
 
+
+    }
+
+    @Test
+
+    public void playerScoreTest(){
+        Player player = goFishGame.getGoFishPlayer();
+        int score =0;
+        Card card1 = new Card(Rank.TWO, Suit.CLUB);
+        Card card2 = new Card(Rank.TWO, Suit.HEART);
+        Card card3 = new Card(Rank.TWO, Suit.DIAMOND);
+        Card card4 = new Card(Rank.TWO, Suit.SPADE);
+        Card card5 = new Card(Rank.THREE, Suit.SPADE);
+        Card card6 = new Card(Rank.THREE, Suit.CLUB);
+        Card card7 = new Card(Rank.THREE, Suit.HEART);
+        Card card8 = new Card(Rank.THREE, Suit.SPADE);
+
+        ArrayList<Card> playerHand1 = new ArrayList<>();
+        playerHand1.add(card1);
+        playerHand1.add(card2);
+        playerHand1.add(card3);
+        playerHand1.add(card4);
+        playerHand1.add(card5);
+        playerHand1.add(card6);
+        playerHand1.add(card7);
+        playerHand1.add(card8);
+
+        System.out.println(playerHand1.size());
+        goFishGame.setPlayerHand(playerHand1);
+
+        // goFishGame.checkPlayerHandForBook();
+        System.out.println(goFishGame.checkPlayerHandForBook());
+
+        System.out.println(playerHand1.size());
+        System.out.println(playerHand1);
+        System.out.println(score);
+        // System.out.println(playerHand1.get(0));
+        // System.out.println(playerHand1);
+
+
+
+
+    }
+
+    @Test
+   public  void decideWinnerTest() {
+      goFishGame.getComputerPlayer().setScore(10);
+      goFishGame.getGoFishPlayer().setScore(2);
+
+
+        goFishGame.decideWiner();
 
     }
 

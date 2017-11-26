@@ -5,57 +5,54 @@ import java.util.Scanner;
 public class GoFish extends GoFishGame {
 
 
-
     Scanner scanner = new Scanner(System.in);
 
     static GoFishGame goFishGame = new GoFishGame();
 
-    public static void goFishRun(){
+    public static void goFishRun() {
 
-        System.out.print("Welcome to the <GoFish> table!");
-
+        System.out.print("Welcome to the <GoFish> table!\n" +
+                "Insert nick name you want to use for the game? \n\n");
+        goFishGame.getGoFishPlayer().setName(InPutConsole.getInput());
 
         String response = "No";
 
         goFishGame.startGame();
         goFishGame.playerHand();
         goFishGame.computerHand();
+                int i =0;
 
-        try {
-        do {
+            do {
 
-            while (!goFishGame.getDeck().isEmpty()) {
-                //System.out.println(goFishGame.getComputerHand());
-                System.out.println("Insert the rank of the card you want to request: ");
-                String rank = InPutConsole.getInput();
-                goFishGame.checkInput(rank);
-                goFishGame.playerHandDisplay();
-               // goFishGame.increasePlayerScoreForBook();
-                goFishGame.goFishingPlayer();
+                while (!goFishGame.getDeck().isEmpty()) {
+                    System.out.println("Insert the rank of the card you want to request: ");
+                    String rank = InPutConsole.getInput();
+                    goFishGame.askComputerHandForACard(rank);
+                    goFishGame.playerHandDisplay();
+                    goFishGame.goFishingPlayer();
+                    // goFishGame.removeBookedCard();
+                    goFishGame.checkIfComputerHandHasAcard();
+                    goFishGame.askPlayerForACard(goFishGame.computerCardToRequest());
+                    goFishGame.goFishingComputer();
+                 // goFishGame.removeComputerBookedCard();
 
-                goFishGame.checkIfComputerHandHasAcard();
-                goFishGame.askPlayerForACard(goFishGame.computerCardToRequest());
-               // goFishGame.checkComputerForBook();
-                goFishGame.goFishingComputer();
+                }
+                System.out.println("The deck has finished");
+                System.out.println("Computer score is " + goFishGame.getComputerPlayer().getScore());
+                System.out.println( goFishGame.getGoFishPlayer().getName() + " score is " + goFishGame.getGoFishPlayer().getScore());
+                goFishGame.decideWiner();
+                System.out.println("Do you want to play again?");
+                response = InPutConsole.getInput();
+                if(response.toUpperCase().equalsIgnoreCase("yes")){
+                    goFishGame.startGame();
 
-                // System.out.println(goFishGame.getPlayerHand());
-            }
-
-            System.out.println("The deck has finished");
-            //  goFishGame.increasePlayerScore();
-
-            // goFishGame.increaseComputerScore();
-
-            System.out.println("Computer score is " + goFishGame.getComputerPlayer().getScore());
-            System.out.println("Your score is " + goFishGame.getGoFishPlayer().getScore());
-            goFishGame.decideWiner();
-            System.out.println("Do you want to play again?");
-            response = InPutConsole.getInput();
-        } while (response == "YES");
-    } catch (Exception e) {
-        System.out.println("please insert YES or NO" );
+                }
+                else{
+                    i=1;
+                    }
+            } while (i==0);
+        System.out.println("Bye bye, visit us again");
     }
-}
 
  /*   public void playGoFish(
 

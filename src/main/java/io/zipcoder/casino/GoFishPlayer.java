@@ -7,16 +7,37 @@ import java.util.Collections;
 
 
    public class GoFishPlayer extends CardPlayer {
+       private int score;
+       private String name;
+       private ArrayList<Card> hand;
 
+       public GoFishPlayer(){super();};
 
+       @Override
+       public int getScore() {
+           return score;
+       }
 
+       @Override
+       public String getName() {
+           return name;
+       }
 
+       @Override
+       public ArrayList<Card> getHand() {
+           return hand;
+       }
 
+       @Override
+       public void setName(String name) {
+           this.name = name;
+       }
 
-
-
-
-//    public Card drawCard(Deck deck) {
+       @Override
+       public void setScore(int score) {
+           this.score = score;
+       }
+       //    public Card drawCard(Deck deck) {
 //        Card playerCard = deck.getCards().remove(0);
 //        return playerCard;
 //    }
