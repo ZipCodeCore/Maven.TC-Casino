@@ -39,8 +39,8 @@ public class CrapsTest {
 
     @Test
     public void placeBetWhenHasMoneySoPotIsSetTest() throws Exception{
-        Player crapsPlayer = new Player();
-        craps.placeBet();
+        DicePlayer crapsPlayer = new DicePlayer();
+        craps.placeBet(20.0);
         Double expected;
         Double actual = craps.getPot();
     }
