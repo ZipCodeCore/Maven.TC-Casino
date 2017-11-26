@@ -1,9 +1,8 @@
 package io.zipcoder.casino;
 
-
-public abstract class Player {
+public class Player {
     private String name;
-    protected Double money;
+    private Double money;
 
     public Player() {
         name = "Player";

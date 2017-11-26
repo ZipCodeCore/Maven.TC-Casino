@@ -11,7 +11,6 @@ public class Die {
     public void rollDice(){
         die1 = (int) (Math.random()*6) + 1;
         die2 = (int) (Math.random()*6) + 1;
-
     }
 
     public int getDie1() {
@@ -22,7 +21,7 @@ public class Die {
         return die2;
     }
 
-    public int diceTotal(){
+    public int diceTotal() {
         return die1 + die2;
     }
 
