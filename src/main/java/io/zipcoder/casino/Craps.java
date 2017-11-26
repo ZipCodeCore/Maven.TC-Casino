@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Craps extends DiceGames implements Dice {
 
+
+
     ArrayList<CrapsPlayer> crapsPlayers;
 
 
@@ -20,6 +22,8 @@ public class Craps extends DiceGames implements Dice {
     public void testGit() {
 
     }
+
+
 
 
 }
