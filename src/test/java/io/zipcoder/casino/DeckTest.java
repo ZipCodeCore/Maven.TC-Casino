@@ -1,3 +1,4 @@
+
 package io.zipcoder.casino;
 
 import org.junit.Assert;
@@ -13,7 +14,7 @@ public class DeckTest {
 
     @Test
     public void constructorTest(){
-        ArrayList<Card> cards = deck.getCards();
+        ArrayList<Card> cards = deck.getDeck();
         String expected = "a bunch of cards";
         String actual = "***output***\n ";
         for(Card card: cards){
@@ -25,7 +26,7 @@ public class DeckTest {
     @Test
     public void shuffleTest() throws Exception {
         deck.shuffle();
-        ArrayList<Card> cards = deck.getCards();
+        ArrayList<Card> cards = deck.getDeck();
 
         String expected = "a bunch of cards";
 

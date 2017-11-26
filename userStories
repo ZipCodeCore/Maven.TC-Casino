@@ -46,7 +46,7 @@
         test the highest score less than 22 win the game (Blackjack)
 
 
--As a gofish player I would like to start a game.
+-As a gofish game customer I would like the game to start with a player, computer player and a deck
 
   test can create a game (GoFish)
             test can add a players to the game (GoFish)
@@ -54,13 +54,24 @@
             test existace of a hand (GoFish, GoFishPlayer)
 
 -As a gofish I would like to draw 7 cards (GoFish)
-    test that the first 7 cards from the deck are in my hand
+    test that the player gets 7 cards from the deck at the start of the game
     test that these cards are removed from the deck
+    test the layer is able to see the card
 
--As a gofish player I would like to ask my opponent for a particular card.
-     test boolean on the other player whether or not has the card asked
+ -As a gofish I would like the computer to draw 7 cards and save it without displaying (GoFish)
+        test that the computer player gets 7 cards from the deck at the start of the game
+        test that these cards are removed from the deck
+ - As a gofish player I would like to be able to see my card
+    test console displayes players card
+
+-As a gofish player I would like to ask the computer for a particular card
+and the compuetr should given me all cards at the hand of that type.
+     test compuetr pass the requested card and is removed from the computer hand
+ -As a go fish player, I want the computer to make smart decision, i.e. ask for the card that it has most.
+     -test the computer ask for the most frequent rank in its hand.
 
 -As a gofish player I would like to score a point when I have a book to lay down.
+        test for the number of cards of the same rank in the player hand
       test I have 4 cards of the same Rank, I remove the cards from my hand
       test my score incremented one point.
 
@@ -72,10 +83,8 @@
 -As a gofish player I would like to see the final score when the deck is empty.
         test which player has the biggest amount of points
 
--As a gofish bot. I would like to ask for the card that I have the most of
-    (or that that has been asked of me).
-    test the goFish bot request a card of rank that it's on its hand
--As a gofish programmer I would like a display method for my bot, for testing purposes only.
+
+
 
 
 -As a craps player I would like to start the game.

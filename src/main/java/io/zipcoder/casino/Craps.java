@@ -1,3 +1,4 @@
+
 package io.zipcoder.casino;
 
 import static io.zipcoder.casino.CrapsConsole.getBooleanInput;

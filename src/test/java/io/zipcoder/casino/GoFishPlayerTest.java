@@ -11,7 +11,7 @@
 //public class GoFishPlayerTest {
 //    @Test
 //    public void checkHandForCard() throws Exception {
-//        GoFish gameOn = new GoFish();
+//        GoFishGame gameOn = new GoFishGame();
 //        GoFishPlayer player1 = new GoFishPlayer();
 //
 //        String expected = "";
@@ -30,7 +30,7 @@
 //
 //    @Test
 //    public void giveCard() throws Exception {
-//        GoFish gameOn = new GoFish();
+//        GoFishGame gameOn = new GoFishGame();
 //        GoFishPlayer player1 = new GoFishPlayer();
 //
 //        String expected = "";
@@ -51,7 +51,7 @@
 //
 //    @Test
 //    public void drawCard() throws Exception {
-//        GoFish gameOn = new GoFish();
+//        GoFishGame gameOn = new GoFishGame();
 //        GoFishPlayer player1 = new GoFishPlayer();
 //
 //        gameOn.addPlayer(player1);
@@ -81,7 +81,7 @@
 //    @Test
 //    public void drawFiveCardsTest(){
 //        GoFishPlayer somePlayer = new GoFishPlayer();
-//        GoFish gameOn = new GoFish();
+//        GoFishGame gameOn = new GoFishGame();
 //
 //        somePlayer.drawFiveCards(gameOn.getGameDeck());
 //

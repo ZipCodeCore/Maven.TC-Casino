@@ -3,9 +3,8 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 
 
-public class Game {
-
-    private int round;
+    public abstract class Game extends Exception {
+    private int playerTurn;
 
     private ArrayList<Player> players = new ArrayList<Player>();
 

@@ -1,3 +1,4 @@
+
 package io.zipcoder.casino;
 
 import java.util.Scanner;
@@ -61,5 +62,4 @@ public class Console {
     }
 
 }
-
 

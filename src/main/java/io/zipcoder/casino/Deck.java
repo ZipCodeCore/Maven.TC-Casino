@@ -15,7 +15,9 @@ public class Deck {
         for (int i = 0; i < 4; i++) {
             Suit[] suitArray = new Suit[]{Suit.CLUB, Suit.DIAMOND, Suit.HEART, Suit.SPADE};
             for (int j = 0; j < 13; j++) {
-                Rank[] rankArray = new Rank[]{Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.SIX, Rank.SEVEN, Rank.EIGHT, Rank.NINE, Rank.TEN, Rank.JACK, Rank.QUEEN, Rank.KING};
+                Rank[] rankArray = new Rank[]{Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE,
+                        Rank.SIX, Rank.SEVEN, Rank.EIGHT, Rank.NINE, Rank.TEN, Rank.JACK, Rank.QUEEN,
+                        Rank.KING};
 
                 Card card = new Card(rankArray[j], suitArray[i]);
 
@@ -25,7 +27,7 @@ public class Deck {
 
     }
 
-    public ArrayList<Card> getCards() {
+    public ArrayList<Card> getDeck() {
         return cards;
     }
 
@@ -41,3 +43,5 @@ public class Deck {
         return null;
     }
 }
+
+
