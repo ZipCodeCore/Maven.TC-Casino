@@ -409,7 +409,7 @@ public class GoFishGame extends CardGame {
         return computerPlayer;
     }
 
-    public Integer countBooksInPlayerHand() {
+    public String countBooksInPlayerHand() {
         ArrayList<Card> hand = getPlayerHand();
         List<String> cardsByRank = new ArrayList<>();
 
@@ -422,10 +422,10 @@ public class GoFishGame extends CardGame {
 
         for (String rank : uniqueSet) {
             if(Collections.frequency(cardsByRank,rank)>3){
-                count++;
+                return rank;
             }
         }
-        return count;
+        return null;
     }
 }
 

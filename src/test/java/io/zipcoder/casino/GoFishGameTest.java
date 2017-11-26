@@ -359,10 +359,10 @@ public class GoFishGameTest {
         int score =0;
         Card card1 = new Card(Rank.TWO, Suit.CLUB);
         Card card2 = new Card(Rank.TWO, Suit.HEART);
-        Card card3 = new Card(Rank.TWO, Suit.DIAMOND);
+        Card card3 = new Card(Rank.THREE, Suit.DIAMOND);
         Card card4 = new Card(Rank.TWO, Suit.SPADE);
         Card card5 = new Card(Rank.THREE, Suit.SPADE);
-        Card card6 = new Card(Rank.THREE, Suit.CLUB);
+        Card card6 = new Card(Rank.TWO, Suit.CLUB);
         Card card7 = new Card(Rank.THREE, Suit.HEART);
         Card card8 = new Card(Rank.THREE, Suit.SPADE);
 
