@@ -11,7 +11,7 @@ public class Craps extends DicePlayer implements Gamble {
         die.rollDice();
     }
 
-    public int getPoint() {
+    public int getPoint() { 
         return point;
     }
 
