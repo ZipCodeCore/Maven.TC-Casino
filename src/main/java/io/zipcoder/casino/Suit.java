@@ -6,11 +6,11 @@ public enum Suit {
 
     private final String suitSymbols;
 
-    Suit(String symbol){
+    Suit(String symbol) {
         this.suitSymbols = symbol;
     }
 
-    public String getSuitSymbols() {
+    public String getSuit() {
         return suitSymbols;
     }
 }

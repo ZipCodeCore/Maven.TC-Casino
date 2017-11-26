@@ -1,28 +1,27 @@
 package io.zipcoder.casino;
 
-import java.util.ArrayList;
-
 abstract class Player<E> {
 
-    private String name;
-    private Double money;
-    private double bet;
+    protected String name;
+    protected Double money;
+    protected double bet;
 
-    public String getName() {
-        return name;
-    }
-
-    private void bet(double bet){
-     this.bet = bet;
-    }
 
     Player(String name, Double money){
         this.name = name;
         this.money = money;
     }
 
-    Player(String name){
-        this.name = name;
+    Player() {
     }
 
+    public String getName() {
+        return name;
+    }
+
+    private void bet(double bet) {
+        this.bet = bet;
+    }
+
+    public abstract void addCardToHand(Card card);
 }

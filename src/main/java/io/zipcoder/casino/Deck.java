@@ -7,15 +7,18 @@ public class Deck {
 
 //    ArrayDeque<Card> cards = new ArrayDeque<>();
 
-    ArrayList<Card> cards = new ArrayList();
+    private ArrayList<Card> cards = new ArrayList();
 
-    Deck() {
+    public void populate() {
+        cards = new ArrayList();
+
         for (Suit suit : Suit.values()) {
             for (CardValue cardValue : CardValue.values()) {
                 cards.add(new Card(suit, cardValue));
             }
         }
     }
+
 
     public Card dealOneRandomCard() {
         Card topCard = cards.get(0);
@@ -25,6 +28,18 @@ public class Deck {
 
     public void shuffle() {
         Collections.shuffle(cards);
+    }
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
+    public int getDeckSize() {
+        return cards.size();
+    }
+
+    public Card getCardByIndex(int index) {
+        return cards.get(index);
     }
 
 }
