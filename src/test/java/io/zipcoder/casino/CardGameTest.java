@@ -10,24 +10,24 @@ import static org.junit.Assert.*;
 
 public class CardGameTest {
 
-    Player player = new Player();
-    ArrayList<Card> handTest;
-    CardGame game = new CardGame();
-    @Before
-    public void setUp() {
-        handTest = new ArrayList<Card>;
-    }
-
-    @Test
-    public void showHand() throws Exception {
-        ArrayList<Card> expected = handTest;
-        ArrayList<Card> actual = game.showHand();
-        Assert.assert;
-
-    }
-
-    @Test
-    public void isHandEmpty() throws Exception {
-    }
+//    Player player = new Player();
+//    ArrayList<Card> handTest;
+//    CardGame game = new CardGame();
+//    @Before
+//    public void setUp() {
+//        handTest = new ArrayList<Card>;
+//    }
+//
+//    @Test
+//    public void showHand() throws Exception {
+//        ArrayList<Card> expected = handTest;
+//        ArrayList<Card> actual = game.showHand();
+//        Assert.assert;
+//
+//    }
+//
+//    @Test
+//    public void isHandEmpty() throws Exception {
+//    }
 
 }
