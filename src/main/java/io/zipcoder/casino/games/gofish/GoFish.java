@@ -74,9 +74,13 @@ public class GoFish implements Game {
     }
 
     private void compAskingForValue() {
+        PlayingValue value = null;
+        PlayingValue randomValue = null;
         do {
-            PlayingValue value = null;
-            value = getRandomPlayingValue(compPlayer);
+            do {
+                randomValue = getRandomPlayingValue(compPlayer);
+            } while (randomValue == value);
+            value = randomValue;
             System.out.println(compPlayer.getUser().getName()+" asks for "+value+"!");
             if (compPlayer.askForValue(humanPlayer, value) > 0) {
                 compPlayer.takeCardsFromOther(humanPlayer, value);
@@ -130,8 +134,8 @@ public class GoFish implements Game {
             } else {
                 System.out.println("They didn't have any of those, Go Fish!");
                 PlayingCard drawnCard = humanPlayer.drawCard();
+                System.out.println("You draw a "+drawnCard.toString());
                 if (drawnCard.getValue() == value) {
-                    System.out.println("You draw a "+drawnCard.toString());
                     System.out.println("You asked for " + value + " and drew a card of that rank! You can ask for another card!");
                     if(humanPlayer.hand.isHandEmpty()){
                         winner = humanPlayer;
