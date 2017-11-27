@@ -11,7 +11,6 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
     }
 
 
-
     //We won't be using this method of course, since Craps is a dice game, but I HAD to put this Override method here
     //to fulfill a contract we entered with our arrangement of abstracts and interfaces... it's just one of those
     //things we didn't anticipate when we were making the UML and now we are stuck with...
@@ -40,24 +39,24 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
     public static String gameMessage = " ";
 
 
-    public static String firstRoll(){
+    public static String firstRoll() {
 
-            switch (shooter) {
-                case 7:
-                case 11:
-                    gameMessage = "You win!";
-                    //add payout to bank
-                    break;
-                case 2:
-                    gameMessage ="You lose!";
+        switch (shooter) {
+            case 7:
+            case 11:
+                gameMessage = "You win!";
+                //add payout to bank
+                break;
+            case 2:
+                gameMessage = "You lose!";
 
-                    //minus bet from available $$
-                    break;
-                default:
-                    point = shooter;
-                    gameMessage ="Your point has be set to: " + point + " Please roll again.";
-                    break;
-             }
+                //minus bet from available $$
+                break;
+            default:
+                point = shooter;
+                gameMessage = "Your point has be set to: " + point + " Please roll again.";
+                break;
+        }
 //        System.out.println(gameMessage);
 //        System.out.println(shooter);
 //        System.out.println(point);
@@ -93,4 +92,5 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
 //        System.out.println(point);
 
     }
+}
 
