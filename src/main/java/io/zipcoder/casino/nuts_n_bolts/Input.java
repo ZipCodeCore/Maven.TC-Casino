@@ -45,14 +45,19 @@ public class Input {
         String stringInput = "";
         do {
             stringInput = getStringInput(prompt);
-            try {
-                value = PlayingValue.valueOf(stringInput.toUpperCase());
-                return value;
-            } catch (IllegalArgumentException iae) {
-                System.out.println("Not a valid value.");
-                continue;
+
+            for (PlayingValue pv :
+                    PlayingValue.values()) {
+                if ((pv.getValue()).equalsIgnoreCase(stringInput)) {
+                    value = pv;
+                }
             }
+            if(value != null){
+                break;
+            }
+            System.out.println("Not a valid value.");
         } while (true);
+        return value;
     }
 
 }
