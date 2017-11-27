@@ -1,5 +1,6 @@
 package io.zipcoder.casino.casino;
 
+import io.zipcoder.casino.games.craps.CrapsConsole;
 import io.zipcoder.casino.nuts_n_bolts.Menu;
 
 public class CasinoMenu extends Menu{
@@ -17,9 +18,11 @@ public class CasinoMenu extends Menu{
         switch(CasinoMenuOptions.valueOf(userInput)){
             case EXIT:
                 Casino.getInstance().exitCasino();
-            case CRAPS:
-//                crapsMenu();
+            case CRAPS:{
+                CrapsConsole craps = new CrapsConsole(/*PassedUserOptional*/);
+                craps.run();
                 break;
+            }
             case GOFISH:
 //                goFishMenu();
                 break;
