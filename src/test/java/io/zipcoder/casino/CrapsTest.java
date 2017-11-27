@@ -49,11 +49,13 @@ public class CrapsTest {
     }
 
     @Test
+
     public void testToMakeSureBetMoneyIsInPot() throws Exception {
         Double expected = 300.0;
         craps.placeBet(300.0);
         Double actual = craps.getPot();
         Assert.assertEquals(expected,actual,0);
+
     }
 
     @Test
@@ -62,6 +64,7 @@ public class CrapsTest {
         craps.placeBet(300.0);
         Double actual = craps.crapsPlayer.getMoney();
         Assert.assertEquals(expected,actual,0);
+        Die die=new Die();
     }
 
     @Test
@@ -73,32 +76,32 @@ public class CrapsTest {
         Assert.assertEquals(expected,actual,0);
     }
 
-    @Test
-    public void firstRollWinTest() throws Exception {
-        craps.die.setDie1(3);
-        craps.die.setDie2(4);
-        String expected = "You win!7";
-        String actual = craps.firstRoll();
-        Assert.assertEquals(expected,actual);
-    }
-
-    @Test
-    public void firstRollLoseTest() throws Exception {
-        craps.die.setDie1(1);
-        craps.die.setDie2(1);
-        String expected = "You lose!2";
-        String actual = craps.firstRoll();
-        Assert.assertEquals(expected,actual);
-    }
-
-    @Test
-    public void firstRollPointTest() throws Exception {
-        craps.die.setDie1(2);
-        craps.die.setDie2(2);
-        String expected = "New target roll4";
-        String actual = craps.firstRoll();
-        Assert.assertEquals(expected,actual);
-    }
+//    @Test
+//    public void firstRollWinTest() throws Exception {
+//        craps.die.setDie1(3);
+//        craps.die.setDie2(4);
+//        String expected = "You win!7";
+//        String actual = craps.firstRoll();
+//        Assert.assertEquals(expected,actual);
+//    }
+//
+//    @Test
+//    public void firstRollLoseTest() throws Exception {
+//        craps.die.setDie1(1);
+//        craps.die.setDie2(1);
+//        String expected = "You lose!2";
+//        String actual = craps.firstRoll();
+//        Assert.assertEquals(expected,actual);
+//    }
+//
+//    @Test
+//    public void firstRollPointTest() throws Exception {
+//        craps.die.setDie1(2);
+//        craps.die.setDie2(2);
+//        String expected = "New target roll4";
+//        String actual = craps.firstRoll();
+//        Assert.assertEquals(expected,actual);
+//    }
 
 //    @Test
 //    public void secondRollWinTest() throws Exception {

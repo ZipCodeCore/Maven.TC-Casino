@@ -4,6 +4,4 @@ public interface Game {
 
     void play();
 
-    boolean reportWinner();
-
 }

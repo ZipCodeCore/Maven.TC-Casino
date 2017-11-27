@@ -8,7 +8,7 @@ public interface Gamble {
 
     public Double getPot();
 
-    public void placeBet(Double money);
+    public int placeBet(Double money);
 
     public boolean hasMoneyToMakeBet(Double moneyToBet);
 
