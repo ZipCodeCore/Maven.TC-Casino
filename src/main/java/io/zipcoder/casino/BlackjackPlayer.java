@@ -4,26 +4,30 @@ import java.util.ArrayList;
 
 public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparable<BlackjackPlayer>, Gamble {
 
-    public String name;
+    private String name;
     private Double money;
     private static ArrayList<Card> cardsInHand;
 
     BlackjackPlayer(String name, Double money) {
         this.name = name;
         this.money = money;
-        this.cardsInHand = new ArrayList<>();
+        cardsInHand = new ArrayList<>();
 
     }
 
-    public boolean hitStay(String userAnswer) {
+    static void hitStay(String userAnswer) {
         if (userAnswer.equalsIgnoreCase("yes")) {
-            return true;
+            BlackJack.endTurn();
+        } else if (userAnswer.equalsIgnoreCase("no")) {
+            BlackJack.giveCardToPlayer();
+        } else {
+            System.out.println("This table is for serious players only, take your money and get out of here!");
         }
-        return false;
     }
 
     //Stubbed this method out b/c may be needed in console/actual game-play integration... delete it if not...
     public int compareTo(BlackjackPlayer p) {
+
         return 0;
     }
 
@@ -31,7 +35,7 @@ public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparab
         return name;
     }
 
-    public Double checkBalance() {
+    Double checkBalance() {
         return money;
     }
 
@@ -44,15 +48,16 @@ public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparab
         cardsInHand.add(newCard);
     }
 
-    public static String viewHand() {
-        String handString = "";
+
+    static int viewHand(BlackjackPlayer blackjackPlayer) {
+        Integer handString = null;
         for (Card card : cardsInHand) {
-            handString += card.toString();
+            handString = card.getCardsValue();
         }
         return handString;
     }
 
-    public int getHandValue() {
+    int getHandValue() {
         int total = 0;
         int acesCount = 0;
 
@@ -71,11 +76,11 @@ public class BlackjackPlayer extends Player<BlackjackPlayer> implements Comparab
         return total;
     }
 
-    public ArrayList<Card> getHandList() {
+    ArrayList<Card> getHandList() {
         return cardsInHand;
     }
 
-    public void addWinnings(Double winnings) {
+    void addWinnings(Double winnings) {
         money += winnings;
     }
 

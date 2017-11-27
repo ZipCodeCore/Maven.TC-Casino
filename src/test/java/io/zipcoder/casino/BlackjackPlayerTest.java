@@ -28,11 +28,11 @@ public class BlackjackPlayerTest {
     public void addCardToHandAndViewHandTest() {
 
         Card card = new Card(Suit.DIAMOND, CardValue.Two);
-        String expected = card.toString();
+        int expected = card.getCardsValue();
 
         blackjackPlayer.addCardToHand(card);
 
-        String actual = blackjackPlayer.viewHand();
+        int actual = blackjackPlayer.viewHand(blackjackPlayer);
 
         Assert.assertEquals(expected, actual);
     }
