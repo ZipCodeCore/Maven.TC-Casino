@@ -10,11 +10,6 @@ import static io.zipcoder.casino.nuts_n_bolts.Input.getStringInput;
 
 public class CrapsConsole {
 
-    public static void main(String[] args){
-        CrapsConsole console = new CrapsConsole();
-        console.run();
-    }
-
     private Craps game = new Craps();
     private User player;
     private double mainPotBet;
@@ -39,12 +34,12 @@ public class CrapsConsole {
         game.determineFirstRoller();
         do {
             while (!pointSet) {//Continue to bet until the roller
-                            //throws a point instead of a win/loss.
+                //throws a point instead of a win/loss.
                 initialBet();
                 pointSet = resolveInitialThrow(game.initialThrow());
             }
             while (!pointMet) {//Continue to bet until the roller
-                            //meets their point or craps out
+                //meets their point or craps out
                 secondaryBet();
                 pointMet = resolveSecondaryThrow(game.secondaryThrow());
             }
@@ -147,8 +142,8 @@ public class CrapsConsole {
             else//If the bot is the thrower, empty the pot
             {
                 opponentWinsBothPots();//mainPotBet will be overwritten in the next
-                                //function call, so we can use it here to catch this
-                                //method's return
+                //function call, so we can use it here to catch this
+                //method's return
             }
         }
         else {
@@ -193,27 +188,27 @@ public class CrapsConsole {
                 opponentWinsBothPots();
             }
         } else
-            if(a==-1)//Crapped out. Pay out the non-thrower from mainPot and sidePot
+        if(a==-1)//Crapped out. Pay out the non-thrower from mainPot and sidePot
+        {
+            if (game.getPlayerTurn())
             {
-                if (game.getPlayerTurn())
-                {
-                    opponentWinsBothPots();
-                }
-                else
-                {
-                    playerWinsBothPots();
-                }
-            } else//Won the pair, but not the point. Pay non-thrower the sidePot
-                {
-                    if (game.getPlayerTurn())
-                    {
-                        playerWinsSidePot();
-                    }
-                    else
-                    {
-                        opponentWinsSidePot();
-                    }
-                }
+                opponentWinsBothPots();
+            }
+            else
+            {
+                playerWinsBothPots();
+            }
+        } else//Won the pair, but not the point. Pay non-thrower the sidePot
+        {
+            if (game.getPlayerTurn())
+            {
+                playerWinsSidePot();
+            }
+            else
+            {
+                opponentWinsSidePot();
+            }
+        }
     }
 
     private void displayOpponentBetting(double passedOpponentBet){//Called _AFTER_ the money transfers have already taken place
@@ -225,7 +220,7 @@ public class CrapsConsole {
         enterAnyKeyToContinue();
     }
     private void displayPlayerBetting(double passedPlayerBet){//Called _AFTER_ the money transfers have already taken place
-                                                             //_AND_ after the player enters their bet amount
+        //_AND_ after the player enters their bet amount
         System.out.println("You bet "+defaultFormat.format(passedPlayerBet));
         System.out.println("Opponent matches "+defaultFormat.format(passedPlayerBet));
         System.out.println("You have "+defaultFormat.format(player.getWallet().getMoney())+" in your wallet");
