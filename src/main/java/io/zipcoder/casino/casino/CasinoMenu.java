@@ -1,6 +1,7 @@
 package io.zipcoder.casino.casino;
 
 
+import io.zipcoder.casino.games.craps.CrapsConsole;
 import io.zipcoder.casino.games.gofish.GoFishMenu;
 import io.zipcoder.casino.nuts_n_bolts.Menu;
 
