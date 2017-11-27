@@ -25,7 +25,7 @@ public class BlackJackTest {
         blackjack.giveCardToPlayer();
         ArrayList cards = dealer.getHandList();
 
-        int expected = 1;
+        int expected = 2;
 
         int actual = cards.size();
 
