@@ -1,5 +1,6 @@
 package io.zipcoder.casino.casino;
 
+import io.zipcoder.casino.games.gofish.GoFishMenu;
 import io.zipcoder.casino.nuts_n_bolts.Menu;
 
 public class CasinoMenu extends Menu{
@@ -21,7 +22,7 @@ public class CasinoMenu extends Menu{
 //                crapsMenu();
                 break;
             case GOFISH:
-//                goFishMenu();
+                goFishMenu();
                 break;
             case BLACKJACK:
 //                blackJackMenu();
@@ -34,12 +35,12 @@ public class CasinoMenu extends Menu{
         CrapsMenu crapsMenu = CrapsMenu.INSTANCE;
         crapsMenu.display();
     }
-
+*/
     private void goFishMenu() {
         GoFishMenu goFishMenu = GoFishMenu.INSTANCE;
         goFishMenu.display();
     }
-
+/*
     private void blackJackMenu() {
         BlackJackMenu blackJackMenu = BlackJackMenu.INSTANCE;
         blackJackMenu.display();

@@ -7,6 +7,11 @@ import io.zipcoder.casino.nuts_n_bolts.User;
 public class Casino {
 
     private static Casino INSTANCE = null;
+
+    public User getUser() {
+        return user;
+    }
+
     private User user;
 
     private Casino(){}
