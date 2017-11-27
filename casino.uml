@@ -3,62 +3,81 @@
   <ID>JAVA</ID>
   <OriginalElement>io.zipcoder.casino</OriginalElement>
   <nodes>
-    <node x="240.0" y="704.0">io.zipcoder.casino.Console</node>
-    <node x="0.0" y="704.0">io.zipcoder.casino.DeckTest</node>
-    <node x="335.5" y="101.0">io.zipcoder.casino.CardGames</node>
-    <node x="0.0" y="867.0">io.zipcoder.casino.Casino</node>
-    <node x="118.5" y="134.5">io.zipcoder.casino.Gamble</node>
-    <node x="262.0" y="497.0">io.zipcoder.casino.Hand</node>
-    <node x="522.0" y="497.0">io.zipcoder.casino.Card</node>
-    <node x="0.0" y="497.0">io.zipcoder.casino.Deck</node>
-    <node x="530.0" y="704.0">io.zipcoder.casino.CardTest</node>
-    <node x="616.5" y="0.0">io.zipcoder.casino.Player</node>
-    <node x="0.0" y="324.0">io.zipcoder.casino.Craps</node>
-    <node x="217.0" y="313.0">io.zipcoder.casino.BlackJack</node>
-    <node x="182.375" y="0.0">io.zipcoder.casino.Games</node>
-    <node x="438.5" y="357.0">io.zipcoder.casino.GoFish</node>
-    <node x="199.0" y="867.0">io.zipcoder.casino.CasinoTest</node>
+    <node x="240.0" y="1503.0">io.zipcoder.casino.Console</node>
+    <node x="158.0" y="1106.0">io.zipcoder.casino.CardPlayer</node>
+    <node x="776.0" y="1503.0">io.zipcoder.casino.Casino</node>
+    <node x="603.0" y="872.0">io.zipcoder.casino.Hand</node>
+    <node x="915.0" y="872.0">io.zipcoder.casino.Deck</node>
+    <node x="542.0" y="1503.0">io.zipcoder.casino.CardTest</node>
+    <node x="327.0" y="423.0">io.zipcoder.casino.BlackJack</node>
+    <node x="470.25" y="0.0">io.zipcoder.casino.Games</node>
+    <node x="285.0" y="1351.5">io.zipcoder.casino.GoFishPlayer</node>
+    <node x="975.0" y="1503.0">io.zipcoder.casino.CasinoTest</node>
+    <node x="0.0" y="1503.0">io.zipcoder.casino.DeckTest</node>
+    <node x="97.25" y="123.0">io.zipcoder.casino.CardGames</node>
+    <node x="529.0" y="178.5">io.zipcoder.casino.Gamble</node>
+    <node x="1177.0" y="872.0">io.zipcoder.casino.Card</node>
+    <node x="185.0" y="872.0">io.zipcoder.casino.Player</node>
+    <node x="699.0" y="533.5">io.zipcoder.casino.Craps</node>
+    <node x="0.0" y="1296.0">io.zipcoder.casino.BlackJackGambler</node>
+    <node x="0.0" y="555.5">io.zipcoder.casino.GoFish</node>
   </nodes>
   <notes />
   <edges>
     <edge source="io.zipcoder.casino.Craps" target="io.zipcoder.casino.Games">
-      <point x="-49.25" y="-58.5" />
-      <point x="49.25" y="76.0" />
-      <point x="215.625" y="76.0" />
-      <point x="-33.25" y="25.5" />
+      <point x="78.25" y="-91.5" />
+      <point x="933.75" y="98.0" />
+      <point x="622.5" y="98.0" />
+      <point x="50.75" y="36.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.GoFishPlayer" target="io.zipcoder.casino.CardPlayer">
+      <point x="0.0" y="-25.5" />
+      <point x="421.5" y="1271.0" />
+      <point x="336.5" y="1271.0" />
+      <point x="59.5" y="70.0" />
     </edge>
     <edge source="io.zipcoder.casino.CardGames" target="io.zipcoder.casino.Games">
-      <point x="0.0" y="-81.0" />
-      <point x="448.5" y="76.0" />
-      <point x="282.125" y="76.0" />
-      <point x="33.25" y="25.5" />
+      <point x="0.0" y="-125.0" />
+      <point x="209.75" y="98.0" />
+      <point x="521.0" y="98.0" />
+      <point x="-50.75" y="36.5" />
+    </edge>
+    <edge source="io.zipcoder.casino.CardPlayer" target="io.zipcoder.casino.Player">
+      <point x="0.0" y="-70.0" />
+      <point x="0.0" y="92.0" />
     </edge>
     <edge source="io.zipcoder.casino.BlackJack" target="io.zipcoder.casino.CardGames">
-      <point x="49.25" y="-69.5" />
-      <point x="364.75" y="288.0" />
-      <point x="392.0" y="288.0" />
-      <point x="-56.5" y="81.0" />
+      <point x="-88.0" y="-202.0" />
+      <point x="415.0" y="398.0" />
+      <point x="266.0" y="398.0" />
+      <point x="56.25" y="125.0" />
+    </edge>
+    <edge source="io.zipcoder.casino.BlackJackGambler" target="io.zipcoder.casino.CardPlayer">
+      <point x="0.0" y="-81.0" />
+      <point x="132.5" y="1271.0" />
+      <point x="217.5" y="1271.0" />
+      <point x="-59.5" y="70.0" />
     </edge>
     <edge source="io.zipcoder.casino.Craps" target="io.zipcoder.casino.Gamble">
-      <point x="49.25" y="-58.5" />
-      <point x="147.75" y="288.0" />
-      <point x="167.75" y="288.0" />
-      <point x="-49.25" y="47.5" />
+      <point x="-78.25" y="-91.5" />
+      <point x="777.25" y="398.0" />
+      <point x="715.0" y="398.0" />
+      <point x="62.0" y="69.5" />
     </edge>
     <edge source="io.zipcoder.casino.BlackJack" target="io.zipcoder.casino.Gamble">
-      <point x="-49.25" y="-69.5" />
-      <point x="49.25" y="47.5" />
+      <point x="88.0" y="-202.0" />
+      <point x="-62.0" y="69.5" />
     </edge>
     <edge source="io.zipcoder.casino.GoFish" target="io.zipcoder.casino.CardGames">
-      <point x="0.0" y="-25.5" />
-      <point x="56.5" y="81.0" />
+      <point x="0.0" y="-69.5" />
+      <point x="-56.25" y="125.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="285.9999999999999" y="585.1666666666666" />
+  <settings layout="Hierarchic Group" zoom="0.4183634381709904" x="1185.9227114566602" y="584.5280723747564" />
   <SelectedNodes />
   <Categories>
-    <Category>Methods</Category>
     <Category>Fields</Category>
+    <Category>Methods</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
