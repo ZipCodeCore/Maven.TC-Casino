@@ -86,7 +86,7 @@ public class Console {
 
     public static void run(){
 
-        Player userPlayer = game.getPlayer();
+        Player userPlayer = game.getHumanPlayer();
 
         System.out.print("" +
                 " ____   _            _     _            _    \n" +
@@ -145,14 +145,14 @@ public class Console {
         } else {
             System.out.println("\nHouse wins!");
         }
-        System.out.println("\nHouse has score: " + game.getDealer().getScore());
+        System.out.println("\nHouse has score: " + game.getCompPlayer().getScore());
         resetPotAndDiscardHands(userPlayer);
     }
 
     private static void resetPotAndDiscardHands(Player userPlayer){
         game.returnBet();
         userPlayer.getHand().clear();
-        game.getDealer().getHand().clear();
+        game.getCompPlayer().getHand().clear();
     }
 
     private static void playerHitsOrStays(Player userPlayer){
@@ -176,7 +176,7 @@ public class Console {
     }
 
     private static void displayDealerCardShowing(){
-        System.out.println("\nDealer is showing:\n"+game.getDealer().getHand().get(0).toString());
+        System.out.println("\nDealer is showing:\n"+game.getCompPlayer().getHand().get(0).toString());
     }
 
     private static void displayPlayerHandAndScore(Player userPlayer){

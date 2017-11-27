@@ -34,7 +34,7 @@ public abstract class Menu {
             } catch (NullPointerException npe) {
                 handleNullPointerException(npe);
             }
-        } while (!"Home".equalsIgnoreCase(userInput));
+        } while (!"back".equalsIgnoreCase(userInput));
     }
 
     protected void handleIllegalArgumentException(String illegalArgument, IllegalArgumentException iae) {
