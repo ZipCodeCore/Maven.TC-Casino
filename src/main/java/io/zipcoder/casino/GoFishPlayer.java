@@ -3,46 +3,73 @@ package io.zipcoder.casino;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-public class GoFishPlayer extends CardPlayer {
 
 
 
-    public Card drawCard(Deck deck) {
-        Card playerCard = deck.getCards().remove(0);
-        return playerCard;
-    }
+   public class GoFishPlayer extends CardPlayer {
+       private int score;
+       private String name;
+       private ArrayList<Card> hand;
 
-    public void addCardToHand(Card card){
-        hand.add(card);
-    }
+       public GoFishPlayer(){super();}
 
-    public ArrayList<Card> getHand() {
-        return hand;
-    }
+       @Override
+       public int getScore() {
+           return score;
+       }
 
-    public boolean checkHandForCard(Rank rank){
-        for(Card card: hand){
-            if(card.getRank() == rank) return true;
-        }return false;
+       @Override
+       public String getName() {
+           return name;
+       }
 
-    }
+       @Override
+       public ArrayList<Card> getHand() {
+           return hand;
+       }
 
-    public Card giveCard(Rank rank){
-        for(Card card: hand){
-            if(card.getRank() == rank){
-                hand.remove(card);
-                return card;
-            }
-        }
-        return null;
-    }
+       @Override
+       public void setName(String name) {
+           this.name = name;
+       }
 
-    public Suit checkFourOfAKind(){
+       @Override
+       public void setScore(int score) {
+           this.score = score;
+       }
+       //    public Card drawCard(Deck deck) {
+//        Card playerCard = deck.getCards().remove(0);
+//        return playerCard;
+//    }
+//
+//    public void addCardToHand(Card card){
+//       getHand().add(card);
+//    }
 
-      //  Stream<Card> handStream = hand.stream().
+//    public ArrayList<Card> getHand() {
+//        return hand;
+//    }
+//
+//    public boolean checkHandForCard(Rank rank){
+//        for(Card card: hand){
+//            if(card.getRank() == rank) return true;
+//        }return false;
+//
+//    }
+//
+//    public Card giveCard(Rank rank){
+//        for(Card card: hand){
+//            if(card.getRank() == rank){
+//                hand.remove(card);
+//                return card;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public Suit checkFourOfAKind(){
+//
+//      //  Stream<Card> handStream = hand.stream().
 
         /*  int diamonds = 0;
         int spades = 0;
@@ -79,4 +106,4 @@ public class GoFishPlayer extends CardPlayer {
     }
 
 
-}
+
