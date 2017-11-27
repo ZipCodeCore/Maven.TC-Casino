@@ -14,7 +14,7 @@ public class BlackJack extends CardGames {
         start();
     }
 
-    public static void createOnePlayer(String name, Double money){
+    public static void createOnePlayer(String name, Double money) {
         BlackjackPlayer blackjackPlayer = new BlackjackPlayer(name, money);
         blackjackPlayers.add(blackjackPlayer);
     }
