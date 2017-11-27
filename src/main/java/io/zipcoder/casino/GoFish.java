@@ -2,6 +2,8 @@ package io.zipcoder.casino;
 
 import java.util.Scanner;
 
+import static io.zipcoder.casino.Console.casinoHome;
+
 
 public class GoFish extends GoFishGame {
 
@@ -17,7 +19,7 @@ public class GoFish extends GoFishGame {
         do {
 
             GoFishGame goFishGame = new GoFishGame();
-         goFishGame.getGoFishPlayer().setName(InPutConsole.getInput());
+            goFishGame.getGoFishPlayer().setName(InPutConsole.getInput());
             goFishGame.startGame();
             goFishGame.playerHand();
             goFishGame.computerHand();
@@ -40,5 +42,6 @@ public class GoFish extends GoFishGame {
             System.out.println("Do you want to play again?");
             response = InPutConsole.getInput();
         } while (response.equalsIgnoreCase("yes"));
-        System.out.println("Bye bye, visit us again");
+        casinoHome();
     }
+}
