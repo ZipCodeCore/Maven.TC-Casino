@@ -5,7 +5,7 @@ public class Casino {
     enum Games {
         BLACKJACK, CRAPS, GOFISH, LEAVE
     }
-    private final String games = "BlackJack, Craps, GoFish, or leave.";
+    private final String games = "BlackJackGame, Craps, GoFish, or leave.";
     public void start() {
         printWelcomeMessage();
         //goToGameConsole();

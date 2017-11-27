@@ -7,7 +7,7 @@ public class GameTest {
 
 //    @Test
 //    public void getPot() {
-//        BlackJack game = new BlackJack();
+//        BlackJackGame game = new BlackJackGame();
 //        Player player = game.getPlayer();
 //        Double expectedPot = 50.0;
 //        player.makeBet(50.0);
@@ -18,7 +18,7 @@ public class GameTest {
 //
 //    @Test
 //    public void startTest() {
-//        Game game = new BlackJack();
+//        Game game = new BlackJackGame();
 //        game.play();
 //        int expectedNumberOfPlayerCards = 2;
 //        int expectedNumberOfDealerCards = 2;

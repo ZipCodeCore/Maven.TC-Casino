@@ -1,7 +1,9 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CrapsGame;
+import io.zipcoder.casino.*;
+
 import java.util.Scanner;
 
-public class Craps extends CardGames implements Gamble{
+public class Craps extends CardGames implements Gamble {
     private static Dice dice1 = new Dice();
     private static Dice dice2 = new Dice();
     private static Scanner scanner = new Scanner(System.in);

@@ -1,7 +1,7 @@
 package io.zipcoder.casino.ConcreteMenus;
 
 import io.zipcoder.casino.Console;
-import io.zipcoder.casino.Craps;
+import io.zipcoder.casino.CrapsGame.Craps;
 import io.zipcoder.casino.GoFishGame.GoFish;
 import io.zipcoder.casino.PlayerWarehouse;
 

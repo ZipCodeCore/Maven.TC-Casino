@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.CrapsGame;
 
 import static java.util.concurrent.ThreadLocalRandom.current;
 

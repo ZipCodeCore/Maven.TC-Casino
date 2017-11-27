@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.CrapsGame.Dice;
 import org.junit.Test;
 
 import static io.zipcoder.casino.MathUtils.isInRange;

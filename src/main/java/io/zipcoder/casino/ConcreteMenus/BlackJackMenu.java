@@ -1,6 +1,6 @@
 package io.zipcoder.casino.ConcreteMenus;
 
-import io.zipcoder.casino.BlackJack.BlackJack;
+import io.zipcoder.casino.BlackJackGame.BlackJack;
 import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.Console;
 import io.zipcoder.casino.Player;
@@ -13,7 +13,8 @@ public class BlackJackMenu {
     private static BlackJack game = new BlackJack();
     private static Scanner scanner = new Scanner (System.in);
     public static void run(){
-        Player userPlayer = PlayerWarehouse.getCurrentPlayer();
+        game.setPlayer(PlayerWarehouse.getCurrentPlayer());
+        Player userPlayer = game.getPlayer();
         System.out.print("" +
                 " ____   _            _     _            _    \n" +
                 "| __ ) | | __ _  ___| | __(_) __ _  ___| | __\n" +
@@ -23,10 +24,7 @@ public class BlackJackMenu {
                 "                        |__/ \n" +
                 "+--------------------------------------------+" +
                 "\n\nWelcome to the <BlackJackGame> table!");
-                //"\n\nWhat's your name? ");
-        //String userName = getInput();
-        //userPlayer.setName(userName);
-        //System.out.println("Hello, " + userName + "!");
+
         System.out.println("\nYou have $"+forceTwoDecimalDouble(userPlayer.getMoney().toString()));
         do {
             game.play();
