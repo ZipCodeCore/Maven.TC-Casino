@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class Craps extends DiceGames implements Dice {
 
-
-    ArrayList<CrapsPlayer> crapsPlayers = new ArrayList<>();
+CrapsPlayer player;
+double pot;
+   ArrayList<CrapsPlayer> crapsPlayers = new ArrayList<>();
 
     public int getDiceRollTotal() {
         return diceRollTotal;
@@ -13,20 +14,42 @@ public class Craps extends DiceGames implements Dice {
 
     int diceRollTotal;
 
-    public void createOnePlayer(String name, Double money) {
-        CrapsPlayer newCrapsPlayer = new CrapsPlayer(name, money);
+    public void createOnePlayer(String name) {
+        CrapsPlayer newCrapsPlayer = new CrapsPlayer(name);
         crapsPlayers.add(newCrapsPlayer);
     }
 
-    public void addWinnings() {
-        for (CrapsPlayer player : crapsPlayers) { //for every player in ouyr craps player arraylist... do stuff
-            player.setMoney(player.getPlayerBet() * 2);
+//    public void createOnePlayer(String name){
+//        CrapsPlayer newCrapsPlayer = new CrapsPlayer(name);
+//    }
+
+    public void crapPlayerMoney(){
+        //add chips to player player.addChips()
+        CrapsPlayer crapsPlayerBet = new CrapsPlayer() ;
+    }
+
+    public void playersFirstRoll(){
+
+        setDiceRollTotal();
+        player.setPlayerPoint(getDiceRollTotal());
+    }
+
+    //playerBet(Double bet){
+    // pot =return double player.bet(bet)
+    // }
+
+    public Double addWinnings() {
+        Double moMoney = 25.00;
+        for (CrapsPlayer player : createOnePlayer()) {
+            moMoney = player.getCrapPlayerBet() * 2;
         }
+
+        return moMoney;
     }
 
     public void loseBet() {
-        for (CrapsPlayer player : crapsPlayers) { //for every player in ouyr craps player arraylist... do stuff
-            player.setPlayerBet(0.00);
+        for (CrapsPlayer player : createOnePlayer()) { //for every player in ouyr craps player arraylist... do stuff
+            player.setCrapPlayerBet(0.00);
         }
     }
 
@@ -38,10 +61,7 @@ public class Craps extends DiceGames implements Dice {
     public static String gameMessage = " ";
     public static int gameStatus = 0;
 
-    public void playersFirstRoll(CrapsPlayer player){
-        setDiceRollTotal();
-        player.setPlayerPoint(getDiceRollTotal());
-    }
+
 
 
     public String firstRoll(CrapsPlayer player) {

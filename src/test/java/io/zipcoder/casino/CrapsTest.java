@@ -8,17 +8,6 @@ public class CrapsTest {
 
     CrapsPlayer jeff = new CrapsPlayer("jeff", 50.00);
     Craps cPlayer = new Craps();
-    @Test
-    public void bet() throws Exception {
-   }
-
-    @Test
-    public void bet1() throws Exception {
-   }
-
-    @Test
-   public void addWinnings() throws Exception {
-   }
 
     @Test
    public void firstRollForSeven()  {
@@ -96,19 +85,14 @@ public class CrapsTest {
 
     }
 
-//    @Test
-//    public void betTest() {
-//        Double expected = 10.0;
-//        Double actual = blackjackPlayer.bet(10.0);
-//        Assert.assertEquals(expected, actual);
-//    }
-//
-//    @Test
-//    public void getWinningsTest() {
-//        Double expected = 1100.0;
-//        cPlayer.addWinnings();
-//        Double actual = blackjackPlayer.checkBalance();
-//
-//        Assert.assertEquals(expected, actual);
-//    }
+
+
+    @Test
+    public void addWinningsTest() {
+        jeff.bet(25.00);
+        Double expected = 50.0;
+        Double actual = cPlayer.addWinnings();
+
+        Assert.assertEquals(expected, actual);
+    }
 }

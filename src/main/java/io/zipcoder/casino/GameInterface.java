@@ -8,24 +8,35 @@ public class GameInterface {
 
         String playAgain;
 
-        do {
-            Craps craps = new Craps();
 
-            int numberOfPlayer = Console.getUserInputInteger("Welcome to the craps table. How many people are playing?");
+        do {Craps craps = new Craps();
+           // CrapsPlayer player = new CrapsPlayer();
+            System.out.println("Welcome to the craps table.");
+
+
+
+         //   int numberOfPlayer = Console.getUserInputInteger("Welcome to the craps table. How many people are playing?");
             //creates players
-            for (int i = 1; i <= numberOfPlayer; i++) {
-                craps.createOnePlayer(Console.getUserInputString("Player name:"), Console.getUserInputDouble("How much money would you like to bring to the table?"));
-            }
 
-            //get players bets
-            for (int b = 0; b <= numberOfPlayer; b++) {
-                System.out.println(craps.crapsPlayers.get(b).getName());
-                Double playerBet = craps.crapsPlayers.get(b).bet(Console.getUserInputDouble(" please place bet"));
-                System.out.println(craps.crapsPlayers.get(b).getName() + " you bet " + playerBet);
-            }
+           // for(int i = 1; i <= numberOfPlayer; i++){
+                craps.createOnePlayer(Console.getUserInputString("Player name:"));
+            //}
+
+             //get players bets
+//            for(int b = 0; b <= numberOfPlayer; b++){
+//                System.out.println(craps.crapsPlayers.get(b).getName());
+//                Double playerBet = craps.crapsPlayers.get(b).bet(Console.getUserInputDouble(" please place bet"));
+//                System.out.println(craps.crapsPlayers.get(b).getName()+" you bet " + playerBet);
+//            }
 
 
-//           if(craps.firstRollChecker())
+                CrapsPlayer.crapPlayerMoney(Console.getUserInputDouble("How many chips would you like to purchase?"));
+
+
+//            craps.takePlayerBet(Consol.Input)
+//            craps.playersFirstRoll(Console.)
+
+//           if()
 //
 //
 //            System.out.println(craps.firstRoll(craps.crapsPlayers.get(0)));
