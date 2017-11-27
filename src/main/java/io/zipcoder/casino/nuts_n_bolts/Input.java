@@ -1,5 +1,7 @@
 package io.zipcoder.casino.nuts_n_bolts;
 
+import io.zipcoder.casino.nuts_n_bolts.cards.PlayingValue;
+
 import java.util.Scanner;
 
 public class Input {
@@ -33,6 +35,21 @@ public class Input {
                 return doubleInput;
             } else {
                 System.out.println("Please input a positive amount.");
+                continue;
+            }
+        } while (true);
+    }
+
+    public static PlayingValue getPlayingValue(String prompt){
+        PlayingValue value = null;
+        String stringInput = "";
+        do {
+            stringInput = getStringInput(prompt);
+            try {
+                value = PlayingValue.valueOf(stringInput.toUpperCase());
+                return value;
+            } catch (IllegalArgumentException iae) {
+                System.out.println("Not a valid value.");
                 continue;
             }
         } while (true);
