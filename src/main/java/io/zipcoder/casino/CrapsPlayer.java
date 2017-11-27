@@ -1,8 +1,17 @@
 package io.zipcoder.casino;
 
-public class CrapsPlayer extends Player {
-    private Bank wallet;
+public class CrapsPlayer extends Player implements PlayForMoney {
+    private double walletAmount;
     private Integer[] currentRoll = new Integer[2];
+
+    public CrapsPlayer(){
+        super("A player has no name");
+        this.walletAmount = 10000.0;
+    }
+    public CrapsPlayer(String name) {
+        super(name);
+        this.walletAmount = 10000.0;
+    }
 
     public Integer roll2Dice() {
 
@@ -21,11 +30,30 @@ public class CrapsPlayer extends Player {
 
 
 
-    public Bank getWallet() {
-        return wallet;
+    public double getWallet() {
+        return walletAmount;
     }
 
-    public void setWallet(Bank wallet) {
-        this.wallet = wallet;
+    public void setWallet(double amount) {
+        this.walletAmount = amount;
     }
+
+    public double makeBet(Double amount) {
+        return 0;
+    }
+
+    public double collectWinnings(boolean isWin) {
+        return 0;
+    }
+
+    public double collectWinnings(boolean isWin, Craps craps) {
+        return 0;
+    }
+
+    public void makeBet(Double amount, Craps craps) {
+        craps.setPlayerBet(amount);
+
+
+    }
+
 }

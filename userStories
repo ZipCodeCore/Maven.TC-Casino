@@ -7,7 +7,7 @@
 -As a blackjack player I want to play blackjack.
     -As a blackjack player I want to start a game
             test can create a game (Blackjack)
-            test can add a players to the game (Game)
+            test can add a players to the game (Game) ok
             test existance of a deck (BlackJack, Deck)
             test existace of a hand (Blackjack, player)
      - As a blackjack player I want to bet before I get the cards
@@ -106,11 +106,12 @@ and the compuetr should given me all cards at the hand of that type.
     test the money of the player decrease by the bet amount
 -As a craps player I would like to win my pass bet when I have rolled anything but a 7, 11, 2, 3, 12,
 to set a point and rolled that point.
-        test the player is able to roll the dice untill it get a sum of the point or 7
+        test the player is able to roll the dice until it get a sum of the point or 7
         test the money of the player increase by the amount of the bet if the sum equals the point
--As a craps player I would like to lose my pass bet when I have rolled a 7.
-              test 7 will make the player loose the game
-            test the money of the player decrease by the bet amount
+-As a craps player I would like to lose my pass bet when when I have rolled anything but a 7, 11, 2, 3, 12,
+to set a point and rolled 7 before my the set point.
+        test 7 will make the player loose the game
+        test the money of the player decrease by the bet amount
 -As a craps player I would like to bet on the don't pass line.
 (As a craps player I would like make "come" bets)
 (As a craps player I would like make "don't come bets")

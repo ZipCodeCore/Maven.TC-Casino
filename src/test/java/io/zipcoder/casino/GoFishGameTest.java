@@ -5,10 +5,11 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
+
 
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
+
 
 public class GoFishGameTest {
 
@@ -44,7 +45,7 @@ public class GoFishGameTest {
     @Test(expected = IllegalStateException.class)
     public void shouldThrowExceptionWhenDeckIsNullStartingGame() {
         goFishGame.setDeck(null);
-        GoFishPlayer goFishPlayer = mock(GoFishPlayer.class);
+        GoFishPlayer goFishPlayer = new GoFishPlayer();
         goFishGame.startGame();
     }
     @Test
@@ -317,10 +318,17 @@ public class GoFishGameTest {
 //    }
 
     @Test
-
     public void countPlayerScoreTest(){
         Player player = goFishGame.getGoFishPlayer();
         int score =0;
+        Card card1 = new Card(Rank.TWO, Suit.CLUB);
+        Card card5 = new Card(Rank.THREE, Suit.SPADE);
+        Card card3 = new Card(Rank.TWO, Suit.DIAMOND);
+        Card card6 = new Card(Rank.THREE, Suit.CLUB);
+        Card card4 = new Card(Rank.TWO, Suit.SPADE);
+        Card card2 = new Card(Rank.THREE, Suit.HEART);
+        Card card7 = new Card(Rank.TWO, Suit.HEART);
+        Card card8 = new Card(Rank.THREE, Suit.SPADE);
 
         playerHand1.add(card1);
         playerHand1.add(card2);
@@ -333,15 +341,29 @@ public class GoFishGameTest {
 
         goFishGame.setPlayerHand(playerHand1);
 
+
        int expected = 2;
        int actual = goFishGame.countBooksInPlayerHand();
        Assert.assertEquals(expected, actual);
-
-
-
     }
+    
     @Test
     public void countComputerScoreTest() {
+
+
+    public void playerScoreTest(){
+        Player player = goFishGame.getGoFishPlayer();
+        int score =0;
+        Card card1 = new Card(Rank.TWO, Suit.CLUB);
+        Card card2 = new Card(Rank.TWO, Suit.HEART);
+        Card card3 = new Card(Rank.THREE, Suit.DIAMOND);
+        Card card4 = new Card(Rank.TWO, Suit.SPADE);
+        Card card5 = new Card(Rank.THREE, Suit.SPADE);
+        Card card6 = new Card(Rank.TWO, Suit.CLUB);
+        Card card7 = new Card(Rank.THREE, Suit.HEART);
+        Card card8 = new Card(Rank.THREE, Suit.SPADE);
+
+        ArrayList<Card> playerHand1 = new ArrayList<>();
 
         playerHand1.add(card1);
         playerHand1.add(card2);

@@ -365,8 +365,11 @@ public class GoFishGame extends CardGame {
 
     }
 
+
 //    public Boolean checkPlayersCardRequestForInputBoundary(String input) {
 //        Boolean checkResult = false;
+//    public void checkPlayersCardRequestForInputBoundary(String input) {
+//        Boolean checkResult = true;
 //        if ((Integer.parseInt(input) > 2 && Integer.parseInt(input) < 12)
 //                || (input.toString().toUpperCase().equals("K"))
 //                || (input.toString().toUpperCase().equals("J")) ||
@@ -443,6 +446,25 @@ public class GoFishGame extends CardGame {
 
     public GoFishPlayer getComputerPlayer() {
         return computerPlayer;
+    }
+
+    public String countBooksInPlayerHand() {
+        ArrayList<Card> hand = getPlayerHand();
+        List<String> cardsByRank = new ArrayList<>();
+
+        for(Card card : hand){
+            cardsByRank.add(card.getRank().getSymbol());
+        }
+
+        Set<String> uniqueSet = new HashSet<>(cardsByRank);
+        Integer count = 0;
+
+        for (String rank : uniqueSet) {
+            if(Collections.frequency(cardsByRank,rank)>3){
+                return rank;
+            }
+        }
+        return null;
     }
 }
 

@@ -2,12 +2,11 @@ package io.zipcoder.casino;
 
 import java.util.Scanner;
 
+
 public class GoFish extends GoFishGame {
 
 
     Scanner scanner = new Scanner(System.in);
-
-
 
     public static void goFishRun() {
 
@@ -43,5 +42,3 @@ public class GoFish extends GoFishGame {
         } while (response.equalsIgnoreCase("yes"));
         System.out.println("Bye bye, visit us again");
     }
-
-}

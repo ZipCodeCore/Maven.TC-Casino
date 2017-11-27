@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 
-
    public class GoFishPlayer extends CardPlayer {
        private int score;
        private String name;
@@ -71,39 +70,4 @@ import java.util.Collections;
 //
 //      //  Stream<Card> handStream = hand.stream().
 
-        /*  int diamonds = 0;
-        int spades = 0;
-        int hearts = 0;
-        int clubs =0;
-
-        for(Card card: hand){
-            if (card.getSuit() == Suit.DIAMOND) {
-                diamonds++;
-                if (diamonds == 4) return Suit.DIAMOND;
-            }
-            if (card.getSuit() == Suit.HEART){
-                hearts++;
-                if (hearts == 4) return Suit.HEART;
-            }
-            if (card.getSuit() == Suit.CLUB) {
-                clubs++;
-                if (clubs == 4) return Suit.CLUB;
-            }
-            if (card.getSuit() == Suit.SPADE) {
-                spades++;
-                if (spades == 4) return Suit.SPADE;
-            }
-        }return null;
-
-    }*/
-
-//    public void drawFiveCards(Deck deck){
-//        for(int i = 0; i<5; i++){
-//            hand.add(drawCard(deck));
-//        }
-
-
-    }
-
-
-
+}

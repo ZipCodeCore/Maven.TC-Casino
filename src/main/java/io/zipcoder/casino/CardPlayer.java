@@ -1,9 +1,14 @@
 package io.zipcoder.casino;
 
+
 import java.util.ArrayList;
 
 public  class CardPlayer extends Player{
     private ArrayList<Card> hand;
+
+    public CardPlayer(String name) {
+        super(name);
+    }
 
     public CardPlayer(){
         super();
@@ -13,3 +18,4 @@ public  class CardPlayer extends Player{
         return hand;
     }
 }
+
