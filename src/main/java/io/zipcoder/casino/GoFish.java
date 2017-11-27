@@ -1,39 +1,37 @@
 package io.zipcoder.casino;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GoFish extends CardGames {
 
-    private ArrayList<GoFishPlayer> goFishPlayers = new ArrayList<>();
+    public ArrayList<GoFishPlayer> goFishPlayers = new ArrayList<>();
     private Deck goFishDeck;
-    private Player activePlayer1;
-    private Player activePlayer2;
 
-
-    public GoFish() {
-        start();
+    public void createOnePlayer(String name){
+        GoFishPlayer goFishPlayer = new GoFishPlayer(name);
+        goFishPlayers.add(goFishPlayer);
     }
 
-    protected void start() {
-
-        GoFishPlayer goFishPlayer1 = new GoFishPlayer("AA-Wrong");
-        GoFishPlayer goFishPlayer2 = new GoFishPlayer("Cifu");
-        goFishPlayers.add(goFishPlayer1);
-        goFishPlayers.add(goFishPlayer2);
-        activePlayer1 = goFishPlayer1;
-        activePlayer2 = goFishPlayer2;
-        Deck goFishDeck = new Deck();
-        goFishDeck.populate();
-        goFishDeck.shuffle();
-        //giveCardToPlayer();
-
-        goFishPlayer1.dealGoFishHand(goFishPlayers, goFishDeck);
+    public void showEverybodysHand(){
+        for(GoFishPlayer player: goFishPlayers){
+            System.out.println(player.getName() + " this is your hand.\n");
+            System.out.println(player.viewHand());
+            System.out.println("");
+        }
     }
-    public void giveCardToPlayer() {
-        Card card = this.goFishDeck.dealOneRandomCard();
-        this.activePlayer1.addCardToHand(card);
-        this.activePlayer2.addCardToHand(card);
+
+    public void askOtherPlayerForCard(){
+        System.out.println(goFishPlayers.get(1).getName()+"\n");
+        System.out.println(goFishPlayers.get(1).viewHand()+"\n");
     }
+
+    public void askFirstPlayerForCard(){
+        System.out.println(goFishPlayers.get(0).getName()+"\n");
+        System.out.println(goFishPlayers.get(0).viewHand()+"\n");
+
+    }
+
 
     public ArrayList<GoFishPlayer> getPlayers() {
         return goFishPlayers;
@@ -43,8 +41,4 @@ public class GoFish extends CardGames {
         return goFishPlayers.get(index);
     }
 
-
-    public Player getActivePlayer() {
-        return activePlayer1;
-    }
 }

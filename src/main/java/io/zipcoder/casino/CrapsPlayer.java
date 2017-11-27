@@ -50,7 +50,6 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
         return bet;
     }
 
-
     public int getPlayerPoint() {
         return playerPoint;
     }

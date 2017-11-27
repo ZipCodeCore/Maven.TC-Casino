@@ -2,7 +2,9 @@ package io.zipcoder.casino;
 
 public class GameInterface {
 
+
     public void playCraps() {
+
 
         String playAgain;
 
@@ -62,14 +64,43 @@ public class GameInterface {
             //so may need to rewrite, won't know until we test the game-play from console itself
             blackjackPlayer.getName();
         } while (playAgain.equals("no"));
-
+        CardGames cardGames = new CardGames();
+        cardGames.chooseGameType();
 
     }
 
 
     public static void playGoFish() {
+        GoFish goFish = new GoFish();
+        Deck goFishDeck = new Deck();
+        goFishDeck.populate();
+        goFishDeck.shuffle();
+        String playAgain = null;
 
+        do{
+            System.out.println("Welcome to the Go Fish table!!!");
+
+            for(int i =0; i <= 1; i++) {
+                goFish.createOnePlayer(Console.getUserInputString("What is your name?"));
+            }
+
+            goFish.goFishPlayers.get(0).dealGoFishHand(goFish.goFishPlayers,goFishDeck);
+
+            goFish.showEverybodysHand();
+
+            goFish.askOtherPlayerForCard();
+
+
+            int cardToAskFor = Console.getUserInputInteger("What card do you want to ask for? \nPlease input the index of the card 1 through " + goFish.goFishPlayers.get(0).getHandList().size() + "!");
+
+            goFish.askFirstPlayerForCard();
+
+        } while (playAgain.equals("no"));
+        CardGames cardGames = new CardGames();
+        cardGames.chooseGameType();
+
+        }
 
     }
-}
+
 
