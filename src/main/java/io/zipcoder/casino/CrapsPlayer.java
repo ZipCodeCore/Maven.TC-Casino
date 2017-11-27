@@ -3,13 +3,32 @@ package io.zipcoder.casino;
 public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
 
     private String name;
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
+    }
+
     private Double money;
     private Card cardsInHand;
+    private int playerPoint;
+
+    public Double getPlayerBet() {
+        return playerBet;
+    }
+
+    public void setPlayerBet(Double playerBet) {
+        this.playerBet = playerBet;
+    }
+
+    private Double playerBet;
 
     CrapsPlayer(String name, Double money) {
         super(name, money);
     }
-
 
 
     //We won't be using this method of course, since Craps is a dice game, but I HAD to put this Override method here
@@ -26,71 +45,18 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
 //    }
 
     public Double bet(Double bet) {
-        money -= bet;
+        money = money - bet;
+        this.playerBet = bet;
         return bet;
     }
 
-    public void addWinnings(Double winnings) {
-        money += winnings;
+
+    public int getPlayerPoint() {
+        return playerPoint;
     }
 
-    static int point = 0;
-
-    public static int shooter = Dice.rollDice(2);
-    public static String gameMessage = " ";
-
-
-    public static String firstRoll(){
-
-            switch (shooter) {
-                case 7:
-                case 11:
-                    gameMessage = "You win!";
-                    //add payout to bank
-                    break;
-                case 2:
-                    gameMessage ="You lose!";
-
-                    //minus bet from available $$
-                    break;
-                default:
-                    point = shooter;
-                    gameMessage ="Your point has be set to: " + point + " Please roll again.";
-                    break;
-             }
-//        System.out.println(gameMessage);
-//        System.out.println(shooter);
-//        System.out.println(point);
-        return gameMessage;
-
+    public void setPlayerPoint(int playerPoint) {
+        this.playerPoint = playerPoint;
     }
-
-    public static void nextRoll() {
-
-        if (shooter == point) {
-            gameMessage = "You win!";
-            //add payout to bank
-
-        } else {
-            switch (shooter) {
-                case 7:
-                case 11:
-                    gameMessage = "You lose!";
-                    //minus bet from available $$
-                    break;
-                case 2:
-                    gameMessage = "You win!";
-                    //add payout to bank
-                    break;
-                default:
-
-                    gameMessage = "You rolled a: " + shooter + " you need to roll a " + point + " Please roll again.";
-                    break;
-            }
-        }
-//        System.out.println(gameMessage);
-//        System.out.println(shooter);
-//        System.out.println(point);
-
-    }
+}
 

@@ -40,8 +40,8 @@ public class Game {
                     cardGames.chooseGameType();
                     break;
                 case 2:
-                    DiceGames diceGames = new DiceGames();
-                    diceGames.chooseGameType();
+                    GameInterface gameInterface = new GameInterface();
+                 gameInterface.playCraps();
                     break;
                 default:
                     System.out.println("You entered an invalid choose :-(\n");
