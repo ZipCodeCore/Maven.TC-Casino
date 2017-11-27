@@ -19,7 +19,7 @@ abstract class Player<E> {
         return name;
     }
 
-    private void bet(double bet) {
+     void bet(double bet) {
         this.bet = bet;
     }
 

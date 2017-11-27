@@ -3,6 +3,45 @@ package io.zipcoder.casino;
 public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
 
     private String name;
+    private Double crapPlayerMoney, playerMoney, crapPlayerBet, playerBet;
+
+
+    public CrapsPlayer(String name) {
+    }
+
+    public static void crapPlayerMoney(Double playerMoney){
+
+    }
+
+    public void crapPlayerBet(){
+        System.out.println(Console.getUserInputDouble("How much would you like to bet?"));
+    }
+
+
+
+    public void setCrapPlayerMoney(Double playerMoney){
+        this.crapPlayerMoney = playerMoney;
+    }
+
+    public Double getCrapPlayerMoney(){
+        return playerMoney;
+    }
+
+    public void setCrapPlayerBet(Double playerBet){
+        this.crapPlayerBet = playerBet;
+    }
+
+    public Double getCrapPlayerBet(){
+        return playerBet;
+    }
+
+    public Double crapPlayerMoneyAvailable(){
+        Double moneyAvailable = 0.0;
+        Double getCrapPlayerMoney /*Total money available*/ = getCrapPlayerMoney();
+        Double getCrapPlayerBet = getCrapPlayerBet();
+        moneyAvailable = getCrapPlayerMoney - getCrapPlayerBet;
+        return moneyAvailable;
+    }
 
     public Double getMoney() {
         return money;
@@ -16,15 +55,15 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
     private Card cardsInHand;
     private int playerPoint;
 
-    public Double getPlayerBet() {
-        return playerBet;
-    }
-
-    public void setPlayerBet(Double playerBet) {
-        this.playerBet = playerBet;
-    }
-
-    private Double playerBet;
+//    public Double getPlayerBet() {
+//        return playerBet;
+//    }
+//
+//    public void setPlayerBet(Double playerBet) {
+//        this.bet = playerBet;
+//    }
+//
+//    private Double playerBet;
 
     CrapsPlayer(String name, Double money) {
         super(name, money);
@@ -39,16 +78,19 @@ public class CrapsPlayer extends Player<CrapsPlayer> implements Gamble, Dice {
         cardsInHand.add(newCard);
     }
 
-
-//    public Double bet() {
-//        return null;
-//    }
-
-    public Double bet(Double bet) {
-        money = money - bet;
-        this.playerBet = bet;
-        return bet;
+    public void getBet(Double bet){
+        this.bet = bet;
     }
+
+
+    public Double bet(Double money) {
+        money = money - bet;
+          return money;
+    }
+//    public Double bet(Double money){
+//        playerBet = money;
+//        return playerBet;
+//    }
 
     public int getPlayerPoint() {
         return playerPoint;
