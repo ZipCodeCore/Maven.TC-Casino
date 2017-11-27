@@ -10,7 +10,7 @@ import java.util.Collections;
        private String name;
        private ArrayList<Card> hand;
 
-       public GoFishPlayer(){super();};
+       public GoFishPlayer(){super();}
 
        @Override
        public int getScore() {

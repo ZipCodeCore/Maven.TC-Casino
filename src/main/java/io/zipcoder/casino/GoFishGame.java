@@ -27,6 +27,7 @@ public class GoFishGame extends CardGame {
 
     public void startGame() {
 
+
         if (goFishPlayer == null || deck == null || playerHand == null) {
             throw new IllegalStateException("Game tools doesnt exist");
         }
@@ -103,8 +104,6 @@ public class GoFishGame extends CardGame {
 
     public void askComputerHandForACard(String rank) {
         ArrayList<Card> cards = new ArrayList<>();
-        // if (checkComputerHandForPlayerRequestedCard(rank)) {
-        // System.out.println("The computer has " + rank + ". The card is being added to your hand...");
         Card card = null;
         while (checkComputerHandForPlayerRequestedCard(rank)) {
             for (int i = 0; i < getComputerHand().size(); i++) {
@@ -125,8 +124,6 @@ public class GoFishGame extends CardGame {
         }
         System.out.println("The computer doesnt have the card. Go Fish!!");
     }
-
-    //// }
 
 
     public void goFishingPlayer() {
@@ -228,11 +225,69 @@ public class GoFishGame extends CardGame {
 
     }
 
+    public Integer countBooksInPlayerHand() {
+        ArrayList<Card> hand = getPlayerHand();
+        List<String> cardsByRank = new ArrayList<>();
+
+        for (Card card : hand) {
+            cardsByRank.add(card.getRank().getSymbol());
+        }
+
+        Set<String> uniqueSet = new HashSet<>(cardsByRank);
+        Integer count = 0;
+
+        for (String rank : uniqueSet) {
+            if (Collections.frequency(cardsByRank , rank) > 3) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public String playerHandCardToBeRemoved() {
+        ArrayList<Card> hand = getPlayerHand();
+        List<String> cardsByRank = new ArrayList<>();
+
+        for (Card card : hand) {
+            cardsByRank.add(card.getRank().getSymbol());
+        }
+
+        Set<String> uniqueSet = new HashSet<>(cardsByRank);
+        Integer count = 0;
+
+        for (String rank : uniqueSet) {
+            if (Collections.frequency(cardsByRank , rank) > 3) {
+                return rank;
+            }
+        }
+        return null;
+    }
+
+    public Integer countBooksInComputerHand() {
+        Integer count = 0;
+        ArrayList<Card> hand = getComputerHand();
+        List<String> cardsByRank = new ArrayList<>();
+
+        for (Card card : hand) {
+            cardsByRank.add(card.getRank().getSymbol());
+        }
+
+        Set<String> uniqueSet = new HashSet<>(cardsByRank);
+
+
+        for (String rank : uniqueSet) {
+            if (Collections.frequency(cardsByRank , rank) > 3) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
     public Card checkPlayerHandForBook() {
         int count = 0;
         Card card = null;
-        //ArrayList<Card> toBeRemoved=new ArrayList<>();
-        //int score = getGoFishPlayer().getScore();
+        ArrayList<Card> toBeRemoved = new ArrayList<>();
 
         for (int i = 0; i < getPlayerHand().size(); i++) {
             boolean found = false;
@@ -242,19 +297,21 @@ public class GoFishGame extends CardGame {
                     found = true;
                 count++;
 
-                if (count == 4)
+                if (count == 4) {
                     card = getPlayerHand().get(i);
+                    int score = getGoFishPlayer().getScore() + 1;
+                    goFishPlayer.setScore(score);
+                }
             }
         }
-        //System.out.println("You booked " + card.getRank().getSymbol() +
-        //      ". Your score is " + score);
+
 
         return card;
     }
 
     public void removeBookedCard() {
         try {
-            String cardTobeRemoved = checkPlayerHandForBook().getRank().getSymbol();
+            String cardTobeRemoved = playerHandCardToBeRemoved();
 
             ArrayList<Card> tobeRemovedList = new ArrayList<>();
             Card card = null;
@@ -265,9 +322,6 @@ public class GoFishGame extends CardGame {
             }
 
             getPlayerHand().removeAll(tobeRemovedList);
-            int score = getGoFishPlayer().getScore() + 1;
-            goFishPlayer.setScore(score);
-            System.out.println(getGoFishPlayer().getName() + " score is " + getGoFishPlayer().getScore());
         } catch (Exception e) {
         }
 
@@ -276,8 +330,6 @@ public class GoFishGame extends CardGame {
     public Card checkComputerHandForBook() {
         int count = 0;
         Card card = null;
-        //ArrayList<Card> toBeRemoved=new ArrayList<>();
-        //int score = getGoFishPlayer().getScore();
 
         for (int i = 0; i < getComputerHand().size(); i++) {
             boolean found = false;
@@ -291,8 +343,6 @@ public class GoFishGame extends CardGame {
                     card = getComputerHand().get(i);
             }
         }
-        //System.out.println("You booked " + card.getRank().getSymbol() +
-        //      ". Your score is " + score);
 
         return card;
     }
@@ -309,9 +359,6 @@ public class GoFishGame extends CardGame {
             }
 
             getComputerHand().removeAll(tobeRemovedList);
-            int score = getComputerPlayer().getScore() + 1;
-            computerPlayer.setScore(score);
-            System.out.println("computer score is " + getComputerPlayer().getScore());
         } catch (Exception e) {
             System.out.println("card cant be removed");
         }
@@ -319,71 +366,66 @@ public class GoFishGame extends CardGame {
     }
 
 
+//    public Boolean checkPlayersCardRequestForInputBoundary(String input) {
+//        Boolean checkResult = false;
 //    public void checkPlayersCardRequestForInputBoundary(String input) {
 //        Boolean checkResult = true;
 //        if ((Integer.parseInt(input) > 2 && Integer.parseInt(input) < 12)
 //                || (input.toString().toUpperCase().equals("K"))
 //                || (input.toString().toUpperCase().equals("J")) ||
 //                (input.toString().toUpperCase().equals("Q"))) {
+//                    checkResult = true;
 //                       checkPlayersCardRequestForGameRule(input);
 //        } else {
-//
-//               System.out.println("Insert proper value");
-//        }
-//
-//    }
-//
-//
-//    public void checkPlayersCardRequestForGameRule(String input) {
-//       // Boolean checkresult = false;
-//        for (int i = 0; i < getPlayerHand().size(); i++) {
-//            if (input.equals(getPlayerHand().get(i).getRank().getSymbol())) {
-//                askComputerHandForACard(input);
-//            }
-//              System.out.println("You cannot request for card not in hand");
-//                break;
+//                checkResult = false;
 //
 //        }
 //
 //
-//    }
+//        return checkResult;
 //
-//    public void checkInput(String input) {
-//
-//
-//        while (checkPlayersCardRequestForInputBoundary(input) && checkPlayersCardRequestForGameRule(input)) {
-//                 System.out.println("Insert proper value");
-//        }
-//       askComputerHandForACard(input);
 //    }
 
 
-    public void increaseComputerScore() {
-        int computerSameRankCardCount = 0;
-        int computerScore = computerPlayer.getScore();
-        Card card = null;
+    public Boolean checkPlayersCardRequestForGameRule(String input) {
+        Boolean checkresult = false;
+        for (int i = 0; i < getPlayerHand().size(); i++) {
+            if (input.toUpperCase().equals(getPlayerHand().get(i).getRank().getSymbol())) {
+                checkresult = true;
+                break;
 
-        for (int i = 0; i < getComputerHand().size() - 1; i++) {
-            card = getComputerHand().get(i);
-            for (int j = i + 1; j < getComputerHand().size() - 1; j++)
-                if (card.getRank() == getComputerHand().get(j).getRank()) {
-                    computerSameRankCardCount++;
-                    if (computerSameRankCardCount == 2)
-                        computerScore += 1;
+            } else {
 
-                }
+                checkresult = false;
+            }
 
         }
-        System.out.println("Computer score is " + computerScore);
+
+        return checkresult;
 
     }
 
+    public String checkInput(String input) {
+        Boolean checkResult = false;
+
+        while (!checkPlayersCardRequestForGameRule(input)) {
+            System.out.println("Game rule:  Insert card same rank as you have on your hand");
+            input = InPutConsole.getInput();
+        }
+
+        return input;
+
+    }
+
+
     public void decideWiner() {
-        if (computerPlayer.getScore() > goFishPlayer.getScore())
-            System.out.println("nayyy! The machine won");
-        else if (computerPlayer.getScore() < goFishPlayer.getScore())
+        System.out.println("Computer score is " +countBooksInComputerHand() );
+        System.out.println("Player score is " +countBooksInPlayerHand() );
+        if (countBooksInComputerHand() > countBooksInPlayerHand())
+            System.out.println(" The computer won");
+        else if (countBooksInComputerHand() < countBooksInPlayerHand())
             System.out.println("Wow, you won! Congrats!!!");
-        else if (computerPlayer.getScore() == goFishPlayer.getScore())
+        else if (countBooksInPlayerHand() == countBooksInComputerHand())
             System.out.println("The game is tie! try again");
         else
             System.out.println("Sorry the score is not yet available. Please check again");
@@ -396,10 +438,6 @@ public class GoFishGame extends CardGame {
 
     public void setComputerHand(ArrayList<Card> computerHand) {
         this.computerHand = computerHand;
-    }
-
-    public void setGoFishPlayer(GoFishPlayer goFishPlayer) {
-        this.goFishPlayer = goFishPlayer;
     }
 
     public ArrayList<Card> getComputerHand() {
