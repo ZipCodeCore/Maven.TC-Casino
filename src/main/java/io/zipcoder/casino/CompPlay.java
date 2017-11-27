@@ -82,6 +82,7 @@ public class CompPlay {
     }
 
     public static GoFishPlayer choosePlayer(GoFishPlayer player, Rank cardRank) {
+        Set<GoFishPlayer>noCards=new HashSet<>();
         for (GoFishPlayer p : playerCards.keySet()) {
             if (playerCards.get(p).contains(cardRank)&&!player.equals(p)) {
                 return p;
@@ -89,10 +90,13 @@ public class CompPlay {
         }
         GoFishPlayer[] arr = playerCards.keySet().stream().toArray(GoFishPlayer[]::new);
         GoFishPlayer otherPlayer = null;
+        int randSeed=arr.length;
         do {
-            otherPlayer = arr[rand.nextInt(arr.length)];
+
+            otherPlayer = arr[rand.nextInt(randSeed)];
+            randSeed--;
         }
-        while (otherPlayer.equals(player)||otherPlayer.getHand().size()==0);
+        while ((otherPlayer.equals(player)||otherPlayer.getHand().size()==0)&&randSeed>1);
         return otherPlayer;
     }
 

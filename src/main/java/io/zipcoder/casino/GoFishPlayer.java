@@ -52,6 +52,7 @@ public class GoFishPlayer extends CardPlayer {
                 giveCards(rank);
                 books++;
                 System.out.println(getName() + " Completed Book: " + rank);
+                break;
             }
     }
 

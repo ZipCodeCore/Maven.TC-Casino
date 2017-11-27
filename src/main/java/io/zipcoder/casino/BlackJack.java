@@ -47,7 +47,7 @@ public class BlackJack extends CardGames<BlackJackGambler> implements Gamble<Bla
             resetHands();
             resetBets();
             removeZeroChipPlayers();
-        } while ("yes".equalsIgnoreCase(playAgain));
+        } while (!"no".equalsIgnoreCase(playAgain));
 
     }
 

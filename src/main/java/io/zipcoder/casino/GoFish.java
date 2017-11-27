@@ -10,7 +10,7 @@ public class GoFish extends CardGames<GoFishPlayer> {
 
         gameSetUp(user);
 
-        while (booksRemaining() > 0) {
+         do{
             System.out.println("Books remaining: " + booksRemaining());
             booksFound();
             System.out.println("Your Hand: " + user.handToString());
@@ -28,7 +28,7 @@ public class GoFish extends CardGames<GoFishPlayer> {
                 }
                 player.removeBooks();
             }
-        }
+        }while (booksRemaining() > 0);
 
         findWinner();
         CompPlay.clearPlayerCards();
