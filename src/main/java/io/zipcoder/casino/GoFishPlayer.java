@@ -4,13 +4,19 @@ import java.util.ArrayList;
 
 public class GoFishPlayer extends Player<GoFishPlayer> implements Comparable<GoFishPlayer> {
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
     public String name;
-    private ArrayList<Card> cardsInHand;
+   private ArrayList<Card> cardsInHand;
 
     GoFishPlayer (String name) {
         this.name = name;
         this.cardsInHand = new ArrayList<>();
     }
+
 
     public void dealGoFishHand(ArrayList<GoFishPlayer> players, Deck deck) {
         for (int i = 1; i <= 5; i++) {
@@ -30,12 +36,14 @@ public class GoFishPlayer extends Player<GoFishPlayer> implements Comparable<GoF
     public String viewHand() {
         String handString = "";
         for (Card card : cardsInHand) {
-            handString += card.toString();
+            handString += card.getCardsValue();
         }
         return handString;
     }
 
-
+    public void goFish(Card card){
+        addCardToHand(card);
+    }
 
 
     //    public Double bet(Double bet) {
@@ -47,3 +55,5 @@ public class GoFishPlayer extends Player<GoFishPlayer> implements Comparable<GoF
         return 0;
     }
 }
+
+
