@@ -64,6 +64,7 @@ public class CrapsTest {
         craps.placeBet(300.0);
         Double actual = craps.crapsPlayer.getMoney();
         Assert.assertEquals(expected,actual,0);
+        Die die=new Die();
     }
 
     @Test
