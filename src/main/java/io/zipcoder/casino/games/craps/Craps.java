@@ -33,7 +33,7 @@ public class Craps implements Gamble, Game {
         determineFirstRoller();
     }
 
-//Add to pot
+    //Add to pot
     @Override
     public void takeBet(Double bet) {
         takeBet(bet, mainPot);
@@ -45,7 +45,7 @@ public class Craps implements Gamble, Game {
         takeBet(bet, sidePot);
     }
 
-//remove some from pot
+    //remove some from pot
     @Override
     public Double settleBet(Double winnings) {
         return (settleBet(winnings, mainPot));
@@ -57,7 +57,7 @@ public class Craps implements Gamble, Game {
         return (settleBet(winnings, sidePot));
     }
 
-//Take all from pot
+    //Take all from pot
     public Double emptyPot(){
         return emptyPot(mainPot);
     }
@@ -92,48 +92,48 @@ public class Craps implements Gamble, Game {
     }
 
     public Integer initialThrow(){ //returns -1 if 2/3/12
-                                    // 1 if 7/11,
-                                    // 0 if point set
+        // 1 if 7/11,
+        // 0 if point set
         numberRolled = dice.rollDie();
 
         switch (numberRolled){
             case  2:
             case  3:
             case 12:{
-                        return -1;
-                    }
+                return -1;
+            }
             case  7:
             case 11:{
-                        return 1;
-                    }
+                return 1;
+            }
             default:{
-                        point=numberRolled;
-                        for (CrapPointPair p : CrapPointPair.values()){
-                            if (p.isInPair(point)){
-                                pair=p;
-                            }
-                        }
-                        return 0;
+                point=numberRolled;
+                for (CrapPointPair p : CrapPointPair.values()){
+                    if (p.isInPair(point)){
+                        pair=p;
                     }
+                }
+                return 0;
+            }
         }
 
     }
     public Integer secondaryThrow(){//returns -1 if crapped out,
-                                    //returns 1 if point met
-                                    //returns 0 if nothing met
-                                    //returns any other number if pair met
+        //returns 1 if point met
+        //returns 0 if nothing met
+        //returns any other number if pair met
         numberRolled=dice.rollDie();
 
         if (numberRolled==point){//Won round
             return 1;
         } else if (numberRolled==7)//Lost round
-            {
-                return -1;
-            } else if (pair.isInPair(numberRolled)){//Won sideBet
-                    return numberRolled;
-                } else{
-                        return 0;//Neutral.
-                      }
+        {
+            return -1;
+        } else if (pair.isInPair(numberRolled)){//Won sideBet
+            return numberRolled;
+        } else{
+            return 0;//Neutral.
+        }
     }
 
     @Override
