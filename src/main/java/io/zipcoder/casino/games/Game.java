@@ -2,6 +2,6 @@ package io.zipcoder.casino.games;
 
 public interface Game {
 
-    public void play();
+    boolean play(String userInput);
 
 }

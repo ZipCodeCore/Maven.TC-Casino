@@ -8,24 +8,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PlayingDeckTest {
-/*
-    Deck deck;
+
+    PlayingDeck deck;
 
     @Before
     public void setUp() {
-        deck = new Deck();
+        deck = new PlayingDeck();
     }
+
     @Test
     public void getAllCardsTest(){
-        deck = new Deck();
-        ArrayList<Card> cards;
+        ArrayList<PlayingCard> cards;
         cards = deck.getAllCards();
 
         Assert.assertTrue((cards!=null)&&(cards.size()==52));
     }
+
     @Test
     public void getCardTest(){
-        Assert.assertTrue(deck.getCard() != null);
+        Integer expectedRemaining = 51;
+
+        Assert.assertTrue(deck.getAndRemoveCard() != null);
+
+        Integer actualRemaining = deck.countLeft();
+
+        Assert.assertEquals(expectedRemaining, actualRemaining);
     }
 
     @Test
@@ -34,20 +41,20 @@ public class PlayingDeckTest {
         Integer actualCount = deck.getAllCards().size();
 
         Assert.assertEquals( expectedCount, actualCount);
-        Assert.assertTrue(deck.getCard() != null);
+        Assert.assertTrue(deck.getAndRemoveCard() != null);
     }
 
     @Test
     public void shuffleTest(){
-        Card[] cardArray1 = new Card[52];
-        Card[] cardArray2 = new Card[52];
+        PlayingCard[] cardArray1 = new PlayingCard[52];
+        PlayingCard[] cardArray2 = new PlayingCard[52];
 
-        Card[] initialArray = deck.getAllCards().toArray(cardArray1);
+        PlayingCard[] initialArray = deck.getAllCards().toArray(cardArray1);
         deck.shuffle();
 
-        Card[] shuffledArray = deck.getAllCards().toArray(cardArray2);
+        PlayingCard[] shuffledArray = deck.getAllCards().toArray(cardArray2);
 
         Assert.assertFalse(Arrays.equals(initialArray, shuffledArray));
     }
-    */
+
 }

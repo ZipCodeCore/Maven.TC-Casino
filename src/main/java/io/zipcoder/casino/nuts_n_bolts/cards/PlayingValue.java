@@ -16,7 +16,20 @@ public enum PlayingValue {
     KING("K"),
     ACE("A");
 
-    PlayingValue(String value) {
+    String value;
 
+    PlayingValue(String value) {
+        this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString(){
+        return value;
+    }
+
+
 }

@@ -1,11 +1,83 @@
 package io.zipcoder.casino.nuts_n_bolts;
 
+import io.zipcoder.casino.games.Gamble;
+import io.zipcoder.casino.games.Game;
+import io.zipcoder.casino.games.craps.Craps;
 import java.util.Scanner;
+import static io.zipcoder.casino.nuts_n_bolts.Input.getPositiveDoubleInput;
+import static io.zipcoder.casino.nuts_n_bolts.Input.getStringInput;
 
 public class Console {
 
-}
+    private Game game = new Craps();
+    private User player;
+    private static Scanner scanner = new Scanner(System.in);
 
+    public Console(Game game, User user) {
+        this.game = game;
+        this.player = user;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public void setUser(User user) {
+        this.player = user;
+    }
+
+    public void run() {
+        System.out.println("Welcome to the " + game.getClass().getSimpleName() + " table!");
+
+        if (game instanceof Gamble) {
+            do {//betting game logic
+
+
+
+
+                playerBets();
+
+
+
+
+
+            } while (game.play(continuePlaying()));
+        } else {
+
+            do {//non betting game logic
+
+            } while (game.play(continuePlaying()));
+        }
+
+    }
+
+
+    private String continuePlaying() {
+        return (getStringInput("Continue playing? "));
+    }
+
+    private void displayPlayerMoney(){
+        System.out.println("You have $" + player.getWallet().getMoney());
+    }
+
+    private void playerBets(){
+        double betAmount;
+
+        do{
+            displayPlayerMoney();
+            betAmount=getBetAmount();
+        }while (betAmount>player.getWallet().getMoney());
+
+        //game.takeBet(betAmount);
+
+    }
+
+    private Double getBetAmount(){
+        return (getPositiveDoubleInput("How much do you want to bet? "));
+
+    }
+
+}
 /*
     private static final double MIN_BET_ALLOWED=0.01;
 
@@ -14,7 +86,7 @@ public class Console {
 
     public static void run(){
 
-        Player userPlayer = game.getPlayer();
+        Player userPlayer = game.getHumanPlayer();
 
         System.out.print("" +
                 " ____   _            _     _            _    \n" +
@@ -35,7 +107,6 @@ public class Console {
         System.out.println("\nYou have $"+forceTwoDecimalDouble(userPlayer.getMoney().toString()));
 
         do {
-            game.start();
             playerBets(userPlayer);
             displayPlayerHandAndScore(userPlayer);
             displayDealerCardShowing();
@@ -74,14 +145,14 @@ public class Console {
         } else {
             System.out.println("\nHouse wins!");
         }
-        System.out.println("\nHouse has score: " + game.getDealer().getScore());
+        System.out.println("\nHouse has score: " + game.getCompPlayer().getScore());
         resetPotAndDiscardHands(userPlayer);
     }
 
     private static void resetPotAndDiscardHands(Player userPlayer){
         game.returnBet();
         userPlayer.getHand().clear();
-        game.getDealer().getHand().clear();
+        game.getCompPlayer().getHand().clear();
     }
 
     private static void playerHitsOrStays(Player userPlayer){
@@ -105,7 +176,7 @@ public class Console {
     }
 
     private static void displayDealerCardShowing(){
-        System.out.println("\nDealer is showing:\n"+game.getDealer().getHand().get(0).toString());
+        System.out.println("\nDealer is showing:\n"+game.getCompPlayer().getHand().get(0).toString());
     }
 
     private static void displayPlayerHandAndScore(Player userPlayer){
