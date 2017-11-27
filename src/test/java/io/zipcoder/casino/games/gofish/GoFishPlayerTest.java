@@ -15,7 +15,7 @@ public class GoFishPlayerTest {
     public void creationAndGetterTest(){
         User user = new User("Uncle Bob", 1000000d);
         GoFish goFish = new GoFish(user);
-        GoFish.GoFishPlayer player = goFish.getPlayer();
+        GoFish.GoFishPlayer player = goFish.getHumanPlayer();
 
         Assert.assertEquals(user, player.getUser());
         Assert.assertNull(player.getAskedValue());
@@ -25,7 +25,7 @@ public class GoFishPlayerTest {
     public void drawCardPutsInHandTest(){
         User user = new User("Uncle Bob", 1000000d);
         GoFish goFish = new GoFish(user);
-        GoFish.GoFishPlayer player = goFish.getPlayer();
+        GoFish.GoFishPlayer player = goFish.getHumanPlayer();
 
         Assert.assertTrue(player.getHand().isHandEmpty());
         player.drawCard();
@@ -36,7 +36,7 @@ public class GoFishPlayerTest {
     public void drawCardReturnsCorrectCardTest(){
         User user = new User("Uncle Bob", 1000000d);
         GoFish goFish = new GoFish(user);
-        GoFish.GoFishPlayer player = goFish.getPlayer();
+        GoFish.GoFishPlayer player = goFish.getHumanPlayer();
 
         PlayingCard expectedCard = goFish.getDeck().getAllCards().get(0);
         PlayingCard actualCard = player.drawCard();
@@ -52,10 +52,10 @@ public class GoFishPlayerTest {
         GoFish goFish = new GoFish(user);
 
         for (int i = 0; i < 4; i++) {
-            goFish.getDealer().getHand().addCard(new PlayingCard(PlayingSuit.CLUB, PlayingValue.KING));
+            goFish.getCompPlayer().getHand().addCard(new PlayingCard(PlayingSuit.CLUB, PlayingValue.KING));
         }
 
-        PlayingValue actual = goFish.getDealer().fourOfKindValue();
+        PlayingValue actual = goFish.getCompPlayer().fourOfKindValue();
         PlayingValue expected = PlayingValue.KING;
 
         Assert.assertEquals(expected, actual);
@@ -67,10 +67,10 @@ public class GoFishPlayerTest {
         GoFish goFish = new GoFish(user);
 
         for (int i = 0; i < 3; i++) {
-            goFish.getDealer().getHand().addCard(new PlayingCard(PlayingSuit.CLUB, PlayingValue.KING));
+            goFish.getCompPlayer().getHand().addCard(new PlayingCard(PlayingSuit.CLUB, PlayingValue.KING));
         }
 
-        PlayingValue actual = goFish.getDealer().fourOfKindValue();
+        PlayingValue actual = goFish.getCompPlayer().fourOfKindValue();
         PlayingValue expected = null;
 
         Assert.assertEquals(expected, actual);
@@ -80,13 +80,13 @@ public class GoFishPlayerTest {
     public void discardFourOfKindTest(){
         User user = new User("Uncle Bob", 1000000d);
         GoFish goFish = new GoFish(user);
-        GoFish.GoFishPlayer dealer = goFish.getDealer();
+        GoFish.GoFishPlayer dealer = goFish.getCompPlayer();
 
         for (int i = 0; i < 4; i++) {
             dealer.getHand().addCard(new PlayingCard(PlayingSuit.CLUB, PlayingValue.KING));
         }
         for (int i = 0; i < 3; i++) {
-            goFish.getDealer().getHand().addCard(new PlayingCard(PlayingSuit.SPADE, PlayingValue.ACE));
+            goFish.getCompPlayer().getHand().addCard(new PlayingCard(PlayingSuit.SPADE, PlayingValue.ACE));
         }
 
         Assert.assertEquals(4, (int)dealer.checkIfHandHasValue(PlayingValue.KING));
