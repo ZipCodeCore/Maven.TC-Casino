@@ -140,7 +140,7 @@ public class BlackJack extends CardGames<BlackJackGambler> implements Gamble<Bla
             multiplier += 0.5;
         Integer winnings = (int) (playerWagers.get(player).doubleValue() * multiplier);
         System.out.println(player.showHand());
-        System.out.println(" Winnings: " + winnings + "\n");
+        System.out.println(" Won: " + winnings + " chips\n");
         player.addChips(winnings);
     }
 
