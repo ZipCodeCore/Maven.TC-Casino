@@ -1,4 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.BlackJack;
+
+import io.zipcoder.casino.*;
 
 public class BlackJack extends CardGames implements Gamble {
     private Player dealer;
@@ -11,6 +13,7 @@ public class BlackJack extends CardGames implements Gamble {
         dealer = new Player("Dealer");
         pot = 0.0;
     }
+
 
     public Player getDealer() {
         return dealer;

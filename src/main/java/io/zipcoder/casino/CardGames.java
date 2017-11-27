@@ -1,7 +1,7 @@
 package io.zipcoder.casino;
 
 public abstract class CardGames implements Game {
-    protected Player player;
+    protected Player player = PlayerWarehouse.getCurrentPlayer();
     protected Deck deck;
 
     public CardGames() {

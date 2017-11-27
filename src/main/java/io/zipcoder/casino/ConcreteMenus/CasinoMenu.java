@@ -1,7 +1,7 @@
 package io.zipcoder.casino.ConcreteMenus;
 
 import io.zipcoder.casino.Console;
-import io.zipcoder.casino.GoFish;
+import io.zipcoder.casino.GoFishGame.GoFish;
 import io.zipcoder.casino.PlayerWarehouse;
 
 public class CasinoMenu extends Menu {
