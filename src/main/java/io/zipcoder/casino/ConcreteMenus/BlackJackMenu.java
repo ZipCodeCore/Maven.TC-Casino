@@ -4,6 +4,7 @@ import io.zipcoder.casino.BlackJack.BlackJack;
 import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.Console;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.PlayerWarehouse;
 
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class BlackJackMenu {
     private static BlackJack game = new BlackJack();
     private static Scanner scanner = new Scanner (System.in);
     public static void run(){
-        Player userPlayer = game.getPlayer();
+        Player userPlayer = PlayerWarehouse.getCurrentPlayer();
         System.out.print("" +
                 " ____   _            _     _            _    \n" +
                 "| __ ) | | __ _  ___| | __(_) __ _  ___| | __\n" +
@@ -21,11 +22,11 @@ public class BlackJackMenu {
                 "|____/ |_|\\__,_|\\___|_|\\_\\| |\\__,_|\\___|_|\\_\\ \n" +
                 "                        |__/ \n" +
                 "+--------------------------------------------+" +
-                "\n\nWelcome to the <BlackJackGame> table!" +
-                "\n\nWhat's your name? ");
-        String userName = getInput();
-        userPlayer.setName(userName);
-        System.out.println("Hello, " + userName + "!");
+                "\n\nWelcome to the <BlackJackGame> table!");
+                //"\n\nWhat's your name? ");
+        //String userName = getInput();
+        //userPlayer.setName(userName);
+        //System.out.println("Hello, " + userName + "!");
         System.out.println("\nYou have $"+forceTwoDecimalDouble(userPlayer.getMoney().toString()));
         do {
             game.play();
@@ -85,7 +86,7 @@ public class BlackJackMenu {
     private static String forceHitOrStay(){
         String input;
         do {
-            System.out.print("\nHit or stay? ");
+            System.out.println("\nHit or stay? ");
             input = getInput();
         } while (!isInputStayOrHit(input));
         return input;
@@ -116,7 +117,7 @@ public class BlackJackMenu {
     private static String forceDoubleInput() {
         String input;
         do {
-            System.out.print("\nHow much do you want to bet?  ");
+            System.out.print("\nHow much do you want to bet?  \n");
             input = getInput();
         } while (!isInputDouble(input) || !isInputPositive(input));
         return forceTwoDecimalDouble(input);

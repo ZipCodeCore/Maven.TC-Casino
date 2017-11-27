@@ -1,6 +1,7 @@
 package io.zipcoder.casino.ConcreteMenus;
 
 import io.zipcoder.casino.Console;
+import io.zipcoder.casino.Craps;
 import io.zipcoder.casino.GoFishGame.GoFish;
 import io.zipcoder.casino.PlayerWarehouse;
 
@@ -20,6 +21,7 @@ public class CasinoMenu extends Menu {
                 BlackJackMenu.run();
                 break;
             case CRAPS:
+                craps();
                 break;
             case GOFISH:
                 goFish();
@@ -51,5 +53,11 @@ public class CasinoMenu extends Menu {
         GoFish newGameOfGoFish = new GoFish();
         newGameOfGoFish.setPlayer(PlayerWarehouse.getCurrentPlayer());
         newGameOfGoFish.play();
+    }
+
+    public void craps() {
+        Craps newGameOfCraps = new Craps();
+        newGameOfCraps.setPlayer(PlayerWarehouse.getCurrentPlayer());
+        newGameOfCraps.play();
     }
 }
