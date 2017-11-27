@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public class Craps extends DicePlayer implements Gamble {
+public class Craps extends DicePlayer implements Gamble, Game {
 
     private int point;
     private Double pot = 0.0;
@@ -27,16 +27,17 @@ public class Craps extends DicePlayer implements Gamble {
         return pot; 
     }
 
-    public void placeBet(Double moneyToBet) {
+    public int placeBet(Double moneyToBet) {
         if (hasMoneyToMakeBet(moneyToBet)) {
             setPot(moneyToBet);
             Double tempMoney = crapsPlayer.getMoney();
             crapsPlayer.setMoney(tempMoney - moneyToBet);
-        } else { //would we want to throw an exception here instead...
+            return 0;
+        } else {
             System.out.println("You do not have enough money to make a bet! Your current balance is " + crapsPlayer.getMoney());
+            return 1;
         }
     }
-
 
     public boolean hasMoneyToMakeBet(Double moneyToBet) {
         if (crapsPlayer.getMoney() < moneyToBet) {
@@ -49,43 +50,72 @@ public class Craps extends DicePlayer implements Gamble {
         crapsPlayer.setMoney(crapsPlayer.getMoney() + getPot() * 2);
     }
 
-    public String firstRoll() {
+    private int firstRoll() {
         if (die.diceTotal() == 7 || die.diceTotal() == 11) {
-            cashInWinnings();//cashInWinnings  //what if they already have money? add to the money they already have
-            return "You win!" + die.diceTotal();
+            cashInWinnings();
+            System.out.println("You win!" + die.diceTotal());
+            return 0;
+
         } else if (die.diceTotal() == 2 || die.diceTotal() == 3 || die.diceTotal() == 12) {
             setPot(0.0);
-            return "You lose!" + die.diceTotal();
+            System.out.println("You lose!" + die.diceTotal());
+            return 0;
 
         } else {
             point = die.diceTotal();
-            return "New target roll" + die.diceTotal();
+            System.out.println("New target roll" + die.diceTotal());
+            return 1;
         }
     }
 
-    public String secondRoll() {
-        String result;
+    private void secondRoll() {
         do {
             die.rollDice();
             if (die.diceTotal() == getPoint()) {
                 cashInWinnings();
-                result = "You win!" + die.diceTotal();
+                System.out.println("You win!" + die.diceTotal());
                 break;
             } else if (die.diceTotal() == 7 || die.diceTotal() == 11) {
                 setPot(0.0);
-                result = "You lose!" + die.diceTotal();
+                System.out.println("You lose!" + die.diceTotal());
                 break;
             } else {
-                result =  "Rolling again" + die.diceTotal(); //suspicious....
+                System.out.println("Rolling again" + die.diceTotal());
             }
         } while (die.diceTotal() != getPoint());
+    }
 
-        return result;
+//    public void continuePlaying() {
+//        System.out.println("Would you like to play a new game of Craps?");
+//        //if input is equalled to Yes.toLowerCase, play another game, crabs.play()
+//        //if input is no.toLowerCase, exit game
+//    }
+
+    public void play() {
+        String playAgain;
+        Double bet;
+
+        do {
+            Craps crapsGame = new Craps();
+            System.out.println("================================================================\n" +
+                    "Greetings player! Welcome to Basic AF Casino's version of Craps!\n " +
+                    "\t\t\tLets get started!\n" +
+                    "================================================================");
+
+            do {
+                bet = ConsoleInput.getDoubleInput("How much would you like to bet?");
+                crapsGame.placeBet(bet);
+            }while (placeBet(bet) == 1);
+
+
+            System.out.println("Your current bet is " + bet);
+            System.out.println("Let's get the dice rolling!");
+
+            if (crapsGame.firstRoll() == 1) {
+                crapsGame.secondRoll();
+            }
+            playAgain = ConsoleInput.getStringInput("Would you like to play again? Yes or No");
+        } while (!playAgain.equals("no"));
     }
 }
-
-//logic:
-//make a bet
-//first roll: 7 or 11 = win or 2, 3, 12 = lose, any other role becomes there point and it is returned to them
-// second roll (if rolled a point): roll the point value = win; role a 7 = lose (needs to keep going until we roll the point value;
 
