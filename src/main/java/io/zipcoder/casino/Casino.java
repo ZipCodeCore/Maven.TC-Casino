@@ -8,7 +8,8 @@ public class Casino {
     public static void main(String[] args) {
         Craps craps;
 
-        System.out.println("~~ Welcome to the Basic AF \'Casino\' ~~\n");
+        System.out.println("\t\t~~ Welcome to the Crap's Casino ~~\n" +
+                "Where the only game to play is craps and you better like it!");
 
         do {
             String userInput = ConsoleInput.getStringInput("Which of our many fabulous games would like to play?\n" +
@@ -17,11 +18,9 @@ public class Casino {
                 craps = new Craps();
                 craps.play();
             } else {
-                System.out.println("\nPsshhh, we don't have " + userInput + "! What kind of place do you think this is?\n");
+                System.out.println("\nPyshc, we don't have " + userInput + "! What kind of place do you think this is?!\n");
             }
-        }while (true);
+        } while (true);
     }
-
-    //when we have more games add switch statement to select game
 }
 

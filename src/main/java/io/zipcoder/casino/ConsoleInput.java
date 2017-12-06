@@ -20,6 +20,17 @@ public class ConsoleInput {
         } while (true);
     }
 
+    //cannot get to work...
+//    public static void rollDicePrompt() {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Please press the enter key to roll the dice!");
+//        String readString = scanner.nextLine();
+//        if (readString.isEmpty()) {
+//            Die die = new Die();
+//            die.rollDice();
+//        }
+//    }
+
     public static Double getDoubleInput(String prompt){
         String userInput;
 
