@@ -9,7 +9,7 @@ So in this lab you will be creating a casino based game.
   * Craps a dice game
 
 # Specs
-* This repo contains a file named (UML.pdf)[https://github.com/Zipcoder/CR-MacroLabs-OOP-Casino/blob/master/UML.pdf]
+* This repo contains a file named [UML.pdf](https://github.com/Zipcoder/CR-MacroLabs-OOP-Casino/blob/master/UML.pdf)
 * The UML displays 2 interfaces which you have to create: `Game`, and `Gamble`
   * Each Game must implement the `Game` interface
   * Games that involve gambling should implement `Gamble`.
