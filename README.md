@@ -1,4 +1,4 @@
-##TC-Casino
+## TC-Casino
 
 So in this lab you will be creating a casino based game.
 
