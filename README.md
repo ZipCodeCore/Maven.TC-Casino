@@ -1,6 +1,6 @@
 # TC-Casino
 * Objective:
- * To create a casino simulation.
+  * To create a casino simulation.
 
 ## Minimum Viable Product (MVP)
 * Your application must have at the very least 3 games:
@@ -11,15 +11,15 @@
 ## Specs
 * This repo contains a file named [UML.pdf](https://github.com/Zipcoder/CR-MacroLabs-OOP-Casino/blob/master/UML.pdf)
 * The UML displays 2 interfaces which you have to create: `Game`, and `Gamble`
- * Each Game must implement the `Game` interface
- * Games that involve gambling should implement `Gamble`.
+  * Each Game must implement the `Game` interface
+  * Games that involve gambling should implement `Gamble`.
 * The project should include some concept of
  * `Player` class
-  * `Player` objects should be created upon input from a user.
+   * `Player` objects should be created upon input from a user.
  * `Game` interface
-  * Contract which ensures that a class enforces some aspect of _playing_.
+   * Contract which ensures that a class enforces some aspect of _playing_.
  * `Gamble` interface
-  * Contract which ensures that a class enforces some aspect of _waging money_.
+   * Contract which ensures that a class enforces some aspect of _waging money_.
   
  
 
