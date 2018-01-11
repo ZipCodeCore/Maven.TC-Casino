@@ -9,10 +9,7 @@
   * Craps a dice game
 
 ## Specs
-* This repo contains a file named [UML.pdf](https://github.com/Zipcoder/CR-MacroLabs-OOP-Casino/blob/master/UML.pdf)
-* The UML displays 2 interfaces which you have to create: `Game`, and `Gamble`
-  * Each Game must implement the `Game` interface
-  * Games that involve gambling should implement `Gamble`.
+* This repo contains a [vanilla](https://en.wikipedia.org/wiki/Vanilla_software) [UML.pdf](https://github.com/Zipcoder/CR-MacroLabs-OOP-Casino/blob/master/UML.pdf) to help get you started.
 * The project should include some concept of
  * `Player` class
    * `Player` objects should be created upon input from a user.
