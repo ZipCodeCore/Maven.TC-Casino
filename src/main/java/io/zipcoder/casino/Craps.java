@@ -37,17 +37,26 @@ public class Craps implements Game, Gamble{
         return win > lose;
     }
 
-    public void takeBet(Double playerMoney) {
-        //if player wins, playerMoney doubles and add to player's total money amount, otherwise deducts the playerMoney from player's money
-        if(wonRound()){
-           // =playerMoney*2;
-        }
-//        else{
-//            Player.getMoney-playerMoney
-//        }
-    }
-
     public boolean play() {
         return false;
     }
-}
+
+    public void takeBet(Double playerMoney) {
+
+    }
+
+//    public void takeBet(Double playerMoney) {
+//        //if player wins, playerMoney doubles and add to player's total money amount, otherwise deducts the playerMoney from player's money
+//        if(wonRound()){
+//           // =playerMoney*2;
+//        }
+//        else{
+//            Player.getMoney-playerMoney
+//        }
+
+    }
+
+//    public boolean play() {
+//        return false;
+//    }
+
