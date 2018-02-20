@@ -1,0 +1,53 @@
+THEME - Casino
+
+EPIC - as a Casino owner
+
+I want to have a casino
+I want that casino to have 3 games
+I want to make lots of money
+    I want to win more than I lose
+I want players to come in and play my games
+//I want to keep track of my revenues/expenses
+I want to ban broke players from playing gambling games, but still allow free games
+
+User story - as a player
+
+    I want to come into the casino
+        I want to keep track of my money as I play games
+        I would like to be able to go home while not in a game
+
+    Games:
+        I want to play a game
+        I want to decide if it's a gambling kind of game or not
+        //I want to decide if any game is gambling or not
+        I want to be able to decide how many other people to play with (pick tables)
+        I want to be able to quit at any time (forfeit bet if gambling game)
+
+    Gambling Games:
+        I want to decide if and how much I bet (can't bet more than wallet, must have at least minimum to play)
+        I want to be paid fair odds
+        //Decide betting limits
+
+    Card Games:
+        I want to keep track of my hand
+        I want to play with a fair deck
+        I want to be able to draw cards
+        I want to be able to move cards around (hand->another player, discard, etc)
+        I want to be able to see the playing area
+
+    Dice Games:
+        I want to be able to roll the dice
+        I want to play with fair dice
+
+    I want to be able to play BlackJack
+        <Gambling, Cards 52 standard deck>
+        I want to decide if I hit or stay
+
+    I want to be able to play GoFish
+        <Not gambling, Cards 52 standard deck>
+        I want to ask give me all your X, and get an honest answer
+
+
+    I want to be able to play Craps
+        <Gambling, 2* 6-sided Dice>
+        //Side bets
