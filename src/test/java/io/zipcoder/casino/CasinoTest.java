@@ -20,7 +20,6 @@ public class CasinoTest {
 
         Assert.assertEquals(firstName, actual);
     }
-    }
 
     @Test
     public void answerTest() {

@@ -2,14 +2,9 @@ package io.zipcoder.casino;
 
 public class Casino {
     private Player player;
-<<<<<<< HEAD
-    private Games running;
-=======
     private Game running;
     public String prompt;
     int answer;
->>>>>>> dc8bfd182095dc50f7f2c2d876a6f1d7cdd07ec1
-
 
     public Casino() {
         this.player = player;
@@ -20,14 +15,6 @@ public class Casino {
         return answer;
     }
 
-<<<<<<< HEAD
-    public Games getRunning() {
-        return running;
-    }
-
-    public void setRunning(Games running) {
-        this.running = running;
-=======
     public void mainMenu(){
         String prompt = "Welcome to High Rollers Club!\n"+
                 "As a welcome gift, here's 500 chips ($2500)\n" +
@@ -56,9 +43,6 @@ public class Casino {
 
             }
         }
->>>>>>> dc8bfd182095dc50f7f2c2d876a6f1d7cdd07ec1
     }
-
-
 }
 
