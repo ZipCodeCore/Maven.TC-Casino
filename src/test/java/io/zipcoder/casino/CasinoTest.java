@@ -12,13 +12,11 @@ public class CasinoTest {
 
     @Test
     public void getAnswerTest() {
-        int getAnswer = 3;
+        int expectedAnswer = 0;
         Casino casino = new Casino();
 
-        casino.setFirstName(firstName);
-        String actual = joeFen.getFirstName();
+        int actual = casino.getAnswer();
 
-        Assert.assertEquals(firstName, actual);
     }
 
     @Test
@@ -31,6 +29,7 @@ public class CasinoTest {
 
     @Test
     public void enterTest() {
+
     }
 
 
