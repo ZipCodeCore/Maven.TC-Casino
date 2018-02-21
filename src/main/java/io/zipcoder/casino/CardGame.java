@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class CardGame implements Game {
 
     private  Deck deck;
-    private ArrayList<Players>players;
+    private ArrayList<Player>players;
     private int playerScore;
     private Player winner;
 

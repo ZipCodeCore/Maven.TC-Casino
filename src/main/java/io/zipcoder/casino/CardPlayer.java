@@ -6,6 +6,9 @@ public class CardPlayer extends Player{
     private int score;
     private boolean isCurrentPlayer;
     Player currentPlayer;
+    public CardPlayer(){
+
+    }
 
     public CardPlayer(Profile someProfile) {
         super(someProfile);

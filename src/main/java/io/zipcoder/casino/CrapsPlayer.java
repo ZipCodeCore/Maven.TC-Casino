@@ -6,8 +6,13 @@ public class CrapsPlayer extends Player implements Gambler {
 
     private boolean isPassLine;
 
+
+    public CrapsPlayer(Profile someProfile) {
+        super(someProfile);
+    }
+
     public CrapsPlayer() {
-        this.isPassLine = isPassLine;
+
     }
 
     public void bet(double amount) {
