@@ -11,18 +11,18 @@ public class Player {
 
 
     public Boolean canCoverBet(Integer minimumBetCharge){
-        return null;
+        return (this.chips >= minimumBetCharge ? true : false);
     }
 
-    public Long betChips(Integer bet){
-        return null;
+    public void betChips(Integer bet){
+        this.chips -= bet;
     }
 
     public void addChips(Integer numberOfChipsToAdd){
-
+        this.chips += numberOfChipsToAdd;
     }
 
     public Long getBalance(){
-        return null;
+        return this.chips;
     }
 }
