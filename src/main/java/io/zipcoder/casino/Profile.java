@@ -1,3 +1,5 @@
+package io.zipcoder.casino;
+
 public class Profile {
     private String name;
     private double accountBalance;
