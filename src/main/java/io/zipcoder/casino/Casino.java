@@ -2,7 +2,7 @@ package io.zipcoder.casino;
 
 public class Casino {
     private Player player;
-    private Game running;
+    private Games running;
 
 
     public Casino() {
@@ -16,11 +16,11 @@ public class Casino {
         this.player = player;
     }
 
-    public Game getRunning() {
+    public Games getRunning() {
         return running;
     }
 
-    public void setRunning(Game running) {
+    public void setRunning(Games running) {
         this.running = running;
     }
 
