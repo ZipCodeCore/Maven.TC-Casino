@@ -1,9 +1,18 @@
 package io.zipcoder.casino;
 
 public class Player {
+
     private String name;
     private Integer age;
     private Integer balance;
+
+
+
+    public Player(String name, Integer age){
+        this.name = name;
+        this.age = age;
+    }
+
 
     public Player(String name, Integer age, Integer balance) {
         this.name = name;
@@ -34,4 +43,5 @@ public class Player {
     public void setBalance(Integer balance) {
         this.balance = balance;
     }
+
 }
