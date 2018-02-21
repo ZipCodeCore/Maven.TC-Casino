@@ -3,6 +3,9 @@ package io.zipcoder.casino;
 import io.zipcoder.casino.Profile;
 
 public class Player {
+    public Player(){
+
+    }
 
     private Profile someProfile;
 
