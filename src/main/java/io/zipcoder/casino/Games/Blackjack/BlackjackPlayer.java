@@ -2,7 +2,7 @@ package io.zipcoder.casino.Games.Blackjack;
 
 import io.zipcoder.casino.*;
 
-public class BlackjackPlayer {
+public class BlackjackPlayer{
     private String name;
     private Integer balance;
     private Integer age;
