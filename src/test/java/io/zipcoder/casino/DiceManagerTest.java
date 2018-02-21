@@ -48,12 +48,16 @@ public class DiceManagerTest {
 
     @Test
     public void getDiceArrayTest() {
-        DiceManager allDice = new DiceManager(2);
+        DiceManager allDice = new DiceManager(3);
         allDice.rollAllDice();
-        allDice.setSpecificDie(0, 5);
+        allDice.setSpecificDie(2, 3);
         allDice.setSpecificDie(1,6);
-        int[] expected = new int[]{5, 6};
+        allDice.setSpecificDie(0, 1);
+        int[] expected = new int[]{1, 6, 3};
         int[] actual = allDice.getAllDieFaces();
+        System.out.println(allDice.getAllDieFaces()[0]);
+        System.out.println(allDice.getAllDieFaces()[1]);
+        System.out.println(allDice.getAllDieFaces()[2]);
         Assert.assertArrayEquals(expected, actual);
     }
 
@@ -65,6 +69,7 @@ public class DiceManagerTest {
         allDice.setSpecificDie(1,2);
         int expected = 4;
         int actual = allDice.getTotalValue();
+        Assert.assertEquals(expected, actual);
     }
 
 }

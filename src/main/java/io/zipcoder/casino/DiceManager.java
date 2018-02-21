@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class DiceManager {
 
     // Die faces will be stored in an array
-
     private Die[] diceArray;
 
     public DiceManager(int amountOfDice) {
