@@ -22,8 +22,8 @@
 
 ## Developmental Notes
 * Go fish is a friendly game and should not involve gambling.
-* `BlackJack` and `GoFish` are both Card Games and should therefore inherit from a common `CardGame`.
-* Any common logic or fields between the games should live CardGame class, **not** BlackJack **nor** GoFish.
+* `BlackJack` and `io.zipcoder.casino.GoFish` are both Card Games and should therefore inherit from a common `io.zipcoder.casino.CardGame`.
+* Any common logic or fields between the games should live io.zipcoder.casino.CardGame class, **not** BlackJack **nor** io.zipcoder.casino.GoFish.
 * The UML provided is missing classes, properties, and definitions required to complete this project.
 * You must have a completed and approved UML diagram before you proceed to do any development
 * You can either work by yourself , or in a group no bigger than 3.
