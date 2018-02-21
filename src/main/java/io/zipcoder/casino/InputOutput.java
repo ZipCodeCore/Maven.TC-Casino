@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputOutput {
@@ -19,6 +20,18 @@ public class InputOutput {
         Integer integerReturn = input.nextInt();
         return integerReturn;
     }
+
+    public ArrayList displayOver21Menu(){
+        return  null;
+    }
+    public ArrayList displayUnder21Menu(){
+        return  null;
+    }
+    //generic methods
+    //method for menus
+    //create line breaks
+    //validate user input
+
 
 //    public static void main(String[] args) {
 //        InputOutput io = new InputOutput();
