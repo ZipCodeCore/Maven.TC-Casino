@@ -36,7 +36,7 @@ public class Casino {
                     running = new CrazyEights();
                     break;
                 case 3:
-                    running= new Ceelo();
+                    running= new CeeLo();
                     break;
                 case 4:
                     running = new Roulette();
