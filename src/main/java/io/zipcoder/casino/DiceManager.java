@@ -7,13 +7,11 @@ public class DiceManager {
     }
 
     public int[] checkDiceValue() {
-
+        return new int[]{0};
     }
 
     public int checkTotalValue() {
-
+        return 0;
     }
-
-
-
+    
 }
