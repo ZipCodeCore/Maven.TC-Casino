@@ -26,11 +26,6 @@ public class DiceManagerTest {
     }
 
     @Test
-    public void rollSpecificDieTest() {
-
-    }
-
-    @Test
     public void setSpecificDieFaceTest() {
         DiceManager allDice = new DiceManager(3);
         allDice.rollAllDice();
