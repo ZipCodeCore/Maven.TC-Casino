@@ -5,7 +5,7 @@ public class Player {
     private Long chips;
 
     public Player(){
-        this.chips = 200l; //each chip is $5
+        this.chips = 500l; //each chip is $5
     }
 
 
