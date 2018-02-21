@@ -11,8 +11,8 @@
 ## Specs
 * This repo contains a [UML](https://github.com/Zipcoder/CR-MacroLabs-OOP-Casino/blob/master/UML.pdf) to help get you started.
 * The project should include some concept of
-  * `Player` class
-    * `Player` objects should be created upon input from a user.
+  * `io.zipcoder.casino.Player` class
+    * `io.zipcoder.casino.Player` objects should be created upon input from a user.
   * `Game` interface
     * Contract which ensures that a class enforces some aspect of _playing_.
   * `Gamble` interface
