@@ -11,7 +11,7 @@ public class Player {
     }
 
     public Player(){
-        
+
     }
 
     public void setSomeProfile(Profile someProfile) {
