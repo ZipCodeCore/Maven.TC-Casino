@@ -1,33 +1,36 @@
 package io.zipcoder.casino;
 
 import java.util.Scanner;
-
 /**
  * filename:
  * project: casino
  * author: https://github.com/vvmk
  * date: 2/21/18
  */
-public class IOHandler {
-    Scanner in = new Scanner(System.in);
-
-    private int getInt() {
-        return -1;
+public final class IOHandler {
+    private static Scanner getInScanner() {
+       return new Scanner(System.in);
     }
 
-    private String getString() {
-        return null;
+    private static int getInt() {
+       return Integer.parseInt(getInScanner().nextLine());
     }
 
-    public void printMessage(String msg) {
+    private static String getString() {
+        return getInScanner().nextLine();
+    }
+
+    public static void printMessage(String msg) {
         System.out.println(msg);
     }
 
-    public int promptForIntWithMessage(String msg) {
-        return -1;
+    public static int promptForIntWithMessage(String msg) {
+        printMessage(msg);
+        return getInt();
     }
 
-    public String promptForStringWithMessage(String msg) {
-        return null;
+    public static String promptForStringWithMessage(String msg) {
+        printMessage(msg);
+        return getString();
     }
 }
