@@ -4,7 +4,7 @@ import io.zipcoder.casino.Game;
 
 import java.util.ArrayList;
 
-public class CardGame implements Game {
+public abstract class CardGame implements Game {
 
     private  Deck deck;
     private ArrayList<Player>players;
