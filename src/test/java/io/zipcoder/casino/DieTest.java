@@ -14,11 +14,18 @@ public class DieTest {
         die.rollDie();
     }
 
-
     @Test
     public void getDieFaceTest() {
         Integer actual = this.die.getDieFace().toInt();
         Assert.assertTrue(1 <= actual && actual <= 6);
+    }
+
+    @Test
+    public void setDieFaceTest() {
+        this.die.setDieFace(1);
+        int expected = 1;
+        int actual = this.die.getDieFace().toInt();
+        Assert.assertEquals(expected, actual);
     }
 
 }
