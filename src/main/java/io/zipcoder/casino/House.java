@@ -11,7 +11,7 @@ public class House {
     private ArrayList<Game> games;
 
     public House() {
-        profiles = new ArrayList<>();
+        profiles = new ArrayList();
         games = new ArrayList<Game>();
     }
     public void addProfile(Profile someProfile){
