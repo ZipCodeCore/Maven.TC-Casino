@@ -9,6 +9,11 @@ public class Casino {
 
     public Casino() {
         this.player = player;
+        answer = 0;
+    }
+
+    public int getAnswer() {
+        return answer;
     }
 
     public void mainMenu(){
@@ -20,8 +25,9 @@ public class Casino {
     }
 
     public void enter(){
-        mainMenu();
         while(answer != 5) { //X is to eXit
+            mainMenu();
+
             switch(answer) {
                 case 1:
                     Blackjack.start() = running;
@@ -39,5 +45,7 @@ public class Casino {
             }
         }
     }
+
+
 }
 
