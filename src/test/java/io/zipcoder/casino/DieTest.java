@@ -22,7 +22,7 @@ public class DieTest {
 
     @Test
     public void setDieFaceTest() {
-        this.die.setDieFace(1);
+        this.die.setDieFace(DieFace.ONE);
         int expected = 1;
         int actual = this.die.getDieFace().toInt();
         Assert.assertEquals(expected, actual);
