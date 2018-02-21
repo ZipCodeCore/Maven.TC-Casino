@@ -5,11 +5,9 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
     private boolean hasStood;
     private boolean isBusted;
 
-
-    public BlackJackPlayer () {
-
+    public BlackJackPlayer(Profile someProfile) {
+        super(someProfile);
     }
-
 
     public boolean getHasStood() {
         return hasStood;
