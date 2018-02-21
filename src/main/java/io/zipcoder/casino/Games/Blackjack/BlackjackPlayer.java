@@ -1,4 +1,5 @@
 package io.zipcoder.casino.Games.Blackjack;
+
 import io.zipcoder.casino.*;
 
 public class BlackjackPlayer {
@@ -7,7 +8,7 @@ public class BlackjackPlayer {
     private Integer age;
     private Card[] hand;
     private boolean canHit;
-    
+
     public BlackjackPlayer(Player rootPlayer){
         this.name = rootPlayer.getName();
         this.age = rootPlayer.getAge();
