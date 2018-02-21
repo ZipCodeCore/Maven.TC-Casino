@@ -12,18 +12,12 @@ public class CasinoTest {
 
     @Test
     public void getAnswerTest() {
-        int getAnswer = 3;
+        int expectedAnswer = 0;
         Casino casino = new Casino();
 
-        casino.setFirstName(firstName);
-        String actual = joeFen.getFirstName();
+        int actual = casino.getAnswer();
 
-        Assert.assertEquals(firstName, actual);
-    }
-    }
-
-    @Test
-    public void answerTest() {
+        Assert.assertEquals(expectedAnswer, actual);
     }
 
     @Test
@@ -32,6 +26,14 @@ public class CasinoTest {
 
     @Test
     public void enterTest() {
+
+        Casino casino = new Casino();
+
+        String expected = ";Ceelo.start() = running;";
+
+        String actual = casino.enter();
+
+        Assert.assertEquals(expected, actual);
     }
 
 
