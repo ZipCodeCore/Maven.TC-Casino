@@ -47,7 +47,7 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
 //
 //    }
 //
-//    public Hand split(Hand currentHand) {
+//    public io.zipcoder.casino.Hand split(io.zipcoder.casino.Hand currentHand) {
 //
 //        return additionalHand;
 //
