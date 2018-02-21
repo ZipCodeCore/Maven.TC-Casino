@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public interface Gambler<T> {
+public interface Gambler {
 
     public void bet(double amount);
     public void win();
