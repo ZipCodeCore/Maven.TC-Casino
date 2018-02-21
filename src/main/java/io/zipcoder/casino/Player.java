@@ -10,6 +10,10 @@ public class Player {
         this.someProfile = someProfile;
     }
 
+    public Player(){
+        
+    }
+
     public void setSomeProfile(Profile someProfile) {
         this.someProfile = someProfile;
     }
