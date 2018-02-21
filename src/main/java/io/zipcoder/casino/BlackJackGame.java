@@ -2,8 +2,9 @@ package io.zipcoder.casino;
 
 public class BlackJackGame extends CardGame implements Game {
 
-    BlackJackPlayer dealer = new BlackJackPlayer();
-    BlackJackPlayer user = new BlackJackPlayer();
+    private Player dealer;
+    private Player blackJackPlayer;
+
 
     public void deal () {
 
