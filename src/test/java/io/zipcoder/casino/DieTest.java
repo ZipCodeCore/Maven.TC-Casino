@@ -11,13 +11,13 @@ public class DieTest {
     @Before
     public void setup() {
         this.die = new Die();
-        this.die.rollDie();
+        die.rollDie();
     }
 
 
     @Test
     public void getDieFaceTest() {
-        Integer actual = this.die.getDieFace();
+        Integer actual = this.die.getDieFace().toInt();
         Assert.assertTrue(1 <= actual && actual <= 6);
     }
 

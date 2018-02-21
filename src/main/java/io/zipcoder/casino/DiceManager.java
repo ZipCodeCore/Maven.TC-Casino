@@ -13,5 +13,5 @@ public class DiceManager {
     public int checkTotalValue() {
         return 0;
     }
-    
+
 }
