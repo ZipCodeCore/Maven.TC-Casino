@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public class BlackJackPlayer extends CardPlayer implements Gambler<> {
+public class BlackJackPlayer extends CardPlayer implements Gambler {
 
     private boolean hasStood;
     private boolean isBusted;
