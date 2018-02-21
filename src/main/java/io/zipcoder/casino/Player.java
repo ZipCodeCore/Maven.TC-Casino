@@ -11,7 +11,7 @@ public class Player {
 
 
     public Boolean canCoverBet(Integer minimumBetCharge){
-        return (this.chips >= minimumBetCharge ? true : false);
+        return (this.chips >= minimumBetCharge);
     }
 
     public void betChips(Integer bet){
