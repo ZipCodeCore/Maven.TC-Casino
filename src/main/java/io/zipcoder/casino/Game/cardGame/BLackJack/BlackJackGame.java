@@ -1,14 +1,21 @@
 package io.zipcoder.casino.Game.cardGame.BLackJack;
 
-
 import io.zipcoder.casino.Game.Game;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Profile;
 
 public class BlackJackGame extends CardGame implements Game {
 
+    private Profile theHouse;
     private Player dealer;
     private Player blackJackPlayer;
+
+    public BlackJackGame (BlackJackPlayer player) {
+        theHouse = new Profile("Dealer", 0);
+        dealer = new BlackJackPlayer(theHouse);
+        this.blackJackPlayer = player;
+    }
 
 
     public void deal () {

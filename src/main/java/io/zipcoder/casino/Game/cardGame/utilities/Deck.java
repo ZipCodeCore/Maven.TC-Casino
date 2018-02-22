@@ -1,25 +1,46 @@
 package io.zipcoder.casino.Game.cardGame.utilities;
 
+import java.util.Collections;
+import java.util.Stack;
 
-
-import java.util.ArrayList;
 
 public class Deck {
-    private ArrayList<Card> listOfCards;
 
-    public Deck(ArrayList<Card> listOfCards) {
-        this.listOfCards = listOfCards;
+    private Stack<Card> deckOfCards = new Stack<Card>();
+
+
+    public Deck() {
+
+        fillDeck();
+
     }
+
+    public void fillDeck() {
+
+        for (CardSuit aSuit : CardSuit.values()) {
+            for (CardRank aRank : CardRank.values()) {
+                Card tempCard = new Card(aSuit, aRank);
+                deckOfCards.push(tempCard);
+            }
+        }
+    }
+
 
     public Card getCard() {
-        return null;
+        return deckOfCards.pop();
     }
 
-    public void removeCard(Card cardToRemove) {
-
+    public void addCard(Card card) {
+        deckOfCards.push(card);
     }
+
+    public void peek() {
+        deckOfCards.peek();
+    }
+
 
     public void shuffle() {
-
+        Collections.shuffle(deckOfCards);
     }
+
 }

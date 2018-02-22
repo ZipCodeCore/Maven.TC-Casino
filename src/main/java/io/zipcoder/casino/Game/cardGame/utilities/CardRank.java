@@ -2,6 +2,32 @@ package io.zipcoder.casino.Game.cardGame.utilities;
 
 public enum CardRank {
 
-    ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
+    TWO(2),
+    THREE(3),
+    FOUR(4),
+    FIVE(5),
+    SIX(6),
+    SEVEN(7),
+    EIGHT(8),
+    NINE(9),
+    TEN(10),
+    JACK(10),
+    QUEEN(10),
+    KING(10),
+    ACE(1, 11);
 
+    private Integer cardValue2;
+    private int cardValue;
+    CardRank(int value, Integer value2) {
+        this.cardValue = value;
+        this.cardValue2 = value2;
+    }
+
+    CardRank(int value) {
+        this(value, null);
+    }
+
+    public int getCardValue() {
+        return cardValue;
+    }
 }
