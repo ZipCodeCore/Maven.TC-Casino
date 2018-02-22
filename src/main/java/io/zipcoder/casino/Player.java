@@ -1,7 +1,5 @@
 package io.zipcoder.casino;
 
-import io.zipcoder.casino.Profile;
-
 public class Player {
 
     private Profile someProfile;

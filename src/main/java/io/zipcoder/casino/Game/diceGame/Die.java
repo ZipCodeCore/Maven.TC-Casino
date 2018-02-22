@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Game.diceGame;
 
 public class Die {
     private int numberOfFaces;

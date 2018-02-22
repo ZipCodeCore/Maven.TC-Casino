@@ -1,6 +1,10 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Game.cardGame;
 
-public class CardPlayer extends Player{
+import io.zipcoder.casino.Game.cardGame.utilities.Hand;
+import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Profile;
+
+public class CardPlayer extends Player {
 
     private Hand hand;
     private int score;

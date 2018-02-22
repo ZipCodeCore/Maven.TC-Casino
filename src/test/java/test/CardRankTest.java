@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package test;
 
 public class CardRankTest {
 

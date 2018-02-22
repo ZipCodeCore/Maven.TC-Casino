@@ -1,4 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Game.diceGame;
+
+import io.zipcoder.casino.Game.Game.cardGame.utilities.Die;
+import io.zipcoder.casino.Game.Game;
+import io.zipcoder.casino.Player;
 
 import java.util.Random;
 

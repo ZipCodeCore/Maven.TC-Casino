@@ -1,4 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Game.cardGame.BLackJack;
+
+import io.zipcoder.casino.Game.Game.cardGame.CardPlayer;
+import io.zipcoder.casino.Game.Game.Gambler;
+import io.zipcoder.casino.Profile;
 
 public class BlackJackPlayer extends CardPlayer implements Gambler {
 
@@ -45,7 +49,7 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
 //
 //    }
 //
-//    public io.zipcoder.casino.Hand split(io.zipcoder.casino.Hand currentHand) {
+//    public io.zipcoder.casino.Game.cardGame.utilities.Hand split(io.zipcoder.casino.Game.cardGame.utilities.Hand currentHand) {
 //
 //        return additionalHand;
 //
