@@ -9,7 +9,7 @@ public class CardPlayer extends Player {
     private Hand hand;
     private int score;
     private boolean isCurrentPlayer;
-    Player currentPlayer;
+    Player player;
     public CardPlayer(){
 
     }
@@ -18,19 +18,22 @@ public class CardPlayer extends Player {
         super(someProfile);
     }
     public void setScore(int newScore){
-        score = newScore;
+
+        this.score = newScore;
     }
 
     public int getScore(){
-        return score;
+
+        return this.score;
     }
 
-    public void setCurrentPlayer(Player currentPlayer){
-        currentPlayer = currentPlayer;
+    public void setPlayer(Player player){
+        this.player = player;
 
     }
-    public Player getCurrentPlayer(){
-        return currentPlayer;
+    public Player getPlayer(){
+
+        return this.player;
     }
 
 
