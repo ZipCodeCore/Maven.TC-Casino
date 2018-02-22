@@ -7,5 +7,6 @@ public interface CardGameInterface {
     ArrayList<Card> deck = new ArrayList<Card>();
 
     int checkNumberOfCards();
+
     void dealCards();
 }
