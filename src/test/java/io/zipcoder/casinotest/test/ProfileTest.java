@@ -62,6 +62,34 @@ public class ProfileTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void EscrowTest1(){
+        //Given
+        //profile1
+
+        //When
+        profile1.setEscrow(100);
+        double expected = 100;
+        double actual = profile1.getEscrow();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void EscrowTest2(){
+        //Given
+        //profile1
+
+        //When
+        profile1.setEscrow(10000.54);
+        double expected = 10000.54;
+        double actual = profile1.getEscrow();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
 
 
 }
