@@ -7,15 +7,6 @@ package io.zipcoder.casino;
  * date: 2/21/18
  */
 public class Card {
-    public enum Rank {
-        TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN,
-        JACK, QUEEN, KING, ACE
-    }
-
-    public enum Suit {
-        HEARTS, CLUBS, SPADES, DIAMONDS
-    }
-
     private Rank rank;
     private Suit suit;
 

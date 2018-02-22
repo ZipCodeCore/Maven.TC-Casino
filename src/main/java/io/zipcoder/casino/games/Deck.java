@@ -89,8 +89,8 @@ public class Deck {
      * Build the fresh deck from enums inside Card.java
      */
     private void buildDeck() {
-        for (Card.Suit suit : Card.Suit.values()) {
-            for (Card.Rank rank : Card.Rank.values()) {
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
                 fullDeck.add(new Card(rank, suit));
             }
         }
