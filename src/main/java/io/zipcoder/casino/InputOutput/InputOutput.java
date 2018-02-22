@@ -16,31 +16,29 @@ public class InputOutput {
         return stringReturn;
     }
 
-    public Integer scanForInt(){
-        Integer integerReturn = input.nextInt();
-        return integerReturn;
+    public Integer scanForInt() {
+        return Integer.parseInt(scanForString());
     }
 
-    public ArrayList displayOver21Menu(){
-        return  null;
+    public ArrayList displayOver21Menu() {
+        return null;
     }
-    public ArrayList displayUnder21Menu(){
-        return  null;
+
+    public ArrayList displayUnder21Menu() {
+        return null;
     }
 
 
     public String promptForString(String message) {
         System.out.println(message);
-        return scanForString();
+        String s = scanForString();
+        return s;
     }
 
     public int promptInt(String message) {
         System.out.println(message);
         return scanForInt();
     }
-
-
-
 
 
     //generic methods
