@@ -1,36 +1,53 @@
 package io.zipcoder.casino.Games;
 
+import io.zipcoder.casino.Players.GoFishPlayer;
+import io.zipcoder.casino.Players.Player;
 import org.junit.Test;
 
 public class GoFishTest {
 
     @Test
-    public void deal() {
+    public void dealTest() {
+
+        GoFish game = new GoFish();
+        Player player1 = new Player();
+        Player goFishPlayer1 = new GoFishPlayer(player1);
+
+
 
     }
 
     @Test
-    public void buildStockPile() {
+    public void buildStockPileTest() {
 
     }
 
     @Test
-    public void isGameOver() {
+    public void isGameOverTest() {
 
     }
 
     @Test
-    public void buildPlayerHand() {
+    public void buildPlayerHandTest() {
 
     }
 
     @Test
-    public void takeTurn() {
+    public void takeTurnTest() {
 
     }
 
     @Test
-    public void goFish() {
+    public void goFishTest() {
+
+    }
+
+    @Test
+    public void displayCardHandTest() {
+        GoFish game = new GoFish();
+        Player player1 = new Player();
+        Player goFishPlayer1 = new GoFishPlayer(player1);
+        game.deal();
 
     }
 
