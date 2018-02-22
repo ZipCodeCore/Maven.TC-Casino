@@ -1,7 +1,6 @@
 package io.zipcoder.casino.games;
 
 
-
 /**
  * filename:
  * project: casino
@@ -18,13 +17,17 @@ public class Card {
         this.suit = suit;
     }
 
+    public Rank getRank() {
+        return rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
     @Override
     public String toString() {
         return String.format("%s of %s", rank.toString(), suit.toString());
-    }
-
-    public Rank getRank(){
-        return this.rank;
     }
 
 }

@@ -1,7 +1,5 @@
 package io.zipcoder.casino.core;
 
-
-import org.junit.Assert;
 import org.junit.Test;
 
 public class CasinoTest {

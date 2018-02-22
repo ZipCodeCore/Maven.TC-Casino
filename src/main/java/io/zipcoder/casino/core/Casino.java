@@ -1,7 +1,7 @@
 package io.zipcoder.casino.core;
 
 
-import io.zipcoder.casino.Game;
+import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utils.IOHandler;
 

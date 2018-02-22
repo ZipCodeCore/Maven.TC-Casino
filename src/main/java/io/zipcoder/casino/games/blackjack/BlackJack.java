@@ -1,6 +1,9 @@
 package io.zipcoder.casino.games.blackjack;
+
 import io.zipcoder.casino.games.Deck;
 import io.zipcoder.casino.games.Rank;
+
+import java.util.Arrays;
 
 
 public class BlackJack {
@@ -11,33 +14,36 @@ public class BlackJack {
     private int dealerValue;
     private int insuranceBet;
 
+    public BlackJack() {
+    Deck playingDeck = new Deck();
 
-    public BlackJack(){
-        playerValue = 0;
-        dealerValue = 0;
-        Deck playerHand = new Deck();
-        Deck dealerHand = new Deck();
+    playerValue = 0;
+    dealerValue = 0;
 
-        for (int i = 0; i < 2; i++){
-            playerHand.pull(1);
-            dealerHand.pull(1);
-        }
+     for (int i = 0; i < 2;i++){
+         playerValue += playingDeck.pull(1)[0].getRank().getScoreValue();
+         dealerValue += playingDeck.pull(1)[0].getRank().getScoreValue();
+     }
 
     }
 
     public static void main(String[] args) {
-        Deck playerHand = new Deck();
-        Deck dealerHand = new Deck();
 
-        for (int i = 0; i < 2; i++){
-            playerHand.pull(1);
-            dealerHand.pull(1);
+        Deck playingDeck = new Deck();
+
+       int playerValue = 0;
+       int dealerValue = 0;
+
+        for (int i = 0; i < 2;i++){
+            playerValue += playingDeck.pull(1)[0].getRank().getScoreValue();
+            dealerValue += playingDeck.pull(1)[0].getRank().getScoreValue();
+
         }
-        playerHand.toString();
-
+        System.out.println(playerValue);
+        System.out.println(dealerValue);
     }
 
-
+}
 //    public Integer cardValue(){
 //
 //    }
@@ -90,4 +96,3 @@ public class BlackJack {
 //    public void wagerMultiplier(){
 //
 //    }
-}

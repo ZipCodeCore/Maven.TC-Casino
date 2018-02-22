@@ -1,4 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games.ceelo;
+
+import io.zipcoder.casino.interfaces.Gamble;
 
 /**
  * filename:
