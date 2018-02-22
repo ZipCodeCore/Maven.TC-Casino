@@ -83,9 +83,21 @@ public class DeckTest {
 
     @Test
     public void peekTest2() {
-
+        Card card = new Card(CardSuit.HEARTS, CardRank.SEVEN);
+        testDeck.addCard(card);
+        Card expected = card;
+        Card actual = testDeck.peek();
+        Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void shuffleTest1() {
+        Card expected = new Card(CardSuit.SPADES, CardRank.QUEEN);
+        testDeck.addCard(expected);
+        testDeck.shuffle();
+        Card actual = testDeck.getCard();
+        Assert.assertNotEquals(expected, actual);
+    }
 
 
 }
