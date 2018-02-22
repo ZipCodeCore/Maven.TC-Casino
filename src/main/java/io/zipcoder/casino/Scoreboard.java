@@ -1,11 +1,13 @@
 package io.zipcoder.casino;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Scoreboard {
 
     private LinkedHashMap<Person, Integer> scoreboard;
+
 
     public Scoreboard() {
         this.scoreboard = new Scoreboard<Person, Integer>();
@@ -36,7 +38,6 @@ public class Scoreboard {
         return players;
     }
 
-
     public void addPlayer(Person person) {
         this.scoreboard.put(person, 0);
     }
@@ -52,12 +53,21 @@ public class Scoreboard {
                 this.scoreboard.replace(person, oldScore, newScore);
             }
         }
-
     }
 
     //for updateScore method
-    public Integer pullOldScore(Person person) {
+    private Integer pullOldScore(Person person) {
         return this.scoreboard.get(person);
+    }
+
+
+
+    public void resetScoreboardForSamePlayers() {
+        this.scoreboard.clear();
+    }
+
+    public void clearScoreboardOfPlayersAndScores() {
+        this.scoreboard.clear();
     }
 
     //at end of game for running tally display
@@ -65,28 +75,26 @@ public class Scoreboard {
         return this.scoreboard;
     }
 
-    public void resetScoreboardForSamePlayers() {
-        this.scoreboard.clear();
-    }
-
-    public void clearScoreboardOfPlayersAndScores(LinkedHashMap<Person, Integer> scoreboard) {
-        scoreboard.clear();
-    }
-
-
     //single player score at request of player during game
     public Integer getScore(Person person) {
         return scoreboard.get(person);
     }
 
-    public String displayScoreboardSingleGame(LinkedHashMap scoreboard) {
+
+    public String displayScoreboardSingleGame() {
+        this.scoreboard
         return null;
     }
 
-    public String displayRunningGameTally(LinkedHashMap scoreboard) {
+    public String displayRunningGameTally(LinkedHashMap endScoreboard) {
+        LinkedHashMap<Person, ArrayList<Integer>> runningTally = new LinkedHashMap<Person, ArrayList<Integer>>();
+        for(Map.Entry<Person, Integer> entry: endScoreboard.entrySet()) {
+            for(Map.Entry<Person, ArrayList<Integer>> secondEntry: runningTally.entrySet()) {
+                if(entry.equals(secondEntry)) {
 
-        for(Map.Entry<Person, Integer> entry: scoreboard.entrySet()) {
-            if()
+                }
+
+            }
         }
         return null;
     }

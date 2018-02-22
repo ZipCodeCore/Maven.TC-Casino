@@ -3,6 +3,8 @@ package io.zipcoder.casino;
 import org.junit.Test;
 import org.junit.Assert;
 
+import java.util.LinkedHashMap;
+
 public class ScoreboardTest {
 
     @Test
@@ -69,7 +71,6 @@ public class ScoreboardTest {
     public void addPlayerTest() {
         //given
         Scoreboard board = new Scoreboard();
-        Person[] players = {person1, person2, person3};
         Person[] expected = {person2, person3};
         //when
         board.addPlayer(person2);
@@ -111,11 +112,42 @@ public class ScoreboardTest {
     @Test
     public void clearScoreboardTest() {
 
+        Scoreboard board = new Scoreboard();
+        Person[] expected = null;
+        board.addPlayer(person1);
+        board.addPlayer(person2);
+
+        board.clearScoreboardOfPlayersAndScores();
+        Person[] actual = board.getPlayers();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void resetScoreboardForSamePlayers(){
+        //Given
+        Scoreboard board = new Scoreboard();
+        Person[] expected = {person1, person2};
+        //when
+        board.addPlayer(person1);
+        board.addPlayer(person2);
+        board.updateScore(person1, 7);
+        board.updateScore(person2, 9);
+        //then
+        board.resetScoreboardForSamePlayers();
+        Person[] actual = board.getPlayers();
+        Assert.assertEquals(expected, actual);
 
+    }
+
+    @Test
+    public void resetScoreboardForSamePlayer2() {
+        Scoreboard board = new Scoreboard();
+        Integer expected = 0;
+        board.addPlayer(person1);
+        board.updateScore(person1, 7);
+        board.resetScoreboardForSamePlayers();
+        Integer actual = board.getScore(person1);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
