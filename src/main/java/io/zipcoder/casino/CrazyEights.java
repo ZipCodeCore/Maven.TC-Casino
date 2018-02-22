@@ -11,23 +11,19 @@ public class CrazyEights {
 
 
     public static void main(String[] args) {
-
         intro();
-        String playAgain = null;
-        do {
-            beginGame(); //start game
-        }
-        while (playAgain.equalsIgnoreCase("Y"));
-        // else end game
     }
 
     public static void intro() {
         String intro = "Welcome to Crazy Eights!\n" +
                 "Press ANY KEY to start the game.\n";
         answer = IOHandler.promptForStringWithMessage(intro);
+        if(!answer.equalsIgnoreCase( null)) {
+            beginGame();
+        }
     }
 
-    public static int[] makeHand()  //deal top 8 cards of deck to hand
+    public static int[] makeHand()  //deals top 8 cards of deck to hand
     {
         int[] hand = new int[52];
         for (int i = 0; i < 8; i++) {
@@ -36,7 +32,7 @@ public class CrazyEights {
         return hand;
     }
 
-    public static int getCard()  //retrieve top card from deck
+    public static int getCard()  //retrieves top card from deck
     {
         int i = 0, value = 0;
         while (i < deck.length && deck[i] == 0)
@@ -49,14 +45,13 @@ public class CrazyEights {
     }
 
     public static void beginGame() {
-        Deck gameDeck = new Deck(); //get new deck to play with
-        player = makeHand();   //deal player
+        new Deck(); //get new deck to play with
+        player = makeH and();   //deal player
         computer = makeHand(); //and computer's hand
         discardPile = getCard(); //add one card to discard pile
         while (!emptyHand(1) && !emptyHand(2) && !deckEmpty)
-        //while the player and computers hands arent empty and the deck is not empty
+        //while the player and computers hands aren't empty and the deck is not empty
         {
-            render();
             playerPlays();
             computerPlays();
         }
@@ -119,8 +114,7 @@ public class CrazyEights {
         if (x > 1)
         { //has legal cards
 
-            answerInt = IOHandler.promptForIntWithMessage("Enter a card number to play: ");
-            int playCard = c.readInt ();
+            int playCard = IOHandler.promptForIntWithMessage("Enter a card number to play: ");
             while (playCard < 1 || playCard + 1 > x)
             {
                 answerInt = IOHandler.promptForIntWithMessage("Invalid number. Enter a card number to play: ");
@@ -129,21 +123,22 @@ public class CrazyEights {
             player [cards [playCard]] = 0;
             if ((discardPile) % 13 == 8)
             { //card is eight, change suit
-                answer = IOHandler.promptForStringWithMessage("Enter the 1st letter of the suit you want to change to: ");
-                String newSuit = c.readLine ();
-                if (newSuit.equalsIgnoreCase ("s"))
+                String newSuit=
+                        IOHandler.promptForStringWithMessage("Enter the 1st letter of the suit you want to change to: ");
+
+                if (newSuit.equalsIgnoreCase ("S"))
                 {
                     discardPile = 8;
                 }
-                else if (newSuit.equalsIgnoreCase ("h"))
+                else if (newSuit.equalsIgnoreCase ("H"))
                 {
                     discardPile = 21;
                 }
-                else if (newSuit.equalsIgnoreCase ("d"))
+                else if (newSuit.equalsIgnoreCase ("D"))
                 {
                     discardPile = 34;
                 }
-                else if (newSuit.equalsIgnoreCase ("c"))
+                else if (newSuit.equalsIgnoreCase ("C"))
                 {
                     discardPile = 47;
                 }
@@ -167,7 +162,7 @@ public class CrazyEights {
             String computerTurn = "Press ANY KEY to let the computer play.\n";
             answer = IOHandler.promptForStringWithMessage(computerTurn);
 
-            c.getChar ();
+            answer.charAt(0);
             int eight = -1;
             boolean played = false;
             for (int i = 0 ; i < computer.length && !played ; i++)
@@ -196,19 +191,24 @@ public class CrazyEights {
                     discardPile = computer [eight];
                     computer [eight] = 0;
                     //change suit to dominant hand suit
-                    int spades = 0, hearts = 0, diamonds = 0, clubs = 0;
+
+                    int spades = 0;
+                    int hearts = 0;
+                    int diamonds = 0;
+                    int clubs = 0;
+
                     for (int i = 0 ; i < computer.length ; i++)
                     {
                         if (computer [i] > 0)
                         {
-                            int suitnum = (computer [i]) / 13;
-                            if (suitnum == 0) // spades
+                            int suitType = (computer [i]) / 13;
+                            if (suitType == 0) // spades
                                 spades++;
-                            else if (suitnum == 1) // hearts
+                            else if (suitType == 1) // hearts
                                 hearts++;
-                            else if (suitnum == 2) // diamonds
+                            else if (suitType == 2) // diamonds
                                 diamonds++;
-                            else if (suitnum == 3) // clubsm
+                            else if (suitType == 3) // clubs
                                 clubs++;
                         }
                     }
@@ -300,26 +300,6 @@ public class CrazyEights {
     {
         String rank = shownValue (value);
         String suit = shownSuit (value);
-        if (hidden) // card is face down
-        {
-            c.setColor (new Color (190, 213, 226));
-            c.fillRoundRect (x, y, 100, 150, 10, 10);
-            c.setColor (Color.black);
-            c.drawRoundRect (x, y, 100, 150, 10, 10);
-        }
-        else // card is face up
-        {
-            c.setColor (Color.white);
-            c.fillRoundRect (x, y, 100, 150, 10, 10);
-            c.setColor (Color.black);
-            c.drawRoundRect (x, y, 100, 150, 10, 10);
-            if (suit.equals ("\u2665") || suit.equals ("\u2666")) // heart or spade
-                c.setColor (Color.red);
-            c.drawString (rank + suit, x + 10, y + 15);
-            c.drawString (rank + suit, x + 75, y + 140);
-            c.fillRoundRect (x + 20, y + 30, 60, 90, 10, 10);
-            c.setColor (Color.black);
-        }
     }
 
 
