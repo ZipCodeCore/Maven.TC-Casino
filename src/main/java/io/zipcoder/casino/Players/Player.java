@@ -4,7 +4,7 @@ public class Player {
 
     private String name;
     private Integer age;
-    private Double balance;
+    private Integer balance;
 
 
 
@@ -19,7 +19,7 @@ public class Player {
     }
 
 
-    public Player(String name, Integer age, Double balance) {
+    public Player(String name, Integer age, Integer balance) {
         this.name = name;
         this.age = age;
         this.balance = balance;
@@ -41,11 +41,11 @@ public class Player {
         this.age = age;
     }
 
-    public Double getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 
