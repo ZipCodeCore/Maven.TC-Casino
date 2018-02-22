@@ -17,4 +17,13 @@ public class CardTest {
         String actual = c.toString();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testGetIntValue() {
+        Card c = new Card(Rank.ACE, Suit.SPADES);
+        int expected = 1;
+        int actual = c.getIntValue();
+
+        Assert.assertEquals(expected, actual);
+    }
 }

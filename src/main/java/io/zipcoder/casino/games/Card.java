@@ -23,6 +23,10 @@ public class Card {
         return suit;
     }
 
+    public Integer getIntValue() {
+        return rank.value;
+    }
+
     @Override
     public String toString() {
         return String.format("%s of %s", rank.toString(), suit.toString());
