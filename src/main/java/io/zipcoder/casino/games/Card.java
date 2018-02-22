@@ -1,4 +1,7 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games;
+
+import io.zipcoder.casino.Rank;
+import io.zipcoder.casino.Suit;
 
 /**
  * filename:
@@ -13,6 +16,14 @@ public class Card {
     public Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
     }
 
     @Override

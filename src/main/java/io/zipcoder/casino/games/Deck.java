@@ -1,4 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games;
+
+import io.zipcoder.casino.Card;
+import io.zipcoder.casino.Rank;
+import io.zipcoder.casino.Suit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +19,15 @@ public class Deck {
     private List<Card> deckInPlay;
 
     public Deck() {
-        fullDeck = new ArrayList<Card>(52);
+        fullDeck = new ArrayList<>(52);
         buildDeck();
 
-        deckInPlay = new ArrayList<Card>(fullDeck);
+        deckInPlay = new ArrayList<>(fullDeck);
     }
 
     /**
      * check for a specific card in the deck (mainly for testing pull/remove)
+     *
      * @param card the card to search for
      * @return true if the card is still in the deck
      */
@@ -32,6 +37,7 @@ public class Deck {
 
     /**
      * remove a card from the deck, abstracted from pull()
+     *
      * @param card the card to remove
      */
     private void removeFromDeck(Card card) {
@@ -42,11 +48,12 @@ public class Deck {
      * draw and return a single card. use Random to simulate a shuffled deck.
      * If trying to pull a card from an empty deck, returns null
      * TODO: discuss
+     *
      * @return a card from a pseudo-randomly chosen index
      */
     public Card pull() {
         if (isEmpty())
-           return null;
+            return null;
 
         Card c = deckInPlay.get(new Random().nextInt(getCardsLeft()));
         removeFromDeck(c);
@@ -56,14 +63,15 @@ public class Deck {
     /**
      * Attempt to remove numberOfCards from the deck, if there aren't that many left, get them all
      * TODO: discuss
+     *
      * @param numberOfCards how many cards to remove
      * @return an array containing the pulled cards
      */
     public Card[] pull(int numberOfCards) {
-       numberOfCards = (numberOfCards > getCardsLeft()) ? getCardsLeft() : numberOfCards;
+        numberOfCards = (numberOfCards > getCardsLeft()) ? getCardsLeft() : numberOfCards;
 
         Card[] ret = new Card[numberOfCards];
-        for (int i=0;i<numberOfCards;i++)
+        for (int i = 0; i < numberOfCards; i++)
             ret[i] = pull();
         return ret;
     }
