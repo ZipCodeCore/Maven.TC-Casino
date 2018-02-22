@@ -13,4 +13,30 @@ public class WalletTest {
         int expected = dummy.getBalance();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void defaultConstructorTest(){
+        dummy = new Wallet();
+        int expected = 0;
+        int actual = dummy.getBalance();
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void addMoneyTest(){
+        dummy = new Wallet(5);
+        dummy.add(5);
+        int expected = 10;
+        int actual = dummy.getBalance();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void subtractMoneyTest(){
+        dummy = new Wallet(5);
+        dummy.subtract(5);
+        int expected = 0;
+        int actual = dummy.getBalance();
+        Assert.assertEquals(expected, actual);
+    }
 }

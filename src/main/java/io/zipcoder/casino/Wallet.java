@@ -14,4 +14,12 @@ public class Wallet {
     public int getBalance(){
         return this.balance;
     }
+
+    public void add(int money){
+        this.balance += money;
+    }
+
+    public void subtract(int money){
+        this.balance -= money;
+    }
 }
