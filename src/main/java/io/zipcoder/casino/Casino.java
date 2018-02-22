@@ -22,8 +22,8 @@ public class Casino {
         return age;
     }
 
-    protected Double askUserBalance(){
-        Double balance = inputOutput.promptDouble("How much do you want to gamble with?");
+    protected Integer askUserBalance(){
+        Integer balance = inputOutput.promptInteger("How much do you want to gamble with?");
         return balance;
     }
 
@@ -32,7 +32,7 @@ public class Casino {
         Integer age = this.askUserAge();
 
         if(age > 21) {
-           Double balance = this.askUserBalance();
+           Integer balance = this.askUserBalance();
            player = new Player(name, age, balance);
 
         } else{

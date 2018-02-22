@@ -2,9 +2,9 @@ package io.zipcoder.casino.Players;
 
 public class Player {
 
+
     protected String name;
     protected Integer age;
-
 
 
 
@@ -40,6 +40,5 @@ public class Player {
     public void setAge(Integer age) {
         this.age = age;
     }
-
 
 }
