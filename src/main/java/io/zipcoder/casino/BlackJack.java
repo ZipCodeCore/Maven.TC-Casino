@@ -3,19 +3,33 @@ package io.zipcoder.casino;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+
 public class BlackJack {
 
     private Deck deck;
     private int playerBet;
     private int playerWallet;
-    private int playerValue = 0;
-    private int dealerValue = 0;
+    private int playerValue;
+    private int dealerValue;
     private Deck playerHand;
     private Deck dealerHand;
     private int insuranceBet;
 
-    public void cardEvaluation(){
+    public BlackJack(){
+        deck = new Deck();
+        playerValue = 0;
+        dealerValue = 0;
+        playerHand = new Deck();
+        dealerHand = new Deck();
 
+        for (int i = 0; i < 2; i++){
+            playerHand.pull(1);
+            dealerHand.pull(1);
+        }
+    }
+
+    public Integer cardValue(){
+        return deck.pull(1)[0].getValue();
     }
 
     public void splitCards(){
@@ -30,9 +44,10 @@ public class BlackJack {
     public void playerStand(){
 
     }
-    public void tallyPlayerScore(){
-
-    }
+//    public Integer tallyPlayerScore(){
+//        playerValue = 0;
+//
+//    }
 
     public void tallyDealerScore(){
 
