@@ -1,4 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.interfaces;
+
+import io.zipcoder.casino.Player;
 
 public interface Game {
 

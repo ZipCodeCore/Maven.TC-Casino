@@ -1,6 +1,6 @@
 package io.zipcoder.casino.games.roulette;
 
-import io.zipcoder.casino.IOHandler;
+import io.zipcoder.casino.utils.IOHandler;
 
 
 public class RoulettePrompts {

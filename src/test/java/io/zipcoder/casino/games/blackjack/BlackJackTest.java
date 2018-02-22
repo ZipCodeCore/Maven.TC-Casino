@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games.blackjack;
 
 import org.junit.Test;
 
