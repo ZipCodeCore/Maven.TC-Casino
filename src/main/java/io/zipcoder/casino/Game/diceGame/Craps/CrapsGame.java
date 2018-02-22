@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Game.diceGame.Craps;
 
 
+import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
 
 public class CrapsGame extends DiceGame {
@@ -10,6 +11,9 @@ public class CrapsGame extends DiceGame {
         this.point = point;
     }
     public void comeOutPhase(){
+        Console.print("Would you like to make a Pass Line or Do Not Pass bet?");
+        //Console.getString();
+
 
     }
     public void pointPhase(){
@@ -50,9 +54,14 @@ public class CrapsGame extends DiceGame {
 
     }
 
+    public int getPoint(){
+        return this.point;
+    }
+
     @Override
     public void startGame(){
         this.createDie(6,2);
+        this.point = 0;
     }
 
 }

@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class CrapsGameTest {
 
     CrapsGame testGame;
@@ -13,6 +15,26 @@ public class CrapsGameTest {
     public void setup(){
         testGame = new CrapsGame();
         testGame.startGame();
+    }
+
+    @Test
+    public void comeOutPhaseTest(){
+        //Given
+        //testGame
+
+        //When
+        ArrayList<Integer> expectedPoints = new ArrayList<Integer>();
+        expectedPoints.add(4);
+        expectedPoints.add(5);
+        expectedPoints.add(6);
+        expectedPoints.add(8);
+        expectedPoints.add(9);
+        expectedPoints.add(10);
+
+        int actualPoint = testGame.getPoint();
+
+        //Then
+        Assert.assertTrue(expectedPoints.contains(actualPoint));
     }
 
     @Test

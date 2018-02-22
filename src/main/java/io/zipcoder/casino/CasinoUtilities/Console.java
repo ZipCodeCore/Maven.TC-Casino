@@ -4,30 +4,28 @@ import java.util.Scanner;
 
 public class Console {
 
-    public Console() {
+    private static Scanner casinoScanner = new Scanner(System.in);
 
+    public static String getString(String userInput) {
+        return casinoScanner.nextLine();
     }
 
-    Scanner casinoScanner = new Scanner(System.in);
+    public static Double getDouble(String userInput) {
 
-    public String getString(String userInput) {
-        return null;
+        return Double.valueOf(casinoScanner.nextLine());
     }
 
-    public double getDouble(String userInput) {
-        return 0.00;
+    public static int getInt(String userInput) {
+
+        return getDouble(userInput).intValue();
     }
 
-    public int getInt(String userInput) {
-        return 0;
-    }
+    //TODO: implement later once rules are operational
+    /*public static void readFile() {
 
-    public void readFile() {
-
-    }
+    }*/
 
     public static void print(String output) {
-
         System.out.println(output);
     }
 
