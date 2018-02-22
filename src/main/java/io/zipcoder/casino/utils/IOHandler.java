@@ -59,14 +59,13 @@ public final class IOHandler {
      * @param pathString the desired relative filepath
      * @return A stream of lines from the file as String
      */
-    public static Stream<String> getMessageFromFile(String pathString) {
+    public static String getMessageFromFile(String pathString) {
         File file = new File(pathString);
-        return getReader(file).lines();
+        return getReader(file).lines().toString();
     }
 
     public static void writeMessageToFile(String pathString, String message, boolean append) {
         File file = new File(pathString);
-
     }
 
     private static BufferedReader getReader(File file) {
