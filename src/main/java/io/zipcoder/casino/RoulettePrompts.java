@@ -314,7 +314,8 @@ public class RoulettePrompts {
 
     public Integer[] blackNumbers(){
         String prompt = "******************* Black Numbers ******************\n" +
-                "You selected to bet 1 chip on numbers all black colored numbers on the board. The payout for this bet is 1 to 1. \n" +
+                "You selected to bet 1 chip on numbers all black colored \nnumbers on the board. " +
+                "The payout for this bet is 1 to 1. \n" +
                 "\n" +
                 "Black numbers: \n" +
                 "{2, 4, 6, 8, 10, 11,\n" +
@@ -332,7 +333,8 @@ public class RoulettePrompts {
 
     public Integer[] redNumbers(){
         String prompt = "******************** Red Numbers *******************\n" +
-                "You selected to bet 1 chip on numbers all red colored numbers on the board. The payout for this bet is 1 to 1. \n" +
+                "You selected to bet 1 chip on numbers all red colored \nnumbers on the board. " +
+                "The payout for this bet is 1 to 1. \n" +
                 "\n" +
                 "Red numbers: \n" +
                 "{1, 3, 5, 7, 9, 12,\n" +

@@ -6,11 +6,7 @@ public class Roulette {
     private Player player;
     private RouletteBoardAndWheel rouletteBoardAndWheel = new RouletteBoardAndWheel();;
     private RoulettePrompts prompts = new RoulettePrompts();;
-    protected ArrayList<Integer> singleNumberChoiceList = new ArrayList<Integer>();
-    protected ArrayList<Integer> doubleNumberChoiceList = new ArrayList<Integer>();
-    protected ArrayList<Integer> cornerNumberChoiceList = new ArrayList<Integer>();
-    protected ArrayList<Integer> sixNumberChoiceList = new ArrayList<Integer>();
-    protected ArrayList<Integer> rowNumberChoiceList = new ArrayList<Integer>();
+    protected ArrayList<Integer> numberChoiceList = new ArrayList<Integer>();
     /** operation path: Welcome -> Rules (if chosen) -> play -> pick bets -> win/loose (repeat til) -> welcome -> exit
      *
      * betting options: single number, double number, corner, row (Straight), basket (0,00,2), 5 number (0,00,1,2,3),
