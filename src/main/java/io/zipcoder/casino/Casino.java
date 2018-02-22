@@ -23,7 +23,7 @@ public class Casino {
     }
 
     protected Integer askUserBalance(){
-        Integer balance = inputOutput.promptInt("How much do you want to gamble with?");
+        Integer balance = inputOutput.promptInteger("How much do you want to gamble with?");
         return balance;
     }
 

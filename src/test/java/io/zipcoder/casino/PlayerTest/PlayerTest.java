@@ -86,7 +86,8 @@ public class PlayerTest {
 
     @Test
     public void getBalanceTest() {
-        Player player1 = new Player("George", 51, 200;
+        Player player1 = new Player("George", 51, 200);
+
         Integer expected = 200;
 
         Integer actual = player1.getBalance();
