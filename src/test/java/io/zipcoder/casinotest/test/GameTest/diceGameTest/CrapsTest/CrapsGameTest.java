@@ -1,6 +1,9 @@
 package io.zipcoder.casinotest.test.GameTest.diceGameTest.CrapsTest;
 
 import io.zipcoder.casino.Game.diceGame.Craps.CrapsGame;
+import io.zipcoder.casino.Game.diceGame.Craps.CrapsPlayer;
+import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Profile;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +13,9 @@ import java.util.ArrayList;
 public class CrapsGameTest {
 
     CrapsGame testGame;
+    Profile stinkyProfile = new Profile("Stinky Pete", 100000, 1);
+    Player stinkyPete = new CrapsPlayer(stinkyProfile);
+
 
     @Before
     public void setup(){

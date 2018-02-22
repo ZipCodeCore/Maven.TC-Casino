@@ -7,22 +7,24 @@ import io.zipcoder.casino.Profile;
 
 public class CrapsPlayer extends Player implements Gambler {
 
-    private boolean isPassLine;
+    private boolean passLine;
+
 
 
     public CrapsPlayer(Profile someProfile) {
         super(someProfile);
     }
 
-    public CrapsPlayer() {
-
-    }
 
     public void bet(double amount) {
+        this.getProfile().setAccountBalance(this.getProfile().getAccountBalance()-amount);
+        this.getProfile().setEscrow(amount);
 
     }
 
-    public void win() {
+
+    public void win(double payoutMultiplier) {
+
 
     }
 
@@ -30,11 +32,12 @@ public class CrapsPlayer extends Player implements Gambler {
 
     }
 
-    public boolean isPassLine(Player somePlayer) {
-        return false;
+    public boolean isPassLine() {
+        return this.passLine;
     }
 
-    public void setPassLine(Player somePlayer) {
+    public void setPassLine(boolean input) {
+        this.passLine = input;
 
     }
 }

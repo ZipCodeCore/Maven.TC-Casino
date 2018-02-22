@@ -4,6 +4,7 @@ public class Profile {
     private String name;
     private double accountBalance;
     private int id;
+    private double escrow;
 
     public Profile(String name, double accountBalance, int id) {
         this.name = name;
@@ -35,5 +36,13 @@ public class Profile {
     public int getId() {
 
         return id;
+    }
+
+    public void setEscrow(double incomingBet){
+        this.escrow = incomingBet;
+    }
+
+    public double getEscrow(){
+        return this.escrow;
     }
 }
