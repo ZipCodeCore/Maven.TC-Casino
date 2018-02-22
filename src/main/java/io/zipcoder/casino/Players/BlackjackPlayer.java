@@ -1,17 +1,14 @@
 package io.zipcoder.casino.Players;
 
 public class BlackjackPlayer extends Player{
-    private String name;
-    private Double balance;
-    private Integer age;
+    protected Player rootPlayer;
     //private Card[] hand;
-    private boolean canHit;
+    protected boolean canHit;
 
     public BlackjackPlayer(Player rootPlayer){
         this.name = rootPlayer.getName();
         this.age = rootPlayer.getAge();
-        this.balance = rootPlayer.getBalance();
-        //this.hand = new Card[];
         this.canHit = true;
+        this.rootPlayer = rootPlayer;
     }
 }
