@@ -46,7 +46,7 @@ public class CrazyEights {
 
     public static void beginGame() {
         new Deck(); //get new deck to play with
-        player = makeH and();   //deal player
+        player = makeHand();   //deal player
         computer = makeHand(); //and computer's hand
         discardPile = getCard(); //add one card to discard pile
         while (!emptyHand(1) && !emptyHand(2) && !deckEmpty)
