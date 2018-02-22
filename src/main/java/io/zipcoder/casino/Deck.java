@@ -35,6 +35,5 @@ public class Deck {
         return this.deckOfCards.remove(deckOfCards.size() - 1);
     }
 
-
 }
 
