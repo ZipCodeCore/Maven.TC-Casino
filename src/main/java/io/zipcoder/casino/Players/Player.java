@@ -4,9 +4,9 @@ import io.zipcoder.casino.Wallet;
 
 public class Player {
 
-    private String name;
-    private Integer age;
-    private Wallet wallet;
+    protected String name;
+    protected Integer age;
+    protected Wallet wallet;
 
 
 
