@@ -21,11 +21,6 @@ public class InputOutput {
         return integerReturn;
     }
 
-    public Double scanForDouble(){
-        Double doubleReturn = input.nextDouble();
-        return doubleReturn;
-    }
-
     public ArrayList displayOver21Menu(){
         return  null;
     }
@@ -44,10 +39,6 @@ public class InputOutput {
         return scanForInt();
     }
 
-    public Double promptDouble(String message) {
-        System.out.println(message);
-        return scanForDouble();
-    }
 
 
 
