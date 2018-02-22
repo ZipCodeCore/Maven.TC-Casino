@@ -15,7 +15,7 @@ public class BlackJackPlayerTest {
 
     @Before
     public void setup() {
-        testProfile = new Profile("Lucky", 100000);
+        testProfile = new Profile("Lucky", 100000, 0);
         testBlackJackPlayer = new BlackJackPlayer(testProfile);
     }
 

@@ -8,11 +8,16 @@ public class Player {
         this.someProfile = someProfile;
     }
 
-    public Player(){
+    public Player() {
 
     }
 
     public void setSomeProfile(Profile someProfile) {
         this.someProfile = someProfile;
+    }
+
+    // method mostly used for testing purposes
+    public Profile getSomeProfile() {
+        return someProfile;
     }
 }
