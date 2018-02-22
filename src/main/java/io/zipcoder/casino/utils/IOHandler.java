@@ -1,9 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.utils;
 
 import java.io.*;
-import java.nio.Buffer;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -86,7 +83,7 @@ public final class IOHandler {
             return new BufferedWriter(new FileWriter(file));
         } catch(IOException e) {
             e.printStackTrace();
-
+            return null;
         }
     }
 }
