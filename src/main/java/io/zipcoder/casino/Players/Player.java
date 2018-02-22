@@ -2,9 +2,9 @@ package io.zipcoder.casino.Players;
 
 public class Player {
 
-    private String name;
-    private Integer age;
-    private Double balance;
+    protected String name;
+    protected Integer age;
+
 
 
 
@@ -19,10 +19,10 @@ public class Player {
     }
 
 
-    public Player(String name, Integer age, Double balance) {
+    public Player(String name, Integer age, Integer balance) {
         this.name = name;
         this.age = age;
-        this.balance = balance;
+
     }
 
     public String getName() {
@@ -41,12 +41,5 @@ public class Player {
         this.age = age;
     }
 
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
 
 }
