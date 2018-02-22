@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Games.War;
+package io.zipcoder.casino.Games;
 
 public class War {
 

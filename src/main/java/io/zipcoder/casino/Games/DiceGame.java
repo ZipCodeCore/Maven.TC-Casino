@@ -1,4 +1,4 @@
-package io.zipcoder.casino.GameTools;
+package io.zipcoder.casino.Games;
 
 public abstract class DiceGame {
 
