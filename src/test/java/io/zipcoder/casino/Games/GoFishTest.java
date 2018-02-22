@@ -5,32 +5,37 @@ import org.junit.Test;
 public class GoFishTest {
 
     @Test
-    public void deal() {
+    public void dealTest() {
 
     }
 
     @Test
-    public void buildStockPile() {
+    public void buildStockPileTest() {
 
     }
 
     @Test
-    public void isGameOver() {
+    public void isGameOverTest() {
 
     }
 
     @Test
-    public void buildPlayerHand() {
+    public void buildPlayerHandTest() {
 
     }
 
     @Test
-    public void takeTurn() {
+    public void takeTurnTest() {
 
     }
 
     @Test
-    public void goFish() {
+    public void goFishTest() {
+
+    }
+
+    @Test
+    public void displayCardHandTest() {
 
     }
 
