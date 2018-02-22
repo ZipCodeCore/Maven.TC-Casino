@@ -1,9 +1,10 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.InputOutput;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+//these hang on runtime, dont work. kris says dont test so :/
 public class InputOutputTest {
     InputOutput inputOutput;
 
