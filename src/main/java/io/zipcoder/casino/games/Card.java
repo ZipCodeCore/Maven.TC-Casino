@@ -1,8 +1,5 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.Rank;
-import io.zipcoder.casino.Suit;
-
 /**
  * filename:
  * project: casino

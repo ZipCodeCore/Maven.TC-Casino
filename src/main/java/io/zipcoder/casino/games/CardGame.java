@@ -1,6 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games;
 
-public abstract class CardGame implements Game{
+import io.zipcoder.casino.interfaces.Game;
+
+public abstract class CardGame implements Game {
     protected Deck deck;
 
     abstract void buildAHand();

@@ -1,8 +1,5 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.Rank;
-import io.zipcoder.casino.Suit;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

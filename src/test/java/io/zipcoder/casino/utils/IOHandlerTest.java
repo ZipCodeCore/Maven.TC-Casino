@@ -12,27 +12,6 @@ import org.junit.Test;
 public class IOHandlerTest {
 
     @Test
-    public void testWriteToNewFile() {
-        String newPathString = "testWriteToNewFile.txt";
-        String expected = "It's time to party";
-        IOHandler.writeMessageToFile(newPathString, expected, true);
-        String actual = IOHandler.getMessageFromFile(newPathString);
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testWriteToExistingFile() {
-        String existingPathString = "testWriteExisting.txt";
-        String addString = "\nAppend this line";
-        String expected = "This line is first\nThis line is second\nAppend this line";
-        IOHandler.writeMessageToFile(existingPathString, addString, true);
-        String actual = IOHandler.getMessageFromFile(existingPathString);
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void testReadFromNonExistentFile() {
         String expected = "[file not found]";
         String pathString = "pathToNothing.txt";

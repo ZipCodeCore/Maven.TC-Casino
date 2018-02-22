@@ -1,6 +1,5 @@
 package io.zipcoder.casino.games.blackjack;
 
-import io.zipcoder.casino.games.Card;
 import io.zipcoder.casino.games.Deck;
 
 public class BlackJack {
