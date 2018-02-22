@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Games.GoFish;
+package io.zipcoder.casino.Games;
 
 public class GoFish {
 

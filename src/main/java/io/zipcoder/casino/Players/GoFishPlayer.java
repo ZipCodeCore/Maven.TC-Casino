@@ -1,6 +1,4 @@
-package io.zipcoder.casino.Games.GoFish;
-
-import io.zipcoder.casino.Player;
+package io.zipcoder.casino.Players;
 
 public class GoFishPlayer {
         private String name;

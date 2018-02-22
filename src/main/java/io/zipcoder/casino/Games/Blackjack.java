@@ -1,6 +1,8 @@
-package io.zipcoder.casino.Games.Blackjack;
+package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Games.Dealer.Dealer;
+import io.zipcoder.casino.Players.BlackjackPlayer;
 
 public class Blackjack {
     public void start(){
