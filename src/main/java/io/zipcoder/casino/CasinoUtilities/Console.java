@@ -26,8 +26,9 @@ public class Console {
 
     }
 
-    public String print() {
-        return null;
+    public static void print(String output) {
+
+        System.out.println(output);
     }
 
 
