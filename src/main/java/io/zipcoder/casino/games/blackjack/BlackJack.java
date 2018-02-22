@@ -1,8 +1,7 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games.blackjack;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
+import io.zipcoder.casino.games.Deck;
 
 public class BlackJack {
 

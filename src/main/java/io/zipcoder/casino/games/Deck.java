@@ -1,8 +1,10 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 
 /**
  * filename:
@@ -89,8 +91,8 @@ public class Deck {
      * Build the fresh deck from enums inside Card.java
      */
     private void buildDeck() {
-        for (Card.Suit suit : Card.Suit.values()) {
-            for (Card.Rank rank : Card.Rank.values()) {
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
                 fullDeck.add(new Card(rank, suit));
             }
         }

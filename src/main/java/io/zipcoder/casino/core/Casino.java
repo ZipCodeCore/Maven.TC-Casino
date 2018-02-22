@@ -9,7 +9,7 @@ public class Casino {
         this.player = player;
         answer = 0;
     }
-
+    
     public int getAnswer() {
 
         return answer;
