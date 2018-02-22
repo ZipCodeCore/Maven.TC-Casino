@@ -1,5 +1,7 @@
 package io.zipcoder.casino.GameTools;
 
+import io.zipcoder.casino.Player;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -37,15 +39,8 @@ public abstract class CardGame {
         return deck;
     }
 
-    public void setDeck(ArrayList<Card> deck) {
-        this.deck = deck;
-    }
-
     public void shuffleDeck() {
         Collections.shuffle(this.deck);
     }
-
-    public Card deal() { return null; }
-
 
 }

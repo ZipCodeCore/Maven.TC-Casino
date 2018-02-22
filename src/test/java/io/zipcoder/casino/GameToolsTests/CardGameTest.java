@@ -43,4 +43,20 @@ public class CardGameTest {
         Assert.assertNotEquals(expected, actual);
     }
 
+    @Test
+    public void getNumberOfPlayersTest(){
+        dummy.setNumberOfPlayers(3);
+        Integer expected = 3;
+        Integer actual = dummy.getNumberOfPlayers();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getMaxNumberOfPlayersTest(){
+        dummy.setMaxNumberOfPlayers(3);
+        Integer expected = 3;
+        Integer actual = dummy.getMaxNumberOfPlayers();
+        Assert.assertEquals(expected, actual);
+    }
+
 }
