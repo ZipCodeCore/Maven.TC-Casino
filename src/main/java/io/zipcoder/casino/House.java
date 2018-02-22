@@ -1,15 +1,17 @@
-import sun.plugin2.message.GetAppletMessage;
+package io.zipcoder.casino;
+
+import io.zipcoder.casino.Profile;
 
 import java.util.ArrayList;
 
 public class House {
     //private Game someGame;
-    private Profile  profile;
+    private Profile profile;
     private ArrayList<Profile> profiles;
     private ArrayList<Game> games;
 
     public House() {
-        profiles = new ArrayList<>();
+        profiles = new ArrayList();
         games = new ArrayList<Game>();
     }
     public void addProfile(Profile someProfile){
