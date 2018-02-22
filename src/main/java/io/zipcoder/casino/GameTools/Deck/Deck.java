@@ -7,7 +7,7 @@ public class Deck {
 
     public ArrayList<Card> deck = new ArrayList<Card>();
 
-    public Deck(){
+    public Deck() {
         for (Rank currentRank: Rank.values()) {
             for (Suit currentSuit : Suit.values()){
                 Card temp = new Card(currentRank, currentSuit);
