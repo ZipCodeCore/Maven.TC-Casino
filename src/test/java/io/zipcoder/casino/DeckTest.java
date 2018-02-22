@@ -49,8 +49,24 @@ public class DeckTest {
         Card expected = deckTest.drawCard();
         ArrayList<Card> actual = deckTest.getDeckOfCards();
 
+
         //Then
         Assert.assertNotEquals(expected, actual);
+    }
+
+    @Test
+    public void EmptyDeck(){
+        //Given
+        Deck deckTest = new Deck();
+        deckTest.emptyDeck();
+        //When
+        ArrayList<Card> expected = deckTest.();
+        System.out.println(expected);
+        ArrayList<Card> actual = deckTest.getDeckOfCards();
+        System.out.println(actual);
+
+        //Then
+        Assert.assertEquals(expected, actual);
     }
 
 }
