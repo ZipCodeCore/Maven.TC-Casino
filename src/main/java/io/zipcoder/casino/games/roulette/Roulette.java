@@ -1,6 +1,7 @@
 package io.zipcoder.casino.games.roulette;
 
-import io.zipcoder.casino.Player;
+import io.zipcoder.casino.core.Player;
+
 import java.util.ArrayList;
 
 public class Roulette {

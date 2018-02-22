@@ -8,7 +8,7 @@ public class PlayerTest {
     Player player = new Player();
 
     @Test
-    public void canCoverBetTest(){
+    public void canCoverBetTest() {
         Integer bet = 10;
         Boolean actual = player.canCoverBet(bet);
         Assert.assertTrue(actual);
@@ -26,7 +26,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void addChipsTest(){
+    public void addChipsTest() {
         Long before = player.getBalance();
         player.addChips(40);
         Long after = player.getBalance();
@@ -35,7 +35,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void getBalanceTest(){
+    public void getBalanceTest() {
         Long actual = player.getBalance();
         Assert.assertTrue(actual >= 0);
         Assert.assertNotEquals(null, actual);

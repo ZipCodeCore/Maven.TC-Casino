@@ -2,37 +2,38 @@ package io.zipcoder.casino.core;
 
 
 import io.zipcoder.casino.interfaces.Game;
-import io.zipcoder.casino.Player;
+
+
 import io.zipcoder.casino.utils.IOHandler;
 
 public class Casino {
+    int answer;
     private Player player;
     private Game running;
-    int answer;
 
     public Casino() {
         this.player = player;
         answer = 0;
     }
-    
+
     public int getAnswer() {
 
         return answer;
     }
 
-    public void mainMenu(){
-        String prompt = "Welcome to High Rollers Club!\n"+
+    public void mainMenu() {
+        String prompt = "Welcome to High Rollers Club!\n" +
                 "As a welcome gift, here's 500 chips ($2500)\n" +
                 "Please choose a game to play\n(Enter a number for your selection)\n\n" +
                 "\t1. Black Jack\n\t2. Crazy 8's\n\t3. Ceelo\n\t4. Roulette\n\t\t5.EXIT";
         answer = IOHandler.promptForIntWithMessage(prompt);
     }
 
-    public void enter(){
-        while(answer != 5) {
+    public void enter() {
+        while (answer != 5) {
             mainMenu();
 
-            switch(answer) {
+            switch (answer) {
                 case 1:
                     //running = new BlackJack();
                     break;

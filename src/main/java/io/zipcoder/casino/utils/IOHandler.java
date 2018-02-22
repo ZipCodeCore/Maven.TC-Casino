@@ -2,7 +2,6 @@ package io.zipcoder.casino.utils;
 
 import java.io.*;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 /**
  * filename:
@@ -53,34 +52,15 @@ public final class IOHandler {
      * File IO
      */
 
-    /**
-     * Returns a Stream of lines from the desired file, if the file exists. When using,
-     * check that the returned stream != null
-     * @param pathString the desired relative filepath
-     * @return A stream of lines from the file as String
-     */
     public static String getMessageFromFile(String pathString) {
         File file = new File(pathString);
         return getReader(file).lines().toString();
-    }
-
-    public static void writeMessageToFile(String pathString, String message, boolean append) {
-        File file = new File(pathString);
     }
 
     private static BufferedReader getReader(File file) {
         try {
             return new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private static BufferedWriter getWriter(File file, boolean append) {
-        try {
-            return new BufferedWriter(new FileWriter(file));
-        } catch(IOException e) {
             e.printStackTrace();
             return null;
         }
