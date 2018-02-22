@@ -2,63 +2,27 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.GameTools.Deck.Card;
+import io.zipcoder.casino.GameTools.Deck.Deck;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.Players.Player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
+import java.util.*;
 
 public class GoFish {
     Queue<Card> stockPile;
-
+    private List<Card> cardHand;
 
 
     public void start() {
         Player rootPlayer = new Player("Bob", 45, 100.00);
         Player goFishPlayer1 = new GoFishPlayer(rootPlayer);
+        cardHand = new ArrayList<Card>();
 
-        CardGame cardGame = new CardGame() {
-            @Override
-            public void generateDeck() {
-                super.generateDeck();
-            }
-
-            @Override
-            public int getNumberOfPlayers() {
-                return super.getNumberOfPlayers();
-            }
-
-            @Override
-            public void setNumberOfPlayers(int numberOfPlayers) {
-                super.setNumberOfPlayers(numberOfPlayers);
-            }
-
-            @Override
-            public int getMaxNumberOfPlayers() {
-                return super.getMaxNumberOfPlayers();
-            }
-
-            @Override
-            public void setMaxNumberOfPlayers(int maxNumberOfPlayers) {
-                super.setMaxNumberOfPlayers(maxNumberOfPlayers);
-            }
-
-            @Override
-            public ArrayList<Card> getDeck() {
-                return super.getDeck();
-            }
-
-            @Override
-            public void shuffleDeck() {
-                super.shuffleDeck();
-            }
-        };
-
+        Deck deck = new Deck();
+        deck.shuffleDeck();
     }
 
-    public Queue<Card> getStockPile = new Queue<Card>() {
+    public Queue<Card> buildStockPile = new Queue<Card>() {
         public boolean add(Card card) {
             return false;
         }
@@ -132,12 +96,30 @@ public class GoFish {
         }
     };
 
-    public void deal() {
+    public void buildPlayerHand() {
 
     }
 
+    public void buildComputerHand() {
+
+    }
+
+
+    public void deal() {
+        this.buildPlayerHand();
+        this.buildComputerHand();
+        //this.buildStockPile();
+    }
+
+
+
     public String displayCardHand() {
-        return "";
+        StringBuilder cardHandBuilder = new StringBuilder();
+        for (int i = 0; i < cardHand.size(); i++) {
+            cardHandBuilder.append("Card " + (i + 1) + cardHand.get(i) + "\n");
+        }
+
+        return cardHandBuilder.toString();
     }
 
     public boolean isGameOver() {
