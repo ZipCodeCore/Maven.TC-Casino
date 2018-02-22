@@ -4,7 +4,7 @@ import io.zipcoder.casino.*;
 
 public class BlackjackPlayer{
     private String name;
-    private Integer balance;
+    private Double balance;
     private Integer age;
     //private Card[] hand;
     private boolean canHit;

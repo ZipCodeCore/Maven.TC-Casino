@@ -9,15 +9,27 @@ public class Casino {
     Player player;
 
 
+    protected String askUserName(){
+        String name = inputOutput.promptForString("Hello Player! What is your name?");
+        return name;
+    }
 
+    protected Integer askUserAge(){
+        Integer age = inputOutput.promptInt("How old are you?");
+        return age;
+    }
+
+    protected Double askUserBalance(){
+        Double balance = inputOutput.promptDouble("How much do you want to gamble with?");
+        return balance;
+    }
 
     protected void setUpUserProfile(){
-
         String name = this.askUserName();
         Integer age = this.askUserAge();
 
         if(age > 21) {
-           Integer balance = this.askUserBalance();
+           Double balance = this.askUserBalance();
            player = new Player(name, age, balance);
 
         } else{
@@ -34,36 +46,9 @@ public class Casino {
         }
     }
 
-
-
-    protected String askUserName(){
-
-        System.out.println("Hello Player! What is your name?");
-        String name = inputOutput.scanForString();
-        return name;
-
-
-    }
-
-    protected Integer askUserAge(){
-        System.out.println("How old are you?");
-        Integer age = inputOutput.scanForInt();
-        return age;
-    }
-
-    protected Integer askUserBalance(){
-        System.out.println("How much do you want to gamble with?");
-        Integer balance = inputOutput.scanForInt();
-        return balance;
-
-    }
-
     protected void start() {
         this.setUpUserProfile();
         this.showMainMenu();
-
-
     }
-
 }
 

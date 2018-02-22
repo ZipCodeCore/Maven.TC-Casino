@@ -22,12 +22,12 @@ public class PlayerTest {
     public void constructorWithNameAgeBalanceTest() {
         String expectedName = "Suzy";
         Integer expectedAge = 24;
-        Integer expectedBalance = 100;
+        Double expectedBalance = 100.00;
         Player player1 = new Player(expectedName, expectedAge, expectedBalance);
 
         String actualName = player1.getName();
         Integer actualAge = player1.getAge();
-        Integer actualBalance = player1.getBalance();
+        Double actualBalance = player1.getBalance();
 
         Assert.assertEquals(expectedName, actualName);
         Assert.assertEquals(expectedAge, actualAge);
@@ -75,20 +75,20 @@ public class PlayerTest {
     }
     @Test
     public void setBalanceTest() {
-        Player player1 = new Player("Bob", 49, 100);
-        Integer expected = 100;
+        Player player1 = new Player("Bob", 49, 100.00);
+        Double expected = 100.00;
         player1.setBalance(expected);
-        Integer actual = player1.getBalance();
+        Double actual = player1.getBalance();
         Assert.assertEquals(expected, actual);
 
     }
 
     @Test
     public void getBalanceTest() {
-        Player player1 = new Player("George", 51, 200);
-        Integer expected = 200;
+        Player player1 = new Player("George", 51, 200.00);
+        Double expected = 200.00;
 
-        Integer actual = player1.getBalance();
+        Double actual = player1.getBalance();
         Assert.assertEquals(expected, actual);
 
     }
