@@ -7,46 +7,32 @@ import java.util.Collections;
 
 public class Deck {
 
-    private ArrayList<String> deckOfCards;
+    private ArrayList<Card> deckOfCards;
+    private Rank rank;
+    private Suit suit;
 
     public Deck() {
 
-        this.deckOfCards = new ArrayList(52);
+        this.deckOfCards = new ArrayList<Card>();
 
-        //for (int i = 0; i < value.length; i++){
-        //    for (int x = 0; x < suit.length; x++){
-        //        Card card = new Card(value[i], suit[x]);
-        //        deckOfCards.add(card);
-        //    }
-        //}
+        for (Suit suit : Suit.values()){
+            for(Rank rank : Rank.values()){
+                deckOfCards.add(new Card(rank, suit));
+            }
+        }
     }
 
-    public ArrayList<String> getDeckOfCards(){
+    public ArrayList<Card> getDeckOfCards(){
         return this.deckOfCards;
     }
-
 
     public void shuffleDeck(){
         Collections.shuffle(this.deckOfCards);
     }
 
-    public String drawCard(){
+    public Card drawCard(){
 
-        String currentCard = "";
-
-        for(int i = 0; i < deckOfCards.size(); i++) {
-            if(deckOfCards.get(i) == null) {
-                return "Out of Cards!";
-            } else {
-                currentCard = deckOfCards.get(i);
-                deckOfCards.remove(0);
-                break;
-            }
-        }
-
-
-
-        return currentCard;
+        return this.deckOfCards.remove(deckOfCards.size() - 1);
     }
 
 
