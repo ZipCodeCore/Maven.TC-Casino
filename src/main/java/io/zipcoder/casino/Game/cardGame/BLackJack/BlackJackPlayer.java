@@ -1,7 +1,7 @@
 package io.zipcoder.casino.Game.cardGame.BLackJack;
 
-import io.zipcoder.casino.Game.Game.cardGame.CardPlayer;
-import io.zipcoder.casino.Game.Game.Gambler;
+import io.zipcoder.casino.Gambler;
+import io.zipcoder.casino.Game.cardGame.CardPlayer;
 import io.zipcoder.casino.Profile;
 
 public class BlackJackPlayer extends CardPlayer implements Gambler {
@@ -17,8 +17,8 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
         return hasStood;
     }
 
-    public void setHasStood(boolean hasStood) {
-        this.hasStood = hasStood;
+    public void setHasStood(boolean stoodStatus) {
+        this.hasStood = stoodStatus;
     }
 
     public boolean getIsBusted() {

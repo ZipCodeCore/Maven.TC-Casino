@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Game.diceGame.Craps;
 
-import io.zipcoder.casino.Game.Game.diceGame.DiceGame;
+
+import io.zipcoder.casino.Game.diceGame.DiceGame;
 
 public class CrapsGame extends DiceGame {
     private int point;

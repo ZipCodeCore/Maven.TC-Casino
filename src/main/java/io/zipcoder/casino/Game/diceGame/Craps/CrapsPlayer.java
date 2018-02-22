@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Game.diceGame.Craps;
 
-import io.zipcoder.casino.Game.Game.Gambler;
+
+import io.zipcoder.casino.Gambler;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 
