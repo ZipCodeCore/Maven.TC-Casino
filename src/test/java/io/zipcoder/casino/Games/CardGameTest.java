@@ -20,31 +20,6 @@ public class CardGameTest {
     }
 
     @Test
-    public void cardConstructorTest(){
-        Card temp = new Card(Rank.SEVEN, Suit.CLUBS);
-        Rank actual = temp.getRankEnum();
-        Rank expected = Rank.SEVEN;
-        Assert.assertEquals(actual, expected);
-    }
-
-    @Test
-    public void deckGeneratorTest(){
-        dummy.generateDeck();
-        Card actual = dummy.deck.get(0);
-        Card expected = new Card(Rank.ACE, Suit.HEARTS);
-        Assert.assertEquals(expected.getRankEnum(), actual.getRankEnum());
-    }
-
-    @Test
-    public void deckShuffleTest(){
-        dummy.generateDeck();
-        Card expected = dummy.deck.get(0);
-        dummy.shuffleDeck();
-        Card actual = dummy.deck.get(0);
-        Assert.assertNotEquals(expected, actual);
-    }
-
-    @Test
     public void getNumberOfPlayersTest(){
         dummy.setNumberOfPlayers(3);
         Integer expected = 3;
@@ -59,5 +34,4 @@ public class CardGameTest {
         Integer actual = dummy.getMaxNumberOfPlayers();
         Assert.assertEquals(expected, actual);
     }
-
 }
