@@ -1,9 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.utils;
 
 import java.io.*;
-import java.nio.Buffer;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -62,14 +59,13 @@ public final class IOHandler {
      * @param pathString the desired relative filepath
      * @return A stream of lines from the file as String
      */
-    public static Stream<String> getMessageFromFile(String pathString) {
+    public static String getMessageFromFile(String pathString) {
         File file = new File(pathString);
-        return getReader(file).lines();
+        return getReader(file).lines().toString();
     }
 
     public static void writeMessageToFile(String pathString, String message, boolean append) {
         File file = new File(pathString);
-
     }
 
     private static BufferedReader getReader(File file) {
@@ -86,7 +82,7 @@ public final class IOHandler {
             return new BufferedWriter(new FileWriter(file));
         } catch(IOException e) {
             e.printStackTrace();
-
+            return null;
         }
     }
 }

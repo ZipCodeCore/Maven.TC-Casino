@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.utils;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,8 +15,7 @@ public class IOHandlerTest {
     public void testWriteToNewFile() {
         String newPathString = "testWriteToNewFile.txt";
         String expected = "It's time to party";
-        String writeMessage = expected;
-        IOHandler.writeMessageToFile(newPathString, writeMessage);
+        IOHandler.writeMessageToFile(newPathString, expected, true);
         String actual = IOHandler.getMessageFromFile(newPathString);
 
         Assert.assertEquals(expected, actual);
@@ -27,7 +26,7 @@ public class IOHandlerTest {
         String existingPathString = "testWriteExisting.txt";
         String addString = "\nAppend this line";
         String expected = "This line is first\nThis line is second\nAppend this line";
-        IOHandler.writeMessageToFile(existingPathString, addString);
+        IOHandler.writeMessageToFile(existingPathString, addString, true);
         String actual = IOHandler.getMessageFromFile(existingPathString);
 
         Assert.assertEquals(expected, actual);
