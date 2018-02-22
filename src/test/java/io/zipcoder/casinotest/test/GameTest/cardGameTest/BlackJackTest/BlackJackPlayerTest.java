@@ -1,6 +1,7 @@
 package io.zipcoder.casinotest.test.GameTest.cardGameTest.BlackJackTest;
 
-import io.zipcoder.casino.Game.Game.cardGame.BLackJack.BlackJackPlayer;
+
+import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackPlayer;
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;
 import org.junit.Before;
