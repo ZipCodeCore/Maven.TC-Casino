@@ -21,10 +21,4 @@ public interface Gamble {
      * @return
      */
     long lose();
-
-    /**
-     * take in the base amount typically at the same time as it is removed from a Player or Gambler object;
-     */
-    //TODO: maybe base is just set in the constructor and we don't have to force the method
-    void setBase();
 }

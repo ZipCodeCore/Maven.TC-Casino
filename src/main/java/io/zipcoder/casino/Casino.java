@@ -29,21 +29,21 @@ public class Casino {
 
             switch(answer) {
                 case 1:
-                    running = new BlackJack();
+                    //running = new BlackJack();
                     break;
                 case 2:
-                    running = new CrazyEights();
+                    //running = new CrazyEights();
                     break;
                 case 3:
-                    running= new CeeLo();
+                    //running= new CeeLo();
                     break;
                 case 4:
-                    running = new Roulette();
+                    //running = new Roulette();
                     break;
 
             }
 
-            running.play(player);
+            //running.play(player);
         }
     }
 }
