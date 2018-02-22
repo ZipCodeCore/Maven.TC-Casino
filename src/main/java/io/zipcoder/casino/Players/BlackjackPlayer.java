@@ -1,8 +1,6 @@
-package io.zipcoder.casino.Games.Blackjack;
+package io.zipcoder.casino.Players;
 
-import io.zipcoder.casino.*;
-
-public class BlackjackPlayer{
+public class BlackjackPlayer extends Player{
     private String name;
     private Double balance;
     private Integer age;

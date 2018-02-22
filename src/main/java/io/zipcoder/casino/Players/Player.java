@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Players;
 
 public class Player {
 
@@ -11,6 +11,11 @@ public class Player {
     public Player(String name, Integer age){
         this.name = name;
         this.age = age;
+    }
+
+    public Player(){
+        this.name = "";
+        this.age = Integer.MAX_VALUE;
     }
 
 
