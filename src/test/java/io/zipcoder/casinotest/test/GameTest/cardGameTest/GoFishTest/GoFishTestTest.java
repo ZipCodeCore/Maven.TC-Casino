@@ -1,8 +1,6 @@
-package test;
+package io.zipcoder.casinotest.test.GameTest.cardGameTest.GoFishTest;
 
 import org.junit.Before;
-
-import static org.junit.Assert.*;
 
 public class GoFishTestTest {
 
