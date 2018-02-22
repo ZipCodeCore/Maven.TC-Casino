@@ -9,6 +9,7 @@ public class GoFish extends CardGame {
     private Player goFishPlayer;
 
     public GoFish() {
+
     }
 
     public void deal(){
@@ -24,7 +25,6 @@ public class GoFish extends CardGame {
 
     }
     public void passTurn(Player player1,Player player2){
-
     }
 
 
