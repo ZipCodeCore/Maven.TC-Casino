@@ -67,7 +67,7 @@ public final class IOHandler {
         return getReader(file).lines();
     }
 
-    public static void writeMessageToFile(String pathString, String message) {
+    public static void writeMessageToFile(String pathString, String message, boolean append) {
         File file = new File(pathString);
 
     }
@@ -81,7 +81,7 @@ public final class IOHandler {
         }
     }
 
-    private static BufferedWriter getWriter(File file) {
+    private static BufferedWriter getWriter(File file, boolean append) {
         try {
             return new BufferedWriter(new FileWriter(file));
         } catch(IOException e) {
