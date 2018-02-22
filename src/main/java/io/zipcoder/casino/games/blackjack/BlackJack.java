@@ -17,30 +17,11 @@ public class BlackJack {
     public BlackJack() {
     Deck playingDeck = new Deck();
 
+    for(int i = 0; i <)
+
     playerValue = 0;
     dealerValue = 0;
 
-     for (int i = 0; i < 2;i++){
-         playerValue += playingDeck.pull(1)[0].getRank().getScoreValue();
-         dealerValue += playingDeck.pull(1)[0].getRank().getScoreValue();
-     }
-
-    }
-
-    public static void main(String[] args) {
-
-        Deck playingDeck = new Deck();
-
-       int playerValue = 0;
-       int dealerValue = 0;
-
-        for (int i = 0; i < 2;i++){
-            playerValue += playingDeck.pull(1)[0].getRank().getScoreValue();
-            dealerValue += playingDeck.pull(1)[0].getRank().getScoreValue();
-
-        }
-        System.out.println(playerValue);
-        System.out.println(dealerValue);
     }
 
 }
