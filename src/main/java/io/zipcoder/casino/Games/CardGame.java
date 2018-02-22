@@ -1,25 +1,12 @@
 package io.zipcoder.casino.Games;
-
 import io.zipcoder.casino.GameTools.Deck.Card;
-import io.zipcoder.casino.GameTools.Deck.Rank;
-import io.zipcoder.casino.GameTools.Deck.Suit;
-
-import java.util.ArrayList;
-import java.util.Collections;
+import io.zipcoder.casino.GameTools.Deck.Deck;
 
 public abstract class CardGame {
     int numberOfPlayers;
     int maxNumberOfPlayers;
-    public ArrayList<Card> deck = new ArrayList<Card>();
+    Deck deck;
 
-    public void generateDeck(){
-        for (Rank currentRank: Rank.values()) {
-            for (Suit currentSuit : Suit.values()){
-                Card temp = new Card(currentRank, currentSuit);
-                deck.add(temp);
-            }
-        }
-    }
 
     public int getNumberOfPlayers() {
         return numberOfPlayers;
@@ -37,12 +24,9 @@ public abstract class CardGame {
         this.maxNumberOfPlayers = maxNumberOfPlayers;
     }
 
-    public ArrayList<Card> getDeck() {
-        return deck;
+    public CardGame(){
+        this.numberOfPlayers = 0;
+        this.maxNumberOfPlayers = 0;
+        this.deck = new Deck();
     }
-
-    public void shuffleDeck() {
-        Collections.shuffle(this.deck);
-    }
-
 }
