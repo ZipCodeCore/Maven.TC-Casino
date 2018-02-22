@@ -3,7 +3,7 @@ package io.zipcoder.casino;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PlayerClass {
+public class PlayerTest {
     Player player = new Player();
 
     @Test
