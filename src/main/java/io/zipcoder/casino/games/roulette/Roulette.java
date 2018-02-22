@@ -6,9 +6,7 @@ import java.util.ArrayList;
 public class Roulette {
     protected ArrayList<Integer> numberChoiceList = new ArrayList<Integer>();
     private Player player;
-    ;
     private RouletteBoardAndWheel rouletteBoardAndWheel = new RouletteBoardAndWheel();
-    ;
     private RoulettePrompts prompts = new RoulettePrompts();
 
     /**
