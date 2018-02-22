@@ -6,13 +6,11 @@ import java.util.Stack;
 
 public class Deck {
 
-    private Stack<Card> deckOfCards = new Stack<Card>();
+    private Stack<Card> deckOfCards = new Stack<>();
 
 
     public Deck() {
-
         fillDeck();
-
     }
 
     public void fillDeck() {
@@ -30,12 +28,16 @@ public class Deck {
         return deckOfCards.pop();
     }
 
+    public int countRemainingCards() {
+        return deckOfCards.size();
+    }
+
     public void addCard(Card card) {
         deckOfCards.push(card);
     }
 
-    public void peek() {
-        deckOfCards.peek();
+    public Card peek() {
+        return deckOfCards.peek();
     }
 
 

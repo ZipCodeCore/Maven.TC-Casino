@@ -25,16 +25,13 @@ public class GoFish extends CardGame {
 
     public void deal( Deck deckOfCards, Player player1,Player dealer){
         deckOfCards.shuffle();
-       /*if(deckOfCards){
+        if(deckOfCards.countRemainingCards()<1){
             newDeck.fillDeck();
-        }*/
+        }
         for(int i=0;i<7;i++){
             playerCards.add(deckOfCards.getCard());
             dealerCards.add(deckOfCards.getCard());
         }
-
-
-
 
     }
     public boolean ask(Card card){
