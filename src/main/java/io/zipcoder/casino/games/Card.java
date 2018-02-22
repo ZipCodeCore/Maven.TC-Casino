@@ -9,11 +9,6 @@ package io.zipcoder.casino.games;
  * date: 2/21/18
  */
 public class Card {
-    public enum Rank {
-
-
-    }
-
 
     private Rank rank;
     private Suit suit;
@@ -28,5 +23,8 @@ public class Card {
         return String.format("%s of %s", rank.toString(), suit.toString());
     }
 
+    public Rank getRank(){
+        return this.rank;
+    }
 
 }

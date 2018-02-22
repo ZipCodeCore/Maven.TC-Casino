@@ -1,7 +1,7 @@
 package io.zipcoder.casino.games.blackjack;
-
-
 import io.zipcoder.casino.games.Deck;
+import io.zipcoder.casino.games.Rank;
+
 
 public class BlackJack {
 
@@ -24,14 +24,19 @@ public class BlackJack {
         for (int i = 0; i < 2; i++){
             playerHand.pull(1);
             dealerHand.pull(1);
+
         }
     }
 
     public Integer cardValue(){
-        return deck.pull(1)[0].getValue();
+      return deck.pull(1)[0].getRank().getScoreValue();
     }
 
     public void splitCards(){
+        //if cardValue == cardValue
+        //new hand
+            //another hit
+            //double bet
 
     }
     public void putInsurance(){

@@ -21,28 +21,24 @@ public enum Rank {
     KING(10),
     ACE(1, 11);
 
-    private Integer val1;
-    private Integer val2;
+    private Integer scoreValue;
+    private Integer aceValue2;
 
-    Rank(int val1) {
-        this(val1, null);
+
+    Rank(int scoreValue) {
+        this(scoreValue, null);
     }
 
-    Rank(int val1, Integer val2) {
-        this.val1 = val1;
-        this.val2 = val2;
+    Rank(int scoreValue, Integer aceValue2) {
+        this.scoreValue = scoreValue;
+        this.aceValue2 = aceValue2;
     }
 
-    public Integer getVal1() {
-        return val1;
+    public Integer getScoreValue() {
+        return scoreValue;
     }
 
-    public Integer getVal2() {
-        return val2;
+    public Integer getAceValue2() {
+        return aceValue2;
     }
-
-    public Integer getValue() {
-        return rank.val1;
-    }
-
 }
