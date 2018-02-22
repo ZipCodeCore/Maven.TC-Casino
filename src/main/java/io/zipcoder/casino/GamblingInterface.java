@@ -3,9 +3,9 @@ package io.zipcoder.casino;
 import java.util.Map;
 
 public interface GamblingInterface {
-    int checkChipAmount();
-    void placeBet(int betAmount);
+    int checkChipAmount(Person personToCheck);
+    void placeBet(Person personPlacingBet, int betAmount);
     int getAnte();
-    void bootPlayerFromGame();
-    int chekcPot();
+    void bootPlayerFromGame(Person personToBoot);
+    int checkPot();
 }

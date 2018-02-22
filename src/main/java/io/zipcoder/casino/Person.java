@@ -19,4 +19,12 @@ public class Person {
     public String getName() {
         return this.name;
     }
+
+    public Hand getHand() {
+        return this.hand;
+    }
+
+    public Wallet getWallet() {
+        return this.wallet;
+    }
 }

@@ -1,14 +1,18 @@
 package io.zipcoder.casino;
 
 public class Dealer extends Person{
-    private String name = "Dealer";
-    private Hand hand = null;
-    private DealerWallet dealerWallet = null;
 
+
+    private DealerWallet dealerWallet;
 
     public Dealer() {
-        this.hand = new Hand();
+        super("Dealer");
         this.dealerWallet = new DealerWallet();
     }
+
+    public DealerWallet getDealerWallet() {
+        return this.dealerWallet;
+    }
+
 
 }
