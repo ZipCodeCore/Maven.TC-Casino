@@ -43,6 +43,17 @@ public class PlayerTest {
         Assert.assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void getNameTest() {
+        Player player1 = new Player("George", 51);
+        String expected = "George";
+
+        String actual = player1.getName();
+        Assert.assertEquals(expected, actual);
+
+    }
+
     @Test
     public void setAgeTest() {
         Player player1 = new Player("Alex", 26);
@@ -52,11 +63,31 @@ public class PlayerTest {
         Assert.assertEquals(expected, actual);
 
     }
+
+    @Test
+    public void getAgeTest() {
+        Player player1 = new Player("George", 51);
+        Integer expected = 51;
+
+        Integer actual = player1.getAge();
+        Assert.assertEquals(expected, actual);
+
+    }
     @Test
     public void setBalanceTest() {
         Player player1 = new Player("Bob", 49, 100);
         Integer expected = 100;
         player1.setBalance(expected);
+        Integer actual = player1.getBalance();
+        Assert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void getBalanceTest() {
+        Player player1 = new Player("George", 51, 200);
+        Integer expected = 200;
+
         Integer actual = player1.getBalance();
         Assert.assertEquals(expected, actual);
 

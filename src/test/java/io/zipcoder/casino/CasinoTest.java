@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class CasinoTest {
     @Test
-    public void askForUserNameTest(){
+    public void iritl(){
 
     }
 }
