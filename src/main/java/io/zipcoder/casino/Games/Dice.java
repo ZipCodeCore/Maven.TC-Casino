@@ -1,9 +1,9 @@
 package io.zipcoder.casino.Games;
 
-public abstract class DiceGame {
+public class Dice {
 
-    public Integer dice1;
-    public Integer dice2;
+    private Integer dice1;
+    private Integer dice2;
 
     public Integer rollDice(){
         return 0;

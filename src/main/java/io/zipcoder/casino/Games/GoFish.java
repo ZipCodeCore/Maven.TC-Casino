@@ -11,15 +11,25 @@ import java.util.*;
 public class GoFish {
     Queue<Card> stockPile;
     private List<Card> cardHand;
+    ArrayList<Player> players;
 
 
-    public void start() {
-        Player rootPlayer = new Player("Bob", 45, 100.00);
+    public void play() {
+        Player rootPlayer = new Player("Bob", 45, 100);
         Player goFishPlayer1 = new GoFishPlayer(rootPlayer);
+
         cardHand = new ArrayList<Card>();
+
+        players = new ArrayList<Player>();
+        players.add(rootPlayer);
+        players.add(goFishPlayer1);
 
         Deck deck = new Deck();
         deck.shuffleDeck();
+
+
+
+        //while(goFishPlayer1.getNumPairs())
     }
 
     public Queue<Card> buildStockPile = new Queue<Card>() {
@@ -111,6 +121,9 @@ public class GoFish {
         //this.buildStockPile();
     }
 
+    public int deckSize() {
+        return cardHand.size();
+    }
 
 
     public String displayCardHand() {

@@ -8,8 +8,6 @@ public class Player {
     protected Integer age;
     protected Wallet wallet;
 
-
-
     public Player(String name, Integer age){
         this.name = name;
         this.age = age;
