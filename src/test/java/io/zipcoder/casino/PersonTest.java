@@ -1,20 +1,18 @@
 package io.zipcoder.casino;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class PersonTest {
 
 
-    Person testPerson = new Person("Joe");
 
-    @Test
-    public void setHand() {
-
-    }
-
-    @Test
-    public void checkHand() {
-
-    }
+   @Test
+    public void constructorTest() {
+       Person testPesron = new Person("Joe");
+       String expected = "Joe";
+       String actual = testPesron.getName();
+       Assert.assertEquals(expected, actual);
+   }
 }
