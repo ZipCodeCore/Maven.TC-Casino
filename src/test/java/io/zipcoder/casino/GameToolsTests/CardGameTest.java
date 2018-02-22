@@ -59,4 +59,12 @@ public class CardGameTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void getDeckTest(){
+        dummy.generateDeck();
+        ArrayList<Card> actual = dummy.getDeck();
+        ArrayList<Card> expected = dummy.deck;
+        Assert.assertEquals(expected, actual);
+    }
+
 }
