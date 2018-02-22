@@ -30,17 +30,17 @@ public class PlayerTest {
 
     @Test
     public void setPlayerTest(){
-        player1.setSomeProfile(profile2);
+        player1.setProfile(profile2);
         Profile expexted = profile2;
-        Profile actual = player1.getSomeProfile();
+        Profile actual = player1.getProfile();
 
         Assert.assertEquals(expexted, actual);
     }
     @Test
     public void setPlayer1Test(){
-        player1.setSomeProfile(profile2);
+        player1.setProfile(profile2);
         Profile expexted = profile2;
-        Profile actual = player1.getSomeProfile();
+        Profile actual = player1.getProfile();
 
         Assert.assertEquals(expexted, actual);
     }

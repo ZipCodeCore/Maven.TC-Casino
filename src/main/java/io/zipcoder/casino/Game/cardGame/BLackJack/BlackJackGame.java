@@ -13,7 +13,6 @@ public class BlackJackGame extends CardGame implements Game {
 
     public BlackJackGame (BlackJackPlayer player) {
         theHouse = new Profile("Dealer", 0, 0);
-
         dealer = new BlackJackPlayer(theHouse);
         this.blackJackPlayer = player;
     }

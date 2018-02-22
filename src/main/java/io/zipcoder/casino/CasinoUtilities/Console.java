@@ -6,18 +6,18 @@ public class Console {
 
     private static Scanner casinoScanner = new Scanner(System.in);
 
-    public static String getString(String userInput) {
+    public static String getString() {
         return casinoScanner.nextLine();
     }
 
-    public static Double getDouble(String userInput) {
+    public static Double getDouble() {
 
         return Double.valueOf(casinoScanner.nextLine());
     }
 
-    public static int getInt(String userInput) {
+    public static int getInt() {
 
-        return getDouble(userInput).intValue();
+        return getDouble().intValue();
     }
 
     //TODO: implement later once rules are operational

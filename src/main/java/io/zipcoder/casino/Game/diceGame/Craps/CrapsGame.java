@@ -7,12 +7,13 @@ import io.zipcoder.casino.Game.diceGame.DiceGame;
 public class CrapsGame extends DiceGame {
     private int point;
 
+
     public CrapsGame() {
         this.point = point;
     }
     public void comeOutPhase(){
         Console.print("Would you like to make a Pass Line or Do Not Pass bet?");
-        //Console.getString();
+        String answer = Console.getString();
 
 
     }

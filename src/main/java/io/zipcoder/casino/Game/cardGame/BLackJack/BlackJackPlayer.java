@@ -33,7 +33,7 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
 
     }
 
-    public void win() {
+    public void win(double payoutMultiplier) {
 
     }
 

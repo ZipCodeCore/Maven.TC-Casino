@@ -2,22 +2,22 @@ package io.zipcoder.casino;
 
 public class Player {
 
-    private Profile someProfile;
+    private Profile playerProfile;
 
     public Player(Profile someProfile) {
-        this.someProfile = someProfile;
+        this.playerProfile = someProfile;
     }
 
     public Player() {
 
     }
 
-    public void setSomeProfile(Profile someProfile) {
-        this.someProfile = someProfile;
+    public void setProfile(Profile someProfile) {
+        this.playerProfile = someProfile;
     }
 
     // method mostly used for testing purposes
-    public Profile getSomeProfile() {
-        return someProfile;
+    public Profile getProfile() {
+        return playerProfile;
     }
 }
