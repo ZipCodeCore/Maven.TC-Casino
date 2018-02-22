@@ -5,6 +5,7 @@ import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
 import io.zipcoder.casino.House;
 import io.zipcoder.casino.Profile;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,13 +17,9 @@ public class HouseTest {
 
 
     private double intialBalance1;
-    private double intialBalance2;
     private String playerName1;
     private String playerName2;
 
-    private Profile profile1;
-    private Profile profile2;
-    private Profile profile3;
     private CardGame game1;
     private DiceGame game2;
     private ArrayList<Profile> listOfProfiles;
@@ -32,37 +29,33 @@ public class HouseTest {
 
     public void setUp() throws Exception {
         intialBalance1 = 1000.0;
-        intialBalance2 = 2000.0;
         playerName1 = "John";
         playerName2 = "Stella";
 
-       //profile1 = new Profile(playerName1, intialBalance1, 0);
-       //profile2 = new Profile(playerName2, intialBalance2, 0);
-      //  profile3 = new Profile("Susan", 10.00);
-
-        //casino.createProfile(playerName1, intialBalance1);
-        //casino.createProfile(playerName2, intialBalance2);
-        //listOfProfiles = new ArrayList<>();
         casino = new House();
-        casino.createProfile(playerName1, intialBalance1);
+        //casino.createProfile(playerName1, intialBalance1);
 
     }
 
 
     @Test
     public void getProfileTest() {
-        Profile expected = profile1;
-      //  Profile actual = casino.getProfile(profile1);
-       // assertEquals(expected, actual);
+        Profile expected = new Profile(playerName1, intialBalance1, -8);
+        casino.createProfile(expected);
+        Profile actual = casino.getProfileById(-8);
+
+        assertEquals(expected, actual);
     }
 
-    @Test
-    public void chooseGame() {
-    }
 
-    @Test
-    public void chooseCardGame() {
-    }
+//    @Test
+//    public void chooseCardGame() {
+//
+//
+//        String cardGame = "Black Jack";
+//       CardGame actual =  casino.chooseCardGame(cardGame);
+//       CardGame expected =
+//    }
 
     @Test
     public void chooseDiceGame() {
@@ -70,16 +63,16 @@ public class HouseTest {
 
     @Test
     public void createProfile() {
-        casino.createProfile(playerName1, intialBalance1);
-        Profile expexted = profile1;
-       Profile actual = casino.getProfileById(1);
-
-      assertEquals(expexted, actual);
+        Profile expexted = new Profile(playerName2, intialBalance1, 1);
+        casino.createProfile(expexted);
+        Profile actual = casino.getProfileById(1);
+        Assert.assertEquals(expexted, actual);
     }
 
 
     @Test
     public void selectExistingProfile() {
+
     }
 
     @Test

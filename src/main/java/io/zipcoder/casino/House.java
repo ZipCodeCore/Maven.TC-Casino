@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.Game;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
@@ -33,12 +34,29 @@ public class House implements MainMenu {
         return null;
     }
 
-    public void createProfile(String name, double balance) {
 
-        int id =  profiles.size() +1;
+
+    public void createProfile(String name) {
+        createProfile(name, 0, profiles.size() +1);
+    }
+
+    public void createProfile(String name, double balance) {
+        createProfile(name, balance, profiles.size() +1);
+    }
+
+    public void createProfile(String name, double balance, int id) {
         profile = new Profile(name, balance, id);
+        createProfile(profile);
+    }
+
+    public void createProfile(Profile profile) {
+        Console.print("Registering a new profile...");
         profiles.add(profile);
     }
+
+
+
+
 
     public Profile selectExistingProfile(String nameOfPlayer) {
         //if(profile.getName().equals(nameOfPlayer);
