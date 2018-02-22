@@ -1,6 +1,7 @@
-package io.zipcoder.casino.GameToolsTests;
+package io.zipcoder.casino.GameToolsTests.Deck;
 
-import io.zipcoder.casino.GameTools.Rank;
+
+import io.zipcoder.casino.GameTools.Deck.Rank;
 import org.junit.Assert;
 import org.junit.Test;
 

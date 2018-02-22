@@ -1,8 +1,9 @@
-package io.zipcoder.casino.GameToolsTests;
+package io.zipcoder.casino.GameToolsTests.Deck;
 
-import io.zipcoder.casino.GameTools.Card;
-import io.zipcoder.casino.GameTools.Rank;
-import io.zipcoder.casino.GameTools.Suit;
+
+import io.zipcoder.casino.GameTools.Deck.Card;
+import io.zipcoder.casino.GameTools.Deck.Rank;
+import io.zipcoder.casino.GameTools.Deck.Suit;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

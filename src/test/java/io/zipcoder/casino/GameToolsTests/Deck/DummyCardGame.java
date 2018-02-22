@@ -1,5 +1,5 @@
-package io.zipcoder.casino.GameToolsTests;
-import io.zipcoder.casino.GameTools.CardGame;
+package io.zipcoder.casino.GameToolsTests.Deck;
+import io.zipcoder.casino.Games.CardGame;
 
 public class DummyCardGame extends CardGame{
 

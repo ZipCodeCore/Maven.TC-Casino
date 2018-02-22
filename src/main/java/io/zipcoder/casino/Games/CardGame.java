@@ -1,8 +1,8 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.GameTools.Card;
-import io.zipcoder.casino.GameTools.Rank;
-import io.zipcoder.casino.GameTools.Suit;
+import io.zipcoder.casino.GameTools.Deck.Card;
+import io.zipcoder.casino.GameTools.Deck.Rank;
+import io.zipcoder.casino.GameTools.Deck.Suit;
 
 import java.util.ArrayList;
 import java.util.Collections;
