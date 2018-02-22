@@ -1,6 +1,5 @@
 package io.zipcoder.casino.games;
 
-import io.zipcoder.casino.Card;
 import io.zipcoder.casino.Rank;
 import io.zipcoder.casino.Suit;
 
