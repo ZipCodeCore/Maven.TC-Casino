@@ -14,24 +14,20 @@ import java.util.*;
 
 public class GoFish extends CardGame implements Game {
 
-    private Hand dealerHand;
-    private Hand userHand;
-    private Profile theHouse;
-    private Player dealer;
     private Deck goFishDeck;
+    private GoFishPlayer user;
+    private GoFishPlayer dealer;
 
     public GoFish(Profile userProfile) {
-        GoFishPlayer user = new GoFishPlayer(userProfile);
-        GoFishPlayer dealer = new GoFishPlayer(House.HOUSE_PROFILE);
+        user = new GoFishPlayer(userProfile);
+        dealer = new GoFishPlayer(House.HOUSE_PROFILE);
         goFishDeck = new Deck();
-        //dealerHand = new Hand();
-        //userHand= new Hand();
-    }
+}
 
    public void deal() {
         for(int i=0;i<7;i++){
-            dealerHand.addCard(goFishDeck.getCard());
-            userHand.addCard(goFishDeck.getCard());
+            user.getHand().addCard(goFishDeck.getCard());
+            dealer.getHand().addCard(goFishDeck.getCard());
         }
     }
 
