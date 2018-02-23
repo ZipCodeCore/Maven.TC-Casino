@@ -1,11 +1,8 @@
 package io.zipcoder.casino;
 
 
-public enum BlackJackChoices {
+enum BlackJackChoices {
     Hit("Say hit to hit");
-
-
-    //upon start Welcome
 
 
     BlackJackChoices(String s) {
