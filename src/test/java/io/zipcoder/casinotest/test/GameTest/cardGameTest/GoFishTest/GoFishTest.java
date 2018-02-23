@@ -57,6 +57,8 @@ public class GoFishTest {
     @Test
     public void testAsk(){
 
+        boolean
+
 
     }
     @Test
@@ -69,7 +71,7 @@ public class GoFishTest {
         int expected = 1;
 
         GoFish testGoFish = new GoFish();
-        testGoFish.transfer(card,testTo,testFrom);
+        //testGoFish.transfer(card,testTo,testFrom);
 
         int actual = testTo.size();
         Assert.assertEquals(expected,actual);

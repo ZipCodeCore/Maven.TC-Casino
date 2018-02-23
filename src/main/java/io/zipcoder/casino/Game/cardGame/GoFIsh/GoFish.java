@@ -5,6 +5,7 @@ import io.zipcoder.casino.Game.Game;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
 import io.zipcoder.casino.Game.cardGame.utilities.Deck;
+import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 
@@ -17,10 +18,8 @@ public class GoFish extends CardGame implements Game {
     private Player dealer;
     private Profile playerProfile;
     private Profile dealerProfile;
-    Map<Player,ArrayList<Card>>cardsAtHand=new HashMap<>();
-    ArrayList<Card> dealerCards = new ArrayList<Card>();
-    ArrayList<Card> playerCards = new ArrayList<Card>();
-
+    private Hand playerHand;
+    private Hand dealerHand;
 
     public GoFish(GoFishPlayer goFishPlayer) {
         dealerProfile = new Profile("DealerName", 0, 0);
@@ -40,8 +39,8 @@ public class GoFish extends CardGame implements Game {
         this.goFishPlayer=player1;
         this.dealer=dealer;
         for (int i = 0; i < 7; i++) {
-                cardsAtHand.get(player1).add(deckOfCards.getCard());
-                cardsAtHand.get(dealer).add(deckOfCards.getCard());
+               // playerHand.add(deckOfCards.getCard());
+               // dealerHand.addCard(deckOfCards.getCard());
         }
 
     }
@@ -51,16 +50,16 @@ public class GoFish extends CardGame implements Game {
         return true;
     }
 
-    public void transfer(Card card, ArrayList<Card>to,ArrayList<Card>from) {
-        while(from.contains(card)){
-            to.add(card);
-            from.remove(card);
-        }
+    public void transfer(Card card, Hand handTo, Hand handFrom) {
+       // while(handFrom.hasCard(card)){
+           // handTo.addCard(card);
+           // handFrom.remove(card);
+        //}
 
     }
 
     public void drawCard(Player player,Card card) {
-        cardsAtHand.get(player).add(card);
+       // .get(player).add(card);
 
 
     }
@@ -70,26 +69,23 @@ public class GoFish extends CardGame implements Game {
 
     protected boolean add(Player player, Card card) {
         if (hasEntry(player)) {
-            getCards(player).add(card);
+           // getCards(player).add(card);
             return true;
 
         } else {
             ArrayList<Card> playerCards = new ArrayList<>();
             playerCards.add(card);
-            cardsAtHand.put(player, playerCards);
+            //cardsAtHand.put(player, playerCards);
         }
 
         return true;
     }
     protected boolean hasEntry(Player player){
-        if(cardsAtHand.containsKey(player)){
+       // if(cardsAtHand.containsKey(player)){
             return true;
         }
-        return false;
-    }
-    protected ArrayList<Card> getCards(Player player){
-        return cardsAtHand.get(player);
-    }
+        //return false;
+   // }
 
 
 }
