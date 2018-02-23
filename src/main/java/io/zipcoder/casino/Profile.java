@@ -1,15 +1,19 @@
 package io.zipcoder.casino;
 
+
+import java.util.HashMap;
+
 public class Profile {
     private String name;
     private double accountBalance;
     private int id;
-    private double escrow;
+    private HashMap<String, Double> escrow;
 
     public Profile(String name, double accountBalance, int id) {
         this.name = name;
         this.accountBalance = accountBalance;
         this.id = id;
+        escrow = new HashMap<String, Double>(0);
     }
 
     public String getName() {
@@ -38,11 +42,16 @@ public class Profile {
         return id;
     }
 
-    public void setEscrow(double incomingBet){
-        this.escrow = incomingBet;
+    public void setEscrow(String typeOfBet, double incomingBet){
+        this.escrow.put(typeOfBet, incomingBet);
     }
 
-    public double getEscrow(){
-        return this.escrow;
+    public double getEscrow(String typeOfBet){
+        return this.escrow.get(typeOfBet);
     }
+
+    public boolean escrowContains(String typeOfBet){
+        return escrow.containsKey(typeOfBet) ? true : false;
+    }
+
 }

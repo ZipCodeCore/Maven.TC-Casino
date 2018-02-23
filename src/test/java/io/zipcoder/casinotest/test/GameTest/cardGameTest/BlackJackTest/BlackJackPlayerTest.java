@@ -50,7 +50,7 @@ public class BlackJackPlayerTest {
     @Test
     public void betTest1() {
         double betAmount = 100;
-        testBlackJackPlayer.bet(betAmount);
+        testBlackJackPlayer.bet("Even Bet",betAmount);
         double expected = 99900;
         double actual = testProfile.getAccountBalance();
     }

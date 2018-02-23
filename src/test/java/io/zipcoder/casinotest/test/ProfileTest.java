@@ -68,9 +68,9 @@ public class ProfileTest {
         //profile1
 
         //When
-        profile1.setEscrow(100);
+        profile1.setEscrow("Test Bet",100);
         double expected = 100;
-        double actual = profile1.getEscrow();
+        double actual = profile1.getEscrow("Test Bet");
 
         //Then
         Assert.assertEquals(expected,actual, 0.01);
@@ -82,9 +82,9 @@ public class ProfileTest {
         //profile1
 
         //When
-        profile1.setEscrow(10000.54);
+        profile1.setEscrow("Test Bet2",10000.54);
         double expected = 10000.54;
-        double actual = profile1.getEscrow();
+        double actual = profile1.getEscrow("Test Bet2");
 
         //Then
         Assert.assertEquals(expected,actual, 0.01);
