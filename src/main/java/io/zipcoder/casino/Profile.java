@@ -7,13 +7,13 @@ public class Profile {
     private String name;
     private double accountBalance;
     private int id;
-    private HashMap<String, Double> escrow;
+    private HashMap<TypeOfBet, Double> escrow;
 
     public Profile(String name, double accountBalance, int id) {
         this.name = name;
         this.accountBalance = accountBalance;
         this.id = id;
-        escrow = new HashMap<String, Double>(0);
+        this.escrow = new HashMap<>(0);
     }
 
     public String getName() {
@@ -38,20 +38,21 @@ public class Profile {
     }
 
     public int getId() {
-
         return id;
     }
 
-    public void setEscrow(String typeOfBet, double incomingBet){
+
+    public void setEscrow(TypeOfBet typeOfBet, double incomingBet){
         this.escrow.put(typeOfBet, incomingBet);
     }
 
-    public double getEscrow(String typeOfBet){
+
+    public double getEscrow(TypeOfBet typeOfBet){
         return this.escrow.get(typeOfBet);
     }
 
-    public boolean escrowContains(String typeOfBet){
-        return escrow.containsKey(typeOfBet) ? true : false;
+    public boolean escrowContains(TypeOfBet typeOfBet){
+        return escrow.containsKey(typeOfBet) ;
     }
 
 }

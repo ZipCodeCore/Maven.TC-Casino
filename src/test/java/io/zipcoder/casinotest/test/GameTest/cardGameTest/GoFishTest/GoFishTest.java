@@ -24,40 +24,10 @@ public class GoFishTest {
 
 
 
-    @Test
-    public void testDeal() {
-        Map<Player, ArrayList<Card>>testCardsAtHand = new HashMap<>();
-        ArrayList<Card> testDealerCards= new ArrayList<Card>();
-        ArrayList<Card>testPlayerCards= new ArrayList<Card>();
-        Deck testDeck = new Deck();
-        GoFish testGoFish= new GoFish();
-
-        System.out.println(testDeck.countRemainingCards());
-
-        Profile testProfilePlayer = new Profile("John",5000,0);
-        Profile testProfileDealer= new Profile("Mark",5000,1);
-        Player testPlayer = new GoFishPlayer(testProfilePlayer);
-        Player testDealer = new GoFishPlayer(testProfileDealer);
-
-        testCardsAtHand.put(testPlayer,testPlayerCards);
-        testCardsAtHand.put(testDealer,testDealerCards);
-        testGoFish.deal(testDeck,testPlayer,testDealer);
-        Integer expected = 7;
-        Integer actual = testCardsAtHand.get(testPlayer).size();
-
-        Assert.assertEquals(expected,actual);
 
 
-
-
-
-
-    }
-
-    @Test
+   @Test
     public void testAsk(){
-
-        boolean
 
 
     }
@@ -70,7 +40,7 @@ public class GoFishTest {
         testFrom.add(card);
         int expected = 1;
 
-        GoFish testGoFish = new GoFish();
+        //GoFish testGoFish = new GoFish();
         //testGoFish.transfer(card,testTo,testFrom);
 
         int actual = testTo.size();
@@ -78,7 +48,7 @@ public class GoFishTest {
 
 
     }
-   /* @Test
+    @Test
     public void testDrawCard(Player player){
 
 
@@ -86,6 +56,6 @@ public class GoFishTest {
     @Test
     public void testPassTurn(Player player1,Player player2){
 
-    }*/
+    }
 
 }

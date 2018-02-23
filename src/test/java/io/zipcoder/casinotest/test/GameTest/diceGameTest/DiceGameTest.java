@@ -1,6 +1,7 @@
 package io.zipcoder.casinotest.test.GameTest.diceGameTest;
 
 import io.zipcoder.casino.Game.diceGame.Craps.CrapsGame;
+import io.zipcoder.casino.Game.diceGame.Craps.CrapsPlayer;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
 import io.zipcoder.casino.Game.diceGame.Die;
 import io.zipcoder.casino.Player;
@@ -22,9 +23,10 @@ public class DiceGameTest {
 
     @Before
     public void setup(){
-        testGame = new CrapsGame();
         stinkyPete = new Player();
         smellyPeter = new Player();
+        testGame = new CrapsGame(stinkyPete);
+
     }
 
     @Test
@@ -112,43 +114,39 @@ public class DiceGameTest {
         //DiceGame testGame
 
         //When
-        Player expected = stinkyPete;
         Player expected2 = smellyPeter;
-        testGame.addPlayer(stinkyPete);
         testGame.addPlayer(smellyPeter);
-        testGame.addPlayer(stinkyPete);
+        testGame.addPlayer(smellyPeter);
+        testGame.addPlayer(smellyPeter);
         ArrayList<Player> actual = testGame.getPlayers();
 
         //Then
-        Assert.assertTrue(actual.contains(expected) && actual.contains(expected2) && actual.size() == 2);
+        Assert.assertTrue(actual.contains(expected2) && actual.size() == 2);
     }
 
     @Test
     public void removePlayerTest(){
         //Given
         //DiceGame testGame
-        testGame.addPlayer(stinkyPete);
         testGame.addPlayer(smellyPeter);
 
         //When
-        Player expected = stinkyPete;
+
         Player notExpected = smellyPeter;
         testGame.removePlayer(smellyPeter);
         ArrayList<Player> actual = testGame.getPlayers();
 
         //Then
-        Assert.assertTrue(actual.contains(expected) && !actual.contains(notExpected));
+        Assert.assertFalse(actual.contains(notExpected));
     }
 
     @Test
     public void removeNonExistentPlayerTest(){
         //Given
         //DiceGame testGame
-        testGame.addPlayer(stinkyPete);
         testGame.addPlayer(smellyPeter);
 
         //When
-        Player expected = stinkyPete;
         Player notExpected = smellyPeter;
         testGame.removePlayer(smellyPeter);
         testGame.removePlayer(smellyPeter);
@@ -156,7 +154,7 @@ public class DiceGameTest {
 
 
         //Then
-        Assert.assertTrue(actual.contains(expected) && !actual.contains(notExpected));
+        Assert.assertFalse(actual.contains(notExpected));
     }
 
 

@@ -3,6 +3,7 @@ package io.zipcoder.casino.Game.cardGame.BLackJack;
 import io.zipcoder.casino.Gambler;
 import io.zipcoder.casino.Game.cardGame.CardPlayer;
 import io.zipcoder.casino.Profile;
+import io.zipcoder.casino.TypeOfBet;
 
 public class BlackJackPlayer extends CardPlayer implements Gambler {
 
@@ -29,15 +30,16 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
         this.isBusted = isBusted;
     }
 
-    public void bet(String typeOfBet, double amount) {
+
+    public void bet(TypeOfBet typeOfBet, double amount) {
 
     }
 
-    public void win(String typeOfBet, double payoutMultiplier) {
+    public void win(TypeOfBet typeOfBet, double payoutMultiplier) {
 
     }
 
-    public void lose(String typeOfBet) {
+    public void lose(TypeOfBet typeOfBet) {
 
     }
 
