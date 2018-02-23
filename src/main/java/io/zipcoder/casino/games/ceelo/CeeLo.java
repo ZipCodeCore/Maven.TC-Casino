@@ -11,9 +11,9 @@ import io.zipcoder.casino.utils.IOHandler;
  * date: 2/23/18
  */
 public class CeeLo implements Game {
-    private final String fRULES_PATH = "ceelo.rules.txt";
-    private final String fTAKE_BET_MSG = "Place your bet";
-    private final String fPLAY_AGAIN_MSG = "Press \"Enter\" to play again...\nyou can also type \"rules\" or \"back\"";
+    private static final String fRULES_PATH = "ceelo.rules.txt";
+    private static final String fTAKE_BET_MSG = "Place your bet";
+    private static final String fPLAY_AGAIN_MSG = "Press \"Enter\" to play again...\nyou can also type \"rules\" or \"back\"";
     private Player player;
 
     private int takeBet() {
