@@ -5,6 +5,8 @@ import io.zipcoder.casino.games.Card;
 import io.zipcoder.casino.games.Deck;
 import io.zipcoder.casino.games.Rank;
 import io.zipcoder.casino.utils.IOHandler;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -12,87 +14,142 @@ public class BlackJack {
 
         private int playerBet;
         static long playerWallet;
-        private int playerValue;
-        private int dealerValue;
+        private ArrayList<Card> playerValue;
+        private ArrayList<Card> dealerValue;
+        private ArrayList<Card> splitHandLeft;
+        private ArrayList<Card> splitHandRight;
+        private int splitHandScoreLeft;
+        private int splitHandScoreRight;
+        private int playerHandScore;
+        private int dealerHandScore;
         private int insuranceBet;
-        private Integer splitNum = 0;
+
         Deck playingDeck;
+        String output;
 
         public BlackJack(Deck playingDeck) {
         this.playingDeck = playingDeck;
-        playerValue = 0;
-        dealerValue = 0;
-    }
-    public Integer dealPlayerHandValue(){
-        for (int i = 0; i < 2; i++) {
-            playerValue += playingDeck.pull(1)[0].getIntValue();
+        playerValue = new ArrayList<>();
+        dealerValue = new ArrayList<>();
+        splitHandLeft = new ArrayList<>();
+        splitHandRight = new ArrayList<>();
+        for (int i = 0; i < 2; i++){
+            playerValue.add(playingDeck.pull(1)[0]);
+            dealerValue.add(playingDeck.pull(1)[0]);
         }
-        return playerValue;
+
     }
-    public Integer dealDealerHandValue(){
-        for (int i = 0; i < 2; i++) {
-            dealerValue += playingDeck.pull(1)[0].getIntValue();
+
+    public Integer getPlayerCardValue(){
+        playerHandScore = 0;
+        for (Card pCard : playerValue){
+            playerHandScore += pCard.getIntValue();
         }
-        return dealerValue;
+        return playerHandScore;
     }
+    public Integer getDealerCardValue(){
+        dealerHandScore = 0;
+        for (Card dCard : dealerValue){
+            dealerHandScore += dCard.getIntValue();
+        }
+        return dealerHandScore;
+    }
+
     public String displayPlayerHand(){
-        String handCards = "";
-        Deck playerHand = new Deck();
-        for(int i = 0; i < 2; i++){
-            handCards += Arrays.toString(playerHand.pull(1));
+        String pHandCards = "";
+        for(Card card: playerValue){
+            pHandCards += card.toString() + ",";
         }
-        return handCards;
+        return pHandCards;
+    }
+    public String displayDealerHand() {
+        String dHandCards = "";
+        for (Card card : dealerValue) {
+            dHandCards+= card.toString() + ",";
+        }
+        return dHandCards;
     }
 
     public boolean isHandSplitable(){
-    Integer card1 = playingDeck.pull(1)[0].getIntValue();
-    Integer card2 = playingDeck.pull(1)[0].getIntValue();
-            if (card1.equals(card2)){
-                splitNum += card1;
+        for (int i = 0; i < playerValue.size() -1; i++) {
+            if (playerValue.get(0).getIntValue() == playerValue.get(1).getIntValue()){
                 return true;
-            } else return false;
-    }
-    public void splitHand(){
-        Integer splitHand = splitNum;
-        if (isHandSplitable() == true){
-            splitHand += playingDeck.pull(1)[0].getIntValue();
+            }
         }
+        return false;
+    }
+    public void splitHandPrompt(){
+        if (isHandSplitable() == true){
+            String prompt = "Your split value is " + playerValue.get(0).getIntValue() + ". Do you want to split?";
+            output = IOHandler.promptForStringWithMessage(prompt);
+        if (output.equalsIgnoreCase("yes")){
+            displaySplitHands();
+        }
+        }
+    }
+
+    public String displaySplitHands(){
+        splitHandLeft.addAll(Arrays.asList(playerValue.get(0), playingDeck.pull(1)[0]));
+        splitHandRight.addAll(Arrays.asList(playerValue.get(0), playingDeck.pull(1)[0]));
+
+        String leftHand = splitHandLeft.toString();
+        String rightHand = splitHandRight.toString();
+        String splitHands = leftHand + rightHand;
+        return splitHands.toString();
+    }
+    public Integer playerHitOrStand(){
+        if(playerHandScore < 21){
+            String prompt = "Do you want to hit or stand?";
+            output = IOHandler.promptForStringWithMessage(prompt);
+            if(output.equalsIgnoreCase("hit")) {
+                playerValue.add(playingDeck.pull(1)[0]);
+                playerHandScore = getPlayerCardValue();
+                return playerHandScore;
+            }
+            if(output.equalsIgnoreCase("stand")){
+               playerHandScore = getPlayerCardValue();
+            }
+        }
+        return playerHandScore;
     }
 
     public static void main(String[] args) {
 
+        String output;
+        Deck playingDeck = new Deck();
+            BlackJack blackJack = new BlackJack(playingDeck);
+            int playerBet;
+         long playerWallet;
+         ArrayList<Card> playerValue;
+         ArrayList<Card> dealerValue;
+         int playerHandScore;
+         int dealerHandScore;
+         int insuranceBet;
+         Integer splitNum = 0;
+
+        playerValue = new ArrayList<>();
+        dealerValue = new ArrayList<>();
+        for (int i = 0; i < 2; i++){
+            playerValue.add(playingDeck.pull(1)[0]);
+            dealerValue.add(playingDeck.pull(1)[0]);
+        }
+        System.out.println(blackJack.displayPlayerHand());
+        System.out.println(blackJack.playerHitOrStand());
+
     }
 }
-//    public Integer cardValue(){
 //
-//    }
-
-//    public void splitCards(){
-//        //if cardValue == cardValue
-//        //new hand
-//            //another hit
-//            //double bet
-//
-//    }
 //    public void putInsurance(){
 //
 //    }
-//    public void playerHit(){
-//
-//    }
-//    public void playerStand(){
-//
-//    }
+
+
 
 //    public void playerDoubleDown(){
 //
 //    }
-//    public void getTotal(){
-//
-//    }
-//    public void checkHand(){
-//
-//    }
+
+
 //    public void isBlackJack(){
 //
 //    }
