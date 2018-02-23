@@ -16,6 +16,13 @@ public class Person {
 
     }
 
+    public Person(String name, Integer amount) {
+        this.name = name;
+        this.hand = new Hand();
+        this.wallet = new Wallet();
+        wallet.addChipsToAmount(amount);
+    }
+
     public String getName() {
         return this.name;
     }
