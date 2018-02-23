@@ -14,6 +14,7 @@ public class CrapsGame extends DiceGame {
     private int point;
     boolean isComeOutPhase = true;
     private CrapsPlayer currentPlayer;
+    private boolean newRound = true;
 
 
 
@@ -40,7 +41,8 @@ public class CrapsGame extends DiceGame {
 
     }
     public void turn(){
-       String rollOrBet;
+
+        String rollOrBet;
         do {
             Console.print("Would you like to [roll] or [bet]?");
             rollOrBet = Console.getString();
@@ -58,9 +60,9 @@ public class CrapsGame extends DiceGame {
 
     public void selectBet(){
         TypeOfBet betType;
-        Console.print(bettingMenu);
         boolean keepRunning = true;
         do {
+            //Console.print(bettingMenu);
             Console.print("What type of bet would you like to place?");
             Console.print("Enter [stop] to finish betting");
             String textBet = Console.getString();
@@ -72,10 +74,14 @@ public class CrapsGame extends DiceGame {
 
                 case "pass line":
                     betType = CrapsBet.PASS_LINE;
+                    currentPlayer.setPassLine(true);
+                    this.placeBet(betType);
                     break;
 
                 case "do not pass":
                     betType = CrapsBet.DO_NOT_PASS;
+                    currentPlayer.setPassLine(false);
+                    this.placeBet(betType);
                     break;
 
                 default:
@@ -88,12 +94,23 @@ public class CrapsGame extends DiceGame {
 
     }
 
+    public String printBettingMenu(){
+         StringBuilder bettingMenu = new StringBuilder("Here are the types of bets you can make: \n");
+        if(newRound == true){
+            bettingMenu.append("[Pass Line] \n");
+            bettingMenu.append("[Do Not Pass]\n");
+        }
+
+        return bettingMenu.toString();
+    }
+
     public void placeBet(TypeOfBet betType){
         Console.print("Your current balance is: $" + currentPlayer.getProfile().getAccountBalance());
         Console.print("How much would you like to bet?");
         Double betAmount = Console.getDouble();
         currentPlayer.bet(betType, betAmount);
-
+        Console.print("Your bet has been placed.  Your current balance is now: $" + currentPlayer.getProfile().getAccountBalance());
+        Console.print("");
     }
 
 
@@ -137,9 +154,6 @@ public class CrapsGame extends DiceGame {
         this.point = 0;
     }
 
-    private String bettingMenu = "Here are the types of bets you can make: \n" +
-            "[Pass Line] \n" +
-            "[Do Not Pass]\n";
 
     private String invalidInput = "Invalid input: please enter your choice again";
 
