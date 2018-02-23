@@ -1,6 +1,10 @@
 package io.zipcoder.casino.utils;
 
-import java.io.*;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -52,17 +56,28 @@ public final class IOHandler {
      * File IO
      */
 
-    public static String getMessageFromFile(String pathString) {
-        File file = new File(pathString);
-        return getReader(file).lines().toString();
+    public static String getMessageFromFile(String file) {
+        String ret = "[file not found]";
+        try {
+            String pathString = IOHandler.class.getResource(file).getPath();
+            Path path = FileSystems.getDefault().getPath(pathString);
+
+            try {
+                ret = linesToString(Files.readAllLines(path));
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        } catch (NullPointerException npe) {
+            npe.getMessage(); // this is bad, i'm sorry.
+        }
+        return ret;
     }
 
-    private static BufferedReader getReader(File file) {
-        try {
-            return new BufferedReader(new FileReader(file));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
+    private static <T> String linesToString(List<T> list) {
+        StringBuilder sb = new StringBuilder();
+        for (T t : list) {
+            sb.append(t.toString());
         }
+        return sb.toString();
     }
 }

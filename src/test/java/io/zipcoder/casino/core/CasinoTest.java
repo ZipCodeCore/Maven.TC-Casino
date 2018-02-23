@@ -1,12 +1,30 @@
 package io.zipcoder.casino.core;
 
+<<<<<<< HEAD
+=======
+
+import org.junit.Assert;
+>>>>>>> c4752736cf6d7aab54ab7e2c113e6b4d883668ce
 import org.junit.Test;
 
 public class CasinoTest {
 
-    @Test
-    public void CasinoConstructorTest() {
-    }
+//    @Test
+//    public void CasinoConstructorTest() {
+//
+//        String expectedPlayer = null;
+//        Integer expectedAnswer= 0;
+//
+//        // When
+//        Casino casino = new Casino();
+//
+//        // Then
+//        String actualPlayer = player.get();
+//        int actualAnswer = answer.getAnswer();
+//
+//        Assert.assertEquals(expectedPlayer, actualPlayer);
+//        Assert.assertEquals(expectedAnswer, actualAnswer);
+//    }
 
     @Test
     public void getAnswerTest() {
@@ -14,6 +32,8 @@ public class CasinoTest {
         Casino casino = new Casino();
 
         int actual = casino.getAnswer();
+
+        Assert.assertEquals(expectedAnswer, actual);
 
     }
 
@@ -23,6 +43,7 @@ public class CasinoTest {
 
     @Test
     public void mainMenuTest() {
+        //IO HANDLER!!!
     }
 
     @Test
