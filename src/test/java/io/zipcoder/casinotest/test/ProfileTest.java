@@ -1,5 +1,6 @@
 package io.zipcoder.casinotest.test;
 
+import io.zipcoder.casino.CrapsBet;
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;
 import org.junit.Before;
@@ -68,9 +69,9 @@ public class ProfileTest {
         //profile1
 
         //When
-        profile1.setEscrow("Test Bet",100);
+        profile1.setEscrow(CrapsBet.PASS_LINE,100);
         double expected = 100;
-        double actual = profile1.getEscrow("Test Bet");
+        double actual = profile1.getEscrow(CrapsBet.PASS_LINE);
 
         //Then
         Assert.assertEquals(expected,actual, 0.01);
@@ -82,9 +83,9 @@ public class ProfileTest {
         //profile1
 
         //When
-        profile1.setEscrow("Test Bet2",10000.54);
+        profile1.setEscrow(CrapsBet.PASS_LINE,10000.54);
         double expected = 10000.54;
-        double actual = profile1.getEscrow("Test Bet2");
+        double actual = profile1.getEscrow(CrapsBet.PASS_LINE);
 
         //Then
         Assert.assertEquals(expected,actual, 0.01);

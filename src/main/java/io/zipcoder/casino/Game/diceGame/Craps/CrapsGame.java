@@ -2,37 +2,126 @@ package io.zipcoder.casino.Game.diceGame.Craps;
 
 
 import io.zipcoder.casino.CasinoUtilities.Console;
+import io.zipcoder.casino.CrapsBet;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
+import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Profile;
+import io.zipcoder.casino.TypeOfBet;
+
+import java.util.Arrays;
 
 public class CrapsGame extends DiceGame {
     private int point;
+    boolean isComeOutPhase = true;
+    private CrapsPlayer currentPlayer;
+    private boolean newRound = true;
 
 
-    public CrapsGame() {
-        this.point = point;
+
+    public CrapsGame(Player player) {
+        this.currentPlayer = new CrapsPlayer(player.getProfile());
+        this.addPlayer(player);
+        Console.currentPlayer = player;
     }
+
+    public static void main(String[] args) {
+        Profile stinkyProfile = new Profile("Stinky Pete", 1000, 11);
+        Player stinkyPete = new Player(stinkyProfile);
+        CrapsGame testGame = new CrapsGame(stinkyPete);
+        testGame.startGame();
+        testGame.turn();
+    }
+
     public void comeOutPhase(){
-        Console.print("Would you like to make a Pass Line or Do Not Pass bet?");
-        String answer = Console.getString();
+
 
 
     }
     public void pointPhase(){
 
     }
-    public void round(){
+    public void turn(){
+
+        String rollOrBet;
+        do {
+            Console.print("Would you like to [roll] or [bet]?");
+            rollOrBet = Console.getString();
+            if (rollOrBet.equalsIgnoreCase("roll")) {
+                int roll = this.getRollValue();
+            } else if (rollOrBet.equalsIgnoreCase("bet")) {
+                this.selectBet();
+            }
+            else{
+                Console.print(invalidInput);
+            }
+        }
+        while(!rollOrBet.equalsIgnoreCase("roll"));
+    }
+
+    public void selectBet(){
+        TypeOfBet betType;
+        boolean keepRunning = true;
+        do {
+            //Console.print(bettingMenu);
+            Console.print("What type of bet would you like to place?");
+            Console.print("Enter [stop] to finish betting");
+            String textBet = Console.getString();
+            textBet = textBet.toLowerCase();
+            switch (textBet) {
+                case "stop":
+                    keepRunning = false;
+                    break;
+
+                case "pass line":
+                    betType = CrapsBet.PASS_LINE;
+                    currentPlayer.setPassLine(true);
+                    this.placeBet(betType);
+                    break;
+
+                case "do not pass":
+                    betType = CrapsBet.DO_NOT_PASS;
+                    currentPlayer.setPassLine(false);
+                    this.placeBet(betType);
+                    break;
+
+                default:
+                    Console.print(invalidInput);
+
+
+            }
+        }
+        while(keepRunning == true);
 
     }
-    public void placeBet(double betAmount, String input){
 
+    public String printBettingMenu(){
+         StringBuilder bettingMenu = new StringBuilder("Here are the types of bets you can make: \n");
+        if(newRound == true){
+            bettingMenu.append("[Pass Line] \n");
+            bettingMenu.append("[Do Not Pass]\n");
+        }
+
+        return bettingMenu.toString();
     }
+
+    public void placeBet(TypeOfBet betType){
+        Console.print("Your current balance is: $" + currentPlayer.getProfile().getAccountBalance());
+        Console.print("How much would you like to bet?");
+        Double betAmount = Console.getDouble();
+        currentPlayer.bet(betType, betAmount);
+        Console.print("Your bet has been placed.  Your current balance is now: $" + currentPlayer.getProfile().getAccountBalance());
+        Console.print("");
+    }
+
 
     public int getRollValue(){
         int [] rawRoll = this.rollDice();
+
         int sum = 0;
         for(int i : rawRoll){
             sum += i;
         }
+        Console.print(Arrays.toString(rawRoll) +"\nYou rolled a " + sum);
         return sum;
     }
 
@@ -64,5 +153,8 @@ public class CrapsGame extends DiceGame {
         this.createDie(6,2);
         this.point = 0;
     }
+
+
+    private String invalidInput = "Invalid input: please enter your choice again";
 
 }
