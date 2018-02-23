@@ -1,8 +1,6 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.GameTools.Deck.Card;
-import io.zipcoder.casino.GameTools.Deck.Rank;
-import io.zipcoder.casino.GameTools.Deck.Suit;
+import io.zipcoder.casino.GameTools.Deck.*;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
 import org.junit.Assert;
@@ -54,6 +52,33 @@ public class BlackjackTest {
         game.initialHand(sueBKJK, jimBKJK);
         Card actual = jimBKJK.getHand().get(1);
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void bustCheckPositiveTest(){
+        ArrayList<BlackjackCard> temp = new ArrayList<BlackjackCard>();
+        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
+        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
+        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
+        sueBKJK.setHand(temp);
+        Assert.assertTrue(game.bustCheck(sueBKJK));
+    }
+
+    @Test
+    public void bustCheckNegativeTest(){
+        ArrayList<BlackjackCard> temp = new ArrayList<BlackjackCard>();
+        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
+        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
+        sueBKJK.setHand(temp);
+        Assert.assertFalse(game.bustCheck(sueBKJK));
+    }
+
+    @Test
+    public void runTurnTest(){
+        //run turn method should initially draw from preset deck, hit once, and bust
+        //this will see if we can get a game to move through functions procedurally
+        //then we can see if we can put this function in a constructor
+        //to kick the game off as soon as the game object is instantiated
     }
 
     @Test
