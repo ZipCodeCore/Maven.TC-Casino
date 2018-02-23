@@ -17,8 +17,8 @@ public class War {
     }
 
     public Card deal() {
-//        player.currentHand.add(deck.deck.get(0));
-//        deck.deck.remove(deck.deck.get(0));
+        player.currentHand.add(deck.deck.get(0));
+        deck.deck.remove(deck.deck.get(0));
         for(int i = 0; i < deck.deck.size(); i++) {
             System.out.println(deck.deck.get(i).toString());
         }
@@ -31,7 +31,6 @@ public class War {
 
     public void itisWar() {
 
-
     }
 
     public Integer awardPoint() {
@@ -39,10 +38,11 @@ public class War {
     }
 
     public boolean cardsLeftInDeck() {
-//        if(deck.get(0) != null) {
-//            return true;
-//        }
-        return false;
+        if(!(deck.deck.get(0).equals(null))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String declareWinner() {
