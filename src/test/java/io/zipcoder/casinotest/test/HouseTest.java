@@ -49,21 +49,37 @@ public class HouseTest {
         assertEquals(expected, actual);
     }
 
-/*
+//fix test
     @Test
-    public void chooseBlackCardGameTest() {
-        Profile someProfile = new Profile(playerName1, intialBalance1, -5);
-        String cardGame = "BlackJack";
-        casino.createProfile(someProfile);
+    public void chooseBlackJackCardGameTest() {
+        Profile player = new Profile(playerName1, intialBalance1, 5);
+        String cardGame = "Black Jack";
+        casino.createProfile(player);
 
-        Profile profile = casino.getProfileById(1);
-        BlackJackPlayer player = new BlackJackPlayer(profile);
+        Profile profile = casino.getProfileById(player.getId());
+        BlackJackPlayer blackJackPlayer = new BlackJackPlayer(profile);
 
-        CardGame expected = new BlackJackGame(player);
-        CardGame actual = casino.chooseCardGame(cardGame);
+        CardGame expected = new BlackJackGame(blackJackPlayer);
+        CardGame actual = casino.chooseCardGame(cardGame, player.getId());
 
-        Assert.assertEquals(expected, actual);
-    }*/
+        Assert.assertEquals(true, expected.equals(actual));
+    }
+
+    //fix test
+    @Test
+    public void chooseGoldFishCardGameTest() {
+        Profile player = new Profile(playerName1, intialBalance1, 5);
+        String cardGame = "Gold Fish";
+        casino.createProfile(player);
+
+        Profile profile = casino.getProfileById(player.getId());
+        BlackJackPlayer blackJackPlayer = new BlackJackPlayer(profile);
+
+        CardGame expected = new BlackJackGame(blackJackPlayer);
+        CardGame actual = casino.chooseCardGame(cardGame, player.getId());
+
+        Assert.assertEquals(true, expected.equals(actual));
+    }
 
     @Test
     public void chooseDiceGame() {
@@ -77,7 +93,7 @@ public class HouseTest {
         Profile actual = casino.getProfileById(1);
         Assert.assertEquals(expexted, actual);
     }
-
+// test needs to be fixed not sure the issue
     @Test
     public void createPlayerTest() {
         Profile user = new Profile("Tim", 100.0, 5);
@@ -86,7 +102,7 @@ public class HouseTest {
         Player expected = new Player(user);
         Player actual = casino.getPlayerById(5);
 
-        assertEquals(true, expected.equals(actual));
+        Assert.assertEquals(true, expected.equals(actual));
     }
 
 
@@ -114,6 +130,7 @@ public class HouseTest {
         Assert.assertEquals(expected, actual);
 
     }
+    // test needs to be fixed not sure the issue
     @Test
     public void removePlayerTest() {
         Profile user = new Profile("Tim", 100.0, 2);

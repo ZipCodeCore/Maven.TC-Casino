@@ -4,6 +4,7 @@ import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.Game;
 import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackGame;
 import io.zipcoder.casino.Game.cardGame.CardGame;
+import io.zipcoder.casino.Game.diceGame.Craps.CrapsGame;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
 
 import java.util.ArrayList;
@@ -38,14 +39,25 @@ public class House implements MainMenu {
 
         Player player = getPlayerById(id);
 
-        if (cardGame.equals("Black Jack")) {
+        if (cardGame.equalsIgnoreCase("Black Jack")) {
             BlackJackGame blackjack = new BlackJackGame(player);
+            return blackjack;
+        } else if (cardGame.equalsIgnoreCase("Gold Fish")) {
+            BlackJackGame goldFish = new BlackJackGame(player);
+            return goldFish;
         }
 
         return null;
     }
 
-    public DiceGame chooseDiceGame(String game) {
+    public DiceGame chooseDiceGame(String diceGame, int id) {
+        Player player = getPlayerById(id);
+        if (diceGame.equalsIgnoreCase("Craps")) {
+            //Craps game needs to take in a player
+//            CrapsGame craps = new CrapsGame(Player);
+//            return craps;
+        }
+
         return null;
     }
 
@@ -87,14 +99,14 @@ public class House implements MainMenu {
     }
 
     public void removeProfile(int id) {
-      profiles.remove(id);
-      Console.print("Profle was removed");
+        profiles.remove(id);
+        Console.print("Profle was removed");
     }
 
     @Override
     public void removePlayer(int id) {
-     mapOfPlayers.remove(id);
-     Console.print("Player was Removed");
+        mapOfPlayers.remove(id);
+        Console.print("Player was Removed");
     }
 
 
