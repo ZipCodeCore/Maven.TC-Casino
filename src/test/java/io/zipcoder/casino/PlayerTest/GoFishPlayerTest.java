@@ -7,7 +7,7 @@ import org.junit.Test;
 
 
 public class GoFishPlayerTest {
-    
+
     @Test
     public void constructorTest() {
         String expectedName = "Bob";
