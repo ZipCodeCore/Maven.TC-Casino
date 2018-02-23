@@ -17,7 +17,7 @@ public class CardPlayer extends Player {
 
     public CardPlayer(Profile someProfile) {
         super(someProfile);
-        
+
 
     }
 
