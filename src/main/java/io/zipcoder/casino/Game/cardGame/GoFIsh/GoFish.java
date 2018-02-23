@@ -22,15 +22,15 @@ public class GoFish extends CardGame implements Game {
 
     public GoFish(Profile userProfile) {
         GoFishPlayer user = new GoFishPlayer(userProfile);
-        Player dealer = new GoFishPlayer(House.HOUSE_PROFILE);
+        GoFishPlayer dealer = new GoFishPlayer(House.HOUSE_PROFILE);
         goFishDeck = new Deck();
-        dealerHand = new Hand();
-        userHand= new Hand();
+        //dealerHand = new Hand();
+        //userHand= new Hand();
     }
 
    public void deal() {
         for(int i=0;i<7;i++){
-            dealerHand.addCard(goFishDeck.getCard());
+           // dealer..addCard(goFishDeck.getCard());
             userHand.addCard(goFishDeck.getCard());
         }
     }
@@ -42,10 +42,10 @@ public class GoFish extends CardGame implements Game {
     }
 
     public void transfer(Card card, Hand handTo, Hand handFrom) {
-        // while(handFrom.hasCard(card)){
-        // handTo.addCard(card);
-        // handFrom.remove(card);
-        //}
+        /* while(handFrom.hasCard(card)){
+         handTo.addCard(card);
+         handFrom.remove(card);
+        }
 
     }
 
