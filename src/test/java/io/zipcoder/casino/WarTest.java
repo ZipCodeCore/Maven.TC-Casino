@@ -3,9 +3,13 @@ package io.zipcoder.casino;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 public class WarTest {
+
+    public static void main(String[] args) {
+        Person player = new Person();
+        War war = new War(player);
+        war.start();
+    }
 
     @Test
     public void checkNumberOfCards() {
