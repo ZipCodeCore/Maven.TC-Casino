@@ -17,6 +17,7 @@ public class GoFish extends CardGame implements Game {
     private GoFishPlayer dealer;
 
     public GoFish(Profile userProfile) {
+
         user = new GoFishPlayer(userProfile);
         dealer = new GoFishPlayer(House.HOUSE_PROFILE);
         goFishDeck = new Deck();

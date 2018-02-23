@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GoFishPlayer extends CardPlayer {
-
-
     private HashMap<Card, Integer>books;
     private Hand gfHand;
 
