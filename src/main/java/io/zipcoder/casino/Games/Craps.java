@@ -1,11 +1,12 @@
 package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.InputOutput.InputOutput;
+import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.CrapsPlayer;
 
 
-public class Craps extends Dice {
-CrapsPlayer crapsPlayer = new CrapsPlayer();
+public class Craps extends Dice implements Game{
+//CrapsPlayer crapsPlayer = new CrapsPlayer();
 InputOutput inputOutput = new InputOutput();
 
 
@@ -35,10 +36,12 @@ public String passLineBetRollNonWinLoseNumber(){
 }
 
 public void startGame(){
-    //Start game
 
 }
 
+public void endGame(){
+    System.out.println("Wasn't that fun?");
+}
 public void playDifferentGame(){
     //end game and go to different menu
 }

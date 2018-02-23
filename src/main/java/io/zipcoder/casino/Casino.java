@@ -1,7 +1,12 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.Games.Blackjack;
+import io.zipcoder.casino.Games.Craps;
+import io.zipcoder.casino.Games.GoFish;
+import io.zipcoder.casino.Games.War;
 import io.zipcoder.casino.InputOutput.InputOutput;
+import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.Player;
 import java.util.ArrayList;
 
@@ -10,7 +15,7 @@ public class Casino {
 
     InputOutput inputOutput = new InputOutput();
     Player player;
-
+    private boolean isPlaying = true;
 
     protected String askUserName(){
         //String name = inputOutput.promptForString("Hello Player! What is your name?");
@@ -43,23 +48,45 @@ public class Casino {
         }
     }
 
+    protected void initiateGame() {
+        do {
+            String selectedGame = inputOutput.availableGames(this.player);
+            if(selectedGame.equals("Exit")){
+                continue;
+            } else {
+                selectGame(selectedGame).startGame();
 
-    protected void showMainMenu() {
-
-        if(player.getAge() > 21) {
-           Integer number =  inputOutput.displayOver21Menu();
-           String selectedGame = inputOutput.under21Games.get(number -1);
-
-
-        } else {
-            String selectedGame = inputOutput.displayUnder21Menu();
+            }
         }
+        while(isPlaying);
     }
 
+    protected Game selectGame(String selectedGame) {
+        Game game;
+
+        switch (selectedGame) {
+            case "War":
+                game = new War();
+                break;
+            case "Go Fish":
+                game = new GoFish();
+                break;
+            case "BlackJack":
+                game = new Blackjack();
+                break;
+
+            case "Craps":
+                game = new Craps();
+                break;
+            case "Exit":
+                isPlaying = false;
+        }
+        return game;
+    }
 
     protected void start() {
         this.setUpUserProfile();
-        this.showMainMenu();
+        this.initiateGame();
     }
 }
 

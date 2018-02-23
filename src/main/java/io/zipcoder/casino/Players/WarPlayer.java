@@ -20,7 +20,7 @@ public class WarPlayer extends Player {
     }
 
     public void setCurrentHand(Card card) {
-        currentHand = new ArrayList<>();
+        //currentHand = new ArrayList<>();
         currentHand.add(card);
     }
 
