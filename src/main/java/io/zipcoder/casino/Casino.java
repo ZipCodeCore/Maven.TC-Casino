@@ -24,22 +24,25 @@ public class Casino {
     }
 
     protected Integer askUserBalance(){
+
         Integer balance = inputOutput.promptForInt("How much do you want to gamble with?");
+
         return balance;
     }
+    
 
     protected void setUpUserProfile(){
         String name = this.askUserName();
         Integer age = this.askUserAge();
 
         if(age > 21) {
-           Integer balance = this.askUserBalance();
-           player = new Player(name, age, balance);
-
+            Integer balance = this.askUserBalance();
+            player = new Player(name, age, balance);
         } else{
             player = new Player(name, age);
         }
     }
+
 
     protected void showMainMenu() {
 
@@ -52,6 +55,7 @@ public class Casino {
             String selectedGame = inputOutput.displayUnder21Menu();
         }
     }
+
 
     protected void start() {
         this.setUpUserProfile();

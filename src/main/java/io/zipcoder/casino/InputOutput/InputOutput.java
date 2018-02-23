@@ -15,6 +15,7 @@ public class InputOutput {
         return stringReturn;
     }
 
+
     public Integer scanForInt(){
         return Integer.parseInt(scanForString());
     }
@@ -32,38 +33,24 @@ public class InputOutput {
 
         return number;
     }
-    public String displayUnder21Menu(){
+    public String displayUnder21Menu() {
         //ArrayList<String> under21Games = new ArrayList<String>();
         under21Games.add("War");
         under21Games.add("Go Fish");
-        return  null;
+        return null;
     }
 
 
-    /*public String promptForString(String message) {
+
+
+    public String promptForString(String message) {
+
         System.out.println(message);
         return scanForString();
     }
-*/
+
     public int promptForInt(String message) {
         System.out.println(message);
         return scanForInt();
     }
-
-
-
-
-
-    //generic methods
-    //method for menus
-    //create line breaks
-    //validate user input
-
-
-//    public static void main(String[] args) {
-//        InputOutput io = new InputOutput();
-//        System.out.println("Enter your name");
-//        String name = io.scanForString();
-//        System.out.println(name);
-//    }
 }
