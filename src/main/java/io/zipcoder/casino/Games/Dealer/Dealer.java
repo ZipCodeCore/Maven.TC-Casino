@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class Dealer {
     private ArrayList<BlackjackCard> hand;
 
+    public Dealer(){
+        hand = new ArrayList<BlackjackCard>();
+    }
+
     public void setHand(ArrayList<BlackjackCard> hand){
         this.hand = hand;
     }

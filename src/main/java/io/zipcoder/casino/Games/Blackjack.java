@@ -40,17 +40,33 @@ public class Blackjack {
         this.deck.deck.remove(0);
     }
 
+    public void dealToDealer(){
+        BlackjackCard temp = this.deck.deck.get(0);
+        this.bkjkDealer.addToHand(temp);
+        this.deck.deck.remove(0);
+    }
+
     public void initialHand(BlackjackPlayer... blackjackPlayers){
         for (BlackjackPlayer thisPlayer:blackjackPlayers) {
             this.deal(thisPlayer);
             this.deal(thisPlayer);
         }
+        this.dealToDealer();
     }
 
     public boolean bustCheck(BlackjackPlayer currentPlayer){
         Integer handValue = currentPlayer.getHandValue();
         if (handValue > 21) return true;
         return false;
+    }
+
+    public boolean dealerHitCheck(){
+        if (this.bkjkDealer.getHandValue() < 17) return true;
+        return false;
+    }
+
+    public void dealerTurn(){
+        
     }
 
 }

@@ -45,6 +45,14 @@ public class BlackjackTest {
     }
 
     @Test
+    public void initialHandDealerTest(){
+        Card expected = game.deck.deck.get(2);
+        game.initialHand(sueBKJK);
+        Card actual = game.bkjkDealer.getHand().get(0);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void initialHandWithMultiplePlayersTest(){
         Player jim = new Player("jim", 38, 300);
         BlackjackPlayer jimBKJK = new BlackjackPlayer(jim);
@@ -71,6 +79,13 @@ public class BlackjackTest {
         temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
         sueBKJK.setHand(temp);
         Assert.assertFalse(game.bustCheck(sueBKJK));
+    }
+
+    @Test
+    public void dealerHitCheck(){
+        game.initialHand(sueBKJK);
+        boolean expected = game.dealerHitCheck();
+        Assert.assertTrue(expected);
     }
 
     @Test
