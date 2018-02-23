@@ -1,30 +1,33 @@
 package io.zipcoder.casino.Game.cardGame.utilities;
 
-import javax.smartcardio.Card;
+
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Card>cards;
-
+    private ArrayList<Card>hand;
 
     public Hand(ArrayList<Card> cards) {
-        this.cards = cards;
+        this.hand = cards;
     }
 
     public void addCard(Card card){
-        cards.add(card);
+        hand.add(card);
 
     }
     public void removeCard(Card card){
-        cards.remove(card);
+        hand.remove(card);
     }
 
     public void clear(){
-        cards.clear();
-
+        hand.clear();
     }
 
-    public boolean hasCard(Card card){
-        return true;
+    public boolean hasCard(Card thisCard){
+
+        if (hand.contains(thisCard)) {
+            return true;
+        }
+        return false;
     }
+
 }
