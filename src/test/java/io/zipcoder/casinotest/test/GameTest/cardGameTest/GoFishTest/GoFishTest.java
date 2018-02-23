@@ -24,7 +24,7 @@ public class GoFishTest {
 
 
 
-    @Test
+   /* @Test
     public void testDeal() {
         Map<Player, ArrayList<Card>>testCardsAtHand = new HashMap<>();
         ArrayList<Card> testDealerCards= new ArrayList<Card>();
@@ -52,12 +52,10 @@ public class GoFishTest {
 
 
 
-    }
+    }*/
 
-    @Test
+   @Test
     public void testAsk(){
-
-        boolean
 
 
     }
@@ -70,7 +68,7 @@ public class GoFishTest {
         testFrom.add(card);
         int expected = 1;
 
-        GoFish testGoFish = new GoFish();
+        //GoFish testGoFish = new GoFish();
         //testGoFish.transfer(card,testTo,testFrom);
 
         int actual = testTo.size();
@@ -78,7 +76,7 @@ public class GoFishTest {
 
 
     }
-   /* @Test
+    @Test
     public void testDrawCard(Player player){
 
 
@@ -86,6 +84,6 @@ public class GoFishTest {
     @Test
     public void testPassTurn(Player player1,Player player2){
 
-    }*/
+    }
 
 }

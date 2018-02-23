@@ -1,7 +1,7 @@
 package io.zipcoder.casino;
 
 
-public enum BlackJackChoices {
+/*public enum BlackJackChoices {
     Hit("Say hit to hit");
 
 
@@ -13,4 +13,4 @@ public enum BlackJackChoices {
     public String getGrahicalRepresentation() {
         return null;
     }
-}
+}*/
