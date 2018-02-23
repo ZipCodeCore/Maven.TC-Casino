@@ -11,7 +11,7 @@ public class GoFishPlayerTest {
 
     @Before
     public void setUp() {
-        testProfile = new Profile("Kibret",5000,1);
+        testProfile = new Profile("Kibret",5000,0);
         testGoFishPlayer = new GoFishPlayer(testProfile);
 
 
