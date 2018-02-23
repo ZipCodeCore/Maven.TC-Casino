@@ -29,15 +29,15 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
         this.isBusted = isBusted;
     }
 
-    public void bet(double amount) {
+    public void bet(String typeOfBet, double amount) {
 
     }
 
-    public void win(double payoutMultiplier) {
+    public void win(String typeOfBet, double payoutMultiplier) {
 
     }
 
-    public void lose() {
+    public void lose(String typeOfBet) {
 
     }
 
