@@ -26,11 +26,24 @@ public class Casino {
 
     public void gameLobby() {
         do {
-            String prompt = "Welcome to High Rollers Club!\n" +
-                    "As a welcome gift, here's 500 chips ($2500)\n" +
-                    "Please choose a game to play\n(Enter a number for your selection)\n\n" +
-                    "\t1. Black Jack\n\t2. Crazy 8's\n\t3. Ceelo\n\t4. Roulette\n\t5. EXIT";
-
+            String prompt =
+                            "**** WELCOME TO HIGH ROLLERS CLUB ****\n" +
+                            "*                                    *\n" +
+                            "*                                    *\n" +
+                            "* Here's 500 chips as a welcome gift!*\n" +
+                            "*              ($2500)               *\n" +
+                            "*                                    *\n" +
+                            "**************************************\n" +
+                            "*                                    *\n" +
+                            "*       Please choose a game:        *\n" +
+                            "*       1. Black Jack                *\n" +
+                            "*       2. Crazy Eights              *\n" +
+                            "*       3. CeeLo                     *\n" +
+                            "*       4. Roulette                  *\n" +
+                            "*                                    *\n" +
+                            "*       PRESS 5 TO EXIT              *\n" +
+                            "*                                    *\n" +
+                            "**************************************\n";
             answer = IOHandler.promptForIntWithMessage(prompt);
 
                 changeGameState(answer).play(player);

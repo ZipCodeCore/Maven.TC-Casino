@@ -25,16 +25,30 @@ public class CrazyEights implements Game {
     public void intro() {
 
     do {
-        String intro = "Welcome to Crazy Eights!\n" +
-                "Press ANY KEY to start the game.\n" +
-                "Or type EXIT to exit";
+        String intro =
+                "****** WELCOME TO CRAZY EIGHTS! ******\n" +
+                "*                                    *\n" +
+                "*                                    *\n" +
+                "* This is a non-gambling game so,    *\n" +
+                "*       Hold on to your chips!!      *\n" +
+                "*                                    *\n" +
+                "*                                    *\n" +
+                "**************************************\n" +
+                "*                                    *\n" +
+                "*        Press 'Y' to PLAY           *\n" +
+                "*        Press 'Q' to QUIT           *\n" +
+                "*        Press 'R' for RULES         *\n" +
+                "*                                    *\n" +
+                "**************************************\n";
         answer = IOHandler.promptForStringWithMessage(intro);
-    if(answer.equalsIgnoreCase("exit")){
+    if(answer.equalsIgnoreCase("q")){
         continue;
-    }
+    }else if(answer.equalsIgnoreCase("r")){
+        IOHandler.printMessage(IOHandler.getMessageFromFile("CrazyEights.txt"));
+    }else
         beginGame();
     }
-    while(!answer.equalsIgnoreCase("exit"));
+    while(!answer.equalsIgnoreCase("q"));
     }
 
     public void beginGame() {
