@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Hand {
     private ArrayList<Card>hand;
 
-    public Hand(ArrayList<Card> cards) {
-        this.hand = cards;
+    public Hand() {
+        hand = new ArrayList<>();
     }
 
     public void addCard(Card card){
@@ -33,6 +33,8 @@ public class Hand {
     public ArrayList<Card> getHand() {
         return hand;
     }
+
+
 
 
 
