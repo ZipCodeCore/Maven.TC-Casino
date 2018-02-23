@@ -5,26 +5,39 @@ import java.util.Scanner;
 
 public class InputOutput {
     Scanner input = new Scanner(System.in);
+    public ArrayList<String> under21Games = new ArrayList<String>();
 
     //MUST INSTANTIATE IN CASINO
 
     public String scanForString() {
-        String stringReturn = new String();
-        if (input.hasNext()) {
-            stringReturn = input.nextLine();
-        }
+        String stringReturn = input.nextLine();
+
         return stringReturn;
     }
+
 
     public Integer scanForInt() {
         return Integer.parseInt(scanForString());
     }
 
-    public ArrayList displayOver21Menu() {
-        return null;
-    }
 
-    public ArrayList displayUnder21Menu() {
+    public Integer displayOver21Menu(){
+        InputOutput inputOutput = new InputOutput();
+        ArrayList<String> over21Games = new ArrayList<String>();
+        over21Games.add("War");
+        over21Games.add("Go Fish");
+        over21Games.add("BlackJack");
+        over21Games.add("Craps");
+
+        StringBuilder displayOver21Games = new StringBuilder();
+        Integer number = inputOutput.promptForInt("Please enter in a number between 1-4 to select a game");
+
+        return number;
+    }
+    public String displayUnder21Menu() {
+        //ArrayList<String> under21Games = new ArrayList<String>();
+        under21Games.add("War");
+        under21Games.add("Go Fish");
         return null;
     }
 
@@ -34,10 +47,11 @@ public class InputOutput {
         return s;
     }
 
-    public int promptInt(String message) {
+    public int promptForInt(String message) {
         System.out.println(message);
         return scanForInt();
     }
+
 
 
     //generic methods
