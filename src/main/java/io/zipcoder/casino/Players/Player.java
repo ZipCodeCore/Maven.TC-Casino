@@ -45,5 +45,5 @@ public class Player {
     public Integer getBalance() {
         return wallet.getBalance();
     }
-    
+
 }

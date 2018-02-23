@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class BlackjackTest {
 
     Player sue = new Player("sue", 30, 1000);
@@ -56,11 +58,6 @@ public class BlackjackTest {
 
     @Test
     public void startTest() {
-
-    }
-
-    @Test
-    public void getHandValueTest() {
 
     }
 

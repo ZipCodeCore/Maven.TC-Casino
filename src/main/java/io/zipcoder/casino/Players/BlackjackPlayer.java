@@ -36,4 +36,13 @@ public class BlackjackPlayer extends Player{
     public boolean isCanHit() {
         return canHit;
     }
+
+    public Integer getHandValue(){
+        Integer handValue = 0;
+        for (Card card:hand) {
+            handValue += card.getRankEnum().getRankValue();
+        }
+        return handValue;
+    }
+
 }

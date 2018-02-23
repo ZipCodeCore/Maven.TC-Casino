@@ -52,4 +52,17 @@ public class BlackjackPlayerTest {
         Assert.assertEquals(expected, acual);
     }
 
+    @Test
+    public void getHandValueTest() {
+        Integer expected = 5;
+        Card two = new Card(Rank.TWO, Suit.HEARTS);
+        Card three = new Card(Rank.THREE, Suit.CLUBS);
+        ArrayList<Card> tempHand = new ArrayList();
+        tempHand.add(three);
+        tempHand.add(two);
+        suebkjk.setHand(tempHand);
+        Integer actual = suebkjk.getHandValue();
+        Assert.assertEquals(expected, actual);
+    }
+
 }
