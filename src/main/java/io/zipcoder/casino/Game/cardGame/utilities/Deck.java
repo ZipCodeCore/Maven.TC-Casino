@@ -11,6 +11,7 @@ public class Deck {
 
     public Deck() {
         fillDeck();
+        shuffle();
     }
 
     public void fillDeck() {

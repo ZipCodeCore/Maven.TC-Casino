@@ -14,18 +14,18 @@ public enum CardRank {
     JACK(10),
     QUEEN(10),
     KING(10),
-    ACE(1, 11);
+    ACE(11);
 
-    private Integer cardValue2;
+//    private Integer cardValue2;
     private int cardValue;
 
-    CardRank(int value, Integer value2) {
-        this.cardValue = value;
-        this.cardValue2 = value2;
-    }
+//    CardRank(int value, Integer value2) {
+//        this.cardValue = value;
+//        this.cardValue2 = value2;
+//    }
 
     CardRank(int value) {
-        this(value, null);
+        this.cardValue = value;
     }
 
     public int getCardValue() {
