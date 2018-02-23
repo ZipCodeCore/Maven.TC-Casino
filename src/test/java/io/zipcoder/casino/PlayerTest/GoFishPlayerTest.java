@@ -12,17 +12,17 @@ public class GoFishPlayerTest {
     public void constructorTest() {
         String expectedName = "Bob";
         Integer expectedAge = 24;
-        Double expectedBalance = 50.00;
+        Integer expectedBalance = 50;
 
-        Player player1 = new Player(expectedName, expectedAge, expectedBalance);
+      Player player1 = new Player(expectedName, expectedAge, expectedBalance);
         Player goFishPlayer1 = new GoFishPlayer(player1);
 
         String actualName = goFishPlayer1.getName();
         Integer actualAge = player1.getAge();
-        Double actualBalance = player1.getBalance();
+       Integer actualBalance = player1.getBalance();
 
         Assert.assertEquals(expectedName, actualName);
         Assert.assertEquals(expectedAge, actualAge);
-        Assert.assertEquals(expectedBalance, actualBalance);
+      Assert.assertEquals(expectedBalance, actualBalance);
     }
 }

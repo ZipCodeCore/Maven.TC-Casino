@@ -1,12 +1,18 @@
 package io.zipcoder.casino.Games;
 
+import java.util.Random;
+
 public class Dice {
 
     private Integer dice1;
     private Integer dice2;
+    // static final Integer SEED = 3900;
 
     public Integer rollDice(){
-        return 0;
+        Random  dice1 = new Random();
+        Random  dice2 = new Random();
+         Integer diceRoll = (dice1.nextInt(6)+1) + dice1.nextInt(6)+1;
+        return diceRoll;
     }
 
     public void setDice1() {

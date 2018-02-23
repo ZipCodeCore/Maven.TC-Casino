@@ -18,12 +18,12 @@ public class Casino {
     }
 
     protected Integer askUserAge(){
-        Integer age = inputOutput.promptInt("How old are you?");
+        Integer age = inputOutput.promptForInt("How old are you?");
         return age;
     }
 
     protected Integer askUserBalance(){
-        Integer balance = inputOutput.promptInteger("How much do you want to gamble with?");
+        Integer balance = inputOutput.promptForInt("How much do you want to gamble with?");
         return balance;
     }
 
@@ -41,11 +41,14 @@ public class Casino {
     }
 
     protected void showMainMenu() {
-       ArrayList selectedGame;
+
         if(player.getAge() > 21) {
-            selectedGame = inputOutput.displayOver21Menu();
+           Integer number =  inputOutput.displayOver21Menu();
+           String selectedGame = inputOutput.under21Games.get(number -1);
+
+
         } else {
-            selectedGame = inputOutput.displayUnder21Menu();
+            String selectedGame = inputOutput.displayUnder21Menu();
         }
     }
 
