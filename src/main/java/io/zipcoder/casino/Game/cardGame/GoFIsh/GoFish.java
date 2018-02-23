@@ -30,7 +30,7 @@ public class GoFish extends CardGame implements Game {
 
    public void deal() {
         for(int i=0;i<7;i++){
-           // dealer..addCard(goFishDeck.getCard());
+            dealerHand.addCard(goFishDeck.getCard());
             userHand.addCard(goFishDeck.getCard());
         }
     }
