@@ -2,8 +2,8 @@ package io.zipcoder.casino;
 
 public interface Gambler{
 
-    public void bet(double amount);
-    public void win(double payoutMultiplier);
-    public void lose();
+    public void bet(String typeOfBet, double amount);
+    public void win(String typeOfBet, double payoutMultiplier);
+    public void lose(String typeOfBet);
 
 }
