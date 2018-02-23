@@ -6,6 +6,7 @@ import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
 import io.zipcoder.casino.Game.cardGame.utilities.Deck;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
+import io.zipcoder.casino.House;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 
@@ -13,37 +14,24 @@ import java.util.*;
 
 public class GoFish extends CardGame implements Game {
 
-
-    private Player goFishPlayer;
-    private Player dealer;
-    private Profile playerProfile;
-    private Profile dealerProfile;
-    private Hand playerHand;
     private Hand dealerHand;
+    private Profile theHouse;
+    private Player dealer;
 
-    public GoFish(GoFishPlayer goFishPlayer) {
-        dealerProfile = new Profile("DealerName", 0, 0);
-        dealer = new GoFishPlayer(dealerProfile);
-        this.goFishPlayer = goFishPlayer;
-
+    public GoFish(Profile userProfile) {
+        GoFishPlayer user = new GoFishPlayer(userProfile);
+        this.theHouse = new Profile("Dealer", 0, 1);
+        Player dealer = new GoFishPlayer(theHouse);
+        Deck goFishDeck = new Deck();
     }
 
-    public GoFish() {
+    public void deal(Deck deckOfCards, Player user, Player dealer) {
+        for(int i=0;i<7;i++){
 
-    }
-
-    public void deal(Deck deckOfCards, Player player1, Player dealer) {
-
-        deckOfCards.fillDeck();
-        deckOfCards.shuffle();
-        this.goFishPlayer=player1;
-        this.dealer=dealer;
-        for (int i = 0; i < 7; i++) {
-               // playerHand.add(deckOfCards.getCard());
-               // dealerHand.addCard(deckOfCards.getCard());
         }
 
     }
+
 
     public boolean ask(Card card) {
 
@@ -51,15 +39,15 @@ public class GoFish extends CardGame implements Game {
     }
 
     public void transfer(Card card, Hand handTo, Hand handFrom) {
-       // while(handFrom.hasCard(card)){
-           // handTo.addCard(card);
-           // handFrom.remove(card);
+        // while(handFrom.hasCard(card)){
+        // handTo.addCard(card);
+        // handFrom.remove(card);
         //}
 
     }
 
-    public void drawCard(Player player,Card card) {
-       // .get(player).add(card);
+    public void drawCard(Player player, Card card) {
+        // .get(player).add(card);
 
 
     }
@@ -69,7 +57,7 @@ public class GoFish extends CardGame implements Game {
 
     protected boolean add(Player player, Card card) {
         if (hasEntry(player)) {
-           // getCards(player).add(card);
+            // getCards(player).add(card);
             return true;
 
         } else {
@@ -80,12 +68,13 @@ public class GoFish extends CardGame implements Game {
 
         return true;
     }
-    protected boolean hasEntry(Player player){
-       // if(cardsAtHand.containsKey(player)){
-            return true;
-        }
-        //return false;
-   // }
+
+    protected boolean hasEntry(Player player) {
+        // if(cardsAtHand.containsKey(player)){
+        return true;
+    }
+    //return false;
+    // }
 
 
 }
