@@ -14,12 +14,12 @@ public class CrapsGameTest {
 
     CrapsGame testGame;
     Profile stinkyProfile = new Profile("Stinky Pete", 100000, 1);
-    Player stinkyPete = new CrapsPlayer(stinkyProfile);
+    Player stinkyPete = new Player(stinkyProfile);
 
 
     @Before
     public void setup(){
-        testGame = new CrapsGame();
+        testGame = new CrapsGame(stinkyPete);
         testGame.startGame();
     }
 
@@ -36,6 +36,7 @@ public class CrapsGameTest {
         expectedPoints.add(8);
         expectedPoints.add(9);
         expectedPoints.add(10);
+        //testGame.comeOutPhase();
 
         int actualPoint = testGame.getPoint();
 
