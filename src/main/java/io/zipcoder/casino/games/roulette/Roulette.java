@@ -64,8 +64,8 @@ public class Roulette {
                         case 1:
                             singleNumberSelection.add(prompts.singleNumberPrompt());
                             bettingMap.put("Single number", singleNumberSelection);
-                            Integer multiplier = 35;
-
+                            break;
+                            case 2
                     }
                     betCounter++;
                 }
