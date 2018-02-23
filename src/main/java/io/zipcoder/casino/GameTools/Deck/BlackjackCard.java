@@ -1,17 +1,14 @@
 package io.zipcoder.casino.GameTools.Deck;
 
-public class Card {
-    private Suit suitEnum;
-    private Rank rankEnum;
+import io.zipcoder.casino.Games.Blackjack;
 
-    public Card(Rank rankEnum, Suit suitEnum) {
+public class BlackjackCard extends Card{
+    private Suit suitEnum;
+    private BlackjackRank rankEnum;
+
+    public BlackjackCard(BlackjackRank rankEnum, Suit suitEnum) {
         this.rankEnum = rankEnum;
         this.suitEnum = suitEnum;
-    }
-
-    public Card(){
-        this.rankEnum = null;
-        this.suitEnum = null;
     }
 
     public Suit getSuitEnum() {
@@ -22,11 +19,11 @@ public class Card {
         this.suitEnum = suitEnum;
     }
 
-    public Rank getRankEnum() {
+    public BlackjackRank getBlackjackRankEnum() {
         return rankEnum;
     }
 
-    public void setRankEnum(Rank rankEnum) {
+    public void setRankEnum(BlackjackRank rankEnum) {
         this.rankEnum = rankEnum;
     }
 }

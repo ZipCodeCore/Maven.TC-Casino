@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Games;
 
 
+import io.zipcoder.casino.GameTools.Deck.BlackjackDeck;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
 import io.zipcoder.casino.Games.Dealer.Dealer;
@@ -12,12 +13,12 @@ import java.util.ArrayList;
 public class Blackjack {
 
     protected ArrayList<BlackjackPlayer> playerList;
-    protected Deck deck;
+    protected BlackjackDeck deck;
     protected Dealer bkjkDealer;
 
 
     Blackjack(Player... players){
-        deck = new Deck();
+        deck = new BlackjackDeck();
         bkjkDealer = new Dealer();
         playerList = new ArrayList<BlackjackPlayer>();
         for (Player rootPlayer:players) {
