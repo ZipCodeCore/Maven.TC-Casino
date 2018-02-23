@@ -2,15 +2,24 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
+import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.Player;
 import io.zipcoder.casino.Players.WarPlayer;
 
-public class War {
+public class War implements Game{
 
    private Integer playerPoints;
    private Integer computerPoints;
    private WarPlayer player = new WarPlayer();
    private Deck deck = new Deck();
+
+    public void startGame(){
+
+    }
+
+    public void endGame(){
+
+    }
 
     public void shuffle() {
         deck.shuffleDeck();

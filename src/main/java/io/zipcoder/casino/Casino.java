@@ -62,7 +62,7 @@ public class Casino {
     }
 
     protected Game selectGame(String selectedGame) {
-        Game game;
+        Game game = null;
 
         switch (selectedGame) {
             case "War":

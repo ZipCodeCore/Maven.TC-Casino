@@ -4,19 +4,27 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
 import io.zipcoder.casino.Games.Dealer.Dealer;
+import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
 
 import java.util.ArrayList;
 
-public class Blackjack {
+public class Blackjack implements Game{
 
     protected ArrayList<BlackjackPlayer> playerList;
     protected Deck deck;
     protected Dealer bkjkDealer;
 
+    public void startGame(){
 
-    Blackjack(Player... players){
+    }
+
+    public void endGame(){
+
+    }
+
+    public Blackjack(Player... players){
         deck = new Deck();
         bkjkDealer = new Dealer();
         playerList = new ArrayList<BlackjackPlayer>();

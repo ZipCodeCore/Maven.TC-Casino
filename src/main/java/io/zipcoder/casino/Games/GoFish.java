@@ -3,16 +3,25 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
+import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.Players.Player;
 
 import java.util.*;
 
-public class GoFish {
+public class GoFish implements Game{
     Queue<Card> stockPile;
     private List<Card> cardHand;
     ArrayList<Player> players;
 
+
+    public void startGame(){
+
+    }
+
+    public void endGame(){
+
+    }
 
     public void play() {
         Player rootPlayer = new Player("Bob", 45, 100);
