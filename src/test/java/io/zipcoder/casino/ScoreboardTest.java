@@ -159,20 +159,24 @@ public class ScoreboardTest {
 
 
     @Test
-    public void displaySingleGameTest() {
-
-    }
-
-    @Test
-    public void displayRunningGameTallyTest(){
+    public void displayScoreboardSingleGameTest() {
         Scoreboard board = new Scoreboard();
         board.addPlayer(person1);
+        board.addPlayer(person2);
         board.updateScore(person1, 7);
-        board.displayRunningGameTally();
-        String actual = board.displayRunningGameTally();
-        System.out.println(actual);
-
-
+        board.updateScore(person2, 9);
+        System.out.println(board.displayScoreboardSingleGame());
     }
+
+/*    @Test
+    public void displayRunningGameTallyTest() {
+        Scoreboard board = new Scoreboard();
+        board.addPlayer(person1);
+        board.addPlayer(person2);
+        board.updateScore(person1, 7);
+        board.updateScore(person2, 9);
+        System.out.println(board.displayRunningGameTally());
+    }*/
+
 
 }

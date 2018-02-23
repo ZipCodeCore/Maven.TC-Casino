@@ -1,9 +1,6 @@
 package io.zipcoder.casino;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static sun.tools.jstat.Alignment.keySet;
 
@@ -81,28 +78,39 @@ public class Scoreboard {
 
 
     public String displayScoreboardSingleGame() {
-
+        String display = String.format("%-15s | %-10s\n", "Name", "Score");
+        display += "------------------------\n";
         for(Map.Entry<Person, Integer> entry: scoreboard.entrySet()) {
-
-       }
-        return null;
+            String name = entry.getKey().getName();
+            String score = entry.getValue().toString();
+            display += String.format("%-15s | ", name);
+            display += String.format("%-10s\n", score);
+        }
+        return display;
     }
 
-    public String displayRunningGameTally() {
+/*    public String displayRunningGameTally() {
         LinkedHashMap<Person, ArrayList<Integer>> runningTally = new LinkedHashMap<Person, ArrayList<Integer>>();
-        String display = String.format("%-20s | %-20s \n", "Name", "Game");
+        String tally = String.format("%-15s | %-10s \n", "Name", "Games");
+        tally += "---------------------------------------\n";
         for(Map.Entry<Person, Integer> entry: scoreboard.entrySet()) {
             for(Map.Entry<Person, ArrayList<Integer>> secondEntry: runningTally.entrySet()) {
-                if(entry.equals(secondEntry)) {
+                if(!(runningTally.containsKey(entry.getKey()))) {
+                    ArrayList<Integer> tallyList = new ArrayList<Integer>(Arrays.asList(entry.getValue()));
+                    runningTally.put(entry.getKey(), tallyList);
+                }
+                if((runningTally.containsKey(entry.getKey()))) {
                     secondEntry.getValue().add(entry.getValue());
                 }
             }
         }
         for(Map.Entry<Person, ArrayList<Integer>> secondEntry: runningTally.entrySet()) {
-            display += String.format("%-20s | %-20s \n", secondEntry.getKey(), secondEntry.getValue());
+            String key = secondEntry.getKey().getName();
+            tally += String.format("%-15s | \n", key);
         }
-        return display;
+        return tally;
     }
+    */
 
 
 }
