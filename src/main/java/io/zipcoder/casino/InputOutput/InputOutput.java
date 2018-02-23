@@ -28,7 +28,6 @@ public class InputOutput {
         return null;
     }
 
-
     public String promptForString(String message) {
         System.out.println(message);
         String s = scanForString();

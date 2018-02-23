@@ -9,7 +9,7 @@ public class GoFishTest {
     @Test
     public void dealTest() {
 
-        GoFish game = new GoFish();
+        //GoFish game = new GoFish();
         Player player1 = new Player();
         Player goFishPlayer1 = new GoFishPlayer(player1);
 
@@ -44,10 +44,7 @@ public class GoFishTest {
 
     @Test
     public void displayCardHandTest() {
-        GoFish game = new GoFish();
-        Player player1 = new Player();
-        Player goFishPlayer1 = new GoFishPlayer(player1);
-        game.deal();
+
 
     }
 
