@@ -1,6 +1,8 @@
 package io.zipcoder.casino.games.roulette;
 
-import io.zipcoder.casino.Player;
+
+import io.zipcoder.casino.core.Player;
+
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -65,7 +67,7 @@ public class Roulette {
                             singleNumberSelection.add(prompts.singleNumberPrompt());
                             bettingMap.put("Single number", singleNumberSelection);
                             break;
-                            case 2
+
                     }
                     betCounter++;
                 }

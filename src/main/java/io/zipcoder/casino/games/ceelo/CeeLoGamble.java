@@ -1,4 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games.ceelo;
+
+import io.zipcoder.casino.interfaces.Gamble;
 
 /**
  * filename:
@@ -15,6 +17,7 @@ public class CeeLoGamble implements Gamble {
 
     /**
      * CeeLo bet is 'even money', a win pays out double the bet amount
+     *
      * @return double the bet amount
      */
     public long win() {
@@ -23,6 +26,7 @@ public class CeeLoGamble implements Gamble {
 
     /**
      * loss gets you nothing
+     *
      * @return 0 chips
      */
     public long lose() {
@@ -31,6 +35,7 @@ public class CeeLoGamble implements Gamble {
 
     /**
      * player tied the banker, return the bet amount
+     *
      * @return the number of chips originally bet
      */
     public long push() {

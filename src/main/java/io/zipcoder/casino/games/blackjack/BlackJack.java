@@ -1,7 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games.blackjack;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import io.zipcoder.casino.games.Deck;
 
 public class BlackJack {
 
@@ -14,51 +13,63 @@ public class BlackJack {
     private Deck dealerHand;
     private int insuranceBet;
 
-    public void cardEvaluation(){
+    public void cardEvaluation() {
 
     }
 
-    public void splitCards(){
-
-    }
-    public void putInsurance(){
-
-    }
-    public void playerHit(){
-
-    }
-    public void playerStand(){
-
-    }
-    public void tallyPlayerScore(){
+    public void splitCards() {
 
     }
 
-    public void tallyDealerScore(){
+    public void putInsurance() {
 
     }
-    public void playerDoubleDown(){
+
+    public void playerHit() {
 
     }
-    public void getTotal(){
+
+    public void playerStand() {
 
     }
-    public void checkHand(){
+
+    public void tallyPlayerScore() {
 
     }
-    public void isBlackJack(){
+
+    public void tallyDealerScore() {
 
     }
-    public void whoWon(){
+
+    public void playerDoubleDown() {
 
     }
-    public void bust(){
+
+    public void getTotal() {
 
     }
-    public void tie(){
+
+    public void checkHand() {
 
     }
-    public void wagerMultiplier(){
+
+    public void isBlackJack() {
+
+    }
+
+    public void whoWon() {
+
+    }
+
+    public void bust() {
+
+    }
+
+    public void tie() {
+
+    }
+
+    public void wagerMultiplier() {
 
     }
 }

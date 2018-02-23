@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games;
 
 /**
  * filename:
@@ -13,6 +13,18 @@ public class Card {
     public Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public Integer getIntValue() {
+        return rank.value;
     }
 
     @Override

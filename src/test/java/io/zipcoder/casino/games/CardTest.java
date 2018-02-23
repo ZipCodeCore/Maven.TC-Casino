@@ -1,4 +1,4 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.games;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +15,15 @@ public class CardTest {
         Card c = new Card(Rank.ACE, Suit.SPADES);
         String expected = "ACE of SPADES";
         String actual = c.toString();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetIntValue() {
+        Card c = new Card(Rank.ACE, Suit.SPADES);
+        int expected = 1;
+        int actual = c.getIntValue();
+
         Assert.assertEquals(expected, actual);
     }
 }
