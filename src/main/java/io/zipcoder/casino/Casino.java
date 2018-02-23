@@ -23,8 +23,17 @@ public class Casino {
     }
 
     protected Integer askUserBalance(){
-        Integer balance = inputOutput.promptInteger("How much do you want to gamble with?");
+        Integer balance = inputOutput.promptInt("How much do you want to gamble with?");
         return balance;
+    }
+
+    protected void showMainMenu() {
+        ArrayList selectedGame;
+        if(player.getAge() > 21) {
+            selectedGame = inputOutput.displayOver21Menu();
+        } else {
+            selectedGame = inputOutput.displayUnder21Menu();
+        }
     }
 
     protected void setUpUserProfile(){
@@ -32,20 +41,10 @@ public class Casino {
         Integer age = this.askUserAge();
 
         if(age > 21) {
-           Integer balance = this.askUserBalance();
-           player = new Player(name, age, balance);
-
+            Integer balance = this.askUserBalance();
+            player = new Player(name, age, balance);
         } else{
             player = new Player(name, age);
-        }
-    }
-
-    protected void showMainMenu() {
-       ArrayList selectedGame;
-        if(player.getAge() > 21) {
-            selectedGame = inputOutput.displayOver21Menu();
-        } else {
-            selectedGame = inputOutput.displayUnder21Menu();
         }
     }
 
