@@ -50,5 +50,4 @@ public class DiceManager {
         return sum;
     }
 
-
 }
