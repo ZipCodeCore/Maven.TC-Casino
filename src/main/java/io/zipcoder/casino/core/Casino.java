@@ -1,53 +1,68 @@
 package io.zipcoder.casino.core;
 
+import io.zipcoder.casino.games.blackjack.BlackJack;
+import io.zipcoder.casino.games.ceelo.CeeLoGamble;
+import io.zipcoder.casino.games.crazy8s.CrazyEights;
+import io.zipcoder.casino.games.roulette.Roulette;
 import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
 public class Casino {
-    int answer;
-    private Player player;
-    private Game running;
+    static int answer;
+    private static Player player;
+    private static Game currentGameRunning;
+    private boolean isPlaying = true;
 
     public Casino() {
         this.player = player;
         answer = 0;
     }
 
+
     public int getAnswer() {
 
         return answer;
     }
 
-    public void mainMenu() {
-        String prompt = "Welcome to High Rollers Club!\n" +
-                "As a welcome gift, here's 500 chips ($2500)\n" +
-                "Please choose a game to play\n(Enter a number for your selection)\n\n" +
-                "\t1. Black Jack\n\t2. Crazy 8's\n\t3. Ceelo\n\t4. Roulette\n\t\t5.EXIT";
-        answer = IOHandler.promptForIntWithMessage(prompt);
+    public void gameLobby() {
+        do {
+            String prompt = "Welcome to High Rollers Club!\n" +
+                    "As a welcome gift, here's 500 chips ($2500)\n" +
+                    "Please choose a game to play\n(Enter a number for your selection)\n\n" +
+                    "\t1. Black Jack\n\t2. Crazy 8's\n\t3. Ceelo\n\t4. Roulette\n\t5. EXIT";
+
+            answer = IOHandler.promptForIntWithMessage(prompt);
+
+                changeGameState(answer).play(player);
+        }
+        while (isPlaying);
     }
 
     public void enter() {
-        while (answer != 5) {
-            mainMenu();
+
+        gameLobby();
+    }
+
+    public Game changeGameState(int answer) {
 
             switch (answer) {
                 case 1:
-                    //running = new BlackJack();
+//                    currentGameRunning = new BlackJack();
                     break;
                 case 2:
-                    //running = new CrazyEights();
+                    currentGameRunning = new CrazyEights();
                     break;
                 case 3:
-                    //running= new CeeLo();
+//                    currentGameRunning = new CeeLoGamble();
                     break;
                 case 4:
-                    //running = new Roulette();
+//                    currentGameRunning = new Roulette();
                     break;
-
+                case 5:
+                    isPlaying = false;
             }
-
-            //running.play(player);
-        }
+        return currentGameRunning;
     }
+
 }
 
