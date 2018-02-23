@@ -78,6 +78,7 @@ public final class IOHandler {
         StringBuilder sb = new StringBuilder();
         for (T t : list) {
             sb.append(t.toString());
+            sb.append("\n");
         }
         return sb.toString();
     }
