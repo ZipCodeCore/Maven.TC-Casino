@@ -23,7 +23,7 @@ public class Blackjack implements Game{
     }
 
     public void endGame(){
-        
+
     }
 
     Blackjack(Player... players){
