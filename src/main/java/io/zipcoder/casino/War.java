@@ -27,23 +27,23 @@ public class War extends Game implements GameInterface, CardGameInterface {
     }
 
     public void beginRound() {
-        if (!(input.nextLine().equals("exit"))) {
-            System.out.println(dealer.getHand().getHandArrayList().size() != 0);
-            System.out.println(player.getHand().getHandArrayList().size() != 0);
-            
+        String playerInput = input.nextLine();
+        if (!(playerInput.equals("exit"))) {
             while ((dealer.getHand().getHandArrayList().size() != 0) && (player.getHand().getHandArrayList().size() != 0)) {
-                System.out.println(dealer.getHand().getHandArrayList().get(0));
                 playerPlayedCards.add(player.getHand().drawCardfromHand());
                 dealerPlayedCards.add(dealer.getHand().drawCardfromHand());
-                System.out.println("You played " + playerPlayedCards + "and the dealer played " + dealerPlayedCards);
+                System.out.println("You played " + playerPlayedCards + " and the dealer played " + dealerPlayedCards);
                 int winner = compareCards(playerPlayedCards.get(playerPlayedCards.size()-1), dealerPlayedCards.get(dealerPlayedCards.size()-1));
                 if (winner == 1) {
                     playerWins();
                 } else if (winner == 2) {
                     dealerWins();
                 }
+                String playerInputAgain = input.nextLine();
+                if (playerInputAgain.equals("exit")) {
+                    end();
+                }
             }
-
         } else {end();}
     }
 
@@ -97,7 +97,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
     }
 
     public void dealCards() {
-        for (int i = dealer.getHand().getHandArrayList().size()-1; i >= (dealer.getHand().getHandArrayList().size())/2; i--) {
+        for (int i = dealer.getHand().getHandArrayList().size()-1; i >= 26; i--) {
             player.getHand()
                     .getHandArrayList()
                     .add(dealer
