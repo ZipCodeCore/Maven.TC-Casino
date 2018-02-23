@@ -42,4 +42,29 @@ public class DealerTest {
         Integer actual = dealer.getHandValue();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void canHitPositiveTest(){
+        BlackjackCard two = new BlackjackCard(BlackjackRank.TWO, Suit.HEARTS);
+        BlackjackCard three = new BlackjackCard(BlackjackRank.THREE, Suit.CLUBS);
+        ArrayList<BlackjackCard> tempHand = new ArrayList<BlackjackCard>();
+        tempHand.add(three);
+        tempHand.add(two);
+        dealer.setHand(tempHand);
+        boolean actual = dealer.canHit();
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void canHitNegativeTest(){
+        BlackjackCard first = new BlackjackCard(BlackjackRank.KING, Suit.HEARTS);
+        BlackjackCard second = new BlackjackCard(BlackjackRank.KING, Suit.CLUBS);
+        ArrayList<BlackjackCard> tempHand = new ArrayList<BlackjackCard>();
+        tempHand.add(first);
+        tempHand.add(second);
+        dealer.setHand(tempHand);
+        boolean actual = dealer.canHit();
+        Assert.assertFalse(actual);
+    }
+
 }
