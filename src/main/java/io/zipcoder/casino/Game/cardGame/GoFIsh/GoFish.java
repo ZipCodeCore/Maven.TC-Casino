@@ -19,7 +19,7 @@ public class GoFish extends CardGame implements Game {
     private GoFishPlayer dealer;
 
     public GoFish(Profile userProfile) {
- master
+
         user = new GoFishPlayer(userProfile);
         dealer = new GoFishPlayer(House.HOUSE_PROFILE);
         goFishDeck = new Deck();
@@ -40,42 +40,7 @@ public class GoFish extends CardGame implements Game {
     }
 
     public void transfer(Card card, Hand handTo, Hand handFrom) {
-        /* while(handFrom.hasCard(card)){
-         handTo.addCard(card);
-         handFrom.remove(card);
         }
-
-    }
-
-    public void drawCard(Player player, Card card) {
-        // .get(player).add(card);
-
-
-    }
-
-    public void passTurn(Player player1, Player player2) {
-    }
-
-    protected boolean add(Player player, Card card) {
-        if (hasEntry(player)) {
-            // getCards(player).add(card);
-            return true;
-
-        } else {
-            ArrayList<Card> playerCards = new ArrayList<>();
-            playerCards.add(card);
-            //cardsAtHand.put(player, playerCards);
-        }
-
-        return true;
-    }
-
-    protected boolean hasEntry(Player player) {
-        // if(cardsAtHand.containsKey(player)){
-        return true;
-    }
-    //return false;
-    // }
 
 
 }
