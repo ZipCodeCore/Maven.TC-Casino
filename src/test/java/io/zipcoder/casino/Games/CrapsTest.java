@@ -15,7 +15,7 @@ public class CrapsTest {
     }
 
     @Test
-    public void rollDiceTest() {
+    public void addDieValuesTogetherTest() {
 
     }
 
