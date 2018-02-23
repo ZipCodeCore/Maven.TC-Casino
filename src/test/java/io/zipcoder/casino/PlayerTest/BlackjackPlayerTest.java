@@ -36,11 +36,11 @@ public class BlackjackPlayerTest {
 
     @Test
     public void getHandTest(){
-        BlackjackCard ace = new BlackjackCard(BlackjackRank.ACE, Suit.CLUBS);
-        ArrayList<BlackjackCard> expected = new ArrayList<BlackjackCard>();
+        Card ace = new Card(Rank.ACE, Suit.CLUBS);
+        ArrayList<Card> expected = new ArrayList<>();
         expected.add(ace);
         suebkjk.setHand(expected);
-        ArrayList<BlackjackCard> actual = suebkjk.getHand();
+        ArrayList<Card> actual = suebkjk.getHand();
         Assert.assertEquals(expected, actual);
     }
 
@@ -54,9 +54,9 @@ public class BlackjackPlayerTest {
     @Test
     public void getHandValueTest() {
         Integer expected = 5;
-        BlackjackCard two = new BlackjackCard(BlackjackRank.TWO, Suit.HEARTS);
-        BlackjackCard three = new BlackjackCard(BlackjackRank.THREE, Suit.CLUBS);
-        ArrayList<BlackjackCard> tempHand = new ArrayList<BlackjackCard>();
+        Card two = new Card(Rank.TWO, Suit.HEARTS);
+        Card three = new Card(Rank.THREE, Suit.CLUBS);
+        ArrayList<Card> tempHand = new ArrayList<>();
         tempHand.add(three);
         tempHand.add(two);
         suebkjk.setHand(tempHand);

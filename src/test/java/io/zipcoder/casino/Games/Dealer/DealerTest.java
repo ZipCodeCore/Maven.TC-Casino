@@ -1,7 +1,7 @@
 package io.zipcoder.casino.Games.Dealer;
 
-import io.zipcoder.casino.GameTools.Deck.BlackjackCard;
-import io.zipcoder.casino.GameTools.Deck.BlackjackRank;
+import io.zipcoder.casino.GameTools.Deck.Card;
+import io.zipcoder.casino.GameTools.Deck.Rank;
 import io.zipcoder.casino.GameTools.Deck.Suit;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
@@ -22,20 +22,20 @@ public class DealerTest {
 
     @Test
     public void getHandTest(){
-        BlackjackCard ace = new BlackjackCard(BlackjackRank.ACE, Suit.CLUBS);
-        ArrayList<BlackjackCard> expected = new ArrayList<BlackjackCard>();
+        Card ace = new Card(Rank.ACE, Suit.CLUBS);
+        ArrayList<Card> expected = new ArrayList<>();
         expected.add(ace);
         dealer.setHand(expected);
-        ArrayList<BlackjackCard> actual = dealer.getHand();
+        ArrayList<Card> actual = dealer.getHand();
         Assert.assertEquals(expected, actual);
 }
 
     @Test
     public void getHandValueTest() {
         Integer expected = 5;
-        BlackjackCard two = new BlackjackCard(BlackjackRank.TWO, Suit.HEARTS);
-        BlackjackCard three = new BlackjackCard(BlackjackRank.THREE, Suit.CLUBS);
-        ArrayList<BlackjackCard> tempHand = new ArrayList<BlackjackCard>();
+        Card two = new Card(Rank.TWO, Suit.HEARTS);
+        Card three = new Card(Rank.THREE, Suit.CLUBS);
+        ArrayList<Card> tempHand = new ArrayList<>();
         tempHand.add(three);
         tempHand.add(two);
         dealer.setHand(tempHand);
@@ -45,9 +45,9 @@ public class DealerTest {
 
     @Test
     public void canHitPositiveTest(){
-        BlackjackCard two = new BlackjackCard(BlackjackRank.TWO, Suit.HEARTS);
-        BlackjackCard three = new BlackjackCard(BlackjackRank.THREE, Suit.CLUBS);
-        ArrayList<BlackjackCard> tempHand = new ArrayList<BlackjackCard>();
+        Card two = new Card(Rank.TWO, Suit.HEARTS);
+        Card three = new Card(Rank.THREE, Suit.CLUBS);
+        ArrayList<Card> tempHand = new ArrayList<>();
         tempHand.add(three);
         tempHand.add(two);
         dealer.setHand(tempHand);
@@ -57,9 +57,9 @@ public class DealerTest {
 
     @Test
     public void canHitNegativeTest(){
-        BlackjackCard first = new BlackjackCard(BlackjackRank.KING, Suit.HEARTS);
-        BlackjackCard second = new BlackjackCard(BlackjackRank.KING, Suit.CLUBS);
-        ArrayList<BlackjackCard> tempHand = new ArrayList<BlackjackCard>();
+        Card first = new Card(Rank.KING, Suit.HEARTS);
+        Card second = new Card(Rank.KING, Suit.CLUBS);
+        ArrayList<Card> tempHand = new ArrayList<>();
         tempHand.add(first);
         tempHand.add(second);
         dealer.setHand(tempHand);

@@ -64,19 +64,19 @@ public class BlackjackTest {
 
     @Test
     public void bustCheckPositiveTest(){
-        ArrayList<BlackjackCard> temp = new ArrayList<BlackjackCard>();
-        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
-        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
-        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
+        ArrayList<Card> temp = new ArrayList<>();
+        temp.add(new Card(Rank.KING, Suit.CLUBS));
+        temp.add(new Card(Rank.KING, Suit.CLUBS));
+        temp.add(new Card(Rank.KING, Suit.CLUBS));
         sueBKJK.setHand(temp);
         Assert.assertTrue(game.bustCheck(sueBKJK));
     }
 
     @Test
     public void bustCheckNegativeTest(){
-        ArrayList<BlackjackCard> temp = new ArrayList<BlackjackCard>();
-        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
-        temp.add(new BlackjackCard(BlackjackRank.KING, Suit.CLUBS));
+        ArrayList<Card> temp = new ArrayList<>();
+        temp.add(new Card(Rank.KING, Suit.CLUBS));
+        temp.add(new Card(Rank.KING, Suit.CLUBS));
         sueBKJK.setHand(temp);
         Assert.assertFalse(game.bustCheck(sueBKJK));
     }

@@ -1,14 +1,14 @@
 package io.zipcoder.casino.Players;
 
-import io.zipcoder.casino.GameTools.Deck.BlackjackCard;
 import io.zipcoder.casino.GameTools.Deck.Card;
+import io.zipcoder.casino.GameTools.Util.BlackjackValueUtil;
 import io.zipcoder.casino.Games.Blackjack;
 
 import java.util.ArrayList;
 
 public class BlackjackPlayer extends Player{
     protected Player rootPlayer;
-    protected ArrayList<BlackjackCard> hand;
+    protected ArrayList<Card> hand;
     protected boolean canHit;
 
     public BlackjackPlayer(Player rootPlayer){
@@ -17,22 +17,22 @@ public class BlackjackPlayer extends Player{
 
         this.canHit = true;
         this.rootPlayer = rootPlayer;
-        this.hand = new ArrayList<BlackjackCard>();
+        this.hand = new ArrayList<Card>();
     }
 
     public Player getRootPlayer() {
         return rootPlayer;
     }
 
-    public void setHand(ArrayList<BlackjackCard> hand){
+    public void setHand(ArrayList<Card> hand){
         this.hand = hand;
     }
 
-    public void addToHand(BlackjackCard card){
+    public void addToHand(Card card){
         this.hand.add(card);
     }
 
-    public ArrayList<BlackjackCard> getHand() {
+    public ArrayList<Card> getHand() {
         return hand;
     }
 
@@ -42,8 +42,8 @@ public class BlackjackPlayer extends Player{
 
     public Integer getHandValue(){
         Integer handValue = 0;
-        for (BlackjackCard card:hand) {
-            handValue += card.getBlackjackRankEnum().getRankValue();
+        for (Card card:hand) {
+            handValue += BlackjackValueUtil.rankParse(card.getRankEnum());
         }
         return handValue;
     }
