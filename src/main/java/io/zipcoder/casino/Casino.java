@@ -1,6 +1,5 @@
 package io.zipcoder.casino;
 
-
 enum BlackJackChoices {
     Hit("Say hit to hit");
 

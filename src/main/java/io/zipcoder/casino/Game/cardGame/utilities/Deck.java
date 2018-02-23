@@ -8,7 +8,6 @@ public class Deck {
 
     private Stack<Card> deckOfCards = new Stack<>();
 
-
     public Deck() {
         fillDeck();
         shuffle();
@@ -23,7 +22,6 @@ public class Deck {
             }
         }
     }
-
 
     public Card getCard() {
         return deckOfCards.pop();
@@ -40,7 +38,6 @@ public class Deck {
     public Card peek() {
         return deckOfCards.peek();
     }
-
 
     public void shuffle() {
         Collections.shuffle(deckOfCards);
