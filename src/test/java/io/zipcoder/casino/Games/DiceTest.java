@@ -3,7 +3,7 @@ package io.zipcoder.casino.Games;
 import org.junit.Test;
 
 
-public class DiceGameTest {
+public class DiceTest {
 
     @Test
     public void getDice1Test(){
