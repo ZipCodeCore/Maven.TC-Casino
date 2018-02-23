@@ -9,15 +9,16 @@ import io.zipcoder.casino.Profile;
 
 import java.util.ArrayList;
 
-public class BlackJackGame extends CardGame implements Game {
+public class BlackJackGame extends CardGame {
 
     private Deck blackJackDeck;
     private Hand dealerHand;
     private Hand userHand;
+    BlackJackPlayer user;
 
     public BlackJackGame (Profile userProfile) {
 
-        BlackJackPlayer user = new BlackJackPlayer(userProfile);
+        user = new BlackJackPlayer(userProfile);
 
         //userHand = new Hand(ArrayList<>);
 
@@ -25,12 +26,6 @@ public class BlackJackGame extends CardGame implements Game {
 
 
         //BlackJackPlayer dealer = new BlackJackPlayer();
-
-    public BlackJackGame (Profile player) {
-        theHouse = new Profile("Dealer", 0, 0);
-        dealer = new BlackJackPlayer(theHouse);
-
-       // player = blackJackPlayer;
     }
 
 
