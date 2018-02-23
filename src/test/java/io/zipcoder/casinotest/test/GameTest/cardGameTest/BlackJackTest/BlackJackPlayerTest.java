@@ -1,6 +1,7 @@
 package io.zipcoder.casinotest.test.GameTest.cardGameTest.BlackJackTest;
 
 
+import io.zipcoder.casino.BlackJackBet;
 import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackPlayer;
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;
@@ -50,7 +51,7 @@ public class BlackJackPlayerTest {
     @Test
     public void betTest1() {
         double betAmount = 100;
-        testBlackJackPlayer.bet("Even Bet",betAmount);
+        testBlackJackPlayer.bet(BlackJackBet.EVEN_BET,betAmount);
         double expected = 99900;
         double actual = testProfile.getAccountBalance();
     }

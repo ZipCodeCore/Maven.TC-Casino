@@ -1,10 +1,8 @@
 package io.zipcoder.casino.Game.diceGame.Craps;
 
 
+import io.zipcoder.casino.*;
 import io.zipcoder.casino.CasinoUtilities.Console;
-import io.zipcoder.casino.Gambler;
-import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Profile;
 
 public class CrapsPlayer extends Player implements Gambler {
 
@@ -17,32 +15,34 @@ public class CrapsPlayer extends Player implements Gambler {
     }
 
 
-    public void bet(String typeOfBet, double amount) {
-       if (this.getProfile().getAccountBalance() < amount){
-           Console.print("Insufficient funds : cannot place bet");
-       }
-       else if (this.getProfile().escrowContains(typeOfBet)) {
-           this.getProfile().setAccountBalance(this.getProfile().getAccountBalance() - amount);
-           this.getProfile().setEscrow(typeOfBet, amount
-                    + this.getProfile().getEscrow(typeOfBet));
-       }
+    public void bet(TypeOfBet typeOfBet, double amount) {
+        double accountBalance = this.getProfile().getAccountBalance();
 
-       else{
-           this.getProfile().setAccountBalance(this.getProfile().getAccountBalance() - amount);
-           this.getProfile().setEscrow(typeOfBet, amount);
+        if (accountBalance < amount) {
+            Console.print("Insufficient funds : cannot place bet");
+        }
+        else if (this.getProfile().escrowContains(typeOfBet)) {
+            double escrowBalance = this.getProfile().getEscrow(typeOfBet);
+            this.getProfile().setAccountBalance(accountBalance - amount);
+            this.getProfile().setEscrow(typeOfBet, amount + escrowBalance);
+        }
+        else {
+            this.getProfile().setAccountBalance(accountBalance - amount);
+            this.getProfile().setEscrow(typeOfBet, amount);
         }
 
     }
 
-
-    public void win(String typeOfBet, double payoutMultiplier) {
+    public void win(TypeOfBet typeOfBet, double payoutMultiplier) {
+        double accountBalance = this.getProfile().getAccountBalance();
         double escrow = this.getProfile().getEscrow(typeOfBet);
         double winnings = escrow + (escrow * payoutMultiplier);
-        this.getProfile().setAccountBalance(this.getProfile().getAccountBalance()+ winnings);
+
+        this.getProfile().setAccountBalance(accountBalance+ winnings);
         this.getProfile().setEscrow(typeOfBet,0);
     }
 
-    public void lose(String typeOfBet) {
+    public void lose(TypeOfBet typeOfBet) {
         this.getProfile().setEscrow(typeOfBet, 0);
     }
 
