@@ -10,10 +10,8 @@ public class InputOutput {
     //MUST INSTANTIATE IN CASINO
 
     public String scanForString() {
-        String stringReturn = new String();
-        if (input.hasNext()) {
-            stringReturn = input.nextLine();
-        }
+        String stringReturn = input.nextLine();
+
         return stringReturn;
     }
 
@@ -42,11 +40,11 @@ public class InputOutput {
     }
 
 
-    public String promptForString(String message) {
+    /*public String promptForString(String message) {
         System.out.println(message);
         return scanForString();
     }
-
+*/
     public int promptForInt(String message) {
         System.out.println(message);
         return scanForInt();

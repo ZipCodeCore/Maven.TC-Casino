@@ -2,9 +2,9 @@ package io.zipcoder.casino.Players;
 
 public class Player {
 
-    private String name;
-    private Integer age;
-    private Integer balance;
+    protected String name;
+    protected Integer age;
+    protected Integer balance;
 
 
 
