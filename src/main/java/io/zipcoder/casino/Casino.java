@@ -27,25 +27,24 @@ public class Casino {
         return balance;
     }
 
+    protected void showMainMenu() {
+        ArrayList selectedGame;
+        if(player.getAge() > 21) {
+            selectedGame = inputOutput.displayOver21Menu();
+        } else {
+            selectedGame = inputOutput.displayUnder21Menu();
+        }
+    }
+
     protected void setUpUserProfile(){
         String name = this.askUserName();
         Integer age = this.askUserAge();
 
         if(age > 21) {
-           Integer balance = this.askUserBalance();
-           player = new Player(name, age, balance);
-
+            Integer balance = this.askUserBalance();
+            player = new Player(name, age, balance);
         } else{
             player = new Player(name, age);
-        }
-    }
-
-    protected void showMainMenu() {
-       ArrayList selectedGame;
-        if(player.getAge() > 21) {
-            selectedGame = inputOutput.displayOver21Menu();
-        } else {
-            selectedGame = inputOutput.displayUnder21Menu();
         }
     }
 

@@ -16,16 +16,17 @@ public class InputOutput {
         return stringReturn;
     }
 
-    public Integer scanForInt(){
+    public Integer scanForInt() {
         Integer integerReturn = input.nextInt();
         return integerReturn;
     }
 
-    public ArrayList displayOver21Menu(){
-        return  null;
+    public ArrayList displayOver21Menu() {
+        return null;
     }
-    public ArrayList displayUnder21Menu(){
-        return  null;
+
+    public ArrayList displayUnder21Menu() {
+        return null;
     }
 
 
@@ -38,21 +39,4 @@ public class InputOutput {
         System.out.println(message);
         return scanForInt();
     }
-
-
-
-
-
-    //generic methods
-    //method for menus
-    //create line breaks
-    //validate user input
-
-
-//    public static void main(String[] args) {
-//        InputOutput io = new InputOutput();
-//        System.out.println("Enter your name");
-//        String name = io.scanForString();
-//        System.out.println(name);
-//    }
 }
