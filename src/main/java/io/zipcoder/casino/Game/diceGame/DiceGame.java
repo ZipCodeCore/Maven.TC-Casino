@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 
 abstract public class DiceGame implements Game {
-    private Die[] dice;
-    private ArrayList<Player> players;
+    protected Die[] dice;
+    protected ArrayList<Player> players;
 
 
 
