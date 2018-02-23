@@ -14,26 +14,17 @@ public class GoFishPlayer extends CardPlayer {
 
 
     private HashMap<Card, Integer>books;
-
-   }
-
-    public GoFishPlayer(Profile playerProfile){
-        super(playerProfile);
-        books = new HashMap<>();
-
-
     private Hand gfHand;
-
-
-
 
     public GoFishPlayer(Profile playerProfile){
         super(playerProfile);
         gfHand = new Hand();
     }
+
+
     public Hand getHand() {
         return this.gfHand;
- master
+
     }
 
 
