@@ -17,6 +17,8 @@ public class CardPlayer extends Player {
 
     public CardPlayer(Profile someProfile) {
         super(someProfile);
+        
+
     }
 
     public void setScore(int newScore){
@@ -41,6 +43,10 @@ public class CardPlayer extends Player {
 
     public void setHand (Hand aHand) {
         this.hand = aHand;
+    }
+
+    public Hand getHand () {
+        return hand;
     }
 
 
