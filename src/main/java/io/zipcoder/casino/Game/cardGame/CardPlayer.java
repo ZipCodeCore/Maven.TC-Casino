@@ -11,14 +11,10 @@ public class CardPlayer extends Player {
     private boolean isCurrentPlayer;
     Player player;
 
-    public CardPlayer(){
 
-    }
-
-    public CardPlayer(Profile someProfile) {
+    public CardPlayer(Profile someProfile, Hand someHand) {
         super(someProfile);
-
-
+        this.hand = someHand;
     }
 
     public void setScore(int newScore){
