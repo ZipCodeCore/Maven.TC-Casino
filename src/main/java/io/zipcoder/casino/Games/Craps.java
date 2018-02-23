@@ -5,7 +5,7 @@ import io.zipcoder.casino.Players.CrapsPlayer;
 
 
 public class Craps extends Dice {
-CrapsPlayer crapsPlayer = new CrapsPlayer();
+//CrapsPlayer crapsPlayer = new CrapsPlayer();
 InputOutput inputOutput = new InputOutput();
 
 
