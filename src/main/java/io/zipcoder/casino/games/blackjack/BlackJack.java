@@ -26,14 +26,24 @@ public class BlackJack {
     private int insuranceBet;
 
     Deck playingDeck;
-    String output;
+    static String output;
 
     public BlackJack(Player player) {
         this.player = player;
     }
 
-    public void play(Player player) {
+    public void play(Player player) {}
 
+    public static void main(String[] args) {
+        welcomeToBlackJack();
+    }
+    public static void welcomeToBlackJack() {
+        String intro = "Welcome to BlackJack!\n" +
+                "Press ANY KEY to start the game.\n";
+        output = IOHandler.promptForStringWithMessage(intro);
+        if (!output.equalsIgnoreCase(null)) {
+
+        }
     }
 
 
