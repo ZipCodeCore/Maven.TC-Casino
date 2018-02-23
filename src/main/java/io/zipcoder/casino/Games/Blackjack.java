@@ -15,10 +15,11 @@ import java.util.ArrayList;
 public class Blackjack implements Game{
 
     protected ArrayList<BlackjackPlayer> playerList;
-    protected BlackjackDeck deck;
+    protected Deck deck;
     protected Dealer bkjkDealer;
 
     public void startGame(){
+
 
     }
 
@@ -26,8 +27,8 @@ public class Blackjack implements Game{
 
     }
 
-    Blackjack(Player... players){
-        deck = new BlackjackDeck();
+    public Blackjack(Player... players){
+        deck = new Deck();
         bkjkDealer = new Dealer();
         playerList = new ArrayList<BlackjackPlayer>();
         for (Player rootPlayer:players) {
@@ -43,13 +44,13 @@ public class Blackjack implements Game{
     }
 
     public void deal(BlackjackPlayer currentPlayer){
-        BlackjackCard temp = this.deck.deck.get(0);
+        Card temp = this.deck.deck.get(0);
         currentPlayer.addToHand(temp);
         this.deck.deck.remove(0);
     }
 
     public void dealToDealer(){
-        BlackjackCard temp = this.deck.deck.get(0);
+        Card temp = this.deck.deck.get(0);
         this.bkjkDealer.addToHand(temp);
         this.deck.deck.remove(0);
     }

@@ -29,4 +29,13 @@ public class Card {
     public void setRankEnum(Rank rankEnum) {
         this.rankEnum = rankEnum;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder card = new StringBuilder();
+        card.append(this.getRankEnum() + " of " + this.getSuitEnum());
+
+        return card.toString();
+    }
+
 }
