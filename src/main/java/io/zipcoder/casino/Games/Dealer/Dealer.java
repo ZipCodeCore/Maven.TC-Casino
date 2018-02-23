@@ -1,7 +1,9 @@
 package io.zipcoder.casino.Games.Dealer;
 
-import io.zipcoder.casino.*;
+import io.zipcoder.casino.GameTools.Deck.Card;
+
+import java.util.ArrayList;
 
 public class Dealer {
-    //private Card[] hand;
+    private ArrayList<Card> hand;
 }

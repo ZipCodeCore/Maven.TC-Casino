@@ -1,12 +1,12 @@
 package io.zipcoder.casino.Players;
 
-public class Player {
+import io.zipcoder.casino.Wallet;
 
+public class Player {
 
     protected String name;
     protected Integer age;
-
-
+    protected Wallet wallet;
 
     public Player(String name, Integer age){
         this.name = name;
@@ -22,6 +22,7 @@ public class Player {
     public Player(String name, Integer age, Integer balance) {
         this.name = name;
         this.age = age;
+        this.wallet = new Wallet(balance);
 
     }
 
@@ -41,4 +42,8 @@ public class Player {
         this.age = age;
     }
 
+    public Integer getBalance() {
+        return wallet.getBalance();
+    }
+    
 }
