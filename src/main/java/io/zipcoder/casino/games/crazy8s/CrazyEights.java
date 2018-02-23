@@ -97,17 +97,15 @@ public class CrazyEights implements Game {
 
     public static boolean emptyHand(int whichHand)  //check if any hand is empty (1 = player, 2 = computer)
     {
-//        int[] hand;
-//        if (whichHand == 1)
-//            hand = player;
-//        else
-//            hand = computer;
-//        for (int x = 0; x < hand.length; x++) {
-//            if (hand[x] > 0)
-//                return false;
-//        }
-        return true;
+        Card[] hand;
+        if (whichHand == 1)
+            hand = player;
+        else
+            hand = computer;
+            if (hand.length > 0)
+                return false;
     }
+
 
     public static void playerPlays() {
         //check hand for legal cards, label them
