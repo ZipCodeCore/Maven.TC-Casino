@@ -13,7 +13,7 @@ import io.zipcoder.casino.utils.IOHandler;
 public class CeeLo implements Game {
     private final String fRULES_PATH = "ceelo.rules.txt";
     private final String fTAKE_BET_MSG = "Place your bet";
-    private final String fPLAY_AGAIN_MSG = "Press \"Enter\" to play again or \"back\" to play something else.";
+    private final String fPLAY_AGAIN_MSG = "Press \"Enter\" to play again...\nyou can also type \"rules\" or \"back\"";
     private Player player;
 
     private int takeBet() {
@@ -22,7 +22,7 @@ public class CeeLo implements Game {
 
     private void playRound() {
         CeeLoGamble bet = new CeeLoGamble(player.betChips((long)takeBet()));
-        long payout = -1;
+        long payout;
 
         int bankerPoint = getBankerPoint();
         int playerPoint = getPlayerPoint();
@@ -37,11 +37,11 @@ public class CeeLo implements Game {
         player.addChips(payout);
     }
 
-    private int getBankerPoint() {
+    protected int getBankerPoint() {
         return -1;
     }
 
-    private int getPlayerPoint() {
+    protected int getPlayerPoint() {
         return -1;
     }
 
@@ -53,20 +53,22 @@ public class CeeLo implements Game {
     @Override
     public void play(Player player) {
         this.player = player;
-        IOHandler.printMessage(getRules());
+        runWelcome();
         boolean playAgain;
         do {
             playRound();
             playAgain = setPlayAgain();
         } while(playAgain);
     }
+
     @Override
     public void quitGame() {
+        // not sure what i need to do here actually. clean up, say goodbye, idk
     }
 
     @Override
     public void runWelcome() {
-
+        IOHandler.printMessage(getRules());
     }
 
     @Override
