@@ -1,29 +1,67 @@
 package io.zipcoder.casino.games.blackjack;
 
+import io.zipcoder.casino.core.Player;
+import io.zipcoder.casino.games.Card;
 import io.zipcoder.casino.games.Deck;
 import io.zipcoder.casino.games.Rank;
-
+import io.zipcoder.casino.utils.IOHandler;
 import java.util.Arrays;
 
 
 public class BlackJack {
-    private Deck deck;
-    private int playerBet;
-    private int playerWallet;
-    private int playerValue;
-    private int dealerValue;
-    private int insuranceBet;
 
-    public BlackJack() {
-    Deck playingDeck = new Deck();
+        private int playerBet;
+        static long playerWallet;
+        private int playerValue;
+        private int dealerValue;
+        private int insuranceBet;
+        private Integer splitNum = 0;
+        Deck playingDeck;
 
-    for(int i = 0; i <)
-
-    playerValue = 0;
-    dealerValue = 0;
-
+        public BlackJack(Deck playingDeck) {
+        this.playingDeck = playingDeck;
+        playerValue = 0;
+        dealerValue = 0;
+    }
+    public Integer dealPlayerHandValue(){
+        for (int i = 0; i < 2; i++) {
+            playerValue += playingDeck.pull(1)[0].getIntValue();
+        }
+        return playerValue;
+    }
+    public Integer dealDealerHandValue(){
+        for (int i = 0; i < 2; i++) {
+            dealerValue += playingDeck.pull(1)[0].getIntValue();
+        }
+        return dealerValue;
+    }
+    public String displayPlayerHand(){
+        String handCards = "";
+        Deck playerHand = new Deck();
+        for(int i = 0; i < 2; i++){
+            handCards += Arrays.toString(playerHand.pull(1));
+        }
+        return handCards;
     }
 
+    public boolean isHandSplitable(){
+    Integer card1 = playingDeck.pull(1)[0].getIntValue();
+    Integer card2 = playingDeck.pull(1)[0].getIntValue();
+            if (card1.equals(card2)){
+                splitNum += card1;
+                return true;
+            } else return false;
+    }
+    public void splitHand(){
+        Integer splitHand = splitNum;
+        if (isHandSplitable() == true){
+            splitHand += playingDeck.pull(1)[0].getIntValue();
+        }
+    }
+
+    public static void main(String[] args) {
+
+    }
 }
 //    public Integer cardValue(){
 //
@@ -45,14 +83,7 @@ public class BlackJack {
 //    public void playerStand(){
 //
 //    }
-////    public Integer tallyPlayerScore(){
-////        playerValue = 0;
-////
-////    }
-//
-//    public void tallyDealerScore(){
-//
-//    }
+
 //    public void playerDoubleDown(){
 //
 //    }
