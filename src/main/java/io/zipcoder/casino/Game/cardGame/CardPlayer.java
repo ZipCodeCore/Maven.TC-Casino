@@ -12,9 +12,10 @@ public class CardPlayer extends Player {
     Player player;
 
 
-    public CardPlayer(Profile someProfile, Hand someHand) {
+    public CardPlayer(Profile someProfile) {
         super(someProfile);
-        this.hand = someHand;
+        Hand cardPlayerHand = new Hand();
+        setHand(cardPlayerHand);
     }
 
     public void setScore(int newScore){

@@ -5,22 +5,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 public class HandTest {
 
     Hand testHand;
-    ArrayList<Card> testArray;
     Deck testDeck;
 
 
     @Before
     public void setup () {
         testDeck = new Deck();
-        testArray = new ArrayList<>();
-        testHand = new Hand(testArray);
+        testHand = new Hand();
     }
-
 
     @Test
     public void addCardTest1() {
@@ -69,7 +64,7 @@ public class HandTest {
         testHand.addCard(card3);
         testHand.clear();
         int expected = 0;
-        int actual = testArray.size();
+        int actual = testHand.getHand().size();
         Assert.assertEquals(expected, actual);
     }
     @Test
@@ -82,7 +77,7 @@ public class HandTest {
         Card card3 = testDeck.getCard();
         testHand.addCard(card3);
         int expected = 1;
-        int actual = testArray.size();
+        int actual = testHand.getHand().size();
         Assert.assertEquals(expected, actual);
     }
 
