@@ -18,7 +18,6 @@ public class BlackJackGame extends CardGame implements Game {
        // player = blackJackPlayer;
     }
 
-
     public void deal () {
 
     }
