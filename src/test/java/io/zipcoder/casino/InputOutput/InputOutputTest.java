@@ -26,4 +26,5 @@ public class InputOutputTest {
         Integer expected = 5;
         Assert.assertEquals(expected, actual);
     }
+
 }
