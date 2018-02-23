@@ -2,19 +2,24 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.Game;
+import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackGame;
 import io.zipcoder.casino.Game.cardGame.CardGame;
+import io.zipcoder.casino.Game.diceGame.Craps.CrapsGame;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class House implements MainMenu {
     //private Game someGame;
     private Profile profile;
     private ArrayList<Profile> profiles;
+    private HashMap<Integer, Player> mapOfPlayers;
 
     public House() {
         profiles = new ArrayList<>();
-        this.profile = profile;
+
+        mapOfPlayers = new HashMap<>();
     }
 
     public Profile getProfileById(int id) {
@@ -26,22 +31,51 @@ public class House implements MainMenu {
         return null;
     }
 
-    public CardGame chooseCardGame(String cardGame) {
+    public Player getPlayerById(int id) {
+        return mapOfPlayers.get(id);
+    }
+
+    public CardGame chooseCardGame(String cardGame, int id) {
+
+        Player player = getPlayerById(id);
+
+        if (cardGame.equalsIgnoreCase("Black Jack")) {
+            BlackJackGame blackjack = new BlackJackGame(player);
+            return blackjack;
+        } else if (cardGame.equalsIgnoreCase("Gold Fish")) {
+            BlackJackGame goldFish = new BlackJackGame(player);
+            return goldFish;
+        }
+
         return null;
     }
 
-    public DiceGame chooseDiceGame(String game) {
+    public DiceGame chooseDiceGame(String diceGame, int id) {
+        Player player = getPlayerById(id);
+        if (diceGame.equalsIgnoreCase("Craps")) {
+            //Craps game needs to take in a player
+//            CrapsGame craps = new CrapsGame(Player);
+//            return craps;
+        }
+
         return null;
     }
-
 
 
     public void createProfile(String name) {
-        createProfile(name, 0, profiles.size() +1);
+        createProfile(name, 0, profiles.size() + 1);
     }
 
     public void createProfile(String name, double balance) {
-        createProfile(name, balance, profiles.size() +1);
+        createProfile(name, balance, profiles.size() + 1);
+    }
+
+
+    public void createPlayer(Profile profile) {
+        int id = profile.getId();
+        Player player = new Player(profile);
+        mapOfPlayers.put(id, player);
+        Console.print("Player was added");
     }
 
     public void createProfile(String name, double balance, int id) {
@@ -55,16 +89,25 @@ public class House implements MainMenu {
     }
 
 
-
-
-
-    public Profile selectExistingProfile(String nameOfPlayer) {
-        //if(profile.getName().equals(nameOfPlayer);
-
+    public Profile selectExistingProfile(String name) {
+        for (Profile profile : profiles) {
+            if (profile.getName().equals(name)) {
+                return profile;
+            }
+        }
         return null;
     }
 
-    public void removeProfile(String nameOfPlayer) {
-
+    public void removeProfile(int id) {
+        profiles.remove(id);
+        Console.print("Profle was removed");
     }
+
+    @Override
+    public void removePlayer(int id) {
+        mapOfPlayers.remove(id);
+        Console.print("Player was Removed");
+    }
+
+
 }
