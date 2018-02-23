@@ -1,16 +1,21 @@
 package io.zipcoder.casino.Games;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class CrapsTest {
 
     @Test
-    public void playerBetsTest() {
+    public void userPlacesBetTest() {
+    Craps crapsTest = new Craps();
+    String expected = "Pass Line";
+    String actual = crapsTest.userPlacesBet();
 
+    Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void rollDiceTest() {
+    public void addDieValuesTogetherTest() {
 
     }
 
