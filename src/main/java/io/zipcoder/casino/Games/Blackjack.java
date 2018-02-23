@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Games;
 
 
+import io.zipcoder.casino.GameTools.Deck.BlackjackCard;
 import io.zipcoder.casino.GameTools.Deck.BlackjackDeck;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
@@ -26,8 +27,15 @@ public class Blackjack {
         }
     }
 
+    public void runTurn(){
+        //run turn method should initially draw from preset deck, hit once, and bust
+        //this will see if we can get a game to move through functions procedurally
+        //then we can see if we can put this function in a constructor
+        //to kick the game off as soon as the game object is instantiated
+    }
+
     public void deal(BlackjackPlayer currentPlayer){
-        Card temp = this.deck.deck.get(0);
+        BlackjackCard temp = this.deck.deck.get(0);
         currentPlayer.addToHand(temp);
         this.deck.deck.remove(0);
     }
@@ -37,6 +45,12 @@ public class Blackjack {
             this.deal(thisPlayer);
             this.deal(thisPlayer);
         }
+    }
+
+    public boolean bustCheck(BlackjackPlayer currentPlayer){
+        Integer handValue = currentPlayer.getHandValue();
+        if (handValue > 21) return true;
+        return false;
     }
 
 }

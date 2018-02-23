@@ -1,8 +1,7 @@
 package io.zipcoder.casino.PlayerTest;
 
-import io.zipcoder.casino.GameTools.Deck.Card;
-import io.zipcoder.casino.GameTools.Deck.Rank;
-import io.zipcoder.casino.GameTools.Deck.Suit;
+import io.zipcoder.casino.GameTools.Deck.*;
+import io.zipcoder.casino.Games.Blackjack;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
 import org.junit.Assert;
@@ -37,27 +36,27 @@ public class BlackjackPlayerTest {
 
     @Test
     public void getHandTest(){
-        Card ace = new Card(Rank.ACE, Suit.CLUBS);
-        ArrayList<Card> expected = new ArrayList<Card>();
+        BlackjackCard ace = new BlackjackCard(BlackjackRank.ACE, Suit.CLUBS);
+        ArrayList<BlackjackCard> expected = new ArrayList<BlackjackCard>();
         expected.add(ace);
         suebkjk.setHand(expected);
-        ArrayList<Card> actual = suebkjk.getHand();
+        ArrayList<BlackjackCard> actual = suebkjk.getHand();
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void getRootPlayerTest(){
         Player expected = sue;
-        Player acual = suebkjk.getRootPlayer();
-        Assert.assertEquals(expected, acual);
+        Player actual = suebkjk.getRootPlayer();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void getHandValueTest() {
         Integer expected = 5;
-        Card two = new Card(Rank.TWO, Suit.HEARTS);
-        Card three = new Card(Rank.THREE, Suit.CLUBS);
-        ArrayList<Card> tempHand = new ArrayList();
+        BlackjackCard two = new BlackjackCard(BlackjackRank.TWO, Suit.HEARTS);
+        BlackjackCard three = new BlackjackCard(BlackjackRank.THREE, Suit.CLUBS);
+        ArrayList<BlackjackCard> tempHand = new ArrayList<BlackjackCard>();
         tempHand.add(three);
         tempHand.add(two);
         suebkjk.setHand(tempHand);
