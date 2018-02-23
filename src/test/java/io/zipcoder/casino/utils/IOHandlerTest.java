@@ -14,8 +14,8 @@ public class IOHandlerTest {
     @Test
     public void testReadFromNonExistentFile() {
         String expected = "[file not found]";
-        String pathString = "pathToNothing.txt";
-        String actual = IOHandler.getMessageFromFile(pathString);
+        String file = "filenotfound.txt";
+        String actual = IOHandler.getMessageFromFile(file);
 
         Assert.assertEquals(expected, actual);
     }
@@ -23,8 +23,8 @@ public class IOHandlerTest {
     @Test
     public void testReadFromExistingFile() {
         String expected = "This file exists, I created it in vim";
-        String pathString = "testReadExisting.txt";
-        String actual = IOHandler.getMessageFromFile(pathString);
+        String file = "testReadExisting.txt";
+        String actual = IOHandler.getMessageFromFile(file);
 
         Assert.assertEquals(expected, actual);
     }
