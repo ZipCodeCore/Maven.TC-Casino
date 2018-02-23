@@ -64,6 +64,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
         while (dealerPlayedCards.size()!=0) {
             player.getHand().receiveCards(dealerPlayedCards.remove(0));
         }
+        System.out.println("You have " + player.getHand().getHandArrayList().size() + " cards and the dealer has " + dealer.getHand().getHandArrayList().size() + " cards");
     }
 
     public void dealerWins() {
@@ -74,6 +75,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
         while (dealerPlayedCards.size()!=0) {
             dealer.getHand().receiveCards(dealerPlayedCards.remove(0));
         }
+        System.out.println("You have " + player.getHand().getHandArrayList().size() + " cards and the dealer has " + dealer.getHand().getHandArrayList().size() + " cards");
     }
 
     public void iDeclareWar() {
