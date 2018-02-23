@@ -5,12 +5,13 @@ import io.zipcoder.casino.games.Card;
 import io.zipcoder.casino.games.Deck;
 import io.zipcoder.casino.games.Rank;
 import io.zipcoder.casino.utils.IOHandler;
+import io.zipcoder.casino.interfaces.Game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class BlackJack {
+public class BlackJack{
 
     private int playerBet;
     static long playerWallet;
@@ -28,27 +29,28 @@ public class BlackJack {
     Deck playingDeck;
     static String output;
 
+    public BlackJack(){
+
+    }
     public BlackJack(Player player) {
         this.player = player;
     }
 
     public void play(Player player) {}
 
-    public static void main(String[] args) {
-        welcomeToBlackJack();
-    }
     public static void welcomeToBlackJack() {
         String intro = "Welcome to BlackJack!\n" +
                 "Press ANY KEY to start the game.\n";
         output = IOHandler.promptForStringWithMessage(intro);
         if (!output.equalsIgnoreCase(null)) {
-
+            new BlackJack();
         }
     }
 
 
     public BlackJack(Deck playingDeck) {
         this.playingDeck = playingDeck;
+
         playerValue = new ArrayList<>();
         dealerValue = new ArrayList<>();
         splitHandLeft = new ArrayList<>();
@@ -63,6 +65,22 @@ public class BlackJack {
     //    public Integer placeBet(){
 //
 //    }
+    public void aceProperties() {
+        /**
+         * If a Card.Rank.Ace shows up,
+         * Ace can be either 1 or 11
+         * Dealer must choose 11 if dealerCardValue >= 17
+         * Player can choose 11 or 1 no matter what, as long as it does not bust.
+         * If a Card[0].Rank.Ace shows up, the player can place down Insurance bet of .5x bet.
+         */
+        if (playerValue.get(0).getRank().equals(Rank.ACE) || playerValue.get(1).getRank().equals(Rank.ACE)){
+            String prompt = "You have an Ace, do you want it to be 1 or 11?";
+            output = IOHandler.promptForStringWithMessage(prompt);
+            if (output.equalsIgnoreCase("yes")) {
+
+            }
+        }
+    }
     public Integer getPlayerCardValue() {
         playerHandScore = 0;
         for (Card pCard : playerValue) {
@@ -156,17 +174,6 @@ public class BlackJack {
         return "Over 21, you bust!";
     }
 
-
-    public void aceProperties() {
-        /**
-         * If a Card.Rank.Ace shows up,
-         * Ace can be either 1 or 11
-         * Dealer must choose 11 if dealerCardValue >= 17
-         * Player can choose 11 or 1 no matter what, as long as it does not bust.
-         * If a Card[0].Rank.Ace shows up, the player can place down Insurance bet of .5x bet.
-         */
-    }
-
     public void blackJackProperties() {
         /**
          * BlackJack is any combination of Ace and 10, Jack, Queen, King on first deal.
@@ -180,7 +187,9 @@ public class BlackJack {
          * A lose returns -1x bet.
          * A natural BlackJack gives the bet 1.5x.
          */
+
     }
+
 
 //    public static void main(String[] args) {
 //

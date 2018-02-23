@@ -1,10 +1,6 @@
 package io.zipcoder.casino.core;
 
-<<<<<<< HEAD
-=======
-
 import org.junit.Assert;
->>>>>>> c4752736cf6d7aab54ab7e2c113e6b4d883668ce
 import org.junit.Test;
 
 public class CasinoTest {
