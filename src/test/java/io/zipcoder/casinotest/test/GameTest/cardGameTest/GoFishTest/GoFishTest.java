@@ -24,35 +24,7 @@ public class GoFishTest {
 
 
 
-   /* @Test
-    public void testDeal() {
-        Map<Player, ArrayList<Card>>testCardsAtHand = new HashMap<>();
-        ArrayList<Card> testDealerCards= new ArrayList<Card>();
-        ArrayList<Card>testPlayerCards= new ArrayList<Card>();
-        Deck testDeck = new Deck();
-        GoFish testGoFish= new GoFish();
 
-        System.out.println(testDeck.countRemainingCards());
-
-        Profile testProfilePlayer = new Profile("John",5000,0);
-        Profile testProfileDealer= new Profile("Mark",5000,1);
-        Player testPlayer = new GoFishPlayer(testProfilePlayer);
-        Player testDealer = new GoFishPlayer(testProfileDealer);
-
-        testCardsAtHand.put(testPlayer,testPlayerCards);
-        testCardsAtHand.put(testDealer,testDealerCards);
-        testGoFish.deal(testDeck,testPlayer,testDealer);
-        Integer expected = 7;
-        Integer actual = testCardsAtHand.get(testPlayer).size();
-
-        Assert.assertEquals(expected,actual);
-
-
-
-
-
-
-    }*/
 
    @Test
     public void testAsk(){
