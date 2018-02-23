@@ -22,17 +22,18 @@ public class GoFish extends CardGame implements Game {
 
     public GoFish(Profile userProfile) {
         GoFishPlayer user = new GoFishPlayer(userProfile);
-
         Player dealer = new GoFishPlayer(House.HOUSE_PROFILE);
         goFishDeck = new Deck();
+        dealerHand = new Hand();
+        userHand= new Hand();
     }
 
-   /* public void deal() {
+   public void deal() {
         for(int i=0;i<7;i++){
-            dealer..addCard(goFishDeck.getCard());
+            dealerHand.addCard(goFishDeck.getCard());
             userHand.addCard(goFishDeck.getCard());
         }
-    }*/
+    }
 
 
     public boolean ask(Card card) {
