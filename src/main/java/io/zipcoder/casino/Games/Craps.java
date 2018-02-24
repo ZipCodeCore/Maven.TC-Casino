@@ -3,7 +3,6 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.CrapsPlayer;
-import io.zipcoder.casino.Players.Player;
 
 
 
@@ -32,33 +31,47 @@ public Integer addDiceValuesTogether(){
     return dieValue;
 }
 
-public String passLineWin(Integer betUserPlaces, Integer dieValue){
+public void passLineWin(Integer betUserPlaces, Integer dieValue){
   if (betUserPlaces == 1 &&  dieValue == 7 || dieValue == 11) {
-      // add funds to wallet
-      System.out.println("You Win! Your winnings of " + playerBetAmount +  " dollars were added to you wallet!");
-      String askPlayerToPlayAgain = "Do you want to play again?";
-      String playerDecision = inputOutput.promptForString(askPlayerToPlayAgain);
-      return playerDecision;
-}
-    return null;
+      // call addFundsToWallet
+      System.out.println("You Win!");
+     // call willUserPlayAgain method
+
+ }
 }
 
 public String passLineLose(Integer betUserPlaces, Integer dieValue){
-    // if certain numbers they lose
     return null;
 }
 
-public String passLineBetRollNonWinLoseNumber(){
+public String passLineBetRollNonWinLoseNumber(Integer betUserPlaces, Integer dieValue){
     //Roll dice while the value is not a win or lose value(Do while loop)
     return null;
 }
 
-public void startGame(){
+public void takeFundsFromWallet(){
+// call remove funds from wallet
+}
+
+public void addFundsToWallet(){
+// add funds to wallet
+//  System.out.println("Your winnings of " + playerBetAmount + " dollars were added to you wallet!");
 
 }
 
+public Integer willUserPlayAgain(){
+    String askPlayerToPlayAgain = "Do you want to play again?\n 1 for Yes!\n 2 for No!";
+    Integer playerDecision = inputOutput.promptForInt(askPlayerToPlayAgain);
+    return playerDecision;
+}
+
+public void startGame(){
+// take in user passlineWin if they say yes
+}
+
 public void endGame(){
-   // System.out.println(I hope you had fun! Thank You!");
+    // take in passLineWin answer if they say no
+   // in tests will be expected System.out.println(I hope you had fun! Thank You!");
 }
 public void returnToMainMenu(){
     //end game and go to different menu

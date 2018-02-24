@@ -14,24 +14,15 @@ public class CrapsTest {
     }
 
     @Test
-    public void passLineWinTest() {
-        Craps crapsTest = new Craps();
-        String expected = "You win!";
-        String actual = crapsTest.passLineWin(1,7);
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
     public void passLineLoseTest(){
-        Craps crapsTest = new Craps();
-        String expected = "You win!";
-        String actual = crapsTest.passLineLose(2,3);
-        Assert.assertEquals(expected, actual);
-    }
+
     }
 
     @Test
     public void ifDontPassLineTest() {
+
+    }
+    public void willUserPlayAgainTest(){
 
     }
 
