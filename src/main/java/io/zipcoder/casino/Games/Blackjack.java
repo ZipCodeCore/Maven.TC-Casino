@@ -184,7 +184,6 @@ public class Blackjack implements Game{
         } else if (newBet > player.getRootPlayer().getBalance()){
             System.out.println("You haven't got that much to bet, pardner!");
         } else {
-            System.out.println("The maze isn't for you.");
             secret();
         }
     }
@@ -202,6 +201,6 @@ public class Blackjack implements Game{
     }
 
     public void secret(){
-
+        System.out.println("The maze isn't for you.");
     }
 }

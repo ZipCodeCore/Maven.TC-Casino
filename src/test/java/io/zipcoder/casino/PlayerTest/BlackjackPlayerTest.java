@@ -77,4 +77,16 @@ public class BlackjackPlayerTest {
         Assert.assertTrue(suebkjk.isCanHit());
     }
 
+    @Test
+    public void getHandValueAceTest(){
+        ArrayList<Card> tempHand = new ArrayList<>();
+        tempHand.add(new Card(Rank.ACE, Suit.CLUBS));
+        tempHand.add(new Card(Rank.KING, Suit.CLUBS));
+        tempHand.add(new Card(Rank.THREE, Suit.CLUBS));
+        suebkjk.setHand(tempHand);
+        int expected = 14;
+        int actual = suebkjk.getHandValue();
+        Assert.assertEquals(expected, actual);
+    }
+
 }

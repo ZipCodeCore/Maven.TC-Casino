@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Players;
 
 import io.zipcoder.casino.GameTools.Deck.Card;
+import io.zipcoder.casino.GameTools.Deck.Rank;
 import io.zipcoder.casino.GameTools.Util.BlackjackValueUtil;
 import io.zipcoder.casino.Games.Blackjack;
 
@@ -46,9 +47,12 @@ public class BlackjackPlayer extends Player{
 
     public Integer getHandValue(){
         Integer handValue = 0;
+        int aceCounter = 0;
         for (Card card:hand) {
+            if (card.getRankEnum().equals(Rank.ACE)) aceCounter++;
             handValue += BlackjackValueUtil.rankParse(card.getRankEnum());
         }
+        if (aceCounter > 0 && handValue > 21) handValue -= 10;
         return handValue;
     }
 
