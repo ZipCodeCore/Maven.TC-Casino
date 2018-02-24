@@ -40,10 +40,11 @@ public class Hand {
 
     public String showHand() {
       StringBuilder cards = new StringBuilder();
-        for(Card aCard: getCards()){
-        cards.append(aCard.toString() + ",");
+        cards.append("Your Cards: ");
+      for(Card aCard: getCards()){
+        cards.append(aCard.toString() + ", ");
     }
-      return  null;//cards.toString();
+      return cards.toString();
 
     }
 }
