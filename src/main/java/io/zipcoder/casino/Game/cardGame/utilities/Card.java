@@ -28,7 +28,7 @@ public class Card {
     @Override
     public String toString() {
         StringBuilder card = new StringBuilder();
-        card.append("suit: " + suit + " rank" + rank);
+        card.append(suit.getSuitSymbols() + rank + " " + suit.getSuitSymbols());
 
         return card.toString();
     }

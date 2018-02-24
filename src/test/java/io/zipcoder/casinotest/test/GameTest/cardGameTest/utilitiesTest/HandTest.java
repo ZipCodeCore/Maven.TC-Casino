@@ -12,7 +12,7 @@ public class HandTest {
 
 
     @Before
-    public void setup () {
+    public void setup() {
         testDeck = new Deck();
         testHand = new Hand();
     }
@@ -67,6 +67,7 @@ public class HandTest {
         int actual = testHand.getCards().size();
         Assert.assertEquals(expected, actual);
     }
+
     @Test
     public void clearTest2() {
         Card card1 = testDeck.getCard();
@@ -82,8 +83,15 @@ public class HandTest {
     }
 
     @Test
-    public void showCardTest1(){
+    public void showCardTest1() {
+        Card card1 = testDeck.getCard();
+        Card card2 = testDeck.getCard();
+        testHand.addCard(card1);
+        testHand.addCard(card2);
+        String expected = "Your Cards: " + card1.toString() + ", " + card2.toString() +", ";
+        String actual = testHand.showHand();
 
+        Assert.assertEquals(expected, actual);
     }
 
 
