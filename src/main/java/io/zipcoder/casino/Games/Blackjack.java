@@ -22,7 +22,6 @@ public class Blackjack implements Game{
         for (BlackjackPlayer currentPlayer : playerList){
             runTurn(currentPlayer);
         }
-
     }
 
     public void endGame(){
@@ -54,7 +53,6 @@ public class Blackjack implements Game{
         Card temp = this.deck.deck.get(0);
         this.bkjkDealer.addToHand(temp);
         this.deck.deck.remove(0);
-        System.out.println(this.deck.deck.size());
     }
 
     public void initialHand(){
@@ -78,7 +76,18 @@ public class Blackjack implements Game{
     }
 
     public void dealerTurn(){
-        
+        while (dealerHitCheck()){
+            dealToDealer();
+        }
+        System.out.println(this.bkjkDealer.getHandValue());
+    }
+
+    public boolean winCheck(BlackjackPlayer player){
+        if (player.getHandValue() == 21 ||
+                (player.getHandValue() < 21 && bkjkDealer.getHandValue() < player.getHandValue())){
+            return true;
+        }
+        return false;
     }
 
 }

@@ -95,11 +95,47 @@ public class BlackjackTest {
         testbed.startGame();
     }
 
-
+    @Test
+    public void dealerTurnTest(){
+        ArrayList<Card> tempHand = new ArrayList<>();
+        tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
+        game.bkjkDealer.setHand(tempHand);
+        game.dealerTurn();
+        int actual = game.bkjkDealer.getHandValue();
+        Assert.assertEquals(21, actual);
+    }
 
     @Test
-    public void getValueTest() {
+    public void winCheck21Test(){
+        ArrayList<Card> tempHand = new ArrayList<>();
+        tempHand.add(new Card(Rank.ACE, Suit.CLUBS));
+        tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
+        sueBKJK.setHand(tempHand);
+        Assert.assertTrue(game.winCheck(sueBKJK));
+    }
 
+    @Test
+    public void winCheckBustTest(){
+        ArrayList<Card> tempHand = new ArrayList<>();
+        tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
+        tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
+        tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
+        sueBKJK.setHand(tempHand);
+        Assert.assertFalse(game.winCheck(sueBKJK));
+    }
+
+    @Test
+    public void winCheckDealerWinTest(){
+        ArrayList<Card> tempHand = new ArrayList<>();
+        tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
+        tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
+        sueBKJK.setHand(tempHand);
+        ArrayList<Card> tempdealerhand = new ArrayList<>();
+        tempdealerhand.add(new Card(Rank.TEN, Suit.CLUBS));
+        tempdealerhand.add(new Card(Rank.NINE, Suit.CLUBS));
+        tempdealerhand.add(new Card(Rank.TWO, Suit.CLUBS));
+        game.bkjkDealer.setHand(tempdealerhand);
+        Assert.assertFalse(game.winCheck(sueBKJK));
     }
 
     @Test
