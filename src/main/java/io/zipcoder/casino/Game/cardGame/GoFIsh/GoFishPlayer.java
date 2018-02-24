@@ -2,7 +2,6 @@ package io.zipcoder.casino.Game.cardGame.GoFIsh;
 
 import io.zipcoder.casino.Game.cardGame.CardPlayer;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
-import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.Profile;
 
 import java.util.ArrayList;

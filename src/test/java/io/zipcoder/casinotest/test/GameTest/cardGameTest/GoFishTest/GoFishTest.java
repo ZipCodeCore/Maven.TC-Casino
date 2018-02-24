@@ -1,9 +1,6 @@
 package io.zipcoder.casinotest.test.GameTest.cardGameTest.GoFishTest;
 
 import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFish;
-import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFishPlayer;
-import io.zipcoder.casino.Game.cardGame.utilities.Deck;
-import io.zipcoder.casino.House;
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;
 import org.junit.Before;

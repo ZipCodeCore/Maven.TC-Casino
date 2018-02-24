@@ -1,9 +1,7 @@
 package io.zipcoder.casino.Game.cardGame;
 
 import io.zipcoder.casino.Game.Game;
-import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFishPlayer;
 import io.zipcoder.casino.Game.cardGame.utilities.Deck;
-import io.zipcoder.casino.House;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 
@@ -12,10 +10,7 @@ import java.util.ArrayList;
 public abstract class CardGame implements Game {
 
     protected Deck deck;
-
-
-    private int playerScore;
-        private ArrayList<Player>players;
+    private ArrayList<CardPlayer> cardPlayers;
 
 
     public CardGame() {
@@ -24,19 +19,26 @@ public abstract class CardGame implements Game {
     }
 
 
-    public Deck getDeck(){
+    public Deck getDeck() {
 
         return deck;
     }
-    public int calculateScore(){
-        return playerScore;
+
+    public void deal() {
+
     }
 
-    public Player decideWinner( Player player1, Player player2){
+    public int calculateScore() {
+        return 0;
+    }
+
+    public Player decideWinner(Player player1, Player player2) {
 
         return null;
     }
-    public void addPlayer(Player player) {
+
+    public void addPlayer() {
+
 
     }
 
@@ -56,4 +58,5 @@ public abstract class CardGame implements Game {
 
         return null;
     }
+
 }
