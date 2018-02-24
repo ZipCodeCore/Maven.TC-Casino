@@ -64,4 +64,17 @@ public class BlackjackPlayerTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void setCanHitNegativeTest(){
+        suebkjk.setCanHit(false);
+        Assert.assertFalse(suebkjk.isCanHit());
+    }
+
+    @Test
+    public void setCanHitPositiveTest(){
+        suebkjk.setCanHit(false);
+        suebkjk.setCanHit(true);
+        Assert.assertTrue(suebkjk.isCanHit());
+    }
+
 }

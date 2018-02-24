@@ -81,12 +81,6 @@ public class BlackjackTest {
     }
 
     @Test
-    public void startTest() {
-        Blackjack testbed = new Blackjack(sue);
-        testbed.startGame();
-    }
-
-    @Test
     public void dealerTurnTest(){
         ArrayList<Card> tempHand = new ArrayList<>();
         tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
@@ -129,64 +123,5 @@ public class BlackjackTest {
         Assert.assertFalse(game.winCheck(sueBKJK));
     }
 
-    @Test
-    public void playerHitOptionTest(){
-        ArrayList<Card> tempHand = new ArrayList<>();
-        tempHand.add(new Card(Rank.THREE, Suit.HEARTS));
-        tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
-        sueBKJK.setHand(tempHand);
-        boolean actual = game.playerHitOption();
-        Assert.assertTrue(game.playerHitOption());
-    }
-
-    @Test
-    public void setAceTest() {
-
-    }
-
-    @Test
-    public void startRoundTest() {
-
-    }
-
-    @Test
-    public void generateDeckTest() {
-
-    }
-
-    @Test
-    public void shuffleDeckTest() {
-
-    }
-
-    @Test
-    public void buildPlayerHandTest() {
-
-    }
-
-    @Test
-    public void startTurnTest() {
-
-    }
-
-    @Test
-    public void hitOrStandTest() {
-
-    }
-
-    @Test
-    public void dealerTakesTurnTest() {
-
-    }
-
-    @Test
-    public void compareValueTest() {
-
-    }
-
-    @Test
-    public void payoutTest() {
-
-    }
 
 }

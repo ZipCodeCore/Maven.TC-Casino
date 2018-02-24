@@ -40,6 +40,10 @@ public class BlackjackPlayer extends Player{
         return canHit;
     }
 
+    public void setCanHit(boolean bool){
+        this.canHit = bool;
+    }
+
     public Integer getHandValue(){
         Integer handValue = 0;
         for (Card card:hand) {

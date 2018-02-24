@@ -44,7 +44,9 @@ public class Blackjack implements Game{
         for (Card card:player.getHand()) {
             System.out.println(card.toString());
         }
-
+        while (player.isCanHit() && player.getHandValue() < 22){
+            if (playerHitOption()) deal();
+        }
         dealerTurn();
     }
 
@@ -103,13 +105,16 @@ public class Blackjack implements Game{
         return x;
     }
 
-    public Boolean runPlayerHit(StringBuilder currentHand, BlackjackPlayer player) {
+    private Boolean runPlayerHit(StringBuilder currentHand, BlackjackPlayer player) {
         while (player.isCanHit()) {
             System.out.println("You're holding: " + currentHand + "Will you hit? 1 for YES, 2 for NO");
             String userChoice;
             userChoice = inputOutput.scanForString();
             if (userChoice.equals("1")) return true;
-            else return false;
+            else {
+                player.setCanHit(false);
+                return false;
+            }
         }
         return null;
     }
