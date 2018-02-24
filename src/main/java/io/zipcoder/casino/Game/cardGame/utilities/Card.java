@@ -24,4 +24,18 @@ public class Card {
     public void setRank(CardRank rank) {
         this.rank = rank;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder card = new StringBuilder();
+        card.append("suit: " + suit + " rank" + rank);
+
+        return card.toString();
+    }
 }
+
+
+
+
+
+
