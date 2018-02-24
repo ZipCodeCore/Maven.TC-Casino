@@ -104,6 +104,7 @@ public class CrazyEights implements Game {
             hand = computer;
             if (hand.length > 0)
                 return false;
+        return false;
     }
 
 

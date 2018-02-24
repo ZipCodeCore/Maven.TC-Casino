@@ -31,6 +31,8 @@ public class BlackJackTest {
     @Before
     public void setUp() {
         blackJackTest = new BlackJack();
+        Deck playingDeck = new Deck();
+        blackJackTest.beginBeforeGame();
         playerValue = new ArrayList<>();
         dealerValue = new ArrayList<>();
         splitHandLeft = new ArrayList<>();
@@ -86,15 +88,6 @@ public class BlackJackTest {
     Card card2 = new Card(Rank.FOUR, Suit.SPADES);
     Integer expected = 0;
     Integer actual = blackJackTest.comparable(card1, card2);
-    Assert.assertEquals(expected, actual);
-    }
-    @Test
-    public void testDisplaySplitHand(){
-    String search = "of";
-    boolean actual = blackJackTest.displaySplitHands().contains(search);
-    boolean expected = true;
-        System.out.println(actual);
-
     Assert.assertEquals(expected, actual);
     }
 
