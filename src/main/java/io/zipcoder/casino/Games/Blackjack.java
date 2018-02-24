@@ -51,8 +51,10 @@ public class Blackjack implements Game{
         for (Card card:player.getHand()) {
             System.out.println(card.toString());
         }
-        while (player.isCanHit() && playerHitOption() && player.getHandValue() < 22){
+        boolean hitchoice = playerHitOption();
+        while (player.isCanHit() && hitchoice && player.getHandValue() < 22){
             deal();
+            hitchoice = playerHitOption();
         }
         System.out.println("Your final hand value is " + player.getHandValue());
         dealerTurn();
@@ -115,7 +117,7 @@ public class Blackjack implements Game{
 
     private Boolean runPlayerHit(StringBuilder currentHand, BlackjackPlayer player) {
         while (player.isCanHit()) {
-            System.out.println("You're holding: " + currentHand + "Will you hit? 1 for YES, 2 for NO");
+            System.out.println("You're holding: " + currentHand + "\nWill you hit?\n1 for YES, 2 for NO");
             String userChoice;
             userChoice = inputOutput.scanForString();
             if (userChoice.equals("1")) return true;
@@ -132,7 +134,7 @@ public class Blackjack implements Game{
     }
 
     public void playAgainCheck(){
-        int feedback = inputOutput.promptForInt("Continue?\n1 for YES, 2 for NO");
+        int feedback = inputOutput.promptForInt("How 'bout another hand?\n1 for YES, 2 for NO");
         if (feedback == 2){
             setPlaying(false);
         }

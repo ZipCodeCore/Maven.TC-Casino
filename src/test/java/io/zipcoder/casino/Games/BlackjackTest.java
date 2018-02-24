@@ -123,9 +123,4 @@ public class BlackjackTest {
         Assert.assertFalse(game.winCheck(sueBKJK));
     }
 
-    @Test
-    public void preGameResetTest(){
-        game.pregameReset();
-    }
-
 }

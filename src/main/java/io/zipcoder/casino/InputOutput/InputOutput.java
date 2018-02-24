@@ -41,7 +41,6 @@ public class InputOutput {
             number = inputOutput.promptForInt("Please enter in a number between 1 - 2 to select a game");
 
         }
-        StringBuilder displayGames = new StringBuilder();
 
         return games.get(number);
     }
