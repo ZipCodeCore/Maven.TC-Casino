@@ -1,8 +1,10 @@
 package io.zipcoder.casino.Games;
 
+import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
 import io.zipcoder.casino.Games.Dealer.Dealer;
+import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
@@ -14,6 +16,7 @@ public class Blackjack implements Game{
     protected ArrayList<BlackjackPlayer> playerList;
     protected Deck deck;
     protected Dealer bkjkDealer;
+    protected InputOutput inputOutput = new InputOutput();
 
     public void startGame(){
         deck = new Deck();
@@ -87,6 +90,18 @@ public class Blackjack implements Game{
                 (player.getHandValue() < 21 && bkjkDealer.getHandValue() < player.getHandValue())){
             return true;
         }
+        return false;
+    }
+
+    public boolean playerHitOption(BlackjackPlayer player){
+        StringBuilder currentHand = new StringBuilder("| ");
+        for (Card card : player.getHand()){
+            currentHand.append(card.toString() + " | ");
+        }
+        System.out.println("You're holding: " + currentHand + "\nWill you hit?\n1 for YES, 2 for NO");
+        int userChoice = inputOutput.scanForInt();
+        if (userChoice == 1) return true;
+        else if (userChoice == 2) return false;
         return false;
     }
 

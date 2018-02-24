@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.GameTools.Deck.*;
+import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
 import org.junit.Assert;
@@ -136,6 +137,15 @@ public class BlackjackTest {
         tempdealerhand.add(new Card(Rank.TWO, Suit.CLUBS));
         game.bkjkDealer.setHand(tempdealerhand);
         Assert.assertFalse(game.winCheck(sueBKJK));
+    }
+
+    @Test
+    public void playerHitOptionTest(){
+        ArrayList<Card> tempHand = new ArrayList<>();
+        tempHand.add(new Card(Rank.THREE, Suit.HEARTS));
+        tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
+        sueBKJK.setHand(tempHand);
+        Assert.assertTrue(game.playerHitOption(sueBKJK));
     }
 
     @Test
