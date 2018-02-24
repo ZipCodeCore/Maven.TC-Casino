@@ -18,21 +18,19 @@ public class CrapsGame extends DiceGame {
 
 
 
-    public CrapsGame(Player player) {
-        this.currentPlayer = new CrapsPlayer(player.getProfile());
-        this.addPlayer(player);
-        Console.currentPlayer = player;
+    public CrapsGame(Profile profile) {
+        this.currentPlayer = new CrapsPlayer(profile);
     }
 
     public static void main(String[] args) {
         Profile stinkyProfile = new Profile("Stinky Pete", 1000, 11);
-        Player stinkyPete = new Player(stinkyProfile);
-        CrapsGame testGame = new CrapsGame(stinkyPete);
+        CrapsGame testGame = new CrapsGame(stinkyProfile);
         testGame.startGame();
         testGame.turn();
     }
 
     public void comeOutPhase(){
+
 
 
 
@@ -44,11 +42,14 @@ public class CrapsGame extends DiceGame {
 
         String rollOrBet;
         do {
+            Console.print(bar);
             Console.print("Would you like to [roll] or [bet]?");
             rollOrBet = Console.getString();
             if (rollOrBet.equalsIgnoreCase("roll")) {
+                Console.print(bar);
                 int roll = this.getRollValue();
             } else if (rollOrBet.equalsIgnoreCase("bet")) {
+                Console.print(bar);
                 this.selectBet();
             }
             else{
@@ -59,58 +60,89 @@ public class CrapsGame extends DiceGame {
     }
 
     public void selectBet(){
-        TypeOfBet betType;
         boolean keepRunning = true;
         do {
-            //Console.print(bettingMenu);
+            Console.print(this.printBettingMenu());
             Console.print("What type of bet would you like to place?");
             Console.print("Enter [stop] to finish betting");
             String textBet = Console.getString();
-            textBet = textBet.toLowerCase();
-            switch (textBet) {
-                case "stop":
-                    keepRunning = false;
-                    break;
+            keepRunning = this.chooseBet(textBet);
 
-                case "pass line":
-                    betType = CrapsBet.PASS_LINE;
-                    currentPlayer.setPassLine(true);
-                    this.placeBet(betType);
-                    break;
-
-                case "do not pass":
-                    betType = CrapsBet.DO_NOT_PASS;
-                    currentPlayer.setPassLine(false);
-                    this.placeBet(betType);
-                    break;
-
-                default:
-                    Console.print(invalidInput);
-
-
-            }
         }
         while(keepRunning == true);
 
     }
 
-    public String printBettingMenu(){
-         StringBuilder bettingMenu = new StringBuilder("Here are the types of bets you can make: \n");
-        if(newRound == true){
-            bettingMenu.append("[Pass Line] \n");
-            bettingMenu.append("[Do Not Pass]\n");
-        }
+    public boolean chooseBet (String textBet){
+        double playerBalance = currentPlayer.getProfile().getAccountBalance();
+        TypeOfBet betType;
+        textBet = textBet.toLowerCase();
+        switch (textBet) {
 
+            case "stop":
+                return false;
+
+            case "pass line":
+                if(!newRound && isInvalidBet(!currentPlayer.isPassLine())){
+                    break;
+                }
+                betType = CrapsBet.PASS_LINE;
+                currentPlayer.setPassLine(true);
+                this.placeBet(betType);
+                if(currentPlayer.getProfile().getAccountBalance() != playerBalance) {
+                    newRound = false;
+                }
+                break;
+
+            case "do not pass":
+                if(!newRound && isInvalidBet(currentPlayer.isPassLine())){
+                    break;
+                }
+                betType = CrapsBet.DO_NOT_PASS;
+                currentPlayer.setPassLine(false);
+                this.placeBet(betType);
+                if(currentPlayer.getProfile().getAccountBalance() != playerBalance) {
+                    newRound = false;
+                }
+                break;
+
+            default:
+                Console.print(invalidInput);
+                Console.print(bar);
+        }
+        return true;
+    }
+
+    public boolean isInvalidBet(boolean betCondition){
+        if(betCondition){
+            Console.print("You cannot place that type of bet at this time");
+            Console.print(bar);
+            return true;
+        }
+        return false;
+    }
+
+
+    public String printBettingMenu(){
+        StringBuilder bettingMenu = new StringBuilder("Here are the types of bets you can make: \n");
+            if(newRound || currentPlayer.isPassLine()){
+                bettingMenu.append("[Pass Line] \n");
+            }
+            if(newRound || !currentPlayer.isPassLine()){
+                bettingMenu.append("[Do Not Pass]\n");
+            }
         return bettingMenu.toString();
     }
 
     public void placeBet(TypeOfBet betType){
+        Console.print(bar);
         Console.print("Your current balance is: $" + currentPlayer.getProfile().getAccountBalance());
         Console.print("How much would you like to bet?");
         Double betAmount = Console.getDouble();
         currentPlayer.bet(betType, betAmount);
+        Console.print(bar);
         Console.print("Your bet has been placed.  Your current balance is now: $" + currentPlayer.getProfile().getAccountBalance());
-        Console.print("");
+
     }
 
 
@@ -156,5 +188,6 @@ public class CrapsGame extends DiceGame {
 
 
     private String invalidInput = "Invalid input: please enter your choice again";
+    private String bar = "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$";
 
 }
