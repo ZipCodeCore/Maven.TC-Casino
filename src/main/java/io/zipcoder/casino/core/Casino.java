@@ -1,9 +1,8 @@
 package io.zipcoder.casino.core;
 
-
 import io.zipcoder.casino.games.blackjack.BlackJack;
-import io.zipcoder.casino.games.ceelo.CeeLoGamble;
 import io.zipcoder.casino.games.crazy8s.CrazyEights;
+
 import io.zipcoder.casino.games.roulette.Roulette;
 
 import io.zipcoder.casino.interfaces.Game;
@@ -64,6 +63,7 @@ public class Casino {
             switch (answer) {
                 case 1:
                    currentGameRunning = new BlackJack();
+
                     break;
                 case 2:
                     currentGameRunning = new CrazyEights();

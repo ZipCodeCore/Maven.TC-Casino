@@ -88,17 +88,17 @@ public class BlackJack implements Game {
         return false;
     }
     public void acePropertiesForPlayer() {
-    if (isDealerLessThan21()) {
-        if (playerValue.get(0).getRank().equals(Rank.ACE) || playerValue.get(1).getRank().equals(Rank.ACE)) {
-            String prompt = "What value do you want for your Ace?\n" +
-                    " 1 or 11?";
-            int output = IOHandler.promptForIntWithMessage(prompt);
-            if (output == 1) {
-                playerHandScore = playerValue.get(0).getIntValue() + 1;
-                playerHitOrStand();
-            } else if (output == 11) {
-                playerHandScore = playerValue.get(0).getIntValue() + 11;
-                playerHitOrStand();
+        if (isDealerLessThan21()) {
+            if (playerValue.get(0).getRank().equals(Rank.ACE) || playerValue.get(1).getRank().equals(Rank.ACE)) {
+                String prompt = "What value do you want for your Ace?\n" +
+                        " 1 or 11?";
+                int output = IOHandler.promptForIntWithMessage(prompt);
+                if (output == 1) {
+                    playerHandScore = playerValue.get(0).getIntValue() + 1;
+                    playerHitOrStand();
+                } else if (output == 11) {
+                    playerHandScore = playerValue.get(0).getIntValue() + 11;
+                    playerHitOrStand();
                 }
             }
         }
@@ -119,7 +119,7 @@ public class BlackJack implements Game {
     }
     public Integer getPlayerCardValue() {
         playerHandScore = 0;
-       // playerValue.add(playingDeck.pull(1)[0]);
+        // playerValue.add(playingDeck.pull(1)[0]);
         for (Card pCard : playerValue) {
             playerHandScore += pCard.getIntValue();
         }
@@ -127,7 +127,7 @@ public class BlackJack implements Game {
     }
     public Integer getDealerCardValue() {
         dealerHandScore = 0;
-      //  dealerValue.add(playingDeck.pull(1)[0]);
+        //  dealerValue.add(playingDeck.pull(1)[0]);
         for (Card dCard : dealerValue) {
             dealerHandScore += dCard.getIntValue();
         }
@@ -148,15 +148,17 @@ public class BlackJack implements Game {
         return dHandCards;
     }
     public void isHandSplitable() {
-        if (playerValue.get(0).getIntValue() == 1 && playerValue.get(1).getIntValue() == 1){
-            System.out.println("I'm not crazy enough to program this now. Take your money and leave me alone.");
-            welcomeToBlackJack();
-        }
-        if (playerValue.get(0).getIntValue().equals(playerValue.get(1).getIntValue())) {
+        if (isDealerLessThan21()) {
+            if (playerValue.get(0).getIntValue() == 1 && playerValue.get(1).getIntValue() == 1) {
+                System.out.println("I'm not crazy enough to program this now. Take your money and leave me alone.");
+                welcomeToBlackJack();
+            }
+            if (playerValue.get(0).getIntValue().equals(playerValue.get(1).getIntValue())) {
                 splitHandLeft.add(playerValue.get(0));
                 splitHandRight.add(playerValue.get(1));
                 splitHandPrompt();
             }
+        }
     }
     public Integer comparable(Card card1, Card card2) {
         Integer cardVal1 = card1.getIntValue();
@@ -170,23 +172,23 @@ public class BlackJack implements Game {
         return 0;
     }
     public void splitHandPrompt() {
-            String prompt = "Your split value is " + playerValue.get(0).getIntValue() + ". Do you want to split?";
-            output = IOHandler.promptForStringWithMessage(prompt);
-            if (output.equalsIgnoreCase("yes")) {
-                System.out.println("Your left hand split is: " + displayLeftHand() +
-                                     " || " + "Your right hand split is: " + displayRightHand());
-                String whichHand = "Which hand do you want to hit first?";
-                output = IOHandler.promptForStringWithMessage(whichHand);
-                if (output.equalsIgnoreCase("left")){
-                    splitHitLeftHand();
-                }
-                if (output.equalsIgnoreCase("right")){
-                    splitHitRightHand();
-                }
+        String prompt = "Your split value is " + playerValue.get(0).getIntValue() + ". Do you want to split?";
+        output = IOHandler.promptForStringWithMessage(prompt);
+        if (output.equalsIgnoreCase("yes")) {
+            System.out.println("Your left hand split is: " + displayLeftHand() +
+                    " || " + "Your right hand split is: " + displayRightHand());
+            String whichHand = "Which hand do you want to hit first?";
+            output = IOHandler.promptForStringWithMessage(whichHand);
+            if (output.equalsIgnoreCase("left")){
+                splitHitLeftHand();
             }
-            if (output.equalsIgnoreCase("no")){
-                playerHitOrStand();
+            if (output.equalsIgnoreCase("right")){
+                splitHitRightHand();
             }
+        }
+        if (output.equalsIgnoreCase("no")){
+            playerHitOrStand();
+        }
     }
     public Integer playerLeftHandScore() {
         splitHandScoreLeft = 0;
@@ -199,7 +201,7 @@ public class BlackJack implements Game {
     public Integer playerRightHandScore(){
         splitHandScoreRight = 0;
 
-       // playingDeck.pull(1)[0]));
+        // playingDeck.pull(1)[0]));
         for (Card cardRight : splitHandRight){
             splitHandScoreRight += cardRight.getIntValue();
         }
@@ -279,9 +281,9 @@ public class BlackJack implements Game {
             }
             else if (output.equalsIgnoreCase("stand")){
                 splitHandScoreLeft = playerLeftHandScore();
-               System.out.println("Your left hand has: " + splitHandScoreLeft);
+                System.out.println("Your left hand has: " + splitHandScoreLeft);
                 break;
-           }
+            }
         }
         if (splitHandScoreLeft == 21 && dealerHandScore != 21){
             System.out.println("Your left wins!");
@@ -290,7 +292,7 @@ public class BlackJack implements Game {
             bust();
         }
         System.out.println("Your left hand has: " + playerLeftHandScore() +
-                            ", the dealer has" + ": " + getDealerCardValue());
+                ", the dealer has" + ": " + getDealerCardValue());
         winCondition();
     }
     public void splitHitRightHand(){
@@ -323,7 +325,7 @@ public class BlackJack implements Game {
         if (getPlayerCardValue() > getDealerCardValue() && getPlayerCardValue() <= 21) {
             System.out.println("You Win!");
         }
-        else if (getPlayerCardValue() < getDealerCardValue() && getDealerCardValue() >= 21){
+        else if (getPlayerCardValue() < getDealerCardValue() && getDealerCardValue() > 21){
             System.out.println("You Win!");
         }
         else if (getPlayerCardValue() <= 21 && getPlayerCardValue() == getDealerCardValue() ) {
