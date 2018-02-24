@@ -22,7 +22,6 @@ public class BlackJackGame extends CardGame {
         dealer = new BlackJackPlayer(House.HOUSE_PROFILE);
     }
 
-
     public void deal () {
 
     }

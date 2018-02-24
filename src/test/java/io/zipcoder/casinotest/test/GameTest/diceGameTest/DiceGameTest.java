@@ -5,6 +5,7 @@ import io.zipcoder.casino.Game.diceGame.Craps.CrapsPlayer;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
 import io.zipcoder.casino.Game.diceGame.Die;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Profile;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,13 +20,14 @@ public class DiceGameTest {
     DiceGame testGame;
     Player stinkyPete;
     Player smellyPeter;
+    Profile stinkyProfile;
 
 
     @Before
     public void setup(){
         stinkyPete = new Player();
         smellyPeter = new Player();
-        testGame = new CrapsGame(stinkyPete);
+        testGame = new CrapsGame(stinkyProfile);
 
     }
 
