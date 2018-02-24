@@ -4,35 +4,23 @@ import io.zipcoder.casino.Game.Game;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Deck;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
+import io.zipcoder.casino.House;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 
 import java.util.ArrayList;
 
-public class BlackJackGame extends CardGame implements Game {
+public class BlackJackGame extends CardGame {
 
-    private Deck blackJackDeck;
-    private Hand dealerHand;
-    private Hand userHand;
+    private BlackJackPlayer user;
+    private BlackJackPlayer dealer;
 
     public BlackJackGame (Profile userProfile) {
 
-        BlackJackPlayer user = new BlackJackPlayer(userProfile);
-
-        //userHand = new Hand(ArrayList<>);
-
-        blackJackDeck = new Deck();
-
-
-        //BlackJackPlayer dealer = new BlackJackPlayer();
-
-    public BlackJackGame (Profile player) {
-        theHouse = new Profile("Dealer", 0, 0);
-        dealer = new BlackJackPlayer(theHouse);
-
-       // player = blackJackPlayer;
+        super();
+        user = new BlackJackPlayer(userProfile);
+        dealer = new BlackJackPlayer(House.HOUSE_PROFILE);
     }
-
 
     public void deal () {
 
