@@ -2,14 +2,12 @@ package io.zipcoder.casino.Game.cardGame;
 
 import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.Game;
-import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackPlayer;
 import io.zipcoder.casino.Game.cardGame.utilities.Deck;
 import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Profile;
 
 import java.util.ArrayList;
 
-public abstract class CardGame implements Game {
+abstract public class CardGame implements Game {
 
     protected Deck deck;
     protected ArrayList<Player> players;
@@ -19,7 +17,6 @@ public abstract class CardGame implements Game {
          deck = new Deck();
          players = new ArrayList<>();
     }
-    private ArrayList<CardPlayer> cardPlayers;
 
     public Deck getDeck() {
 
@@ -35,21 +32,21 @@ public abstract class CardGame implements Game {
         return null;
     }
 
-    public void addPlayer(Player player){
-        if(players.contains(player)){
+    public void addPlayer(Player aPlayer){
+        if(players.contains(aPlayer)){
             Console.print("Error: Player already added to game - cannot add duplicate players");
         }
         else{
-            players.add(player);
+            players.add(aPlayer);
         }
 
     }
-    public void removePlayer (Player player){
-        if(!players.contains(player)){
+    public void removePlayer (Player aPlayer){
+        if(!players.contains(aPlayer)){
             Console.print("Error: Player not in game - cannot remove nonexistent player");
         }
         else{
-            players.remove(player);
+            players.remove(aPlayer);
         }
 
     }

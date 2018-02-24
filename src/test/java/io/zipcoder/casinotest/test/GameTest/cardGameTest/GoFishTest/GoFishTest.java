@@ -2,7 +2,6 @@ package io.zipcoder.casinotest.test.GameTest.cardGameTest.GoFishTest;
 
 import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFish;
 
-import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFishPlayer;
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,8 +12,8 @@ public class GoFishTest {
 
     private Profile testUserProfile;
     private GoFish testGame;
-    GoFishPlayer user;
-    GoFishPlayer dealer;
+//    GoFishPlayer user;
+//    GoFishPlayer dealer;
 
 
     @Before
@@ -32,18 +31,52 @@ public class GoFishTest {
         int actual = testGame.getDeck().countRemainingCards();
         Assert.assertEquals(expected, actual);
     }
-  /*  @Test
-   public void transferTest1(){
-        //testGame.deal(user,dealer);
-        Card card1 = testGame.getDeck().getCard();
-        Card card2 = testGame.getDeck().getCard();
-        dealer.getHand().addCard(card1);
-        dealer.getHand().addCard(card2);
-        testGame.transfer(card1,user.getHand(),dealer.getHand());
-        boolean expected =true;
-        boolean actual = user.getHand().hasCard(card1);
-        Assert.assertTrue(actual);
-    }*/
+
+
+    @Test
+    public void testGetDeck(){
+
+
+    }
+
+    @Test
+    public void calculateScore(){
+
+
+    }
+
+    @Test
+    public void testDecideWinner( ){
+
+
+
+    }
+
+    @Test
+    public void testAddPlayer() {
+
+    }
+
+    @Test
+    public void testRemovePlayer() {
+
+    }
+
+    @Test
+    public void testStartGame() {
+
+    }
+
+    @Test
+    public void testEndGame() {
+
+    }
+
+    @Test
+    public void testGetRules() {
+
+
+    }
 
 
 }
