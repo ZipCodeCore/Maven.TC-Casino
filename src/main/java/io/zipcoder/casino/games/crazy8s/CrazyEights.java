@@ -1,4 +1,5 @@
 package io.zipcoder.casino.games.crazy8s;
+
 import io.zipcoder.casino.core.Player;
 import io.zipcoder.casino.games.Card;
 import io.zipcoder.casino.games.Deck;
@@ -21,50 +22,6 @@ public class CrazyEights implements Game {
     public CrazyEights() {
 
     }
-
-    public void intro() {
-
-    do {
-        String intro =
-                "****** WELCOME TO CRAZY EIGHTS! ******\n" +
-                "*                                    *\n" +
-                "*                                    *\n" +
-                "* This is a non-gambling game so,    *\n" +
-                "*       Hold on to your chips!!      *\n" +
-                "*                                    *\n" +
-                "*                                    *\n" +
-                "**************************************\n" +
-                "*                                    *\n" +
-                "*        Press 'Y' to PLAY           *\n" +
-                "*        Press 'Q' to QUIT           *\n" +
-                "*        Press 'R' for RULES         *\n" +
-                "*                                    *\n" +
-                "**************************************\n";
-        answer = IOHandler.promptForStringWithMessage(intro);
-    if(answer.equalsIgnoreCase("q")){
-        continue;
-    }else if(answer.equalsIgnoreCase("r")){
-        IOHandler.printMessage(IOHandler.getMessageFromFile("CrazyEights.txt"));
-    }else
-        beginGame();
-    }
-    while(!answer.equalsIgnoreCase("q"));
-    }
-
-    public void beginGame() {
-            Deck deck = new Deck(); //get new deck to play with
-            player = deck.pull(8);   //deal player
-            computer = deck.pull(8); //and computer's hand
-            facedownDeck = getCard(); //show one card from face down Deck
-            while (!emptyHand(1) && !emptyHand(2) && !deckEmpty)
-            //while the player and computers hands aren't empty and the deck is not empty
-            {
-                playerPlays();
-                computerPlays();
-            }
-            result();
-            intro();
-        }
 
     public static int getCard()  //retrieves top card from deck
     {
@@ -98,14 +55,17 @@ public class CrazyEights implements Game {
     public static boolean emptyHand(int whichHand)  //check if any hand is empty (1 = player, 2 = computer)
     {
         Card[] hand;
-        if (whichHand == 1)
+        if (whichHand == 1) {
             hand = player;
-        else
-            hand = computer;
-            if (hand.length > 0)
-                return false;
-    }
 
+        } else
+            hand = computer;
+
+        if (hand.length > 0)
+            return false;
+        else
+            return true;
+    }
 
     public static void playerPlays() {
         //check hand for legal cards, label them
@@ -228,7 +188,6 @@ public class CrazyEights implements Game {
         }
     }
 
-
     public static boolean cardLegal(int card)  //check whether card matches suit, rank of pile or is eight
     {
         if ((card) % 13 == 8) { //card is 8
@@ -276,7 +235,6 @@ public class CrazyEights implements Game {
         String suit = shownSuit(value);
     }
 
-
     public static void render() {
 //        int x = 0;
 //        for (int i = 0; i < computer.length; i++) { //computer's hand
@@ -295,6 +253,50 @@ public class CrazyEights implements Game {
 //        //discard pile
 //        drawCard(facedownDeck, 350, 215, false);
 
+    }
+
+    public void intro() {
+
+        do {
+            String intro =
+                    "****** WELCOME TO CRAZY EIGHTS! ******\n" +
+                            "*                                    *\n" +
+                            "*                                    *\n" +
+                            "* This is a non-gambling game so,    *\n" +
+                            "*       Hold on to your chips!!      *\n" +
+                            "*                                    *\n" +
+                            "*                                    *\n" +
+                            "**************************************\n" +
+                            "*                                    *\n" +
+                            "*        Press 'Y' to PLAY           *\n" +
+                            "*        Press 'Q' to QUIT           *\n" +
+                            "*        Press 'R' for RULES         *\n" +
+                            "*                                    *\n" +
+                            "**************************************\n";
+            answer = IOHandler.promptForStringWithMessage(intro);
+            if (answer.equalsIgnoreCase("q")) {
+                continue;
+            } else if (answer.equalsIgnoreCase("r")) {
+                IOHandler.printMessage(IOHandler.getMessageFromFile("CrazyEights.txt"));
+            } else
+                beginGame();
+        }
+        while (!answer.equalsIgnoreCase("q"));
+    }
+
+    public void beginGame() {
+        Deck deck = new Deck(); //get new deck to play with
+        player = deck.pull(8);   //deal player
+        computer = deck.pull(8); //and computer's hand
+        facedownDeck = getCard(); //show one card from face down Deck
+        while (!emptyHand(1) && !emptyHand(2) && !deckEmpty)
+        //while the player and computers hands aren't empty and the deck is not empty
+        {
+            playerPlays();
+            computerPlays();
+        }
+        result();
+        intro();
     }
 
     @Override

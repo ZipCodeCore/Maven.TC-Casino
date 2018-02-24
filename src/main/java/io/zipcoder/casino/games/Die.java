@@ -26,4 +26,8 @@ public class Die {
             rolls[i] = new Random().nextInt(sides) + 1;
         return rolls;
     }
+
+    public int getSides() {
+        return sides;
+    }
 }

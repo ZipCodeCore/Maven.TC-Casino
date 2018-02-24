@@ -24,4 +24,12 @@ public class DieTest {
         for (int roll : actual)
             Assert.assertTrue(expected.contains(roll));
     }
+
+    @Test
+    public void testGetSides() {
+        int expected = 20;
+        int actual = new Die(expected).getSides();
+
+        Assert.assertEquals(expected, actual);
+    }
 }

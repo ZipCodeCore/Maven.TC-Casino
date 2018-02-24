@@ -1,8 +1,11 @@
 package io.zipcoder.casino.games.ceelo;
 
 import io.zipcoder.casino.core.Player;
+import io.zipcoder.casino.games.Die;
 import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
+
+import java.util.Arrays;
 
 /**
  * filename:
@@ -38,6 +41,10 @@ public class CeeLo implements Game {
     }
 
     protected int getBankerPoint() {
+        Die d6 = new Die(6);
+        int[] rolls = d6.roll(3);
+        Arrays.sort(rolls);
+
         return -1;
     }
 
