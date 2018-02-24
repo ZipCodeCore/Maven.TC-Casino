@@ -9,12 +9,7 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
 
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Blackjack implements Game{
 
@@ -22,12 +17,24 @@ public class Blackjack implements Game{
     protected Deck deck;
     protected Dealer bkjkDealer;
     public InputOutput inputOutput = new InputOutput();
+    public boolean isPlaying = true;
 
     public void startGame(){
-        deck = new Deck();
-        deck.shuffleDeck();
-        initialHand();
-        runTurn();
+        do {
+            pregameReset();
+            deck = new Deck();
+            deck.shuffleDeck();
+            initialHand();
+            runTurn();
+            playAgainCheck();
+        }
+        while (isPlaying);
+    }
+
+    public void pregameReset() {
+        player.setHand(new ArrayList<>());
+        bkjkDealer.setHand(new ArrayList<>());
+        player.setCanHit(true);
     }
 
     public void endGame(){
@@ -44,9 +51,10 @@ public class Blackjack implements Game{
         for (Card card:player.getHand()) {
             System.out.println(card.toString());
         }
-        while (player.isCanHit() && player.getHandValue() < 22){
-            if (playerHitOption()) deal();
+        while (player.isCanHit() && playerHitOption() && player.getHandValue() < 22){
+            deal();
         }
+        System.out.println("Your final hand value is " + player.getHandValue());
         dealerTurn();
     }
 
@@ -84,7 +92,7 @@ public class Blackjack implements Game{
         while (dealerHitCheck()){
             dealToDealer();
         }
-        System.out.println(this.bkjkDealer.getHandValue());
+        System.out.println("Dealer's final hand value is " + this.bkjkDealer.getHandValue());
     }
 
     public boolean winCheck(BlackjackPlayer player){
@@ -95,7 +103,7 @@ public class Blackjack implements Game{
         return false;
     }
 
-    public boolean playerHitOption(){
+    public Boolean playerHitOption(){
         StringBuilder currentHand = new StringBuilder("| ");
         for (Card card : player.getHand()){
             currentHand.append(card.toString() + " | ");
@@ -119,5 +127,15 @@ public class Blackjack implements Game{
         return null;
     }
 
+    public void setPlaying(boolean playing) {
+        isPlaying = playing;
+    }
+
+    public void playAgainCheck(){
+        int feedback = inputOutput.promptForInt("Continue?\n1 for YES, 2 for NO");
+        if (feedback == 2){
+            setPlaying(false);
+        }
+    }
 
 }
