@@ -15,7 +15,7 @@ import static junit.framework.TestCase.assertTrue;
 public class BlackJackTest {
 
     Deck playingDeck = new Deck();
-    BlackJack blackJack = new BlackJack(playingDeck);
+    private BlackJack blackJackTest;
     private int playerBet;
     static long playerWallet;
     private ArrayList<Card> playerValue;
@@ -30,6 +30,9 @@ public class BlackJackTest {
 
     @Before
     public void setUp() {
+        blackJackTest = new BlackJack();
+        Deck playingDeck = new Deck();
+        blackJackTest.beginBeforeGame();
         playerValue = new ArrayList<>();
         dealerValue = new ArrayList<>();
         splitHandLeft = new ArrayList<>();
@@ -42,13 +45,13 @@ public class BlackJackTest {
 
     @Test
     public void testGetPlayerCardValue(){
-    Integer actual = blackJack.getPlayerCardValue();
+    Integer actual = blackJackTest.getPlayerCardValue();
     assertTrue(0 <= actual && actual <= 21);
     }
 
     @Test
     public void testGetDealerCardValue(){
-    Integer actual = blackJack.getDealerCardValue();
+    Integer actual = blackJackTest.getDealerCardValue();
     assertTrue(0 <= actual && actual <= 21);
     }
     @Test
@@ -60,14 +63,14 @@ public class BlackJackTest {
     @Test
     public void testDisplayPlayerHand(){
     String search = "of";
-    boolean actual = blackJack.displayPlayerHand().contains(search);
+    boolean actual = blackJackTest.displayPlayerHand().contains(search);
     boolean expected = true;
     Assert.assertEquals(expected,actual);
     }
     @Test
     public void testDisplayDealerHand(){
     String search = "of";
-    boolean actual = blackJack.displayDealerHand().contains(search);
+    boolean actual = blackJackTest.displayDealerHand().contains(search);
     boolean expected = true;
     Assert.assertEquals(expected, actual);
     }
@@ -76,7 +79,7 @@ public class BlackJackTest {
     Card card1 = new Card(Rank.FOUR, Suit.HEARTS);
     Card card2 = new Card(Rank.NINE, Suit.HEARTS);
     Integer expected = -1;
-    Integer actual = blackJack.comparable(card1, card2);
+    Integer actual = blackJackTest.comparable(card1, card2);
     Assert.assertEquals(expected, actual);
     }
     @Test
@@ -84,15 +87,7 @@ public class BlackJackTest {
     Card card1 = new Card(Rank.FOUR, Suit.HEARTS);
     Card card2 = new Card(Rank.FOUR, Suit.SPADES);
     Integer expected = 0;
-    Integer actual = blackJack.comparable(card1, card2);
+    Integer actual = blackJackTest.comparable(card1, card2);
     Assert.assertEquals(expected, actual);
     }
-    @Test
-    public void testDisplaySplitHand(){
-    String search = "of";
-    boolean actual = blackJack.displaySplitHands().contains(search);
-    boolean expected = true;
-    Assert.assertEquals(expected, actual);
-    }
-
 }
