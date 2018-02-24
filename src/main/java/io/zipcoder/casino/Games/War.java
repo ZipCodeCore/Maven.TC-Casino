@@ -2,10 +2,11 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
+import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.Player;
 import io.zipcoder.casino.Players.WarPlayer;
 
-public class War {
+public class War implements Game{
 
    private Integer playerPoints;
    private Integer computerPoints;
@@ -55,5 +56,15 @@ public class War {
     public static void main(String[] args) {
         War war = new War();
         war.deal();
+    }
+
+    @Override
+    public void startGame() {
+
+    }
+
+    @Override
+    public void endGame() {
+
     }
 }

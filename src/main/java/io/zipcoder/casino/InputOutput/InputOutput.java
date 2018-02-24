@@ -14,7 +14,6 @@ public class InputOutput {
 
     public String scanForString() {
         String stringReturn = input.nextLine();
-
         return stringReturn;
     }
 
