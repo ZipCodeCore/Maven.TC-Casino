@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Game.cardGame.GoFIsh;
 
+import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
 import io.zipcoder.casino.Game.cardGame.utilities.CardRank;
@@ -25,7 +26,6 @@ public class GoFish extends CardGame {
         addPlayer(dealer);
     }
 
-
     public void deal() {
 
         for (int i = 0; i < 7; i++) {
@@ -37,9 +37,26 @@ public class GoFish extends CardGame {
 
     public void playTurn() {
 
+
     }
 
-    public int checkHandForCard(GoFishPlayer goFishPlayer, CardRank someCardRank) {
+    public void ask(CardRank aCardRank, GoFishPlayer askingPlayer, GoFishPlayer playerBeingAsked) {
+
+        if (countMatchesInHand(askingPlayer, aCardRank) < 1) {
+            Console.print("You cannot ask for a card that you do not have. Try again.");
+        } else if (countMatchesInHand(playerBeingAsked, aCardRank) < 1) {
+            Console.print("Go fish.");
+            fish(askingPlayer);
+        } else {
+            transfer(aCardRank, playerBeingAsked, askingPlayer);
+        }
+    }
+
+    public void fish(GoFishPlayer askingPlayer) {
+        askingPlayer.getHand().addCard(getDeck().getCard());
+    }
+
+    public int countMatchesInHand(GoFishPlayer goFishPlayer, CardRank someCardRank) {
 
         int countOfCard = 0;
         ArrayList<Card> cardsBeingChecked = goFishPlayer.getHand().getCards();
@@ -53,12 +70,17 @@ public class GoFish extends CardGame {
         return countOfCard;
     }
 
-    public void transfer(Card card, Hand handTo, Hand handFrom) {
-        while (handFrom.hasCard(card)) {
-            handTo.addCard(card);
-            handFrom.removeCard(card);
-        }
+    public void transfer(CardRank someCardRank, GoFishPlayer fromPlayer, GoFishPlayer toPlayer) {
 
+        for (int i = 0; i < fromPlayer.getHand().getCards().size(); i++) {
+            
+            if (fromPlayer.getHand().getCards().get(i).getRank() == someCardRank) {
+
+                toPlayer.getHand().addCard(fromPlayer.getHand().getCards().get(i));
+
+                fromPlayer.getHand().removeCard(fromPlayer.getHand().getCards().get(i));
+            }
+        }
     }
 
     public GoFishPlayer getUser() {
