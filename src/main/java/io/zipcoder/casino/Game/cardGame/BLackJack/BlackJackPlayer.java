@@ -1,9 +1,9 @@
 package io.zipcoder.casino.Game.cardGame.BLackJack;
 
 import io.zipcoder.casino.CasinoUtilities.Console;
-import io.zipcoder.casino.Escrow;
 import io.zipcoder.casino.Gambler;
 import io.zipcoder.casino.Game.cardGame.CardPlayer;
+import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 import io.zipcoder.casino.TypeOfBet;
 
@@ -34,7 +34,6 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
         this.isBusted = isBusted;
     }
 
-
     public boolean bet(TypeOfBet typeOfBet, double amount) {
         double accountBalance = this.getProfile().getAccountBalance();
 
@@ -60,7 +59,6 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
         double accountBalance = this.getProfile().getAccountBalance();
         double escrow = this.getEscrowBet(typeOfBet);
         double winnings = escrow + (escrow * payoutMultiplier);
-
         this.getProfile().setAccountBalance(accountBalance+ winnings);
         this.setEscrow(typeOfBet,0);
     }
@@ -78,12 +76,10 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
         return this.playerEscrow.getEscrow().get(typeOfBet);
     }
 
+
     public boolean escrowContains(TypeOfBet typeOfBet){
         return playerEscrow.getEscrow().containsKey(typeOfBet) ;
     }
-
-
-
 
 
 //    public void buyInsurance() {

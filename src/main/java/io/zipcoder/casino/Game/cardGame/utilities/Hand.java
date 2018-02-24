@@ -1,9 +1,12 @@
 package io.zipcoder.casino.Game.cardGame.utilities;
 
 
+import io.zipcoder.casino.CasinoUtilities.Console;
+
 import java.util.ArrayList;
 
 public class Hand {
+
     private ArrayList<Card>cards;
 
     public Hand() {
@@ -22,7 +25,7 @@ public class Hand {
         cards.clear();
     }
 
-    public boolean hasCard(Card thisCard){
+    public boolean hasCard(Card thisCard) {
 
         if (cards.contains(thisCard)) {
             return true;
@@ -35,7 +38,12 @@ public class Hand {
     }
 
 
+    public String showHand() {
+      StringBuilder cards = new StringBuilder();
+        for(Card aCard: getCards()){
+        cards.append(aCard.toString() + ",");
+    }
+      return  null;//cards.toString();
 
-
-
+    }
 }
