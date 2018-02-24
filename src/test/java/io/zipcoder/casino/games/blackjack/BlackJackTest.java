@@ -90,5 +90,4 @@ public class BlackJackTest {
     Integer actual = blackJackTest.comparable(card1, card2);
     Assert.assertEquals(expected, actual);
     }
-
 }

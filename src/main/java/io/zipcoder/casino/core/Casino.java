@@ -22,7 +22,6 @@ public class Casino {
         answer = 0;
     }
 
-
     public int getAnswer() {
 
         return answer;
