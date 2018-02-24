@@ -4,34 +4,34 @@ package io.zipcoder.casino.Game.cardGame.utilities;
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Card>hand;
+    private ArrayList<Card>cards;
 
     public Hand() {
-        hand = new ArrayList<>();
+        cards = new ArrayList<>();
     }
 
     public void addCard(Card card){
-        hand.add(card);
+        cards.add(card);
 
     }
     public void removeCard(Card card){
-        hand.remove(card);
+        cards.remove(card);
     }
 
     public void clear(){
-        hand.clear();
+        cards.clear();
     }
 
     public boolean hasCard(Card thisCard){
 
-        if (hand.contains(thisCard)) {
+        if (cards.contains(thisCard)) {
             return true;
         }
         return false;
     }
 
-    public ArrayList<Card> getHand() {
-        return hand;
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 
 

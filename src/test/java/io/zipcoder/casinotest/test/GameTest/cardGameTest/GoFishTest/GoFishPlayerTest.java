@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class GoFishPlayerTest {
+
     Profile testProfile;
     GoFishPlayer testGoFishPlayer;
 
@@ -13,9 +14,9 @@ public class GoFishPlayerTest {
     public void setUp() {
         testProfile = new Profile("Kibret",5000, 0);
         testGoFishPlayer = new GoFishPlayer(testProfile);
-
-
     }
+
+
     @Test
     public void testBuildBook(){
 
