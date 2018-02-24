@@ -7,6 +7,7 @@ import io.zipcoder.casino.CasinoUtilities.Console;
 public class CrapsPlayer extends Player implements Gambler {
 
     private boolean passLine;
+    private boolean odds;
     private Escrow playerEscrow;
 
 
@@ -73,4 +74,13 @@ public class CrapsPlayer extends Player implements Gambler {
         this.passLine = input;
 
     }
+
+    public void setOdds(boolean input){
+        this.odds = input;
+    }
+
+    public boolean hasOdds(){
+        return this.odds;
+    }
+
 }

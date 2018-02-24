@@ -156,6 +156,145 @@ public class CrapsGameTest {
     }
 
     @Test
+    public void passLineOddsPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.PASS_LINE_ODDS, 50);
+        testGame.getCurrentPlayer().setPassLine(true);
+
+        //When
+        testGame.passLineOddsPayout(3);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual &&
+                testGame.getCurrentPlayer().getEscrowBet(CrapsBet.PASS_LINE_ODDS) == 0);
+
+    }
+
+    @Test
+    public void passLineOddsPayoutWin4Test(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.PASS_LINE_ODDS, 50);
+        testGame.getCurrentPlayer().setPassLine(true);
+
+        //When
+        testGame.passLineOddsPayout(4);
+        double expected = 200;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void passLineOddsPayoutWin5Test(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.PASS_LINE_ODDS, 50);
+        testGame.getCurrentPlayer().setPassLine(true);
+
+        //When
+        testGame.passLineOddsPayout(5);
+        double expected = 175;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void passLineOddsPayoutWin6Test(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.PASS_LINE_ODDS, 50);
+        testGame.getCurrentPlayer().setPassLine(true);
+
+        //When
+        testGame.passLineOddsPayout(6);
+        double expected = 160;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void doNotPassOddsPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_PASS_ODDS, 50);
+        testGame.getCurrentPlayer().setPassLine(false);
+
+        //When
+        testGame.doNotPassOddsPayout(3);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual &&
+                testGame.getCurrentPlayer().getEscrowBet(CrapsBet.DO_NOT_PASS_ODDS) == 0);
+
+    }
+
+    @Test
+    public void doNotPassOddsPayoutWin4Test(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_PASS_ODDS, 50);
+        testGame.getCurrentPlayer().setPassLine(false);
+
+        //When
+        testGame.doNotPassOddsPayout(4);
+        double expected = 125;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void doNotPassOddsPayoutWin5Test(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_PASS_ODDS, 50);
+        testGame.getCurrentPlayer().setPassLine(false);
+
+        //When
+        testGame.doNotPassOddsPayout(5);
+        double expected = 133;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void doNotPassOddsPayoutWin6Test(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_PASS_ODDS, 50);
+        testGame.getCurrentPlayer().setPassLine(false);
+
+        //When
+        testGame.doNotPassOddsPayout(6);
+        double expected = 141.5;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+
+    @Test
     public void doNotPassPayoutWinTest(){
         //Given
         //testGame

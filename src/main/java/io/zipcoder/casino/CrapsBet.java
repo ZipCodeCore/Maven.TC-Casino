@@ -22,12 +22,15 @@ public enum CrapsBet implements TypeOfBet {
     ANY_CRAPS,
     ACE_DEUCE,
     ACES,
-    BOXCAR;
+    BOXCAR,
+    PASS_LINE_ODDS,
+    DO_NOT_PASS_ODDS,
 
 
+/*
     public String toString(){
        return name().replaceAll("_", " ");
-    }
+    }*/
 
 
 
