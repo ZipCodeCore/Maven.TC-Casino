@@ -58,4 +58,11 @@ public class Dice {
         }
         return false;
     }
+
+    public static int getCeeloPoint(int[] rolls) {
+        if (rolls[0] == rolls[1]) return rolls[2];
+        else if (rolls[1] == rolls[2]) return rolls[0];
+        else if (rolls[0] == rolls[2]) return rolls[1];
+        else return -1;
+    }
 }

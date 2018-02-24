@@ -117,4 +117,22 @@ public class DiceTest {
         int[] sample = {1, 2, 3};
         Assert.assertFalse(Dice.contains(sample, 4));
     }
+
+    @Test
+    public void testGetCeeloPointFound() {
+        int[] sample = {6, 6, 2};
+        int expected = 2;
+        int actual = Dice.getCeeloPoint(sample);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetCeeloPointNotFound() {
+        int[] sample = {2, 3, 4};
+        int expected = -1;
+        int actual = Dice.getCeeloPoint(sample);
+
+        Assert.assertEquals(expected, actual);
+    }
 }
