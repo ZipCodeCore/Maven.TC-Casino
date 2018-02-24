@@ -72,9 +72,14 @@ public class Casino {
 //                    currentGameRunning = new Roulette();
                     break;
                 case 5:
+                    goodBye();
                     isPlaying = false;
             }
         return currentGameRunning;
+    }
+
+    public void goodBye(){
+        IOHandler.printMessage( "\n**** THANKS FOR PLAYING!! ****\n");
     }
 
 }

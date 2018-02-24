@@ -6,77 +6,112 @@ import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
 public class CrazyEights implements Game {
-    static int[] deck;
     static Card[] player;
     static Card[] computer; //card arrays
-    static int facedownDeck;
-    static int suit;
-    static boolean deckEmpty;
+    static Card[] facedownDeck;
     static String answer;
     static String result;
-    static int answerInt;
-    private static boolean isPlaying;
+    private static int answerInt;
+    boolean isLegal;
 
 
     public CrazyEights() {
-
     }
 
-    public void intro() {
-
-    do {
-        String intro =
-                "****** WELCOME TO CRAZY EIGHTS! ******\n" +
-                "*                                    *\n" +
-                "*                                    *\n" +
-                "* This is a non-gambling game so,    *\n" +
-                "*       Hold on to your chips!!      *\n" +
-                "*                                    *\n" +
-                "*                                    *\n" +
-                "**************************************\n" +
-                "*                                    *\n" +
-                "*        Press 'Y' to PLAY           *\n" +
-                "*        Press 'Q' to QUIT           *\n" +
-                "*        Press 'R' for RULES         *\n" +
-                "*                                    *\n" +
-                "**************************************\n";
-        answer = IOHandler.promptForStringWithMessage(intro);
-    if(answer.equalsIgnoreCase("q")){
-        continue;
-    }else if(answer.equalsIgnoreCase("r")){
-        IOHandler.printMessage(IOHandler.getMessageFromFile("CrazyEights.txt"));
-    }else
-        beginGame();
+    @Override
+    public void play(Player player) {
+        runWelcome();
     }
-    while(!answer.equalsIgnoreCase("q"));
+
+    @Override
+    public void runWelcome() {
+        do {
+            String intro =
+                    "****** WELCOME TO CRAZY EIGHTS! ******\n" +
+                            "*                                    *\n" +
+                            "*                                    *\n" +
+                            "* This is a non-gambling game so,    *\n" +
+                            "*       Hold on to your chips!!      *\n" +
+                            "*                                    *\n" +
+                            "*                                    *\n" +
+                            "**************************************\n" +
+                            "*                                    *\n" +
+                            "*        Press 'Y' to PLAY           *\n" +
+                            "*        Press 'Q' to QUIT           *\n" +
+                            "*        Press 'R' for RULES         *\n" +
+                            "*                                    *\n" +
+                            "**************************************\n";
+            answer = IOHandler.promptForStringWithMessage(intro);
+            if (answer.equalsIgnoreCase("q")) {
+                continue;
+            }else if (answer.equalsIgnoreCase("r")) {
+                IOHandler.printMessage(IOHandler.getMessageFromFile("CrazyEights.txt"));
+            }else
+                beginGame();
+        }
+        while (!answer.equalsIgnoreCase("q"));
     }
 
     public void beginGame() {
-            Deck deck = new Deck(); //get new deck to play with
-            player = deck.pull(8);   //deal player
-            computer = deck.pull(8); //and computer's hand
-            facedownDeck = getCard(); //show one card from face down Deck
-            while (!emptyHand(1) && !emptyHand(2) && !deckEmpty)
-            //while the player and computers hands aren't empty and the deck is not empty
-            {
-                playerPlays();
-                computerPlays();
-            }
-            result();
-            intro();
-        }
+        Deck deck = new Deck(); //get new deck to play with
+        int handSize = 8;
 
-    public static int getCard()  //retrieves top card from deck
+        player = deck.pull(handSize);   //deal player
+        computer = deck.pull(handSize); //and computer's hand
+        facedownDeck = deck.pull(1); //show one card from face down Deck
+
+        while (!emptyHand(1) && !emptyHand(2))
+        //while the player and computers hands aren't empty
+        {
+            displayState();
+            playerPlays();
+
+            displayCard();
+            computerPlays();
+        }
+        result();
+        runWelcome();
+    }
+
+    public static boolean emptyHand(int whichHand)  //check if any hand is empty (1 = player, 2 = computer)
     {
-//        int i = 0, value = 0;
-//        while (i < deck.length && deck[i] == 0)
-//            i++;
-//        if (deck.length > i) {
-//            value = deck[i];
-//            deck[i] = 0;
-//        }
-//        return value;
-        return 0;
+        Card[] hand;
+        if (whichHand == 1)
+            hand = player;
+        else
+            hand = computer;
+        if(hand.length > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public String displayPlayerHand() {
+    String playerHandDisplay = "";
+        for (Card card : player) {
+        playerHandDisplay += card.toString() + " ";
+    }
+        return playerHandDisplay;
+}
+
+    public String displayCard() {
+        String displayCard = "";
+        for (Card card : facedownDeck) {
+            displayCard += card.toString() + " ";
+        }
+        return displayCard;
+    }
+    public void displayState() {
+        displayPlayerHand();
+        displayCard();
+    }
+    public boolean legalCard(Card card) {
+        if ((card.getSuit() == card.getSuit(facedownDeck)) ||
+                (card.getRank() == card.getRank(facedownDeck)) ||
+                (card.getIntValue() == 8)) {
+            isLegal = true;
+        }
+        return false;
     }
 
     public static void result() {
@@ -93,70 +128,48 @@ public class CrazyEights implements Game {
                     "\n Play again? [y/n]";
             answer = IOHandler.promptForStringWithMessage(result);
         }
-    }
 
-    public static boolean emptyHand(int whichHand)  //check if any hand is empty (1 = player, 2 = computer)
-    {
-        Card[] hand;
-        if (whichHand == 1)
-            hand = player;
-        else
-            hand = computer;
-            if (hand.length > 0)
-                return false;
     }
 
 
     public static void playerPlays() {
-        //check hand for legal cards, label them
-//        int x = 1, y = 0;
-//        int[] cards = new int[52];
-//        for (int i = 0; i < player.length; i++) {
-//            if (player[i] > 0) {
-//                if (cardLegal(player[i])) {
-//                    cards[x] = i;
-//                    x++;
-//                }
-//                y++;
-//            }
-//        }
-//        if (x > 1) { //has legal cards
-//
-//            int playCard = IOHandler.promptForIntWithMessage("Enter a card number to play: ");
+        if (!emptyHand(2)) {
+            //check if there are legal cards to play
+            //if there are:
+            String pickCard = "Pick a card to play: \n";
+            answerInt = IOHandler.promptForIntWithMessage(pickCard);
 //            while (playCard < 1 || playCard + 1 > x) {
 //                answerInt = IOHandler.promptForIntWithMessage("Invalid number. Enter a card number to play: ");
 //            }
 //            facedownDeck = player[cards[playCard]];
 //            player[cards[playCard]] = 0;
-//            if ((facedownDeck) % 13 == 8) { //card is eight, change suit
+//            if (facedownDeck == 8) { //card is eight, change suit
 //                String newSuit =
 //                        IOHandler.promptForStringWithMessage("Enter the 1st letter of the suit you want to change to: ");
 //
 //                if (newSuit.equalsIgnoreCase("S")) {
-//                    facedownDeck = 8;
+//                    facedownDeck = "Spades";
 //                } else if (newSuit.equalsIgnoreCase("H")) {
-//                    facedownDeck = 21;
+//                    facedownDeck = "Hearts";
 //                } else if (newSuit.equalsIgnoreCase("D")) {
-//                    facedownDeck = 34;
+//                    facedownDeck = "Diamonds";
 //                } else if (newSuit.equalsIgnoreCase("C")) {
-//                    facedownDeck = 47;
+//                    facedownDeck = "Clubs";
 //                }
 //            }
 //        } else { //no legal cards
 //            answerInt = IOHandler.promptForIntWithMessage("You can't play any of your cards. Press 0 to draw a card.");
-//
-//            boolean filled = false;
-//            int i = 0;
-//            drawCard(filled, i, player);
-//        }
-//        render();
+//            deck.pull();
+//            }
+        }
     }
 
     public static void computerPlays() {
-//        if (!emptyHand(1)) {
-//            String computerTurn = "Press ANY KEY to let the computer play.\n";
-//            answer = IOHandler.promptForStringWithMessage(computerTurn);
-//
+        if (!emptyHand(1)) {
+            String computerTurn = "Press ANY KEY to let the computer play.\n";
+            answer = IOHandler.promptForStringWithMessage(computerTurn);
+        }
+
 //            answer.charAt(0);
 //            int eight = -1;
 //            boolean played = false;
@@ -213,104 +226,11 @@ public class CrazyEights implements Game {
 //            }
 //        }
 //        render();
-    }
-
-    private static void drawCard(boolean filled, int i, int[] computer) {
-        while (!filled && i < computer.length) {
-            if (computer[i] == 0) {
-                computer[i] = getCard();
-                if (computer[i] == 0) {
-                    deckEmpty = true;
-                }
-                filled = true;
-            }
-            i++;
         }
-    }
 
-
-    public static boolean cardLegal(int card)  //check whether card matches suit, rank of pile or is eight
-    {
-        if ((card) % 13 == 8) { //card is 8
-            return true;
-        } else if ((card) / 13 == (facedownDeck) / 13) { //card matches suit
-            return true;
-        } else if ((card) % 13 == (facedownDeck) % 13) { //card matches rank
-            return true;
-        }
-        return false;
-    }
-
-    public static String shownValue(int card)  // convert card rank to shown rank
-    {
-        int val = card % 13;
-        if (val == 0)
-            return "A";
-        else if (val <= 9)
-            return "" + val;
-        else if (val == 10)
-            return "J";
-        else if (val == 11)
-            return "Q";
-        else if (val == 12)
-            return "K";
-        return "X";
-    }
-
-    public static String shownSuit(int card)  // convert suit 1-4 to SHDC
-    {
-        int suitnum = card / 13;
-        if (suitnum == 0) // spades
-            return "\u2660";
-        else if (suitnum == 1) // hearts
-            return "\u2665";
-        else if (suitnum == 2) // diamonds
-            return "\u2666";
-        else if (suitnum == 3) // clubsm
-            return "\u2663";
-        return "X";
-    }
-
-    public static void drawCard(int value, int x, int y, boolean hidden) {
-        String rank = shownValue(value);
-        String suit = shownSuit(value);
-    }
-
-
-    public static void render() {
-//        int x = 0;
-//        for (int i = 0; i < computer.length; i++) { //computer's hand
-//            if (computer[i] != 0) {
-//                drawCard(computer[i], 670 - x * 40, 30, true);
-//                x++;
-//            }
-//        }
-//        x = 0;
-//        for (int i = 0; i < player.length; i++) { //player's hand
-//            if (player[i] != 0) {
-//                drawCard(player[i], 30 + x * 40, 400, false);
-//                x++;
-//            }
-//        }
-//        //discard pile
-//        drawCard(facedownDeck, 350, 215, false);
-
-    }
-
-    @Override
-    public void play(Player player) {
-        intro();
-
-    }
 
     @Override
     public void quitGame() {
-
-    }
-
-    @Override
-    public void runWelcome() {
-
     }
 
     @Override
@@ -318,4 +238,5 @@ public class CrazyEights implements Game {
         return null;
     }
 }
+
 
