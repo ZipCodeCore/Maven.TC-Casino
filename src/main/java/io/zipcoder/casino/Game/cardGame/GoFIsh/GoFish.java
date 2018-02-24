@@ -4,6 +4,7 @@ import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.House;
+import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 
 
@@ -21,11 +22,16 @@ public class GoFish extends CardGame {
     }
 
 
+
     public void deal() {
             for (int i = 0; i < 7; i++) {
             user.getHand().addCard(deck.getCard());
             dealer.getHand().addCard(deck.getCard());
         }
+    }
+
+    public void addPlayer(Player player) {
+
     }
 
 

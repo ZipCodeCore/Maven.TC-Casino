@@ -8,8 +8,6 @@ public class CardPlayer extends Player {
 
     protected Hand hand;
     protected int score;
-    protected boolean isCurrentPlayer;
-
 
     public CardPlayer(Profile someProfile) {
         super(someProfile);
