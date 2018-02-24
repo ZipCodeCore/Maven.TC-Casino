@@ -31,7 +31,7 @@ public class Hand {
 
     public void receiveCards(Card... cards) {
         for (Card card : cards) {
-            handArrayList.add(card);
+            handArrayList.add(0, card);
         }
     }
 
