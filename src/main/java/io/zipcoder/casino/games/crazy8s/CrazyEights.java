@@ -25,16 +25,30 @@ public class CrazyEights implements Game {
     public void intro() {
 
     do {
-        String intro = "Welcome to Crazy Eights!\n" +
-                "Press ANY KEY to start the game.\n" +
-                "Or type EXIT to exit";
+        String intro =
+                "****** WELCOME TO CRAZY EIGHTS! ******\n" +
+                "*                                    *\n" +
+                "*                                    *\n" +
+                "* This is a non-gambling game so,    *\n" +
+                "*       Hold on to your chips!!      *\n" +
+                "*                                    *\n" +
+                "*                                    *\n" +
+                "**************************************\n" +
+                "*                                    *\n" +
+                "*        Press 'Y' to PLAY           *\n" +
+                "*        Press 'Q' to QUIT           *\n" +
+                "*        Press 'R' for RULES         *\n" +
+                "*                                    *\n" +
+                "**************************************\n";
         answer = IOHandler.promptForStringWithMessage(intro);
-    if(answer.equalsIgnoreCase("exit")){
+    if(answer.equalsIgnoreCase("q")){
         continue;
-    }
+    }else if(answer.equalsIgnoreCase("r")){
+        IOHandler.printMessage(IOHandler.getMessageFromFile("CrazyEights.txt"));
+    }else
         beginGame();
     }
-    while(!answer.equalsIgnoreCase("exit"));
+    while(!answer.equalsIgnoreCase("q"));
     }
 
     public void beginGame() {
@@ -83,17 +97,15 @@ public class CrazyEights implements Game {
 
     public static boolean emptyHand(int whichHand)  //check if any hand is empty (1 = player, 2 = computer)
     {
-//        int[] hand;
-//        if (whichHand == 1)
-//            hand = player;
-//        else
-//            hand = computer;
-//        for (int x = 0; x < hand.length; x++) {
-//            if (hand[x] > 0)
-//                return false;
-//        }
-        return true;
+        Card[] hand;
+        if (whichHand == 1)
+            hand = player;
+        else
+            hand = computer;
+            if (hand.length > 0)
+                return false;
     }
+
 
     public static void playerPlays() {
         //check hand for legal cards, label them

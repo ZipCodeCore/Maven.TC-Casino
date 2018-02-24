@@ -22,10 +22,9 @@ public class IOHandlerTest {
 
     @Test
     public void testReadFromExistingFile() {
-        String expected = "This file exists, I created it in vim";
+        String expected = "This file exists, I created it in vim\n";
         String file = "testReadExisting.txt";
         String actual = IOHandler.getMessageFromFile(file);
-
         Assert.assertEquals(expected, actual);
     }
 }

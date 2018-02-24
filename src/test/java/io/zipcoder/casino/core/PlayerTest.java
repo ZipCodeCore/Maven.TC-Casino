@@ -9,7 +9,7 @@ public class PlayerTest {
 
     @Test
     public void canCoverBetTest() {
-        Integer bet = 10;
+        Long bet = 10l;
         Boolean actual = player.canCoverBet(bet);
         Assert.assertTrue(actual);
     }
