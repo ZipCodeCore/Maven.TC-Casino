@@ -1,12 +1,13 @@
 package io.zipcoder.casino;
 
 enum BlackJackChoices {
-    Hit("Say hit to hit");
+    BET,
+    HIT,
+    STAND,
+    SPILT;
 
 
-    BlackJackChoices(String s) {
-    }
-    public String getGrahicalRepresentation() {
-        return null;
+    public String toString() {
+        return name().replaceAll("_", " ");
     }
 }
