@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Game.cardGame.GoFIsh;
 
+import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
@@ -19,8 +20,9 @@ public class GoFish extends CardGame {
         super();
         user = new GoFishPlayer(userProfile);
         dealer = new GoFishPlayer(House.HOUSE_PROFILE);
+        addPlayer(user);
+        addPlayer(dealer);
     }
-
 
 
     public void deal() {
@@ -30,12 +32,10 @@ public class GoFish extends CardGame {
         }
     }
 
-    public void addPlayer(Player player) {
 
-    }
+    public boolean ask(GoFishPlayer asker, GoFishPlayer checker, Card card) {
 
-
-    public boolean ask(Card card) {
+        if (asker.)
 
         return true;
     }

@@ -4,7 +4,7 @@ import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 
-public class CardPlayer extends Player {
+public abstract class CardPlayer extends Player {
 
 
     private boolean isCurrentPlayer;
