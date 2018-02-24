@@ -59,10 +59,32 @@ public class CrapsTest {
     }
 
     @Test
-    public void checkPhaseTwoRollsTest5() { // Checks Field Bet
+    public void checkPhaseTwoRollsTest5() { // Checks Field Double Bet
         crapsTest.getDiceManager().setSpecificDie(0, DieFace.ONE);
         crapsTest.getDiceManager().setSpecificDie(1, DieFace.ONE);
         crapsTest.setFieldBet(10);
+        crapsTest.checkPhaseTwoRolls();
+        int expected = 20;
+        int actual = crapsTest.getPlayer().getWallet().checkChipAmount();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkPhaseTwoRollsTest6() { // Checks Field Bet
+        crapsTest.getDiceManager().setSpecificDie(0, DieFace.TWO);
+        crapsTest.getDiceManager().setSpecificDie(1, DieFace.ONE);
+        crapsTest.setFieldBet(10);
+        crapsTest.checkPhaseTwoRolls();
+        int expected = 10;
+        int actual = crapsTest.getPlayer().getWallet().checkChipAmount();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkPhaseTwoRollsTest7() { // Checks Field Bet
+        crapsTest.getDiceManager().setSpecificDie(0, DieFace.TWO);
+        crapsTest.getDiceManager().setSpecificDie(1, DieFace.TWO);
+        crapsTest.setPassOddsBet(10);
         crapsTest.checkPhaseTwoRolls();
         int expected = 20;
         int actual = crapsTest.getPlayer().getWallet().checkChipAmount();
