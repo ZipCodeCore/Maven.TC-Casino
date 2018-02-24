@@ -13,14 +13,6 @@ public class Person {
         this.name = name;
         this.hand = new Hand();
         this.wallet = new Wallet();
-
-    }
-
-    public Person(String name, Integer amount) {
-        this.name = name;
-        this.hand = new Hand();
-        this.wallet = new Wallet();
-        wallet.addChipsToAmount(amount);
     }
 
     public String getName() {

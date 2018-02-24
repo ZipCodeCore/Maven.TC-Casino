@@ -5,16 +5,26 @@ import org.junit.Test;
 
 public class MainMenuTest {
 
-    //follow the prompts in the scanner to create the person for the test
-    public static void main(String[] args) {
-        MainMenu menu = new MainMenu();
-        menu.makePerson();
-        //this checks to make sure player is created
-        System.out.println(menu.player.getName());
-        menu.chooseGame();
-        System.out.println(menu.player.getName());
+    @Test
+    public void testChooseGame() {
+        String chosenGame = "war";
+        Person player = new Person ("Adam");
+        Game expected = new War("Adam");
+
+        Game actual = MainMenu.chooseGame(chosenGame, player);
+
+        Assert.assertEquals(actual, expected);
     }
 
+    @Test
+    public void testChooseGame2() {
+        String chosenGame = "theibhwn";
+        Person player = new Person ("Adam");
+        Game expected = new War("Adam");
 
+        Game actual = MainMenu.chooseGame(chosenGame, player);
+
+        Assert.assertNotEquals(actual, expected);
+    }
 
 }
