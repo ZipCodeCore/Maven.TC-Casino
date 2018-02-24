@@ -34,19 +34,10 @@ public class CeeLoTest {
     }
 
     @Test
-    public void testGetPlayerPoint() {
+    public void testGetPoint() {
         Integer[] i = {1, 2, 3, 4, 5, 6};
         List<Integer> expected = new ArrayList<>(Arrays.asList(i));
-        int actual = clo.getPlayerPoint();
-
-        Assert.assertTrue(expected.contains(actual));
-    }
-
-    @Test
-    public void testGetBankerPoint() {
-        Integer[] i = {1, 2, 3, 4, 5, 6};
-        List<Integer> expected = new ArrayList<>(Arrays.asList(i));
-        int actual = clo.getBankerPoint();
+        int actual = clo.rollForPoint();
 
         Assert.assertTrue(expected.contains(actual));
     }
