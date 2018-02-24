@@ -1,6 +1,5 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
 import io.zipcoder.casino.Games.Dealer.Dealer;
@@ -41,7 +40,7 @@ public class Blackjack implements Game{
     }
 
     public void endGame(){
-        System.out.println("Ok bye.");
+        System.out.println("See you 'round, pardner.");
     }
 
     public Blackjack(Player entryPlayer){
@@ -56,6 +55,7 @@ public class Blackjack implements Game{
         }
         System.out.println("Ante up! 10 chips in the pot");
         setBetAmount(10);
+        promptBet();
         boolean hitchoice = playerHitOption();
         while (player.isCanHit() && hitchoice && player.getHandValue() < 22){
             deal();
@@ -157,6 +157,8 @@ public class Blackjack implements Game{
             payoutWin();
         } else if (player.getHandValue() > 21){
             payoutLoss();
+        } else if (player.getHandValue() < 22 && bkjkDealer.getHandValue() > 21){
+            payoutWin();
         } else {
             payoutLoss();
         }
@@ -164,6 +166,27 @@ public class Blackjack implements Game{
 
     public void setBetAmount(int betAmount) {
         this.betAmount = betAmount;
+    }
+
+    public void promptBet(){
+        InputOutput inputOutput = new InputOutput();
+        int betChoice = inputOutput.promptForInt("Care to bet?\n1 for YES, 2 for NO");
+        if (betChoice == 1) betProcess();
+    }
+
+    public void betProcess(){
+        System.out.println(player.getRootPlayer().getBalance() - betAmount + " chips available. How much will you bet?");
+        InputOutput inputOutput = new InputOutput();
+        int newBet = inputOutput.scanForInt();
+        if (newBet > 0 && newBet <= player.getRootPlayer().getBalance() - betAmount){
+            betAmount += newBet;
+            System.out.println("You added " + newBet + " to the pot.");
+        } else if (newBet > player.getRootPlayer().getBalance()){
+            System.out.println("You haven't got that much to bet, pardner!");
+        } else {
+            System.out.println("The maze isn't for you.");
+            secret();
+        }
     }
 
     public void payoutWin(){
@@ -176,5 +199,9 @@ public class Blackjack implements Game{
         int bet = getBetAmount();
         player.payoutLoss(bet);
         System.out.println("Rough luck! You're down " + bet + " chips.");
+    }
+
+    public void secret(){
+
     }
 }
