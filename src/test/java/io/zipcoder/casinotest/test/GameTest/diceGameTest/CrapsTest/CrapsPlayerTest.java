@@ -33,7 +33,7 @@ public class CrapsPlayerTest {
         //When
         stinkyPete.bet(CrapsBet.PASS_LINE,75);
         double expectedEscrowBalance = 75;
-        double actualEscrowBalance = stinkyPete.getProfile().getEscrow(CrapsBet.PASS_LINE);
+        double actualEscrowBalance = stinkyPete.getEscrowBet(CrapsBet.PASS_LINE);
 
         //Then
         Assert.assertEquals(expectedEscrowBalance, actualEscrowBalance, 0.01);
@@ -49,8 +49,8 @@ public class CrapsPlayerTest {
         stinkyPete.bet(CrapsBet.HARD_EIGHT, 10);
         double expectedPL = 25;
         double expectedHE = 10;
-        double actualPL = stinkyPete.getProfile().getEscrow(CrapsBet.PASS_LINE);
-        double actualHE = stinkyPete.getProfile().getEscrow(CrapsBet.HARD_EIGHT);
+        double actualPL = stinkyPete.getEscrowBet(CrapsBet.PASS_LINE);
+        double actualHE = stinkyPete.getEscrowBet(CrapsBet.HARD_EIGHT);
 
         //Then
         Assert.assertTrue(expectedPL == actualPL && expectedHE == actualHE);
@@ -81,7 +81,7 @@ public class CrapsPlayerTest {
         stinkyPete.bet(CrapsBet.PASS_LINE, 25);
         stinkyPete.bet(CrapsBet.PASS_LINE, 75);
         double expected = 100;
-        double actual = stinkyPete.getProfile().getEscrow(CrapsBet.PASS_LINE);
+        double actual = stinkyPete.getEscrowBet(CrapsBet.PASS_LINE);
 
         //Then
         Assert.assertEquals(expected,actual,0.01);
@@ -98,7 +98,7 @@ public class CrapsPlayerTest {
         double expectedBalance = 75;
         double actualBalance = stinkyPete.getProfile().getAccountBalance();
         double expectedEscrow = 25;
-        double actualEscrow = stinkyPete.getProfile().getEscrow(CrapsBet.PASS_LINE);
+        double actualEscrow = stinkyPete.getEscrowBet(CrapsBet.PASS_LINE);
 
         //Then
         Assert.assertTrue(expectedBalance == actualBalance && expectedEscrow == actualEscrow);
@@ -183,7 +183,7 @@ public class CrapsPlayerTest {
         //When
         stinkyPete.win(CrapsBet.PASS_LINE,1);
         double expectedEscrow = 0;
-        double actualEscrow = stinkyPete.getProfile().getEscrow(CrapsBet.PASS_LINE);
+        double actualEscrow = stinkyPete.getEscrowBet(CrapsBet.PASS_LINE);
 
         //Then
         Assert.assertEquals(expectedEscrow,actualEscrow, 0.01);
@@ -214,7 +214,7 @@ public class CrapsPlayerTest {
         //When
         stinkyPete.lose(CrapsBet.PASS_LINE);
         double expected = 0;
-        double actual = stinkyPete.getProfile().getEscrow(CrapsBet.PASS_LINE);
+        double actual = stinkyPete.getEscrowBet(CrapsBet.PASS_LINE);
 
         //Then
         Assert.assertEquals(expected,actual,0.01);
