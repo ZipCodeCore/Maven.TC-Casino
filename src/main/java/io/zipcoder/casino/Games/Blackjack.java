@@ -201,6 +201,12 @@ public class Blackjack implements Game{
     }
 
     public void secret(){
-        System.out.println("The maze isn't for you.");
+        if (player.getName().equals("Bernard") || player.getName().equals("Dolores")) {
+            System.out.println("These violent delights have violent ends.");
+            
+        }
+        else {
+            System.out.println("The maze isn't for you.");
+        }
     }
 }
