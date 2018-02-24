@@ -1,5 +1,7 @@
 package io.zipcoder.casino.Players;
 import io.zipcoder.casino.GameTools.Deck.Card;
+import io.zipcoder.casino.InputOutput.InputOutput;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,4 +19,6 @@ public class GoFishAI extends GoFishPlayer {
     public int getNumPairs() {
         return numPairs;
     }
+
 }
+

@@ -42,23 +42,24 @@ public class GoFishPlayerTest {
     }
 
     @Test
-    public void getCardHandTest() {
-        Player player1 = new Player("Bob", 34);
+    public void getNumPairsTest() {
+        Player player1 = new Player("Phoebe", 24);
         GoFishPlayer goFishPlayer1 = new GoFishPlayer(player1);
 
-        //List<Card> cardHand = new ArrayList<Card>();
-        Card temp1 = new Card(Rank.ACE, Suit.HEARTS);
-        Card temp2 = new Card(Rank.FOUR, Suit.DIAMOND);
-        Card temp3 = new Card(Rank.QUEEN, Suit.SPADE);
-        goFishPlayer1.cardHand.add(temp1);
-        goFishPlayer1.cardHand.add(temp2);
-        goFishPlayer1.cardHand.add(temp3);
+        int expected = 0;
+        int actual = goFishPlayer1.getNumPairs();
 
-//        List<Card> expectedCards =
-//        List<Card> actualCards = goFishPlayer1.getCardHand();
-//
-//        Assert.assertEquals(expectedCards, actualCards);
+        Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void hasCardTest(){
+        Player player1 = new Player("Sue", 89);
+        GoFishPlayer goFishPlayer1 = new GoFishPlayer(player1);
 
+        Card temp1 = new Card(Rank.ACE, Suit.HEARTS);
+        goFishPlayer1.cardHand.add(temp1);
+
+        Assert.assertTrue(goFishPlayer1.cardHand.contains(temp1));
+    }
 }

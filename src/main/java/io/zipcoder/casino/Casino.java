@@ -7,6 +7,7 @@ import io.zipcoder.casino.Games.GoFish;
 import io.zipcoder.casino.Games.War;
 import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.Players.Player;
 import java.util.ArrayList;
 
@@ -18,9 +19,8 @@ public class Casino {
     private boolean isPlaying = true;
 
     protected String askUserName(){
-        //String name = inputOutput.promptForString("Hello Player! What is your name?");
-        //return name;
-        return null;
+        String name = inputOutput.promptForString("Hello Player! What is your name?");
+        return name;
     }
 
     protected Integer askUserAge(){
@@ -61,14 +61,14 @@ public class Casino {
     }
 
     protected Game selectGame(String selectedGame) {
-        Game game;
+        Game game = null;
 
         switch (selectedGame) {
             case "War":
                 game = new War();
                 break;
             case "Go Fish":
-                game = new GoFish();
+                game = new GoFish(new GoFishPlayer(player));
                 break;
             case "BlackJack":
                 game = new Blackjack();

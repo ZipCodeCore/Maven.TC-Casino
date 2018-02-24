@@ -8,14 +8,23 @@ public class GoFishTest {
 
     @Test
     public void dealTest() {
-
-        //GoFish game = new GoFish();
         Player player1 = new Player();
         Player goFishPlayer1 = new GoFishPlayer(player1);
+    }
 
+    @Test
+    public void displayCardHandTest() {
 
 
     }
+
+
+
+
+
+
+
+
 
     @Test
     public void buildStockPileTest() {
@@ -41,11 +50,4 @@ public class GoFishTest {
     public void goFishTest() {
 
     }
-
-    @Test
-    public void displayCardHandTest() {
-
-
-    }
-
 }
