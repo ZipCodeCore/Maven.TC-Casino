@@ -16,7 +16,6 @@ public class Blackjack implements Game{
     protected BlackjackPlayer player;
     protected Deck deck;
     protected Dealer bkjkDealer;
-    public InputOutput inputOutput = new InputOutput();
     public boolean isPlaying = true;
 
     public void startGame(){
@@ -119,6 +118,7 @@ public class Blackjack implements Game{
         while (player.isCanHit()) {
             System.out.println("You're holding: " + currentHand + "\nWill you hit?\n1 for YES, 2 for NO");
             String userChoice;
+            InputOutput inputOutput = new InputOutput();
             userChoice = inputOutput.scanForString();
             if (userChoice.equals("1")) return true;
             else {
@@ -134,6 +134,7 @@ public class Blackjack implements Game{
     }
 
     public void playAgainCheck(){
+        InputOutput inputOutput = new InputOutput();
         int feedback = inputOutput.promptForInt("How 'bout another hand?\n1 for YES, 2 for NO");
         if (feedback == 2){
             setPlaying(false);
