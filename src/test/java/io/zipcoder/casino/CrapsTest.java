@@ -81,10 +81,11 @@ public class CrapsTest {
     }
 
     @Test
-    public void checkPhaseTwoRollsTest7() { // Checks Field Bet
+    public void checkPhaseTwoRollsTest7() { // Checks Pass Odds bet
         crapsTest.getDiceManager().setSpecificDie(0, DieFace.TWO);
         crapsTest.getDiceManager().setSpecificDie(1, DieFace.TWO);
         crapsTest.setPassOddsBet(10);
+        crapsTest.setPoint(4);
         crapsTest.checkPhaseTwoRolls();
         int expected = 20;
         int actual = crapsTest.getPlayer().getWallet().checkChipAmount();
