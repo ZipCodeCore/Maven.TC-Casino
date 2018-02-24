@@ -6,6 +6,19 @@ import java.util.Scanner;
 
 public class MainMenu {
 
+    Game game;
+
+    public MainMenu(){
+        this.game = game;
+    }
+
+    public void setMainMenu(Game game) {
+        this.game = game;
+    }
+
+    public Game getMainMenu() {
+        return game;
+    }
 
     public String displayGameChoices() {
         Scanner in = new Scanner(System.in);
