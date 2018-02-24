@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class Blackjack implements Game{
 
-    protected ArrayList<BlackjackPlayer> playerList;
+    protected BlackjackPlayer player;
     protected Deck deck;
     protected Dealer bkjkDealer;
     public InputOutput inputOutput = new InputOutput();
@@ -27,35 +27,30 @@ public class Blackjack implements Game{
         deck = new Deck();
         deck.shuffleDeck();
         initialHand();
-        for (BlackjackPlayer currentPlayer : playerList){
-            runTurn(currentPlayer);
-        }
+        runTurn();
     }
 
     public void endGame(){
 
     }
 
-    public Blackjack(Player... players){
+    public Blackjack(Player entryPlayer){
         deck = new Deck();
         bkjkDealer = new Dealer();
-        playerList = new ArrayList<>();
-        for (Player rootPlayer:players) {
-            playerList.add(new BlackjackPlayer(rootPlayer));
-        }
+        player = new BlackjackPlayer(entryPlayer);
     }
 
-    public void runTurn(BlackjackPlayer currentPlayer){
-        for (Card card:currentPlayer.getHand()) {
+    public void runTurn(){
+        for (Card card:player.getHand()) {
             System.out.println(card.toString());
         }
 
         dealerTurn();
     }
 
-    public void deal(BlackjackPlayer currentPlayer){
+    public void deal(){
         Card temp = this.deck.deck.get(0);
-        currentPlayer.addToHand(temp);
+        this.player.addToHand(temp);
         this.deck.deck.remove(0);
     }
 
@@ -66,10 +61,8 @@ public class Blackjack implements Game{
     }
 
     public void initialHand(){
-        for (BlackjackPlayer thisPlayer:this.playerList) {
-            this.deal(thisPlayer);
-            this.deal(thisPlayer);
-        }
+        this.deal();
+        this.deal();
         this.dealToDealer();
         this.dealToDealer();
     }
@@ -102,7 +95,6 @@ public class Blackjack implements Game{
 
     public boolean playerHitOption(){
         StringBuilder currentHand = new StringBuilder("| ");
-        BlackjackPlayer player = this.playerList.get(0);
         for (Card card : player.getHand()){
             currentHand.append(card.toString() + " | ");
         }

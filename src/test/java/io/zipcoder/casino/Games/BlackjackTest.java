@@ -24,7 +24,7 @@ public class BlackjackTest {
 
     @Test
     public void constructorTest(){
-        String actual = game.playerList.get(0).getName();
+        String actual = game.player.getName();
         String expected = sue.getName();
         Assert.assertEquals(expected, actual);
     }
@@ -32,8 +32,8 @@ public class BlackjackTest {
     @Test
     public void dealTest(){
         Card expected = game.deck.deck.get(0);
-        game.deal(sueBKJK);
-        Card actual = sueBKJK.getHand().get(0);
+        game.deal();
+        Card actual = game.player.getHand().get(0);
         Assert.assertEquals(expected, actual);
     }
 
@@ -41,7 +41,7 @@ public class BlackjackTest {
     public void initialHandTest(){
         Card expected = game.deck.deck.get(1);
         game.initialHand();
-        Card actual = game.playerList.get(0).getHand().get(1);
+        Card actual = game.player.getHand().get(1);
         Assert.assertEquals(expected, actual);
     }
 
@@ -50,16 +50,6 @@ public class BlackjackTest {
         Card expected = game.deck.deck.get(2);
         game.initialHand();
         Card actual = game.bkjkDealer.getHand().get(0);
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void initialHandWithMultiplePlayersTest(){
-        Player jim = new Player("jim", 38, 300);
-        Blackjack testbed = new Blackjack(sue, jim);
-        Card expected = testbed.deck.deck.get(3);
-        testbed.initialHand();
-        Card actual = testbed.playerList.get(1).getHand().get(1);
         Assert.assertEquals(expected, actual);
     }
 

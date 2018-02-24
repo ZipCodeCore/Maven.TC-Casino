@@ -36,7 +36,7 @@ public String passLineBetRollNonWinLoseNumber(){
 }
 
 public void startGame(){
-
+    endGame();
 }
 
 public void endGame(){
