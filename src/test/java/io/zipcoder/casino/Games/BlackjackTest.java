@@ -39,15 +39,15 @@ public class BlackjackTest {
     @Test
     public void initialHandTest(){
         Card expected = game.deck.deck.get(1);
-        game.initialHand(sueBKJK);
-        Card actual = sueBKJK.getHand().get(1);
+        game.initialHand();
+        Card actual = game.playerList.get(0).getHand().get(1);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void initialHandDealerTest(){
         Card expected = game.deck.deck.get(2);
-        game.initialHand(sueBKJK);
+        game.initialHand();
         Card actual = game.bkjkDealer.getHand().get(0);
         Assert.assertEquals(expected, actual);
     }
@@ -55,10 +55,10 @@ public class BlackjackTest {
     @Test
     public void initialHandWithMultiplePlayersTest(){
         Player jim = new Player("jim", 38, 300);
-        BlackjackPlayer jimBKJK = new BlackjackPlayer(jim);
-        Card expected = game.deck.deck.get(3);
-        game.initialHand(sueBKJK, jimBKJK);
-        Card actual = jimBKJK.getHand().get(1);
+        Blackjack testbed = new Blackjack(sue, jim);
+        Card expected = testbed.deck.deck.get(3);
+        testbed.initialHand();
+        Card actual = testbed.playerList.get(1).getHand().get(1);
         Assert.assertEquals(expected, actual);
     }
 
@@ -91,7 +91,8 @@ public class BlackjackTest {
 
     @Test
     public void startTest() {
-        game.startGame();
+        Blackjack testbed = new Blackjack(sue);
+        testbed.startGame();
     }
 
 

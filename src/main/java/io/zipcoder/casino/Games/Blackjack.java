@@ -16,12 +16,12 @@ public class Blackjack implements Game{
     protected Dealer bkjkDealer;
 
     public void startGame(){
-//        deck = new Deck();
-//        //deck.shuffleDeck();
-//        initialHand();
-//        for (BlackjackPlayer currentPlayer : playerList){
-//            runTurn(currentPlayer);
-//        }
+        deck = new Deck();
+        deck.shuffleDeck();
+        initialHand();
+        for (BlackjackPlayer currentPlayer : playerList){
+            runTurn(currentPlayer);
+        }
 
     }
 
@@ -57,8 +57,8 @@ public class Blackjack implements Game{
         System.out.println(this.deck.deck.size());
     }
 
-    public void initialHand(BlackjackPlayer... blackjackPlayers){
-        for (BlackjackPlayer thisPlayer:blackjackPlayers) {
+    public void initialHand(){
+        for (BlackjackPlayer thisPlayer:this.playerList) {
             this.deal(thisPlayer);
             this.deal(thisPlayer);
         }
