@@ -30,14 +30,30 @@ public class CrapsGame extends DiceGame {
     }
 
     public void comeOutPhase(){
+        Console.print(bar);
+        Console.print("The game is in the Come Out phase");
+        int roll = this.getRollValue();
+        if(isNatural(roll)){
+            Console.print("You rolled a natural");
+            this.rollIsNaturalPayout();
+            this.turn();
+        }
+        else if(isCraps(roll)){
 
-
-
+        }
+        else{
+            this.point = roll;
+            this.isComeOutPhase=false;
+            this.turn();
+        }
 
     }
+
     public void pointPhase(){
-
+        Console.print(bar);
+        int roll = this.getRollValue();
     }
+
     public void turn(){
 
         String rollOrBet;
@@ -46,8 +62,12 @@ public class CrapsGame extends DiceGame {
             Console.print("Would you like to [roll] or [bet]?");
             rollOrBet = Console.getString();
             if (rollOrBet.equalsIgnoreCase("roll")) {
-                Console.print(bar);
-                int roll = this.getRollValue();
+                if(isComeOutPhase){
+                    this.comeOutPhase();
+                }
+                else{
+                    this.pointPhase();
+                }
             } else if (rollOrBet.equalsIgnoreCase("bet")) {
                 Console.print(bar);
                 this.selectBet();
@@ -143,6 +163,17 @@ public class CrapsGame extends DiceGame {
         Console.print(bar);
         Console.print("Your bet has been placed.  Your current balance is now: $" + currentPlayer.getProfile().getAccountBalance());
         return wasBetPlaced;
+    }
+
+    public void rollIsNaturalPayout(){
+        if(currentPlayer.isPassLine()){
+            Console.print("Your Pass Line bet pays even money!");
+            currentPlayer.win(CrapsBet.PASS_LINE, 1);
+        }
+        else if(!currentPlayer.isPassLine()){
+            Console.print("Your Do Not Pass bet loses");
+            currentPlayer.lose(CrapsBet.DO_NOT_PASS);
+        }
     }
 
 
