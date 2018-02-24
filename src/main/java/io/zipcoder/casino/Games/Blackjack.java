@@ -9,14 +9,19 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
 
+import java.io.BufferedReader;
+import java.io.Console;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Blackjack implements Game{
 
     protected ArrayList<BlackjackPlayer> playerList;
     protected Deck deck;
     protected Dealer bkjkDealer;
-    protected InputOutput inputOutput = new InputOutput();
+    public InputOutput inputOutput = new InputOutput();
 
     public void startGame(){
         deck = new Deck();
@@ -44,6 +49,8 @@ public class Blackjack implements Game{
         for (Card card:currentPlayer.getHand()) {
             System.out.println(card.toString());
         }
+
+        dealerTurn();
     }
 
     public void deal(BlackjackPlayer currentPlayer){
@@ -93,16 +100,27 @@ public class Blackjack implements Game{
         return false;
     }
 
-    public boolean playerHitOption(BlackjackPlayer player){
+    public boolean playerHitOption(){
         StringBuilder currentHand = new StringBuilder("| ");
+        BlackjackPlayer player = this.playerList.get(0);
         for (Card card : player.getHand()){
             currentHand.append(card.toString() + " | ");
         }
-        System.out.println("You're holding: " + currentHand + "\nWill you hit?\n1 for YES, 2 for NO");
-        int userChoice = inputOutput.scanForInt();
-        if (userChoice == 1) return true;
-        else if (userChoice == 2) return false;
-        return false;
+        Boolean x = runPlayerHit(currentHand, player);
+        if (x != null) return x;
+        return x;
     }
+
+    public Boolean runPlayerHit(StringBuilder currentHand, BlackjackPlayer player) {
+        while (player.isCanHit()) {
+            System.out.println("You're holding: " + currentHand + "Will you hit? 1 for YES, 2 for NO");
+            String userChoice;
+            userChoice = inputOutput.scanForString();
+            if (userChoice.equals("1")) return true;
+            else return false;
+        }
+        return null;
+    }
+
 
 }

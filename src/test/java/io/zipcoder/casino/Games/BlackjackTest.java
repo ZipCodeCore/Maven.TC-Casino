@@ -145,7 +145,8 @@ public class BlackjackTest {
         tempHand.add(new Card(Rank.THREE, Suit.HEARTS));
         tempHand.add(new Card(Rank.TEN, Suit.CLUBS));
         sueBKJK.setHand(tempHand);
-        Assert.assertTrue(game.playerHitOption(sueBKJK));
+        boolean actual = game.playerHitOption();
+        Assert.assertTrue(game.playerHitOption());
     }
 
     @Test
