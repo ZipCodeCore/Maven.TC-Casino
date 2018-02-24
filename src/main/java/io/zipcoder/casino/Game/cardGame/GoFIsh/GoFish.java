@@ -12,6 +12,7 @@ public class GoFish extends CardGame {
     private GoFishPlayer user;
     private GoFishPlayer dealer;
 
+
     public GoFish(Profile userProfile) {
 
         super();
@@ -34,8 +35,11 @@ public class GoFish extends CardGame {
     }
 
     public void transfer(Card card, Hand handTo, Hand handFrom) {
-        handTo.addCard(card);
-        handFrom.removeCard(card);
+        while(handFrom.hasCard(card)){
+            handTo.addCard(card);
+            handFrom.removeCard(card);
+        }
+
     }
 
 }
