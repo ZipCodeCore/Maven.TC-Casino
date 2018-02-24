@@ -1,11 +1,8 @@
 package io.zipcoder.casino.Game.cardGame.BLackJack;
 
+import io.zipcoder.casino.*;
 import io.zipcoder.casino.CasinoUtilities.Console;
-import io.zipcoder.casino.Gambler;
 import io.zipcoder.casino.Game.cardGame.CardPlayer;
-import io.zipcoder.casino.Player;
-import io.zipcoder.casino.Profile;
-import io.zipcoder.casino.TypeOfBet;
 
 public class BlackJackPlayer extends CardPlayer implements Gambler {
 

@@ -2,6 +2,7 @@ package io.zipcoder.casinotest.test.GameTest.cardGameTest.GoFishTest;
 
 import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFish;
 
+import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFishPlayer;
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,6 +22,7 @@ public class GoFishTest {
 
         testUserProfile = new Profile("Kibret", 100000, 2);
         testGame = new GoFish(testUserProfile);
+
     }
 
     @Test
