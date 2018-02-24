@@ -4,17 +4,18 @@ import io.zipcoder.casino.core.Player;
 import io.zipcoder.casino.games.Card;
 import io.zipcoder.casino.games.Deck;
 import io.zipcoder.casino.games.Rank;
+import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class BlackJack {
+public class BlackJack implements Game {
 
-    private int playerBet;
-    static long playerWallet;
     private Player player;
+    static Deck playingDeck;
+    static String output;
     private ArrayList<Card> playerValue;
     private ArrayList<Card> dealerValue;
     private ArrayList<Card> splitHandLeft;
@@ -25,46 +26,80 @@ public class BlackJack {
     private int dealerHandScore;
     private int insuranceBet;
 
-    Deck playingDeck;
-    static String output;
+    public BlackJack() {
 
-    public BlackJack(Player player) {
-        this.player = player;
     }
 
-    public void play(Player player) {}
+    public void welcomeToBlackJack() {
+        do {
+            String intro = "Welcome to BlackJack!\n" +
+                    "Press start to start the game.\n" +
+                    "Press q to exit if you hate fun.";
 
-    public static void main(String[] args) {
-        welcomeToBlackJack();
-    }
-    public static void welcomeToBlackJack() {
-        String intro = "Welcome to BlackJack!\n" +
-                "Press ANY KEY to start the game.\n";
-        output = IOHandler.promptForStringWithMessage(intro);
-        if (!output.equalsIgnoreCase(null)) {
-
+            output = IOHandler.promptForStringWithMessage(intro);
+            if (output.equalsIgnoreCase("start")) {
+                beginGame();
+            }
         }
+        while (!output.equalsIgnoreCase("q"));
     }
 
+    public void beginGame() {
 
-    public BlackJack(Deck playingDeck) {
-        this.playingDeck = playingDeck;
+        Deck playingDeck = new Deck();
         playerValue = new ArrayList<>();
         dealerValue = new ArrayList<>();
         splitHandLeft = new ArrayList<>();
         splitHandRight = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+
+        if(playerValue.size() == 0 && dealerValue.size() == 0){
             playerValue.add(playingDeck.pull(1)[0]);
             dealerValue.add(playingDeck.pull(1)[0]);
         }
 
+        getPlayerCardValue();
+        getDealerCardValue();
+
     }
 
-    //    public Integer placeBet(){
-//
-//    }
+
+    public void acePropertiesForPlayer() {
+        /**
+         * If a Card.Rank.Ace shows up,
+         * Ace can be either 1 or 11
+         * Dealer must choose 11 if dealerCardValue >= 17
+         * Player can choose 11 or 1 no matter what, as long as it does not bust.
+         * If a Card[0].Rank.Ace shows up for dealer, the player can place down Insurance bet of .5x bet.
+         */
+        if (playerValue.get(0).getRank().equals(Rank.ACE) || playerValue.get(1).getRank().equals(Rank.ACE)) {
+            String prompt = "What value do you want for your Ace?\n" +
+                    " 1 or 11?";
+            int output = IOHandler.promptForIntWithMessage(prompt);
+            if (output == 1) {
+                playerHandScore = 1 + playerValue.get(0).getIntValue();
+            }
+            if (output == 11) {
+                playerHandScore = 11 + playerValue.get(0).getIntValue();
+            }
+        }
+    }
+
+    public void acePropertiesForDealer() {
+        if (dealerValue.get(0).getRank().equals(Rank.ACE)) {
+            String prompt = "The dealer has an Ace, do you want to put down insurance?\n" +
+                    " Yes or No";
+            output = IOHandler.promptForStringWithMessage("Yes");
+            if (output.equalsIgnoreCase("Yes")) {
+                System.out.println("You put down insurance");
+            }
+            displayDealerHand();
+
+        }
+    }
+
     public Integer getPlayerCardValue() {
         playerHandScore = 0;
+       // playerValue.add(playingDeck.pull(1)[0]);
         for (Card pCard : playerValue) {
             playerHandScore += pCard.getIntValue();
         }
@@ -73,6 +108,7 @@ public class BlackJack {
 
     public Integer getDealerCardValue() {
         dealerHandScore = 0;
+      //  dealerValue.add(playingDeck.pull(1)[0]);
         for (Card dCard : dealerValue) {
             dealerHandScore += dCard.getIntValue();
         }
@@ -127,14 +163,19 @@ public class BlackJack {
     }
 
     public String displaySplitHands() {
+
         splitHandLeft.addAll(Arrays.asList(playerValue.get(0), playingDeck.pull(1)[0]));
         splitHandRight.addAll(Arrays.asList(playerValue.get(0), playingDeck.pull(1)[0]));
 
         String leftHand = splitHandLeft.toString();
         String rightHand = splitHandRight.toString();
         String splitHands = leftHand + rightHand;
-        return splitHands.toString();
+        return splitHands;
     }
+
+//    public String compareToTheDealer(){
+//        while (dealerHandScore < )
+//    }
 
     public String playerHitOrStand() {
         while (playerHandScore < 21) {
@@ -149,6 +190,9 @@ public class BlackJack {
                 playerHandScore = getPlayerCardValue();
             }
         }
+        if (playerHandScore == 21) {
+            return "You win!";
+        }
         return bust();
     }
 
@@ -156,15 +200,17 @@ public class BlackJack {
         return "Over 21, you bust!";
     }
 
-
-    public void aceProperties() {
-        /**
-         * If a Card.Rank.Ace shows up,
-         * Ace can be either 1 or 11
-         * Dealer must choose 11 if dealerCardValue >= 17
-         * Player can choose 11 or 1 no matter what, as long as it does not bust.
-         * If a Card[0].Rank.Ace shows up, the player can place down Insurance bet of .5x bet.
-         */
+    public String winCondition() {
+        if (playerHandScore > dealerHandScore) {
+            return "You Win!";
+        }
+        if (playerHandScore == dealerHandScore) {
+            return "You tied";
+        }
+        if (playerHandScore < dealerHandScore) {
+            return "You lost!";
+        }
+        return playerHitOrStand();
     }
 
     public void blackJackProperties() {
@@ -182,32 +228,44 @@ public class BlackJack {
          */
     }
 
+    public void play(Player player) {
+        welcomeToBlackJack();
+    }
+
+    @Override
+    public void quitGame() {
+
+    }
+
+    @Override
+    public void runWelcome() {
+
+    }
+
+    @Override
+    public String getRules() {
+        return null;
+    }
+
+
 //    public static void main(String[] args) {
 //
-//        String output;
 //        Deck playingDeck = new Deck();
-//        BlackJack blackJack = new BlackJack(playingDeck);
-//        int playerBet;
-//        long playerWallet;
-//        ArrayList<Card> playerValue;
-//        ArrayList<Card> dealerValue;
-//        int playerHandScore;
-//        int dealerHandScore;
-//        int insuranceBet;
-//        Integer splitNum = 0;
+//        BlackJack blackJack = new BlackJack();
 //
-//        playerValue = new ArrayList<>();
-//        dealerValue = new ArrayList<>();
+//
+//        ArrayList<Card> playerValue = new ArrayList<>();
+//        ArrayList<Card> dealerValue = new ArrayList<>();
 //        for (int i = 0; i < 2; i++) {
 //            playerValue.add(playingDeck.pull(1)[0]);
 //            dealerValue.add(playingDeck.pull(1)[0]);
 //        }
-//        System.out.println(blackJack.displayPlayerHand());
+//
 //        System.out.println(blackJack.getPlayerCardValue());
-//        System.out.println(blackJack.playerHitOrStand());
+//
 //
 //    }
-//}
+}
 //
 //    public void putInsurance(){
 //
@@ -232,4 +290,3 @@ public class BlackJack {
 //    public void wagerMultiplier(){
 //
 //    }
-}
