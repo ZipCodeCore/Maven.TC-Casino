@@ -6,10 +6,9 @@ import io.zipcoder.casino.Profile;
 
 public class CardPlayer extends Player {
 
-    private Hand hand;
-    private int score;
-    private boolean isCurrentPlayer;
-    Player player;
+    protected Hand hand;
+    protected int score;
+    protected boolean isCurrentPlayer;
 
 
     public CardPlayer(Profile someProfile) {
@@ -27,16 +26,6 @@ public class CardPlayer extends Player {
 
         return this.score;
     }
-
-    public void setPlayer(Player player){
-        this.player = player;
-
-    }
-    public Player getPlayer(){
-
-        return this.player;
-    }
-
 
     public void setHand (Hand aHand) {
         this.hand = aHand;

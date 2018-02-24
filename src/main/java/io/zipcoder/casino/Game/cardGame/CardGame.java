@@ -1,18 +1,27 @@
 package io.zipcoder.casino.Game.cardGame;
 
 import io.zipcoder.casino.Game.Game;
+import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFishPlayer;
 import io.zipcoder.casino.Game.cardGame.utilities.Deck;
+import io.zipcoder.casino.House;
 import io.zipcoder.casino.Player;
+import io.zipcoder.casino.Profile;
 
 import java.util.ArrayList;
 
 public abstract class CardGame implements Game {
 
-    private Deck deck;
+    protected Deck deck;
 
-    private ArrayList<Player>players;
+
     private int playerScore;
-    private Player winner;
+        private ArrayList<Player>players;
+
+
+    public CardGame() {
+
+        deck = new Deck();
+    }
 
 
     public Deck getDeck(){
@@ -22,9 +31,10 @@ public abstract class CardGame implements Game {
     public int calculateScore(){
         return playerScore;
     }
+
     public Player decideWinner( Player player1, Player player2){
 
-        return winner;
+        return null;
     }
     public void addPlayer(Player player) {
 
