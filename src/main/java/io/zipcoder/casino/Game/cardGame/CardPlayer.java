@@ -8,7 +8,7 @@ public class CardPlayer extends Player {
 
 
     private boolean isCurrentPlayer;
-    protected Hand hand;
+    protected Hand cardPlayerHand;
     protected int score;
 
     public CardPlayer(Profile someProfile) {

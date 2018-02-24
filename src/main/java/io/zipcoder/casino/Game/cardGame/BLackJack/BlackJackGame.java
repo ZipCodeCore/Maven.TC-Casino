@@ -15,11 +15,16 @@ public class BlackJackGame extends CardGame {
     BlackJackPlayer player;
     BlackJackPlayer dealer;
 
-        player = new BlackJackPlayer(userProfile);
-        this.addPlayer(player);
-        dealer = new BlackJackPlayer(null);
-        this.addPlayer(dealer);
-    }
+
+
+        public BlackJackGame(Profile profile){
+            player = new BlackJackPlayer(profile);
+            this.addPlayer(player);
+            dealer = new BlackJackPlayer(null);
+            this.addPlayer(dealer);
+
+        }
+
 
     public static void main(String[] args) {
         Profile someProfile = new Profile("Commander", 100.0, 1);
