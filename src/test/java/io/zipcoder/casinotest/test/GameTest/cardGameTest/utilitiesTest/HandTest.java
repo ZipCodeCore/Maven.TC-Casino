@@ -64,7 +64,7 @@ public class HandTest {
         testHand.addCard(card3);
         testHand.clear();
         int expected = 0;
-        int actual = testHand.getHand().size();
+        int actual = testHand.getCards().size();
         Assert.assertEquals(expected, actual);
     }
     @Test
@@ -77,7 +77,7 @@ public class HandTest {
         Card card3 = testDeck.getCard();
         testHand.addCard(card3);
         int expected = 1;
-        int actual = testHand.getHand().size();
+        int actual = testHand.getCards().size();
         Assert.assertEquals(expected, actual);
     }
 

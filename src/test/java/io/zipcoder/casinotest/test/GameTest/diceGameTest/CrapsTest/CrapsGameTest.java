@@ -19,29 +19,38 @@ public class CrapsGameTest {
 
     @Before
     public void setup(){
-        testGame = new CrapsGame(stinkyPete);
+        testGame = new CrapsGame(stinkyProfile);
         testGame.startGame();
     }
 
+
     @Test
-    public void comeOutPhaseTest(){
+    public void chooseBetStopTest(){
         //Given
         //testGame
+        String textBet = "stop";
 
         //When
-        ArrayList<Integer> expectedPoints = new ArrayList<Integer>();
-        expectedPoints.add(4);
-        expectedPoints.add(5);
-        expectedPoints.add(6);
-        expectedPoints.add(8);
-        expectedPoints.add(9);
-        expectedPoints.add(10);
-        //testGame.comeOutPhase();
-
-        int actualPoint = testGame.getPoint();
+        boolean expected = false;
+        boolean actual = testGame.chooseBet(textBet);
 
         //Then
-        Assert.assertTrue(expectedPoints.contains(actualPoint));
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void invalidBetTest(){
+        //Given
+        boolean betCondition = true;
+
+        //When
+        boolean expected = true;
+        boolean actual = testGame.isInvalidBet(betCondition);
+
+        //Then
+        Assert.assertEquals(expected,actual);
+
+
     }
 
     @Test

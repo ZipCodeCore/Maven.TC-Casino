@@ -5,7 +5,7 @@ import io.zipcoder.casino.Game.Game;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Deck;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
-import io.zipcoder.casino.MainMenu;
+
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 
@@ -15,11 +15,8 @@ public class BlackJackGame extends CardGame {
     BlackJackPlayer player;
     BlackJackPlayer dealer;
 
-    public BlackJackGame(Profile userProfile) {
-
         player = new BlackJackPlayer(userProfile);
         this.addPlayer(player);
-
         dealer = new BlackJackPlayer(null);
         this.addPlayer(dealer);
     }

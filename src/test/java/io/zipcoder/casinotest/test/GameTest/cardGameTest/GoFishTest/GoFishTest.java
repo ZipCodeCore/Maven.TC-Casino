@@ -1,61 +1,49 @@
 package io.zipcoder.casinotest.test.GameTest.cardGameTest.GoFishTest;
 
 import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFish;
-import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFishPlayer;
-import io.zipcoder.casino.Game.cardGame.utilities.Card;
-import io.zipcoder.casino.Game.cardGame.utilities.CardRank;
-import io.zipcoder.casino.Game.cardGame.utilities.CardSuit;
-import io.zipcoder.casino.Game.cardGame.utilities.Deck;
-import io.zipcoder.casino.Player;
+
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class GoFishTest {
-    Player player1;
-    Player dealer;
-    Deck testDeck = new Deck();
+
+    private Profile testUserProfile;
+    private GoFish testGame;
+    GoFishPlayer user;
+    GoFishPlayer dealer;
 
 
+    @Before
+    public void setup() {
 
-
-
-
-   @Test
-    public void testAsk(){
-
-
+        testUserProfile = new Profile("Kibret", 100000, 2);
+        testGame = new GoFish(testUserProfile);
     }
+
     @Test
-    public void testTransfer(){
-
-        ArrayList<Card>testTo = new ArrayList<>();
-        ArrayList<Card>testFrom=new ArrayList<>();
-        Card card = new Card(CardSuit.DIAMONDS,CardRank.TWO);
-        testFrom.add(card);
-        int expected = 1;
-
-        //GoFish testGoFish = new GoFish();
-        //testGoFish.transfer(card,testTo,testFrom);
-
-        int actual = testTo.size();
-        Assert.assertEquals(expected,actual);
-
-
+    public void dealTest1() {
+        testGame.deal();
+        int expected = 38;
+        int actual = testGame.getDeck().countRemainingCards();
+        Assert.assertEquals(expected, actual);
     }
-    @Test
-    public void testDrawCard(Player player){
+  /*  @Test
+   public void transferTest1(){
+        //testGame.deal(user,dealer);
+        Card card1 = testGame.getDeck().getCard();
+        Card card2 = testGame.getDeck().getCard();
+        dealer.getHand().addCard(card1);
+        dealer.getHand().addCard(card2);
+        testGame.transfer(card1,user.getHand(),dealer.getHand());
+        boolean expected =true;
+        boolean actual = user.getHand().hasCard(card1);
+        Assert.assertTrue(actual);
+    }*/
 
-
-    }
-    @Test
-    public void testPassTurn(Player player1,Player player2){
-
-    }
 
 }
+
+
