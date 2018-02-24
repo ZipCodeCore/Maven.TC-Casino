@@ -37,13 +37,13 @@ public class MainMenu {
                 game = new War(player);
                 break;
             case "go fish":
-                game = new GoFish(player);
+                //game = new GoFish(player);
                 break;
             case "blackjack":
-                game = new Blackjack(player);
+               // game = new Blackjack(player);
                 break;
             case "craps":
-                game = new Craps(player);
+               // game = new Craps(player);
                 break;
             default:
                 return null;
