@@ -3,10 +3,12 @@ package io.zipcoder.casino.Game.cardGame.GoFIsh;
 import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
+import io.zipcoder.casino.Game.cardGame.utilities.CardRank;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.House;
-import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
+
+import java.util.ArrayList;
 
 
 public class GoFish extends CardGame {
@@ -24,28 +26,69 @@ public class GoFish extends CardGame {
         addPlayer(dealer);
     }
 
-
     public void deal() {
-            for (int i = 0; i < 7; i++) {
+
+        for (int i = 0; i < 7; i++) {
             user.getHand().addCard(deck.getCard());
             dealer.getHand().addCard(deck.getCard());
         }
     }
 
 
-    public boolean ask(GoFishPlayer asker, GoFishPlayer checker, Card card) {
+    public void playTurn() {
 
-        if (asker.)
 
-        return true;
     }
 
-    public void transfer(Card card, Hand handTo, Hand handFrom) {
-        while(handFrom.hasCard(card)){
-            handTo.addCard(card);
-            handFrom.removeCard(card);
+    public void ask(CardRank aCardRank, GoFishPlayer askingPlayer, GoFishPlayer playerBeingAsked) {
+
+        if (countMatchesInHand(askingPlayer, aCardRank) < 1) {
+            Console.print("You cannot ask for a card that you do not have. Try again.");
+        } else if (countMatchesInHand(playerBeingAsked, aCardRank) < 1) {
+            Console.print("Go fish.");
+            fish(askingPlayer);
+        } else {
+            transfer(aCardRank, playerBeingAsked, askingPlayer);
+        }
+    }
+
+    public void fish(GoFishPlayer askingPlayer) {
+        askingPlayer.getHand().addCard(getDeck().getCard());
+    }
+
+    public int countMatchesInHand(GoFishPlayer goFishPlayer, CardRank someCardRank) {
+
+        int countOfCard = 0;
+        ArrayList<Card> cardsBeingChecked = goFishPlayer.getHand().getCards();
+
+        for (int i = 0; i < cardsBeingChecked.size(); i++) {
+            if (cardsBeingChecked.get(i).getRank() == (someCardRank)) {
+                countOfCard++;
+            }
         }
 
+        return countOfCard;
+    }
+
+    public void transfer(CardRank someCardRank, GoFishPlayer fromPlayer, GoFishPlayer toPlayer) {
+
+        for (int i = 0; i < fromPlayer.getHand().getCards().size(); i++) {
+            
+            if (fromPlayer.getHand().getCards().get(i).getRank() == someCardRank) {
+
+                toPlayer.getHand().addCard(fromPlayer.getHand().getCards().get(i));
+
+                fromPlayer.getHand().removeCard(fromPlayer.getHand().getCards().get(i));
+            }
+        }
+    }
+
+    public GoFishPlayer getUser() {
+        return user;
+    }
+
+    public GoFishPlayer getDealer() {
+        return dealer;
     }
 
 }
