@@ -52,4 +52,12 @@ public class BlackjackPlayer extends Player{
         return handValue;
     }
 
+    public void payoutWin(int money){
+        rootPlayer.wallet.add(money);
+    }
+
+    public void payoutLoss(int money){
+        rootPlayer.wallet.subtract(money);
+    }
+
 }

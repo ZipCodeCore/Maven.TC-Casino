@@ -17,6 +17,7 @@ public class Blackjack implements Game{
     protected Deck deck;
     protected Dealer bkjkDealer;
     public boolean isPlaying = true;
+    protected int betAmount = 0;
 
     public void startGame(){
         do {
@@ -25,19 +26,22 @@ public class Blackjack implements Game{
             deck.shuffleDeck();
             initialHand();
             runTurn();
+            settleAccount();
             playAgainCheck();
         }
         while (isPlaying);
+        endGame();
     }
 
     public void pregameReset() {
         player.setHand(new ArrayList<>());
         bkjkDealer.setHand(new ArrayList<>());
         player.setCanHit(true);
+        setBetAmount(0);
     }
 
     public void endGame(){
-
+        System.out.println("Ok bye.");
     }
 
     public Blackjack(Player entryPlayer){
@@ -141,4 +145,33 @@ public class Blackjack implements Game{
         }
     }
 
+    public int getBetAmount() {
+        return betAmount;
+    }
+
+    public void settleAccount(){
+        if ((player.getHandValue() > bkjkDealer.getHandValue() && player.getHandValue() < 22)) {
+            payoutWin();
+        } else if (player.getHandValue() > 21){
+            payoutLoss();
+        } else {
+            payoutLoss();
+        }
+    }
+
+    public void setBetAmount(int betAmount) {
+        this.betAmount = betAmount;
+    }
+
+    public void payoutWin(){
+        int bet = getBetAmount();
+        player.payoutWin(bet);
+        System.out.println("You won " + bet + ". Nice work!");
+    }
+
+    public void payoutLoss(){
+        int bet = getBetAmount();
+        player.payoutLoss(bet);
+        System.out.println("Rough luck! You're down " + bet + " chips.");
+    }
 }

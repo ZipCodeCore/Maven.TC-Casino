@@ -123,4 +123,13 @@ public class BlackjackTest {
         Assert.assertFalse(game.winCheck(sueBKJK));
     }
 
+    @Test
+    public void payoutTest1(){
+        int expected = 1010;
+        game.setBetAmount(10);
+        game.payoutWin();
+        int actual = game.player.getRootPlayer().getBalance();
+        Assert.assertEquals(expected, actual);
+    }
+
 }
