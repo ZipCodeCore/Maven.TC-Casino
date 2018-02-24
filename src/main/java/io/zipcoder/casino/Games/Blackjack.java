@@ -54,6 +54,8 @@ public class Blackjack implements Game{
         for (Card card:player.getHand()) {
             System.out.println(card.toString());
         }
+        System.out.println("Ante up! 10 chips in the pot");
+        setBetAmount(10);
         boolean hitchoice = playerHitOption();
         while (player.isCanHit() && hitchoice && player.getHandValue() < 22){
             deal();
@@ -139,7 +141,8 @@ public class Blackjack implements Game{
 
     public void playAgainCheck(){
         InputOutput inputOutput = new InputOutput();
-        int feedback = inputOutput.promptForInt("How 'bout another hand?\n1 for YES, 2 for NO");
+        int feedback = inputOutput.promptForInt("How 'bout another hand?\nYou now sit at "
+                + player.getRootPlayer().getBalance() + " chips.\n1 for YES, 2 for NO");
         if (feedback == 2){
             setPlaying(false);
         }

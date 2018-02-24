@@ -132,4 +132,13 @@ public class BlackjackTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void payoutTest2(){
+        int expected = 990;
+        game.setBetAmount(10);
+        game.payoutLoss();
+        int actual = game.player.getRootPlayer().getBalance();
+        Assert.assertEquals(expected, actual);
+    }
+
 }
