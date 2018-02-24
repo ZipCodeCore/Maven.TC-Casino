@@ -34,24 +34,48 @@ public class CrapsGame extends DiceGame {
         Console.print("The game is in the Come Out phase");
         int roll = this.getRollValue();
         if(isNatural(roll)){
-            Console.print("You rolled a natural");
+            Console.print("You rolled a Natural");
             this.rollIsNaturalPayout();
+            this.newRound = true;
             this.turn();
         }
         else if(isCraps(roll)){
-
+            Console.print("You rolled Craps");
+            this.rollIsCrapsPayout(roll);
+            this.newRound= true;
+            this.turn();
         }
         else{
             this.point = roll;
+            Console.print("The game is entering the Point phase");
+            Console.print("The point is set to: " + this.point);
             this.isComeOutPhase=false;
             this.turn();
         }
-
     }
 
     public void pointPhase(){
         Console.print(bar);
+        Console.print("The game is in the Point phase");
+        Console.print("The Point is set to: " + this.point);
         int roll = this.getRollValue();
+        if(roll == this.point){
+            this.passLinePayout();
+            this.newRound = true;
+            Console.print("The game is entering the Come Out Phase");
+            this.isComeOutPhase= true;
+            this.turn();
+        }
+        else if(roll == 7){
+            this.doNotPassPayout();
+            this.newRound = true;
+            Console.print("The game is entering the Come Out Phase");
+            this.isComeOutPhase = true;
+            this.turn();
+        }
+        else{
+            this.turn();
+        }
     }
 
     public void turn(){
@@ -169,12 +193,67 @@ public class CrapsGame extends DiceGame {
         if(currentPlayer.isPassLine()){
             Console.print("Your Pass Line bet pays even money!");
             currentPlayer.win(CrapsBet.PASS_LINE, 1);
+            Console.print(newBalance());
         }
         else if(!currentPlayer.isPassLine()){
             Console.print("Your Do Not Pass bet loses");
             currentPlayer.lose(CrapsBet.DO_NOT_PASS);
+            Console.print(newBalance());
         }
     }
+
+    public void rollIsCrapsPayout(int roll){
+        if(currentPlayer.isPassLine()){
+            Console.print("You Crapped Out");
+            Console.print("Your Pass Line bet loses");
+            currentPlayer.lose(CrapsBet.PASS_LINE);
+            Console.print(newBalance());
+        }
+        else if(!currentPlayer.isPassLine() && roll == 12){
+            Console.print("Your Do Not Pass bet breaks even");
+            currentPlayer.win(CrapsBet.DO_NOT_PASS, 0);
+            Console.print(newBalance());
+        }
+        else if(!currentPlayer.isPassLine()){
+            Console.print("Your Do Not Pass bet pays even money!");
+            currentPlayer.win(CrapsBet.DO_NOT_PASS, 1);
+            Console.print(newBalance());
+        }
+    }
+
+    public void passLinePayout(){
+        if(currentPlayer.isPassLine()){
+            Console.print("Your made your Point!");
+            Console.print("Your Pass Line bet pays even money!");
+            currentPlayer.win(CrapsBet.PASS_LINE, 1);
+            Console.print(newBalance());
+        }
+        else if(!currentPlayer.isPassLine()){
+            Console.print("The Point came before a 7");
+            Console.print("Your Do Not Pass bet loses");
+            currentPlayer.lose(CrapsBet.DO_NOT_PASS);
+            Console.print(newBalance());
+        }
+    }
+
+    public void doNotPassPayout(){
+        if(currentPlayer.isPassLine()){
+            Console.print("A 7 came before the Point");
+            Console.print("You Sevened Out");
+            Console.print("Your Pass Line bet loses");
+            currentPlayer.lose(CrapsBet.PASS_LINE);
+            Console.print(newBalance());
+        }
+        else if(!currentPlayer.isPassLine()){
+            Console.print("A 7 came before the Point!");
+            Console.print("Your Do Not Pass bet pays even money!");
+            currentPlayer.win(CrapsBet.DO_NOT_PASS,1);
+            Console.print(newBalance());
+        }
+
+    }
+
+
 
 
     public int getRollValue(){
@@ -217,8 +296,14 @@ public class CrapsGame extends DiceGame {
         this.point = 0;
     }
 
+    public CrapsPlayer getCurrentPlayer(){
+        return this.currentPlayer;
+    }
+
 
     private String invalidInput = "Invalid input: please enter your choice again";
     private String bar = "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$";
-
+    public String newBalance(){
+        return "Your new balance is: $" + currentPlayer.getProfile().getAccountBalance();
+    }
 }
