@@ -2,58 +2,127 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
-import io.zipcoder.casino.Players.Player;
+import io.zipcoder.casino.InputOutput.InputOutput;
+import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.WarPlayer;
 
-public class War {
+import java.util.Scanner;
+
+public class War implements Game {
 
    private Integer playerPoints;
-   private Integer computerPoints;
-   private WarPlayer player = new WarPlayer();
-   private Deck deck = new Deck();
+   private Integer player2Points;
+   private WarPlayer player1;
+   private WarPlayer player2;
+   private Deck warDeck;
 
-    public void shuffle() {
-        deck.shuffleDeck();
-    }
+   private boolean isPlaying = true;
 
-    public Card deal() {
-        player.currentHand.add(deck.deck.get(0));
-        deck.deck.remove(deck.deck.get(0));
-        for(int i = 0; i < deck.deck.size(); i++) {
-            System.out.println(deck.deck.get(i).toString());
+    public void startGame(){
+        player1 = new WarPlayer();
+        player2 = new WarPlayer("Computer", 25);
+        warDeck = new Deck();
+
+
+        System.out.println(displayLogo());
+
+        do {
+            deal();
+            takeTurn();
         }
-        return null;
+        while(isPlaying);
     }
 
-    public String compareCards() {
-        return null;
+    public void endGame(){
+        System.out.println("Thank you for playing War. Comeback soon");
+        isPlaying = false;
     }
 
-    public void itisWar() {
+    public void deal() {
 
+        warDeck.shuffleDeck();
+
+        do {
+            player1.currentHand.add(warDeck.deck.get(0));
+            warDeck.deck.remove(0);
+            player2.currentHand.add(warDeck.deck.get(0));
+            warDeck.deck.remove(0);
+
+        } while (warDeck.deck.size() > 0);
     }
 
-    public Integer awardPoint() {
-        return 0;
+    public void takeTurn() {
+        Scanner input = new Scanner(System.in);
+        String deal = input.nextLine();
+
+        while(deal != null) {
+            if(player1.currentHand.size() == 0) {
+                continue;
+            }
+
+            System.out.println("1. | " + player1.currentHand.get(0) + player1.getName());
+            System.out.println("2. | " + player2.currentHand.get(0) + player2.getName());
+
+            compareCards(player1.currentHand.get(0), player2.currentHand.get(0));
+
+            player1.currentHand.remove(0);
+            player2.currentHand.remove(0);
+        }
+        playAgain();
     }
 
-    public boolean cardsLeftInDeck() {
-        if(!(deck.deck.get(0).equals(null))) {
-            return true;
+    public void compareCards(Card card1, Card card2) {
+
+        /*if (card1.getRankEnum().getRankValue() == card2.getRankEnum().getRankValue()) {
+            itisWar(card1, card2);
+        } else
+        */
+
+        if(card1.getRankEnum().getRankValue() > card2.getRankEnum().getRankValue()) {
+            awardPoint(player1);
+            System.out.println("WINNER: " + player1.getName());
+            System.out.println("===========================");
         } else {
-            return false;
+            awardPoint(player2);
+            System.out.println("WINNER: " + player2.getName());
+            System.out.println("===========================");
         }
     }
 
-    public String declareWinner() {
-        if(playerPoints > computerPoints) {
-            return "Congratulations. " + player.getName() + "You won";
-        }
-        return "You lost to a computer...";
+    public void itisWar(Card card1, Card card2) {
+
     }
 
-    public static void main(String[] args) {
-        War war = new War();
-        war.deal();
+    public void awardPoint(WarPlayer player) {
+        player.addPoint();
+    }
+
+    public Integer doesUserWantToPlayAgain() {
+        InputOutput io = new InputOutput();
+        Integer yesOrNo = io.promptForInt("Do you want to play again? (\n1. Yes\n2. No)");
+        return yesOrNo;
+    }
+
+    /*public void playAgain() {
+        if(doesUserWantToPlayAgain() == 1) {
+
+        } else {
+
+        }
+    }*/
+
+    public String displayLogo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n\nWELCOME TO" + "\n" +
+                "\n" +
+                "                          \n" +
+                "██╗    ██╗ █████╗ ██████╗ \n" +
+                "██║    ██║██╔══██╗██╔══██╗\n" +
+                "██║ █╗ ██║███████║██████╔╝\n" +
+                "██║███╗██║██╔══██║██╔══██╗\n" +
+                "╚███╔███╔╝██║  ██║██║  ██║\n" +
+                " ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝\n" +
+                "                          \n");
+        return sb.toString();
     }
 }
