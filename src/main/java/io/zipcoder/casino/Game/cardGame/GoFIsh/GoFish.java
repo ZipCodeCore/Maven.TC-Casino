@@ -1,12 +1,13 @@
 package io.zipcoder.casino.Game.cardGame.GoFIsh;
 
-import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
+import io.zipcoder.casino.Game.cardGame.utilities.CardRank;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.House;
-import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
+
+import java.util.ArrayList;
 
 
 public class GoFish extends CardGame {
@@ -26,26 +27,46 @@ public class GoFish extends CardGame {
 
 
     public void deal() {
-            for (int i = 0; i < 7; i++) {
+
+        for (int i = 0; i < 7; i++) {
             user.getHand().addCard(deck.getCard());
             dealer.getHand().addCard(deck.getCard());
         }
     }
 
 
-    public boolean ask(GoFishPlayer asker, GoFishPlayer checker, Card card) {
+    public void playTurn() {
 
-        if (asker.)
+    }
 
-        return true;
+    public int checkHandForCard(GoFishPlayer goFishPlayer, CardRank someCardRank) {
+
+        int countOfCard = 0;
+        ArrayList<Card> cardsBeingChecked = goFishPlayer.getHand().getCards();
+
+        for (int i = 0; i < cardsBeingChecked.size(); i++) {
+            if (cardsBeingChecked.get(i).getRank() == (someCardRank)) {
+                countOfCard++;
+            }
+        }
+
+        return countOfCard;
     }
 
     public void transfer(Card card, Hand handTo, Hand handFrom) {
-        while(handFrom.hasCard(card)){
+        while (handFrom.hasCard(card)) {
             handTo.addCard(card);
             handFrom.removeCard(card);
         }
 
+    }
+
+    public GoFishPlayer getUser() {
+        return user;
+    }
+
+    public GoFishPlayer getDealer() {
+        return dealer;
     }
 
 }
