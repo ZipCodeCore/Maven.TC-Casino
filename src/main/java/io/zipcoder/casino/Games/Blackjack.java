@@ -16,7 +16,12 @@ public class Blackjack implements Game{
     protected Dealer bkjkDealer;
 
     public void startGame(){
-
+//        deck = new Deck();
+//        //deck.shuffleDeck();
+//        initialHand();
+//        for (BlackjackPlayer currentPlayer : playerList){
+//            runTurn(currentPlayer);
+//        }
 
     }
 
@@ -27,17 +32,16 @@ public class Blackjack implements Game{
     public Blackjack(Player... players){
         deck = new Deck();
         bkjkDealer = new Dealer();
-        playerList = new ArrayList<BlackjackPlayer>();
+        playerList = new ArrayList<>();
         for (Player rootPlayer:players) {
             playerList.add(new BlackjackPlayer(rootPlayer));
         }
     }
 
-    public void runTurn(){
-        //run turn method should initially draw from preset deck, hit once, and bust
-        //this will see if we can get a game to move through functions procedurally
-        //then we can see if we can put this function in a constructor
-        //to kick the game off as soon as the game object is instantiated
+    public void runTurn(BlackjackPlayer currentPlayer){
+        for (Card card:currentPlayer.getHand()) {
+            System.out.println(card.toString());
+        }
     }
 
     public void deal(BlackjackPlayer currentPlayer){
@@ -50,6 +54,7 @@ public class Blackjack implements Game{
         Card temp = this.deck.deck.get(0);
         this.bkjkDealer.addToHand(temp);
         this.deck.deck.remove(0);
+        System.out.println(this.deck.deck.size());
     }
 
     public void initialHand(BlackjackPlayer... blackjackPlayers){
@@ -57,6 +62,7 @@ public class Blackjack implements Game{
             this.deal(thisPlayer);
             this.deal(thisPlayer);
         }
+        this.dealToDealer();
         this.dealToDealer();
     }
 

@@ -83,23 +83,18 @@ public class BlackjackTest {
 
     @Test
     public void dealerHitCheck(){
-        game.initialHand(sueBKJK);
+        game.bkjkDealer.addToHand(new Card(Rank.THREE, Suit.CLUBS));
+        game.bkjkDealer.addToHand(new Card(Rank.KING, Suit.CLUBS));
         boolean expected = game.dealerHitCheck();
         Assert.assertTrue(expected);
     }
 
     @Test
-    public void runTurnTest(){
-        //run turn method should initially draw from preset deck, hit once, and bust
-        //this will see if we can get a game to move through functions procedurally
-        //then we can see if we can put this function in a constructor
-        //to kick the game off as soon as the game object is instantiated
-    }
-
-    @Test
     public void startTest() {
-
+        game.startGame();
     }
+
+
 
     @Test
     public void getValueTest() {

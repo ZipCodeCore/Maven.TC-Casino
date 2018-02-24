@@ -17,7 +17,7 @@ public class BlackjackPlayer extends Player{
 
         this.canHit = true;
         this.rootPlayer = rootPlayer;
-        this.hand = new ArrayList<Card>();
+        this.hand = new ArrayList<>();
     }
 
     public Player getRootPlayer() {
