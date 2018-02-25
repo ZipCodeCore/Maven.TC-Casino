@@ -129,7 +129,7 @@ public class GoFish extends CardGame {
     public CardRank getHandForBook(GoFishPlayer aPlayer) {
 
         int count;
-        CardRank rankForBook = null;
+        CardRank rankForBook=CardRank.ACE;
         int books = 0;
 
         for (int i = 0; i < aPlayer.getHand().getCards().size(); i++) {
@@ -137,7 +137,7 @@ public class GoFish extends CardGame {
             for (int j = 0; j < aPlayer.getHand().getCards().size(); j++) {
                 if (aPlayer.getHand().getCards().get(i).equals(aPlayer.getHand().getCards().get(j))) {
                     count++;
-                    if (count == 4) {
+                    if (count >= 4) {
                         rankForBook = aPlayer.getHand().getCards().get(i).getRank();
                         books++;
                     }
@@ -148,7 +148,7 @@ public class GoFish extends CardGame {
         if (books > 0) {
             return rankForBook;
         } else {
-            return null;
+            return rankForBook;
         }
     }
 
