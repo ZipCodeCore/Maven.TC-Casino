@@ -39,19 +39,27 @@ public class CrapsGame extends DiceGame {
             if(roll == 7){
                 this.comePointPayout(roll);
                 this.dontComePointPayout(roll);
+                this.bigSixPayout(roll);
+                this.bigEightPayout(roll);
+                this.fieldPayout(roll);
             }
+            this.fieldPayout(roll);
             this.rollIsNaturalPayout();
             this.newRound = true;
             this.turn();
         } else if (isCraps(roll)) {
             Console.print("You rolled Craps");
+            this.fieldPayout(roll);
             this.rollIsCrapsPayout(roll);
             this.newRound = true;
             this.turn();
         } else {
             this.point = roll;
+            this.fieldPayout(roll);
             this.comePointPayout(roll);
             this.dontComePointPayout(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
             Console.print("The game is entering the Point phase");
             Console.print("The point is set to: [" + this.point +"]");
             this.isComeOutPhase = false;
@@ -67,10 +75,13 @@ public class CrapsGame extends DiceGame {
         this.printDontComePoints();
         int roll = this.getRollValue();
         if (roll == this.point) {
+            this.fieldPayout(roll);
             this.passLinePayout();
             this.dontComePointPayout(roll);
             this.comePointPayout(roll);
             this.newComePoint(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
 
             if(currentPlayer.hasOdds() && currentPlayer.isPassLine()){
                 this.passLineOddsPayout(roll);
@@ -86,10 +97,13 @@ public class CrapsGame extends DiceGame {
             this.isComeOutPhase = true;
             this.turn();
         } else if (roll == 7) {
+            this.fieldPayout(roll);
             this.doNotPassPayout();
             this.comeNaturalPayout(roll);
             this.comePointPayout(roll);
             this.dontComePointPayout(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
 
             if(currentPlayer.hasOdds() && !currentPlayer.isPassLine()){
                 this.doNotPassOddsPayout(this.point);
@@ -106,15 +120,21 @@ public class CrapsGame extends DiceGame {
             this.turn();
         }
         else if(!isCraps(roll) && roll != 11){
+            this.fieldPayout(roll);
             this.comePointPayout(roll);
             this.dontComePointPayout(roll);
             this.newComePoint(roll);
             this.newDontComePoint(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
             this.turn();
         }
         else {
+            this.fieldPayout(roll);
             this.comeNaturalPayout(roll);
             this.doNotComeCrapsPayout(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
             this.turn();
         }
     }
@@ -252,6 +272,14 @@ public class CrapsGame extends DiceGame {
                 }
                 break;
 
+            case "field":
+                betType = CrapsBet.FIELD;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setField(true);
+                }
+                break;
+
             default:
                 Console.print(invalidInput);
                 Console.print(bar);
@@ -289,8 +317,9 @@ public class CrapsGame extends DiceGame {
         if(!this.isComeOutPhase && !currentPlayer.isCome()){
             bettingMenu.append("[Do Not Come]\n");
         }
-        bettingMenu.append("[Big Six}");
-        bettingMenu.append("[Big Eight]");
+        bettingMenu.append("[Big Six]\n");
+        bettingMenu.append("[Big Eight]\n");
+        bettingMenu.append("[Field]\n");
         return bettingMenu.toString();
     }
 
@@ -692,10 +721,71 @@ public class CrapsGame extends DiceGame {
     }
 
     public void bigSixPayout(int roll){
-
+        if(currentPlayer.isBigSix()){
+            if(roll == 6){
+                Console.print("You rolled a 6 before a 7!");
+                Console.print("Your Big Six bet pays even money!");
+                currentPlayer.win(CrapsBet.BIG_SIX, 1);
+                currentPlayer.setBigSix(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before a 6");
+                Console.print("Your Big Six bet loses");
+                currentPlayer.lose(CrapsBet.BIG_SIX);
+                currentPlayer.setBigSix(false);
+                Console.print(newBalance());
+            }
+        }
     }
 
     public void bigEightPayout(int roll){
+        if(currentPlayer.isBigEight()){
+            if(roll == 8){
+                Console.print("You rolled a 8 before a 7!");
+                Console.print("Your Big Eight bet pays even money!");
+                currentPlayer.win(CrapsBet.BIG_EIGHT, 1);
+                currentPlayer.setBigEight(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before a 8");
+                Console.print("Your Big Eight bet loses");
+                currentPlayer.lose(CrapsBet.BIG_EIGHT);
+                currentPlayer.setBigEight(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
+    public void fieldPayout(int roll){
+        if(currentPlayer.isField()){
+            if(roll == 2){
+                Console.print("Your Field bet pays 2:1 on a 2!");
+                currentPlayer.win(CrapsBet.FIELD,2);
+                currentPlayer.setField(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 3 || roll == 4 || roll == 9 || roll == 10 || roll == 11){
+                Console.print("Your Field bet pays even money on a " + roll + "!");
+                currentPlayer.win(CrapsBet.FIELD,1);
+                currentPlayer.setField(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 12){
+                Console.print("Your Field bet pays 3:1 on a 12!");
+                currentPlayer.win(CrapsBet.FIELD,3);
+                currentPlayer.setField(false);
+                Console.print(newBalance());
+            }
+            else{
+                Console.print("Your Field bet loses");
+                currentPlayer.lose(CrapsBet.FIELD);
+                currentPlayer.setField(false);
+                Console.print(newBalance());
+            }
+        }
 
     }
 
@@ -708,7 +798,7 @@ public class CrapsGame extends DiceGame {
         for (int i : rawRoll) {
             sum += i;
         }
-        Console.print(Arrays.toString(rawRoll) + "\nYou rolled a " + sum);
+        Console.print(Arrays.toString(rawRoll) + "\n<<You rolled a [" + sum + "]>>");
         return sum;
     }
 

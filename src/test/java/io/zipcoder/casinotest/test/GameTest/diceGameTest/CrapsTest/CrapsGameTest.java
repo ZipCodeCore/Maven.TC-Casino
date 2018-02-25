@@ -602,8 +602,136 @@ public class CrapsGameTest {
 
     @Test
     public void bigSixPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.BIG_SIX, 50);
+        testGame.getCurrentPlayer().setBigSix(true);
+
+        //When
+        double expected = 150;
+        testGame.bigSixPayout(6);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
 
     }
+
+    @Test
+    public void bigSixPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.BIG_SIX, 50);
+        testGame.getCurrentPlayer().setBigSix(true);
+
+        //When
+        double expected = 50;
+        testGame.bigSixPayout(7);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.BIG_SIX) == 0);
+
+    }
+
+    @Test
+    public void bigEightPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.BIG_EIGHT, 50);
+        testGame.getCurrentPlayer().setBigEight(true);
+
+        //When
+        double expected = 150;
+        testGame.bigEightPayout(8);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void bigEightPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.BIG_EIGHT, 50);
+        testGame.getCurrentPlayer().setBigEight(true);
+
+        //When
+        double expected = 50;
+        testGame.bigEightPayout(7);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.BIG_EIGHT) == 0);
+
+    }
+
+    @Test
+    public void fieldPayoutWin2Test(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.FIELD, 50);
+        testGame.getCurrentPlayer().setField(true);
+
+        //When
+        double expected = 200;
+        testGame.fieldPayout(2);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+    }
+
+    @Test
+    public void fieldPayoutWin3Test(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.FIELD, 50);
+        testGame.getCurrentPlayer().setField(true);
+
+        //When
+        double expected = 150;
+        testGame.fieldPayout(3);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+    }
+
+    @Test
+    public void fieldPayoutWin12Test(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.FIELD, 50);
+        testGame.getCurrentPlayer().setField(true);
+
+        //When
+        double expected = 250;
+        testGame.fieldPayout(12);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+    }
+
+    @Test
+    public void fieldPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.FIELD, 50);
+        testGame.getCurrentPlayer().setField(true);
+
+        //When
+        double expected = 50;
+        testGame.fieldPayout(7);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.FIELD)==0);
+    }
+
 
     @Test
     public void intToComePointTest(){
