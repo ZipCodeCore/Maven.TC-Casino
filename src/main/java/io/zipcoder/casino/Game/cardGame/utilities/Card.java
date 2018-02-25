@@ -1,6 +1,6 @@
 package io.zipcoder.casino.Game.cardGame.utilities;
 
-public class Card {
+public class Card implements Comparable<Card> {
     private CardSuit suit;
     private CardRank rank;
 
@@ -33,6 +33,18 @@ public class Card {
         return card.toString();
     }
 
+
+    @Override
+    public int compareTo(Card anyCard) {
+
+        if (getRank().compareTo(anyCard.getRank()) > 0) {
+            return 1;
+        } else if (getRank().compareTo(anyCard.getRank()) < 0) {
+            return -1;
+        } else {
+            return getSuit().compareTo(anyCard.getSuit());
+        }
+    }
 }
 
 
