@@ -17,10 +17,12 @@ public class Blackjack implements Game{
     protected Dealer bkjkDealer;
     public boolean isPlaying = true;
     protected int betAmount = 0;
+    boolean bulkApperception = false;
 
     public void startGame(){
         do {
             pregameReset();
+            if (player.getRootPlayer().getBalance() < 10) break;
             deck = new Deck();
             deck.shuffleDeck();
             initialHand();
@@ -201,12 +203,14 @@ public class Blackjack implements Game{
     }
 
     public void secret(){
-        if (player.getName().equals("Bernard") || player.getName().equals("Dolores")) {
+        if (player.getName().equals("Bernard") || player.getName().equals("Maeve")) {
             System.out.println("These violent delights have violent ends.");
-
+            BJKJSecret secret = new BJKJSecret();
+            secret.start(this.player);
         }
         else {
             System.out.println("The maze isn't for you.");
         }
     }
+
 }
