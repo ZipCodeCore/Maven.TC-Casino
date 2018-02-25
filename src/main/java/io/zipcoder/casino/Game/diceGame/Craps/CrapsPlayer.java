@@ -23,6 +23,9 @@ public class CrapsPlayer extends Player implements Gambler {
 
         super(someProfile);
         this.playerEscrow = new Escrow();
+        this.comePoints = new ArrayList<Integer>(0);
+        this.dontComePoints = new ArrayList<Integer>(0);
+
     }
 
 
