@@ -94,13 +94,7 @@ public class GoFish extends CardGame {
                 Console.print("You made a book!!");
                 askingPlayer.getHand().orderCards();
                 Console.print(askingPlayer.getHand().showHand());
-                for(int i =0;i<askingPlayer.getHand().getCards().size();i++){
-                    if(askingPlayer.getHand().getCards().get(i).getRank()==aCardRank){
-                        askingPlayer.buildBooks(askingPlayer,aCardRank);
-                        askingPlayer.getHand().getCards().remove(askingPlayer.getHand().getCards().get(i));
-                    }
-
-                }
+                addCardToBookAndRemoveFromHand(askingPlayer,aCardRank);
                 Console.print(askingPlayer.getHand().showHand());
 
                 // SCORE IT
@@ -113,14 +107,7 @@ public class GoFish extends CardGame {
             Console.print("Good guess! Here you go!");
             if (getHandForBook(user,aCardRank)>0) {
                 Console.print("You made a book!!");
-
-                for(int i =0;i<askingPlayer.getHand().getCards().size();i++){
-                    if(askingPlayer.getHand().getCards().get(i).getRank()==aCardRank){
-                        askingPlayer.buildBooks(askingPlayer,aCardRank);
-                        askingPlayer.getHand().getCards().remove(askingPlayer.getHand().getCards().get(i));
-                    }
-
-                }
+                addCardToBookAndRemoveFromHand(askingPlayer,aCardRank);
                 askingPlayer.getHand().orderCards();
                 Console.print(askingPlayer.getHand().showHand());
 
@@ -154,31 +141,6 @@ public class GoFish extends CardGame {
 
     }
 
-    //    public CardRank getHandForBook(GoFishPlayer aPlayer) {
-//
-//        int count;
-//        CardRank rankForBook=null;
-//        int books = 0;
-//
-//        for (int i = 0; i < aPlayer.getHand().getCards().size(); i++) {
-//            count = 0;
-//            for (int j = 0; j < aPlayer.getHand().getCards().size(); j++) {
-//                if (aPlayer.getHand().getCards().get(i).equals(aPlayer.getHand().getCards().get(j))) {
-//                    count++;
-//                    if (count >= 4) {
-//                        rankForBook = aPlayer.getHand().getCards().get(i).getRank();
-//                        books++;
-//                    }
-//                }
-//            }
-//        }
-//
-//        if (books > 0) {
-//            return rankForBook;
-//        } else {
-//            return null;
-//        }
-//    }
     public int getHandForBook(GoFishPlayer aPlayer, CardRank aCardRank) {
         int books =0;
         int count=0;
@@ -191,6 +153,16 @@ public class GoFish extends CardGame {
             }
         }
         return books;
+    }
+    public void addCardToBookAndRemoveFromHand(GoFishPlayer aPlayer, CardRank aCardRank){
+        for(int i =0;i<aPlayer.getHand().getCards().size();i++){
+            if(aPlayer.getHand().getCards().get(i).getRank()==aCardRank){
+                aPlayer.buildBooks(aPlayer,aCardRank);
+                aPlayer.getHand().getCards().remove(aPlayer.getHand().getCards().get(i));
+            }
+
+        }
+
     }
 
     public void fish(GoFishPlayer askingPlayer) {
