@@ -1,6 +1,8 @@
 package io.zipcoder.casino;
 
 
+import java.util.Scanner;
+
 public class Person {
     private String name = "";
     private Hand hand = null;
@@ -13,8 +15,8 @@ public class Person {
         this.name = name;
         this.hand = new Hand();
         this.wallet = new Wallet();
-
     }
+
 
     public String getName() {
         return this.name;
@@ -27,4 +29,16 @@ public class Person {
     public Wallet getWallet() {
         return this.wallet;
     }
+
+    //has Scanner and Wilhelm told me not to test methods with Scanner
+    public static Person createNewPlayerFromUserInput() {
+        String playerName;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Welcome to our casino! Please enter your name");
+        playerName = in.nextLine();
+        return new Person(playerName);
+    }
+
+
+
 }

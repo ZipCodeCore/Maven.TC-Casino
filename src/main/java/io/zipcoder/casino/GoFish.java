@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class GoFish implements GameInterface, CardGameInterface{
+public class GoFish extends Game implements GameInterface, CardGameInterface {
 
     private Person player1 = new Person("Joe");
     private Person dealer = new Person("Dealer");
@@ -426,9 +426,9 @@ public class GoFish implements GameInterface, CardGameInterface{
 
     }
 
-    public static void main(String[] args) {
-        GoFish game = new GoFish();
-        game.start();
-
-    }
+//    public static void main(String[] args) {
+//        GoFish game = new GoFish();
+//        game.start();
+//
+//    }
 }
