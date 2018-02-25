@@ -36,6 +36,7 @@ public class GoFish extends CardGame {
     }
 
     public void startGame() {
+        Console.print("Lets play Go Fish! Shuffle up and deal...");
         deal();
     }
 
@@ -53,8 +54,11 @@ public class GoFish extends CardGame {
 
     public void playUserTurn() {
 
+        Console.print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
         do {
+            dealer.getHand().orderCards();
             Console.print(dealer.getHand().showHand());
+            user.getHand().orderCards();
             Console.print(user.getHand().showHand());
             Console.print("Which card value would you like to ask for?");
             CardRank requestedRank = convertStringToRank(Console.getString());
@@ -65,14 +69,20 @@ public class GoFish extends CardGame {
 
     public void playDealerTurn() {
 
-        int dealerHandSize = dealer.getHand().getCards().size();
-        int randomSelector = (int) Math.floor(Math.random() * dealerHandSize);
-        CardRank aCardRank = dealer.getHand().getCards().get(randomSelector).getRank();
+        Console.print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+
+
+//        int dealerHandSize = dealer.getHand().getCards().size();
+//        int randomSelector = (int) Math.floor(Math.random() * dealerHandSize);
+//        CardRank aCardRank = dealer.getHand().getCards().get(randomSelector).getRank();
 
         Console.print("Now its my turn!");
 
         do {
-            Console.print("Do you have any " + aCardRank);
+            int dealerHandSize = dealer.getHand().getCards().size();
+            int randomSelector = (int) Math.floor(Math.random() * dealerHandSize);
+            CardRank aCardRank = dealer.getHand().getCards().get(randomSelector).getRank();
+            Console.print("Do you have any " + aCardRank + "s?");
             dealerAsk(aCardRank);
         } while (!isTurn);
 
@@ -214,7 +224,15 @@ public class GoFish extends CardGame {
 
     public CardRank convertStringToRank(String aString) {
 
+//        try {
+//            return CardRank.valueOf(aString.toLowerCase());
+//        } catch (IllegalArgumentException iae) {
+//            return null;
+//        }
+//    }
+
         String lowercase = aString.toLowerCase();
+
 
         switch (lowercase) {
 
