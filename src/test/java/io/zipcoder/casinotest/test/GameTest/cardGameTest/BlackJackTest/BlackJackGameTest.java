@@ -4,6 +4,7 @@ import io.zipcoder.casino.BlackJackBet;
 import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackGame;
 import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackPlayer;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
+import io.zipcoder.casino.Game.cardGame.utilities.CardRank;
 import io.zipcoder.casino.Game.cardGame.utilities.Deck;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.Profile;
@@ -33,10 +34,30 @@ public class BlackJackGameTest {
 
     @Test
     public void dealTest() {
-        testBlackJackGAme.deal();
+        testBlackJackGAme.deal(testPlayer);
         int expected = 48;
         int actual = testBlackJackGAme.getDeck().countRemainingCards();
         Assert.assertEquals(expected, actual);
+    }
+
+    //How can I write this test to not have if else statements?
+    //create a cleaner method retrieve cardValues;
+    @Test
+    public void countAcesInHandTest(){
+        Card card1 = testDeck.getCard();
+        Card card2 = testDeck.getCard();
+        testPlayer.getHand().addCard(card1);
+        testPlayer.getHand().addCard(card2);
+        int expected = 0;
+        if(card1.getRank() == CardRank.ACE){
+            expected++;
+        }
+        else if(card2.getRank() == CardRank.ACE){
+            expected++;
+        }
+      int actual = testBlackJackGAme.countAcesInHand(testPlayer);
+
+      Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -143,10 +164,10 @@ public class BlackJackGameTest {
     // need to get find way to fill expected String
     @Test
     public void showDealerTopCardTEst() {
-        testBlackJackGAme.deal();
+        testBlackJackGAme.deal(testPlayer);
 
 
-        String expected = ""; //testDealer.getHand().getCards().get(1).toString();
+        String expected = "";
         String actual = testBlackJackGAme.showDealersFaceCard();
 
         Assert.assertEquals(expected, actual);
