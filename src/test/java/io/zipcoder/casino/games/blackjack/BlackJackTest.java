@@ -38,8 +38,8 @@
 //        splitHandLeft = new ArrayList<>();
 //        splitHandRight = new ArrayList<>();
 //        for (int i = 0; i < 2; i++) {
-//            playerValue.add(playingDeck.pull(1)[0]);
-//            dealerValue.add(playingDeck.pull(1)[0]);
+//            playerValue.add(playingDeck.pullMany(1)[0]);
+//            dealerValue.add(playingDeck.pullMany(1)[0]);
 //        }
 //    }
 //

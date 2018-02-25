@@ -40,7 +40,7 @@ public class Crazy8Play implements Game {
     }
 
     public void cardSelect(int cardSelection){
-    //take the selected card and make it the NEW cardToMatch
+        //take the selected card and make it the NEW cardToMatch
         if(emptyHand(1) || emptyHand(2)) {
             decideWinner();
         }
@@ -61,7 +61,7 @@ public class Crazy8Play implements Game {
         } else
             //IF NO MATCH (player) force them to draw a card
             playersHand = deck.pull(1);
-            computeMatchesPlayer();
+        computeMatchesPlayer();
     }
 
     public void computeMatchesComputer() {
@@ -76,7 +76,7 @@ public class Crazy8Play implements Game {
     }
 
     public boolean legalCard(Card card) {
-    //check whether card matches suit, rank of pile or is eight
+        //check whether card matches suit, rank of pile or is eight
         if (card.getRank().equals(8)) { //card is 8
             return true;
 //        } else if (card.getSuit().equals(matchThisCard.getSuit())) { //card matches suit
@@ -145,18 +145,18 @@ public class Crazy8Play implements Game {
     }
 
     public boolean emptyHand(int whichHand){
-    {
-        Card[] hand;
-        if (whichHand == 1) {
-            hand = playersHand;
-        } else {
-            hand = computer;
+        {
+            Card[] hand;
+            if (whichHand == 1) {
+                hand = playersHand;
+            } else {
+                hand = computer;
+            }
+            if (hand.length > 0) {
+                return false;
+            }
+            return true;
         }
-        if (hand.length > 0) {
-            return false;
-        }
-        return true;
-    }
 
     }
     public void decideWinner() {

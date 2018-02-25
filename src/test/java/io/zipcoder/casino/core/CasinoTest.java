@@ -1,14 +1,13 @@
 package io.zipcoder.casino.core;
 
 import io.zipcoder.casino.utils.IOHandler;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 public class CasinoTest {
 
     @Test
-    public void gameLobbyMenu(){
+    public void gameLobbyMenu() {
 
         String expected = "**** WELCOME TO HIGH ROLLERS CLUB ****\n" +
                 "*                                    *\n" +
@@ -88,6 +87,7 @@ public class CasinoTest {
     public void changeGameStateTest() {
         Casino casino = new Casino();
     }
+
     @Test
     public void welcomeScreenTest() {
 
@@ -112,7 +112,7 @@ public class CasinoTest {
     }
 
     @Test
-    public void goodByeTest(){
+    public void goodByeTest() {
         Casino casino = new Casino();
 
         String expected = "******** THANKS FOR PLAYING!! ********\n" +

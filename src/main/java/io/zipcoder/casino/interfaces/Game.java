@@ -12,17 +12,12 @@ public interface Game {
     void play(Player player);
 
     /**
-     * Each game must have a way for the player to quit the game and go back to the main menu.
-     */
-    void quitGame();
-
-    /**
      * The game must have a welcome prompt.
      */
-    String runWelcome();
+    void runWelcome();
 
     /**
-     * Makes it so that every game has a way to pull up the rules for the game.
+     * Makes it so that every game has a way to pullMany up the rules for the game.
      *
      * @return rules
      */

@@ -1,8 +1,8 @@
 package io.zipcoder.casino.core;
 
-import io.zipcoder.casino.games.ceelo.CeeLoGamble;
+import io.zipcoder.casino.games.blackjack.BlackJack;
+import io.zipcoder.casino.games.ceelo.CeeLo;
 import io.zipcoder.casino.games.crazy8s.Crazy8Play;
-import io.zipcoder.casino.games.roulette.Roulette;
 import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
@@ -15,11 +15,15 @@ public class Casino {
         this.player = player;
     }
 
-
+    @SuppressWarnings("all")
     public void enter() {
-
-        int userInput = IOHandler.promptForIntWithMessage(runWelcomeMenu());
-        handleInput(userInput);
+        for (; ; ) {
+            int userInput = IOHandler.promptForIntWithMessage(runWelcomeMenu());
+            handleInput(userInput);
+            currentGameRunning = changeGameState(userInput);
+            if (currentGameRunning != null)
+                currentGameRunning.play(player);
+        }
     }
 
 
@@ -58,26 +62,26 @@ public class Casino {
 
 
     public Game changeGameState(int answer) {
+         switch (answer) {
+                case 1:
+                    currentGameRunning = new BlackJack();
+                    break;
+                case 2:
+                    currentGameRunning = new Crazy8Play();
+                    break;
+                case 3:
+                    currentGameRunning = new CeeLo();
+                    break;
+                case 4:
+                    //currentGameRunning = new Roulette();
+                    System.out.println("[ SORRY! OUT OF ORDER! ]\n");
+                    break;
+                case 5:
+                    goodBye();
 
-        switch (answer) {
-            case 1:
-//                currentGameRunning = new BlackJack();
-//                break;
-            case 2:
-                currentGameRunning = new Crazy8Play();
-                break;
-            case 3:
-//                currentGameRunning = new CeeLoGamble();
-//                break;
-            case 4:
-//                currentGameRunning = new Roulette();
-//                break;
-            case 5:
-                goodBye();
-
+            }
+            return currentGameRunning;
         }
-        return currentGameRunning;
-    }
 
     public void welcomeScreen(){
 
