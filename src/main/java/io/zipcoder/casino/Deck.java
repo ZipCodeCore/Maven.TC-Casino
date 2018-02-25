@@ -23,6 +23,7 @@ public class Deck {
     }
 
     public ArrayList<Card> getDeckOfCards(){
+
         return this.deckOfCards;
     }
 

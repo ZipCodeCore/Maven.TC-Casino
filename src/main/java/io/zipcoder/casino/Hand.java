@@ -36,6 +36,7 @@ public class Hand {
     }
 
     public Card drawCardfromHand() {
+
         return handArrayList.remove(handArrayList.size() - 1);
     }
 
