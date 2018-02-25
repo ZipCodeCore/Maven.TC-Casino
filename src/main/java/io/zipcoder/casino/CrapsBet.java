@@ -36,7 +36,7 @@ public enum CrapsBet implements TypeOfBet {
     DO_NOT_COME_SIX,
     DO_NOT_COME_EIGHT,
     DO_NOT_COME_NINE,
-    DO_NOT_COME_Ten;
+    DO_NOT_COME_TEN;
 
 
 
