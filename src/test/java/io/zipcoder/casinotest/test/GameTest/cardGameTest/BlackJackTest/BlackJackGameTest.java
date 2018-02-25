@@ -79,7 +79,7 @@ public class BlackJackGameTest {
 
     @Test
     public void standTest() {
-    //isStood changes to true;
+        //isStood changes to true;
         //currentPlayer changes to dealer
         boolean expected = true;
         boolean actual = testBlackJackGAme.stand();
@@ -87,10 +87,35 @@ public class BlackJackGameTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
     public void splitTest() {
-       // if both cards delt are same then player can choose to split
+        // if both cards delt are same then player can choose to split
         //
     }
+
+    @Test
+    public void bustedTest() {
+        testBlackJackGAme.dealACard(testPlayer);
+        testBlackJackGAme.dealACard(testPlayer);
+        testBlackJackGAme.dealACard(testPlayer);
+        boolean expected;
+        if (testPlayer.getScore() > 21) {
+            expected = true;
+        } else {
+            expected = false;
+        }
+        boolean actual = testBlackJackGAme.isBusted(testPlayer);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void dealACardTest() {
+        int actual = testBlackJackGAme.dealACard(testPlayer);
+        int expected = testPlayer.getScore();
+        Assert.assertEquals(expected, actual);
+    }
+
 
     @Test
     public void roundTest() {
@@ -98,9 +123,22 @@ public class BlackJackGameTest {
     }
 
     @Test
-    public void dealerBehavior() {
+    public void dealerBehaviorTest() {
+        // if dealer score  is less than 17 a dealer must be dealt a card
+        /*Card cardToScore = testDeck.getCard();
+        Card card1 = testDeck.getCard();
+        testDealer.getHand().addCard(card1);
+        //updates score of first card addeded
+        testBlackJackGAme.updateScore(card1, testDealer);
+        testBlackJackGAme.updateScore(cardToScore, testDealer);
+        */
+        boolean expected = true;
+        //boolean actual = testBlackJackGAme.dealerBehavior();
 
+        //Assert.assertEquals(expected, actual);
     }
+
+
 
     // need to get find way to fill expected String
     @Test
@@ -118,6 +156,19 @@ public class BlackJackGameTest {
     public void showListOfPlayerActionsTest() {
         String expected = "Choose Action: [Bet], [Hit], [Stand], [Spilt]";
         String actual = testBlackJackGAme.showListOfPlayerActions();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void isBlackJackIntialHandTest(){
+        testBlackJackGAme.dealACard(testPlayer);
+        testBlackJackGAme.dealACard(testPlayer);
+        boolean expected = false;
+        if(testPlayer.getScore() == 21){
+            expected = true;
+        }
+        boolean actual = testBlackJackGAme.isBlackJack(testPlayer);
 
         Assert.assertEquals(expected, actual);
     }
