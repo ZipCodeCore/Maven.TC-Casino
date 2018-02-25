@@ -4,11 +4,14 @@ import io.zipcoder.casino.BlackJackBet;
 import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
+import io.zipcoder.casino.Game.cardGame.utilities.CardRank;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 import io.zipcoder.casino.TypeOfBet;
+
+import java.util.ArrayList;
 
 public class BlackJackGame extends CardGame {
     BlackJackPlayer player;
@@ -19,7 +22,6 @@ public class BlackJackGame extends CardGame {
         player = new BlackJackPlayer(profile);
         this.addPlayer(player);
         dealer = new BlackJackPlayer(null);
-        this.addPlayer(dealer);
 
         player.setIsBusted(false);
         dealer.setIsBusted(false);
@@ -31,15 +33,17 @@ public class BlackJackGame extends CardGame {
         Profile someProfile = new Profile("Commander", 100.0, 1);
         BlackJackGame game = new BlackJackGame(someProfile);
         game.startGame();
-
     }
 
-    public void deal() {
+
+    // need to change deal to accomodate multiple players not just given players
+    //Multiple players would loop through list of players at table and deal to each player
+    public void deal(BlackJackPlayer player1) {
         Card temp;
         for (int i = 0; i < 2; i++) {
             temp = deck.getCard();
-            player.getHand().addCard(deck.getCard());
-            updateScore(temp, player);
+            player1.getHand().addCard(deck.getCard());
+            updateScore(temp, player1);
 
             temp = deck.getCard();
             dealer.getHand().addCard(temp);
@@ -47,28 +51,33 @@ public class BlackJackGame extends CardGame {
         }
 
         Console.print(player.getHand().showHand());
-        Console.print(showDealersFaceCard());
+        Console.print("Dealer Face Card: " + showDealersFaceCard());
+    }
+
+    //bets are placed be for the dealer deals
+    //need to change list of players to cardPlayers
+    public boolean placeInitialBet(BlackJackPlayer thePlayer) {
+        return placeBet(BlackJackBet.INTIAL_BET, thePlayer);
     }
 
     public void turn(BlackJackPlayer currentPlayer) {
         currentPlayer.setCurrentPlayer(true);
-        //loop while its still the players turn
-        while (currentPlayer.getIsBusted() == false) {
+
+
+        while (currentPlayer.getIsBusted() != true & currentPlayer.getHasStood() != true) {
             // show list of Actions
             showListOfPlayerActions();
             String input = Console.getString();
-
             // player has an ace the player can choose to change value to 1;
-            if (input.equalsIgnoreCase("Hit") & player.getScore() < 21) {
-                hit(player);
+            if (input.equalsIgnoreCase("Hit") & currentPlayer.getScore() < 21) {
+                hit(currentPlayer);
                 continue;
             } else if (input.equalsIgnoreCase("Stand")) {
                 stand();
                 break;
             }
         }
-
-
+        currentPlayer.setCurrentPlayer(false);
         // player must choose to bet
         // if player does not have any money promt the user to add more money or game is over.
     }
@@ -99,22 +108,52 @@ public class BlackJackGame extends CardGame {
      * @param thePlayer
      * @return
      */
+    //makes changes to include aces
+    // players hand has more than one ace add ace score as score plus 1
     public int updateScore(Card cardToScore, BlackJackPlayer thePlayer) {
-        int cardValue = cardToScore.getRank().getCardValue();
-        int updateScore = thePlayer.getScore() + cardValue;
-        thePlayer.setScore(updateScore);
+        int cardValue, updateScore;
 
+        if (cardToScore.getRank() == CardRank.ACE & countAcesInHand(thePlayer) < 2) {
+            cardValue = 1;
+        } else {
+            cardValue = cardToScore.getRank().getCardValue();
+        }
+        updateScore = thePlayer.getScore() + cardValue;
+        thePlayer.setScore(updateScore);
         return updateScore;
     }
 
 
     public void round() {
+     // goes through list ofPlayers turns
+        // once all players have either stood or busted
+        // dealer deals hand until cards are 17, busted or blackJack
+        // make a call to winner
+        // make a call to payOuts
+        // promt to play another round
+        // game should continue as long as player has money
+        // game 
+
+
 
     }
 
+    /**
+     * @param currentPlayer
+     * @return
+     */
+    public int countAcesInHand(BlackJackPlayer currentPlayer) {
+        int numberOfAces = 0;
+        for (Card ace : currentPlayer.getHand().getCards()) {
+            if (ace.getRank() == CardRank.ACE) {
+                numberOfAces++;
+            }
+        }
+        return numberOfAces;
+    }
 
     public void dealerBehavior() {
-
+        // TODO consider When dealer has a soft 17
         while (dealer.getScore() < 17) {
             dealACard(dealer);
         }
@@ -173,13 +212,11 @@ public class BlackJackGame extends CardGame {
 
     @Override
     public void startGame() {
-        Console.print("Welcome to BlackJack!" + "\n" + player.getProfile().toString());
-        Console.print("Please Enter Your Starting [Bet]\n");
-        double bet = Console.getDouble();
-
-
-        player.bet(BlackJackBet.INTIAL_BET, bet);
-
+        Console.print("Welcome to BlackJack!" + " " + player.getProfile().getName().toString());
+        while(placeInitialBet(player) == false) {
+            placeInitialBet(player);
+        }
+        deal(player);
     }
 //if Player score is > 21 console print score you loose play
     // if Player Score is <
