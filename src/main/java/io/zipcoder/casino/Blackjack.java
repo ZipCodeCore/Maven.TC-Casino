@@ -205,6 +205,7 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
                     break;
                 } else {
                     System.out.println("You only have " + this.getPlayer().getWallet().checkChipAmount() + " chips");
+                    System.out.println();
                 }
             } catch (NumberFormatException ne) {
                 System.out.println("Please try again.");
