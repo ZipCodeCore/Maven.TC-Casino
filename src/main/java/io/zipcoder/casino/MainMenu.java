@@ -23,7 +23,7 @@ public class MainMenu {
     public String displayGameChoices() {
         Scanner in = new Scanner(System.in);
         System.out.println("Please choose a game from the following menu:\nWar\nGo Fish\nBlackJack\nCraps");
-        String choice = in.nextLine();
+        String choice = in.nextLine().toLowerCase();
         return choice;
     }
 
@@ -37,10 +37,10 @@ public class MainMenu {
                 game = new War(player);
                 break;
             case "go fish":
-                game = new GoFish(player);
+                //game = new GoFish(player);
                 break;
             case "blackjack":
-                game = new Blackjack(player);
+               // game = new Blackjack(player);
                 break;
             case "craps":
                 game = new Craps(player);

@@ -9,7 +9,7 @@ public class MainMenuTest {
     public void testChooseGame() {
         String chosenGame = "war";
         Person player = new Person ("Adam");
-        Game expected = new War("Adam");
+        Game expected = new War(player);
 
         Game actual = MainMenu.chooseGame(chosenGame, player);
 
@@ -20,7 +20,7 @@ public class MainMenuTest {
     public void testChooseGame2() {
         String chosenGame = "theibhwn";
         Person player = new Person ("Adam");
-        Game expected = new War("Adam");
+        Game expected = new War(player);
 
         Game actual = MainMenu.chooseGame(chosenGame, player);
 
