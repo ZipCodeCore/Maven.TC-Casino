@@ -56,6 +56,7 @@ public class WarTest {
     public void iDeclareWarTest() {
         Person player = new Person();
         War warGame = new War(player);
+
     }
 
 }

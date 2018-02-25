@@ -11,7 +11,8 @@ public class War extends Game implements GameInterface, CardGameInterface {
     Scanner input = new Scanner(System.in);
 
     public War(Person player) {
-       // this.player = player;
+        // this.player = player;
+        // un-note that ^ when the main menu is done and everything should work properly
     }
 
     public void start() {
@@ -19,32 +20,53 @@ public class War extends Game implements GameInterface, CardGameInterface {
         System.out.println("Enter 'exit' at any time to end the game");
         Deck dealerDeck = new Deck();
         for (int i = 0; i < dealerDeck.getDeckOfCards().size(); i++) {
-            dealer.getHand().receiveCards(dealerDeck.drawCard());
+            dealer.getHand().receiveCards(dealerDeck.getDeckOfCards().get(i));
         }
         dealer.getHand().shuffleHand();
         dealCards();
-        beginRound();
+        engine();
     }
 
-    public void beginRound() {
-        String playerInput = input.nextLine();
-        if (!(playerInput.equals("exit"))) {
+    public void engine() {
+        // String playerInput = input.nextLine();
+        if (nextLineIsNotExit()) {
             while ((dealer.getHand().getHandArrayList().size() != 0) && (player.getHand().getHandArrayList().size() != 0)) {
                 playerPlayedCards.add(player.getHand().drawCardfromHand());
                 dealerPlayedCards.add(dealer.getHand().drawCardfromHand());
                 System.out.println("You played " + playerPlayedCards + " and the dealer played " + dealerPlayedCards);
-                int winner = compareCards(playerPlayedCards.get(playerPlayedCards.size()-1), dealerPlayedCards.get(dealerPlayedCards.size()-1));
-                if (winner == 1) {
-                    playerWins();
-                } else if (winner == 2) {
-                    dealerWins();
-                }
-                String playerInputAgain = input.nextLine();
-                if (playerInputAgain.equals("exit")) {
+                int winner =
+                        compareCards(
+                                getLastCardPlayedOnTable(playerPlayedCards),
+                                getLastCardPlayedOnTable(dealerPlayedCards));
+                announceWinner(winner);
+                if (!nextLineIsNotExit()) {
                     end();
                 }
+                checkIfGameIsOver();
             }
         } else {end();}
+    }
+
+    private void checkIfGameIsOver() {
+        if ((player.getHand().getHandArrayList().size() == 0) || (dealer.getHand().getHandArrayList().size() == 0)) {
+            end();
+        }
+    }
+
+    private void announceWinner(int winnerNumber) {
+        if (winnerNumber == 1) {
+            playerWins();
+        } else if (winnerNumber == 2) {
+            dealerWins();
+        }
+    }
+
+    private Card getLastCardPlayedOnTable(ArrayList<Card> cardsOnTable) {
+        return cardsOnTable.get(cardsOnTable.size() - 1);
+    }
+
+    private boolean nextLineIsNotExit() {
+        return !("exit").equals(input.nextLine());
     }
 
     public int compareCards(Card p1card, Card p2card) {
@@ -88,7 +110,8 @@ public class War extends Game implements GameInterface, CardGameInterface {
 
     public void iDeclareWarLogic(ArrayList<Card> playedCards, Person person, int amountOfCardsAvailable) {
         if (amountOfCardsAvailable < 4) {
-            for (int i = 0; i < amountOfCardsAvailable; i++) {
+            int cardsAvailableInteger = amountOfCardsAvailable;
+            for (int i = 0; i < cardsAvailableInteger-1; i++) {
                 playedCards.add(person.getHand().getHandArrayList().remove(i));
             }
         } else {
@@ -111,7 +134,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
 
     public void end() {
         String winner = "";
-        if (player.getHand().getHandArrayList().size() == 52) {
+        if (player.getHand().getHandArrayList().size() > 50) {
             winner += "you!";
         } else {
             winner += "the dealer!";
