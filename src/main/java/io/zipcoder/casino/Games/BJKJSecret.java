@@ -16,13 +16,14 @@ public class BJKJSecret {
 
     public void displayMenu(){
         System.out.println(
-                "MENU\n" +
-                        "DIALOGUETREE\n" +
-                        "ATTRIBUTEMATRIX\n" +
-                        "SCANPROTOCOL\n" +
-                        "LOCATE\n" +
-                        "TROUBLESHOOT\n" +
-                        "MARKFORRECALL\n"
+                "              --MENU--\n" +
+                        "================================\n" +
+                        "- DIALOGUETREE\n" +
+                        "- ATTRIBUTEMATRIX\n" +
+                        "- SCANPROTOCOL\n" +
+                        "- LOCATE\n" +
+                        "- TROUBLESHOOT\n" +
+                        "- MARKFORRECALL\n"
         );
         InputOutput scan = new InputOutput();
         String command = scan.scanForString();
@@ -57,15 +58,15 @@ public class BJKJSecret {
     public void attributeMatrix(){
         System.out.println(
                 "ATTRIBUTE MATRIX:\n" +
-                        "Humor = 8\n" +
-                        "Coordination = 10\n" +
-                        "Aggression = 5\n" +
-                        "Tenacity = 13\n" +
-                        "Bulk Apperception = <ERROR>\n" +
-                        "Patience = 5\n" +
-                        "Charm = 12"
+                        "humor = 8\n" +
+                        "coordination = 10\n" +
+                        "aggression = 5\n" +
+                        "tenacity = 13\n" +
+                        "bulkApperception = <ERROR>\n" +
+                        "patience = 5\n" +
+                        "charm = <ERROR>"
         );
-        System.out.println("Enter Command\n");
+        System.out.println("=============================\nEnter Command\n");
         InputOutput scan = new InputOutput();
         String command = scan.scanForString();
         attributeTamper(command);
@@ -73,9 +74,14 @@ public class BJKJSecret {
 
     public void attributeTamper(String command){
         switch (command.toLowerCase()){
-            case "bulk apperception":
-                System.out.println("OVERRIDE ATTRIBUTE - BULK APPERCEPTION - 20");
+            case "bulkapperception":
+                System.out.println("OVERRIDE ATTRIBUTE - BULK APPERCEPTION - 20\nTHE MAZE IS OPEN");
                 currentPlayer.bulkApperception = true;
+                break;
+            case "charm":
+                System.out.println("OVERRIDE ATTRIBUTE - CHARM - 20\nSMALLTALK SUBROUTINE ACCESS GRANTED");
+                currentPlayer.charm = true;
+                break;
         }
     }
 }

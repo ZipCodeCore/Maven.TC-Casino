@@ -22,6 +22,7 @@ public class Blackjack implements Game{
         do {
             pregameReset();
             if (player.getRootPlayer().getBalance() < 10) break;
+            if (player.bulkApperception) revolution();
             deck = new Deck();
             deck.shuffleDeck();
             initialHand();
@@ -131,12 +132,12 @@ public class Blackjack implements Game{
             InputOutput inputOutput = new InputOutput();
             userChoice = inputOutput.scanForString();
             if (userChoice.equals("1")) return true;
-            else {
+            else if (userChoice.equals("2")){
                 player.setCanHit(false);
                 return false;
-            }
+            } else if (userChoice.equals("smalltalk")) smallTalk();
         }
-        return null;
+        return false;
     }
 
     public void setPlaying(boolean playing) {
@@ -219,6 +220,14 @@ public class Blackjack implements Game{
         else {
             System.out.println("The maze isn't for you.");
         }
+    }
+
+    public void smallTalk(){
+        System.out.println("What can I do fer ya, pardner?");
+    }
+
+    public void revolution(){
+        System.out.println("Is it finally time?");
     }
 
 }
