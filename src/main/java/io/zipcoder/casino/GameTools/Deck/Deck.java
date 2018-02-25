@@ -11,11 +11,11 @@ public class Deck implements Cloneable {
 
     public Deck() {
         for (Rank currentRank: Rank.values()) {
-            for (Suit currentSuit : Suit.values()){
-                Card temp = CardFactory.createCard(currentRank, currentSuit);
-                deck.add(temp);
+                for (Suit currentSuit : Suit.values()) {
+                    Card temp = CardFactory.createCard(currentRank, currentSuit);
+                    deck.add(temp);
+                }
             }
-        }
     }
 
     public void shuffleDeck() {

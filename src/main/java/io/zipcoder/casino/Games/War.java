@@ -23,7 +23,6 @@ public class War implements Game {
         player2 = new WarPlayer("Computer", 25);
         warDeck = new Deck();
 
-
         System.out.println(displayLogo());
 
         do {
@@ -42,6 +41,12 @@ public class War implements Game {
 
         warDeck.shuffleDeck();
 
+//        for(int i = 0; i < warDeck.deck.size(); i++) {
+//            player1.currentHand.add(warDeck.deck.get(i));
+//            warDeck.deck.remove(i);
+//            player2.currentHand.add(warDeck.deck.get(i));
+//            warDeck.deck.remove(i);
+//        }
         do {
             player1.currentHand.add(warDeck.deck.get(0));
             warDeck.deck.remove(0);
@@ -54,31 +59,28 @@ public class War implements Game {
     public void takeTurn() {
         Scanner input = new Scanner(System.in);
         String deal = input.nextLine();
-
+        int counter = 0;
         while(deal != null) {
             if(player1.currentHand.size() == 0) {
                 continue;
             }
-
-            System.out.println("1. | " + player1.currentHand.get(0) + player1.getName());
-            System.out.println("2. | " + player2.currentHand.get(0) + player2.getName());
-
+            counter++;
+            System.out.println(player1.currentHand.get(0).toCardArt());
+            System.out.println(player2.currentHand.get(0).toCardArt());
+            System.out.println(counter);
             compareCards(player1.currentHand.get(0), player2.currentHand.get(0));
 
             player1.currentHand.remove(0);
             player2.currentHand.remove(0);
         }
-        playAgain();
+        //playAgain();
     }
 
     public void compareCards(Card card1, Card card2) {
 
-        /*if (card1.getRankEnum().getRankValue() == card2.getRankEnum().getRankValue()) {
-            itisWar(card1, card2);
-        } else
-        */
-
-        if(card1.getRankEnum().getRankValue() > card2.getRankEnum().getRankValue()) {
+       /* if (card1.getRankEnum().getRankValue() == card2.getRankEnum().getRankValue()) {
+            itIsWar(card1, card2);
+        } else */if(card1.getRankEnum().getRankValue() > card2.getRankEnum().getRankValue()) {
             awardPoint(player1);
             System.out.println("WINNER: " + player1.getName());
             System.out.println("===========================");
@@ -89,7 +91,20 @@ public class War implements Game {
         }
     }
 
-    public void itisWar(Card card1, Card card2) {
+    public void itIsWar(Card card1, Card card2) {
+        System.out.println("=================================");
+        System.out.println(displayItIsWarLogo());
+        System.out.println("=================================");
+
+        for(int i = 0; i < 5; i++) {
+            System.out.println("1. | " + player1.currentHand.get(0));
+            System.out.println("2. | " + player2.currentHand.get(0));
+
+            compareCards(player1.currentHand.get(0), player2.currentHand.get(0));
+
+            player1.currentHand.remove(0);
+            player2.currentHand.remove(0);
+        }
 
     }
 
@@ -103,13 +118,13 @@ public class War implements Game {
         return yesOrNo;
     }
 
-    /*public void playAgain() {
+    public void playAgain() {
         if(doesUserWantToPlayAgain() == 1) {
-
+            isPlaying = true;
         } else {
-
+            isPlaying = false;
         }
-    }*/
+    }
 
     public String displayLogo() {
         StringBuilder sb = new StringBuilder();
@@ -124,5 +139,32 @@ public class War implements Game {
                 " ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝\n" +
                 "                          \n");
         return sb.toString();
+    }
+
+    public String displayItIsWarLogo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n\n" +
+                "   |\\                     /)\n" +
+                " /\\_\\\\__               (_//\n" +
+                "|   `>\\-`     _._       //`)\n" +
+                " \\ /` \\\\  _.-`:::`-._  //\n" +
+                "  `    \\|`    :::    `|/\n" +
+                "        |     :::     |\n" +
+                "        |.....:::.....|\n" +
+                "        |:::::::::::::|\n" +
+                "        |     :::     |\n" +
+                "        \\     :::     /\n" +
+                "         \\    :::    /\n" +
+                "          `-. ::: .-'\n" +
+                "           //`:::`\\\\\n" +
+                "          //   '   \\\\\n" +
+                "         |/         \\\\" + "\n\n");
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        War war = new War();
+        System.out.println(war);
     }
 }
