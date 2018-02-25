@@ -47,6 +47,7 @@ public class Roulette implements Game{
 
     public void play(Player player) {
         this.player = player;
+        runWelcome();
         try {
             mainLoop();
         } catch (InterruptedException e) {
@@ -55,15 +56,20 @@ public class Roulette implements Game{
     }
 
     public void runWelcome() {
-        String prompt = " (        )          (                             \n" +
+        String welcomeResponse =
+                "********************* WELCOME TO **********************" +
+                "(        )          (                             \n" +
                 " )\\ )  ( /(          )\\ )        *   )  *   )      \n" +
                 "(()/(  )\\())     (  (()/(  (   ` )  /(` )  /( (    \n" +
                 " /(_))((_)\\      )\\  /(_)) )\\   ( )(_))( )(_)))\\   \n" +
                 "(_))    ((_)  _ ((_)(_))  ((_) (_(_())(_(_())((_)  \n" +
                 "| _ \\  / _ \\ | | | || |   | __||_   _||_   _|| __| \n" +
                 "|   / | (_) || |_| || |__ | _|   | |    | |  | _|  \n" +
-                "|_|_\\  \\___/  \\___/ |____||___|  |_|    |_|  |___|\n";
-        System.out.println(prompt);
+                "|_|_\\  \\___/  \\___/ |____||___|  |_|    |_|  |___|\n\n";
+        String continueResponse;
+        do {
+             continueResponse = IOHandler.promptForStringWithMessage("Press 'c' to continue");
+        } while(!continueResponse.equals("c"));
     }
 
     public String getRules(){
@@ -75,8 +81,7 @@ public class Roulette implements Game{
         startProgram:
         while (true) {
             int betCounter = 1;
-            runWelcome();
-            stringResponse = prompts.welcomeMessage();
+            stringResponse = prompts.startMessage();
             if (stringResponse.equals("q")) {
                 break startProgram;
             } else if (stringResponse.equals("r")) {

@@ -21,7 +21,7 @@ public class DeckTest {
     @Test
     public void testPullFewerThanRemaining() {
         int expected = 9;
-        int actual = deck.pull(expected).length;
+        int actual = deck.pullMany(expected).length;
 
         Assert.assertEquals(expected, actual);
     }
@@ -30,7 +30,7 @@ public class DeckTest {
     public void testPullMoreThanRemaining() {
         int expected = 52;
         int desiredDraws = 53;
-        int actual = deck.pull(desiredDraws).length;
+        int actual = deck.pullMany(desiredDraws).length;
 
         Assert.assertEquals(expected, actual);
     }
@@ -38,7 +38,7 @@ public class DeckTest {
     @Test
     public void testPullFromFreshDeck() {
         int removeCards = 50;
-        deck.pull(removeCards);
+        deck.pullMany(removeCards);
         int expected = 7;
         int actual = deck.pullFromFreshDeck(expected).length;
 
@@ -48,7 +48,7 @@ public class DeckTest {
     @Test
     public void testGetCardsLeft() {
         int removeCards = 50;
-        deck.pull(removeCards);
+        deck.pullMany(removeCards);
         int expected = 2;
         int actual = deck.getCardsLeft();
 
@@ -58,7 +58,7 @@ public class DeckTest {
     @Test
     public void testIsEmpty() {
         int removeCards = 52;
-        deck.pull(removeCards);
+        deck.pullMany(removeCards);
 
         Assert.assertTrue(deck.isEmpty());
     }
@@ -68,7 +68,7 @@ public class DeckTest {
         int removeCards = 52;
         int expected = 52;
 
-        deck.pull(removeCards);
+        deck.pullMany(removeCards);
         Assert.assertTrue(deck.isEmpty());
 
         deck.shuffle();

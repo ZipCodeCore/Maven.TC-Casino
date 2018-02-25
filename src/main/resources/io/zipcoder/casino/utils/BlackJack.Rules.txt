@@ -1,0 +1,63 @@
+﻿
+*****************************************************************************************
+                                                                                        *                                                                                        *
+                                                                                        *
+BlackJack Rules                                                                         *
+                                                                                        *
+Objective:                                                                              *
+The objective of BlackJack is for you (the Player) to beat the                          *
+dealer by getting a count as close to 21 as possible without going over.                *
+                                                                                        *
+Card Values/Scoring:                                                                    *
+It is up to the player’s choice to decide if an Ace is 1 or 11.                         *
+Face cards are worth 10. All other cards are their own value.                           *
+                                                                                        *
+Betting:                                                                                *
+Occurs before you play the game. You cannot bet again during the game.                  *
+                                                                                        *
+Dealing:                                                                                *
+When all the players have placed their bets, the dealer gives                           *
+one card face up to each player, and then one card face up to himself.                  *
+Another round of cards is then dealt face up to each player, but the dealer             *
+takes his second card face down. Thus, each player except the dealer receives           *
+two cards face up, and the dealer receives one card face up and one card face down.     *
+                                                                                        *
+Naturals:                                                                               *
+If a player's first two cards are an ace and a                                          *
+"ten-card" (a picture card or 10), giving him a count of 21 in two cards,               *
+this is a natural or "BlackJack." If any player has a natural and the dealer does not,  *
+the dealer immediately pays that player 1.5x the amount of his bet. If the dealer has   *
+a natural, he immediately collects the bets of all players who do not have naturals,    *
+(but no additional amount).If the dealer and another player both have naturals, the     *
+bet of that player is a tie.                                                            *
+                                                                                        *
+Player Playing:                                                                         *
+After the player receives two cards, they are allowed to “hit” or “stand.”              *
+“Stand” is to not ask for another card. “Hit” is to ask for                             *
+another card in an attempt to get 21, or close to it.                                   *
+If the player goes over 21, then they have bust and lose their bet.                     *
+                                                                                        *
+Dealer Playing:                                                                         *
+If the dealer’s first two cards add up to 17 or higher, they must “stand”.              *
+If the sum of their two cards is 16 or lower, they must “hit”. If the dealer has an Ace,*
+and the sum of their cards is 17 or higher, they must choose for it to be 11.           *
+                                                                                        *
+Splitting:                                                                              *
+If the player has a pair of the same cards, they are allowed to split it                *
+into two hands and also add another bet of the same amount. If the player has a pair of *
+Aces, they only get one extra card per hand, and cannot “hit” for more. Any naturals    *
+made from splitting does not pay extra. They are allowed to split up to three times.    *
+                                                                                        *
+Double Down:                                                                            *
+After first two cards are dealt to the player, they are allowed to “double down”.       *
+Doubling down is to add an equal amount of your bet to the bet,                         *
+but you are only able to get one more card.                                             *
+                                                                                        *
+Insurance:                                                                              *
+If the dealer gets an Ace for their first card, the player                              *
+can put down an “insurance”of half the value of their own bet. If the dealer’s          *
+second card is a 10 or face card, the player wins 2x his insurance.                     *
+                                                                                        *
+Have Fun!                                                                               *
+                                                                                        *
+*****************************************************************************************

@@ -1,5 +1,8 @@
 package io.zipcoder.casino.games.crazy8s;
 
+import io.zipcoder.casino.core.Player;
+import io.zipcoder.casino.games.Card;
+import io.zipcoder.casino.games.Deck;
 import io.zipcoder.casino.utils.IOHandler;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,17 +15,67 @@ public class Crazy8PlayTest {
     }
 
     @Test
-    public void dealCardsTest() {
+    public void dealCardsTestPlayer() {
+        //Given
+        Deck deck = new Deck(); //get new deck to play with
+        int handSize = 8;
 
+        Card[] playersHand = deck.pullMany(handSize);   //deal playersHand
+
+        Assert.assertEquals(true, playersHand.length == 8);
     }
 
     @Test
-    public void drawCardTest() {
+    public void dealCardsTestComputer() {
+        //Given
+        Deck deck = new Deck(); //get new deck to play with
+        int handSize = 8;
 
+        Card[] computer = deck.pullMany(handSize); //and computer's hand
+
+        Assert.assertEquals(true, computer.length == 8);
+    }
+
+    @Test
+    public void dealCardsTestMatch() {
+        //Given
+        Deck deck = new Deck(); //get new deck to play with
+
+        Card matchThisCard = deck.pull(); //show one card from face down Deck
+
+//        Assert.assertEquals(true, matchThisCard.toString() == 1);
+    }
+
+
+    @Test
+    public void displayPileCardToMatchTest(){
+        //Given
+        Deck deck = new Deck();
+        Card matchThisCard;
+
+        matchThisCard = deck.pull();   //deal playersHand
+
+        String expected = "Hearts";
+
+        String actual = matchThisCard.toString();
+
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void displayHandTest() {
+        //Given
+        Deck deck = new Deck();
+        Card[] playersHand;
+
+        playersHand = deck.pullMany(8);   //deal playersHand
+
+        String expected = "Hearts";
+
+        String actual = playersHand.toString();
+
+        Assert.assertEquals(expected, actual);
+
 
     }
 
@@ -32,29 +85,59 @@ public class Crazy8PlayTest {
     }
 
     @Test
-    public void decideWinnerTest() {
+    public void decideWinnerTestWin() {
 
+        //Given
+        String resultWin = "Congratulations! You are the winner!";
+
+        Player p1 = new Player();
+        Crazy8Play game = new Crazy8Play();
+        //When
+        game.emptyHand(1);
+
+        String expected = "Congratulations! You are the winner!";
+
+        String actual = resultWin;
+
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    public void decideWinnerTestLose() {
+
+        //Given
+        String resultLose = "Sorry! You lose!";
+
+        Player p1 = new Player();
+        Crazy8Play game = new Crazy8Play();
+        //When
+        game.emptyHand(2);
+
+        String expected = "Sorry! You lose!";
+
+        String actual = resultLose;
+
+        Assert.assertEquals(expected, actual);
     }
 
     //CANT TEST USER INPUT!
-//    @Test
-//    public void playAgainPromptTest(){
-//        //Given
-//        Player p1 = new Player();
-//        Crazy8Play game = new Crazy8Play(p1);
-//        //When
-//        game.decideWinner();
-//        String expected = "Do you want to play again? [Y/N]";
-//
-//        String actual = IOHandler.promptForStringWithMessage("Do you want to play again? [Y/N]");
-//
+    @Test
+    public void playAgainPromptTest(){
+        //Given
+        Player p1 = new Player();
+        Crazy8Play game = new Crazy8Play();
+        //When
+        game.decideWinner();
+        String expected = "Do you want to play again? [Y/N]";
+
+        String actual = IOHandler.promptForStringWithMessage("Do you want to play again? [Y/N]");
+
 //        Assert.assertEquals(expected, actual);
 
-//    }
+    }
 
     @Test
-    public void runWelcomeTest() {
-        String expected = "       WELCOME TO CRAZY EIGHTS!\n" +
+    public void runWelcomeTest(){
+        String expected =   "       WELCOME TO CRAZY EIGHTS!\n" +
                 "**************************************\n" +
                 "*                                    *\n" +
                 "*                                    *\n" +

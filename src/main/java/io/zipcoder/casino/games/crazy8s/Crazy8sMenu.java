@@ -1,8 +1,8 @@
 package io.zipcoder.casino.games.crazy8s;
 
 import io.zipcoder.casino.core.Casino;
-import io.zipcoder.casino.core.Player;
 import io.zipcoder.casino.utils.IOHandler;
+import io.zipcoder.casino.core.Player;
 
 public class Crazy8sMenu {
 
@@ -36,7 +36,7 @@ public class Crazy8sMenu {
 
     public void playGame() {
         Player player = new Player();
-        Crazy8Play game = new Crazy8Play();
+        Crazy8Play game = new Crazy8Play(true);
 
         game.play(player);
     }

@@ -1,10 +1,13 @@
 package io.zipcoder.casino.games.roulette;
 
+
+import io.zipcoder.casino.interfaces.Gamble;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RouletteGamble {
+public class RouletteGamble implements Gamble{
     /**
      * this class will hold stats, therefore calculating chips winnings and losses
      */
@@ -38,7 +41,7 @@ public class RouletteGamble {
         this.currentBalance = currentBalance;
     }
 
-    public Integer getEarnings(HashMap<String, ArrayList<Integer>> numberSelections, Integer winningNumber) {
+    public Integer win(HashMap<String, ArrayList<Integer>> numberSelections, Integer winningNumber) {
         Integer earnings = 0;
         for (Map.Entry<String, ArrayList<Integer>> entry : numberSelections.entrySet()) {
             if (entry.getValue().contains(winningNumber)) {

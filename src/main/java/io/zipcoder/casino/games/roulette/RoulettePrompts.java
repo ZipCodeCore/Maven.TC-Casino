@@ -19,25 +19,26 @@ public class RoulettePrompts {
     }
 
 
-    public String welcomeMessage() {
-        String welcomePrompt = "*** WELCOME TO THE ROULETTE TABLE  ***\n" +
-                "* This is the table for high roller  *\n" +
-                "* Indulgence here at our casino.     *\n" +
-                "* Roulette is a casino game named    *\n" +
-                "* after the French word meaning      *\n" +
-                "* little wheel. In the game, players *\n" +
-                "* may choose to place bets on either *\n" +
-                "* a single number, various groupings *\n" +
-                "* of numbers, the colors red or      *\n" +
-                "* black, whether the number is odd   *\n" +
-                "* or even, or if the numbers are     *\n" +
-                "* high (19–36) or low (1–18).        *\n" +
-                "**************************************\n\n" +
-                "*         Press 'y' to play          *\n" +
-                "*         Press 'q' to quit          *\n" +
-                "*        Press 'r' for rules         *\n" +
-                "*     Press 'b' for betting info     *\n\n" +
-                "**************************************\n";
+    public String startMessage() {
+        String welcomePrompt =
+                "*******************************************************\n" +
+                "*          This is the table for high roller          *\n" +
+                "*          Indulgence here at our casino.             *\n" +
+                "*           Roulette is a casino game named           *\n" +
+                "*          after the French word meaning              *\n" +
+                "*          little wheel. In the game, players         *\n" +
+                "*          may choose to place bets on either         *\n" +
+                "*           a single number, various groupings        *\n" +
+                "*           of numbers, the colors red or             *\n" +
+                "*           black, whether the number is odd          *\n" +
+                "*           or even, or if the numbers are            *\n" +
+                "*           high (19–36) or low (1–18).               *\n" +
+                "*******************************************************\n\n" +
+                "*             Press 'y' to place your bets            *\n" +
+                "*                  Press 'q' to quit                  *\n" +
+                "*                 Press 'r' for rules                 *\n" +
+                "*              Press 'b' for betting info             *\n\n" +
+                "*******************************************************\n";
 
         return IOHandler.promptForStringWithMessage(welcomePrompt);
     }
