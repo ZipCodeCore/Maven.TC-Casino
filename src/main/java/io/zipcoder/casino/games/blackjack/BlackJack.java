@@ -379,8 +379,9 @@ public class BlackJack implements Game {
     }
 
     @Override
-    public void runWelcome() {
+    public String runWelcome() {
         welcomeToBlackJack();
+        return null;
     }
 
     @Override

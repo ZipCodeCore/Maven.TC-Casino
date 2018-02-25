@@ -159,9 +159,10 @@ public class CeeLo implements Game {
     }
 
     @Override
-    public void runWelcome() {
+    public String runWelcome() {
         displaySplash();
         IOHandler.printMessage(getRules());
+        return null;
     }
 
     @Override

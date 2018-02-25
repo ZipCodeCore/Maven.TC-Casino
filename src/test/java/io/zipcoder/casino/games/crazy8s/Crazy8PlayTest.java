@@ -37,45 +37,22 @@ public class Crazy8PlayTest {
     }
 
     @Test
-    public void dealCardsTestMatch() {
+    public void dealCardsTestDeck() {
         //Given
         Deck deck = new Deck(); //get new deck to play with
 
-        Card[] matchThisCard = deck.pull(1); //show one card from face down Deck
+        Card[] matchThisCard = deck.pull(1); //deck
 
         Assert.assertEquals(true, matchThisCard.length == 1);
     }
 
-
     @Test
-    public void displayPileCardToMatchTest(){
-        //Given
-        Deck deck = new Deck();
-        Card[] matchThisCard;
+    public void drawCardTest() {
 
-        matchThisCard = deck.pull(1);   //deal playersHand
-
-        String expected = "Hearts";
-
-        String actual = matchThisCard.toString();
-
-        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void displayHandTest() {
-        //Given
-        Deck deck = new Deck();
-        Card[] playersHand;
-
-        playersHand = deck.pull(8);   //deal playersHand
-
-        String expected = "Hearts";
-
-        String actual = playersHand.toString();
-
-        Assert.assertEquals(expected, actual);
-
 
     }
 
@@ -90,7 +67,6 @@ public class Crazy8PlayTest {
         //Given
         String resultWin = "Congratulations! You are the winner!";
 
-        Player p1 = new Player();
         Crazy8Play game = new Crazy8Play();
         //When
         game.emptyHand(1);
@@ -107,7 +83,6 @@ public class Crazy8PlayTest {
         //Given
         String resultLose = "Sorry! You lose!";
 
-        Player p1 = new Player();
         Crazy8Play game = new Crazy8Play();
         //When
         game.emptyHand(2);
@@ -123,7 +98,6 @@ public class Crazy8PlayTest {
     @Test
     public void playAgainPromptTest(){
         //Given
-        Player p1 = new Player();
         Crazy8Play game = new Crazy8Play();
         //When
         game.decideWinner();
@@ -131,7 +105,7 @@ public class Crazy8PlayTest {
 
         String actual = IOHandler.promptForStringWithMessage("Do you want to play again? [Y/N]");
 
-//        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
 
     }
 
