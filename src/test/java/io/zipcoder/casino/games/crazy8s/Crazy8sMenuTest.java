@@ -1,5 +1,6 @@
 package io.zipcoder.casino.games.crazy8s;
 
+import io.zipcoder.casino.utils.IOHandler;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -50,27 +51,14 @@ public class Crazy8sMenuTest {
         Assert.assertEquals(expectedInput, actualInput);
     }
 
-
-
-    @Test
-    public void playTest(){
-        //Given
-        Crazy8sMenu game = new Crazy8sMenu();
-        //When
-        game.playGame();
-        //Then
-        //ASSERT!!!
-    }
-
-
 //    @Test
-//    public void quitGame(){
+//    public void playTest(){
 //        //Given
 //        Crazy8sMenu game = new Crazy8sMenu();
 //        //When
-//       // game.quitMenu();
+//        game.playGame();
 //        //Then
-//        Assert.assertFalse(game.showMenu);
+//        //ASSERT!!!
 //    }
 
     @Test
@@ -92,7 +80,8 @@ public class Crazy8sMenuTest {
                             "*        Press 'R' for RULES         *\n" +
                             "*                                    *\n" +
                             "**************************************\n";
-        String actual = game.runWelcome();
+
+        String actual = IOHandler.getMessageFromFile("Crazy8Welcome.txt");
 
         Assert.assertEquals(expected, actual);
 
@@ -133,7 +122,7 @@ public class Crazy8sMenuTest {
 "*                                                            *\n"+
 "*   The first player who gets rid of all their cards wins!   *\n"+
 "**************************************************************\n";
-        String actual = game.getRules();
+        String actual = IOHandler.getMessageFromFile("Crazy8Rules.txt");
 
         Assert.assertEquals(expected, actual);
     }

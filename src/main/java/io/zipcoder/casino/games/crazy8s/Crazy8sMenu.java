@@ -1,5 +1,6 @@
 package io.zipcoder.casino.games.crazy8s;
 
+import io.zipcoder.casino.core.Casino;
 import io.zipcoder.casino.utils.IOHandler;
 import io.zipcoder.casino.core.Player;
 
@@ -9,7 +10,6 @@ public class Crazy8sMenu {
 
             String userInput = IOHandler.promptForStringWithMessage(runWelcome());
             handleInput(userInput);
-
     }
 
     public String handleInput(String userInput) {
@@ -25,6 +25,8 @@ public class Crazy8sMenu {
                 showMenu();
                 return userInput;
             case "Q":
+                Casino casino = new Casino();
+                casino.enter();
                 return userInput;
                 default:
                     showMenu();
@@ -34,7 +36,7 @@ public class Crazy8sMenu {
 
     public void playGame() {
         Player player = new Player();
-        Crazy8Play game = new Crazy8Play();
+        Crazy8Play game = new Crazy8Play(player);
 
         game.play(player);
     }

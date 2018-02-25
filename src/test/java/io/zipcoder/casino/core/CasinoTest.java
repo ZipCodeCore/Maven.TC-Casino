@@ -30,11 +30,6 @@ public class CasinoTest {
     }
 
     @Test
-    public void enterTest() {
-        Casino casino = new Casino();
-    }
-
-    @Test
     public void handleInputTestBJ() {
         //Given
         Casino casino = new Casino();

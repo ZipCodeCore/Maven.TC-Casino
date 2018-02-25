@@ -57,26 +57,7 @@
 ////
 ////    }
 ////
-////    public void beginGame() {
-////        Deck deck = new Deck(); //get new deck to play with
-////        int handSize = 8;
-////
-////        playersHand = deck.pull(handSize);   //deal playersHand
-////        computer = deck.pull(handSize); //and computer's hand
-////        matchThisCard = deck.pull(1); //show one card from face down Deck
-////
-////        while (!emptyHand(1) && !emptyHand(2))
-////        //while the playersHand and computers hands aren't empty
-////        {
-////            displayState();
-////            playerPlays();
-////
-////            displayCardToMatch();
-////            computerPlays();
-////        }
-////        result();
-////        runWelcome();
-////    }
+
 ////
 ////    public static boolean emptyHand(int whichHand)  //check if any hand is empty (1 = playersHand, 2 = computer)
 ////    {
@@ -135,20 +116,7 @@
 //        return 0;
 //    }
 //
-//    public static void result() {
-//        if (emptyHand(1)) { //player won
-//            result = "Congratulations! You are the winner!" +
-//                    "\n Play again? [y/n]";
-//            answer = IOHandler.promptForStringWithMessage(result);
-//        } else if (emptyHand(2)) { //computer won
-//            result = "Sorry! You lose!" +
-//                    "\n Play again? [y/n]";
-//            answer = IOHandler.promptForStringWithMessage(result);
-//        } else {
-//            result = "Its a TIE!!!" +
-//                    "\n Play again? [y/n]";
-//            answer = IOHandler.promptForStringWithMessage(result);
-//        }
+
 //    }
 //
 //    public static boolean emptyHand(int whichHand)  //check if any hand is empty (1 = player, 2 = computer)

@@ -1,6 +1,8 @@
 package io.zipcoder.casino.core;
 
+import io.zipcoder.casino.games.ceelo.CeeLoGamble;
 import io.zipcoder.casino.games.crazy8s.Crazy8Play;
+import io.zipcoder.casino.games.roulette.Roulette;
 import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
@@ -9,16 +11,12 @@ public class Casino {
     private Game currentGameRunning;
 
     public Casino() {
+
         this.player = player;
     }
 
 
     public void enter() {
-        this.player = new Player();
-    }
-
-
-    public void gameLobbyMenu() {
 
         int userInput = IOHandler.promptForIntWithMessage(runWelcomeMenu());
         handleInput(userInput);
@@ -64,16 +62,16 @@ public class Casino {
         switch (answer) {
             case 1:
 //                currentGameRunning = new BlackJack();
-                break;
+//                break;
             case 2:
-                currentGameRunning = new Crazy8Play();
+                currentGameRunning = new Crazy8Play(player);
                 break;
             case 3:
-//                currentGameRunning = new CeeLo();
-                break;
+//                currentGameRunning = new CeeLoGamble();
+//                break;
             case 4:
 //                currentGameRunning = new Roulette();
-                break;
+//                break;
             case 5:
                 goodBye();
 
