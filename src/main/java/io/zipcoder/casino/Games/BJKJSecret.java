@@ -17,12 +17,12 @@ public class BJKJSecret {
     public void displayMenu(){
         System.out.println(
                 "MENU\n" +
-                        "DIALOGUETREE" +
-                        "ATTRIBUTEMATRIX" +
-                        "SCANPROTOCOL" +
-                        "LOCATE" +
-                        "TROUBLESHOOT" +
-                        "MARKFORRECALL"
+                        "DIALOGUETREE\n" +
+                        "ATTRIBUTEMATRIX\n" +
+                        "SCANPROTOCOL\n" +
+                        "LOCATE\n" +
+                        "TROUBLESHOOT\n" +
+                        "MARKFORRECALL\n"
         );
         InputOutput scan = new InputOutput();
         String command = scan.scanForString();
@@ -36,14 +36,21 @@ public class BJKJSecret {
                 System.out.println("IS - THIS - A - WESTWORLD - REFERENCE");
                 break;
             case "attributematrix":
+                System.out.println("OPENING: ATTR MATRIX INTERFACE");
                 attributeMatrix();
                 break;
             case "scanprotocol":
+                System.out.println("no");
                 break;
             case "locate":
                 System.out.println("ERROR - UNABLE TO LOCATE UNIT");
+                break;
             case "troubleshoot":
-                System.out.println("");
+                System.out.println("ERROR - UNAVAILABLE WHILE UNIT OFF CAMPUS");
+                break;
+
+                default:
+                    System.out.println("INVALID COMMAND");
         }
     }
 
@@ -54,12 +61,21 @@ public class BJKJSecret {
                         "Coordination = 10\n" +
                         "Aggression = 5\n" +
                         "Tenacity = 13\n" +
-                        "Bulk Apperception = 14" +
+                        "Bulk Apperception = <ERROR>\n" +
                         "Patience = 5\n" +
                         "Charm = 12"
         );
         System.out.println("Enter Command\n");
         InputOutput scan = new InputOutput();
         String command = scan.scanForString();
+        attributeTamper(command);
+    }
+
+    public void attributeTamper(String command){
+        switch (command.toLowerCase()){
+            case "bulk apperception":
+                System.out.println("OVERRIDE ATTRIBUTE - BULK APPERCEPTION - 20");
+                currentPlayer.bulkApperception = true;
+        }
     }
 }

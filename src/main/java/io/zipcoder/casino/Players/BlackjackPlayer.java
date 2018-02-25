@@ -11,6 +11,7 @@ public class BlackjackPlayer extends Player{
     protected Player rootPlayer;
     protected ArrayList<Card> hand;
     protected boolean canHit;
+    public boolean bulkApperception = false;
 
     public BlackjackPlayer(Player rootPlayer){
         this.name = rootPlayer.getName();

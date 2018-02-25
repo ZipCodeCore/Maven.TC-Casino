@@ -17,7 +17,6 @@ public class Blackjack implements Game{
     protected Dealer bkjkDealer;
     public boolean isPlaying = true;
     protected int betAmount = 0;
-    boolean bulkApperception = false;
 
     public void startGame(){
         do {
@@ -49,13 +48,16 @@ public class Blackjack implements Game{
         deck = new Deck();
         bkjkDealer = new Dealer();
         player = new BlackjackPlayer(entryPlayer);
+        System.out.println("Howdy, pardners.");
     }
 
     public void runTurn(){
+        System.out.println("Suffle up 'n deal!");
         for (Card card:player.getHand()) {
-            System.out.println(card.toString());
+            System.out.println("You got " + card.toString());
         }
         System.out.println("Ante up! 10 chips in the pot");
+        System.out.println("Dealer holding " + this.bkjkDealer.getHand().get(0).toString() + " and one hidden card.");
         setBetAmount(10);
         promptBet();
         boolean hitchoice = playerHitOption();
@@ -154,13 +156,15 @@ public class Blackjack implements Game{
         return betAmount;
     }
 
-    public void settleAccount(){
+    public void settleAccount() {
         if ((player.getHandValue() > bkjkDealer.getHandValue() && player.getHandValue() < 22)) {
             payoutWin();
-        } else if (player.getHandValue() > 21){
+        } else if (player.getHandValue() > 21) {
             payoutLoss();
-        } else if (player.getHandValue() < 22 && bkjkDealer.getHandValue() > 21){
+        } else if (player.getHandValue() < 22 && bkjkDealer.getHandValue() > 21) {
             payoutWin();
+        } else if (player.getHandValue() == bkjkDealer.getHandValue()){
+            payoutDraw();
         } else {
             payoutLoss();
         }
@@ -193,7 +197,7 @@ public class Blackjack implements Game{
     public void payoutWin(){
         int bet = getBetAmount();
         player.payoutWin(bet);
-        System.out.println("You won " + bet + ". Nice work!");
+        System.out.println("You won " + bet + " chips. Nice gamblin', sonny!");
     }
 
     public void payoutLoss(){
@@ -202,8 +206,12 @@ public class Blackjack implements Game{
         System.out.println("Rough luck! You're down " + bet + " chips.");
     }
 
+    public void payoutDraw(){
+        System.out.println("It's a draw! Double or nuthin'!");
+    }
+
     public void secret(){
-        if (player.getName().equals("Bernard") || player.getName().equals("Maeve")) {
+        if (player.getName().toLowerCase().equals("bernard") || player.getName().toLowerCase().equals("maeve")) {
             System.out.println("These violent delights have violent ends.");
             BJKJSecret secret = new BJKJSecret();
             secret.start(this.player);
