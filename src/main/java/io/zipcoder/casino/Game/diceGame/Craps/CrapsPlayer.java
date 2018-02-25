@@ -4,9 +4,17 @@ package io.zipcoder.casino.Game.diceGame.Craps;
 import io.zipcoder.casino.*;
 import io.zipcoder.casino.CasinoUtilities.Console;
 
+import java.util.ArrayList;
+
 public class CrapsPlayer extends Player implements Gambler {
 
     private boolean passLine;
+    private boolean odds;
+    private boolean come;
+    private boolean dontCome;
+    private ArrayList<Integer> comePoints;
+    private ArrayList<Integer> dontComePoints;
+
     private Escrow playerEscrow;
 
 
@@ -73,4 +81,51 @@ public class CrapsPlayer extends Player implements Gambler {
         this.passLine = input;
 
     }
+
+    public void setOdds(boolean input){
+        this.odds = input;
+    }
+
+    public boolean hasOdds(){
+        return this.odds;
+    }
+    public void setCome(boolean input){
+        this.come = input;
+    }
+    public boolean isCome(){
+        return this.come;
+    }
+
+    public void setDontCome(boolean input){
+        this.dontCome=input;
+    }
+
+    public boolean isDontCome(){
+        return this.dontCome;
+    }
+
+    public ArrayList<Integer> getComePoints(){
+        return this.comePoints;
+    }
+
+    public ArrayList<Integer> getDontComePoints(){
+        return this.dontComePoints;
+    }
+
+    public void addComePoint(Integer point){
+        this.comePoints.add(point);
+    }
+
+    public void removeComePoint(Integer point){
+        this.comePoints.remove(point);
+    }
+
+    public void addDontComePoint(Integer point){
+        this.dontComePoints.add(point);
+    }
+
+    public void removeDontComePoint(Integer point){
+        this.dontComePoints.remove(point);
+    }
+
 }

@@ -140,6 +140,24 @@ public class CrapsPlayerTest {
     }
 
     @Test
+    public void pushTest(){
+        //Given
+        //CrapsPlayer stinkyPete
+        stinkyPete.bet(CrapsBet.DO_NOT_PASS, 50);
+
+        //When
+        double payoutMultiplier = 0;
+        stinkyPete.win(CrapsBet.DO_NOT_PASS, payoutMultiplier);
+        double expected = 100;
+        double actual = stinkyPete.getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+
+    }
+
+    @Test
     public void multipleBetWinTest(){
         //Given
         //CrapsPlayer stinkyPete

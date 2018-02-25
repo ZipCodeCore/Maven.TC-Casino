@@ -14,8 +14,16 @@ public class Console {
     }
 
     public static Double getDouble() {
+        Double input;
+        try {
+            input = Double.valueOf(casinoScanner.nextLine());
+            return input;
+        }
+        catch(NumberFormatException e){
+            Console.print("Invalid input: please enter a numerical value");
+            return -0.001;
+        }
 
-        return Double.valueOf(casinoScanner.nextLine());
     }
 
     public static int getInt() {
