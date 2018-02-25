@@ -7,6 +7,7 @@ package io.zipcoder.casino.games;
  * date: 2/21/18
  */
 public class Card {
+
     private Rank rank;
     private Suit suit;
 
@@ -31,4 +32,5 @@ public class Card {
     public String toString() {
         return String.format("%s of %s", rank.toString(), suit.toString());
     }
+
 }

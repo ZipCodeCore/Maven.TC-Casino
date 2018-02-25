@@ -1,0 +1,30 @@
+                    Crazy Eights Rules
+**************************************************************
+*   Crazy Eights is a game for two or more players.          *
+*                                                            *
+*   The object is to get rid of the cards in your hand       *
+*   onto a discard pile by matching the number or suit       *
+*   of the previous discard.                                 *
+*                                                            *
+*                   Basic Game Play:                         *
+**************************************************************
+*   The dealer deals eight cards to each player.             *
+*   The rest of the deck is placed face down on the table,   *
+*   and the top card of that deck is turned face up.         *
+*   Each player, in turn, must either play a legal card,     *
+*   or draw a card from the remaining. The following plays   *
+*   are legal.                                               *
+*                                                            *
+*	1.	If the top card of the discard pile is not an eight, *
+*	you may play any card which matches the rank or suit of  *
+*	the previous card (for example if the top card was the   *
+*	king of hearts you could play any king or any heart).    *
+*                                                            *
+*	2.	An eight may be played on any card, and the player   *
+*	of the eight must nominate a suit.                       *
+*                                                            *
+*	3.	If an eight is on top of the pile, you must play     *
+*	either another eight or any card of the suit nominated   *
+*                                                            *
+*   The first player who gets rid of all their cards wins!   *
+**************************************************************

@@ -12,11 +12,6 @@ public interface Game {
     void play(Player player);
 
     /**
-     * Each game must have a way for the player to quit the game and go back to the main menu.
-     */
-    void quitGame();
-
-    /**
      * The game must have a welcome prompt.
      */
     void runWelcome();

@@ -1,0 +1,13 @@
+**** WELCOME TO HIGH ROLLERS CLUB ****
+*                                    *
+**************************************
+*                                    *
+*       Please choose a game:        *
+*       1. Black Jack                *
+*       2. Crazy Eights              *
+*       3. CeeLo                     *
+*       4. Roulette                  *
+*                                    *
+*       PRESS 5 TO EXIT              *
+*                                    *
+**************************************
