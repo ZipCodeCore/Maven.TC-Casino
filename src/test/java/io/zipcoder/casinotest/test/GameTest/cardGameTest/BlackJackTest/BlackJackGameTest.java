@@ -1,5 +1,6 @@
 package io.zipcoder.casinotest.test.GameTest.cardGameTest.BlackJackTest;
 
+import io.zipcoder.casino.BlackJackBet;
 import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackGame;
 import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackPlayer;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
@@ -38,12 +39,18 @@ public class BlackJackGameTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void turnChoice1Test() {
+        testPlayer.bet(BlackJackBet.INTIAL_BET, 500);
+        double expectecd = 500;
+        double actual = testPlayer.getProfile().getAccountBalance();
+
+        Assert.assertEquals(expectecd, actual, .001);
+    }
+
 
     @Test
     public void hitTest() {
-        // Card card1 = testDeck.getCard();
-        //testPlayer.getHand().addCard(card1);
-        //int score =   testPlayer.getScore();
         testBlackJackGAme.hit(testPlayer);
         int expected = 1;
         int actual = testPlayer.getHand().getCards().size();
@@ -57,10 +64,15 @@ public class BlackJackGameTest {
         Card card1 = testDeck.getCard();
         testPlayer.getHand().addCard(card1);
 
-        testBlackJackGAme.hit(testPlayer);
+        //updates score of first card addeded
+        testBlackJackGAme.currentScore(card1, testPlayer);
+        // adds another card to hand
+        testPlayer.getHand().addCard(cardToScore);
+
 
         int expected = card1.getRank().getCardValue() + cardToScore.getRank().getCardValue();
-        int actual = testBlackJackGAme.currentScore(cardToScore, testPlayer);
+        // updates score to reflect second card added
+        int actual = Integer.valueOf(testBlackJackGAme.currentScore(cardToScore, testPlayer));
 
         Assert.assertEquals(expected, actual);
     }
@@ -68,6 +80,11 @@ public class BlackJackGameTest {
     @Test
     public void standTest() {
 
+    }
+
+    public void splitTest() {
+       // if both cards delt are same then player can choose to split
+        //
     }
 
     @Test
@@ -87,7 +104,7 @@ public class BlackJackGameTest {
 
 
         String expected = ""; //testDealer.getHand().getCards().get(1).toString();
-        String actual = testBlackJackGAme.ShowDealersFaceCard();
+        String actual = testBlackJackGAme.showDealersFaceCard();
 
         Assert.assertEquals(expected, actual);
     }
