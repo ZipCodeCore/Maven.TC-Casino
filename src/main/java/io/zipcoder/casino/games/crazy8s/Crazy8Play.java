@@ -12,12 +12,11 @@ public class Crazy8Play implements Game {
     private Card[] playersHand;
     private Card[] computer;
     private Card[] matchThisCard;
-    private Player player;
-    private String answer;
+    boolean legalCard = false;
     Deck deck = new Deck(); //get new deck to play with
 
 
-    public Crazy8Play(Player player) {
+    public Crazy8Play() {
 
         start.showMenu();
     }
@@ -28,38 +27,87 @@ public class Crazy8Play implements Game {
         dealCards();
         //check for empty hands
         displayPlayerHand();
-        displayPileCard();
+        displayCardToMatch();
+        //check if any of the players cards match the DisplayCard
+        computeMatchesPlayer();
+    }
 
-        emptyHand(1);
-        emptyHand(2);
+    public void playerSelectCard(){
+
+        int cardSelection = IOHandler.promptForIntWithMessage("Select which card you would like to play: ");
+        cardSelect(cardSelection);
 
     }
 
-    public void computeMatches(){
-        //check if the displayCard == any card in the player or computers hand
-        //by rand, suit OR 8
-        //IF match (player) allow them to choose a card
-        pickCard();
-        //IF NO MATCH (player) force them to draw a card
-        playersHand = deck.pull(1);
-        computeMatches();
-        //IF 8 - force them to chose a suit
+    public void cardSelect(int cardSelection){
+    //take the selected card and make it the NEW cardToMatch
+        if(emptyHand(1) || emptyHand(2)) {
+            decideWinner();
+        }
+        switchTurns();
 
-        //IF match (computer) force them to play match
-        compPlayCard();
-        //IF NO MATCH (computer) force them to draw card
-        computer = deck.pull(1);
-        computeMatches();
-        //IF 8 - force them to chose a suit
+    }
 
+    private void switchTurns() {
+        //if the Player just played it now the computers turn
+        //vice versa!
+    }
+
+    public void computeMatchesPlayer() {
+        if (legalCard == true) {
+            //check if the displayCard == any card in the player or computers hand by rank, suit OR 8
+            //IF there is a match (for player) allow them to choose a card
+            playerSelectCard();
+        } else
+            //IF NO MATCH (player) force them to draw a card
+            playersHand = deck.pull(1);
+            computeMatchesPlayer();
+    }
+
+    public void computeMatchesComputer() {
+        if(legalCard == true) {
+            //IF match (computer) force them to play match
+            compPlayCard();
+        }else {
+            //IF NO MATCH (computer) force them to draw card
+            computer = deck.pull(1);
+            computeMatchesComputer();
+        }
+    }
+
+    public boolean legalCard(Card card) {
+    //check whether card matches suit, rank of pile or is eight
+        if (card.getRank().equals(8)) { //card is 8
+            return true;
+//        } else if (card.getSuit().equals(matchThisCard.getSuit())) { //card matches suit
+//            return true;
+//        } else if (card.getRank().equals(matchThisCard.getRank())) { //card matches rank
+//            legalCard = true;
+        }
+        legalCard = false;
+        return legalCard;
     }
 
     private void compPlayCard() {
 
+        //computers matching card is now removed from hand and made into displayCardToMatch
+        if(emptyHand(1) || emptyHand(2)) {
+            decideWinner();
+        }
+        switchTurns();
     }
 
     private void pickCard() {
 
+        String userInput = IOHandler.promptForStringWithMessage("You don't have any cards to play. Press ANY key to pick up a card.");
+        if(userInput.equalsIgnoreCase(" ")) {
+            deck.pull(1);
+        }
+    }
+
+    public void compPickCard(){
+
+        deck.pull(1);
     }
 
     public void playersTurn(){
@@ -76,7 +124,7 @@ public class Crazy8Play implements Game {
         matchThisCard = deck.pull(1); //show one card from face down Deck
     }
 
-    public String displayPileCard(){
+    public String displayPlayerHand(){
 
         StringBuilder sb = new StringBuilder();
 
@@ -87,7 +135,7 @@ public class Crazy8Play implements Game {
         return sb.toString();
     }
 
-    public String displayPlayerHand() {
+    public String displayCardToMatch() {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < matchThisCard.length; i++) {

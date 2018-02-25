@@ -5,6 +5,7 @@ import io.zipcoder.casino.utils.IOHandler;
 import io.zipcoder.casino.core.Player;
 
 public class Crazy8sMenu {
+    Player player = new Player();
 
     public void showMenu() {
 
@@ -35,9 +36,7 @@ public class Crazy8sMenu {
     }
 
     public void playGame() {
-        Player player = new Player();
-        Crazy8Play game = new Crazy8Play(player);
-
+        Crazy8Play game = new Crazy8Play();
         game.play(player);
     }
 

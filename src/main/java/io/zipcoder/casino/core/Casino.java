@@ -64,7 +64,7 @@ public class Casino {
 //                currentGameRunning = new BlackJack();
 //                break;
             case 2:
-                currentGameRunning = new Crazy8Play(player);
+                currentGameRunning = new Crazy8Play();
                 break;
             case 3:
 //                currentGameRunning = new CeeLoGamble();

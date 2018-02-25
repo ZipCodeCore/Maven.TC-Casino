@@ -46,13 +46,36 @@ public class Crazy8PlayTest {
         Assert.assertEquals(true, matchThisCard.length == 1);
     }
 
-    @Test
-    public void drawCardTest() {
 
+    @Test
+    public void displayPileCardToMatchTest(){
+        //Given
+        Deck deck = new Deck();
+        Card[] matchThisCard;
+
+        matchThisCard = deck.pull(1);   //deal playersHand
+
+        String expected = "Hearts";
+
+        String actual = matchThisCard.toString();
+
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void displayHandTest() {
+        //Given
+        Deck deck = new Deck();
+        Card[] playersHand;
+
+        playersHand = deck.pull(8);   //deal playersHand
+
+        String expected = "Hearts";
+
+        String actual = playersHand.toString();
+
+        Assert.assertEquals(expected, actual);
+
 
     }
 
@@ -68,7 +91,7 @@ public class Crazy8PlayTest {
         String resultWin = "Congratulations! You are the winner!";
 
         Player p1 = new Player();
-        Crazy8Play game = new Crazy8Play(p1);
+        Crazy8Play game = new Crazy8Play();
         //When
         game.emptyHand(1);
 
@@ -85,7 +108,7 @@ public class Crazy8PlayTest {
         String resultLose = "Sorry! You lose!";
 
         Player p1 = new Player();
-        Crazy8Play game = new Crazy8Play(p1);
+        Crazy8Play game = new Crazy8Play();
         //When
         game.emptyHand(2);
 
@@ -101,7 +124,7 @@ public class Crazy8PlayTest {
     public void playAgainPromptTest(){
         //Given
         Player p1 = new Player();
-        Crazy8Play game = new Crazy8Play(p1);
+        Crazy8Play game = new Crazy8Play();
         //When
         game.decideWinner();
         String expected = "Do you want to play again? [Y/N]";
