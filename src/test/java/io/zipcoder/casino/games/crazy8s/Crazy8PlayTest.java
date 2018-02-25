@@ -46,18 +46,62 @@ public class Crazy8PlayTest {
         Assert.assertEquals(true, matchThisCard.length == 1);
     }
 
+
+    @Test
+    public void cardSelectTest() {
+
+    }
+
+    @Test
+    public void isHandEmptyTest() {
+
+    }
+
+    @Test
+    public void computersTurnTest() {
+
+    }
+
+    @Test
+    public void computeMatchesComputerTest() {
+
+    }
+
+    @Test
+    public void computeMatchesPlayerTest() {
+
+    }
+
+    @Test
+    public void legalCardTest() {
+
+    }
+    @Test
+    public void legalCardComputerTest() {
+
+    }
+
+    @Test
+    public void compPlayCardTest() {
+    }
+
     @Test
     public void drawCardTest() {
 
     }
 
     @Test
-    public void displayHandTest() {
+    public void displayPlayerHandTest() {
 
     }
 
     @Test
-    public void computeMatchesTest() {
+    public void pickCardTest() {
+
+    }
+
+    @Test
+    public void emptyHandTest(){
 
     }
 
