@@ -1,138 +1,4 @@
-////package io.zipcoder.casino.games.crazy8s;
-////
-////import io.zipcoder.casino.core.Player;
-////import io.zipcoder.casino.games.Card;
-////import io.zipcoder.casino.games.Deck;
-////import io.zipcoder.casino.interfaces.Game;
-////import io.zipcoder.casino.utils.IOHandler;
-////
-////public class CrazyEights implements Game {
-////    static Card[] playersHand;
-////    static Card[] computer; //card arrays
-////    static Card[] matchThisCard;
-////    static String answer;
-////    static String result;
-////    private static int answerInt;
-////    boolean isLegal;
-////
-////
-////    public CrazyEights() {
-////    }
-////
-////    @Override
-////    public void play(Player player) {
-////        runWelcome();
-////    }
-////
-////    @Override
-////    public void runWelcome() {
-////        do {
-////            String intro =
-////                    "****** WELCOME TO CRAZY EIGHTS! ******\n" +
-////                            "*                                    *\n" +
-////                            "*                                    *\n" +
-////                            "* This is a non-gambling game so,    *\n" +
-////                            "*       Hold on to your chips!!      *\n" +
-////                            "*                                    *\n" +
-////                            "*                                    *\n" +
-////                            "**************************************\n" +
-////                            "*                                    *\n" +
-////                            "*        Press 'Y' to PLAY           *\n" +
-////                            "*        Press 'Q' to QUIT           *\n" +
-////                            "*        Press 'R' for RULES         *\n" +
-////                            "*                                    *\n" +
-////                            "**************************************\n";
-////            answer = IOHandler.promptForStringWithMessage(intro);
-////            if (answer.equalsIgnoreCase("q")) {
-////                continue;
-////            } else if (answer.equalsIgnoreCase("r")) {
-////                IOHandler.printMessage(IOHandler.getMessageFromFile("Crazy8Rules.txt"));
-////            } else
-////                beginGame();
-////        }
-////        while (!answer.equalsIgnoreCase("q"));
-////    }
-////
-////    public void choseStep() {
-////
-////    }
-////
 
-////
-////    public static boolean emptyHand(int whichHand)  //check if any hand is empty (1 = playersHand, 2 = computer)
-////    {
-////        Card[] hand;
-////        if (whichHand == 1)
-////            hand = playersHand;
-////        else
-////            hand = computer;
-////        if (hand.length > 0) {
-////            return false;
-////        }
-////        return true;
-////    }
-////
-////    public static String displayPlayerHand() {
-////
-////        StringBuilder sb = new StringBuilder();
-////        for (int i=0;i<playersHand.length;i++) {
-////            sb.append(String.format("%2d: ", i));
-////            sb.append(playersHand[i].toString());
-//package io.zipcoder.casino.games.crazy8s;
-//
-//import io.zipcoder.casino.core.Player;
-//import io.zipcoder.casino.games.Card;
-//import io.zipcoder.casino.games.Deck;
-//import io.zipcoder.casino.interfaces.Game;
-//import io.zipcoder.casino.utils.IOHandler;
-//
-//public class CrazyEights implements Game {
-//    static int[] deck;
-//    static Card[] player;
-//    static Card[] computer; //card arrays
-//    static int facedownDeck;
-//    static int suit;
-//    static boolean deckEmpty;
-//    static String answer;
-//    static String result;
-//    static int answerInt;
-//    private static boolean isPlaying;
-//
-//
-//    public CrazyEights() {
-//
-//    }
-//
-//    public static int getCard()  //retrieves top card from deck
-//    {
-////        int i = 0, value = 0;
-////        while (i < deck.length && deck[i] == 0)
-////            i++;
-////        if (deck.length > i) {
-////            value = deck[i];
-////            deck[i] = 0;
-////        }
-////        return value;
-//        return 0;
-//    }
-//
-
-//    }
-//
-//    public static boolean emptyHand(int whichHand)  //check if any hand is empty (1 = player, 2 = computer)
-//    {
-//        Card[] hand;
-//        if (whichHand == 1) {
-//            hand = player;
-//
-//        } else
-//            hand = computer;
-//
-//        if (hand.length > 0)
-//            return false;
-//        else
-//            return true;
-//    }
 //
 //    public static void playerPlays() {
 //        //check hand for legal cards, label them
@@ -174,24 +40,8 @@
 ////        return false;
 ////    }
 ////
-////    public static void result() {
-////        if (emptyHand(1)) { //playersHand won
-////            result = "Congratulations! You are the winner!" +
-////                    "\n Play again? [y/n]";
-////            answer = IOHandler.promptForStringWithMessage(result);
-////        } else if (emptyHand(2)) { //computer won
-////            result = "Sorry! You lose!" +
-////                    "\n Play again? [y/n]";
-////            answer = IOHandler.promptForStringWithMessage(result);
-////        } else {
-////            result = "Its a TIE!!!" +
-////                    "\n Play again? [y/n]";
-////            answer = IOHandler.promptForStringWithMessage(result);
-////        }
-////
-////    }
-////
-////
+
+
 ////    public static void playerPlays() {
 ////        if (!emptyHand(2)) {
 ////            //check if there are legal cards to play
@@ -288,17 +138,7 @@
 ////        render();
 ////    }
 ////
-////
-////    @Override
-////    public void quitGame() {
-////    }
-////
-////    @Override
-////    public String getRules() {
-////        return null;
-////    }
-////}
-//    }
+
 //
 //    private static void drawCard(boolean filled, int i, int[] computer) {
 //        while (!filled && i < computer.length) {
@@ -377,37 +217,7 @@
 ////        }
 ////        //discard pile
 ////        drawCard(facedownDeck, 350, 215, false);
-//
-//    }
-//
-//    public void intro() {
-//
-//        do {
-//            String intro =
-//                    "****** WELCOME TO CRAZY EIGHTS! ******\n" +
-//                            "*                                    *\n" +
-//                            "*                                    *\n" +
-//                            "* This is a non-gambling game so,    *\n" +
-//                            "*       Hold on to your chips!!      *\n" +
-//                            "*                                    *\n" +
-//                            "*                                    *\n" +
-//                            "**************************************\n" +
-//                            "*                                    *\n" +
-//                            "*        Press 'Y' to PLAY           *\n" +
-//                            "*        Press 'Q' to QUIT           *\n" +
-//                            "*        Press 'R' for RULES         *\n" +
-//                            "*                                    *\n" +
-//                            "**************************************\n";
-//            answer = IOHandler.promptForStringWithMessage(intro);
-//            if (answer.equalsIgnoreCase("q")) {
-//                continue;
-//            } else if (answer.equalsIgnoreCase("r")) {
-//                IOHandler.printMessage(IOHandler.getMessageFromFile("CrazyEights.txt"));
-//            } else
-//                beginGame();
-//        }
-//        while (!answer.equalsIgnoreCase("q"));
-//    }
+
 //
 //    public void beginGame() {
 //        Deck deck = new Deck(); //get new deck to play with
@@ -422,22 +232,5 @@
 //        }
 //        result();
 //        intro();
-//    }
-//
-//    @Override
-//    public void play(Player player) {
-//        intro();
-//
-//    }
-//
-//    @Override
-//    public void quitGame() {
-//
-//    }
-//
-//    @Override
-//    public void runWelcome() {
-//
-//    }
-//}
+
 

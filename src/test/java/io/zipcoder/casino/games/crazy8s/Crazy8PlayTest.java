@@ -1,6 +1,8 @@
 package io.zipcoder.casino.games.crazy8s;
 
 import io.zipcoder.casino.core.Player;
+import io.zipcoder.casino.games.Card;
+import io.zipcoder.casino.games.Deck;
 import io.zipcoder.casino.utils.IOHandler;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,8 +15,35 @@ public class Crazy8PlayTest {
     }
 
     @Test
-    public void dealCardsTest() {
+    public void dealCardsTestPlayer() {
+        //Given
+        Deck deck = new Deck(); //get new deck to play with
+        int handSize = 8;
 
+        Card[] playersHand = deck.pull(handSize);   //deal playersHand
+
+        Assert.assertEquals(true, playersHand.length == 8);
+    }
+
+    @Test
+    public void dealCardsTestComputer() {
+        //Given
+        Deck deck = new Deck(); //get new deck to play with
+        int handSize = 8;
+
+        Card[] computer = deck.pull(handSize); //and computer's hand
+
+        Assert.assertEquals(true, computer.length == 8);
+    }
+
+    @Test
+    public void dealCardsTestMatch() {
+        //Given
+        Deck deck = new Deck(); //get new deck to play with
+
+        Card[] matchThisCard = deck.pull(1); //show one card from face down Deck
+
+        Assert.assertEquals(true, matchThisCard.length == 1);
     }
 
     @Test
@@ -33,25 +62,55 @@ public class Crazy8PlayTest {
     }
 
     @Test
-    public void decideWinnerTest() {
+    public void decideWinnerTestWin() {
 
+        //Given
+        String resultWin = "Congratulations! You are the winner!";
+
+        Player p1 = new Player();
+        Crazy8Play game = new Crazy8Play(p1);
+        //When
+        game.emptyHand(1);
+
+        String expected = "Congratulations! You are the winner!";
+
+        String actual = resultWin;
+
+        Assert.assertEquals(expected, actual);
+    }
+    @Test
+    public void decideWinnerTestLose() {
+
+        //Given
+        String resultLose = "Sorry! You lose!";
+
+        Player p1 = new Player();
+        Crazy8Play game = new Crazy8Play(p1);
+        //When
+        game.emptyHand(2);
+
+        String expected = "Sorry! You lose!";
+
+        String actual = resultLose;
+
+        Assert.assertEquals(expected, actual);
     }
 
     //CANT TEST USER INPUT!
-//    @Test
-//    public void playAgainPromptTest(){
-//        //Given
-//        Player p1 = new Player();
-//        Crazy8Play game = new Crazy8Play(p1);
-//        //When
-//        game.decideWinner();
-//        String expected = "Do you want to play again? [Y/N]";
-//
-//        String actual = IOHandler.promptForStringWithMessage("Do you want to play again? [Y/N]");
-//
+    @Test
+    public void playAgainPromptTest(){
+        //Given
+        Player p1 = new Player();
+        Crazy8Play game = new Crazy8Play(p1);
+        //When
+        game.decideWinner();
+        String expected = "Do you want to play again? [Y/N]";
+
+        String actual = IOHandler.promptForStringWithMessage("Do you want to play again? [Y/N]");
+
 //        Assert.assertEquals(expected, actual);
 
-//    }
+    }
 
     @Test
     public void runWelcomeTest(){

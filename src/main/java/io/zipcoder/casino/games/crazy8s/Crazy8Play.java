@@ -14,6 +14,8 @@ public class Crazy8Play implements Game {
     private Card[] matchThisCard;
     private Player player;
     private String answer;
+    Deck deck = new Deck(); //get new deck to play with
+
 
     public Crazy8Play(Player player) {
 
@@ -22,44 +24,104 @@ public class Crazy8Play implements Game {
 
     @Override
     public void play(Player player) {
-//        Deck deck = new Deck(); //get new deck to play with
-//        int handSize = 8;
-//
-//        playersHand = deck.pull(handSize);   //deal playersHand
-//        computer = deck.pull(handSize); //and computer's hand
-//        matchThisCard = deck.pull(1); //show one card from face down Deck
-//
-//        while (!emptyHand(1) && !emptyHand(2))
-//        //while the playersHand and computers hands aren't empty
-//        {
-//            displayState();
-//            playerPlays();
-//
-//            displayCardToMatch();
-//            computerPlays();
-//        }
-//        result();
-//        runWelcome();
-    }
+        //deal cards
+        dealCards();
+        //check for empty hands
+        displayPlayerHand();
+        displayPileCard();
 
-    public void emptyHand(){
+        emptyHand(1);
+        emptyHand(2);
 
     }
-    public void decideWinner(){
-//        String result;
-//        if (emptyHand(1)) { //player won
-//            result = "Congratulations! You are the winner!" +
-//                    "\n Play again? [y/n]";
-//            answer = IOHandler.promptForStringWithMessage(result);
-//        } else if (emptyHand(2)) { //computer won
-//            result = "Sorry! You lose!" +
-//                    "\n Play again? [y/n]";
-//            answer = IOHandler.promptForStringWithMessage(result);
-//        } else {
-//            result = "Its a TIE!!!" +
-//                    "\n Play again? [y/n]";
-//            answer = IOHandler.promptForStringWithMessage(result);
-//        }
+
+    public void computeMatches(){
+        //check if the displayCard == any card in the player or computers hand
+        //by rand, suit OR 8
+        //IF match (player) allow them to choose a card
+        pickCard();
+        //IF NO MATCH (player) force them to draw a card
+        playersHand = deck.pull(1);
+        computeMatches();
+        //IF 8 - force them to chose a suit
+
+        //IF match (computer) force them to play match
+        compPlayCard();
+        //IF NO MATCH (computer) force them to draw card
+        computer = deck.pull(1);
+        computeMatches();
+        //IF 8 - force them to chose a suit
+
+    }
+
+    private void compPlayCard() {
+
+    }
+
+    private void pickCard() {
+
+    }
+
+    public void playersTurn(){
+
+        String userInput = IOHandler.promptForStringWithMessage("Do you want to play again? [Y/N]");
+        handleInput(userInput);
+    }
+
+    public void dealCards() {
+        int handSize = 8;
+
+        playersHand = deck.pull(handSize);   //deal playersHand
+        computer = deck.pull(handSize); //and computer's hand
+        matchThisCard = deck.pull(1); //show one card from face down Deck
+    }
+
+    public String displayPileCard(){
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < playersHand.length; i++) {
+            sb.append(String.format("%2d: ", i));
+            sb.append(playersHand[i].toString());
+        }
+        return sb.toString();
+    }
+
+    public String displayPlayerHand() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < matchThisCard.length; i++) {
+            sb.append(matchThisCard[i].toString());
+        }
+        return sb.toString();
+    }
+
+    public boolean emptyHand(int whichHand){
+    {
+        Card[] hand;
+        if (whichHand == 1) {
+            hand = playersHand;
+        } else {
+            hand = computer;
+        }
+        if (hand.length > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    }
+    public void decideWinner() {
+        String resultWin = "Congratulations! You are the winner!";
+        String resultLose = "Sorry! You lose!";
+        if (emptyHand(1)) { //player won
+            IOHandler.printMessage(resultWin);
+            playAgainPrompt();
+        } else if (emptyHand(2)) { //computer won
+            IOHandler.printMessage(resultLose);
+            playAgainPrompt();
+        } else
+            playAgainPrompt();
     }
 
     public void playAgainPrompt() {
