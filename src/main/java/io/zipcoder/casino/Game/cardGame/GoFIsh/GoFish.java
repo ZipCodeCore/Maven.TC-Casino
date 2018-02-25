@@ -96,6 +96,7 @@ public class GoFish extends CardGame {
                 Console.print(askingPlayer.getHand().showHand());
                 for(int i =0;i<askingPlayer.getHand().getCards().size();i++){
                     if(askingPlayer.getHand().getCards().get(i).getRank()==aCardRank){
+                        askingPlayer.buildBooks(askingPlayer,aCardRank);
                         askingPlayer.getHand().getCards().remove(askingPlayer.getHand().getCards().get(i));
                     }
 
@@ -112,10 +113,27 @@ public class GoFish extends CardGame {
             Console.print("Good guess! Here you go!");
             if (getHandForBook(user,aCardRank)>0) {
                 Console.print("You made a book!!");
+
+                for(int i =0;i<askingPlayer.getHand().getCards().size();i++){
+                    if(askingPlayer.getHand().getCards().get(i).getRank()==aCardRank){
+                        askingPlayer.buildBooks(askingPlayer,aCardRank);
+                        askingPlayer.getHand().getCards().remove(askingPlayer.getHand().getCards().get(i));
+                    }
+
+                }
+                Console.print(askingPlayer.getHand().showHand());
+
                 // SCORE IT
                 // REMOVE CARDS
             }
 
+        }
+        int askingPlayerScore = askingPlayer.getScores();
+        int playerBeingAskedScores = playerBeingAsked.getScores();
+        if(askingPlayerScore>playerBeingAskedScores){
+            Console.print("you win: You scored "+ askingPlayerScore +"And I scored "+playerBeingAskedScores);
+        }else if(askingPlayerScore<playerBeingAskedScores){
+            Console.print("I won: I scored "+ playerBeingAskedScores+" And you scored "+askingPlayerScore);
         }
     }
 

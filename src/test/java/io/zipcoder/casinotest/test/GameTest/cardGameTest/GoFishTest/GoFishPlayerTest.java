@@ -34,7 +34,8 @@ public class GoFishPlayerTest {
         testGoFishPlayer.getHand().getCards().add(thirdCard);
 
         int expected = 2;
-        int actual = testGoFishPlayer.buildBooks(testGoFishPlayer,CardRank.JACK).size();
+        testGoFishPlayer.buildBooks(testGoFishPlayer,CardRank.JACK);
+        int actual=testGoFishPlayer.getBook().size();
 
         Assert.assertEquals(expected,actual);
 
@@ -60,7 +61,8 @@ public class GoFishPlayerTest {
 
 
         System.out.println(testGoFishPlayer.getHand().showHand());
-        for(Card card:testGoFishPlayer.buildBooks(testGoFishPlayer,CardRank.JACK)){
+        testGoFishPlayer2.buildBooks(testGoFishPlayer,CardRank.JACK);
+        for(Card card:testGoFishPlayer2.getBook()){
             testGoFishPlayer2.getHand().addCard(card);
         }
         System.out.println(testGoFishPlayer2.getHand().showHand());
