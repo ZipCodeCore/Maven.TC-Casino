@@ -9,11 +9,11 @@ import io.zipcoder.casino.Players.Player;
 
 import java.util.*;
 
-public class GoFish implements Game{
+public class GoFish implements Game {
+
     Queue<Card> stockPile;
     private List<Card> cardHand;
     ArrayList<Player> players;
-
 
     public void startGame(){
 

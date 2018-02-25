@@ -7,7 +7,6 @@ import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
-
 import java.util.ArrayList;
 
 public class Blackjack implements Game{
@@ -149,9 +148,9 @@ public class Blackjack implements Game{
         return false;
     }
 
-    public Boolean playerHitOption(){
+    public Boolean playerHitOption() {
         StringBuilder currentHand = new StringBuilder("| ");
-        for (Card card : player.getHand()){
+        for (Card card : player.getHand()) {
             currentHand.append(card.toString() + " | ");
         }
         Boolean x = runPlayerHit(currentHand, player);

@@ -3,6 +3,7 @@ package io.zipcoder.casino.GameTools.Deck;
 public class Card {
     private Suit suitEnum;
     private Rank rankEnum;
+    private Rank asciiEnum;
 
     public Card(Rank rankEnum, Suit suitEnum) {
         this.rankEnum = rankEnum;
@@ -30,6 +31,20 @@ public class Card {
         this.rankEnum = rankEnum;
     }
 
+    public void setAsciiEnum(Rank asciiEnum) {
+        this.asciiEnum = asciiEnum;
+    }
+
+    public Rank getAsciiEnum() {
+        return asciiEnum;
+    }
+
+    public String toCardArt() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.rankEnum.getAsciiValue());
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder card = new StringBuilder();
@@ -37,5 +52,4 @@ public class Card {
 
         return card.toString();
     }
-
 }

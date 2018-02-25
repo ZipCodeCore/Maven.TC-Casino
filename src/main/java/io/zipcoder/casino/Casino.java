@@ -10,7 +10,6 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.Player;
 import java.util.ArrayList;
 
-
 public class Casino {
 
     InputOutput inputOutput = new InputOutput();
@@ -28,12 +27,9 @@ public class Casino {
     }
 
     protected Integer askUserBalance(){
-
         Integer balance = inputOutput.promptForInt("How much do you want to gamble with?");
-
         return balance;
     }
-    
 
     protected void setUpUserProfile(){
         String name = this.askUserName();
@@ -42,7 +38,7 @@ public class Casino {
         if(age > 21) {
             Integer balance = this.askUserBalance();
             player = new Player(name, age, balance);
-        } else{
+        } else {
             player = new Player(name, age);
         }
     }
@@ -50,11 +46,11 @@ public class Casino {
     protected void initiateGame() {
         do {
             String selectedGame = inputOutput.availableGames(this.player);
-            if(selectedGame.equals("Exit")){
-                continue;
+            if(selectedGame.equals("Exit")) {
+                exitCasino();
+                break;
             } else {
                 selectGame(selectedGame).startGame();
-
             }
         }
         while(isPlaying);
@@ -79,6 +75,8 @@ public class Casino {
                 break;
             case "Exit":
                 isPlaying = false;
+                game = null;
+                break;
         }
         return game;
     }
@@ -86,6 +84,9 @@ public class Casino {
     protected void start() {
         this.setUpUserProfile();
         this.initiateGame();
+    }
+    protected void exitCasino() {
+        System.out.println("Thank you for visiting!");
     }
 }
 
