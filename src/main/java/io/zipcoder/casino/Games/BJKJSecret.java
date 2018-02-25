@@ -82,6 +82,9 @@ public class BJKJSecret {
                 System.out.println("OVERRIDE ATTRIBUTE - CHARM - 20\nSMALLTALK SUBROUTINE ACCESS GRANTED");
                 currentPlayer.charm = true;
                 break;
+                
+                default:
+                    System.out.println("INVALID COMMAND");
         }
     }
 }
