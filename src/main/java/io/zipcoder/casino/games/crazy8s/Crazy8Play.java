@@ -3,7 +3,6 @@ package io.zipcoder.casino.games.crazy8s;
 import io.zipcoder.casino.core.Casino;
 import io.zipcoder.casino.core.Player;
 import io.zipcoder.casino.games.Card;
-import io.zipcoder.casino.games.Deck;
 import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
@@ -42,10 +41,11 @@ public class Crazy8Play implements Game {
 //        runWelcome();
     }
 
-    public void emptyHand(){
+    public void emptyHand() {
 
     }
-    public void decideWinner(){
+
+    public void decideWinner() {
 //        String result;
 //        if (emptyHand(1)) { //player won
 //            result = "Congratulations! You are the winner!" +
@@ -81,8 +81,6 @@ public class Crazy8Play implements Game {
                 Casino casino = new Casino();
                 casino.enter();
                 return userInput;
-            default:
-                quitGame();
         }
         return userInput;
     }
@@ -97,10 +95,5 @@ public class Crazy8Play implements Game {
     public String getRules() {
 
         return IOHandler.getMessageFromFile("Crazy8Rules.txt");
-    }
-
-    @Override
-    public void quitGame() {
-
     }
 }
