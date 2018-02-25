@@ -37,6 +37,10 @@ public class Hand {
         return cards;
     }
 
+    public void setCards (ArrayList<Card> someCards) {
+        this.cards = someCards;
+    }
+
 
     public String showHand() {
       StringBuilder cards = new StringBuilder();
