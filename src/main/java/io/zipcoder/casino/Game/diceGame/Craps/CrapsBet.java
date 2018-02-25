@@ -1,4 +1,6 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.Game.diceGame.Craps;
+
+import io.zipcoder.casino.TypeOfBet;
 
 public enum CrapsBet implements TypeOfBet {
 
@@ -36,7 +38,7 @@ public enum CrapsBet implements TypeOfBet {
     DO_NOT_COME_SIX,
     DO_NOT_COME_EIGHT,
     DO_NOT_COME_NINE,
-    DO_NOT_COME_TEN;
+    DO_NOT_COME_TEN
 
 
 

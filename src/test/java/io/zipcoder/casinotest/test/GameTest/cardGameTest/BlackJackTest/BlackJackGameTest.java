@@ -1,6 +1,6 @@
 package io.zipcoder.casinotest.test.GameTest.cardGameTest.BlackJackTest;
 
-import io.zipcoder.casino.BlackJackBet;
+import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackBet;
 import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackGame;
 import io.zipcoder.casino.Game.cardGame.BLackJack.BlackJackPlayer;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;

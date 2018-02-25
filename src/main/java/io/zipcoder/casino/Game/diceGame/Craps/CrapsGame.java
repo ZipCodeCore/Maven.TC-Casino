@@ -2,9 +2,7 @@ package io.zipcoder.casino.Game.diceGame.Craps;
 
 
 import io.zipcoder.casino.CasinoUtilities.Console;
-import io.zipcoder.casino.CrapsBet;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
-import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 import io.zipcoder.casino.TypeOfBet;
 
