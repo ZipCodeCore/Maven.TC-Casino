@@ -53,7 +53,6 @@ public class Casino {
                 return userInput;
             case 5:
                 goodBye();
-                return userInput;
             default:
                 runWelcomeMenu();
         }
