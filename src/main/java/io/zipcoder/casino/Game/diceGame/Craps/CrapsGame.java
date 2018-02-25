@@ -31,9 +31,15 @@ public class CrapsGame extends DiceGame {
     public void comeOutPhase() {
         Console.print(bar);
         Console.print("The game is in the Come Out phase");
+        this.printComePoints();
+        this.printDontComePoints();
         int roll = this.getRollValue();
         if (isNatural(roll)) {
             Console.print("You rolled a Natural");
+            if(roll == 7){
+                this.comePointPayout(roll);
+                this.dontComePointPayout(roll);
+            }
             this.rollIsNaturalPayout();
             this.newRound = true;
             this.turn();
@@ -44,8 +50,10 @@ public class CrapsGame extends DiceGame {
             this.turn();
         } else {
             this.point = roll;
+            this.comePointPayout(roll);
+            this.dontComePointPayout(roll);
             Console.print("The game is entering the Point phase");
-            Console.print("The point is set to: " + this.point);
+            Console.print("The point is set to: [" + this.point +"]");
             this.isComeOutPhase = false;
             this.turn();
         }
@@ -54,11 +62,15 @@ public class CrapsGame extends DiceGame {
     public void pointPhase() {
         Console.print(bar);
         Console.print("The game is in the Point phase");
-        Console.print("The Point is set to: " + this.point);
+        Console.print("The Point is set to: [" + this.point + "]");
+        this.printComePoints();
+        this.printDontComePoints();
         int roll = this.getRollValue();
         if (roll == this.point) {
             this.passLinePayout();
-
+            this.dontComePointPayout(roll);
+            this.comePointPayout(roll);
+            this.newComePoint(roll);
 
             if(currentPlayer.hasOdds() && currentPlayer.isPassLine()){
                 this.passLineOddsPayout(roll);
@@ -76,7 +88,8 @@ public class CrapsGame extends DiceGame {
         } else if (roll == 7) {
             this.doNotPassPayout();
             this.comeNaturalPayout(roll);
-
+            this.comePointPayout(roll);
+            this.dontComePointPayout(roll);
 
             if(currentPlayer.hasOdds() && !currentPlayer.isPassLine()){
                 this.doNotPassOddsPayout(this.point);
@@ -91,7 +104,15 @@ public class CrapsGame extends DiceGame {
             Console.print("The game is entering the Come Out Phase");
             this.isComeOutPhase = true;
             this.turn();
-        } else {
+        }
+        else if(!isCraps(roll) && roll != 11){
+            this.comePointPayout(roll);
+            this.dontComePointPayout(roll);
+            this.newComePoint(roll);
+            this.newDontComePoint(roll);
+            this.turn();
+        }
+        else {
             this.comeNaturalPayout(roll);
             this.doNotComeCrapsPayout(roll);
             this.turn();
@@ -215,6 +236,22 @@ public class CrapsGame extends DiceGame {
                 }
                 break;
 
+            case "big six":
+                betType = CrapsBet.BIG_SIX;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setBigSix(true);
+                }
+                break;
+
+            case "big eight":
+                betType = CrapsBet.BIG_EIGHT;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setBigEight(true);
+                }
+                break;
+
             default:
                 Console.print(invalidInput);
                 Console.print(bar);
@@ -252,6 +289,8 @@ public class CrapsGame extends DiceGame {
         if(!this.isComeOutPhase && !currentPlayer.isCome()){
             bettingMenu.append("[Do Not Come]\n");
         }
+        bettingMenu.append("[Big Six}");
+        bettingMenu.append("[Big Eight]");
         return bettingMenu.toString();
     }
 
@@ -433,44 +472,38 @@ public class CrapsGame extends DiceGame {
 
             case 4:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.COME);
-                currentPlayer.lose(CrapsBet.COME);
-                currentPlayer.bet(CrapsBet.COME_FOUR, betValue);
-                currentPlayer.setCome(false);
+                currentPlayer.setEscrow(CrapsBet.COME,0);
+                currentPlayer.setEscrow(CrapsBet.COME_FOUR, betValue);
                 break;
 
             case 5:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.COME);
-                currentPlayer.lose(CrapsBet.COME);
-                currentPlayer.bet(CrapsBet.COME_FIVE, betValue);
-                currentPlayer.setCome(false);
+                currentPlayer.setEscrow(CrapsBet.COME,0);
+                currentPlayer.setEscrow(CrapsBet.COME_FIVE, betValue);
                 break;
 
             case 6:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.COME);
-                currentPlayer.lose(CrapsBet.COME);
-                currentPlayer.bet(CrapsBet.COME_SIX, betValue);
-                currentPlayer.setCome(false);
+                currentPlayer.setEscrow(CrapsBet.COME,0);
+                currentPlayer.setEscrow(CrapsBet.COME_SIX, betValue);
                 break;
 
             case 8:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.COME);
-                currentPlayer.lose(CrapsBet.COME);
-                currentPlayer.bet(CrapsBet.COME_EIGHT, betValue);
-                currentPlayer.setCome(false);
+                currentPlayer.setEscrow(CrapsBet.COME,0);
+                currentPlayer.setEscrow(CrapsBet.COME_EIGHT, betValue);
                 break;
 
             case 9:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.COME);
-                currentPlayer.lose(CrapsBet.COME);
-                currentPlayer.bet(CrapsBet.COME_NINE, betValue);
-                currentPlayer.setCome(false);
+                currentPlayer.setEscrow(CrapsBet.COME,0);
+                currentPlayer.setEscrow(CrapsBet.COME_NINE, betValue);
                 break;
 
             case 10:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.COME);
-                currentPlayer.lose(CrapsBet.COME);
-                currentPlayer.bet(CrapsBet.COME_TEN, betValue);
-                currentPlayer.setCome(false);
+                currentPlayer.setEscrow(CrapsBet.COME,0);
+                currentPlayer.setEscrow(CrapsBet.COME_TEN, betValue);
                 break;
 
         }
@@ -487,44 +520,38 @@ public class CrapsGame extends DiceGame {
 
             case 4:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.DO_NOT_COME);
-                currentPlayer.lose(CrapsBet.DO_NOT_COME);
-                currentPlayer.bet(CrapsBet.DO_NOT_COME_FOUR, betValue);
-                currentPlayer.setDontCome(false);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME,0);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME_FOUR, betValue);
                 break;
 
             case 5:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.DO_NOT_COME);
-                currentPlayer.lose(CrapsBet.DO_NOT_COME);
-                currentPlayer.bet(CrapsBet.DO_NOT_COME_FIVE, betValue);
-                currentPlayer.setDontCome(false);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME,0);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME_FIVE, betValue);
                 break;
 
             case 6:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.DO_NOT_COME);
-                currentPlayer.lose(CrapsBet.DO_NOT_COME);
-                currentPlayer.bet(CrapsBet.DO_NOT_COME_SIX, betValue);
-                currentPlayer.setDontCome(false);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME,0);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME_SIX, betValue);
                 break;
 
             case 8:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.DO_NOT_COME);
-                currentPlayer.lose(CrapsBet.DO_NOT_COME);
-                currentPlayer.bet(CrapsBet.DO_NOT_COME_EIGHT, betValue);
-                currentPlayer.setDontCome(false);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME,0);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME_EIGHT, betValue);
                 break;
 
             case 9:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.DO_NOT_COME);
-                currentPlayer.lose(CrapsBet.DO_NOT_COME);
-                currentPlayer.bet(CrapsBet.DO_NOT_COME_NINE, betValue);
-                currentPlayer.setDontCome(false);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME,0);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME_NINE, betValue);
                 break;
 
             case 10:
                 betValue = currentPlayer.getEscrowBet(CrapsBet.DO_NOT_COME);
-                currentPlayer.lose(CrapsBet.DO_NOT_COME);
-                currentPlayer.bet(CrapsBet.DO_NOT_COME_TEN, betValue);
-                currentPlayer.setDontCome(false);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME,0);
+                currentPlayer.setEscrow(CrapsBet.DO_NOT_COME_TEN, betValue);
                 break;
 
         }
@@ -533,6 +560,143 @@ public class CrapsGame extends DiceGame {
 
     public void setDontComePoint(int roll){
         currentPlayer.getDontComePoints().add(roll);
+    }
+
+    public void newComePoint(int roll){
+        if(currentPlayer.isCome()){
+            this.changeComeBet(roll);
+            this.setComePoint(roll);
+            currentPlayer.setCome(false);
+            Console.print("You have a new Come Point: [" + roll +"]");
+        }
+    }
+
+    public void newDontComePoint(int roll){
+        if(currentPlayer.isDontCome()){
+            this.changeDontComeBet(roll);
+            this.setDontComePoint(roll);
+            currentPlayer.setDontCome(false);
+            Console.print("You have a new Do Not Come Point: [" + roll +"]");
+        }
+    }
+
+    public void comePointPayout(int roll){
+        if(currentPlayer.hasComePoints()){
+            if(currentPlayer.getComePoints().contains(roll)){
+                Console.print("You made your Come Point before a 7 was rolled!");
+                Console.print("Your Come bet on [" + roll + "] pays even money!");
+                currentPlayer.win(intToComePoint(roll), 1);
+                currentPlayer.removeComePoint(roll);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before your Come Point");
+                for(int i = 0; i<currentPlayer.getComePoints().size(); i++){
+                    Console.print("Your Come bet on [" + currentPlayer.getComePoints().get(i) + "] loses");
+                    currentPlayer.lose(intToComePoint(currentPlayer.getComePoints().get(i)));
+                }
+                Console.print(newBalance());
+                currentPlayer.getComePoints().clear();
+            }
+        }
+
+    }
+
+    public void dontComePointPayout(int roll){
+        if(currentPlayer.hasDontComePoints()){
+            if(currentPlayer.getDontComePoints().contains(roll)){
+                Console.print("Your Do Not Come Point came before a 7");
+                Console.print("Your Do Not Come bet on [" + roll + "] loses");
+                currentPlayer.lose(intToDontComePoint(roll));
+                currentPlayer.removeDontComePoint(roll);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before your Do Not Come Point!");
+                for(int i = 0; i<currentPlayer.getDontComePoints().size(); i++){
+                    Console.print("Your Do Not Come bet on [" + currentPlayer.getDontComePoints().get(i) + "] pays even money!");
+                    currentPlayer.win(intToDontComePoint(currentPlayer.getDontComePoints().get(i)), 1);
+                }
+                Console.print(newBalance());
+                currentPlayer.getDontComePoints().clear();
+            }
+        }
+    }
+
+    public CrapsBet intToComePoint (int roll){
+        switch (roll){
+            case 4:
+                return CrapsBet.COME_FOUR;
+
+            case 5:
+                return CrapsBet.COME_FIVE;
+
+            case 6:
+                return CrapsBet.COME_SIX;
+
+            case 8:
+                return CrapsBet.COME_EIGHT;
+
+            case 9:
+                return CrapsBet.COME_NINE;
+
+            case 10:
+                return CrapsBet.COME_TEN;
+
+        }
+        return null;
+    }
+
+    public CrapsBet intToDontComePoint (int roll){
+        switch (roll){
+            case 4:
+                return CrapsBet.DO_NOT_COME_FOUR;
+
+            case 5:
+                return CrapsBet.DO_NOT_COME_FIVE;
+
+            case 6:
+                return CrapsBet.DO_NOT_COME_SIX;
+
+            case 8:
+                return CrapsBet.DO_NOT_COME_EIGHT;
+
+            case 9:
+                return CrapsBet.DO_NOT_COME_NINE;
+
+            case 10:
+                return CrapsBet.DO_NOT_COME_TEN;
+
+        }
+        return null;
+    }
+
+    public void printComePoints(){
+        if (currentPlayer.hasComePoints()){
+            StringBuilder pointsList = new StringBuilder();
+            for(int i = 0; i< currentPlayer.getComePoints().size(); i++){
+                pointsList.append("[" + currentPlayer.getComePoints().get(i) + "] ");
+            }
+            Console.print("Your current Come Points are: " + pointsList.toString());
+        }
+    }
+
+    public void printDontComePoints(){
+        if (currentPlayer.hasDontComePoints()){
+            StringBuilder pointsList = new StringBuilder();
+            for(int i = 0; i< currentPlayer.getDontComePoints().size(); i++){
+                pointsList.append("[" + currentPlayer.getDontComePoints().get(i) + "] ");
+            }
+            Console.print("Your current Do Not Come Points are: " + pointsList.toString());
+        }
+    }
+
+    public void bigSixPayout(int roll){
+
+    }
+
+    public void bigEightPayout(int roll){
+
     }
 
 
