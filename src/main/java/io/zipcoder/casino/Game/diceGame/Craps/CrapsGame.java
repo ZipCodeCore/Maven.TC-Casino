@@ -59,6 +59,7 @@ public class CrapsGame extends DiceGame {
         if (roll == this.point) {
             this.passLinePayout();
 
+
             if(currentPlayer.hasOdds() && currentPlayer.isPassLine()){
                 this.passLineOddsPayout(roll);
                 currentPlayer.setOdds(false);
@@ -74,6 +75,8 @@ public class CrapsGame extends DiceGame {
             this.turn();
         } else if (roll == 7) {
             this.doNotPassPayout();
+            this.comeNaturalPayout(roll);
+
 
             if(currentPlayer.hasOdds() && !currentPlayer.isPassLine()){
                 this.doNotPassOddsPayout(this.point);
@@ -89,6 +92,8 @@ public class CrapsGame extends DiceGame {
             this.isComeOutPhase = true;
             this.turn();
         } else {
+            this.comeNaturalPayout(roll);
+            this.doNotComeCrapsPayout(roll);
             this.turn();
         }
     }
@@ -188,6 +193,28 @@ public class CrapsGame extends DiceGame {
                 }
                 break;
 
+            case "come":
+                if(isInvalidBet(currentPlayer.isDontCome() || this.isComeOutPhase)){
+                    break;
+                }
+                betType = CrapsBet.COME;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setCome(true);
+                }
+                break;
+
+            case "do not come":
+                if(isInvalidBet(currentPlayer.isCome() || this.isComeOutPhase)){
+                    break;
+                }
+                betType = CrapsBet.DO_NOT_COME;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setDontCome(true);
+                }
+                break;
+
             default:
                 Console.print(invalidInput);
                 Console.print(bar);
@@ -219,6 +246,12 @@ public class CrapsGame extends DiceGame {
         if ((newRound || !currentPlayer.isPassLine()) && !this.isComeOutPhase) {
             bettingMenu.append("[Do Not Pass Odds]\n");
         }
+        if(!this.isComeOutPhase && !currentPlayer.isDontCome()){
+            bettingMenu.append("[Come]\n");
+        }
+        if(!this.isComeOutPhase && !currentPlayer.isCome()){
+            bettingMenu.append("[Do Not Come]\n");
+        }
         return bettingMenu.toString();
     }
 
@@ -246,7 +279,7 @@ public class CrapsGame extends DiceGame {
         while(keepRunning);
         boolean wasBetPlaced = currentPlayer.bet(betType, betAmount);
         Console.print(bar);
-        Console.print("Your bet has been placed.  Your current balance is now: $" + currentPlayer.getProfile().getAccountBalance());
+        Console.print(newBalance());
         return wasBetPlaced;
     }
 
@@ -355,6 +388,53 @@ public class CrapsGame extends DiceGame {
         }
 
     }
+
+    public void comeNaturalPayout(int roll){
+        if(currentPlayer.isCome() && isNatural(roll)){
+            Console.print("Your Come bet pays even money!");
+            currentPlayer.win(CrapsBet.COME,1);
+            Console.print(newBalance());
+            currentPlayer.setCome(false);
+        }
+        else if(currentPlayer.isDontCome() && isNatural(roll)){
+            Console.print("Your Do Not Come bet loses");
+            currentPlayer.lose(CrapsBet.DO_NOT_COME);
+            Console.print(newBalance());
+            currentPlayer.setDontCome(false);
+        }
+
+    }
+
+    public void doNotComeCrapsPayout(int roll){
+        if(currentPlayer.isDontCome() && (roll == 2 || roll == 3)){
+            Console.print("Your Do Not Come bet wins even money!");
+            currentPlayer.win(CrapsBet.DO_NOT_COME, 1);
+            Console.print(newBalance());
+            currentPlayer.setDontCome(false);
+        }
+        else if(currentPlayer.isDontCome() && roll == 12){
+            Console.print("Your Do Not Come bet breaks even");
+            currentPlayer.win(CrapsBet.DO_NOT_COME, 0);
+            Console.print(newBalance());
+            currentPlayer.setDontCome(false);
+        }
+        else if(currentPlayer.isCome() && isCraps(roll)){
+            Console.print("Your Come bet loses");
+            currentPlayer.lose(CrapsBet.COME);
+            Console.print(newBalance());
+            currentPlayer.setCome(false);
+        }
+
+    }
+
+    public void changeComeBet(int roll){
+
+    }
+
+    public void setComePoint(int roll){
+
+    }
+
 
 
     public int getRollValue() {

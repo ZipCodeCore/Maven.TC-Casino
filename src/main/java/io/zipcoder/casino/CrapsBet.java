@@ -25,6 +25,19 @@ public enum CrapsBet implements TypeOfBet {
     BOXCAR,
     PASS_LINE_ODDS,
     DO_NOT_PASS_ODDS,
+    COME_FOUR,
+    COME_FIVE,
+    COME_SIX,
+    COME_EIGHT,
+    COME_NINE,
+    COME_TEN,
+    DO_NOT_COME_FOUR,
+    DO_NOT_COME_FIVE,
+    DO_NOT_COME_SIX,
+    DO_NOT_COME_EIGHT,
+    DO_NOT_COME_NINE,
+    DO_NOT_COME_Ten;
+
 
 
 /*

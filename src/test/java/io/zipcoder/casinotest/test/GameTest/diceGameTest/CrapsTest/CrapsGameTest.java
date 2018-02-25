@@ -329,6 +329,145 @@ public class CrapsGameTest {
 
     }
 
+    @Test
+    public void comeNaturalPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.COME, 50);
+        testGame.getCurrentPlayer().setCome(true);
+
+        //When
+        testGame.comeNaturalPayout(7);
+        double expected = 150;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+    }
+
+    @Test
+    public void comeNaturalPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_COME, 50);
+        testGame.getCurrentPlayer().setDontCome(true);
+
+        //When
+        testGame.comeNaturalPayout(7);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual &&
+                testGame.getCurrentPlayer().getEscrowBet(CrapsBet.DO_NOT_COME) == 0);
+
+    }
+
+    @Test
+    public void doNotComeCrapsPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_COME, 50);
+        testGame.getCurrentPlayer().setDontCome(true);
+
+        //When
+        testGame.doNotComeCrapsPayout(3);
+        double expected = 150;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+    }
+
+    @Test
+    public void doNotComeCrapsPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.COME, 50);
+        testGame.getCurrentPlayer().setCome(true);
+
+        //When
+        testGame.doNotComeCrapsPayout(2);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual &&
+                testGame.getCurrentPlayer().getEscrowBet(CrapsBet.COME) == 0);
+
+    }
+
+    @Test
+    public void doNotComeCrapsPayoutPushTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_COME, 50);
+        testGame.getCurrentPlayer().setDontCome(true);
+
+        //When
+        testGame.doNotComeCrapsPayout(12);
+        double expected = 100;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual &&
+                testGame.getCurrentPlayer().getEscrowBet(CrapsBet.DO_NOT_COME) == 0);
+
+    }
+
+    @Test
+    public void changeComeBetTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.COME, 50);
+        testGame.getCurrentPlayer().setCome(true);
+
+        //When
+        int roll = 4;
+        double expected = 50;
+        testGame.changeComeBet(roll);
+        double actual = testGame.getCurrentPlayer().getEscrowBet(CrapsBet.COME_FOUR);
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void changeComeBetTest2(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.COME, 50);
+        testGame.getCurrentPlayer().setCome(true);
+
+        //When
+        int roll = 8;
+        double expected = 50;
+        testGame.changeComeBet(roll);
+        double actual = testGame.getCurrentPlayer().getEscrowBet(CrapsBet.COME_EIGHT);
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void setComePointTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.COME, 50);
+        testGame.getCurrentPlayer().setCome(true);
+
+        //When
+        int roll = 4;
+        testGame.setComePoint(roll);
+        int expected = 4;
+        boolean actual = testGame.getCurrentPlayer().getComePoints().contains(expected);
+
+        //Then
+        Assert.assertTrue(actual);
+    }
+
 
     @Test
     public void invalidBetTest(){
