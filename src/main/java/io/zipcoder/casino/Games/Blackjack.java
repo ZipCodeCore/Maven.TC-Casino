@@ -17,9 +17,11 @@ public class Blackjack implements Game{
     protected Dealer bkjkDealer;
     public boolean isPlaying = true;
     protected int betAmount = 0;
+    protected boolean titleSplash = true;
 
     public void startGame(){
         do {
+            splash();
             pregameReset();
             if (player.getRootPlayer().getBalance() < 10) {
                 System.out.println("You haven't got the dough! ");
@@ -35,6 +37,35 @@ public class Blackjack implements Game{
         }
         while (isPlaying);
         endGame();
+    }
+
+    private void splash(){
+        if (titleSplash == true) {
+            System.out.println(
+                    ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                        \n" +
+                            "|  |) /_|  |    /  O  \\ '  .--./|  .'   /    |  |/  O  \\ '  .--./|  .'   /                                                        \n" +
+                            "|  .-.  \\  |   |  .-.  ||  |    |  .   ',--. |  |  .-.  ||  |    |  .   '                                                         \n" +
+                            "|  '--' /  '--.|  | |  |'  '--'\\|  |\\   \\  '-'  /  | |  |'  '--'\\|  |\\   \\                                                        \n" +
+                            "`------'`-----'`--' `--' `-----'`--' '--'`-----'`--' `--' `-----'`--' '--'");
+            this.titleSplash = false;
+        } else {
+            System.out.println(
+                    ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                        \n" +
+                            "|  |) /_|  |    /  O  \\ '  .--./|  .'   /    |  |/  O  \\ '  .--./|  .'   /                                                        \n" +
+                            "|  .-.  \\  |   |  .-.  ||  |    |  .   ',--. |  |  .-.  ||  |    |  .   '                                                         \n" +
+                            "|  '--' /  '--.|  | |  |'  '--'\\|  |\\   \\  '-'  /  | |  |'  '--'\\|  |\\   \\                                                        \n" +
+                            "`------'`-----'`--' `--' `-----'`--' '--'`-----'`--' `--' `-----'`--' '--'");
+            System.out.println(
+                    "                  _               _   _     _                    _          \n" +
+                    "                 | |             | | | |   (_)                  | |         \n" +
+                    "   __ _ _ __   __| |  _ __   ___ | |_| |__  _ _ __   __ _    ___| |___  ___ \n" +
+                    "  / _` | '_ \\ / _` | | '_ \\ / _ \\| __| '_ \\| | '_ \\ / _` |  / _ | / __|/ _ \\\n" +
+                    " | (_| | | | | (_| | | | | | (_) | |_| | | | | | | | (_| | |  __| \\__ |  __/\n" +
+                    "  \\__,_|_| |_|\\__,_| |_| |_|\\___/ \\__|_| |_|_|_| |_|\\__, |  \\___|_|___/\\___|\n" +
+                    "                                                     __/ |                  \n" +
+                    "                                                    |___/                   ");
+            this.titleSplash = false;
+        }
     }
 
     public void pregameReset() {
