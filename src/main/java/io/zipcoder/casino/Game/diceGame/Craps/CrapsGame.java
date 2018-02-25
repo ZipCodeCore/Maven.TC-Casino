@@ -3,6 +3,7 @@ package io.zipcoder.casino.Game.diceGame.Craps;
 
 import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.diceGame.DiceGame;
+import io.zipcoder.casino.House;
 import io.zipcoder.casino.Profile;
 import io.zipcoder.casino.TypeOfBet;
 
@@ -24,7 +25,7 @@ public class CrapsGame extends DiceGame {
         Profile stinkyProfile = new Profile("Stinky Pete", 1000, 11);
         CrapsGame testGame = new CrapsGame(stinkyProfile);
         testGame.startGame();
-        testGame.turn();
+
     }
 
     public void comeOutPhase() {
@@ -156,7 +157,7 @@ public class CrapsGame extends DiceGame {
         String rollOrBet;
         do {
             Console.print(bar);
-            Console.print("Would you like to [roll] or [bet]?");
+            Console.print("Would you like to [roll] [bet] or [leave] ?");
             rollOrBet = Console.getString();
             if (rollOrBet.equalsIgnoreCase("roll") && newRound) {
                 Console.print("You must make a Pass Line or Do Not Pass bet before starting a new round");
@@ -170,7 +171,11 @@ public class CrapsGame extends DiceGame {
             } else if (rollOrBet.equalsIgnoreCase("bet")) {
                 Console.print(bar);
                 this.selectBet();
-            } else {
+            }
+            else if(rollOrBet.equalsIgnoreCase("leave")){
+                this.endGame();
+            }
+            else {
                 Console.print(invalidInput);
             }
         }
@@ -1001,6 +1006,35 @@ public class CrapsGame extends DiceGame {
     public void startGame() {
         this.createDie(6, 2);
         this.point = 0;
+        Console.print(bar);
+        Console.print("Welcome to Craps " + currentPlayer.getProfile().getName());
+        Console.print("You currently have $" + currentPlayer.getProfile().getAccountBalance() +" to gamble with");
+        Console.print("Your private game of Craps is starting now!");
+        this.turn();
+    }
+
+    @Override
+    public void endGame(){
+        boolean keepRunning = true;
+        Console.print("Are you sure you want to leave Craps?");
+        Console.print("[Yes] [No]");
+        Console.print("Any outstanding bets will be lost");
+        do {
+            String choice = Console.getString();
+            if (choice.equalsIgnoreCase("yes")) {
+                Console.print("Thanks for playing Craps at Casino Royale With Cheese!");
+                Console.print(bar);
+                keepRunning = false;
+                House.INSTANCE.gameSelection();
+            } else if (choice.equalsIgnoreCase("no")) {
+                keepRunning = false;
+                this.turn();
+            } else {
+                Console.print("Invalid response: please enter your answer again");
+            }
+        }
+        while(keepRunning == true);
+
     }
 
     public CrapsPlayer getCurrentPlayer() {
