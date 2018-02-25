@@ -1,0 +1,15 @@
+       WELCOME TO CRAZY EIGHTS!
+**************************************
+*                                    *
+*                                    *
+* This is a non-gambling game so,    *
+*       Hold on to your chips!!      *
+*                                    *
+*                                    *
+**************************************
+*                                    *
+*        Press 'P' to PLAY           *
+*        Press 'Q' to QUIT           *
+*        Press 'R' for RULES         *
+*                                    *
+**************************************

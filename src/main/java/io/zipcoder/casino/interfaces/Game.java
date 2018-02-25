@@ -19,7 +19,7 @@ public interface Game {
     /**
      * The game must have a welcome prompt.
      */
-    void runWelcome();
+    String runWelcome();
 
     /**
      * Makes it so that every game has a way to pull up the rules for the game.

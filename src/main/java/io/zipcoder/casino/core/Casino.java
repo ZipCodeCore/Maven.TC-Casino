@@ -1,9 +1,6 @@
 package io.zipcoder.casino.core;
 
-import io.zipcoder.casino.games.blackjack.BlackJack;
-import io.zipcoder.casino.games.ceelo.CeeLoGamble;
-import io.zipcoder.casino.games.crazy8s.CrazyEights;
-import io.zipcoder.casino.games.roulette.Roulette;
+import io.zipcoder.casino.games.crazy8s.Crazy8Play;
 import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
@@ -15,71 +12,83 @@ public class Casino {
 
     public Casino() {
         this.player = player;
-        answer = 0;
     }
 
-
-    public int getAnswer() {
-
-        return answer;
-    }
-
-    public void gameLobby() {
-        do {
-            String prompt =
-                            "**** WELCOME TO HIGH ROLLERS CLUB ****\n" +
-                            "*                                    *\n" +
-                            "*                                    *\n" +
-                            "* Here's 500 chips as a welcome gift!*\n" +
-                            "*              ($2500)               *\n" +
-                            "*                                    *\n" +
-                            "**************************************\n" +
-                            "*                                    *\n" +
-                            "*       Please choose a game:        *\n" +
-                            "*       1. Black Jack                *\n" +
-                            "*       2. Crazy Eights              *\n" +
-                            "*       3. CeeLo                     *\n" +
-                            "*       4. Roulette                  *\n" +
-                            "*                                    *\n" +
-                            "*       PRESS 5 TO EXIT              *\n" +
-                            "*                                    *\n" +
-                            "**************************************\n";
-            answer = IOHandler.promptForIntWithMessage(prompt);
-
-                changeGameState(answer).play(player);
-        }
-        while (isPlaying);
-    }
 
     public void enter() {
 
-        gameLobby();
+        gameLobbyMenu();
     }
+
+    public void gameLobbyMenu() {
+
+        int userInput = IOHandler.promptForIntWithMessage(runWelcomeMenu());
+        handleInput(userInput);
+    }
+
+    public String runWelcomeMenu() {
+
+        return IOHandler.getMessageFromFile("CasinoWelcomeMenu.txt");
+    }
+
+    public int handleInput(int userInput) {
+
+        switch (userInput) {
+            case 1:
+                changeGameState(userInput);
+                runWelcomeMenu();
+                return userInput;
+            case 2:
+                changeGameState(userInput);
+                runWelcomeMenu();
+                return userInput;
+            case 3:
+                changeGameState(userInput);
+                runWelcomeMenu();
+                return userInput;
+            case 4:
+                changeGameState(userInput);
+                runWelcomeMenu();
+                return userInput;
+            case 5:
+                goodBye();
+                return userInput;
+            default:
+                runWelcomeMenu();
+        }
+        return userInput;
+    }
+
 
     public Game changeGameState(int answer) {
 
             switch (answer) {
                 case 1:
-//                    currentGameRunning = new BlackJack();
+//                    currentGameRunning = (Game) new BlackJack();
                     break;
                 case 2:
-                    currentGameRunning = new CrazyEights();
+                    currentGameRunning = new Crazy8Play();
                     break;
                 case 3:
-//                    currentGameRunning = new CeeLoGamble();
+//                    currentGameRunning = (Game) new CeeLoGamble();
                     break;
                 case 4:
-//                    currentGameRunning = new Roulette();
+//                    currentGameRunning = (Game) new Roulette();
                     break;
-                case 5:
-                    goodBye();
-                    isPlaying = false;
             }
         return currentGameRunning;
     }
 
+    public void welcomeScreen(){
+
+        IOHandler.getMessageFromFile("CasinoWelcomeMenu.txt");
+    }
+
     public void goodBye(){
-        IOHandler.printMessage( "\n**** THANKS FOR PLAYING!! ****\n");
+
+        IOHandler.getMessageFromFile("Goodbye.txt");
+
+        System.exit(0);
     }
 
 }
