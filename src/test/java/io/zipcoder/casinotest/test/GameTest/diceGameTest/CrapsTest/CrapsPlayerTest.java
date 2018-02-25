@@ -265,5 +265,34 @@ public class CrapsPlayerTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void hasComePointsTest(){
+        //Given
+        stinkyPete.addComePoint(4);
+        stinkyPete.addComePoint(5);
+
+        //When
+        stinkyPete.removeComePoint(4);
+        stinkyPete.removeComePoint(5);
+        boolean expected = false;
+        boolean actual = stinkyPete.hasComePoints();
+
+        //Then
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void hasDontComePointsTest(){
+        //Given
+        stinkyPete.addDontComePoint(9);
+
+        //When
+        boolean expected = true;
+        boolean actual = stinkyPete.hasDontComePoints();
+
+        //Then
+        Assert.assertEquals(expected,actual);
+    }
+
 
 }

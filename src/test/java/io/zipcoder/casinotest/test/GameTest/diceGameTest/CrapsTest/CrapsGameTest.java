@@ -521,6 +521,119 @@ public class CrapsGameTest {
         Assert.assertTrue(actual);
     }
 
+    @Test
+    public void comePointPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.COME, 50);
+        testGame.getCurrentPlayer().setCome(true);
+        testGame.newComePoint(5);
+
+        //When
+        double expected = 150;
+        testGame.comePointPayout(5);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+    }
+
+    @Test
+    public void comePointPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.COME, 50);
+        testGame.getCurrentPlayer().setCome(true);
+        testGame.newComePoint(5);
+        testGame.getCurrentPlayer().bet(CrapsBet.COME, 50);
+        testGame.getCurrentPlayer().setCome(true);
+        testGame.newComePoint(10);
+
+        //When
+        double expected = 0;
+        testGame.comePointPayout(7);
+        double actual1 = testGame.getCurrentPlayer().getEscrowBet(CrapsBet.COME_FIVE);
+        double actual2 = testGame.getCurrentPlayer().getEscrowBet(CrapsBet.COME_TEN);
+        double actual3 = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+        double actual4 = testGame.getCurrentPlayer().getComePoints().size();
+
+        //Then
+        Assert.assertTrue(expected == actual1 && expected == actual2 && expected == actual3 && expected == actual4);
+    }
+
+    @Test
+    public void dontComePointPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_COME, 50);
+        testGame.getCurrentPlayer().setDontCome(true);
+        testGame.newDontComePoint(6);
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_COME, 50);
+        testGame.getCurrentPlayer().setDontCome(true);
+        testGame.newDontComePoint(8);
+
+        //When
+        double expected = 200;
+        testGame.dontComePointPayout(7);
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+    }
+
+    @Test
+    public void dontComePointPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_COME, 100);
+        testGame.getCurrentPlayer().setDontCome(true);
+        testGame.newDontComePoint(6);
+
+        //When
+        double expected = 0;
+        testGame.dontComePointPayout(6);
+        double actual1 = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+        double actual2 = testGame.getCurrentPlayer().getEscrowBet(CrapsBet.DO_NOT_COME_SIX);
+
+        //Then
+        Assert.assertTrue(expected == actual1 && expected == actual2);
+
+    }
+
+    @Test
+    public void bigSixPayoutWinTest(){
+
+    }
+
+    @Test
+    public void intToComePointTest(){
+        //Given
+        //testGame
+
+        //When
+        CrapsBet expected = CrapsBet.COME_EIGHT;
+        CrapsBet actual = testGame.intToComePoint(8);
+
+        //Then
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void intToDontComePointTest(){
+        //Given
+        //testGame
+
+        //When
+        CrapsBet expected = CrapsBet.DO_NOT_COME_TEN;
+        CrapsBet actual = testGame.intToDontComePoint(10);
+
+        //Then
+        Assert.assertEquals(expected,actual);
+    }
+
+
+
+
 
     @Test
     public void invalidBetTest(){
