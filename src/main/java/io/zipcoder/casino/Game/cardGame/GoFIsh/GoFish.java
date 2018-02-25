@@ -71,11 +71,6 @@ public class GoFish extends CardGame {
 
         Console.print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
 
-
-//        int dealerHandSize = dealer.getHand().getCards().size();
-//        int randomSelector = (int) Math.floor(Math.random() * dealerHandSize);
-//        CardRank aCardRank = dealer.getHand().getCards().get(randomSelector).getRank();
-
         Console.print("Now its my turn!");
 
         do {
@@ -99,39 +94,32 @@ public class GoFish extends CardGame {
             Console.print("Go fish.");
             Console.print("You fished: " + getDeck().peek().toString());
             fish(askingPlayer);
-//            Console.print(askingPlayer.getHand().showHand());
-            if (getHandForBook(user,aCardRank)>0) {
+            //Console.print(askingPlayer.getHand().showHand());
+            if (getHandForBook(user, aCardRank) > 0) {
                 Console.print("You made a book!!");
                 askingPlayer.getHand().orderCards();
                 Console.print(askingPlayer.getHand().showHand());
-                addCardToBookAndRemoveFromHand(askingPlayer,aCardRank);
+                addCardToBookAndRemoveFromHand(askingPlayer, aCardRank);
                 Console.print(askingPlayer.getHand().showHand());
-
-                // SCORE IT
-                // REMOVE CARDS
             }
             isTurn = false;
 
         } else {
             transfer(aCardRank, playerBeingAsked, askingPlayer);
             Console.print("Good guess! Here you go!");
-            if (getHandForBook(user,aCardRank)>0) {
+            if (getHandForBook(user, aCardRank) > 0) {
                 Console.print("You made a book!!");
-                addCardToBookAndRemoveFromHand(askingPlayer,aCardRank);
+                addCardToBookAndRemoveFromHand(askingPlayer, aCardRank);
                 askingPlayer.getHand().orderCards();
                 Console.print(askingPlayer.getHand().showHand());
-
-                // SCORE IT
-                // REMOVE CARDS
             }
-
         }
-        int askingPlayerScore = askingPlayer.getScores();
-        int playerBeingAskedScores = playerBeingAsked.getScores();
-        if(askingPlayerScore>playerBeingAskedScores){
-            Console.print("you win: You scored "+ askingPlayerScore +"And I scored "+playerBeingAskedScores);
-        }else if(askingPlayerScore<playerBeingAskedScores){
-            Console.print("I won: I scored "+ playerBeingAskedScores+" And you scored "+askingPlayerScore);
+        if (askingPlayer.getHand().getCards().size() < 1 ||
+                playerBeingAsked.getHand().getCards().size() < 1 ||
+                (askingPlayer.getHand().getCards().size() + askingPlayer.getBook().size() +
+                 playerBeingAsked.getHand().getCards().size() + playerBeingAsked.getBook().size() >= 52)) {
+
+                decideWinner(askingPlayer, playerBeingAsked);
         }
     }
 
@@ -152,27 +140,38 @@ public class GoFish extends CardGame {
     }
 
     public int getHandForBook(GoFishPlayer aPlayer, CardRank aCardRank) {
-        int books =0;
-        int count=0;
+        int books = 0;
+        int count = 0;
         for (int i = 0; i < aPlayer.getHand().getCards().size(); i++) {
-            if(aCardRank==aPlayer.getHand().getCards().get(i).getRank()){
+            if (aCardRank == aPlayer.getHand().getCards().get(i).getRank()) {
                 count++;
             }
-            if(count==4){
+            if (count == 4) {
                 books++;
             }
         }
         return books;
     }
-    public void addCardToBookAndRemoveFromHand(GoFishPlayer aPlayer, CardRank aCardRank){
-        for(int i =0;i<aPlayer.getHand().getCards().size();i++){
-            if(aPlayer.getHand().getCards().get(i).getRank()==aCardRank){
-                aPlayer.buildBooks(aPlayer,aCardRank);
+
+    public void addCardToBookAndRemoveFromHand(GoFishPlayer aPlayer, CardRank aCardRank) {
+        for (int i = 0; i < aPlayer.getHand().getCards().size(); i++) {
+            if (aPlayer.getHand().getCards().get(i).getRank() == aCardRank) {
+                aPlayer.buildBooks(aPlayer, aCardRank);
                 aPlayer.getHand().getCards().remove(aPlayer.getHand().getCards().get(i));
             }
 
         }
 
+    }
+
+    public String decideWinner(GoFishPlayer player1, GoFishPlayer player2) {
+        if (player1.getScores() > player2.getScores()) {
+            return "The winner is: " + player1.getProfile().getName();
+        } else if (player2.getScores() > player1.getScores()) {
+            return "The winner is: " + player2.getProfile().getName();
+        } else {
+            return "It is a tie.";
+        }
     }
 
     public void fish(GoFishPlayer askingPlayer) {
@@ -224,63 +223,12 @@ public class GoFish extends CardGame {
 
     public CardRank convertStringToRank(String aString) {
 
-//        try {
-//            return CardRank.valueOf(aString.toLowerCase());
-//        } catch (IllegalArgumentException iae) {
-//            return null;
-//        }
-//    }
-
-        String lowercase = aString.toLowerCase();
-
-
-        switch (lowercase) {
-
-            case "two":
-                return CardRank.TWO;
-
-            case "three":
-                return CardRank.THREE;
-
-            case "four":
-                return CardRank.FOUR;
-
-            case "five":
-                return CardRank.FIVE;
-
-            case "six":
-                return CardRank.SIX;
-
-            case "seven":
-                return CardRank.SEVEN;
-
-            case "eight":
-                return CardRank.EIGHT;
-
-            case "nine":
-                return CardRank.NINE;
-
-            case "ten":
-                return CardRank.TEN;
-
-            case "jack":
-                return CardRank.JACK;
-
-            case "queen":
-                return CardRank.QUEEN;
-
-            case "king":
-                return CardRank.KING;
-
-            case "ace":
-                return CardRank.ACE;
-
-            default:
-                Console.print("Invalid entry. Try again.");
-                break;
+        try {
+            return CardRank.valueOf(aString.toUpperCase());
+        } catch (IllegalArgumentException iae) {
+            Console.print("Invalid entry. Try again.");
+            return null;
         }
-
-        return null;
     }
 
 }
