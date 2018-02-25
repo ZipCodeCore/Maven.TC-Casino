@@ -14,13 +14,13 @@ public class Crazy8Play implements Game {
     private Player player;
     private String answer;
 
-    public Crazy8Play(Player player) {
-
-        start.showMenu();
+    public Crazy8Play() {
     }
 
     @Override
     public void play(Player player) {
+        this.player = player;
+        start.showMenu();
 //        Deck deck = new Deck(); //get new deck to play with
 //        int handSize = 8;
 //
@@ -86,9 +86,9 @@ public class Crazy8Play implements Game {
     }
 
     @Override
-    public String runWelcome() {
+    public void runWelcome() {
 
-        return IOHandler.getMessageFromFile("Crazy8Welcome.txt");
+        IOHandler.printMessage(IOHandler.getMessageFromFile("Crazy8Welcome.txt"));
     }
 
     @Override

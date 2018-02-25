@@ -1,15 +1,15 @@
 package io.zipcoder.casino.games.crazy8s;
 
 import io.zipcoder.casino.core.Casino;
-import io.zipcoder.casino.utils.IOHandler;
 import io.zipcoder.casino.core.Player;
+import io.zipcoder.casino.utils.IOHandler;
 
 public class Crazy8sMenu {
 
     public void showMenu() {
 
-            String userInput = IOHandler.promptForStringWithMessage(runWelcome());
-            handleInput(userInput);
+        String userInput = IOHandler.promptForStringWithMessage(runWelcome());
+        handleInput(userInput);
     }
 
     public String handleInput(String userInput) {
@@ -28,15 +28,15 @@ public class Crazy8sMenu {
                 Casino casino = new Casino();
                 casino.enter();
                 return userInput;
-                default:
-                    showMenu();
+            default:
+                showMenu();
         }
         return userInput;
     }
 
     public void playGame() {
         Player player = new Player();
-        Crazy8Play game = new Crazy8Play(player);
+        Crazy8Play game = new Crazy8Play();
 
         game.play(player);
     }

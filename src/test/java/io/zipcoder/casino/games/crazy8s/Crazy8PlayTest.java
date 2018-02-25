@@ -1,6 +1,5 @@
 package io.zipcoder.casino.games.crazy8s;
 
-import io.zipcoder.casino.core.Player;
 import io.zipcoder.casino.utils.IOHandler;
 import org.junit.Assert;
 import org.junit.Test;
@@ -54,8 +53,8 @@ public class Crazy8PlayTest {
 //    }
 
     @Test
-    public void runWelcomeTest(){
-        String expected =   "       WELCOME TO CRAZY EIGHTS!\n" +
+    public void runWelcomeTest() {
+        String expected = "       WELCOME TO CRAZY EIGHTS!\n" +
                 "**************************************\n" +
                 "*                                    *\n" +
                 "*                                    *\n" +
