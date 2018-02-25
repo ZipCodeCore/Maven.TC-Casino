@@ -16,13 +16,7 @@ public enum CardRank {
     KING(10),
     ACE(11);
 
-//    private Integer cardValue2;
     private int cardValue;
-
-//    CardRank(int value, Integer value2) {
-//        this.cardValue = value;
-//        this.cardValue2 = value2;
-//    }
 
     CardRank(int value) {
         this.cardValue = value;
@@ -31,4 +25,6 @@ public enum CardRank {
     public int getCardValue() {
         return cardValue;
     }
+
+
 }

@@ -119,7 +119,7 @@ public class GoFishTest {
         Card anotherCard = new Card(CardSuit.HEARTS, CardRank.QUEEN);
         testGame.getUser().getHand().addCard(newCard);
         testGame.getDealer().getHand().addCard(anotherCard);
-        testGame.ask(CardRank.QUEEN, testGame.getUser(), testGame.getDealer());
+        testGame.playerAsk(CardRank.QUEEN, testGame.getDealer(), testGame.getUser());
 
         Card expected = anotherCard;
         Card actual = testGame.getDealer().getHand().getCards().get(0);
@@ -132,7 +132,7 @@ public class GoFishTest {
         Card anotherCard = new Card(CardSuit.HEARTS, CardRank.QUEEN);
         testGame.getUser().getHand().addCard(newCard);
         testGame.getDealer().getHand().addCard(anotherCard);
-        testGame.ask(anotherCard.getRank(), testGame.getDealer(), testGame.getUser());
+        testGame.playerAsk(anotherCard.getRank(), testGame.getUser(), testGame.getDealer());
         int expected = 2;
         int actual = testGame.getDealer().getHand().getCards().size();
         Assert.assertEquals(expected, actual);
@@ -144,7 +144,7 @@ public class GoFishTest {
         Card anotherCard = new Card(CardSuit.HEARTS, CardRank.QUEEN);
         testGame.getUser().getHand().addCard(newCard);
         testGame.getDealer().getHand().addCard(anotherCard);
-        testGame.ask(anotherCard.getRank(), testGame.getDealer(), testGame.getUser());
+        testGame.playerAsk(anotherCard.getRank(), testGame.getUser(), testGame.getDealer());
         Assert.assertTrue(testGame.getDealer().getHand().hasCard(newCard));
     }
 
@@ -156,7 +156,7 @@ public class GoFishTest {
         testGame.getUser().getHand().addCard(newCard);
         testGame.getDealer().getHand().addCard(anotherCard);
         testGame.getDealer().getHand().addCard(aThirdCard);
-        testGame.ask(anotherCard.getRank(), testGame.getUser(), testGame.getDealer());
+        testGame.playerAsk(anotherCard.getRank(), testGame.getDealer(), testGame.getUser());
         int expected = 3;
         int actual = testGame.getUser().getHand().getCards().size();
         Assert.assertEquals(expected, actual);
