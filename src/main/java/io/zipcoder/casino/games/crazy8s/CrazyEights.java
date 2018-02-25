@@ -60,13 +60,6 @@ public class CrazyEights implements Game {
 
         } else
             hand = computer;
-<<<<<<< HEAD
-=======
-            if (hand.length > 0)
-                return false;
-        return false;
-    }
->>>>>>> BlackJackB
 
         if (hand.length > 0)
             return false;

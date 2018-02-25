@@ -1,17 +1,9 @@
 package io.zipcoder.casino.core;
 
-<<<<<<< HEAD
 import io.zipcoder.casino.games.blackjack.BlackJack;
-=======
 import io.zipcoder.casino.games.ceelo.CeeLo;
->>>>>>> 8715c1f1628c61473f3881fe511e92fef3b8ed65
 import io.zipcoder.casino.games.crazy8s.CrazyEights;
-
-import io.zipcoder.casino.games.roulette.Roulette;
-
 import io.zipcoder.casino.interfaces.Game;
-
-
 import io.zipcoder.casino.utils.IOHandler;
 
 public class Casino {
@@ -63,24 +55,9 @@ public class Casino {
     }
 
     public Game changeGameState(int answer) {
-
-<<<<<<< HEAD
-            switch (answer) {
-                case 1:
-                   currentGameRunning = new BlackJack();
-
-                    break;
-                case 2:
-                    currentGameRunning = new CrazyEights();
-                    break;
-                case 3:
-//                    currentGameRunning = new CeeLoGamble();
-                    break;
-                case 4:
-=======
         switch (answer) {
             case 1:
-//                    currentGameRunning = new BlackJack();
+                currentGameRunning = new BlackJack();
                 break;
             case 2:
                 currentGameRunning = new CrazyEights();
@@ -89,7 +66,6 @@ public class Casino {
                 currentGameRunning = new CeeLo();
                 break;
             case 4:
->>>>>>> 8715c1f1628c61473f3881fe511e92fef3b8ed65
 //                    currentGameRunning = new Roulette();
                 break;
             case 5:
