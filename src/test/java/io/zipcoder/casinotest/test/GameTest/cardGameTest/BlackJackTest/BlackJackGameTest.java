@@ -65,21 +65,26 @@ public class BlackJackGameTest {
         testPlayer.getHand().addCard(card1);
 
         //updates score of first card addeded
-        testBlackJackGAme.currentScore(card1, testPlayer);
+        testBlackJackGAme.updateScore(card1, testPlayer);
         // adds another card to hand
         testPlayer.getHand().addCard(cardToScore);
 
 
         int expected = card1.getRank().getCardValue() + cardToScore.getRank().getCardValue();
         // updates score to reflect second card added
-        int actual = Integer.valueOf(testBlackJackGAme.currentScore(cardToScore, testPlayer));
+        int actual = Integer.valueOf(testBlackJackGAme.updateScore(cardToScore, testPlayer));
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void standTest() {
+    //isStood changes to true;
+        //currentPlayer changes to dealer
+        boolean expected = true;
+        boolean actual = testBlackJackGAme.stand();
 
+        Assert.assertEquals(expected, actual);
     }
 
     public void splitTest() {
