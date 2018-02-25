@@ -12,20 +12,100 @@ import io.zipcoder.casino.Profile;
 import io.zipcoder.casino.TypeOfBet;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class BlackJackGame extends CardGame {
-    BlackJackPlayer player;
-    BlackJackPlayer dealer;
-
+    private BlackJackPlayer player;
+    private BlackJackPlayer dealer;
+    private boolean playAnotherGame;
 
     public BlackJackGame(Profile profile) {
+
         player = new BlackJackPlayer(profile);
         this.addPlayer(player);
         dealer = new BlackJackPlayer(null);
 
         player.setIsBusted(false);
         dealer.setIsBusted(false);
+        playAnotherGame = true;
+    }
 
+    //TODO test this method
+    public void playBlackJack() {
+        while (!playAnotherGame) {
+            round(player, dealer);
+            Console.print(player.getProfile().getName().toString() + "Enter [Yes] to try your luck at another Round");
+
+            if (Console.getString().equalsIgnoreCase("YES")) {
+                playAnotherGame = true;
+            } else if (Console.getString().equalsIgnoreCase("NO")) {
+                playAnotherGame = false;
+            } else {
+                Console.print("Invalid entry");
+            }
+        }
+        endGame();
+    }
+
+    //TODO test this method
+    public void round(BlackJackPlayer thePlayer, BlackJackPlayer theDealer) {
+
+        deal(thePlayer);
+        //TODO handel if player or dealer has blackJack after deal
+        turn(thePlayer);
+        //TODO handel if player has blackJack at anypoint in his turn
+
+        // need to account for all the types of bets played in the round;
+        if (thePlayer.getIsBusted()) {
+
+            for (TypeOfBet key : thePlayer.getAllBets().keySet()) {
+                thePlayer.lose(key);
+            }
+            thePlayer.setIsBusted(false);
+        }
+
+        //TODO handle player wins if dealer busts
+        dealerBehavior();
+//TODO determine winner if dealer doesnt bust
+        thePlayer.getHand().clear();
+        theDealer.getHand().clear();
+        // dealer deals hand until cards are 17, busted or blackJack
+        // make a call to winner
+        // make a call to payOuts
+        // promt to play another round
+        // game should continue as long as player has money
+        // game
+        //TODO handle when deck isEmpty to sure game continues as long as players want to play
+    }
+
+    //TODO test this method
+    public void turn(BlackJackPlayer currentPlayer) {
+        currentPlayer.setCurrentPlayer(true);
+
+        while (currentPlayer.getIsBusted() != true & currentPlayer.getHasStood() != true) {
+            showListOfPlayerActions();
+            String input = Console.getString();
+
+            // player has an ace the player can choose to change value to 1;
+            if (input.equalsIgnoreCase("Hit") & currentPlayer.getScore() < 21) {
+                hit(currentPlayer);
+                if(isBlackJack(currentPlayer)){
+                    Console.print("BLACKJACK!!!!!!!!!!!!!!!!!!!!!");
+
+                    break;
+                }
+            } else if (input.equalsIgnoreCase("Stand")) {
+                stand(currentPlayer);
+                break;
+            } else {
+                Console.print("Invalid input enter one of the following actions");
+            }
+
+
+        }
+        currentPlayer.setCurrentPlayer(false);
+        // player must choose to bet
+        // if player does not have any money promt the user to add more money or game is over.
     }
 
 
@@ -60,40 +140,20 @@ public class BlackJackGame extends CardGame {
         return placeBet(BlackJackBet.INTIAL_BET, thePlayer);
     }
 
-    public void turn(BlackJackPlayer currentPlayer) {
-        currentPlayer.setCurrentPlayer(true);
-
-
-        while (currentPlayer.getIsBusted() != true & currentPlayer.getHasStood() != true) {
-            // show list of Actions
-            showListOfPlayerActions();
-            String input = Console.getString();
-            // player has an ace the player can choose to change value to 1;
-            if (input.equalsIgnoreCase("Hit") & currentPlayer.getScore() < 21) {
-                hit(currentPlayer);
-                continue;
-            } else if (input.equalsIgnoreCase("Stand")) {
-                stand();
-                break;
-            }
-        }
-        currentPlayer.setCurrentPlayer(false);
-        // player must choose to bet
-        // if player does not have any money promt the user to add more money or game is over.
-    }
-
 
     public String hit(BlackJackPlayer thePlayer) {
         String currentScore = String.valueOf(dealACard(thePlayer));
-        Console.print(currentScore);
+        Console.print(player.getProfile().getName() + " " + currentScore);
         return currentScore;
     }
 
-    public boolean stand() {
-        //player.isCurrentPlayer();
-
-
-        return false;
+    /**
+     * @param thePlayer
+     * @return
+     */
+    public boolean stand(BlackJackPlayer thePlayer) {
+        thePlayer.setHasStood(true);
+        return thePlayer.getHasStood();
     }
 
     public void split() {
@@ -124,20 +184,6 @@ public class BlackJackGame extends CardGame {
     }
 
 
-    public void round() {
-     // goes through list ofPlayers turns
-        // once all players have either stood or busted
-        // dealer deals hand until cards are 17, busted or blackJack
-        // make a call to winner
-        // make a call to payOuts
-        // promt to play another round
-        // game should continue as long as player has money
-        // game 
-
-
-
-    }
-
     /**
      * @param currentPlayer
      * @return
@@ -156,6 +202,7 @@ public class BlackJackGame extends CardGame {
         // TODO consider When dealer has a soft 17
         while (dealer.getScore() < 17) {
             dealACard(dealer);
+            Console.print("Dealers Hand: " + dealer.getHand().showHand());
         }
 
     }
@@ -213,10 +260,11 @@ public class BlackJackGame extends CardGame {
     @Override
     public void startGame() {
         Console.print("Welcome to BlackJack!" + " " + player.getProfile().getName().toString());
-        while(placeInitialBet(player) == false) {
+        while (placeInitialBet(player) == false) {
             placeInitialBet(player);
         }
-        deal(player);
+        playBlackJack();
+
     }
 //if Player score is > 21 console print score you loose play
     // if Player Score is <

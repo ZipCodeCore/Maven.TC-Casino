@@ -103,7 +103,7 @@ public class BlackJackGameTest {
         //isStood changes to true;
         //currentPlayer changes to dealer
         boolean expected = true;
-        boolean actual = testBlackJackGAme.stand();
+        boolean actual = testBlackJackGAme.stand(testPlayer);
 
         Assert.assertEquals(expected, actual);
     }
