@@ -49,7 +49,7 @@ public class MainMenu {
                 return null;
         }
 
-        return game = new Craps(player);
+        return game;
     }
 
 }
