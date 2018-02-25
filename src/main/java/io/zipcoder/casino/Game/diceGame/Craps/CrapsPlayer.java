@@ -14,6 +14,11 @@ public class CrapsPlayer extends Player implements Gambler {
     private boolean dontCome;
     private boolean bigSix;
     private boolean bigEight;
+    private boolean field;
+    private boolean hardFour;
+    private boolean hardSix;
+    private boolean hardEight;
+    private boolean hardTen;
     private ArrayList<Integer> comePoints;
     private ArrayList<Integer> dontComePoints;
 
@@ -165,6 +170,45 @@ public class CrapsPlayer extends Player implements Gambler {
 
     public boolean isBigEight(){
         return this.bigEight;
+    }
+
+    public void setField(boolean input){
+        this.field = input;
+    }
+
+    public boolean isField(){
+        return this.field;
+    }
+
+    public void setHardFour(boolean input){
+        this.hardFour = input;
+    }
+
+    public boolean isHardFour(){
+        return this.hardFour;
+    }
+    public void setHardSix(boolean input){
+        this.hardSix = input;
+    }
+
+    public boolean isHardSix(){
+        return this.hardSix;
+    }
+
+    public void setHardEight(boolean input){
+        this.hardEight = input;
+    }
+
+    public boolean isHardEight(){
+        return this.hardEight;
+    }
+
+    public void setHardTen(boolean input){
+        this.hardTen = input;
+    }
+
+    public boolean isHardTen(){
+        return this.hardTen;
     }
 
 }

@@ -4,6 +4,8 @@ import io.zipcoder.casino.*;
 import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardPlayer;
 
+import java.util.HashMap;
+
 public class BlackJackPlayer extends CardPlayer implements Gambler {
 
     private boolean hasStood;
@@ -78,6 +80,9 @@ public class BlackJackPlayer extends CardPlayer implements Gambler {
         return playerEscrow.getEscrow().containsKey(typeOfBet) ;
     }
 
+    public HashMap<TypeOfBet, Double> getAllBets(){
+     return playerEscrow.getEscrow();
+    }
 
 //    public void buyInsurance() {
 //
