@@ -12,23 +12,18 @@ import java.util.List;
 
 
 
-public class GoFishPlayer extends Player {
-    public List<Card> cardHand;
-    private int numPairs;
-    private InputOutput inputOutput = new InputOutput();
+public abstract class GoFishPlayer extends Player {
+    protected List<Card> cardHand;
+    protected int numPairs;
 
-    public GoFishPlayer(Player rootPlayer) {
+    protected GoFishPlayer(Player rootPlayer) {
         super(rootPlayer.getName(), rootPlayer.getAge());
         cardHand = new ArrayList<Card>();
         numPairs = 0;
     }
 
-    public GoFishPlayer(){
-
-    }
-
     public GoFishPlayer(String name) {
-        cardHand = new ArrayList<Card>();
+        cardHand = new ArrayList<>();
         numPairs = 0;
         this.name = name;
     }
@@ -38,15 +33,41 @@ public class GoFishPlayer extends Player {
     }
 
     public int getNumPairs() {
-            return numPairs;
+        return numPairs;
     }
 
-    public void takeTurn() {
-        this.pickCard();
+
+    public void addCardToHand(Card cardToAdd) {
+        if (this.hasCard(cardToAdd)) {
+            System.out.println("\n" + this.getName() + " made a match. One point.\n");
+            this.addPair();
+            this.removeMatches(cardToAdd.getRankEnum());
+        }
+        else {
+            this.cardHand.add(cardToAdd);
+        }
 
     }
 
-    public void showCards() {
+    public void removeMatches(Rank rankToCompare) {
+        Iterator carditr = cardHand.iterator();
+        while(carditr.hasNext()) {
+            Card card = (Card) carditr.next();
+            if(card.getRankEnum().equals(rankToCompare)) {
+                carditr.remove();
+            }
+        }
+    }
+
+    public int getCardHandSize() {
+        return this.cardHand.size();
+    }
+
+    public boolean isHandEmpty(){
+        return this.cardHand.isEmpty();
+    }
+
+    public String showCards() {
         StringBuilder showCardHand = new StringBuilder("\n");
         for (int i = 0; i < cardHand.size(); i++) {
             showCardHand.append((i + 1))
@@ -55,9 +76,10 @@ public class GoFishPlayer extends Player {
                     .append("\n");
         }
         System.out.println(showCardHand.toString());
+        return showCardHand.toString();
     }
 
-    public void showOpponents(List<GoFishPlayer> opponents) {
+    public String showOpponents(List<GoFishPlayer> opponents) {
         StringBuilder showOpponents = new StringBuilder();
         for (int i = 0; i < opponents.size(); i++) {
             showOpponents.append((i + 1))
@@ -66,23 +88,7 @@ public class GoFishPlayer extends Player {
                     .append("\n");
         }
         System.out.println(showOpponents.toString());
-    }
-
-    public GoFishPlayer pickOpponentToAsk(List<GoFishPlayer> opponents) {
-        this.showOpponents(opponents);
-        int opponentIndex = inputOutput.promptForInt("Enter the number for the player you want to ask:");
-        return opponents.get(opponentIndex -1);
-    }
-
-    public Card pickCard() {
-        this.showCards();
-        int cardIndex = inputOutput.promptForInt("Enter the number of your card choice:");
-        return cardHand.get(cardIndex -1);
-    }
-
-    public void goFish(Card card) {
-        this.cardHand.add(card);
-
+        return showOpponents.toString();
     }
 
     public Boolean hasCard(Card cardAskedFor) {
@@ -104,4 +110,7 @@ public class GoFishPlayer extends Player {
         }
     }
 
+    public abstract GoFishPlayer pickOpponentToAsk(List<GoFishPlayer> opponents);
+
+    public abstract Card pickCard();
 }

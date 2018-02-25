@@ -2,7 +2,8 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
 import io.zipcoder.casino.Interfaces.Game;
-import io.zipcoder.casino.Players.GoFishAI;
+import io.zipcoder.casino.Players.GoFishComputerPlayer;
+import io.zipcoder.casino.Players.GoFishHumanPlayer;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Players.Player;
@@ -16,16 +17,15 @@ public class GoFish implements Game {
     private ArrayList<GoFishPlayer> players;
     private InputOutput inputOutput;
     private int numPairsMatched;
-    private GoFishAI goFishAI;
     private Deck deck;
 
 
-    public GoFish(GoFishPlayer player1) {
+    public GoFish(GoFishHumanPlayer player1) {
         inputOutput = new InputOutput();
-        players = new ArrayList<GoFishPlayer>();
+        players = new ArrayList<>();
         players.add(player1);
-        players.add(new GoFishPlayer("Bob"));
-        //players.add(goFishAI);
+        players.add(new GoFishComputerPlayer("Bob"));
+        players.add(new GoFishComputerPlayer("Sue"));
         numPairsMatched = 0;
         turnCounter = 0;
         deck = new Deck();
@@ -33,35 +33,36 @@ public class GoFish implements Game {
 
     }
 
-//    public int welcomeMessage() {
-//        int numOpponents = inputOutput.promptForInt("Welcome! Choose number of opponents:");
-//        return numOpponents;
-//    }
+    public void welcomeMessage() {
+        System.out.println("Welcome to Go Fish!\nYou are playing with Bob and Sue today.\n");
+
+    }
 
     public void startGame() {
-        //this.welcomeMessage();
+        this.welcomeMessage();
         this.deal();
         while (gameIsNotOver()) {
             takeTurn();
         }
         GoFishPlayer winner = this.determineWinner();
         System.out.println("Congratulations, " + winner.getName() + " , you win!");
-        inputOutput.promptForString("That was fun! Want to play again?");
-        endGame();
+        System.out.println("That was fun! Game over.");
+        this.endGame();
     }
 
 
     public void deal() {
+        System.out.println("Dealing out player hands.");
         for (int i = 0; i < players.size(); i++) {
             for(int j= 0; j < 5; j++) {
-                players.get(i).cardHand.add(deck.deck.get(0));
+                players.get(i).addCardToHand(deck.getTopCard());
                 deck.deck.remove(0);
             }
 
         }
     }
 
-    private boolean gameIsNotOver () {
+    public boolean gameIsNotOver () {
         for (GoFishPlayer player : players) {
             numPairsMatched = player.getNumPairs();
         }
@@ -76,32 +77,64 @@ public class GoFish implements Game {
 
     public void takeTurn () {
         GoFishPlayer currentPlayer = getCurrentPlayer();
-        System.out.println("It's " + currentPlayer.getName() + "'s turn.\n");
+        if(currentPlayer.isHandEmpty()) {
+            return;
+        }
+        System.out.println("\nIt's " + currentPlayer.getName() + "'s turn.\n");
+
         List<GoFishPlayer> opponents = new ArrayList<>(players);
         opponents.remove(currentPlayer);
         GoFishPlayer opponentToAsk = currentPlayer.pickOpponentToAsk(opponents);
 
         Card cardPicked = currentPlayer.pickCard();
 
+        System.out.println("\n" + currentPlayer.getName() + " asked " + opponentToAsk.getName() + " for a " + cardPicked + ".");
+
         if (opponentToAsk.hasCard(cardPicked)) {
             opponentToAsk.removeCard(cardPicked);
-            currentPlayer.removeCard(cardPicked);
-            currentPlayer.addPair();
-            System.out.println("\n" + opponentToAsk.getName() + " had that card. You get a point. Go again.\n");
+            currentPlayer.addCardToHand(cardPicked);
+            System.out.println("\n" + opponentToAsk.getName() + " had that card. " + currentPlayer.getName() + " goes again.\n");
+            this.fillPlayerHands();
             this.takeTurn();
         } else {
-            System.out.println(opponentToAsk.getName() + " did not have that card. Go fish.\n");
-            currentPlayer.goFish(deck.deck.get(0));
+            System.out.println("\n" + opponentToAsk.getName() + " did not have that card. Go fish.\n");
+            if (deck.deck.isEmpty()) {
+                System.out.println("The deck is empty. No cards to draw.");
+                turnCounter++;
+                return;
+            }
+            Card topCard = deck.getTopCard();
             deck.deck.remove(0);
-            turnCounter++;
+            currentPlayer.addCardToHand(topCard);
+            if (topCard.getRankEnum().equals(cardPicked.getRankEnum())) {
+                System.out.println("\n" + currentPlayer.getName() + " picked their wish! " + currentPlayer.getName() + " gets a point. Go again.\n");
+                this.fillPlayerHands();
+                this.takeTurn();
+
+            } else {
+                this.fillPlayerHands();
+                turnCounter++;
+            }
+
         }
+    }
+
+    public void fillPlayerHands() {
+            for (GoFishPlayer player : players) {
+                if (player.isHandEmpty() && deck.deck.size() > 0) {
+                    Card topCard = deck.getTopCard();
+                    deck.deck.remove(0);
+                    player.addCardToHand(topCard);
+
+                }
+            }
 
     }
 
     public GoFishPlayer determineWinner() {
-        GoFishPlayer winner = new GoFishPlayer();
+        GoFishPlayer winner = null;
         int highestScore = 0;
-        for (GoFishPlayer player : players) {
+        for (GoFishPlayer player: players) {
             int currentScore = player.getNumPairs();
             if (currentScore > highestScore) {
                 highestScore = currentScore;

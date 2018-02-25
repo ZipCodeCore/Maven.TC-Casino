@@ -7,6 +7,7 @@ import io.zipcoder.casino.Games.GoFish;
 import io.zipcoder.casino.Games.War;
 import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Players.GoFishHumanPlayer;
 import io.zipcoder.casino.Players.GoFishPlayer;
 import io.zipcoder.casino.Players.Player;
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class Casino {
                 game = new War();
                 break;
             case "Go Fish":
-                game = new GoFish(new GoFishPlayer(player));
+                game = new GoFish(new GoFishHumanPlayer(player));
                 break;
             case "BlackJack":
                 game = new Blackjack();
