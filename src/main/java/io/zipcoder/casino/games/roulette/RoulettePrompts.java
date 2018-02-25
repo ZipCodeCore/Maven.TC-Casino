@@ -2,10 +2,22 @@ package io.zipcoder.casino.games.roulette;
 
 import io.zipcoder.casino.utils.IOHandler;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class RoulettePrompts {
 
     RouletteBoardAndWheel rouletteBoardAndWheel = new RouletteBoardAndWheel();
+    ArrayList<Integer> lastColumn = new ArrayList<>();
+    ArrayList<Integer> secondColumn = new ArrayList<>();
+    ArrayList<Integer> firstColumn = new ArrayList<>();
+    public RoulettePrompts(){
+        lastColumn.addAll(Arrays.asList(rouletteBoardAndWheel.columnSelection(3)));
+        secondColumn.addAll(Arrays.asList(rouletteBoardAndWheel.columnSelection(2)));
+        firstColumn.addAll(Arrays.asList(rouletteBoardAndWheel.columnSelection(1)));
+    }
+
 
     public String welcomeMessage() {
         String welcomePrompt = "*** WELCOME TO THE ROULETTE TABLE  ***\n" +
@@ -30,8 +42,8 @@ public class RoulettePrompts {
         return IOHandler.promptForStringWithMessage(welcomePrompt);
     }
 
-    public void rules() {
-        System.out.println("************************RULES**********************\n" +
+    public String rules() {
+        String rules = "************************RULES**********************\n" +
                 "\n" +
                 "Roulette is a game played with a large wheel that \n" +
                 "contains 38 pockets. These stops are numbered \n" +
@@ -66,7 +78,8 @@ public class RoulettePrompts {
                 "after which all losing bets are swept off the table. \n" +
                 "Then the croupier will pay all winning bets and, \n" +
                 "once all of the payouts are completed, players may \n" +
-                "place bets for the next spin.");
+                "place bets for the next spin.\n\n";
+        return rules;
     }
 
     public int firstSetOfOptionsPrompt(int n) {
@@ -77,23 +90,23 @@ public class RoulettePrompts {
                 "* Betting:                                 *\n" +
                 "* 1. Single number                         *\n" +
                 "* 2. On the line (2 numbers)               *\n" +
-                "* 4. Corner (4 numbers of a corner)        *\n" +
-                "* 5. Stright (one row)                     *\n" +
-                "* 6. Basket (0, 00, 2)                     *\n" +
-                "* 7. 5 number bet (0, 00, 1, 2, 3)         *\n" +
-                "* 8. line (6 numbers in 2 rows adjacent)   *\n" +
-                "* 9. Column                                *\n" +
-                "* 10. 12 number sections (1st, 2nd, 3rd)   *\n" +
-                "* 11. Numbers 1-18                         *\n" +
-                "* 12. Numbers 19-36                        *\n" +
-                "* 13. Even numbers                         *\n" +
-                "* 14. Odd numbers                          *\n" +
-                "* 15. Black Numbers                        *\n" +
-                "* 16. Red Numbers                          *\n" +
+                "* 3. Corner (4 numbers of a corner)        *\n" +
+                "* 4. Stright (one row)                     *\n" +
+                "* 5. Basket (0, 00, 2)                     *\n" +
+                "* 6. 5 number bet (0, 00, 1, 2, 3)         *\n" +
+                "* 7. line (6 numbers in 2 rows adjacent)   *\n" +
+                "* 8. Column                                *\n" +
+                "* 9. 12 number sections (1st, 2nd, 3rd)    *\n" +
+                "* 10. Numbers 1-18                         *\n" +
+                "* 11. Numbers 19-36                        *\n" +
+                "* 12. Even numbers                         *\n" +
+                "* 13. Odd numbers                          *\n" +
+                "* 14. Black Numbers                        *\n" +
+                "* 15. Red Numbers                          *\n" +
                 "*                                          *\n" +
                 "* Other options:                           *\n" +
-                "* 17. Betting info                         *\n" +
-                "* 18. FINISH BETTING                       *\n" +
+                "* 16. Betting info                         *\n" +
+                "* 17. FINISH BETTING                       *\n" +
                 "********************************************\n";
         return IOHandler.promptForIntWithMessage(options);
     }
@@ -113,29 +126,72 @@ public class RoulettePrompts {
                 "\t- line bet (6 numbers/2 rows) wins 5 to 1\n");
     }
 
-    public int singleNumberPrompt() {
+
+    //SingleNumberAdd
+    public ArrayList<Integer> singleNumberPrompt() {
         String prompt = "***************** Single Number ********************\n" +
                 "You selected to bet 1 chip on a single number space. \n" +
                 "The payout for this bet is 35 to 1 if your \n" +
-                "selection is the winning number. \n" +
-                "\n" +
-                "Please choose a number between 1-36:";
-        int numberChoice = IOHandler.promptForIntWithMessage(prompt);
-        return numberChoice;
-    }
-
-    public Integer[] onTheLine() {
-        System.out.println("************* On The Line (2 numbers) **************\n" +
-                "You selected to bet 1 chip on two number spaces. \n" +
-                "The payout for this bet is 17 to 1 if your \n" +
-                "selection is the winning number.\n\n");
-        Integer[] result = new Integer[2];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = IOHandler.promptForIntWithMessage("Please choose a number between 1-36: ");
+                "selection is the winning number. \n\n";
+        System.out.println(prompt);
+        int numberChoice = 0;
+        ArrayList<Integer> result = new ArrayList<>();
+        while(numberChoice != 37) {
+            numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-36 or enter 37 to finish this bet:");
+            Integer numberToAdd = singleNumberPromptAddArrayListEntry(numberChoice);
+            if(numberToAdd != null) {
+                result.add(numberToAdd);
+            }
         }
 
         return result;
     }
+    public Integer singleNumberPromptAddArrayListEntry(int numberChoice){
+        if (numberChoice != 37){
+            return numberChoice;
+        } else if (numberChoice > 37){
+            System.out.println("ERROR! INVALID INPUT!");
+        } else{
+
+        }
+        return null;
+    }
+    //Single Number end
+
+
+    //On the line start
+    public Integer[] onTheLine() {
+        System.out.println("************* On The Line (2 numbers) **************\n" +
+                "You selected to bet 1 chip on two number spaces. \n" +
+                "The instructions are to choose one number out of\n"+
+                "two numbers that you want to select. For example,\n"+
+                "if you enter the number 2, the dealer will take\n" +
+                "that as 'betting on 2 and 3'. \n"+
+                "NUMBERS HAVE TO BE NEXT TO EACH OTHER. \n" +
+                "The payout for this bet is 17 to 1 if your \n" +
+                "selection is the winning number.\n\n");
+        Integer[] result = new Integer[2];
+        int numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-35: ");
+        if(numberChoice > 35 || lastColumn.contains(numberChoice)) {
+            do {
+                System.out.println("\n\nERROR!\n\n");
+                numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-35: ");
+            }while(numberChoice > 35 || lastColumn.contains(numberChoice));
+        }
+        if (numberChoice < 36) {
+            result = returnDoubleNumberArray(numberChoice);
+        }
+        return result;
+    }
+
+    public Integer[] returnDoubleNumberArray(int numberChoice){
+        Integer[] result = {numberChoice, numberChoice+1};
+        return result;
+    }
+    //on the line end
+
+
+
 
     public Integer[] corner() {
         String prompt = "********************* Corner **********************\n" +
@@ -146,12 +202,19 @@ public class RoulettePrompts {
                 "if I wanted to choose the corner that intersects \n" +
                 "17, 18, 20, and 21, I would enter the number 17.\n" +
                 "The payout for this bet is 8 to 1 if your \n" +
-                "selection is the winning number.\n\n";
+                "selection is the winning number.\n\n" +
+                "Please enter your number choice:";
         Integer[] result = new Integer[4];
         int counterForArray = 0;
         int startingNumber = IOHandler.promptForIntWithMessage(prompt);
-        for (int i = startingNumber; i <= startingNumber + 5; i++) {
-            if (i != startingNumber + 3) {
+        if (startingNumber > 31 || lastColumn.contains(startingNumber));{
+            do {
+                System.out.println("\n\nERROR!\n\n");
+                startingNumber = IOHandler.promptForIntWithMessage(prompt);
+            }while(startingNumber > 31 || lastColumn.contains(startingNumber));
+        }
+        for (int i = startingNumber; i < startingNumber + 5; i++) {
+            if (i != (startingNumber + 2)) {
                 result[counterForArray] = i;
                 counterForArray++;
             }
@@ -168,8 +231,16 @@ public class RoulettePrompts {
                 "won. The payout for this bet is 11 to 1 if your \n" +
                 "selection is the winning number.\n\n";
         Integer[] result = new Integer[3];
+        Integer[] column2 = rouletteBoardAndWheel.columnSelection(2);
+        Integer[] column3 = rouletteBoardAndWheel.columnSelection(3);
         int startingNumber = IOHandler.promptForIntWithMessage(prompt);
-        for (int i = 0; i <= result.length; i++) {
+        if(startingNumber > 34){
+            do{
+                System.out.println("\n\nERROR!\n\n");
+                startingNumber = IOHandler.promptForIntWithMessage(prompt);
+            } while (startingNumber > 34);
+        }
+        for (int i = 0; i < result.length; i++) {
             result[i] = startingNumber + i;
         }
         return result;
@@ -239,7 +310,7 @@ public class RoulettePrompts {
                 "\n" +
                 "Please enter 1, 2, or 3 for the first column, second \n" +
                 "column, or third column respectively:";
-        Integer[] result = rouletteBoardAndWheel.columnBetSelection(IOHandler.promptForIntWithMessage(prompt));
+        Integer[] result = rouletteBoardAndWheel.columnSelection(IOHandler.promptForIntWithMessage(prompt));
         return result;
     }
 
@@ -256,14 +327,14 @@ public class RoulettePrompts {
         return result;
     }
 
-    public Integer[] numbers1Thru18() {
-        String prompt = "********************* 1-18 Bet *********************\n" +
-                "You selected to bet 1 chip on numbers 1-18. The \n" +
+    public Integer[] numbers1Thru8() {
+        String prompt = "********************* 1-8 Bet *********************\n" +
+                "You selected to bet 1 chip on numbers 1-8. The \n" +
                 "payout for this bet is 1 to 1. Please press 'c' to \n" +
                 "continue./n";
         String goOnAhead = IOHandler.promptForStringWithMessage(prompt);
         if (goOnAhead.equals("c")) {
-            Integer[] result = new Integer[18];
+            Integer[] result = new Integer[8];
             for (int i = 1; i <= result.length; i++) {
                 result[i - 1] = i;
             }

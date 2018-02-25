@@ -25,10 +25,10 @@ public class RouletteBoardAndWheel {
     }
 
 
-    public Integer[] columnBetSelection(int column) {
+    public Integer[] columnSelection(int column) {
         Integer[] columnArray = new Integer[this.rouletteInnerBoard.length];
         for (int i = 0; i < columnArray.length; i++) {
-            columnArray[i] = this.rouletteInnerBoard[i][column];
+            columnArray[i] = this.rouletteInnerBoard[i][column-1];
         }
         return columnArray;
     }
@@ -91,12 +91,10 @@ public class RouletteBoardAndWheel {
     //Wheel portion of the table
 
     public Integer generateWinningNumber() throws InterruptedException {
-        long timeout1 = 2;
-        long timeout2 = 5;
-        System.out.println("\n\n\nSpinning the wheel...\n\n\n");
-        TimeUnit.SECONDS.sleep(timeout1);
+        System.out.println("\n\n\nAll bets are FINAL!\nSpinning the wheel...\n\n\n");
+        TimeUnit.SECONDS.sleep(2);
         System.out.println("\n\n\nWHOOSH (wheel spin sound)\n\n\n");
-        TimeUnit.SECONDS.sleep(timeout2);
+        TimeUnit.SECONDS.sleep(5);
         Integer winningNumber = (int) (Math.random() * 36);
         if (winningNumber == 0) {
             int whichZeroChoice = (int) ((Math.random() * 2) + 1);
