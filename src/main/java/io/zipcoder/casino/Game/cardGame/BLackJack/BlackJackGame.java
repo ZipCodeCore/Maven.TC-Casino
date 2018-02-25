@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Game.cardGame.BLackJack;
 
+import io.zipcoder.casino.BlackJackBet;
 import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
@@ -11,6 +12,7 @@ import io.zipcoder.casino.Profile;
 public class BlackJackGame extends CardGame {
     BlackJackPlayer player;
     BlackJackPlayer dealer;
+
 
 
     public BlackJackGame(Profile profile) {
@@ -30,51 +32,83 @@ public class BlackJackGame extends CardGame {
     }
 
     public void deal() {
-
+      Card temp;
         for (int i = 0; i < 2; i++) {
+            temp = deck.getCard();
             player.getHand().addCard(deck.getCard());
-            // print card value to string
-            dealer.getHand().addCard(deck.getCard());
+            currentScore(temp, player);
+
+            temp = deck.getCard();
+            dealer.getHand().addCard(temp);
+            currentScore(temp, dealer);
         }
 
         Console.print(player.getHand().showHand());
-
+        Console.print(showDealersFaceCard());
     }
 
     public void turn() {
+        //loop while its still the players turn
+        while(player.getIsBusted() == false || player.isCurrentPlayer() == true) {
 
+
+            // show list of Actions
+            showListOfPlayerActions();
+
+
+            // player must choose to bet
+            // if player does not have any money promt the user to add more money or game is over.
+        }
     }
 
 
-    public void hit(BlackJackPlayer aPlayer) {
+    public String hit(BlackJackPlayer thePlayer) {
         Card cardToAdd = deck.getCard();
-        aPlayer.getHand().addCard(cardToAdd);
-        currentScore(cardToAdd, aPlayer);
-         // Console.print();
+        thePlayer.getHand().addCard(cardToAdd);
 
-        // if player score is over 21 change is busted to true
+        String currentScore = String.valueOf(currentScore(cardToAdd, thePlayer));
+        Console.print(currentScore);
+        //player.getIsBusted();
+     return currentScore;
     }
 
     public void stand() {
+     //dealer.isCurrentPlayer();
 
     }
 
-    public int currentScore(Card cardToScore, BlackJackPlayer aPlayer) {
+    public void split(){
+
+    }
+
+    /**
+     * updates the current Score
+     *
+     * @param cardToScore
+     * @param thePlayer
+     * @return
+     */
+    public int currentScore(Card cardToScore, BlackJackPlayer thePlayer) {
         int cardValue = cardToScore.getRank().getCardValue();
-        int updateScore = aPlayer.getScore() + cardValue;
-        aPlayer.setScore(updateScore);
+        int updateScore = thePlayer.getScore() + cardValue;
+        thePlayer.setScore(updateScore);
+
         return updateScore;
     }
 
-    public void round(Card card) {
+
+
+    public void round() {
 
     }
+
+
 
     public void dealerBehavior() {
 
     }
 
-    public String ShowDealersFaceCard() {
+    public String showDealersFaceCard() {
         Hand hand = dealer.getHand();
         Card faceCard = hand.getCards().get(0);
 
@@ -93,10 +127,17 @@ public class BlackJackGame extends CardGame {
 
     @Override
     public void startGame() {
-        //Console.print("Welcome to BlackJack! Please place your [Bet] amount");
-        //player.bet(Console.getDouble());
+        Console.print("Welcome to BlackJack!" + "\n" + player.getProfile().toString());
+        Console.print("Please Enter Your Starting [Bet]\n");
+        double bet = Console.getDouble();
 
-        deal();
+
+        player.bet(BlackJackBet.INTIAL_BET, bet);
+
+    }
+
+    public Player decideWinner(BlackJackPlayer player1, BlackJackPlayer player2) {
+         return null;
     }
 
     public void endGame() {
@@ -106,6 +147,5 @@ public class BlackJackGame extends CardGame {
     public String getRules() {
         return null;
     }
-
 
 }

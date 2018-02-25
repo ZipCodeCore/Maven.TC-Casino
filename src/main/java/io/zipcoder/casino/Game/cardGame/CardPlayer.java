@@ -7,7 +7,7 @@ import io.zipcoder.casino.Profile;
 public abstract class CardPlayer extends Player {
 
 
-    private boolean isCurrentPlayer;
+    protected boolean isCurrentPlayer;
     protected Hand cardPlayerHand;
     protected int score;
 
@@ -15,25 +15,41 @@ public abstract class CardPlayer extends Player {
         super(someProfile);
         cardPlayerHand = new Hand();
         setHand(cardPlayerHand);
+        this.isCurrentPlayer = isCurrentPlayer;
     }
 
-    public void setScore(int newScore){
+    public void setScore(int newScore) {
 
         this.score = newScore;
     }
 
-    public int getScore(){
+    public int getScore() {
 
         return this.score;
     }
 
-    public void setHand (Hand aHand) {
+
+    public void setHand(Hand aHand) {
         this.cardPlayerHand = aHand;
     }
 
-    public Hand getHand () {
+    public Hand getHand() {
         return cardPlayerHand;
     }
 
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Score=" + score);
+        return sb.toString();
+    }
+
+    public boolean isCurrentPlayer() {
+        return isCurrentPlayer;
+    }
+
+    public void setCurrentPlayer(boolean currentPlayer) {
+        isCurrentPlayer = currentPlayer;
+    }
 }

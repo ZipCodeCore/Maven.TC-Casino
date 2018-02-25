@@ -40,5 +40,10 @@ public class Profile {
         return id;
     }
 
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" " + name +" " + "Your Account Balance is: $ " +accountBalance);
+        return sb.toString();
+    }
 }
