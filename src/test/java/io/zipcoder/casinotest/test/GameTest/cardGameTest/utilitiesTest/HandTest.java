@@ -94,5 +94,21 @@ public class HandTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void orderCardsTest1() {
+        Card card1 = new Card(CardSuit.HEARTS, CardRank.FOUR);
+        Card card2 = new Card(CardSuit.CLUBS, CardRank.JACK);
+        Card card4 = new Card(CardSuit.DIAMONDS, CardRank.FOUR);
+        Card card3 = new Card(CardSuit.DIAMONDS, CardRank.EIGHT);
+        testHand.addCard(card1);
+        testHand.addCard(card2);
+        testHand.addCard(card3);
+        testHand.addCard(card4);
+        testHand.orderCards();
+        Card expected = card4;
+        Card actual = testHand.getCards().get(0);
+        Assert.assertEquals(expected, actual);
+    }
+
 
 }

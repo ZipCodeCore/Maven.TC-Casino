@@ -4,6 +4,8 @@ package io.zipcoder.casino.Game.cardGame.utilities;
 import io.zipcoder.casino.CasinoUtilities.Console;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Hand {
 
@@ -34,6 +36,12 @@ public class Hand {
     }
 
     public ArrayList<Card> getCards() {
+        return cards;
+    }
+
+    public ArrayList<Card> orderCards() {
+        Collections.sort(cards);
+
         return cards;
     }
 
