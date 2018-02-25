@@ -1,6 +1,9 @@
 package io.zipcoder.casinotest.test.GameTest.cardGameTest.GoFishTest;
 
 import io.zipcoder.casino.Game.cardGame.GoFIsh.GoFishPlayer;
+import io.zipcoder.casino.Game.cardGame.utilities.Card;
+import io.zipcoder.casino.Game.cardGame.utilities.CardRank;
+import io.zipcoder.casino.Game.cardGame.utilities.CardSuit;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;
@@ -20,8 +23,47 @@ public class GoFishPlayerTest {
 
 
     @Test
-    public void testBuildBook(){
+    public void testBuildBook1(){
+        Hand aHand = new Hand();
+        testGoFishPlayer.setHand(aHand);
+        Card firstCard = new Card(CardSuit.HEARTS, CardRank.JACK);
+        Card secondCard = new Card(CardSuit.DIAMONDS,CardRank.TWO);
+        Card thirdCard = new Card(CardSuit.SPADES,CardRank.JACK);
+        testGoFishPlayer.getHand().getCards().add(firstCard);
+        testGoFishPlayer.getHand().getCards().add(secondCard);
+        testGoFishPlayer.getHand().getCards().add(thirdCard);
 
+        int expected = 2;
+        int actual = testGoFishPlayer.buildBooks(testGoFishPlayer,CardRank.JACK).size();
+
+        Assert.assertEquals(expected,actual);
+
+
+    }
+
+    @Test
+    public void testBuildBook2(){
+        Hand aHand = new Hand();
+        Hand hand2=new Hand();
+        Profile profile2 = new Profile("aaa",1000,100);
+        GoFishPlayer testGoFishPlayer2 = new GoFishPlayer(profile2);
+        testGoFishPlayer2.setHand(hand2);
+
+        testGoFishPlayer.setHand(aHand);
+        Card firstCard = new Card(CardSuit.HEARTS, CardRank.JACK);
+        Card secondCard = new Card(CardSuit.DIAMONDS,CardRank.TWO);
+        Card thirdCard = new Card(CardSuit.SPADES,CardRank.JACK);
+
+        testGoFishPlayer.getHand().getCards().add(firstCard);
+        testGoFishPlayer.getHand().getCards().add(secondCard);
+        testGoFishPlayer.getHand().getCards().add(thirdCard);
+
+
+        System.out.println(testGoFishPlayer.getHand().showHand());
+        for(Card card:testGoFishPlayer.buildBooks(testGoFishPlayer,CardRank.JACK)){
+            testGoFishPlayer2.getHand().addCard(card);
+        }
+        System.out.println(testGoFishPlayer2.getHand().showHand());
 
     }
 
