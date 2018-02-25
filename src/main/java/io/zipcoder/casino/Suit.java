@@ -15,8 +15,13 @@ public enum Suit {
         this.suitSymbol = suitSymbol;
     }
 
+    // Modified toString on Sat Feb 24 to return suitSymbol and not suitWord
+//    public String toString() {
+//        return this.suitWord;
+//    }
+
     public String toString() {
-        return this.suitWord;
+        return this.suitSymbol;
     }
 
     public String toSymbol() {
