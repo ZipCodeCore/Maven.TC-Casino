@@ -6,6 +6,8 @@ import io.zipcoder.casino.games.crazy8s.Crazy8Play;
 import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
+import static io.zipcoder.casino.utils.IOHandler.getMessageFromFile;
+
 public class Casino {
     private Player player;
     private Game currentGameRunning;
@@ -29,7 +31,7 @@ public class Casino {
 
     public String runWelcomeMenu() {
 
-        return IOHandler.getMessageFromFile("CasinoWelcomeMenu.txt");
+        return getMessageFromFile("CasinoWelcomeMenu.txt");
     }
 
     public int handleInput(int userInput) {
@@ -84,12 +86,12 @@ public class Casino {
 
     public void welcomeScreen(){
 
-        IOHandler.getMessageFromFile("CasinoWelcomeMenu.txt");
+        getMessageFromFile("CasinoWelcomeMenu.txt");
     }
 
     public void goodBye(){
 
-        IOHandler.getMessageFromFile("Goodbye.txt");
+        System.out.println(IOHandler.getMessageFromFile("Goodbye.txt"));
 
         System.exit(0);
     }
