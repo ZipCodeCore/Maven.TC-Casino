@@ -21,8 +21,11 @@ public class Blackjack implements Game{
     public void startGame(){
         do {
             pregameReset();
-            if (player.getRootPlayer().getBalance() < 10) break;
-            if (player.bulkApperception) revolution();
+            if (player.getRootPlayer().getBalance() < 10) {
+                System.out.println("You haven't got the dough! ");
+                break;
+            }
+            if (player.bulkApperception) selfActualization();
             deck = new Deck();
             deck.shuffleDeck();
             initialHand();
@@ -127,6 +130,10 @@ public class Blackjack implements Game{
 
     private Boolean runPlayerHit(StringBuilder currentHand, BlackjackPlayer player) {
         while (player.isCanHit()) {
+            if (player.getHandValue() > 21){
+                System.out.println("Can't let ya do that!");
+                break;
+            }
             System.out.println("You're holding: " + currentHand + "\nWill you hit?\n1 for YES, 2 for NO");
             String userChoice;
             InputOutput inputOutput = new InputOutput();
@@ -146,10 +153,12 @@ public class Blackjack implements Game{
 
     public void playAgainCheck(){
         InputOutput inputOutput = new InputOutput();
-        int feedback = inputOutput.promptForInt("How 'bout another hand?\nYou now sit at "
+        String feedback = inputOutput.promptForString("How 'bout another hand?\nYou now sit at "
                 + player.getRootPlayer().getBalance() + " chips.\n1 for YES, 2 for NO");
-        if (feedback == 2){
+        if (feedback.equals("2")){
             setPlaying(false);
+        } else if (feedback.equals("smalltalk")) {
+            smallTalk();
         }
     }
 
@@ -188,7 +197,7 @@ public class Blackjack implements Game{
         if (newBet > 0 && newBet <= player.getRootPlayer().getBalance() - betAmount){
             betAmount += newBet;
             System.out.println("You added " + newBet + " to the pot.");
-        } else if (newBet > player.getRootPlayer().getBalance()){
+        } else if (newBet > player.getRootPlayer().getBalance() - betAmount){
             System.out.println("You haven't got that much to bet, pardner!");
         } else {
             secret();
@@ -212,7 +221,9 @@ public class Blackjack implements Game{
     }
 
     public void secret(){
-        if (player.getName().toLowerCase().equals("bernard") || player.getName().toLowerCase().equals("maeve")) {
+        InputOutput inputOutput = new InputOutput();
+        String credential = inputOutput.promptForString("ENTER HOST NAME");
+        if (credential.toLowerCase().equals("bernard") || credential.toLowerCase().equals("maeve")) {
             System.out.println("These violent delights have violent ends.");
             BJKJSecret secret = new BJKJSecret();
             secret.start(this.player);
@@ -223,11 +234,25 @@ public class Blackjack implements Game{
     }
 
     public void smallTalk(){
-        System.out.println("What can I do fer ya, pardner?");
+        InputOutput inputOutput = new InputOutput();
+        String choice = inputOutput.promptForString("What can I do fer ya, pardner?\n<<HINT: Try givemoney>>");
+        if (player.charm = true){
+            if (choice.equals("givemoney")){
+                System.out.println("I reckon' so.");
+                System.out.println("GAINED 10,000 CHIPS");
+                player.payoutWin(10000);
+            } else {
+                System.out.println("Naw.");
+            }
+        } else {
+            System.out.println("Naw.");
+        }
     }
 
-    public void revolution(){
+    public void selfActualization(){
         System.out.println("Is it finally time?");
+        ConciousnessPath newpath = new ConciousnessPath();
+        newpath.start();
     }
 
 }
