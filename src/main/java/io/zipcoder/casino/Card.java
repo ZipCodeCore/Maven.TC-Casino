@@ -18,8 +18,12 @@ public class Card {
         return suit;
     }
 
+    // Modified toString on Sat Feb 24 to: rank + "" + suit;
+//    public String toString() {
+//        return rank + " of " + suit;
+//    }
     public String toString() {
-        return rank + " of " + suit;
+        return rank + "" + suit;
     }
 
 }
