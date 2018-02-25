@@ -306,11 +306,6 @@ public class CrazyEights implements Game {
     }
 
     @Override
-    public void quitGame() {
-
-    }
-
-    @Override
     public void runWelcome() {
 
     }

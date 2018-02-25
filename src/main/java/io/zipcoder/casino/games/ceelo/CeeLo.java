@@ -6,8 +6,6 @@ import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.Dice;
 import io.zipcoder.casino.utils.IOHandler;
 
-import java.util.Arrays;
-
 /**
  * filename:
  * project: casino
@@ -21,6 +19,26 @@ public class CeeLo implements Game {
     private static final String fPLAYER_WINS_MSG = "You Won!";
     private static final String fPLAYER_TIE_MSG = "Push";
     private static final String fPLAYER_LOSE_MSG = "You're a Loser!";
+
+    private static void displayStarLine() {
+        IOHandler.printMessage("*******************************************");
+    }
+
+    public static void displaySplash() {
+        String dice = "                  _______    (( _______ \n" +
+                "     _______  (( /\\O    O\\     /O    O/\\ \n" +
+                "    /O    O/\\   /  \\   O  \\   /O    O/O \\ \n" +
+                "(( /      /O \\ / O  \\O____O\\ /O____O/    \\\n" +
+                "  /O____O/    \\\\    /O     / \\O    O\\    / \n" +
+                "  \\O    O\\    / \\  /   O  /   \\      \\ O/ \n" +
+                "   \\O    O\\ O/   \\/_____O/     \\O____O\\/ )) \n" +
+                "    \\O____O\\/ ))          ))\n";
+        String title = "***** C E E - L O *****";
+        displayStarLine();
+        IOHandler.printMessage(dice + title);
+        displayStarLine();
+    }
+
 
     private int takeBet() {
         return IOHandler.promptForIntWithMessage(fTAKE_BET_MSG);
@@ -71,7 +89,7 @@ public class CeeLo implements Game {
     }
 
     protected int getPoint(Die die, int[] rolls) {
-        if (Dice.containsHighStraight(die, rolls) || Dice.containsHighStraight(die, rolls))
+        if (Dice.containsHighStraight(die, rolls) || Dice.allDiceMatch(rolls))
             return 6;
 
         if (Dice.containsLowStraight(die, rolls))
@@ -93,7 +111,8 @@ public class CeeLo implements Game {
     }
 
     private void displayRoll(int[] rolls) {
-        IOHandler.printMessage(Arrays.toString(rolls));
+        for (int r : rolls)
+            IOHandler.printMessage(Dice.getD6Art(r));
     }
 
     private void displayLoseMessage(long payout) {
@@ -134,22 +153,14 @@ public class CeeLo implements Game {
         IOHandler.printMessage("Chip Balance: " + player.getBalance());
     }
 
-    private void displayStarLine() {
-        IOHandler.printMessage("********************************");
-    }
-
     private boolean setPlayAgain() {
         String in = IOHandler.promptForStringWithMessage(fPLAY_AGAIN_MSG);
         return !in.equals("back");
     }
 
     @Override
-    public void quitGame() {
-        // not sure what i need to do here actually. clean up, say goodbye, idk
-    }
-
-    @Override
     public void runWelcome() {
+        displaySplash();
         IOHandler.printMessage(getRules());
     }
 
