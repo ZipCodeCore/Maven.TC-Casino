@@ -16,7 +16,6 @@ public class GoFish implements Game {
     private int turnCounter;
     private ArrayList<GoFishPlayer> players;
     private InputOutput inputOutput;
-    private int numPairsMatched;
     private Deck deck;
 
 
@@ -26,7 +25,6 @@ public class GoFish implements Game {
         players.add(player1);
         players.add(new GoFishComputerPlayer("Bob"));
         players.add(new GoFishComputerPlayer("Sue"));
-        numPairsMatched = 0;
         turnCounter = 0;
         deck = new Deck();
         deck.shuffleDeck();
@@ -63,8 +61,10 @@ public class GoFish implements Game {
     }
 
     public boolean gameIsNotOver () {
+        int numPairsMatched = 0;
         for (GoFishPlayer player : players) {
-            numPairsMatched = player.getNumPairs();
+            numPairsMatched += player.getNumPairs();
+
         }
         return numPairsMatched < 26;
     }
@@ -78,6 +78,8 @@ public class GoFish implements Game {
     public void takeTurn () {
         GoFishPlayer currentPlayer = getCurrentPlayer();
         if(currentPlayer.isHandEmpty()) {
+            System.out.println(currentPlayer.getName() + " ran out of cards and there are no cards left in the deck. Skipping turn.");
+            turnCounter++;
             return;
         }
         System.out.println("\nIt's " + currentPlayer.getName() + "'s turn.\n");
