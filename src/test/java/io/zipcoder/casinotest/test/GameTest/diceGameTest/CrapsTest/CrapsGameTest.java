@@ -468,6 +468,59 @@ public class CrapsGameTest {
         Assert.assertTrue(actual);
     }
 
+    @Test
+    public void changeDontComeBetTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_COME, 50);
+        testGame.getCurrentPlayer().setDontCome(true);
+
+        //When
+        int roll = 4;
+        double expected = 50;
+        testGame.changeDontComeBet(roll);
+        double actual = testGame.getCurrentPlayer().getEscrowBet(CrapsBet.DO_NOT_COME_FOUR);
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void changeDontComeBetTest2(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_COME, 50);
+        testGame.getCurrentPlayer().setDontCome(true);
+
+        //When
+        int roll = 8;
+        double expected = 50;
+        testGame.changeDontComeBet(roll);
+        double actual = testGame.getCurrentPlayer().getEscrowBet(CrapsBet.DO_NOT_COME_EIGHT);
+
+        //Then
+        Assert.assertEquals(expected,actual,0.01);
+
+    }
+
+    @Test
+    public void setDontComePointTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.DO_NOT_COME, 50);
+        testGame.getCurrentPlayer().setDontCome(true);
+
+        //When
+        int roll = 4;
+        testGame.setDontComePoint(roll);
+        int expected = 4;
+        boolean actual = testGame.getCurrentPlayer().getDontComePoints().contains(expected);
+
+        //Then
+        Assert.assertTrue(actual);
+    }
+
 
     @Test
     public void invalidBetTest(){
