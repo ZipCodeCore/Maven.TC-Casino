@@ -17,7 +17,7 @@ public class DieTest {
     @Test
     public void testRoll() {
         Die d6 = new Die();
-        Integer[] i = {1,2,3,4,5,6};
+        Integer[] i = {1, 2, 3, 4, 5, 6};
         List<Integer> expected = new ArrayList<>(Arrays.asList(i));
         int[] actual = d6.roll(1);
         System.out.println(Arrays.toString(actual));

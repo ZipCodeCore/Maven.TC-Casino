@@ -22,7 +22,7 @@ public class Die {
 
     public int[] roll(int numberOfRolls) {
         int[] rolls = new int[numberOfRolls];
-        for (int i=0;i<numberOfRolls;i++)
+        for (int i = 0; i < numberOfRolls; i++)
             rolls[i] = new Random().nextInt(sides) + 1;
         return rolls;
     }

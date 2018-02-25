@@ -65,4 +65,50 @@ public class Dice {
         else if (rolls[0] == rolls[2]) return rolls[1];
         else return -1;
     }
+
+    public static String getD6Art(int side) {
+        String ret;
+        switch (side) {
+            case 1:
+                ret = " _____\n" +
+                        "|     |\n" +
+                        "|  O  |\n" +
+                        "|_____|";
+                break;
+            case 2:
+                ret = " _____\n" +
+                        "|O    |\n" +
+                        "|     |\n" +
+                        "|____O|";
+                break;
+            case 3:
+                ret = " _____\n" +
+                        "|O    |\n" +
+                        "|  O  |\n" +
+                        "|____O|";
+                break;
+            case 4:
+                ret = " _____\n" +
+                        "|O   O|\n" +
+                        "|     |\n" +
+                        "|O___O|";
+                break;
+            case 5:
+                ret = " _____\n" +
+                        "|O   O|\n" +
+                        "|  O  |\n" +
+                        "|O___O|";
+                break;
+            case 6:
+                ret = " _____\n" +
+                        "|O   O|\n" +
+                        "|O   O|\n" +
+                        "|O___O|";
+                break;
+            default:
+                ret = "default";
+                break;
+        }
+        return ret;
+    }
 }
