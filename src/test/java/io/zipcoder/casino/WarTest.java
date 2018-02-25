@@ -59,4 +59,13 @@ public class WarTest {
 
     }
 
+    @Test
+    public void decideHowManyYaddaYaddaTest() {
+        Person player = new Person();
+        War warGame = new War(player);
+        int expected = 4;
+        int actual = warGame.decideOnHowManyTimesToIterateBasedOn(4);
+        Assert.assertEquals(expected, actual);
+    }
+
 }

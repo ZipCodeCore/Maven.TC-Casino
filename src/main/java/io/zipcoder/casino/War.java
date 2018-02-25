@@ -27,10 +27,11 @@ public class War extends Game implements GameInterface, CardGameInterface {
         engine();
     }
 
+    // Make private after testing / Make public for testing
     public void engine() {
         // String playerInput = input.nextLine();
         if (nextLineIsNotExit()) {
-            while ((dealer.getHand().getHandArrayList().size() != 0) && (player.getHand().getHandArrayList().size() != 0)) {
+            while (!handOfPersonIsEmpty(dealer) && !handOfPersonIsEmpty(player)) {
                 playerPlayedCards.add(player.getHand().drawCardfromHand());
                 dealerPlayedCards.add(dealer.getHand().drawCardfromHand());
                 System.out.println("You played " + playerPlayedCards + " and the dealer played " + dealerPlayedCards);
@@ -48,9 +49,13 @@ public class War extends Game implements GameInterface, CardGameInterface {
     }
 
     private void checkIfGameIsOver() {
-        if ((player.getHand().getHandArrayList().size() == 0) || (dealer.getHand().getHandArrayList().size() == 0)) {
+        if (handOfPersonIsEmpty(player) || handOfPersonIsEmpty(dealer)) {
             end();
         }
+    }
+
+    private boolean handOfPersonIsEmpty(Person person) {
+        return person.getHand().getHandArrayList().size() == 0;
     }
 
     private void announceWinner(int winnerNumber) {
@@ -78,6 +83,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
         return 0;
     }
 
+    // Make private after testing / Make public for testing
     public void playerWins() {
         System.out.println("You won this round!");
         while (playerPlayedCards.size()!=0) {
@@ -89,6 +95,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
         System.out.println("You have " + player.getHand().getHandArrayList().size() + " cards and the dealer has " + dealer.getHand().getHandArrayList().size() + " cards");
     }
 
+    // Make private after testing / Make public for testing
     public void dealerWins() {
         System.out.println("You lost this round!");
         while (playerPlayedCards.size()!=0) {
@@ -100,6 +107,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
         System.out.println("You have " + player.getHand().getHandArrayList().size() + " cards and the dealer has " + dealer.getHand().getHandArrayList().size() + " cards");
     }
 
+    // Make private after testing / Make public for testing
     public void iDeclareWar() {
         System.out.println("I   D E C L A R E   W A R!");
         int amountOfPlayerAvailibleCards = checkNumberOfCards(player.getHand());
@@ -108,17 +116,25 @@ public class War extends Game implements GameInterface, CardGameInterface {
         iDeclareWarLogic(dealerPlayedCards, dealer, amountOfDealerAvailibleCards);
     }
 
+    // Make private after testing / Make public for testing
     public void iDeclareWarLogic(ArrayList<Card> playedCards, Person person, int amountOfCardsAvailable) {
-        if (amountOfCardsAvailable < 4) {
-            int cardsAvailableInteger = amountOfCardsAvailable;
-            for (int i = 0; i < cardsAvailableInteger-1; i++) {
-                playedCards.add(person.getHand().getHandArrayList().remove(i));
-            }
-        } else {
-            for (int i = 0; i < 4; i++) {
-                playedCards.add(person.getHand().getHandArrayList().remove(i));
-            }
+        for (int i = 0; i < decideOnHowManyTimesToIterateBasedOn(amountOfCardsAvailable); i++) {
+            playCardInHandForPerson(playedCards, person, i);
         }
+    }
+
+    // Make private after testing / Make public for testing
+    public int decideOnHowManyTimesToIterateBasedOn(int amountOfCardsAvailable) {
+        if(amountOfCardsAvailable <= 4) {
+            int cardsAvailableInteger = amountOfCardsAvailable;
+            return cardsAvailableInteger;
+        }
+        return 4;
+    }
+
+    // Make private after testing / Make public for testing
+    public void playCardInHandForPerson(ArrayList<Card> playedCards, Person person, int i) {
+        playedCards.add(person.getHand().getHandArrayList().remove(i));
     }
 
     public void dealCards() {
