@@ -49,7 +49,6 @@ public class GoFish extends CardGame {
         } while (goFishGame.getDeck().countRemainingCards() > 0 &&
                 goFishGame.user.getHand().getCards().size() > 0 &&
                 goFishGame.dealer.getHand().getCards().size() > 0);
-
     }
 
     public void playUserTurn() {
