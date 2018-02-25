@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Crazy8Play implements Game {
-    Crazy8sMenu start = new Crazy8sMenu();
+    private Crazy8sMenu start = new Crazy8sMenu();
     private ArrayList<Card> playersHand = new ArrayList<>();
     private ArrayList<Card> computerHand = new ArrayList<>();
     private Card matchThisCard;
-    boolean legalCard = false;
-    Deck deck = new Deck(); //get new deck to play with
+    private boolean legalCard = false;
+    private boolean legalCardComputer = false;
+    private Deck deck = new Deck(); //get new deck to play with
 
 
     public Crazy8Play() {
@@ -44,44 +45,51 @@ public class Crazy8Play implements Game {
 
         //check if any of the players cards match the DisplayCard
         legalCard(matchThisCard);
-        ///////
-        computeMatchesPlayer();
-
-        //check for empty hands
-
-        computeMatchesPlayer();
     }
 
     public void playerSelectCard(){
 
         int cardSelection = IOHandler.promptForIntWithMessage("Select which card you would like to play: ");
-        cardSelect(cardSelection);
-
+        if(playersHand.get(cardSelection).getRank().equals(matchThisCard.getRank())) {
+            cardSelect(cardSelection);
+        }else if (playersHand.get(cardSelection).getSuit().equals(matchThisCard.getSuit())) {
+            cardSelect(cardSelection);
+        } else if((playersHand.get(cardSelection).getRank().equals("EIGHT"))) {
+            cardSelect(cardSelection);
+        }else {
+            IOHandler.printMessage("That is not a legal play.");
+            playerSelectCard();
+        }
     }
 
     public void cardSelect(int cardSelection) {
         switch (cardSelection) {
             case 1:
+                matchThisCard = playersHand.get(1);
                 playersHand.remove(1);
-                displayPlayerHand();
                 break;
             case 2:
+                matchThisCard = playersHand.get(2);
                 playersHand.remove(2);
-                displayPlayerHand();
                 break;
             case 3:
+                matchThisCard = playersHand.get(3);
                 playersHand.remove(3);
                 break;
             case 4:
+                matchThisCard = playersHand.get(4);
                 playersHand.remove(4);
                 break;
             case 5:
+                matchThisCard = playersHand.get(5);
                 playersHand.remove(5);
                 break;
             case 6:
+                matchThisCard = playersHand.get(6);
                 playersHand.remove(6);
                 break;
             case 7:
+                matchThisCard = playersHand.get(7);
                 playersHand.remove(7);
                 break;
             default:
@@ -90,6 +98,10 @@ public class Crazy8Play implements Game {
         }
         isAnyHandEmpty();
         displayPlayerHand();
+        IOHandler.printMessage("\nThe NEW card to match is: \n");
+        displayCardToMatch();
+        IOHandler.printMessage("\n");
+        computersTurn();
     }
     public void isAnyHandEmpty(){
 
@@ -99,69 +111,93 @@ public class Crazy8Play implements Game {
     }
 
     private void computersTurn() {
-        //if the Player just played it now the computers turn
-        //vice versa!
+        legalCardComputer(matchThisCard);
+        computeMatchesComputer();
     }
 
     public void computeMatchesPlayer() {
-        if (legalCard == true) {
+        if (legalCard) {
             playerSelectCard();
-        } else
+        } else if (legalCard = false) {
             pickCard();
             computeMatchesPlayer();
+        }
     }
 
     public void computeMatchesComputer() {
-        if(legalCard == true) {
+        if(legalCardComputer) {
             //IF match (computerHand) force them to play match
             compPlayCard();
         }else {
             //IF NO MATCH (computerHand) force them to draw card
-            computerHand.add.deck.pull(1);
+            computerHand.add(deck.pull(1)[0]);
             computeMatchesComputer();
         }
     }
 
     public boolean legalCard(Card card) {
-    //check whether card matches suit, rank of pile or is eight
-        if (card.getRank().equals(8)) { //card is 8
-            System.out.println("You have an 8!");
-            return true;
-        } else if (card.getSuit().equals(matchThisCard.getSuit())) { //card matches suit
-            System.out.println("You have a matching suit");
-            return true;
-        } else if (card.getRank().equals(matchThisCard.getRank())) { //card matches rank
-            System.out.println("You have a matching Rank");
-            legalCard = true;
+        //check whether card matches suit, rank of pile or is eight
+        for (int i = 0; i < playersHand.size(); i++) {
+            if (playersHand.get(i).toString().equalsIgnoreCase(("EIGHT"))) { //card is 8matchThisCard =
+                System.out.println("You have an EIGHT");
+                legalCard = true;
+                computeMatchesPlayer();
+            } else if (playersHand.get(i).getSuit().equals(card.getSuit())) { //card matches suit
+                legalCard = true;
+                computeMatchesPlayer();
+            } else if (playersHand.get(i).getRank().equals(card.getRank())) { //card matches rank
+                legalCard = true;
+                computeMatchesPlayer();
+            }
+            legalCard = false;
         }
-        legalCard = false;
         return legalCard;
     }
 
-    private void compPlayCard() {
+        public boolean legalCardComputer (Card card) {
+            //check whether card matches suit, rank of pile or is eight
+            for (int i = 0; i < computerHand.size(); i++) {
+                if (computerHand.get(i).toString().equalsIgnoreCase(("EIGHT"))) { //card is 8matchThisCard =
+                    IOHandler.printMessage("You have an EIGHT");
+                    legalCardComputer = true;
+                    computeMatchesComputer();
+                } else if (computerHand.get(i).getSuit().equals(card.getSuit())) { //card matches suit
+                    legalCardComputer = true;
+                    computeMatchesComputer();
+                } else if (computerHand.get(i).getRank().equals(card.getRank())) { //card matches rank
+                    legalCardComputer = true;
+                    computeMatchesComputer();
+                }
+                legalCardComputer = false;
+            }
+            return legalCardComputer;
 
+        }
+
+    private void compPlayCard() {
+        //remove matching card from computers ahd
+        for(int i = 0; i < computerHand.size(); i++) {
+            if(computerHand.get(i).equals(matchThisCard)) {
+                matchThisCard = computerHand.get(i);
+                computerHand.remove(computerHand.get(i));
+            }
+        }
         isAnyHandEmpty();
-//        switchTurns();
+        IOHandler.printMessage("Computer has " + computerHand.size() + " cards in their hand\n");
+        displayPlayerHand();
+        IOHandler.printMessage("\n");
+        computeMatchesPlayer();
     }
 
     private void pickCard() {
 
         String userInput = IOHandler.promptForStringWithMessage("You don't have any cards to play. " +
-                                                                      "Press ANY key to pick up a card.");
-        if(userInput.equalsIgnoreCase(" ")) {
-            playersHand.addAll(deck.pull(1));
+                                                                      "Press X to pick up a card.");
+        if(userInput.equalsIgnoreCase("x")) {
+            playersHand.add(deck.pull(1)[0]);
         }
-    }
+        playersHand.add(deck.pull(1)[0]);
 
-    public void compPickCard(){
-
-        computerHand.add(deck.pull(1));
-    }
-
-    public void playersTurn(){
-
-        String userInput = IOHandler.promptForStringWithMessage("Do you want to play again? [Y/N]");
-        handleInput(userInput);
     }
 
     public void dealCards() {
