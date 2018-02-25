@@ -41,6 +41,9 @@ public class Crazy8Play implements Game {
 
     public void cardSelect(int cardSelection){
     //take the selected card and make it the NEW cardToMatch
+        if(cardSelection.getSuit == 8) {
+
+        }
         if(emptyHand(1) || emptyHand(2)) {
             decideWinner();
         }
