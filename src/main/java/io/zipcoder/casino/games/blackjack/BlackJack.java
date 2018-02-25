@@ -8,7 +8,6 @@ import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class BlackJack implements Game {
@@ -68,8 +67,8 @@ public class BlackJack implements Game {
 
 
         for (int i = 0; i < 2; i++){
-            playerValue.add(playingDeck.pull(1)[0]);
-            dealerValue.add(playingDeck.pull(1)[0]);
+            playerValue.add(playingDeck.pullMany(1)[0]);
+            dealerValue.add(playingDeck.pullMany(1)[0]);
         }
 
         getPlayerCardValue();
@@ -209,7 +208,7 @@ public class BlackJack implements Game {
         Deck playingDeck = new Deck();
         while (dealerHandScore < 17){
             System.out.println("The drunken dealer does some weird shit...\n");
-            dealerValue.add(playingDeck.pull(1)[0]);
+            dealerValue.add(playingDeck.pullMany(1)[0]);
             dealerHandScore = getDealerCardValue();
         }
         if (dealerHandScore > 21){
@@ -229,7 +228,7 @@ public class BlackJack implements Game {
             String prompt = "Do you want to hit or stand?\n";
             output = IOHandler.promptForStringWithMessage(prompt);
             if (output.equalsIgnoreCase("hit")) {
-                playerValue.add(playingDeck.pull(1)[0]);
+                playerValue.add(playingDeck.pullMany(1)[0]);
                 playerHandScore = getPlayerCardValue();
                 System.out.println("You have: " + playerHandScore);
             }
@@ -250,7 +249,7 @@ public class BlackJack implements Game {
             String prompt = "Do you want to hit or stand?\n";
             output = IOHandler.promptForStringWithMessage(prompt);
             if (output.equalsIgnoreCase("hit")) {
-                playerValue.add(playingDeck.pull(1)[0]);
+                playerValue.add(playingDeck.pullMany(1)[0]);
                 playerHandScore = getPlayerCardValue() + 10;
                 System.out.println("You have: " + playerHandScore);
             }
@@ -311,7 +310,7 @@ public class BlackJack implements Game {
             String prompt = "Do you want to hit or stand your left hand?\n";
             output = IOHandler.promptForStringWithMessage(prompt);
             if (output.equalsIgnoreCase("hit")) {
-                splitHandLeft.add(playingDeck.pull(1)[0]);
+                splitHandLeft.add(playingDeck.pullMany(1)[0]);
                 splitHandScoreLeft = playerLeftHandScore();
                 System.out.println("Your left hand has: " + splitHandScoreLeft);
             }
@@ -337,7 +336,7 @@ public class BlackJack implements Game {
             String prompt = "Do you want to hit or stand your right hand?\n";
             output = IOHandler.promptForStringWithMessage(prompt);
             if (output.equalsIgnoreCase("hit")) {
-                splitHandRight.add(playingDeck.pull(1)[0]);
+                splitHandRight.add(playingDeck.pullMany(1)[0]);
                 splitHandScoreRight = playerRightHandScore();
                 System.out.println("Your right hand has: " + splitHandScoreRight);
             }

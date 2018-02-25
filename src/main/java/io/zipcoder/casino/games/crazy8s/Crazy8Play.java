@@ -24,9 +24,9 @@ public class Crazy8Play implements Game {
 //        Deck deck = new Deck(); //get new deck to play with
 //        int handSize = 8;
 //
-//        playersHand = deck.pull(handSize);   //deal playersHand
-//        computer = deck.pull(handSize); //and computer's hand
-//        matchThisCard = deck.pull(1); //show one card from face down Deck
+//        playersHand = deck.pullMany(handSize);   //deal playersHand
+//        computer = deck.pullMany(handSize); //and computer's hand
+//        matchThisCard = deck.pullMany(1); //show one card from face down Deck
 //
 //        while (!emptyHand(1) && !emptyHand(2))
 //        //while the playersHand and computers hands aren't empty
