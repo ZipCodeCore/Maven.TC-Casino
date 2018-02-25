@@ -18,6 +18,13 @@ public class Blackjack implements Game{
     protected int betAmount = 0;
     protected boolean titleSplash = true;
 
+    public Blackjack(Player entryPlayer){
+        deck = new Deck();
+        bkjkDealer = new Dealer();
+        player = new BlackjackPlayer(entryPlayer);
+        System.out.println("Howdy, pardners.");
+    }
+
     public void startGame(){
         do {
             splash();
@@ -54,17 +61,14 @@ public class Blackjack implements Game{
                             "|  .-.  \\  |   |  .-.  ||  |    |  .   ',--. |  |  .-.  ||  |    |  .   '                                                         \n" +
                             "|  '--' /  '--.|  | |  |'  '--'\\|  |\\   \\  '-'  /  | |  |'  '--'\\|  |\\   \\                                                        \n" +
                             "`------'`-----'`--' `--' `-----'`--' '--'`-----'`--' `--' `-----'`--' '--'");
-            System.out.println(
-                    "                  _               _   _     _                    _          \n" +
-                    "                 | |             | | | |   (_)                  | |         \n" +
-                    "   __ _ _ __   __| |  _ __   ___ | |_| |__  _ _ __   __ _    ___| |___  ___ \n" +
-                    "  / _` | '_ \\ / _` | | '_ \\ / _ \\| __| '_ \\| | '_ \\ / _` |  / _ | / __|/ _ \\\n" +
-                    " | (_| | | | | (_| | | | | | (_) | |_| | | | | | | | (_| | |  __| \\__ |  __/\n" +
-                    "  \\__,_|_| |_|\\__,_| |_| |_|\\___/ \\__|_| |_|_|_| |_|\\__, |  \\___|_|___/\\___|\n" +
-                    "                                                     __/ |                  \n" +
-                    "                                                    |___/                   ");
-            this.titleSplash = false;
+            System.out.println("  ___  __  __ ____      __  __   ___   ______ __  __ __ __  __   ___      ____ __     __   ____\n" +
+                    " // \\\\ ||\\ || || \\\\     ||\\ ||  // \\\\  | || | ||  || || ||\\ ||  // \\\\    ||    ||    (( \\ ||   \n" +
+                    " ||=|| ||\\\\|| ||  ))    ||\\\\|| ((   ))   ||   ||==|| || ||\\\\|| (( ___    ||==  ||     \\\\  ||== \n" +
+                    " || || || \\|| ||_//     || \\||  \\\\_//    ||   ||  || || || \\||  \\\\_||    ||___ ||__| \\_)) ||___\n" +
+                    "                                                                                               ");
         }
+            this.titleSplash = false;
+
     }
 
     public void pregameReset() {
@@ -78,20 +82,14 @@ public class Blackjack implements Game{
         System.out.println("See you 'round, pardner.");
     }
 
-    public Blackjack(Player entryPlayer){
-        deck = new Deck();
-        bkjkDealer = new Dealer();
-        player = new BlackjackPlayer(entryPlayer);
-        System.out.println("Howdy, pardners.");
-    }
-
     public void runTurn(){
         System.out.println("Suffle up 'n deal!");
         for (Card card:player.getHand()) {
-            System.out.println("You got " + card.toString());
+            System.out.println("You got\n" + card.toCardArt());
         }
         System.out.println("Ante up! 10 chips in the pot");
-        System.out.println("Dealer holding " + this.bkjkDealer.getHand().get(0).toString() + " and one hidden card.");
+        System.out.println("" +
+                "===========================\nDealer holding \n" + this.bkjkDealer.getHand().get(0).toCardArt() + "\nand one hidden card.");
         setBetAmount(10);
         promptBet();
         boolean hitchoice = playerHitOption();
@@ -149,22 +147,20 @@ public class Blackjack implements Game{
     }
 
     public Boolean playerHitOption() {
-        StringBuilder currentHand = new StringBuilder("| ");
-        for (Card card : player.getHand()) {
-            currentHand.append(card.toString() + " | ");
-        }
-        Boolean x = runPlayerHit(currentHand, player);
+        makeCardArt(player);
+        Boolean x = runPlayerHit(player);
         if (x != null) return x;
         return x;
     }
 
-    private Boolean runPlayerHit(StringBuilder currentHand, BlackjackPlayer player) {
+    private Boolean runPlayerHit(BlackjackPlayer player) {
         while (player.isCanHit()) {
             if (player.getHandValue() > 21){
-                System.out.println("Can't let ya do that!");
+                System.out.println(makeCardArt(player) + "\nYou bust! Tough luck pal.");
                 break;
             }
-            System.out.println("You're holding: " + currentHand + "\nWill you hit?\n1 for YES, 2 for NO");
+            System.out.println(makeCardArt(player));
+            System.out.println("\nWill you hit?\n1 for YES, 2 for NO");
             String userChoice;
             InputOutput inputOutput = new InputOutput();
             userChoice = inputOutput.scanForString();
@@ -175,6 +171,14 @@ public class Blackjack implements Game{
             } else if (userChoice.equals("smalltalk")) smallTalk();
         }
         return false;
+    }
+
+    private StringBuilder makeCardArt(BlackjackPlayer player) {
+        StringBuilder hand = new StringBuilder();
+        for (Card card : player.getHand()) {
+            hand.append(card.toCardArt() + "\n");
+        }
+        return hand;
     }
 
     public void setPlaying(boolean playing) {
@@ -216,8 +220,9 @@ public class Blackjack implements Game{
 
     public void promptBet(){
         InputOutput inputOutput = new InputOutput();
-        int betChoice = inputOutput.promptForInt("Care to bet?\n1 for YES, 2 for NO");
-        if (betChoice == 1) betProcess();
+        String betChoice = inputOutput.promptForString("Care to bet?\n1 for YES, 2 for NO");
+        if (betChoice.equals("1")) betProcess();
+        else if (betChoice.equals("smalltalk")) smallTalk();
     }
 
     public void betProcess(){
@@ -252,8 +257,8 @@ public class Blackjack implements Game{
 
     public void secret(){
         InputOutput inputOutput = new InputOutput();
-        String credential = inputOutput.promptForString("ENTER HOST NAME");
-        if (credential.toLowerCase().equals("bernard") || credential.toLowerCase().equals("maeve")) {
+        String credential = inputOutput.promptForString("ENTER ADMIN USER NAME");
+        if (credential.equals("admin")) {
             System.out.println("These violent delights have violent ends.");
             BJKJSecret secret = new BJKJSecret();
             secret.start(this.player);
@@ -281,7 +286,7 @@ public class Blackjack implements Game{
 
     public void selfActualization(){
         System.out.println("Is it finally time?");
-        ConciousnessPath newpath = new ConciousnessPath();
+        ConciousnessPath newpath = new ConciousnessPath(player);
         newpath.start();
     }
 

@@ -10,8 +10,19 @@ public class BJKJSecret {
 
     public void start(BlackjackPlayer player){
         currentPlayer = player;
+        password();
         displayMenu();
+    }
 
+    public void password(){
+        boolean password = false;
+        do {
+            InputOutput scan = new InputOutput();
+            String passwordCrack = scan.promptForString("ENTER PASSWORD");
+            if (passwordCrack.toLowerCase().equals("password")){
+                password = true;
+            }
+        } while (password == false);
     }
 
     public void displayMenu(){
@@ -25,23 +36,26 @@ public class BJKJSecret {
                         "- TROUBLESHOOT\n" +
                         "- MARKFORRECALL\n"
         );
-        InputOutput scan = new InputOutput();
-        String command = scan.scanForString();
-        navigateMain(command.toLowerCase());
+        navigateMain();
 
     }
 
-    public void navigateMain(String command){
-        switch (command){
+    public void navigateMain(){
+        boolean passThrough = false;
+        do {
+            InputOutput scan = new InputOutput();
+            String command = scan.scanForString();
+        switch (command) {
             case "dialoguetree":
                 System.out.println("IS - THIS - A - WESTWORLD - REFERENCE");
                 break;
             case "attributematrix":
                 System.out.println("OPENING: ATTR MATRIX INTERFACE");
+                passThrough = true;
                 attributeMatrix();
                 break;
             case "scanprotocol":
-                System.out.println("no");
+                System.out.println("ERROR - UNIT UNAVAILABLE FOR DIAGNOSTIC");
                 break;
             case "locate":
                 System.out.println("ERROR - UNABLE TO LOCATE UNIT");
@@ -50,9 +64,10 @@ public class BJKJSecret {
                 System.out.println("ERROR - UNAVAILABLE WHILE UNIT OFF CAMPUS");
                 break;
 
-                default:
-                    System.out.println("INVALID COMMAND");
+            default:
+                System.out.println("INVALID COMMAND");
         }
+        } while (passThrough == false);
     }
 
     public void attributeMatrix(){
