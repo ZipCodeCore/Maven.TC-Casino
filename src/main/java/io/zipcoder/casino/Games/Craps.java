@@ -6,15 +6,15 @@ import io.zipcoder.casino.Players.CrapsPlayer;
 
 
 public class Craps extends Dice implements Game {
-    CrapsPlayer crapsPlayer = new CrapsPlayer();
-    InputOutput inputOutput = new InputOutput();
+    private CrapsPlayer crapsPlayer = new CrapsPlayer();
+    private InputOutput inputOutput = new InputOutput();
     private Integer playerBetAmount = 0;
-    private Integer betUserPlaces;
-    private Integer dieValue;
     private Integer playerDecision = 1;
+    private Integer betUserPlaces = 0;
+
 
     public Integer userPlacesBet() {
-        System.out.println("Hello! " + crapsPlayer.getName());
+        System.out.println("Hello!");
         String askUserBet = "Please press\n 1 for Pass Line\n 2 for Don't Pass Line";
         Integer betUserPlaces = inputOutput.promptForInt(askUserBet);
         return betUserPlaces;
@@ -31,8 +31,8 @@ public class Craps extends Dice implements Game {
         return dieValue;
     }
 
-    public void passLineWin(Integer betUserPlaces, Integer dieValue) {
-        if (betUserPlaces == 1 && dieValue == 7 || dieValue == 11) {
+    public void passLineWin() {
+        if (userPlacesBet() == 1 && addDiceValuesTogether() == 7 || addDiceValuesTogether() == 11) {
 
             System.out.println("You Win!");
             addFundsToWallet();
@@ -41,8 +41,8 @@ public class Craps extends Dice implements Game {
         }
     }
 
-    public String passLineLose(Integer betUserPlaces, Integer dieValue) {
-        if (betUserPlaces == 1 && dieValue == 2 || dieValue == 3 || dieValue == 12) {
+    public String passLineLose() {
+        if (userPlacesBet() == 1 && addDiceValuesTogether() == 2 || addDiceValuesTogether() == 3 || addDiceValuesTogether() == 12) {
 
             System.out.println("You Lose!");
             takeFundsFromWallet();
@@ -51,16 +51,27 @@ public class Craps extends Dice implements Game {
         return null;
     }
 
-    public String passLineBetRollNonWinLoseNumber(Integer betUserPlaces, Integer dieValue) {
-        //Roll dice while the value is not a win or lose value(Do while loop)
+    public String passLineBetRollsNonWinOrLoseNumber() {
+
         do {
             rollDice();
-        } while (dieValue != 7 || dieValue != dieValue);
+        } while (addDiceValuesTogether() != 7 || addDiceValuesTogether() != addDiceValuesTogether());
+
+        if (addDiceValuesTogether() == 7) {
+            System.out.println("You Lose!");
+            takeFundsFromWallet();
+            willUserPlayAgain();
+        } else if (addDiceValuesTogether() == addDiceValuesTogether()) {
+
+            System.out.println("You Win!");
+            addFundsToWallet();
+            willUserPlayAgain();
+        }
         return null;
     }
 
     public String dontPassLineWin() {
-        if (betUserPlaces == 2 && dieValue == 2 || dieValue == 3) {
+        if (userPlacesBet() == 2 && addDiceValuesTogether() == 2 || addDiceValuesTogether() == 3) {
 
             System.out.println("You Win!");
             addFundsToWallet();
@@ -71,7 +82,7 @@ public class Craps extends Dice implements Game {
     }
 
     public String dontPassLineLose() {
-        if (betUserPlaces == 2 && dieValue == 7 || dieValue == 11) {
+        if (userPlacesBet() == 2 && addDiceValuesTogether() == 7 || addDiceValuesTogether()== 11) {
 
             System.out.println("You Lose!");
             takeFundsFromWallet();
@@ -80,11 +91,22 @@ public class Craps extends Dice implements Game {
         return null;
     }
 
-    public String dontPassLineBetRollNonWinLoseNumber(Integer betUserPlaces, Integer dieValue) {
-        //Roll dice while the value is not a win or lose value(Do while loop)
+    public String dontPassLineBetRollNonWinLoseNumber() {
+
         do {
             rollDice();
-        } while (dieValue != 7 || dieValue != dieValue);
+        } while (addDiceValuesTogether() != 7 || addDiceValuesTogether()!= addDiceValuesTogether());
+
+        if (addDiceValuesTogether()== 7) {
+            System.out.println("You Win!");
+            addFundsToWallet();
+            willUserPlayAgain();
+        } else if (addDiceValuesTogether() == addDiceValuesTogether()) {
+            System.out.println("You Lose!");
+            takeFundsFromWallet();
+            willUserPlayAgain();
+        }
+
         return null;
     }
 
@@ -107,20 +129,14 @@ public class Craps extends Dice implements Game {
 
     public void startGame() {
         do {
-            this.userPlacesBet();
+           userPlacesBet();
 
-        } while (willUserPlayAgain() == 1);
-// take in user passlineWin if they say yes
+        } while (playerDecision == 1);
+
+
     }
 
     public void endGame() {
-        // take in passLineWin answer if they say no
-        // no == 2;
-        // in tests will be expected System.out.println(I hope you had fun! Thank You!");
-    }
-
-    public void returnToMainMenu() {
-        //end game and go to different menu
-        //
+       String goodbye = "Thank you for playing!";
     }
 }

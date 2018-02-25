@@ -18,9 +18,9 @@ public class Casino {
     private boolean isPlaying = true;
 
     protected String askUserName(){
-        //String name = inputOutput.promptForString("Hello Player! What is your name?");
-        //return name;
-        return null;
+        String name = inputOutput.promptForString("Hello Player! What is your name?");
+        return name;
+
     }
 
     protected Integer askUserAge(){
