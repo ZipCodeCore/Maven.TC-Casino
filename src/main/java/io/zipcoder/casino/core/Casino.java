@@ -5,10 +5,8 @@ import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
 public class Casino {
-    static int answer;
-    private static Player player;
-    private static Game currentGameRunning;
-    private boolean isPlaying = true;
+    private Player player;
+    private Game currentGameRunning;
 
     public Casino() {
         this.player = player;
@@ -16,15 +14,16 @@ public class Casino {
 
 
     public void enter() {
-
-        gameLobbyMenu();
+        this.player = new Player();
     }
+
 
     public void gameLobbyMenu() {
 
         int userInput = IOHandler.promptForIntWithMessage(runWelcomeMenu());
         handleInput(userInput);
     }
+
 
     public String runWelcomeMenu() {
 
@@ -62,20 +61,23 @@ public class Casino {
 
     public Game changeGameState(int answer) {
 
-            switch (answer) {
-                case 1:
-//                    currentGameRunning = (Game) new BlackJack();
-                    break;
-                case 2:
-                    currentGameRunning = new Crazy8Play();
-                    break;
-                case 3:
-//                    currentGameRunning = (Game) new CeeLoGamble();
-                    break;
-                case 4:
-//                    currentGameRunning = (Game) new Roulette();
-                    break;
-            }
+        switch (answer) {
+            case 1:
+//                currentGameRunning = new BlackJack();
+                break;
+            case 2:
+                currentGameRunning = new Crazy8Play();
+                break;
+            case 3:
+//                currentGameRunning = new CeeLo();
+                break;
+            case 4:
+//                currentGameRunning = new Roulette();
+                break;
+            case 5:
+                goodBye();
+
+        }
         return currentGameRunning;
     }
 

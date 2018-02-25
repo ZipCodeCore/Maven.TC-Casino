@@ -1,5 +1,8 @@
 package io.zipcoder.casino.games;
 
+import io.zipcoder.casino.games.Card;
+import io.zipcoder.casino.games.Rank;
+import io.zipcoder.casino.games.Suit;
 import org.junit.Assert;
 import org.junit.Test;
 

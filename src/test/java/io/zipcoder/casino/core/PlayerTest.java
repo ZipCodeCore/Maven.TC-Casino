@@ -1,5 +1,6 @@
 package io.zipcoder.casino.core;
 
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,7 +9,7 @@ public class PlayerTest {
 
     @Test
     public void canCoverBetTest() {
-        Integer bet = 10;
+        Long bet = 10l;
         Boolean actual = player.canCoverBet(bet);
         Assert.assertTrue(actual);
     }
