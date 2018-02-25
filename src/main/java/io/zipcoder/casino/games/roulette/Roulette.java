@@ -46,7 +46,6 @@ public class Roulette implements Game{
      */
 
     public void play(Player player) {
-        this.player = player;
         runWelcome();
         try {
             mainLoop();
@@ -199,7 +198,7 @@ public class Roulette implements Game{
         Integer winningNumber = rouletteBoardAndWheel.generateWinningNumber();
         System.out.println("\n\n\n\n\n\nThe winning number is... \n\n" + winningNumber + "\n\n");
 
-        Integer earnings = rouletteGamble.getEarnings(bettingMap, winningNumber);
+        Integer earnings = rouletteGamble.win(bettingMap, winningNumber);
         Integer losses = rouletteGamble.getLosses(bettingMap, winningNumber);
         Integer difference = earnings - losses;
         if(difference > 0) {
