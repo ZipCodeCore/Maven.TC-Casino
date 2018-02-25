@@ -23,7 +23,7 @@ public class Deck {
     }
 
     /**
-     * check for a specific card in the deck (mainly for testing pull/remove)
+     * check for a specific card in the deck (mainly for testing pullMany/remove)
      *
      * @param card the card to search for
      * @return true if the card is still in the deck
@@ -33,7 +33,7 @@ public class Deck {
     }
 
     /**
-     * remove a card from the deck, abstracted from pull()
+     * remove a card from the deck, abstracted from pullMany()
      *
      * @param card the card to remove
      */
@@ -43,7 +43,7 @@ public class Deck {
 
     /**
      * draw and return a single card. use Random to simulate a shuffled deck.
-     * If trying to pull a card from an empty deck, returns null
+     * If trying to pullMany a card from an empty deck, returns null
      * TODO: discuss
      *
      * @return a card from a pseudo-randomly chosen index
@@ -64,7 +64,7 @@ public class Deck {
      * @param numberOfCards how many cards to remove
      * @return an array containing the pulled cards
      */
-    public Card[] pull(int numberOfCards) {
+    public Card[] pullMany(int numberOfCards) {
         numberOfCards = (numberOfCards > getCardsLeft()) ? getCardsLeft() : numberOfCards;
 
         Card[] ret = new Card[numberOfCards];
@@ -75,7 +75,7 @@ public class Deck {
 
     public Card[] pullFromFreshDeck(int cards) {
         shuffle();
-        return pull(cards);
+        return pullMany(cards);
     }
 
     public int getCardsLeft() {

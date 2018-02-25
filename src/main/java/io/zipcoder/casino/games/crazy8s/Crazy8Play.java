@@ -1,6 +1,4 @@
 package io.zipcoder.casino.games.crazy8s;
-
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import io.zipcoder.casino.core.Casino;
 import io.zipcoder.casino.core.Player;
 import io.zipcoder.casino.games.Card;
@@ -132,7 +130,7 @@ public class Crazy8Play implements Game {
             playerSelectCard();
         } else
             pickCard();
-            computeMatchesPlayer();
+        computeMatchesPlayer();
     }
 
     public void computeMatchesComputer() {
@@ -141,7 +139,7 @@ public class Crazy8Play implements Game {
             compPlayCard();
         }else {
             //IF NO MATCH (computerHand) force them to draw card
-            computerHand.add(deck.pull(1)[0]);
+            computerHand.add(deck.pull());
             computeMatchesComputer();
         }
     }
@@ -167,25 +165,25 @@ public class Crazy8Play implements Game {
         return legalCard;
     }
 
-        public boolean legalCardComputer (Card card) {
-            //check whether card matches suit, rank of pile or is eight
-            for (int i = 0; i < computerHand.size(); i++) {
-                if (computerHand.toString().contains("EIGHT")) { //card is 8
-                    legalCardComputer = true;
-                    computeMatchesComputer();
-                } else if (computerHand.get(i).getSuit().equals(card.getSuit())) { //card matches suit
-                    legalCardComputer = true;
-                    computeMatchesComputer();
-                } else if (computerHand.get(i).getRank().equals(card.getRank())) { //card matches rank
-                    legalCardComputer = true;
-                    computeMatchesComputer();
-                }
-                legalCardComputer = false;
+    public boolean legalCardComputer (Card card) {
+        //check whether card matches suit, rank of pile or is eight
+        for (int i = 0; i < computerHand.size(); i++) {
+            if (computerHand.toString().contains("EIGHT")) { //card is 8
+                legalCardComputer = true;
+                computeMatchesComputer();
+            } else if (computerHand.get(i).getSuit().equals(card.getSuit())) { //card matches suit
+                legalCardComputer = true;
+                computeMatchesComputer();
+            } else if (computerHand.get(i).getRank().equals(card.getRank())) { //card matches rank
+                legalCardComputer = true;
                 computeMatchesComputer();
             }
-            return legalCardComputer;
-
+            legalCardComputer = false;
+            computeMatchesComputer();
         }
+        return legalCardComputer;
+
+    }
 
     private void compPlayCard() {
         //remove matching card from computers ahd
@@ -208,14 +206,14 @@ public class Crazy8Play implements Game {
     private void pickCard() {
 
         String userInput = IOHandler.promptForStringWithMessage("You don't have any cards to play. " +
-                                                                      "Press X to pick up a card.");
+                "Press X to pick up a card.");
         if(userInput.equalsIgnoreCase("x")) {
-            playersHand.add(deck.pull();
+            playersHand.add(deck.pull());
             IOHandler.printMessage("\nThe card to match is:");
             displayCardToMatch();
             legalCard(matchThisCard);
         }
-        playersHand.add(deck.pull(1)[0]);
+        playersHand.add(deck.pull());
         displayPlayerHand();
         legalCard(matchThisCard);
 
@@ -226,9 +224,9 @@ public class Crazy8Play implements Game {
 
         deck.shuffle();
 
-        playersHand.addAll(Arrays.asList(deck.pull(handSize)));   //deal playersHand
-        computerHand.addAll(Arrays.asList(deck.pull(handSize))); //and computerHand's hand
-        matchThisCard = deck.pull(1)[0]; //show one card from face down Deck
+        playersHand.addAll(Arrays.asList(deck.pullMany(handSize)));   //deal playersHand
+        computerHand.addAll(Arrays.asList(deck.pullMany(handSize))); //and computerHand's hand
+        matchThisCard = deck.pull(); //show one card from face down Deck
     }
 
     public void displayPlayerHand() {
@@ -245,18 +243,18 @@ public class Crazy8Play implements Game {
     }
 
     public boolean emptyHand(int whichHand){
-    {
-        Card[] hand;
-        if (whichHand == 1) {
-            hand = playersHand.toArray(new Card[0]);
-        } else {
-            hand = computerHand.toArray(new Card[0]);
+        {
+            Card[] hand;
+            if (whichHand == 1) {
+                hand = playersHand.toArray(new Card[0]);
+            } else {
+                hand = computerHand.toArray(new Card[0]);
+            }
+            if (hand.length > 0) {
+                return false;
+            }
+            return true;
         }
-        if (hand.length > 0) {
-            return false;
-        }
-        return true;
-    }
 
     }
     public void decideWinner() {

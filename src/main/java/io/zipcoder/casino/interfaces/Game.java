@@ -17,7 +17,7 @@ public interface Game {
     String runWelcome();
 
     /**
-     * Makes it so that every game has a way to pull up the rules for the game.
+     * Makes it so that every game has a way to pullMany up the rules for the game.
      *
      * @return rules
      */

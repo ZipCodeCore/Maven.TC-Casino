@@ -7,7 +7,7 @@ public class HandTest {
     @Test
     public void emptyHandTest() {
         Deck hand = new Deck();
-        hand.pull(1);
+        hand.pullMany(1);
 
     }
 }
