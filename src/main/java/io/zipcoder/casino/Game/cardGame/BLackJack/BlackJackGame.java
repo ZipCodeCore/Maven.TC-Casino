@@ -8,6 +8,7 @@ import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
+import io.zipcoder.casino.TypeOfBet;
 
 public class BlackJackGame extends CardGame {
     BlackJackPlayer player;
@@ -36,11 +37,11 @@ public class BlackJackGame extends CardGame {
         for (int i = 0; i < 2; i++) {
             temp = deck.getCard();
             player.getHand().addCard(deck.getCard());
-            currentScore(temp, player);
+            updateScore(temp, player);
 
             temp = deck.getCard();
             dealer.getHand().addCard(temp);
-            currentScore(temp, dealer);
+            updateScore(temp, dealer);
         }
 
         Console.print(player.getHand().showHand());
@@ -66,15 +67,17 @@ public class BlackJackGame extends CardGame {
         Card cardToAdd = deck.getCard();
         thePlayer.getHand().addCard(cardToAdd);
 
-        String currentScore = String.valueOf(currentScore(cardToAdd, thePlayer));
+        String currentScore = String.valueOf(updateScore(cardToAdd, thePlayer));
         Console.print(currentScore);
         //player.getIsBusted();
      return currentScore;
     }
 
-    public void stand() {
-     //dealer.isCurrentPlayer();
+    public boolean stand() {
+        player.isCurrentPlayer();
 
+
+        return false;
     }
 
     public void split(){
@@ -88,7 +91,7 @@ public class BlackJackGame extends CardGame {
      * @param thePlayer
      * @return
      */
-    public int currentScore(Card cardToScore, BlackJackPlayer thePlayer) {
+    public int updateScore(Card cardToScore, BlackJackPlayer thePlayer) {
         int cardValue = cardToScore.getRank().getCardValue();
         int updateScore = thePlayer.getScore() + cardValue;
         thePlayer.setScore(updateScore);
@@ -105,7 +108,6 @@ public class BlackJackGame extends CardGame {
 
 
     public void dealerBehavior() {
-
     }
 
     public String showDealersFaceCard() {
@@ -123,6 +125,35 @@ public class BlackJackGame extends CardGame {
 
         return playerActions;
     }
+
+    public boolean placeBet(TypeOfBet betType, BlackJackPlayer currentPlayer) {
+        Double betAmount;
+        boolean keepRunning = true;
+        do {
+           // Console.print(bar);
+            Console.print("Your current balance is: $" + currentPlayer.getProfile().getAccountBalance());
+            Console.print("How much would you like to bet?");
+            betAmount = Console.getDouble();
+            if(betAmount >=0 && betAmount<0.01){
+                Console.print("Cannot bet fractions of a cent.  Please enter a valid bet");
+            }
+            else if(betAmount >=0){
+                keepRunning = false;
+            }
+            else if(betAmount == -0.001){
+                continue;
+            }
+            else if(betAmount <0){
+                Console.print("Cannot bet negative values.  Please enter a valid bet");
+            }
+        }
+        while(keepRunning);
+        boolean wasBetPlaced = currentPlayer.bet(betType, betAmount);
+        //Console.print(bar);
+        //Console.print();
+        return wasBetPlaced;
+    }
+
 
 
     @Override
