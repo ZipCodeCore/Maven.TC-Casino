@@ -15,6 +15,7 @@ public class CrapsGame extends DiceGame {
     boolean isComeOutPhase = true;
     private CrapsPlayer currentPlayer;
     private boolean newRound = true;
+    private boolean hardRoll = false;
 
 
     public CrapsGame(Profile profile) {
@@ -38,23 +39,36 @@ public class CrapsGame extends DiceGame {
             Console.print("You rolled a Natural");
             if(roll == 7){
                 this.comePointPayout(roll);
+                this.hardWayPayouts(roll);
                 this.dontComePointPayout(roll);
+                this.bigSixPayout(roll);
+                this.bigEightPayout(roll);
+                this.oneRollBetPayouts(roll);
             }
+            this.oneRollBetPayouts(roll);
             this.rollIsNaturalPayout();
             this.newRound = true;
+            this.hardRoll = false;
             this.turn();
         } else if (isCraps(roll)) {
             Console.print("You rolled Craps");
+            this.oneRollBetPayouts(roll);
             this.rollIsCrapsPayout(roll);
             this.newRound = true;
+            this.hardRoll = false;
             this.turn();
         } else {
             this.point = roll;
+            this.hardWayPayouts(roll);
+            this.oneRollBetPayouts(roll);
             this.comePointPayout(roll);
             this.dontComePointPayout(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
             Console.print("The game is entering the Point phase");
             Console.print("The point is set to: [" + this.point +"]");
             this.isComeOutPhase = false;
+            this.hardRoll = false;
             this.turn();
         }
     }
@@ -67,10 +81,14 @@ public class CrapsGame extends DiceGame {
         this.printDontComePoints();
         int roll = this.getRollValue();
         if (roll == this.point) {
+            this.oneRollBetPayouts(roll);
+            this.hardWayPayouts(roll);
             this.passLinePayout();
             this.dontComePointPayout(roll);
             this.comePointPayout(roll);
             this.newComePoint(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
 
             if(currentPlayer.hasOdds() && currentPlayer.isPassLine()){
                 this.passLineOddsPayout(roll);
@@ -84,12 +102,17 @@ public class CrapsGame extends DiceGame {
             this.newRound = true;
             Console.print("The game is entering the Come Out Phase");
             this.isComeOutPhase = true;
+            this.hardRoll = false;
             this.turn();
         } else if (roll == 7) {
+            this.oneRollBetPayouts(roll);
+            this.hardWayPayouts(roll);
             this.doNotPassPayout();
             this.comeNaturalPayout(roll);
             this.comePointPayout(roll);
             this.dontComePointPayout(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
 
             if(currentPlayer.hasOdds() && !currentPlayer.isPassLine()){
                 this.doNotPassOddsPayout(this.point);
@@ -103,18 +126,29 @@ public class CrapsGame extends DiceGame {
             this.newRound = true;
             Console.print("The game is entering the Come Out Phase");
             this.isComeOutPhase = true;
+            this.hardRoll = false;
             this.turn();
         }
         else if(!isCraps(roll) && roll != 11){
+            this.oneRollBetPayouts(roll);
+            this.hardWayPayouts(roll);
             this.comePointPayout(roll);
             this.dontComePointPayout(roll);
             this.newComePoint(roll);
             this.newDontComePoint(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
+            this.hardRoll = false;
             this.turn();
         }
         else {
+            this.oneRollBetPayouts(roll);
+            this.hardWayPayouts(roll);
             this.comeNaturalPayout(roll);
             this.doNotComeCrapsPayout(roll);
+            this.bigSixPayout(roll);
+            this.bigEightPayout(roll);
+            this.hardRoll = false;
             this.turn();
         }
     }
@@ -252,6 +286,46 @@ public class CrapsGame extends DiceGame {
                 }
                 break;
 
+            case "field":
+                betType = CrapsBet.FIELD;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setField(true);
+                }
+                break;
+
+            case "hard four":
+                betType = CrapsBet.HARD_FOUR;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setHardFour(true);
+                }
+                break;
+
+            case "hard six":
+                betType = CrapsBet.HARD_SIX;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setHardSix(true);
+                }
+                break;
+
+            case "hard eight":
+                betType = CrapsBet.HARD_EIGHT;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setHardEight(true);
+                }
+                break;
+
+            case "hard ten":
+                betType = CrapsBet.HARD_TEN;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setHardTen(true);
+                }
+                break;
+
             default:
                 Console.print(invalidInput);
                 Console.print(bar);
@@ -289,8 +363,13 @@ public class CrapsGame extends DiceGame {
         if(!this.isComeOutPhase && !currentPlayer.isCome()){
             bettingMenu.append("[Do Not Come]\n");
         }
-        bettingMenu.append("[Big Six}");
-        bettingMenu.append("[Big Eight]");
+        bettingMenu.append("[Big Six]\n");
+        bettingMenu.append("[Big Eight]\n");
+        bettingMenu.append("[Field]\n");
+        bettingMenu.append("[Hard Four]\n");
+        bettingMenu.append("[Hard Six]\n");
+        bettingMenu.append("[Hard Eight]\n");
+        bettingMenu.append("[Hard Ten]\n");
         return bettingMenu.toString();
     }
 
@@ -692,11 +771,191 @@ public class CrapsGame extends DiceGame {
     }
 
     public void bigSixPayout(int roll){
-
+        if(currentPlayer.isBigSix()){
+            if(roll == 6){
+                Console.print("You rolled a 6 before a 7!");
+                Console.print("Your Big Six bet pays even money!");
+                currentPlayer.win(CrapsBet.BIG_SIX, 1);
+                currentPlayer.setBigSix(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before a 6");
+                Console.print("Your Big Six bet loses");
+                currentPlayer.lose(CrapsBet.BIG_SIX);
+                currentPlayer.setBigSix(false);
+                Console.print(newBalance());
+            }
+        }
     }
 
     public void bigEightPayout(int roll){
+        if(currentPlayer.isBigEight()){
+            if(roll == 8){
+                Console.print("You rolled a 8 before a 7!");
+                Console.print("Your Big Eight bet pays even money!");
+                currentPlayer.win(CrapsBet.BIG_EIGHT, 1);
+                currentPlayer.setBigEight(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before a 8");
+                Console.print("Your Big Eight bet loses");
+                currentPlayer.lose(CrapsBet.BIG_EIGHT);
+                currentPlayer.setBigEight(false);
+                Console.print(newBalance());
+            }
+        }
 
+    }
+
+    public void fieldPayout(int roll){
+        if(currentPlayer.isField()){
+            if(roll == 2){
+                Console.print("Your Field bet pays 2:1 on a 2!");
+                currentPlayer.win(CrapsBet.FIELD,2);
+                currentPlayer.setField(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 3 || roll == 4 || roll == 9 || roll == 10 || roll == 11){
+                Console.print("Your Field bet pays even money on a " + roll + "!");
+                currentPlayer.win(CrapsBet.FIELD,1);
+                currentPlayer.setField(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 12){
+                Console.print("Your Field bet pays 3:1 on a 12!");
+                currentPlayer.win(CrapsBet.FIELD,3);
+                currentPlayer.setField(false);
+                Console.print(newBalance());
+            }
+            else{
+                Console.print("Your Field bet loses");
+                currentPlayer.lose(CrapsBet.FIELD);
+                currentPlayer.setField(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
+    public void hardFourPayout(int roll){
+        if (currentPlayer.isHardFour()){
+            if(this.hardRoll == true && roll == 4){
+                Console.print("You rolled a Hard Four!");
+                Console.print("Your Hard Four bet pays 7:1!");
+                currentPlayer.win(CrapsBet.HARD_FOUR,7);
+                currentPlayer.setHardFour(false);
+                Console.print(newBalance());
+            }
+            else if(this.hardRoll == false && roll == 4){
+                Console.print("A Soft Four came before a Hard Four");
+                Console.print("Your Hard Four bet loses");
+                currentPlayer.lose(CrapsBet.HARD_FOUR);
+                currentPlayer.setHardFour(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before a Hard Four");
+                Console.print("Your Hard Four bet loses");
+                currentPlayer.lose(CrapsBet.HARD_FOUR);
+                currentPlayer.setHardFour(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
+    public void hardSixPayout(int roll){
+        if (currentPlayer.isHardSix()){
+            if(this.hardRoll == true && roll == 6){
+                Console.print("You rolled a Hard Six!");
+                Console.print("Your Hard Six bet pays 9:1!");
+                currentPlayer.win(CrapsBet.HARD_SIX,9);
+                currentPlayer.setHardSix(false);
+                Console.print(newBalance());
+            }
+            else if(this.hardRoll == false && roll == 6){
+                Console.print("A Soft Six came before a Hard Six");
+                Console.print("Your Hard Six bet loses");
+                currentPlayer.lose(CrapsBet.HARD_SIX);
+                currentPlayer.setHardSix(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before a Hard Six");
+                Console.print("Your Hard Six bet loses");
+                currentPlayer.lose(CrapsBet.HARD_SIX);
+                currentPlayer.setHardSix(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
+    public void hardEightPayout(int roll){
+        if (currentPlayer.isHardEight()){
+            if(this.hardRoll == true && roll == 8){
+                Console.print("You rolled a Hard Eight!");
+                Console.print("Your Hard Eight bet pays 9:1!");
+                currentPlayer.win(CrapsBet.HARD_EIGHT,9);
+                currentPlayer.setHardEight(false);
+                Console.print(newBalance());
+            }
+            else if(this.hardRoll == false && roll == 8){
+                Console.print("A Soft Eight came before a Hard Eight");
+                Console.print("Your Hard Eight bet loses");
+                currentPlayer.lose(CrapsBet.HARD_EIGHT);
+                currentPlayer.setHardEight(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before a Hard Eight");
+                Console.print("Your Hard Eight bet loses");
+                currentPlayer.lose(CrapsBet.HARD_EIGHT);
+                currentPlayer.setHardEight(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
+    public void hardTenPayout(int roll){
+        if (currentPlayer.isHardTen()){
+            if(this.hardRoll == true && roll == 10){
+                Console.print("You rolled a Hard Ten!");
+                Console.print("Your Hard Ten bet pays 7:1!");
+                currentPlayer.win(CrapsBet.HARD_TEN,7);
+                currentPlayer.setHardTen(false);
+                Console.print(newBalance());
+            }
+            else if(this.hardRoll == false && roll == 10){
+                Console.print("A Soft Ten came before a Hard Ten");
+                Console.print("Your Hard Ten bet loses");
+                currentPlayer.lose(CrapsBet.HARD_TEN);
+                currentPlayer.setHardTen(false);
+                Console.print(newBalance());
+            }
+            else if(roll == 7){
+                Console.print("A 7 came before a Hard Ten");
+                Console.print("Your Hard Ten bet loses");
+                currentPlayer.lose(CrapsBet.HARD_TEN);
+                currentPlayer.setHardTen(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
+    public void hardWayPayouts(int roll){
+        this.hardFourPayout(roll);
+        this.hardSixPayout(roll);
+        this.hardEightPayout(roll);
+        this.hardTenPayout(roll);
+    }
+
+    public void oneRollBetPayouts(int roll){
+        this.fieldPayout(roll);
     }
 
 
@@ -708,8 +967,15 @@ public class CrapsGame extends DiceGame {
         for (int i : rawRoll) {
             sum += i;
         }
-        Console.print(Arrays.toString(rawRoll) + "\nYou rolled a " + sum);
+        Console.print(Arrays.toString(rawRoll) + "\n<<You rolled a [" + sum + "]>>");
+        if(rawRoll[0] == rawRoll[1]){
+            this.hardRoll = true;
+        }
         return sum;
+    }
+
+    public void setHardRoll(boolean input){
+        this.hardRoll = input;
     }
 
     public static boolean isCraps(int rollValue) {
