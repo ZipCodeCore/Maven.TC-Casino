@@ -74,6 +74,7 @@ public class PlayerTest {
         Assert.assertEquals(expected, actual);
 
     }
+
     @Test
     public void setBalanceTest() {
         Player player1 = new Player("Bob", 49, 100);

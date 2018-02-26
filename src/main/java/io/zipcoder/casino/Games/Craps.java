@@ -6,11 +6,13 @@ import io.zipcoder.casino.Players.CrapsPlayer;
 import io.zipcoder.casino.Players.Player;
 
 
+
 public class Craps extends Dice implements Game {
     private CrapsPlayer mainPlayer;
     private Integer betUserPlaces = 0;
     private Integer playerBetAmount = 0;
     private Integer playerDecision = 1;
+
 
     public Integer getPlayerBetAmount() {
         return playerBetAmount;
@@ -46,6 +48,7 @@ public class Craps extends Dice implements Game {
         Integer previousRoll = rollDice() + rollDice();
         return previousRoll;
     }
+
 
 
     protected void passLineBetTurnSequence(Integer previousRoll) {
