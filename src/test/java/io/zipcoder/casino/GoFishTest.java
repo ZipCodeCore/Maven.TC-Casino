@@ -98,12 +98,12 @@ public class GoFishTest {
 
         Card cardSend = new Card(Rank.SEVEN,Suit.CLUBS);
 
-        //int expected = 1;
-        //int actual = goFishTest.checkBookCount(7, playerBookTest);
+        String expected = "[A♠, 7♣, 7♦, 7♥, 7♠]";
+        String actual = playerBookTest.getHand().getHandArrayList().toString();
 
         System.out.println(playerBookTest.getHand().getHandArrayList());
 
-        //Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -112,10 +112,10 @@ public class GoFishTest {
 
         Card cardExpected = new Card(Rank.KING,Suit.SPADES);
 
-        //String expected = cardExpected.toString();
-        //String actual = goFishTest.goFishPlayer(player1Test).toString();
+        String expected = "K♠";
+        String actual = cardExpected.toString();
 
-       // Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class GoFishTest {
         GoFish goFishTest = new GoFish();
 
         int expected = 0;
-        int actual = goFishTest.checkNumberOfCards();
+        int actual = goFishTest.checkNumberOfCard();
 
         Assert.assertEquals(expected, actual);
     }
