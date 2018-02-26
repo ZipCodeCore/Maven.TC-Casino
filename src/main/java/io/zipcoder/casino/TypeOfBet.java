@@ -1,5 +1,4 @@
 package io.zipcoder.casino;
 
-
-public class CasinoTest {
+public interface TypeOfBet {
 }
