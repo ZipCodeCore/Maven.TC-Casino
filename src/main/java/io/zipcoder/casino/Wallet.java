@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Wallet {
@@ -32,8 +33,18 @@ public class Wallet {
         isGambling = in.nextLine();
         if(isGambling.equals("y")) {
             System.out.println("Please enter number of chips you would like to begin with");
-            walletAmount = in.nextInt();
+            walletAmount = getUserInput()
             addChipsToAmount(walletAmount);
+        }
+    }
+
+    private int getUserInput(){
+        Scanner in = new Scanner(System.in);
+        try {
+            return in.nextInt();
+        } catch (InputMismatchException e){
+            System.out.println("Input not recognized. Setting chips to 500.");
+            return 500;
         }
     }
 
