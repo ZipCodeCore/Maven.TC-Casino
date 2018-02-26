@@ -134,7 +134,7 @@ public class RoulettePrompts {
     //SingleNumberAdd
     public Integer singleNumberPrompt() {
         String prompt = "***************** Single Number ********************\n" +
-                "You selected to bet 1 chip on a single number space. \n" +
+                "You selected to bet 10 chips on a single number space. \n" +
                 "The payout for this bet is 35 to 1 if your \n" +
                 "selection is the winning number. \n\n";
         System.out.println(prompt);
@@ -152,7 +152,7 @@ public class RoulettePrompts {
     //On the line start
     public Integer[] onTheLine() {
         System.out.println("************* On The Line (2 numbers) **************\n" +
-                "You selected to bet 1 chip on two number spaces. \n" +
+                "You selected to bet 10 chips on two number spaces. \n" +
                 "The instructions are to choose one number out of\n" +
                 "two numbers that you want to select. For example,\n" +
                 "if you enter the number 2, the dealer will take\n" +
@@ -183,7 +183,7 @@ public class RoulettePrompts {
 
     public Integer[] corner() {
         String prompt = "********************* Corner **********************\n" +
-                "You selected to bet 1 chip on four number spaces.\n" +
+                "You selected to bet 10 chips on four number spaces.\n" +
                 "These 4 spaces are numbers at every side of the \n" +
                 "corner you want to select. You will enter the 1st\n" +
                 "corner number to enter your decision. For example, \n" +
@@ -212,7 +212,7 @@ public class RoulettePrompts {
 
     public Integer[] straight() {
         String prompt = "********************* Straight *********************\n" +
-                "You selected to bet 1 chip on three number spaces.\n" +
+                "You selected to bet 10 chips on three number spaces.\n" +
                 "These 3 spaces are numbers that lie in the same row. You will enter the 1st number in the row to make\n" +
                 "your decision For example, if I wanted to choose \n" +
                 "the row that contains 4, 5, and 6, I would enter the number 4. If any of those numbers win, the bet is\n" +
@@ -237,7 +237,7 @@ public class RoulettePrompts {
 
     public Integer[] basket() {
         String prompt = "********************* Basket *********************\n" +
-                "You selected to bet 1 chip on three number spaces.\n" +
+                "You selected to bet 10 chips on three number spaces.\n" +
                 "These 3 spaces are numbers 0, 00, and 2. The payout \n" +
                 "for this bet is 11 to 1 if your selection is the \n" +
                 "winning number. Press 'c' to continue and place bet.";
@@ -249,7 +249,7 @@ public class RoulettePrompts {
 
     public Integer[] fiveNumberBet() {
         String prompt = "***************** Five Number Bet *****************\n" +
-                "You selected to bet 1 chip on the top five number \n" +
+                "You selected to bet 10 chips on the top five number \n" +
                 "spaces.These 3 spaces are numbers 0, 00, 1, 2, and \n" +
                 "3. The payout for this bet is 6 to 1 if your \n" +
                 "selection is the winning number. Press 'c' to \n" +
@@ -262,7 +262,7 @@ public class RoulettePrompts {
 
     public Integer[] lineBet() {
         String prompt = "********************* Line Bet *********************\n" +
-                "You selected to bet 1 chip on 6 number spaces. This \n" +
+                "You selected to bet 10 chips on 6 number spaces. This \n" +
                 "selection includes 6 numbers in a 2 row format.\n" +
                 "\n" +
                 "Visual example:\n" +
@@ -294,7 +294,7 @@ public class RoulettePrompts {
 
     public Integer[] columnBet() {
         String prompt = "******************** Column Bet ********************\n" +
-                "You selected to bet 1 chip on one column of the \n" +
+                "You selected to bet 10 chips on one column of the \n" +
                 "board. There are three column on our Roulette board. \n" +
                 "When betting on one column, you are betting on every \n" +
                 "number in that column. The payout for this bet is 2 \n" +
@@ -312,7 +312,7 @@ public class RoulettePrompts {
 
     public Integer[] twelveNumberBet() {
         String prompt = "******************** Column Bet ********************\n" +
-                "You selected to bet 1 chip on twelve number spaces.  \n" +
+                "You selected to bet 10 chips on twelve number spaces.  \n" +
                 "You are able to bet on bulk options that include the \n" +
                 "first twelve numbers on the board, second twelve, or \n" +
                 "third twelve. The payout for this bet is 2 to 1.\n" +
@@ -329,7 +329,7 @@ public class RoulettePrompts {
 
     public Integer[] numbers1Thru18() {
         String prompt = "********************* 1-18 Bet *********************\n" +
-                "You selected to bet 1 chip on numbers 1-18. The \n" +
+                "You selected to bet 10 chips on numbers 1-18. The \n" +
                 "payout for this bet is 1 to 1. Please press 'c' to \n" +
                 "continue.\n";
         String goOnAhead = IOHandler.promptForStringWithMessage(prompt);
@@ -358,7 +358,7 @@ public class RoulettePrompts {
 
     public Integer[] evenNumbers() {
         String prompt = "******************* Even Numbers *******************\n" +
-                "You selected to bet 1 chip on numbers all even \n" +
+                "You selected to bet 10 chips on numbers all even \n" +
                 "numbers on the board. The payout for this bet is 1 \n" +
                 "to 1. Please press 'c' to continue.\n";
         String goOnAhead = IOHandler.promptForStringWithMessage(prompt);
@@ -369,7 +369,7 @@ public class RoulettePrompts {
 
     public Integer[] oddNumbers() {
         String prompt = "******************** Odd Numbers *******************\n" +
-                "You selected to bet 1 chip on numbers all odd \n" +
+                "You selected to bet 10 chips on numbers all odd \n" +
                 "numbers on the board. The payout for this bet is 1 \n" +
                 "to 1. Please press 'c' to continue.\n";
         String goOnAhead = IOHandler.promptForStringWithMessage(prompt);
@@ -380,7 +380,7 @@ public class RoulettePrompts {
 
     public Integer[] blackNumbers() {
         String prompt = "******************* Black Numbers ******************\n" +
-                "You selected to bet 1 chip on numbers all black colored \nnumbers on the board. " +
+                "You selected to bet 10 chips on numbers all black colored \nnumbers on the board. " +
                 "The payout for this bet is 1 to 1. \n" +
                 "\n" +
                 "Black numbers: \n" +
@@ -397,7 +397,7 @@ public class RoulettePrompts {
 
     public Integer[] redNumbers() {
         String prompt = "******************** Red Numbers *******************\n" +
-                "You selected to bet 1 chip on numbers all red colored \nnumbers on the board. " +
+                "You selected to bet 10 chips on numbers all red colored \nnumbers on the board. " +
                 "The payout for this bet is 1 to 1. \n" +
                 "\n" +
                 "Red numbers: \n" +
