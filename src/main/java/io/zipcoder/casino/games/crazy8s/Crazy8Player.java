@@ -27,6 +27,7 @@ public class Crazy8Player {
     }
 
     public boolean isPlayerCardsValid() {
+
         return playerCardsValid;
     }
 
