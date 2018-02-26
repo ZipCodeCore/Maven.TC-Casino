@@ -46,7 +46,6 @@ public abstract class GoFishPlayer extends Player {
         else {
             this.cardHand.add(cardToAdd);
         }
-
     }
 
     public void removeMatches(Rank rankToCompare) {
@@ -65,30 +64,6 @@ public abstract class GoFishPlayer extends Player {
 
     public boolean isHandEmpty(){
         return this.cardHand.isEmpty();
-    }
-
-    public String showCards() {
-        StringBuilder showCardHand = new StringBuilder("\n");
-        for (int i = 0; i < cardHand.size(); i++) {
-            showCardHand.append((i + 1))
-                    .append(": ")
-                    .append(this.cardHand.get(i))
-                    .append("\n");
-        }
-        System.out.println(showCardHand.toString());
-        return showCardHand.toString();
-    }
-
-    public String showOpponents(List<GoFishPlayer> opponents) {
-        StringBuilder showOpponents = new StringBuilder();
-        for (int i = 0; i < opponents.size(); i++) {
-            showOpponents.append((i + 1))
-                    .append(": ")
-                    .append(opponents.get(i).getName())
-                    .append("\n");
-        }
-        System.out.println(showOpponents.toString());
-        return showOpponents.toString();
     }
 
     public Boolean hasCard(Card cardAskedFor) {

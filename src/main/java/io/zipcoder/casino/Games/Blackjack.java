@@ -3,7 +3,9 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
 import io.zipcoder.casino.Games.Dealer.Dealer;
+
 import io.zipcoder.casino.InputOutput.InputOutput;
+
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.BlackjackPlayer;
 import io.zipcoder.casino.Players.Player;
@@ -289,9 +291,12 @@ public class Blackjack implements Game{
         }
     }
 
+
     public void selfActualization() {
         System.out.println("Is it finally time?");
         ConciousnessPath newpath = new ConciousnessPath(player);
         newpath.start();
+
     }
+
 }
