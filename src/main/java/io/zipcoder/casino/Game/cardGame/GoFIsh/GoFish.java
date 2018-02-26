@@ -36,6 +36,7 @@ public class GoFish extends CardGame {
     }
 
     public void startGame() {
+        GoFish newGame = new GoFish(user.getProfile());
         Console.print("Lets play Go Fish! Shuffle up and deal...");
         deal();
 
@@ -61,6 +62,25 @@ public class GoFish extends CardGame {
         decideWinner(user, dealer);
 
         endGame();
+
+    }
+
+    public void endGame() {
+        boolean keepPlaying = true;
+        Console.print("Would you like to play again? ('Yes' or 'No')");
+        do {
+            String choice = Console.getString();
+            if (choice.equalsIgnoreCase("no")) {
+                Console.print("Thanks for playing!");
+                keepPlaying = false;
+                House.INSTANCE.gameSelection();
+            } else if (choice.equalsIgnoreCase("yes")) {
+                keepPlaying = false;
+                playGame();
+            } else {
+                Console.print("Invalid response: please enter your selection again.");
+            }
+        } while (keepPlaying);
 
     }
 
@@ -106,7 +126,7 @@ public class GoFish extends CardGame {
             Console.print("Go fish.");
             Console.print("You fished: " + getDeck().peek().toString());
             fish(askingPlayer);
-            
+
             if (getHandForBook(user, aCardRank) > 0) {
                 Console.print("You made a book!!");
                 askingPlayer.getHand().orderCards();
@@ -238,7 +258,7 @@ public class GoFish extends CardGame {
         try {
             return CardRank.valueOf(aString.toUpperCase());
         } catch (IllegalArgumentException iae) {
-            Console.print("Invalid entry. Try again.");
+            Console.print("Invalid entry.");
             return null;
         }
     }
