@@ -50,14 +50,10 @@ public class WarTest {
     public void dealCardsTest() {
         Person player = new Person();
         War warGame = new War(player);
-        warGame.dealCards();
-    }
-
-    @Test
-    public void iDeclareWarTest() {
-        Person player = new Person();
-        War warGame = new War(player);
-
+        warGame.start();
+        int expected = 26;
+        int actual = player.getHand().getHandArrayList().size();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
