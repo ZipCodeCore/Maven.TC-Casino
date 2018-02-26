@@ -1,5 +1,8 @@
 package io.zipcoder.casino.interfaces;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * filename:
  * project: casino
@@ -23,4 +26,8 @@ public interface Gamble {
      * @return
      */
     long lose();
+
+    Integer win(HashMap<String, ArrayList<Integer>> numberSelections, Integer winningNumber);
+
+    Integer lose(HashMap<String, ArrayList<Integer>> numberSelections, Integer winningNumber);
 }

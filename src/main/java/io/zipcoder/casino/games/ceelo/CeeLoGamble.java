@@ -8,7 +8,7 @@ import io.zipcoder.casino.interfaces.Gamble;
  * author: https://github.com/vvmk
  * date: 2/21/18
  */
-public class CeeLoGamble implements Gamble {
+public class CeeLoGamble{
     private long base;
 
     public CeeLoGamble(long base) {

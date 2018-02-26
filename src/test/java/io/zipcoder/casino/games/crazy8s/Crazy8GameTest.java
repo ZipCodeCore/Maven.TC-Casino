@@ -7,11 +7,16 @@ import io.zipcoder.casino.utils.IOHandler;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Crazy8PlayTest {
+
+class Crazy8PlayTest {
 
     @Test
-    public void playTest() {
+    public void playerTurnTest(){
+        Crazy8Game game = new Crazy8Game();
+        Crazy8Player player = new Crazy8Player("player");
+        //Given
 
+        Assert.assertTrue(player.isPlayerCardsValid());
     }
 
     @Test
@@ -36,83 +41,81 @@ public class Crazy8PlayTest {
         Assert.assertEquals(true, computer.length == 8);
     }
 
-    @Test
-    public void dealCardsTestMatch() {
-        //Given
-        Deck deck = new Deck(); //get new deck to play with
-
-        Card matchThisCard = deck.pull(); //show one card from face down Deck
-
-//        Assert.assertEquals(true, matchThisCard.toString() == 1);
-    }
-
 
     @Test
-    public void displayPileCardToMatchTest(){
-        //Given
-        Deck deck = new Deck();
-        Card matchThisCard;
-
-        matchThisCard = deck.pull();   //deal playersHand
-
-        String expected = "Hearts";
-
-        String actual = matchThisCard.toString();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void displayHandTest() {
-        //Given
-        Deck deck = new Deck();
-        Card[] playersHand;
-
-        playersHand = deck.pullMany(8);   //deal playersHand
-
-        String expected = "Hearts";
-
-        String actual = playersHand.toString();
-
-        Assert.assertEquals(expected, actual);
+    public void playerSelectCardTest() {
+        Crazy8Game game = new Crazy8Game();
 
 
     }
 
     @Test
-    public void computeMatchesTest() {
+    public void displayPreselectionMessageTest() {
+        Crazy8Game game = new Crazy8Game();
+
 
     }
 
     @Test
-    public void decideWinnerTestWin() {
+    public void ChangeSuitWithEightTest() {
+        Crazy8Game game = new Crazy8Game();
+
+
+    }
+
+    @Test
+    public void removeCardTest() {
+        Crazy8Game game = new Crazy8Game();
+
+
+    }
+
+    @Test
+    public void validateSelectionTest() {
+        Crazy8Game game = new Crazy8Game();
+
+
+    }
+
+    @Test
+    public void displayPlayerHandTest() {
+        Crazy8Game game = new Crazy8Game();
+
+
+    }
+
+    @Test
+    public void displayCardToMatchTest() {
+        Crazy8Game game = new Crazy8Game();
+
+
+
+    }
+
+    @Test
+    public void displayWinnerTestWin() {
 
         //Given
-        String resultWin = "Congratulations! You are the winner!";
+        Crazy8Player winner = new Crazy8Player("playerOne");
+        String winningResults = "Player 1 Won!";
 
-        Player p1 = new Player();
-        Crazy8Play game = new Crazy8Play();
         //When
-        game.emptyHand(1);
+        String expected = "Player 1 Won!";
 
-        String expected = "Congratulations! You are the winner!";
-
-        String actual = resultWin;
+        String actual = winningResults;
 
         Assert.assertEquals(expected, actual);
     }
     @Test
-    public void decideWinnerTestLose() {
+    public void displayWinnerTestLose() {
 
         //Given
-        String resultLose = "Sorry! You lose!";
+        Crazy8Player winner = new Crazy8Player("playerTwo");
 
-        Player p1 = new Player();
-        Crazy8Play game = new Crazy8Play();
+        String resultLose = "Player 2 Won!";
         //When
-        game.emptyHand(2);
 
-        String expected = "Sorry! You lose!";
+        String expected = "Player 2 Won!";
 
         String actual = resultLose;
 
@@ -123,15 +126,13 @@ public class Crazy8PlayTest {
     @Test
     public void playAgainPromptTest(){
         //Given
-        Player p1 = new Player();
-        Crazy8Play game = new Crazy8Play();
+        Crazy8Game game = new Crazy8Game();
         //When
-        game.decideWinner();
         String expected = "Do you want to play again? [Y/N]";
 
         String actual = IOHandler.promptForStringWithMessage("Do you want to play again? [Y/N]");
 
-//        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
 
     }
 
