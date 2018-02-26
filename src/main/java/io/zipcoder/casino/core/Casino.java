@@ -6,6 +6,8 @@ import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
 public class Casino {
+    private final String fPLAYER_BROKE_MSG = "You're out of money, chum. Maybe try a nice safe game like Crazy 8s.";
+    private final String fSHADY_MESSAGE = "pssst...hey, you (type 666 to check it out. Something doesn't feel right...)";
     private Player player;
     private Game currentGameRunning;
 
@@ -13,17 +15,22 @@ public class Casino {
         this.player = new Player();
     }
 
+    protected static boolean playerIsBroke(Player playerToCheck) {
+        return playerToCheck.getBalance() == 0;
+    }
+
     @SuppressWarnings("all")
     public void enter() {
         for (; ; ) {
+            if (playerIsBroke(player)) {
+                showShadyMessage();
+            }
             int userInput = IOHandler.promptForIntWithMessage(runWelcomeMenu());
-            handleInput(userInput);
-            currentGameRunning = changeGameState(userInput);
+            currentGameRunning = changeGameState(handleInput(userInput));
             if (currentGameRunning != null)
                 currentGameRunning.play(player);
         }
     }
-
 
     public String runWelcomeMenu() {
         return IOHandler.getMessageFromFile("CasinoWelcomeMenu.txt");
@@ -31,9 +38,19 @@ public class Casino {
 
     public int handleInput(int userInput) {
         switch (userInput) {
+            case 1:
+            case 3:
+            case 4:
+                if (playerIsBroke(player)) {
+                    IOHandler.printMessage(fPLAYER_BROKE_MSG);
+                    return -1;
+                }
             case 5:
                 goodBye();
-                return userInput;
+                break;
+            case 666:
+                if (playerIsBroke(player))
+                    visitManInBlack();
             default:
                 runWelcomeMenu();
         }
@@ -56,17 +73,21 @@ public class Casino {
                 //currentGameRunning = new Roulette();
                 System.out.println("[ SORRY! OUT OF ORDER! ]\n");
                 break;
-            case 5:
-                goodBye();
-
         }
         return currentGameRunning;
     }
 
-    public void goodBye() {
+    private void goodBye() {
         IOHandler.getMessageFromFile("Goodbye.txt");
         System.exit(0);
     }
 
+    protected void showShadyMessage() {
+        IOHandler.printMessage(fSHADY_MESSAGE);
+    }
+
+    protected void visitManInBlack() {
+        
+    }
 }
 

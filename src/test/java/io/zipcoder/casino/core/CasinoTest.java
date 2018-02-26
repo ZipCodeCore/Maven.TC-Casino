@@ -121,4 +121,20 @@ public class CasinoTest {
 
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testUserIsBrokeTrue() {
+        Player brokePlayer = new Player();
+        brokePlayer.betChips(Long.MAX_VALUE);
+
+        Assert.assertTrue(Casino.playerIsBroke(brokePlayer));
+    }
+
+    @Test
+    public void testUserIsBrokeFalse() {
+        Player notBrokePlayer = new Player();
+        notBrokePlayer.addChips(1);
+
+        Assert.assertFalse(Casino.playerIsBroke(notBrokePlayer));
+    }
 }

@@ -40,4 +40,29 @@ public class PlayerTest {
         Assert.assertTrue(actual >= 0);
         Assert.assertNotEquals(null, actual);
     }
+
+    @Test
+    public void testGetDebt() {
+        long expected = 0;
+        long actual = player.getDebt();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAddDebt() {
+        long startingDebt = player.getDebt();
+        long expected = startingDebt + 50;
+        player.addDebt(50);
+        long actual = player.getDebt();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testBreakLeg() {
+        player.breakLeg();
+
+        Assert.assertTrue(player.isLegBroken());
+    }
 }
