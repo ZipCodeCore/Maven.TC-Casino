@@ -38,6 +38,12 @@ public class GoFish extends CardGame {
     public void startGame() {
         Console.print("Lets play Go Fish! Shuffle up and deal...");
         deal();
+        do {
+            playUserTurn();
+            playDealerTurn();
+        } while (getDeck().countRemainingCards() > 0 &&
+                user.getHand().getCards().size() > 0 &&
+                dealer.getHand().getCards().size() > 0);
     }
 
     public static void main(String[] args) {
