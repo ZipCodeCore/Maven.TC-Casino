@@ -92,10 +92,12 @@ public class Roulette implements Game {
             } else if(intResponse == 17){
                 displayBoard();
                 pressCtoContinue();
-            } else if (intResponse != 18) {
+            } else if (intResponse != 18 && intResponse <= 18) {
                 displayBoard();
                 selectionOptions(intResponse);
                 turnCounter++;
+            } else if (intResponse > 18){
+                System.out.println("\n\n\nINVALID INPUT\n\n\n");
             }
         } while (intResponse != 18);
         calculateWinnersAndEarnings();

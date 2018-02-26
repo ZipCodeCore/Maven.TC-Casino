@@ -140,7 +140,10 @@ public class RoulettePrompts {
         System.out.println(prompt);
         Integer numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-36:");
         if (numberChoice > 36) {
-            return null;
+            do {
+                System.out.println("\n\nERROR!\n\n");
+                numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-36: ");
+            } while (numberChoice > 36);
         }
         return numberChoice;
     }
@@ -215,6 +218,7 @@ public class RoulettePrompts {
                 "the row that contains 4, 5, and 6, I would enter the number 4. If any of those numbers win, the bet is\n" +
                 "won. The payout for this bet is 11 to 1 if your \n" +
                 "selection is the winning number.\n\n";
+        System.out.println(prompt);
         Integer[] result = new Integer[3];
         Integer[] column2 = rouletteBoardAndWheel.columnSelection(2);
         Integer[] column3 = rouletteBoardAndWheel.columnSelection(3);
@@ -222,7 +226,7 @@ public class RoulettePrompts {
         if (startingNumber > 34 || secondColumn.contains(startingNumber) || lastColumn.contains(startingNumber)) {
             do {
                 System.out.println("\n\nERROR!\n\n");
-                startingNumber = IOHandler.promptForIntWithMessage(prompt);
+                startingNumber = IOHandler.promptForIntWithMessage("Please enter a number between 1-34: ");
             } while (startingNumber > 34 || secondColumn.contains(startingNumber) || lastColumn.contains(startingNumber));
         }
         for (int i = 0; i < result.length; i++) {
