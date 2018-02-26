@@ -18,11 +18,11 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
     private Deck deck;
 
     // these 2 args are now in Person constructor for gambling games
-    public Blackjack(String playerName, int chipsToStart) {
-        this.player = new Person(playerName);
+    public Blackjack(Person player) {
+        this.player = player;
         this.playerHand = player.getHand();
         this.playerWallet = player.getWallet();
-        playerWallet.addChipsToAmount(chipsToStart); // add chipsToStart is now in Person constructor for gambl games
+        //playerWallet.addChipsToAmount(chipsToStart); // add chipsToStart is now in Person constructor for gambl games
         this.playerChips = playerWallet.checkChipAmount();
 
         this.dealer = new Dealer();
@@ -348,9 +348,9 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
         System.out.println();
     }
 
-    public static void main (String[] args) {
-        Blackjack blackjack = new Blackjack("Anyname", 10);
-        blackjack.start();
-        blackjack.end();
-    }
+//    public static void main (String[] args) {
+//        Blackjack blackjack = new Blackjack("Anyname", 10);
+//        blackjack.start();
+//        blackjack.end();
+//    }
 }

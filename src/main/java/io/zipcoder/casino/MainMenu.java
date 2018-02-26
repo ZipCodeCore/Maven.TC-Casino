@@ -49,7 +49,7 @@ public class MainMenu {
                 return null;
         }
 
-        return game = new War(player);
+        return game = new Blackjack(player);
     }
 
 }

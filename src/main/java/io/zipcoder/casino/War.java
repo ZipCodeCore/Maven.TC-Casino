@@ -5,13 +5,13 @@ import java.util.*;
 public class War extends Game implements GameInterface, CardGameInterface {
 
     private Dealer dealer = new Dealer();
-    private Person player = new Person("Joe");
+    private Person player;
     private ArrayList<Card> playerPlayedCards = new ArrayList<Card>();
     private ArrayList<Card> dealerPlayedCards = new ArrayList<Card>();
     Scanner input = new Scanner(System.in);
 
     public War(Person player) {
-       // this.player = player;
+        this.player = player;
     }
 
     public void start() {
