@@ -17,12 +17,11 @@ public class Roulette {
      * line (6 numbers/2 rows), column, 12 number (1st, 2nd, 3rd), 1-18, 19-36, even, odd, black, red
      */
 
-    public Roulette(Player player) {
-        this.player = player;
+    public Roulette() {
     }
 
     public void play(Player player) {
-
+        this.player = player;
     }
 
 
