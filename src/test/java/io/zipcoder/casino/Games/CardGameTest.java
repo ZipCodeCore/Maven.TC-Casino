@@ -34,4 +34,5 @@ public class CardGameTest {
         Integer actual = dummy.getMaxNumberOfPlayers();
         Assert.assertEquals(expected, actual);
     }
+
 }

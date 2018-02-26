@@ -10,6 +10,7 @@ import io.zipcoder.casino.Players.Player;
 import java.util.*;
 
 public class GoFish implements Game {
+
     private int turnCounter;
     private ArrayList<GoFishPlayer> players;
     private InputOutput inputOutput;

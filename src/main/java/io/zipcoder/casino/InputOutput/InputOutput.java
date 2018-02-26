@@ -51,7 +51,8 @@ public class InputOutput {
 
     public int promptForInt(String message) {
         System.out.println(message);
-        return scanForInt();
+        int temp = input.nextInt();
+        return temp;
     }
 
 

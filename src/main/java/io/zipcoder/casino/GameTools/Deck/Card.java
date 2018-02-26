@@ -10,6 +10,11 @@ public class Card {
         this.suitEnum = suitEnum;
     }
 
+    public Card(){
+        this.rankEnum = null;
+        this.suitEnum = null;
+    }
+
     public Suit getSuitEnum() {
         return suitEnum;
     }

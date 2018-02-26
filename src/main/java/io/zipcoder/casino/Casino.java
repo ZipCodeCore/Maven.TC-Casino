@@ -69,7 +69,7 @@ public class Casino {
                 game = new GoFish(new GoFishHumanPlayer(player));
                 break;
             case "BlackJack":
-                game = new Blackjack();
+                game = new Blackjack(player);
                 break;
 
             case "Craps":

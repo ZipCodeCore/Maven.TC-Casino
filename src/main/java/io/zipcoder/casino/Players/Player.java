@@ -25,6 +25,7 @@ public class Player {
         this.name = name;
         this.age = age;
         this.wallet = new Wallet(balance);
+
     }
 
     public String getName() {
