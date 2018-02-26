@@ -152,8 +152,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
     }
 
     public void end() {
-        player.getHand().clearHand();
-        dealer.getHand().clearHand();
+
         String winner = "";
         if (player.getHand().getHandArrayList().size() > 50) {
             winner += "you!";
@@ -161,10 +160,13 @@ public class War extends Game implements GameInterface, CardGameInterface {
             winner += "the dealer!";
         }
         System.out.println("And the winner is " + winner);
+        player.getHand().clearHand();
+        dealer.getHand().clearHand();
         System.out.println("If you want to play again, enter 'yes', or enter anything else to return to the casino");
         if (input.nextLine().equals("yes")) {
             start();
         }
+
         gameIsRunning = false;
     }
 
