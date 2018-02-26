@@ -32,7 +32,9 @@ public class GoFish implements Game {
     }
 
     public void welcomeMessage() {
-        System.out.println("\nWelcome to Go Fish!\nYou are playing with Bob and Sue today.\n");
+        System.out.println(displayLogo());
+        System.out.println("\nWelcome to Go Fish!\nYou are playing with Bob and Sue today.");
+        System.out.println("=======================================\n");
 
     }
 
@@ -49,7 +51,9 @@ public class GoFish implements Game {
 
 
     public void deal() {
-        System.out.println("\nDealing out player hands.\n");
+        System.out.println("\n+-+-+ +-+-+-+-++-+-+ +-+-+-+-++-+-+");
+        System.out.println("Dealing out player hands.");
+        System.out.println("+-+-+ +-+-+-+-++-+-+ +-+-+-+-++-+-+\n");
         for (int i = 0; i < players.size(); i++) {
             for(int j= 0; j < 5; j++) {
                 players.get(i).addCardToHand(deck.getTopCard());
@@ -77,30 +81,33 @@ public class GoFish implements Game {
     public void takeTurn () {
         GoFishPlayer currentPlayer = getCurrentPlayer();
         if(currentPlayer.isHandEmpty()) {
-            System.out.println("\n" + currentPlayer.getName() + " ran out of cards and there are no cards left in the deck. Skipping turn.\n");
+            System.out.println("\n" + currentPlayer.getName() + " ran out of cards and there are no cards left in the deck. Skipping turn.");
+            System.out.println("=======================================\n");
             turnCounter++;
             return;
         }
-        System.out.println("\nIt's " + currentPlayer.getName() + "'s turn.\n");
+        System.out.println("\n\n\n=======================================");
+        System.out.println("It's " + currentPlayer.getName() + "'s turn.\n");
 
         List<GoFishPlayer> opponents = new ArrayList<>(players);
         opponents.remove(currentPlayer);
         GoFishPlayer opponentToAsk = currentPlayer.pickOpponentToAsk(opponents);
 
         Card cardPicked = currentPlayer.pickCard();
-
         System.out.println("\n" + currentPlayer.getName() + " asked " + opponentToAsk.getName() + " for a " + cardPicked + ".\n");
 
         if (opponentToAsk.hasCard(cardPicked)) {
             opponentToAsk.removeCard(cardPicked);
             currentPlayer.addCardToHand(cardPicked);
-            System.out.println("\n" + opponentToAsk.getName() + " had that card. " + currentPlayer.getName() + " goes again.\n");
+            System.out.println("\n" + opponentToAsk.getName() + " had that card. " + currentPlayer.getName() + " goes again.");
+            System.out.println("=======================================\n\n");
             this.fillPlayerHands();
             this.takeTurn();
         } else {
-            System.out.println("\n" + opponentToAsk.getName() + " did not have that card. Go fish.\n");
+            System.out.println("\n" + opponentToAsk.getName() + " did not have that card " + displaySecondLogo());
             if (deck.deck.isEmpty()) {
-                System.out.println("\nThe deck is empty. No cards to draw.\n");
+                System.out.println("\nThe deck is empty. No cards to draw.");
+                System.out.println("=======================================\n");
                 turnCounter++;
                 return;
             }
@@ -109,11 +116,13 @@ public class GoFish implements Game {
             currentPlayer.addCardToHand(topCard);
             if (topCard.getRankEnum().equals(cardPicked.getRankEnum())) {
                 System.out.println("\n" + currentPlayer.getName() + " picked their wish! " + currentPlayer.getName() + " gets a point. Go again.\n");
+                System.out.println("=======================================\n");
                 this.fillPlayerHands();
                 this.takeTurn();
 
             } else {
                 this.fillPlayerHands();
+                System.out.println("=======================================\n");
                 turnCounter++;
             }
         }
@@ -131,14 +140,16 @@ public class GoFish implements Game {
     }
 
     public String displayScores(ArrayList<GoFishPlayer> players) {
-        System.out.println("\nScore totals:");
+        System.out.println("=======================================");
+        System.out.println("Score totals:\n");
         StringBuilder displayScores = new StringBuilder();
         for (int i = 0; i < players.size(); i++) {
-            displayScores.append("\t>")
+            displayScores.append("\t> ")
                          .append(players.get(i).getName())
                          .append(": ")
                          .append(players.get(i).getNumPairs())
-                         .append("\n");
+                         .append("\n")
+                         .append("\t--------------\n");
         }
         System.out.println(displayScores.toString());
         return displayScores.toString();
@@ -166,19 +177,50 @@ public class GoFish implements Game {
         if(winners.size() > 1) {
             System.out.println("There was a tie!");
             for (int i = 0; i < winners.size(); i++) {
-                System.out.println("\nCongratulations, " + winners.get(i).getName() + ", you tied!\n");
+                System.out.println(displayCongrats());
+                System.out.println("\n" + winners.get(i).getName() + ", you tied!\n");
             }
         }
         else {
-            System.out.println("\nCongratulations, " + winners.get(0).getName() + ", you win!\n");
+            System.out.println(displayCongrats());
+            System.out.println("\n" + winners.get(0).getName() + ", you win!\n");
         }
         this.displayScores(players);
         System.out.println("\nThat was fun! Game over.\n");
+    }
+
+    public String displayLogo() {
+        StringBuilder logo = new StringBuilder("\n");
+
+logo.append("   /$$$$$$                  /$$$$$$$$ /$$           /$$\n");
+logo.append("  /$$__  $$                | $$_____/|__/          | $$\n");
+logo.append(" | $$ \\__/  /$$$$$$        | $$       /$$  /$$$$$$$| $$$$$$$\n");
+logo.append(" | $$ /$$$$ /$$__  $$      | $$$$$   | $$ /$$_____/| $$__  $$\n");
+logo.append(" | $$|_  $$| $$ \\ $$       | $$__/   | $$|  $$$$$$ | $$  \\ $$\n");
+logo.append(" | $$ \\ $$| $$  | $$       | $$      | $$\\____  $$ | $$  | $$\n");
+logo.append(" |  $$$$$$/|  $$$$$$/      | $$      | $$ /$$$$$$$/| $$  | $$\n");
+logo.append(" \\______/ \\______/         |__/      |__/|_______/ |__/  |__/\n");
+
+    return logo.toString();
+    }
+
+    public String displaySecondLogo() {
+        StringBuilder logo = new StringBuilder("\n\n");
+        logo.append(" +-+-+ +-+-+-+-+\n");
+        logo.append(" |G|o| |F|i|s|h|\n");
+        logo.append(" +-+-+ +-+-+-+-+\n");
+        return logo.toString();
+    }
+
+    public String displayCongrats() {
+        StringBuilder congrats = new StringBuilder("\n");
+        congrats.append("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n");
+        congrats.append("|C|o|n|g|r|a|t|u|l|a|t|i|o|n|s|\n");
+        congrats.append("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n");
+        return congrats.toString();
     }
 
     public void endGame() {
 
     }
 }
-
-
