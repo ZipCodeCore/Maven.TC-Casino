@@ -4,8 +4,6 @@ import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.CrapsPlayer;
 
-
-
 public class Craps extends Dice implements Game{
 //CrapsPlayer crapsPlayer = new CrapsPlayer();
 InputOutput inputOutput = new InputOutput();
