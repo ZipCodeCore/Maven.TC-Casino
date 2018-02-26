@@ -136,7 +136,7 @@ public class GoFish extends CardGame {
                 Console.print("You made a book!!");
                 askingPlayer.buildBooks(askingPlayer, aCardRank);
                 removeFromHand(askingPlayer, aCardRank);
-                Console.print(askingPlayer.getHand().showHand());
+//                Console.print(askingPlayer.getHand().showHand());
             }
             isTurn = false;
 
@@ -148,7 +148,7 @@ public class GoFish extends CardGame {
                 askingPlayer.buildBooks(askingPlayer, aCardRank);
                 removeFromHand(askingPlayer, aCardRank);
                 askingPlayer.getHand().orderCards();
-                Console.print(askingPlayer.getHand().showHand());
+//                Console.print(askingPlayer.getHand().showHand());
             }
         }
     }

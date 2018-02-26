@@ -1,6 +1,6 @@
 package io.zipcoder.casino;
 
-public class Casino {
+public class vincCasino {
 
 
 
