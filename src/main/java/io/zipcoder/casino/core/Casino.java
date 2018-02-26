@@ -48,6 +48,7 @@ public class Casino {
                     IOHandler.printMessage(fPLAYER_BROKE_MSG);
                     return -1;
                 }
+                break;
             case 5:
                 goodBye();
                 break;
@@ -75,6 +76,9 @@ public class Casino {
             case 4:
                 //currentGameRunning = new Roulette();
                 System.out.println("[ SORRY! OUT OF ORDER! ]\n");
+                break;
+            default:
+                currentGameRunning = null;
                 break;
         }
         return currentGameRunning;

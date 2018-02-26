@@ -19,28 +19,4 @@ public class ManInBlackTest {
         mib = new ManInBlack();
         player = new Player();
     }
-
-    @Test
-    public void testIsValidChoiceLowDebtTrue() {
-        Assert.assertTrue(mib.isValidChoice("yes"));
-        Assert.assertTrue(mib.isValidChoice("no"));
-    }
-
-    @Test
-    public void testIsValidChoiceLowDebtFalse() {
-        Assert.assertFalse(mib.isValidChoice("dick move"));
-
-    }
-
-    @Test
-    public void testIsValidChoiceTooMuchDebtTrue() {
-        Assert.assertTrue(mib.isValidChoice("rock off"));
-        Assert.assertTrue(mib.isValidChoice("roll"));
-        Assert.assertTrue(mib.isValidChoice("run"));
-    }
-
-    @Test
-    public void testIsValidChoiceTooMuchDebtFalse() {
-        Assert.assertFalse(mib.isValidChoice("sfdghewjd"));
-    }
 }

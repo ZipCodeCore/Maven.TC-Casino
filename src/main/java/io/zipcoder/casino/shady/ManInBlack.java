@@ -10,14 +10,18 @@ import io.zipcoder.casino.utils.IOHandler;
  * date: 2/25/18
  */
 public class ManInBlack {
-    private final String fFIRST_VISIT = "first Visit";
-    private final String fSECOND_VISIT = "second visit";
-    private final String fTOO_MUCH_DEBT_VISIT = "too much debt, play one more to wipe your debt?";
-    private final String fRUN = "you turn around to run, but the man in black is already behind you...last chance, kid. play?";
-    private final String fTRUE_FORM = "[true form]";
-    private final String fPLAY = "the man in black scores three sixes.";
-    private final String fROCK_OFF = "[rock off]";
-    private final String fTAKE_SOUL = "you lose";
+    private final String fFIRST_VISIT = "You walk over to a shady corner and see a shady man wearing a black suit. \"Down on your luck, friend?" +
+            " Need a little help?\" (yes/no)";
+    private final String fSECOND_VISIT = "Welcome back. Need a few more chips? Today's your lucky day, I can feel it. (yes/no)";
+    private final String fTOO_MUCH_DEBT_VISIT = "\"You sure have built up quite a large debt.\"\n" +
+            "The Man in Black suggests ONE MORE GAME of Cee-lo to settle your bet. 'play'? (you could try to 'run' away, too)";
+    private final String fRUN = "You turn around to run, but the man in black is already behind you...last chance, kid. play?\n" +
+            "You can take your chances and 'play', or you might be able to 'run' around him...";
+    private final String fPLAY = "You agree to one more game without asking what happens if you lose. The Man in Black \n" +
+            "produces three bone-white dice seemingly from nowhere and throws them into the air...\n" +
+            "\n...He rolls three sixes. With an evil grin, he gestures toward a door behind him that you hadn't noticed before. \n" +
+            "The Man in Black follows you through the door and shuts it behind him, his laughter unnoticed amidst the \n" +
+            "cheerful bells and dings of the Casino's slot machines.";
     private Player[] ledger;
     private boolean validChoice;
 
@@ -67,14 +71,20 @@ public class ManInBlack {
     }
 
     protected void tryToRun() {
+        for (; ; ) {
         String choice = IOHandler.promptForStringWithMessage(fRUN);
-        if (choice.equalsIgnoreCase("run")) {
-            IOHandler.printMessage("You try to run around him. Turns out he's the devil. He devours your still-beating heart.");
-            collectDebt();
-        } else if (choice.equalsIgnoreCase("play")) {
-            tryToWin();
-        } else if (choice.equalsIgnoreCase("eat a dick"))
-            tellHimToEatADick();
+            if (choice.equalsIgnoreCase("run")) {
+                IOHandler.printMessage("You try to run around him. The Man in Black grabs your arm with an unnaturally strong grip. \n" +
+                        "He opens a previously unnoticed door with his free hand and pushes you through.");
+                collectDebt();
+            } else if (choice.equalsIgnoreCase("play")) {
+                tryToWin();
+            } else if (choice.equalsIgnoreCase("eat a dick"))
+                tellHimToEatADick();
+            else {
+                IOHandler.printMessage("That's not going to work...");
+            }
+        }
     }
 
     protected void tryToWin() {
@@ -84,16 +94,17 @@ public class ManInBlack {
 
     protected void tellHimToEatADick() {
         String choice = IOHandler.promptForStringWithMessage("The man in black laughs. " +
-                "Turns out, he's the devil.\n\n \"I'm going to enjoy ripping that tongue of yours right out of your mouth\". \n");
+                "Flames erupt from his eyes and the Casino begins to crumble around you.\n\n \"I'm going to enjoy ripping that tongue of yours right out of your mouth\". \n" +
+                "Its probably too late to start praying...");
         if (choice.equalsIgnoreCase("rock off"))
             challengeToRockOff();
         else
-            losePatience();
+            losePatience(choice);
 
     }
 
-    protected void losePatience() {
-        IOHandler.printMessage("The devil grows impatient. He beats you to death with your own skull.\n");
+    protected void losePatience(String choice) {
+        IOHandler.printMessage("The devil shrugs off your pitiful attemt to " + choice + " and beats you to death with your own skull.\n");
         collectDebt();
     }
 
@@ -109,7 +120,7 @@ public class ManInBlack {
             collectDebt();
         }
         IOHandler.printMessage("Inspiration strikes as you stare eternal damnation in the face. " +
-                "After a 26 minute guitar solo that could rend asunder the very heavens, the devil is forced to concede to your terms and " + terms +
+                "After a 26 minute guitar solo \nthat could rend asunder the very heavens, the devil is forced to concede to your terms \nand give you " + terms +
                 "\n\nYou exit the casino, triumphant, soul intact, and not entirely sure any of this actually happened.");
 
         System.exit(0);
@@ -117,15 +128,12 @@ public class ManInBlack {
     }
 
     protected void collectDebt() {
-        //you lose
+        IOHandler.printMessage("YOU LOSE");
+        System.exit(0);
     }
 
     protected void friendlyGoodbye() {
         IOHandler.printMessage("Come back any time...");
         validChoice = true;
-    }
-
-    protected boolean isValidChoice(String choice) {
-        return true;
     }
 }
