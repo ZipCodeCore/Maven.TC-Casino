@@ -249,7 +249,7 @@ public class Blackjack implements Game{
     public void payoutWin(){
         int bet = getBetAmount();
         player.payoutWin(bet);
-        System.out.println("You won " + bet + " chips. Nice gamblin', sonny!");
+        System.out.println("You won " + bet + " chips. Nice gamblin, " + player.getName() + " !");
     }
 
     public void payoutLoss(){
