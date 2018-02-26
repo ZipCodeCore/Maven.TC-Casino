@@ -6,9 +6,9 @@ import org.junit.Test;
 
 public class CardFactoryTest {
 
-    @Test
-    public void playerFactoryTest() {
-        CardFactory.createCard(Rank.SEVEN, Suit.CLUBS);
-
-    }
+//    @Test
+//    public void cardFactoryTest() {
+//        CardFactory.createCard(Rank.SEVEN, Suit.CLUBS);
+//
+//    }
 }

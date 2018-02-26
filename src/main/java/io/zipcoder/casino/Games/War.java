@@ -4,49 +4,51 @@ import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
 import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Players.Player;
 import io.zipcoder.casino.Players.WarPlayer;
-
-import java.util.Scanner;
 
 public class War implements Game {
 
-   private Integer playerPoints;
-   private Integer player2Points;
-   private WarPlayer player1;
-   private WarPlayer player2;
-   private Deck warDeck;
+   public WarPlayer player1;
+   public WarPlayer player2;
+   public Deck warDeck;
 
    private boolean isPlaying = true;
 
-    public void startGame(){
-        player1 = new WarPlayer();
-        player2 = new WarPlayer("Computer", 25);
+    public War(Player player) {
         warDeck = new Deck();
+        player1 = new WarPlayer(player);
+        player2 = new WarPlayer("Computer", 25);
+    }
+
+    public void startGame(){
 
         System.out.println(displayLogo());
 
         do {
+            if(warDeck.deck.size() == 0){
+                warDeck = new Deck();
+            }
+            player1.resetPoints();
+            player2.resetPoints();
             deal();
             takeTurn();
+            displayWinner();
+            playAgain();
+
         }
         while(isPlaying);
+        endGame();
     }
 
     public void endGame(){
-        System.out.println("Thank you for playing War. Comeback soon");
+        System.out.println("Thank you for playing War. Comeback soon\n");
         isPlaying = false;
     }
 
     public void deal() {
-
         warDeck.shuffleDeck();
 
-//        for(int i = 0; i < warDeck.deck.size(); i++) {
-//            player1.currentHand.add(warDeck.deck.get(i));
-//            warDeck.deck.remove(i);
-//            player2.currentHand.add(warDeck.deck.get(i));
-//            warDeck.deck.remove(i);
-//        }
         do {
             player1.currentHand.add(warDeck.deck.get(0));
             warDeck.deck.remove(0);
@@ -57,73 +59,86 @@ public class War implements Game {
     }
 
     public void takeTurn() {
-        Scanner input = new Scanner(System.in);
-        String deal = input.nextLine();
-        int counter = 0;
-        while(deal != null) {
+        InputOutput io = new InputOutput();
+        String deal = io.promptForString("Press Enter to play a card");
+
+        do {
             if(player1.currentHand.size() == 0) {
-                continue;
+                break;
             }
-            counter++;
             System.out.println(player1.currentHand.get(0).toCardArt());
             System.out.println(player2.currentHand.get(0).toCardArt());
-            System.out.println(counter);
+
             compareCards(player1.currentHand.get(0), player2.currentHand.get(0));
+
+            deal = io.promptForString("Press Enter to play another");
 
             player1.currentHand.remove(0);
             player2.currentHand.remove(0);
-        }
-        //playAgain();
+
+        } while(deal.equals(""));
     }
 
     public void compareCards(Card card1, Card card2) {
-
-       /* if (card1.getRankEnum().getRankValue() == card2.getRankEnum().getRankValue()) {
-            itIsWar(card1, card2);
-        } else */if(card1.getRankEnum().getRankValue() > card2.getRankEnum().getRankValue()) {
+        if (card1.getRankEnum().getRankValue() == card2.getRankEnum().getRankValue()) {
+            System.out.println("TIE");
+            System.out.println(player1.getName() + " | " + player1.getPoints());
+            System.out.println(player2.getName() + " | " + player2.getPoints());
+            System.out.println("===========================");
+        } else if(card1.getRankEnum().getRankValue() > card2.getRankEnum().getRankValue()) {
             awardPoint(player1);
             System.out.println("WINNER: " + player1.getName());
+            System.out.println(player1.getName() + " | " + player1.getPoints());
+            System.out.println(player2.getName() + " | " + player2.getPoints());
             System.out.println("===========================");
         } else {
             awardPoint(player2);
-            System.out.println("WINNER: " + player2.getName());
+            System.out.println("WINNER: " + player2.getName() + " | " + player2.getPoints());
+            System.out.println(player1.getName() + " | " + player1.getPoints());
+            System.out.println(player2.getName() + " | " + player2.getPoints());
             System.out.println("===========================");
         }
     }
 
-    public void itIsWar(Card card1, Card card2) {
-        System.out.println("=================================");
-        System.out.println(displayItIsWarLogo());
-        System.out.println("=================================");
-
-        for(int i = 0; i < 5; i++) {
-            System.out.println("1. | " + player1.currentHand.get(0));
-            System.out.println("2. | " + player2.currentHand.get(0));
-
-            compareCards(player1.currentHand.get(0), player2.currentHand.get(0));
-
-            player1.currentHand.remove(0);
-            player2.currentHand.remove(0);
-        }
-
-    }
-
     public void awardPoint(WarPlayer player) {
-        player.addPoint();
+        player.addPoint(2);
     }
 
-    public Integer doesUserWantToPlayAgain() {
+    public String highestPoints() {
+        if(player1.getPoints() > player2.getPoints()) {
+            return "Winner is " + player1.getName();
+        } else if (player2.getPoints() > player1.getPoints()){
+            return "Winner is " + player2.getName();
+        } else {
+            return "There is no winner in this war";
+        }
+    }
+
+    public String doesUserWantToPlayAgain() {
+        boolean properEntry = false;
+        String yesOrNo;
         InputOutput io = new InputOutput();
-        Integer yesOrNo = io.promptForInt("Do you want to play again? (\n1. Yes\n2. No)");
+
+        do {
+            yesOrNo = io.promptForString("\nDo you want to play again? (Y/N)");
+            if(yesOrNo.equals("Y") || yesOrNo.equals("N")){
+                properEntry = true;
+            }
+        } while(!properEntry);
         return yesOrNo;
+
     }
 
     public void playAgain() {
-        if(doesUserWantToPlayAgain() == 1) {
-            isPlaying = true;
+        if(doesUserWantToPlayAgain().equals("Y")) {
+            this.isPlaying = true;
         } else {
-            isPlaying = false;
+            this.isPlaying = false;
         }
+    }
+
+    public void displayWinner() {
+        System.out.println(highestPoints());
     }
 
     public String displayLogo() {
@@ -141,30 +156,4 @@ public class War implements Game {
         return sb.toString();
     }
 
-    public String displayItIsWarLogo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n\n" +
-                "   |\\                     /)\n" +
-                " /\\_\\\\__               (_//\n" +
-                "|   `>\\-`     _._       //`)\n" +
-                " \\ /` \\\\  _.-`:::`-._  //\n" +
-                "  `    \\|`    :::    `|/\n" +
-                "        |     :::     |\n" +
-                "        |.....:::.....|\n" +
-                "        |:::::::::::::|\n" +
-                "        |     :::     |\n" +
-                "        \\     :::     /\n" +
-                "         \\    :::    /\n" +
-                "          `-. ::: .-'\n" +
-                "           //`:::`\\\\\n" +
-                "          //   '   \\\\\n" +
-                "         |/         \\\\" + "\n\n");
-
-        return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        War war = new War();
-        System.out.println(war);
-    }
 }

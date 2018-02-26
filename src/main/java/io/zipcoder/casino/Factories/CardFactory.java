@@ -1,7 +1,6 @@
 package io.zipcoder.casino.Factories;
 
 import io.zipcoder.casino.GameTools.Deck.Card;
-import io.zipcoder.casino.GameTools.Deck.CardArt;
 import io.zipcoder.casino.GameTools.Deck.Rank;
 import io.zipcoder.casino.GameTools.Deck.Suit;
 

@@ -284,10 +284,9 @@ public class Blackjack implements Game{
         }
     }
 
-    public void selfActualization(){
+    public void selfActualization() {
         System.out.println("Is it finally time?");
         ConciousnessPath newpath = new ConciousnessPath(player);
         newpath.start();
     }
-
 }

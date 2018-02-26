@@ -16,9 +16,10 @@ public class InputOutput {
     }
 
 
-    public Integer scanForInt(){
+    public Integer scanForInt() {
         return Integer.parseInt(scanForString());
     }
+
 
     public String availableGames(Player player){
         InputOutput inputOutput = new InputOutput();
@@ -44,7 +45,8 @@ public class InputOutput {
 
     public String promptForString(String message) {
         System.out.println(message);
-        return scanForString();
+        String s = scanForString();
+        return s;
     }
 
     public int promptForInt(String message) {
@@ -52,4 +54,19 @@ public class InputOutput {
         int temp = input.nextInt();
         return temp;
     }
+
+
+
+    //generic methods
+    //method for menus
+    //create line breaks
+    //validate user input
+
+
+//    public static void main(String[] args) {
+//        InputOutput io = new InputOutput();
+//        System.out.println("Enter your name");
+//        String name = io.scanForString();
+//        System.out.println(name);
+//    }
 }

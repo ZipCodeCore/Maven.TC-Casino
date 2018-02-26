@@ -7,6 +7,7 @@ import io.zipcoder.casino.GameTools.Util.BlackjackValueUtil;
 import java.util.ArrayList;
 
 public class BlackjackPlayer extends Player{
+
     protected Player rootPlayer;
     protected ArrayList<Card> hand;
     protected boolean canHit;
