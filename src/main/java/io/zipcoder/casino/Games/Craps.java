@@ -10,7 +10,6 @@ public class Craps extends Dice implements Game {
     private CrapsPlayer mainPlayer;
     private Integer betUserPlaces = 0;
     private Integer playerBetAmount = 0;
-    private Integer dieValue = 0;
     private Integer playerDecision = 1;
 
     public Integer getPlayerBetAmount() {
@@ -19,10 +18,6 @@ public class Craps extends Dice implements Game {
 
     public void setPlayerBetAmount(Integer playerBetAmount) {
         this.playerBetAmount = playerBetAmount;
-    }
-
-    protected void setDieValue(Integer dieValue) {
-        this.dieValue = dieValue;
     }
 
     public void setBetUserPlaces(Integer betUserPlaces) {
@@ -34,6 +29,11 @@ public class Craps extends Dice implements Game {
         this.mainPlayer = new CrapsPlayer(player);
     }
 
+    public void resetStats() {
+        betUserPlaces = 0;
+        playerBetAmount = 0;
+        playerDecision = 1;
+    }
 
 
     private void userPlacesBet() {
@@ -48,28 +48,29 @@ public class Craps extends Dice implements Game {
     }
 
     private Integer addDiceValuesTogether() {
-        System.out.println("51");
-        return dieValue = rollDice() + rollDice();
+        System.out.println("*Rolls Dice*");
+        Integer previousRoll = rollDice() + rollDice();
+        return previousRoll;
     }
 
 
-    protected void passLineBetTurnSequence(Integer dieValue) {
-        if (this.dieValue == 7 || this.dieValue == 11) {
+    protected void passLineBetTurnSequence(Integer previousRoll) {
+        if (previousRoll == 7 || previousRoll == 11) {
             playerWins();
-        } else if (this.dieValue == 2 || this.dieValue == 3 || this.dieValue == 12) {
+        } else if (previousRoll == 2 || previousRoll == 3 || previousRoll == 12) {
             playerLoses();
         } else {
-            passLineBetRollsNonWinOrLoseNumber(this.dieValue);
+            passLineBetRollsNonWinOrLoseNumber(previousRoll);
         }
     }
 
-    protected void dontPassLineBetTurnSequence(Integer dieValue) {
-        if (this.dieValue == 2 || this.dieValue == 3) {
+    protected void dontPassLineBetTurnSequence(Integer previousRoll) {
+        if (previousRoll == 2 || previousRoll == 3) {
             playerWins();
-        } else if (this.dieValue == 7 || this.dieValue == 11) {
+        } else if (previousRoll == 7 || previousRoll == 11) {
             playerLoses();
         } else {
-            dontPassLineBetRollNonWinLoseNumber(this.dieValue);
+            dontPassLineBetRollNonWinLoseNumber(previousRoll);
         }
     }
 
@@ -89,32 +90,37 @@ public class Craps extends Dice implements Game {
         willUserPlayAgain();
     }
 
-    protected void passLineBetRollsNonWinOrLoseNumber(Integer dieValue) {
-
+    protected void passLineBetRollsNonWinOrLoseNumber(Integer previousRoll) {
+        Integer currentRoll = 0;
         do {
-            addDiceValuesTogether();
-        } while (this.dieValue != 7 || this.dieValue != dieValue);
+            currentRoll = addDiceValuesTogether();
 
-        if (dieValue == 7) {
-            playerLoses();
-        } else if (this.dieValue == dieValue) {
+            if (currentRoll == 7) {
+                playerLoses();
+                break;
 
-            playerWins();
-        }
+            } else if (currentRoll == previousRoll) {
+
+                playerWins();
+                break;
+            }
+        } while (currentRoll != 7 || currentRoll != previousRoll);
 
     }
 
-    protected void dontPassLineBetRollNonWinLoseNumber(Integer dieValue) {
-
+    protected void dontPassLineBetRollNonWinLoseNumber(Integer previousRoll) {
+        Integer currentRoll = 0;
         do {
-            rollDice();
-        } while (this.dieValue != 7 || this.dieValue != this.dieValue);
+            currentRoll = addDiceValuesTogether();
 
-        if (this.dieValue == 7) {
-            playerWins();
-        } else if (this.dieValue == this.dieValue) {
-            playerLoses();
-        }
+            if (previousRoll == 7) {
+                playerWins();
+                break;
+            } else if (currentRoll == previousRoll) {
+                playerLoses();
+                break;
+            }
+        } while (currentRoll != 7 || currentRoll != previousRoll);
 
     }
 
@@ -136,16 +142,16 @@ public class Craps extends Dice implements Game {
     }
 
     public void startGame() {
+        Integer diceRoll;
         do {
+            resetStats();
             userPlacesBet();
             userBetAmount();
-            addDiceValuesTogether();
-            System.out.println("his");
+            diceRoll = addDiceValuesTogether();
             if (this.betUserPlaces == 1) {
-                System.out.println("hdsjh");
-                passLineBetTurnSequence(this.dieValue);
+                passLineBetTurnSequence(diceRoll);
             } else {
-                dontPassLineBetTurnSequence(this.dieValue);
+                dontPassLineBetTurnSequence(diceRoll);
             }
 
         } while (this.playerDecision == 1);

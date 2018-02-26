@@ -13,8 +13,7 @@ public class CrapsTest {
 
 
     @Test
-    public void passLineBetTurnSequenceTest(){
-        game.setDieValue(dieValue);
+    public void passLineBetTurnSequenceTest() {
     }
 
     @Test
