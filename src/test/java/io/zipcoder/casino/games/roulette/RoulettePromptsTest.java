@@ -4,20 +4,15 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class RoulettePromptsTest {
     RoulettePrompts roulettePrompts = new RoulettePrompts();
 
 
-
-
-
     @Test
-    public void startMessageTest1(){
+    public void startMessageTest1() {
         String input = "y";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -26,7 +21,7 @@ public class RoulettePromptsTest {
     }
 
     @Test
-    public void startMessageTest2(){
+    public void startMessageTest2() {
         String input = "r";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -35,15 +30,8 @@ public class RoulettePromptsTest {
     }
 
 
-
-
-
-
-
-
-
     @Test
-    public void rulesTest(){
+    public void rulesTest() {
         String actual = roulettePrompts.rules();
 
         String expected = "************************RULES**********************\n" +
@@ -87,18 +75,8 @@ public class RoulettePromptsTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     @Test
-    public void firstSetOfOptionsPromptTest1(){
+    public void firstSetOfOptionsPromptTest1() {
         String input = "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -107,7 +85,7 @@ public class RoulettePromptsTest {
     }
 
     @Test
-    public void firstSetOfOptionsPromptTest2(){
+    public void firstSetOfOptionsPromptTest2() {
         String input = "11";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -116,7 +94,7 @@ public class RoulettePromptsTest {
     }
 
     @Test
-    public void firstSetOfOptionsPromptTest3(){
+    public void firstSetOfOptionsPromptTest3() {
         String input = "8";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -125,15 +103,8 @@ public class RoulettePromptsTest {
     }
 
 
-
-
-
-
-
-
-
     @Test
-    public void bettingInfoTest(){
+    public void bettingInfoTest() {
         String actual = roulettePrompts.bettingInfo();
         String expected = "***************** BETTING INFO *********************\n" +
                 "- Black, Red, 1-8, 19-36, Odd, and Even spaces payout evenly (1 to 1)\n" +
@@ -152,17 +123,8 @@ public class RoulettePromptsTest {
     }
 
 
-
-
-
-
-
-
-
-
-
     @Test
-    public void singleNumberPromptTest1(){
+    public void singleNumberPromptTest1() {
         String input = "37";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -171,7 +133,7 @@ public class RoulettePromptsTest {
     }
 
     @Test
-    public void singleNumberPromptTest2(){
+    public void singleNumberPromptTest2() {
         String input = "14";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -181,55 +143,58 @@ public class RoulettePromptsTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     @Test
-    public void onTheLineTest1(){
+    public void onTheLineTest1() {
         int input = 2;
 
-        Integer[] expected = {2,3};
+        Integer[] expected = {2, 3};
 
         Assert.assertEquals(expected, roulettePrompts.returnDoubleNumberArray(input));
     }
 
     @Test
-    public void onTheLineTest2(){
+    public void onTheLineTest2() {
         int input = 19;
 
-        Integer[] expected = {19,20};
+        Integer[] expected = {19, 20};
 
         Assert.assertEquals(expected, roulettePrompts.returnDoubleNumberArray(input));
     }
+
     @Test
-    public void onTheLineTest3(){
-        String input = "16";
+    public void onTheLineTest3() {
+        String input = "36";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.onTheLine();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
 
-        Integer[] expected = {16, 17};
 
-        Assert.assertEquals(expected, roulettePrompts.onTheLine());
+        Assert.assertFalse(actual);
+    }
+    @Test
+    public void onTheLineTest4() {
+        String input = "3";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.onTheLine();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
     }
 
 
-
-
-
-
-
-
-
-
     @Test
-    public void cornerTest1(){
+    public void cornerTest1() {
         String input = "17";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -240,7 +205,7 @@ public class RoulettePromptsTest {
     }
 
     @Test
-    public void cornerTest2(){
+    public void cornerTest2() {
         String input = "4";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -249,15 +214,40 @@ public class RoulettePromptsTest {
 
         Assert.assertEquals(expected, roulettePrompts.corner());
     }
+    @Test
+    public void cornerTest3() {
+        String input = "36";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.corner();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
 
 
+        Assert.assertFalse(actual);
+    }
+    @Test
+    public void cornerTest4() {
+        String input = "3";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.corner();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
 
 
-
+        Assert.assertFalse(actual);
+    }
 
 
     @Test
-    public void straightTest1(){
+    public void straightTest1() {
         String input = "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -268,76 +258,410 @@ public class RoulettePromptsTest {
     }
 
     @Test
-    public void straightTest2(){
+    public void straightTest2() {
         String input = "4";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        Integer[] expected = {4,5,6};
+        Integer[] expected = {4, 5, 6};
 
         Assert.assertEquals(expected, roulettePrompts.straight());
     }
+    @Test
+    public void straightTest3() {
+        String input = "36";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.straight();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
 
 
+        Assert.assertFalse(actual);
+    }
+    @Test
+    public void straightTest4() {
+        String input = "2";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.straight();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
 
+
+        Assert.assertFalse(actual);
+    }
+    @Test
+    public void straightTest5() {
+        String input = "3";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.straight();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
 
 
     @Test
-    public void basketTest(){
+    public void basketTest() {
         String input = "c";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        Integer[] basket = {0,00,2};
+        Integer[] basket = {0, 00, 2};
 
         Assert.assertEquals(basket, roulettePrompts.basket());
     }
 
 
-
-
     @Test
-    public void fiveNumberBetTest(){
+    public void fiveNumberBetTest() {
         String input = "c";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        Integer[] basket = {0,00,1,2,3};
+        Integer[] basket = {0, 00, 1, 2, 3};
 
         Assert.assertEquals(basket, roulettePrompts.fiveNumberBet());
     }
 
 
-
-
     @Test
-    public void lineBetTest1(){
+    public void lineBetTest1() {
         String input = "4";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
         Integer[] actual = roulettePrompts.lineBet();
-        Integer[] expected = {4,5,6,7,8,9};
+        Integer[] expected = {4, 5, 6, 7, 8, 9};
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void lineBetTest2(){
+    public void lineBetTest2() {
         String input = "13";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
         Integer[] actual = roulettePrompts.lineBet();
-        Integer[] expected = {13,14,15,16,17,18};
+        Integer[] expected = {13, 14, 15, 16, 17, 18};
 
         Assert.assertEquals(expected, actual);
+    }
+    @Test
+    public void lineTest3() {
+        String input = "36";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.lineBet();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
+    @Test
+    public void lineTest4() {
+        String input = "2";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.lineBet();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
+    @Test
+    public void lineTest5() {
+        String input = "3";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.lineBet();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
     }
 
 
 
+    @Test
+    public void columnBetTest1() {
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.columnBet();
+        Integer[] expected = {1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void columnBetTest2() {
+        String input = "4";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.columnBet();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
 
 
     @Test
-    public void
+    public void twelveBetTest1() {
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.twelveNumberBet();
+        Integer[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void twelveBetTest2() {
+        String input = "4";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.twelveNumberBet();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
+
+
+    @Test
+    public void numbers1Thru18BetTest1() {
+        String input = "c";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.numbers1Thru18();
+        Integer[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void numbers1Thru18BetTest2() {
+        String input = "f";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.numbers1Thru18();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
+
+
+    @Test
+    public void numbers19Thru36BetTest1() {
+        String input = "c";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.numbers19thru36();
+        Integer[] expected = {19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void numbers19Thru36BetTest2() {
+        String input = "f";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.numbers19thru36();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
+
+
+    @Test
+    public void evenNumbersTest1() {
+        String input = "c";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.evenNumbers();
+        Integer[] expected = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void evenNumbersTest2() {
+        String input = "f";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.evenNumbers();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
+
+
+    @Test
+    public void oddNumbersTest1() {
+        String input = "c";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.oddNumbers();
+        Integer[] expected = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void oddNumbersTest2() {
+        String input = "f";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.oddNumbers();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
+
+
+    @Test
+    public void blackNumbersTest1() {
+        String input = "c";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.blackNumbers();
+        Integer[] expected = {2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void blackNumbersTest2() {
+        String input = "f";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.blackNumbers();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
+
+    @Test
+    public void redNumbersTest1() {
+        String input = "c";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.redNumbers();
+        Integer[] expected = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void redNumbersTest2() {
+        String input = "f";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean actual = true;
+        try {
+            roulettePrompts.redNumbers();
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
+
+
+    @Test
+    public void cTest1() {
+        boolean actual = true;
+        try {
+            roulettePrompts.whereYouGetStuckForJustNotPressingC("c", "hi");
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void cTest2() {
+        boolean actual = true;
+        try {
+            roulettePrompts.whereYouGetStuckForJustNotPressingC("f", "hi");
+        } catch (NoSuchElementException e) {
+            actual = false;
+        }
+
+
+        Assert.assertFalse(actual);
+    }
 }
