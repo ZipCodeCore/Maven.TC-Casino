@@ -82,24 +82,31 @@ public class BJKJSecret {
                         "charm = <ERROR>"
         );
         System.out.println("=============================\nEnter Command\n");
-        InputOutput scan = new InputOutput();
-        String command = scan.scanForString();
-        attributeTamper(command);
+
+        attributeTamper();
     }
 
-    public void attributeTamper(String command){
-        switch (command.toLowerCase()){
+    public void attributeTamper(){
+        boolean proc = false;
+        do {
+            InputOutput scan = new InputOutput();
+            String command = scan.scanForString();
+        switch (command.toLowerCase()) {
             case "bulkapperception":
                 System.out.println("OVERRIDE ATTRIBUTE - BULK APPERCEPTION - 20\nTHE MAZE IS OPEN");
                 currentPlayer.bulkApperception = true;
+                proc = true;
                 break;
             case "charm":
                 System.out.println("OVERRIDE ATTRIBUTE - CHARM - 20\nSMALLTALK SUBROUTINE ACCESS GRANTED");
                 currentPlayer.charm = true;
+                proc = true;
                 break;
-                
-                default:
-                    System.out.println("INVALID COMMAND");
+
+            default:
+                System.out.println("INVALID COMMAND");
+                break;
         }
+        } while (proc == false);
     }
 }
