@@ -27,9 +27,7 @@ public class BlackJackGame extends CardGame {
     @Override
     public void startGame() {
         Console.print("Welcome to BlackJack!" + " " + player.getProfile().getName().toString());
-        while (placeInitialBet(player) == false) {
-            placeInitialBet(player);
-        }
+
         playBlackJack();
         endGame();
     }
@@ -39,7 +37,13 @@ public class BlackJackGame extends CardGame {
 
         while (playAnotherGame == true) {
             reset();
-            Console.print(round(player, dealer));
+            String printThis;
+            while (placeInitialBet(player) == false) {
+                placeInitialBet(player);
+            }
+            printThis = round(player, dealer);
+            Console.print(printThis);
+
             Console.print(player.getProfile().getName().toString() + " Play Again: Enter [Yes] : [NO] to end game");
 
             if (Console.getString().equalsIgnoreCase("YES")) {
@@ -71,10 +75,12 @@ public class BlackJackGame extends CardGame {
         String result = "";
         deal(thePlayer);
         /*check to see if player or dealer has blackjack upon first dealing if so round ends by return result.*/
-        result = settlesIfBlackJAck(thePlayer, theDealer);
-        if (result != null) {
+
+        if (isBlackJack(thePlayer) == true) {
+            result = settlesIfBlackJAck(thePlayer, theDealer);
             return result;
-        }/*player plays turn if player has blackjack or busts then round will end by returning result.*/
+        }
+        /*player plays turn if player has blackjack or busts then round will end by returning result.*/
         result = turn(thePlayer);
         if (result != null) {
             return result;
@@ -107,20 +113,24 @@ public class BlackJackGame extends CardGame {
      */
     public String turn(BlackJackPlayer currentPlayer) {
         String aResult = null;
-        currentPlayer.setCurrentPlayer(true);
-        while (currentPlayer.getIsBusted() == false || currentPlayer.getHasStood() == false) {
-
-            showListOfPlayerActions();
-            String input = Console.getString();
+        // currentPlayer.setCurrentPlayer(true);
+        while (currentPlayer.getIsBusted() == false | currentPlayer.getHasStood() == false) {
             if (currentPlayer.getScore() > 21) {
                 currentPlayer.setIsBusted(true);
+                Console.print(currentPlayer.getProfile().getName() + "You BUSTED!!!!");
                 aResult = settleBets(currentPlayer, dealer);
-            } else if (input.equalsIgnoreCase("Hit") & currentPlayer.getScore() < 21) {
-                hit(currentPlayer);
-                Console.print(currentPlayer.getProfile().getName() + " " + currentPlayer.getHand().showHand());
-            } else if (isBlackJack(currentPlayer) == true) {
+                break;
+            }
+            else if (isBlackJack(currentPlayer) == true) {
                 Console.print("BLACKJACK!!!!!!!!");
                 aResult = settlesIfBlackJAck(currentPlayer, dealer);
+                  break;
+            }
+            showListOfPlayerActions();
+            String input = Console.getString();
+            if (input.equalsIgnoreCase("Hit") & currentPlayer.getScore() < 21) {
+                hit(currentPlayer);
+                Console.print(currentPlayer.getProfile().getName() + " " + currentPlayer.getHand().showHand());
             } else if (input.equalsIgnoreCase("Stand")) {
                 stand(currentPlayer);
                 break;
@@ -129,7 +139,7 @@ public class BlackJackGame extends CardGame {
             }
 
         }
-        currentPlayer.setCurrentPlayer(false);
+        //currentPlayer.setCurrentPlayer(false);
         return aResult;
     }
 
@@ -178,11 +188,6 @@ public class BlackJackGame extends CardGame {
         thePlayer.setHasStood(true);
         return thePlayer.getHasStood();
     }
-
-    public void split() {
-
-    }
-
     /**
      * updates the current Score
      *
@@ -196,7 +201,7 @@ public class BlackJackGame extends CardGame {
         int cardValue;
         int updateScore;
 
-        if (cardToScore.getRank() == CardRank.ACE & countAcesInHand(thePlayer) > 1) {
+        if ((cardToScore.getRank() == CardRank.ACE ) & (countAcesInHand(thePlayer) > 1)) {
             cardValue = 1;
         } else {
             cardValue = cardToScore.getRank().getCardValue();
@@ -230,6 +235,7 @@ public class BlackJackGame extends CardGame {
         }
         if (isBusted(theDealer) | isBlackJack(theDealer)) {
             result = settleBets(thePlayer, theDealer);
+            Console.print("Dealer Busts");
             return result;
         }
         return null;
@@ -251,7 +257,7 @@ public class BlackJackGame extends CardGame {
     }
 
     public String showListOfPlayerActions() {
-        String playerActions = "Choose Action: [Bet], [Hit], [Stand], [Spilt]";
+        String playerActions = "Choose Action: [Bet], [Hit], [Stand]";
 
         Console.print(playerActions);
 
@@ -298,12 +304,12 @@ public class BlackJackGame extends CardGame {
         int payout = 0;
         String theResult = "";
         //settle winning bets;
-        if (isBlackJack(thePlayer) == true | theDealer.getIsBusted() == true | decideWinner(thePlayer, theDealer) == thePlayer) {
+        if ((isBlackJack(thePlayer) == true) | (theDealer.getIsBusted() == true )| (decideWinner(thePlayer, theDealer) == thePlayer)) {
             payout = 1;
             settlingBets(thePlayer, payout);
             theResult = winnerAsString(thePlayer);
         }//settle loosing bets
-        else if (thePlayer.getIsBusted() == true | decideWinner(thePlayer, theDealer) == theDealer) {
+        else if ((thePlayer.getIsBusted() == true) | (decideWinner(thePlayer, theDealer) == theDealer)){
             payout = 2;
             settlingBets(thePlayer, payout);
             theResult = looserAsString(thePlayer);
@@ -379,14 +385,14 @@ public class BlackJackGame extends CardGame {
         int playerScore = thePlayer.getScore();
         int dealerScore = theDealer.getScore();
 
-        if (playerScore <= 21 & dealerScore <= 21 & playerScore < dealerScore) {
+        if ((playerScore <= 21 & dealerScore <= 21) & (playerScore < dealerScore)) {
             return theDealer;
         }
         // score is equal game is a push no player wins or looses
-        else if (playerScore <= 21 & dealerScore <= 21 & playerScore == dealerScore) {
-            return null;
+        else if ((playerScore <= 21 & dealerScore <= 21) & (playerScore > dealerScore)) {
+            return thePlayer;
         }
-        return thePlayer;
+        return null;
     }
 
     public boolean isBusted(BlackJackPlayer thePlayer) {
@@ -413,6 +419,8 @@ public class BlackJackGame extends CardGame {
         dealer.setHasStood(false);
         player.getHand().clear();
         dealer.getHand().clear();
+        player.setScore(0);
+        dealer.setScore(0);
     }
 
 
