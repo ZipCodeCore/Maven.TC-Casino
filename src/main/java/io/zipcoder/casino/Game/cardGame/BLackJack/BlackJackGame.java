@@ -59,7 +59,7 @@ public class BlackJackGame extends CardGame {
         }
 
         turn(thePlayer);
-        
+
 
 
         //TODO
