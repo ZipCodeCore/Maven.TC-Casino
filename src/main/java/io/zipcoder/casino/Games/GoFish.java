@@ -101,6 +101,7 @@ public class GoFish implements Game {
             System.out.println("\n" + opponentToAsk.getName() + " did not have that card. Go fish.\n");
             if (deck.deck.isEmpty()) {
                 System.out.println("\nThe deck is empty. No cards to draw.\n");
+                System.out.println("===========================\n");
                 turnCounter++;
                 return;
             }
@@ -114,6 +115,7 @@ public class GoFish implements Game {
 
             } else {
                 this.fillPlayerHands();
+                System.out.println("===========================\n");
                 turnCounter++;
             }
         }
