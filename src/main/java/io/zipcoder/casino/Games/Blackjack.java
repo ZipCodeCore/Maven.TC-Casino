@@ -31,10 +31,7 @@ public class Blackjack implements Game{
         do {
             splash();
             pregameReset();
-            if (player.getRootPlayer().getBalance() < 10) {
-                System.out.println("You haven't got the dough! ");
-                break;
-            }
+            if (outOfMoneyCheck()) break;
             if (player.bulkApperception) selfActualization();
             deck = new Deck();
             deck.shuffleDeck();
@@ -47,10 +44,18 @@ public class Blackjack implements Game{
         endGame();
     }
 
+    public boolean outOfMoneyCheck() {
+        if (player.getRootPlayer().getBalance() < 10) {
+            System.out.println("You haven't got the dough! ");
+            return true;
+        }
+        return false;
+    }
+
     private void splash(){
         if (titleSplash == true) {
             System.out.println(
-                    ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                        \n" +
+                            ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                        \n" +
                             "|  |) /_|  |    /  O  \\ '  .--./|  .'   /    |  |/  O  \\ '  .--./|  .'   /                                                        \n" +
                             "|  .-.  \\  |   |  .-.  ||  |    |  .   ',--. |  |  .-.  ||  |    |  .   '                                                         \n" +
                             "|  '--' /  '--.|  | |  |'  '--'\\|  |\\   \\  '-'  /  | |  |'  '--'\\|  |\\   \\                                                        \n" +
@@ -58,7 +63,7 @@ public class Blackjack implements Game{
             this.titleSplash = false;
         } else {
             System.out.println(
-                    ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                        \n" +
+                            ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                          \n" +
                             "|  |) /_|  |    /  O  \\ '  .--./|  .'   /    |  |/  O  \\ '  .--./|  .'   /                                                        \n" +
                             "|  .-.  \\  |   |  .-.  ||  |    |  .   ',--. |  |  .-.  ||  |    |  .   '                                                         \n" +
                             "|  '--' /  '--.|  | |  |'  '--'\\|  |\\   \\  '-'  /  | |  |'  '--'\\|  |\\   \\                                                        \n" +
@@ -261,7 +266,7 @@ public class Blackjack implements Game{
         InputOutput inputOutput = new InputOutput();
         String credential = inputOutput.promptForString("ENTER ADMIN USER NAME");
         if (credential.equals("admin")) {
-            System.out.println("These violent delights have violent ends.");
+            System.out.println("These card based delights have card based ends.");
             BJKJSecret secret = new BJKJSecret();
             secret.start(this.player);
         }
