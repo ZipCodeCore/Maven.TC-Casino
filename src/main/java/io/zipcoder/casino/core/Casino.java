@@ -2,7 +2,7 @@ package io.zipcoder.casino.core;
 
 import io.zipcoder.casino.games.blackjack.BlackJack;
 import io.zipcoder.casino.games.ceelo.CeeLo;
-import io.zipcoder.casino.games.crazy8s.Crazy8Play;
+import io.zipcoder.casino.games.crazy8s.Crazy8Game;
 import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
@@ -67,7 +67,7 @@ public class Casino {
                     currentGameRunning = new BlackJack();
                     break;
                 case 2:
-                    currentGameRunning = new Crazy8Play();
+                    currentGameRunning = new Crazy8Game();
                     break;
                 case 3:
                     currentGameRunning = new CeeLo();
@@ -83,10 +83,6 @@ public class Casino {
             return currentGameRunning;
         }
 
-    public void welcomeScreen(){
-
-        IOHandler.getMessageFromFile("CasinoWelcomeMenu.txt");
-    }
 
     public void goodBye(){
 

@@ -36,7 +36,8 @@ public class Crazy8sMenu {
 
     public void playGame() {
         Player player = new Player();
-        Crazy8Play game = new Crazy8Play(true);
+        //Crazy8Play game = new Crazy8Play(true);
+        Crazy8Game game = new Crazy8Game(true);
 
         game.play(player);
     }
