@@ -14,20 +14,20 @@ public class CrapsPlayerTest {
     Craps game;
 
     @Before
-    public void setup(){
+    public void setup() {
         bobCrapsPlayer = new CrapsPlayer(bob);
         game = new Craps(bob);
     }
 
     @Test
-    public void constructorTest(){
+    public void constructorTest() {
         String expected = "Bob";
         String actual = bobCrapsPlayer.getName();
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void lostMoneyTest(){
+    public void lostMoneyTest() {
         int moneyTest = 500;
         game.setPlayerBetAmount(500);
         bobCrapsPlayer.lostMoney(500);
@@ -35,11 +35,11 @@ public class CrapsPlayerTest {
     }
 
     @Test
-    public void wonMoneyTest(){
+    public void wonMoneyTest() {
         int moneyTest = 500;
         game.setPlayerBetAmount(500);
         bobCrapsPlayer.wonMoney(500);
-        Assert.assertTrue(bob.getBalance() == 0);
+        Assert.assertTrue(bob.getBalance() == 1000);
     }
 
 }

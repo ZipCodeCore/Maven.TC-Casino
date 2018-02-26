@@ -20,21 +20,9 @@ public class Craps extends Dice implements Game {
         this.playerBetAmount = playerBetAmount;
     }
 
-    public void setBetUserPlaces(Integer betUserPlaces) {
-        this.betUserPlaces = betUserPlaces;
-    }
-
-
     public Craps(Player player) {
         this.mainPlayer = new CrapsPlayer(player);
     }
-
-    public void resetStats() {
-        betUserPlaces = 0;
-        playerBetAmount = 0;
-        playerDecision = 1;
-    }
-
 
     private void userPlacesBet() {
         System.out.println("Hello! " + mainPlayer.getName() + "\n Please press\n 1 for Pass Line\n 2 for Don't Pass Line");
@@ -42,9 +30,15 @@ public class Craps extends Dice implements Game {
         this.betUserPlaces = inputOutput.scanForInt();
     }
 
-    private void userBetAmount() {
+    protected boolean userBetAmount() {
         InputOutput inputOutput = new InputOutput();
-        this.playerBetAmount = inputOutput.promptForInt("How much money do you bet?");
+        playerBetAmount = inputOutput.promptForInt("How much money do you bet?");
+        if (playerBetAmount > mainPlayer.getMainPlayer().getBalance()) {
+            System.out.println("You don't have enough to bet! Get Out of here!");
+            return true;
+        }
+        return false;
+
     }
 
     private Integer addDiceValuesTogether() {
@@ -144,9 +138,12 @@ public class Craps extends Dice implements Game {
     public void startGame() {
         Integer diceRoll;
         do {
-            resetStats();
+            if (mainPlayer.getMainPlayer().getBalance() == 0) {
+                System.out.println("You Have no money Left!");
+                break;
+            }
             userPlacesBet();
-            userBetAmount();
+            if (userBetAmount() == true) break;
             diceRoll = addDiceValuesTogether();
             if (this.betUserPlaces == 1) {
                 passLineBetTurnSequence(diceRoll);
@@ -154,12 +151,13 @@ public class Craps extends Dice implements Game {
                 dontPassLineBetTurnSequence(diceRoll);
             }
 
+
         } while (this.playerDecision == 1);
         endGame();
 
     }
 
     public void endGame() {
-        String goodbye = "Thank you for playing!";
+        System.out.println("Thank you for Playing!");
     }
 }

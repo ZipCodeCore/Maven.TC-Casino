@@ -1,8 +1,6 @@
 package io.zipcoder.casino.Players;
 
 
-import io.zipcoder.casino.Wallet;
-
 public class CrapsPlayer extends Player {
 
     protected Player mainPlayer;
@@ -24,6 +22,6 @@ public class CrapsPlayer extends Player {
     }
 
     public void wonMoney(int money) {
-        mainPlayer.wallet.subtract(money);
+        mainPlayer.wallet.add(money);
     }
 }

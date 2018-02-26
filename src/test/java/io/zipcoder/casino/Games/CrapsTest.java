@@ -3,6 +3,8 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.Players.Player;
 
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CrapsTest {
@@ -11,19 +13,19 @@ public class CrapsTest {
     Player bob = new Player("Bob", 30, 500);
 
 
-
-    @Test
-    public void passLineBetTurnSequenceTest() {
+    @Before
+    public void setup() {
+        game = new Craps(bob);
     }
 
     @Test
-    public void ifDontPassLineTest() {
+    public void setPlayerBetAmountTest() {
+        Integer expected = 500;
 
+        game.setPlayerBetAmount(expected);
+        Integer actual = game.getPlayerBetAmount();
+
+        Assert.assertEquals(expected, actual);
     }
-    public void willUserPlayAgainTest(){
-
-    }
-
-
 
 }
