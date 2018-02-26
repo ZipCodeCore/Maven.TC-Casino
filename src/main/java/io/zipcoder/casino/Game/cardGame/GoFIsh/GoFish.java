@@ -161,22 +161,22 @@ public class GoFish extends CardGame {
         if (countMatchesInHand(user, aCardRank) < 1) {
             Console.print("Darn. I'm fishing. Your turn now.");
             fish(dealer);
-            if (getHandForBook(dealer, aCardRank) > 0) {
-                Console.print("I made a book!!");
-                dealer.buildBooks(dealer, aCardRank);
-                removeFromHand(dealer, aCardRank);
-            }
+//            if (getHandForBook(dealer, aCardRank) > 0) {
+//                Console.print("I made a book!!");
+//                dealer.buildBooks(dealer, aCardRank);
+//                removeFromHand(dealer, aCardRank);
+//            }
 
             isTurn = true;
 
         } else {
             transfer(aCardRank, user, dealer);
             Console.print("Thanks! Now I guess again!");
-            if (getHandForBook(dealer, aCardRank) > 0) {
-                Console.print("I made a book!!");
-                dealer.buildBooks(dealer, aCardRank);
-                removeFromHand(dealer, aCardRank);
-            }
+//            if (getHandForBook(dealer, aCardRank) > 0) {
+//                Console.print("I made a book!!");
+//                dealer.buildBooks(dealer, aCardRank);
+//                removeFromHand(dealer, aCardRank);
+//            }
         }
 
     }
