@@ -41,24 +41,15 @@ public class GoFish extends CardGame {
 
     }
 
-    public static void main(String[] args) {
-        Profile luckyPlayer = new Profile("Kibret", 1000000, 11);
-        GoFish goFishGame = new GoFish(luckyPlayer);
-        goFishGame.playGame();
-
-    }
-
     public void playGame() {
         startGame();
 
         do {
             playUserTurn();
             playDealerTurn();
-        } while (getDeck().countRemainingCards() > 0 &&
-                user.getHand().getCards().size() > 0 &&
-                dealer.getHand().getCards().size() > 0);
+        } while (getDeck().countRemainingCards() > 0 );
 
-        decideWinner(user, dealer);
+        decideWinner();
 
         endGame();
 
@@ -86,6 +77,11 @@ public class GoFish extends CardGame {
     public void playUserTurn() {
 
         Console.print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+        if (user.getHand().getCards().size() == 0) {
+            Console.print("Your hand is empty.  You have to fish.");
+            fish(user);
+            isTurn = false;
+        }
         do {
             dealer.getHand().orderCards();
             Console.print(dealer.getHand().showHand());
@@ -103,6 +99,12 @@ public class GoFish extends CardGame {
         Console.print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
 
         Console.print("Now its my turn!");
+
+        if (dealer.getHand().getCards().size() == 0) {
+            Console.print("My hand is empty.  I have to fish.");
+            fish(dealer);
+            isTurn = false;
+        }
 
         do {
             int dealerHandSize = dealer.getHand().getCards().size();
@@ -148,13 +150,6 @@ public class GoFish extends CardGame {
                 askingPlayer.getHand().orderCards();
                 Console.print(askingPlayer.getHand().showHand());
             }
-        }
-        if (askingPlayer.getHand().getCards().size() < 1 ||
-                playerBeingAsked.getHand().getCards().size() < 1 ||
-                (askingPlayer.getHand().getCards().size() + askingPlayer.getBook().size() +
-                        playerBeingAsked.getHand().getCards().size() + playerBeingAsked.getBook().size() >= 52)) {
-
-            decideWinner(askingPlayer, playerBeingAsked);
         }
     }
 
@@ -202,11 +197,15 @@ public class GoFish extends CardGame {
 
     }
 
-    public String decideWinner(GoFishPlayer player1, GoFishPlayer player2) {
-        if (player1.getScores() > player2.getScores()) {
-            return "The winner is: " + player1.getProfile().getName();
-        } else if (player2.getScores() > player1.getScores()) {
-            return "The winner is: " + player2.getProfile().getName();
+    public String decideWinner() {
+
+        Console.print("Dealer score is: " + dealer.getScore());
+        Console.print("Your score is: " + user.getScore());
+
+        if (user.getScores() > dealer.getScores()) {
+            return "The winner is: " + user.getProfile().getName();
+        } else if (dealer.getScores() > user.getScore()) {
+            return "The winner is: " + dealer.getProfile().getName();
         } else {
             return "It is a tie.";
         }
