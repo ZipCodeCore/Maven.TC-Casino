@@ -145,6 +145,14 @@ public class Craps extends Dice implements Game {
                 System.out.println("You Have no money Left!");
                 break;
             }
+            System.out.println("\n" +
+                    " ██████╗██████╗  █████╗ ██████╗ ███████╗    \n" +
+                    "██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔════╝    \n" +
+                    "██║     ██████╔╝███████║██████╔╝███████╗    \n" +
+                    "██║     ██╔══██╗██╔══██║██╔═══╝ ╚════██║    \n" +
+                    "╚██████╗██║  ██║██║  ██║██║     ███████║    \n" +
+                    " ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚══════╝    \n" +
+                    "                                            \n");
             userPlacesBet();
             if (userBetAmount() == true) break;
             diceRoll = addDiceValuesTogether();
