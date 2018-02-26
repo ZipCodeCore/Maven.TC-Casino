@@ -49,7 +49,6 @@ public class Casino {
                 break;
             case 2:
                 currentGameRunning = new Crazy8Game();
-                System.out.println("[ SORRY! OUT OF ORDER! ]\n");
                 break;
             case 3:
                 currentGameRunning = new CeeLo();
