@@ -105,7 +105,7 @@ public class House implements MainMenu {
             }
             else if(userInput.equalsIgnoreCase("go fish")){
                 GoFish newGame = new GoFish(currentPlayer);
-                newGame.startGame();
+                newGame.playGame();
                 break;
             }
             else if(userInput.equalsIgnoreCase("leave")){

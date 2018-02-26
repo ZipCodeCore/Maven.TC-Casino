@@ -83,8 +83,8 @@ public class GoFish extends CardGame {
             isTurn = false;
         }
         do {
-            dealer.getHand().orderCards();
-            Console.print(dealer.getHand().showHand());
+//            dealer.getHand().orderCards();
+//            Console.print(dealer.getHand().showHand());
             user.getHand().orderCards();
             Console.print(user.getHand().showHand());
             Console.print("Which card value would you like to ask for?");
