@@ -12,7 +12,8 @@ public class RoulettePrompts {
     ArrayList<Integer> lastColumn = new ArrayList<>();
     ArrayList<Integer> secondColumn = new ArrayList<>();
     ArrayList<Integer> firstColumn = new ArrayList<>();
-    public RoulettePrompts(){
+
+    public RoulettePrompts() {
         lastColumn.addAll(Arrays.asList(rouletteBoardAndWheel.columnSelection(3)));
         secondColumn.addAll(Arrays.asList(rouletteBoardAndWheel.columnSelection(2)));
         firstColumn.addAll(Arrays.asList(rouletteBoardAndWheel.columnSelection(1)));
@@ -21,24 +22,24 @@ public class RoulettePrompts {
 
     public String startMessage() {
         String welcomePrompt =
-                "*******************************************************\n" +
-                "*          This is the table for high roller          *\n" +
-                "*          Indulgence here at our casino.             *\n" +
-                "*           Roulette is a casino game named           *\n" +
-                "*          after the French word meaning              *\n" +
-                "*          little wheel. In the game, players         *\n" +
-                "*          may choose to place bets on either         *\n" +
-                "*           a single number, various groupings        *\n" +
-                "*           of numbers, the colors red or             *\n" +
-                "*           black, whether the number is odd          *\n" +
-                "*           or even, or if the numbers are            *\n" +
-                "*           high (19–36) or low (1–18).               *\n" +
-                "*******************************************************\n\n" +
-                "*             Press 'y' to place your bets            *\n" +
-                "*                  Press 'q' to quit                  *\n" +
-                "*                 Press 'r' for rules                 *\n" +
-                "*              Press 'b' for betting info             *\n\n" +
-                "*******************************************************\n";
+                "\n\n\n\n*******************************************************\n" +
+                        "*          This is the table for high roller          *\n" +
+                        "*          Indulgence here at our casino.             *\n" +
+                        "*           Roulette is a casino game named           *\n" +
+                        "*          after the French word meaning              *\n" +
+                        "*          little wheel. In the game, players         *\n" +
+                        "*          may choose to place bets on either         *\n" +
+                        "*           a single number, various groupings        *\n" +
+                        "*           of numbers, the colors red or             *\n" +
+                        "*           black, whether the number is odd          *\n" +
+                        "*           or even, or if the numbers are            *\n" +
+                        "*           high (19–36) or low (1–18).               *\n" +
+                        "*******************************************************\n\n" +
+                        "*             Press 'y' to place your bets            *\n" +
+                        "*                  Press 'q' to quit                  *\n" +
+                        "*                 Press 'r' for rules                 *\n" +
+                        "*              Press 'b' for betting info             *\n\n" +
+                        "*******************************************************\n";
 
         return IOHandler.promptForStringWithMessage(welcomePrompt);
     }
@@ -86,7 +87,7 @@ public class RoulettePrompts {
     public int firstSetOfOptionsPrompt(int n) {
         String options = "****************** BET #" + n + " ******************\n" +
                 "*         Please choose an option          *\n" +
-                "*         Each bet is 1 chip ($5)          *\n" +
+                "*        Each bet is 10 chip ($50)         *\n" +
                 "*                                          *\n" +
                 "* Betting:                                 *\n" +
                 "* 1. Single number                         *\n" +
@@ -112,8 +113,8 @@ public class RoulettePrompts {
         return IOHandler.promptForIntWithMessage(options);
     }
 
-    public void bettingInfo() {
-        System.out.println("***************** BETTING INFO *********************\n" +
+    public String bettingInfo() {
+        String info ="***************** BETTING INFO *********************\n" +
                 "- Black, Red, 1-8, 19-36, Odd, and Even spaces payout evenly (1 to 1)\n" +
                 "- 1st 12, 2nd 12, and 3rd 12 payout 2 to 1\n" +
                 "- column wins pay 2 to 1 as well\n" +
@@ -124,35 +125,28 @@ public class RoulettePrompts {
                 "\t- Basket (0, 00, and 2) wins 11 to 1\n" +
                 "\t- Corner (4 numbers) wins 8 to 1\n" +
                 "\t- 5 number bet ( 0, 00, 1, 2, 3) wins 6 to 1\n" +
-                "\t- line bet (6 numbers/2 rows) wins 5 to 1\n");
+                "\t- line bet (6 numbers/2 rows) wins 5 to 1\n";
+        return info;
     }
 
 
     //SingleNumberAdd
-    public ArrayList<Integer> singleNumberPrompt() {
+    public Integer singleNumberPrompt() {
         String prompt = "***************** Single Number ********************\n" +
                 "You selected to bet 1 chip on a single number space. \n" +
                 "The payout for this bet is 35 to 1 if your \n" +
                 "selection is the winning number. \n\n";
         System.out.println(prompt);
-        int numberChoice = 0;
-        ArrayList<Integer> result = new ArrayList<>();
-        while(numberChoice != 37) {
-            numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-36 or enter 37 to finish this bet:");
-            Integer numberToAdd = singleNumberPromptAddArrayListEntry(numberChoice);
-            if(numberToAdd != null) {
-                result.add(numberToAdd);
-            }
-        }
-
-        return result;
+        Integer numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-36 or enter 37 to finish this bet:");
+        return numberChoice;
     }
-    public Integer singleNumberPromptAddArrayListEntry(int numberChoice){
-        if (numberChoice != 37){
+
+    public Integer singleNumberPromptAddArrayListEntry(int numberChoice) {
+        if (numberChoice != 37) {
             return numberChoice;
-        } else if (numberChoice > 37){
+        } else if (numberChoice > 37) {
             System.out.println("ERROR! INVALID INPUT!");
-        } else{
+        } else {
 
         }
         return null;
@@ -164,20 +158,20 @@ public class RoulettePrompts {
     public Integer[] onTheLine() {
         System.out.println("************* On The Line (2 numbers) **************\n" +
                 "You selected to bet 1 chip on two number spaces. \n" +
-                "The instructions are to choose one number out of\n"+
-                "two numbers that you want to select. For example,\n"+
+                "The instructions are to choose one number out of\n" +
+                "two numbers that you want to select. For example,\n" +
                 "if you enter the number 2, the dealer will take\n" +
-                "that as 'betting on 2 and 3'. \n"+
+                "that as 'betting on 2 and 3'. \n" +
                 "NUMBERS HAVE TO BE NEXT TO EACH OTHER. \n" +
                 "The payout for this bet is 17 to 1 if your \n" +
                 "selection is the winning number.\n\n");
         Integer[] result = new Integer[2];
         int numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-35: ");
-        if(numberChoice > 35 || lastColumn.contains(numberChoice)) {
+        if (numberChoice > 35 || lastColumn.contains(numberChoice)) {
             do {
                 System.out.println("\n\nERROR!\n\n");
                 numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-35: ");
-            }while(numberChoice > 35 || lastColumn.contains(numberChoice));
+            } while (numberChoice > 35 || lastColumn.contains(numberChoice));
         }
         if (numberChoice < 36) {
             result = returnDoubleNumberArray(numberChoice);
@@ -185,13 +179,11 @@ public class RoulettePrompts {
         return result;
     }
 
-    public Integer[] returnDoubleNumberArray(int numberChoice){
-        Integer[] result = {numberChoice, numberChoice+1};
+    public Integer[] returnDoubleNumberArray(int numberChoice) {
+        Integer[] result = {numberChoice, numberChoice + 1};
         return result;
     }
     //on the line end
-
-
 
 
     public Integer[] corner() {
@@ -208,11 +200,12 @@ public class RoulettePrompts {
         Integer[] result = new Integer[4];
         int counterForArray = 0;
         int startingNumber = IOHandler.promptForIntWithMessage(prompt);
-        if (startingNumber > 31 || lastColumn.contains(startingNumber));{
+        if (startingNumber > 31 || lastColumn.contains(startingNumber)) ;
+        {
             do {
                 System.out.println("\n\nERROR!\n\n");
                 startingNumber = IOHandler.promptForIntWithMessage(prompt);
-            }while(startingNumber > 31 || lastColumn.contains(startingNumber));
+            } while (startingNumber > 31 || lastColumn.contains(startingNumber));
         }
         for (int i = startingNumber; i < startingNumber + 5; i++) {
             if (i != (startingNumber + 2)) {
@@ -235,8 +228,8 @@ public class RoulettePrompts {
         Integer[] column2 = rouletteBoardAndWheel.columnSelection(2);
         Integer[] column3 = rouletteBoardAndWheel.columnSelection(3);
         int startingNumber = IOHandler.promptForIntWithMessage(prompt);
-        if(startingNumber > 34){
-            do{
+        if (startingNumber > 34) {
+            do {
                 System.out.println("\n\nERROR!\n\n");
                 startingNumber = IOHandler.promptForIntWithMessage(prompt);
             } while (startingNumber > 34);
@@ -328,14 +321,14 @@ public class RoulettePrompts {
         return result;
     }
 
-    public Integer[] numbers1Thru8() {
-        String prompt = "********************* 1-8 Bet *********************\n" +
-                "You selected to bet 1 chip on numbers 1-8. The \n" +
+    public Integer[] numbers1Thru18() {
+        String prompt = "********************* 1-18 Bet *********************\n" +
+                "You selected to bet 1 chip on numbers 1-18. The \n" +
                 "payout for this bet is 1 to 1. Please press 'c' to \n" +
                 "continue./n";
         String goOnAhead = IOHandler.promptForStringWithMessage(prompt);
         if (goOnAhead.equals("c")) {
-            Integer[] result = new Integer[8];
+            Integer[] result = new Integer[18];
             for (int i = 1; i <= result.length; i++) {
                 result[i - 1] = i;
             }

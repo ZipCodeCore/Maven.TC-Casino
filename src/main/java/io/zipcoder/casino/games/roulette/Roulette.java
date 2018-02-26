@@ -10,16 +10,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class Roulette implements Game{
+public class Roulette implements Game {
     private Player player = new Player();
     private RouletteBoardAndWheel rouletteBoardAndWheel = new RouletteBoardAndWheel();
     private RoulettePrompts prompts = new RoulettePrompts();
     private RouletteGamble rouletteGamble = new RouletteGamble();
     private String stringResponse = "";
     private int intResponse;
-    private Integer initialBalance = player.getBalance().intValue();
-    //    private Integer initialBalance = player.getBalance().intValue();
-//    protected Integer currentBalance = initialBalance;
+    private Integer earnings = 0;
+    private Integer losses = 0;
+    protected Integer initialBalance = player.getBalance().intValue();
     protected HashMap<String, ArrayList<Integer>> bettingMap = new HashMap<>();
     protected ArrayList<Integer> singleNumberSelection = new ArrayList<>();
     protected ArrayList<Integer> doubleNumberSelection = new ArrayList<>();
@@ -54,43 +54,22 @@ public class Roulette implements Game{
         System.out.println("Thank you for playing Roulette!\n\n");
     }
 
-    public void runWelcome() {
-        String welcomeResponse =
-                "********************* WELCOME TO **********************" +
-                "(        )          (                             \n" +
-                " )\\ )  ( /(          )\\ )        *   )  *   )      \n" +
-                "(()/(  )\\())     (  (()/(  (   ` )  /(` )  /( (    \n" +
-                " /(_))((_)\\      )\\  /(_)) )\\   ( )(_))( )(_)))\\   \n" +
-                "(_))    ((_)  _ ((_)(_))  ((_) (_(_())(_(_())((_)  \n" +
-                "| _ \\  / _ \\ | | | || |   | __||_   _||_   _|| __| \n" +
-                "|   / | (_) || |_| || |__ | _|   | |    | |  | _|  \n" +
-                "|_|_\\  \\___/  \\___/ |____||___|  |_|    |_|  |___|\n\n";
-        String continueResponse;
-        do {
-             continueResponse = IOHandler.promptForStringWithMessage("Press 'c' to continue");
-        } while(!continueResponse.equals("c"));
-    }
 
-    public String getRules(){
-        String rules = prompts.rules();
-        return rules;
-    }
+
     public void mainLoop() throws InterruptedException {
-        Integer atStartOfTurnBalance = player.getBalance().intValue();
         startProgram:
         while (true) {
-            int betCounter = 1;
             stringResponse = prompts.startMessage();
             if (stringResponse.equals("q")) {
                 break startProgram;
             } else if (stringResponse.equals("r")) {
                 System.out.println(getRules());
-                TimeUnit.SECONDS.sleep(10);
+                pressCtoContinue();
             } else if (stringResponse.equals("b")) {
-                prompts.bettingInfo();
-                TimeUnit.SECONDS.sleep(10);
+               System.out.println(getBettingInfo());
+               pressCtoContinue();
             } else if (stringResponse.equals("y")) {
-                letsPlay(betCounter, atStartOfTurnBalance);
+                letsPlay();
             } else {
                 System.out.println("\nERROR! INVALID INPUT!\n\nRestarting game...\n\n\n");
                 TimeUnit.SECONDS.sleep(5);
@@ -98,113 +77,148 @@ public class Roulette implements Game{
         }
     }
 
-    public void letsPlay(int betCounter, Integer atStartOfTurnBalance) throws InterruptedException {
-        while (intResponse != 17) {
-            intResponse = prompts.firstSetOfOptionsPrompt(betCounter);
+    public void letsPlay() throws InterruptedException {
+        int turnCounter = 1;
+        do{
+            intResponse = prompts.firstSetOfOptionsPrompt(turnCounter);
             if (intResponse == 16) {
-                prompts.bettingInfo();
-                TimeUnit.SECONDS.sleep(10);
+                System.out.println(getBettingInfo());
+                pressCtoContinue();
+            } else if(intResponse != 17) {
+                selectionOptions(intResponse);
+                turnCounter++;
             }
-            selectionOptions(intResponse);
-            betCounter++;
-        }
+        } while (intResponse != 17);
         calculateWinnersAndEarnings();
-        rouletteGamble.printStats(initialBalance, atStartOfTurnBalance, player.getBalance().intValue());
-        IOHandler.promptForStringWithMessage("\nPress 'c' to restart\n\n");
+        this.losses = rouletteGamble.lose((turnCounter-1)*10, this.earnings);
+        rouletteGamble.printStats(initialBalance, player.getBalance().intValue(), (turnCounter-1)*10, this.earnings, this.losses);
+        pressCtoContinue();
+        clearNumberArraysAndBettingMap();
     }
 
-    public void selectionOptions(int intResponse){
-        long bet = 1;
-        switch (intResponse) {
-            case 1:
-                player.betChips(bet);
-                singleNumberSelection.addAll(prompts.singleNumberPrompt());
-                bettingMap.put("Single Number", singleNumberSelection);
-                break;
-            case 2:
-                player.betChips(bet);
-                doubleNumberSelection.addAll(Arrays.asList(prompts.onTheLine()));
-                bettingMap.put("Double Number", doubleNumberSelection);
-                break;
-            case 3:
-                player.betChips(bet);
-                cornerNumberSelection.addAll(Arrays.asList(prompts.corner()));
-                bettingMap.put("Corner", cornerNumberSelection);
-                break;
-            case 4:
-                player.betChips(bet);
-                rowNumberSelection.addAll(Arrays.asList(prompts.straight()));
-                bettingMap.put("Straight", rowNumberSelection);
-                break;
-            case 5:
-                player.betChips(bet);
-                basketNumberSelection.addAll(Arrays.asList(prompts.basket()));
-                bettingMap.put("Basket", basketNumberSelection);
-                break;
-            case 6:
-                player.betChips(bet);
-                fiveNumberSelection.addAll(Arrays.asList(prompts.fiveNumberBet()));
-                bettingMap.put("Five Number Bet", fiveNumberSelection);
-                break;
-            case 7:
-                player.betChips(bet);
-                lineNumberSelection.addAll(Arrays.asList(prompts.lineBet()));
-                bettingMap.put("Line Bet", lineNumberSelection);
-                break;
-            case 8:
-                player.betChips(bet);
-                columnNumberSelection.addAll(Arrays.asList(prompts.columnBet()));
-                bettingMap.put("Column Bet", columnNumberSelection);
-                break;
-            case 9:
-                player.betChips(bet);
-                twelveNumberSelection.addAll(Arrays.asList(prompts.twelveNumberBet()));
-                bettingMap.put("12 Number Bet", twelveNumberSelection);
-                break;
-            case 10:
-                player.betChips(bet);
-                oneThru8Selection.addAll(Arrays.asList(prompts.numbers1Thru8()));
-                bettingMap.put("Numbers 1 - 8", oneThru8Selection);
-                break;
-            case 11:
-                player.betChips(bet);
-                nineteenThru36Selection.addAll(Arrays.asList(prompts.numbers19thru36()));
-                bettingMap.put("Numbers 19 - 36", nineteenThru36Selection);
-                break;
-            case 12:
-                player.betChips(bet);
-                evenNumberSelection.addAll(Arrays.asList(prompts.evenNumbers()));
-                bettingMap.put("Even Numbers", evenNumberSelection);
-                break;
-            case 13:
-                player.betChips(bet);
-                oddNumberSelection.addAll(Arrays.asList(prompts.oddNumbers()));
-                bettingMap.put("Odd Numbers", oddNumberSelection);
-                break;
-            case 14:
-                player.betChips(bet);
-                blackNumberSelection.addAll(Arrays.asList(prompts.blackNumbers()));
-                bettingMap.put("Black Numbers", blackNumberSelection);
-                break;
-            case 15:
-                player.betChips(bet);
-                redNumberSelection.addAll(Arrays.asList(prompts.redNumbers()));
-                bettingMap.put("Red Numbers", redNumberSelection);
-                break;
+    public void selectionOptions(int intResponse) {
+        long betCost = 10;
+        if (player.canCoverBet(betCost) == true) {
+            player.betChips(betCost);
+            switch (intResponse) {
+                case 1:
+                    singleNumberSelection.add(prompts.singleNumberPrompt());
+                    bettingMap.put("Single Number", singleNumberSelection);
+                    break;
+                case 2:
+                    doubleNumberSelection.addAll(Arrays.asList(prompts.onTheLine()));
+                    bettingMap.put("Double Number", doubleNumberSelection);
+                    break;
+                case 3:
+                    cornerNumberSelection.addAll(Arrays.asList(prompts.corner()));
+                    bettingMap.put("Corner", cornerNumberSelection);
+                    break;
+                case 4:
+                    rowNumberSelection.addAll(Arrays.asList(prompts.straight()));
+                    bettingMap.put("Straight", rowNumberSelection);
+                    break;
+                case 5:
+                    basketNumberSelection.addAll(Arrays.asList(prompts.basket()));
+                    bettingMap.put("Basket", basketNumberSelection);
+                    break;
+                case 6:
+                    fiveNumberSelection.addAll(Arrays.asList(prompts.fiveNumberBet()));
+                    bettingMap.put("Five Number Bet", fiveNumberSelection);
+                    break;
+                case 7:
+                    lineNumberSelection.addAll(Arrays.asList(prompts.lineBet()));
+                    bettingMap.put("Line Bet", lineNumberSelection);
+                    break;
+                case 8:
+                    columnNumberSelection.addAll(Arrays.asList(prompts.columnBet()));
+                    bettingMap.put("Column Bet", columnNumberSelection);
+                    break;
+                case 9:
+                    twelveNumberSelection.addAll(Arrays.asList(prompts.twelveNumberBet()));
+                    bettingMap.put("12 Number Bet", twelveNumberSelection);
+                    break;
+                case 10:
+                    oneThru8Selection.addAll(Arrays.asList(prompts.numbers1Thru18()));
+                    bettingMap.put("Numbers 1 - 18", oneThru8Selection);
+                    break;
+                case 11:
+                    nineteenThru36Selection.addAll(Arrays.asList(prompts.numbers19thru36()));
+                    bettingMap.put("Numbers 19 - 36", nineteenThru36Selection);
+                    break;
+                case 12:
+                    evenNumberSelection.addAll(Arrays.asList(prompts.evenNumbers()));
+                    bettingMap.put("Even Numbers", evenNumberSelection);
+                    break;
+                case 13:
+                    oddNumberSelection.addAll(Arrays.asList(prompts.oddNumbers()));
+                    bettingMap.put("Odd Numbers", oddNumberSelection);
+                    break;
+                case 14:
+                    blackNumberSelection.addAll(Arrays.asList(prompts.blackNumbers()));
+                    bettingMap.put("Black Numbers", blackNumberSelection);
+                    break;
+                case 15:
+                    redNumberSelection.addAll(Arrays.asList(prompts.redNumbers()));
+                    bettingMap.put("Red Numbers", redNumberSelection);
+                    break;
+            }
         }
     }
+    public void runWelcome() {
+        String welcomeResponse =
+                "********************* WELCOME TO **********************\n" +
+                        "(        )          (                             \n" +
+                        " )\\ )  ( /(          )\\ )        *   )  *   )      \n" +
+                        "(()/(  )\\())     (  (()/(  (   ` )  /(` )  /( (    \n" +
+                        " /(_))((_)\\      )\\  /(_)) )\\   ( )(_))( )(_)))\\   \n" +
+                        "(_))    ((_)  _ ((_)(_))  ((_) (_(_())(_(_())((_)  \n" +
+                        "| _ \\  / _ \\ | | | || |   | __||_   _||_   _|| __| \n" +
+                        "|   / | (_) || |_| || |__ | _|   | |    | |  | _|  \n" +
+                        "|_|_\\  \\___/  \\___/ |____||___|  |_|    |_|  |___|\n\n";
+        System.out.println(welcomeResponse);
+        pressCtoContinue();
+    }
 
-    public  void calculateWinnersAndEarnings() throws InterruptedException{
+
+    public void calculateWinnersAndEarnings() throws InterruptedException {
         Integer winningNumber = rouletteBoardAndWheel.generateWinningNumber();
         System.out.println("\n\n\n\n\n\nThe winning number is... \n\n" + winningNumber + "\n\n");
 
-        Integer earnings = rouletteGamble.win(bettingMap, winningNumber);
-        Integer losses = rouletteGamble.getLosses(bettingMap, winningNumber);
-        Integer difference = earnings - losses;
-        if(difference > 0) {
-            player.addChips(difference);
-        } else if(difference == 0){
-            player.addChips(earnings);
-        }
+        this.earnings = rouletteGamble.win(bettingMap, winningNumber);
+        player.addChips(earnings);
+    }
+
+    public String getRules() {
+        return prompts.rules();
+    }
+
+    public String getBettingInfo(){
+        return prompts.bettingInfo();
+    }
+
+    public void pressCtoContinue(){
+        String continueResponse;
+        do {
+            continueResponse = IOHandler.promptForStringWithMessage("Press 'c' to continue");
+        } while (!continueResponse.equals("c"));
+    }
+
+    public void clearNumberArraysAndBettingMap(){
+        singleNumberSelection.clear();
+        doubleNumberSelection.clear();
+        cornerNumberSelection.clear();
+        rowNumberSelection.clear();
+        basketNumberSelection.clear();
+        fiveNumberSelection.clear();
+        lineNumberSelection.clear();
+        columnNumberSelection.clear();
+        twelveNumberSelection.clear();
+        oneThru8Selection.clear();
+        nineteenThru36Selection.clear();
+        evenNumberSelection.clear();
+        oneThru8Selection.clear();
+        blackNumberSelection.clear();
+        redNumberSelection.clear();
+        bettingMap.clear();
     }
 }
