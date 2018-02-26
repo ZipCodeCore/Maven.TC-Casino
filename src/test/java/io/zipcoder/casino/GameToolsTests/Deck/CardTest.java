@@ -57,4 +57,19 @@ public class CardTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void toCardArtTest() {
+        tester.setAsciiEnum(Rank.EIGHT);
+        String expected = "  _________\n" +
+                " |8 +   +  |\n" +
+                " |+        |\n" +
+                " |  +   +  |\n" +
+                " |         |\n" +
+                " |  +   +  |\n" +
+                " |        +|\n" +
+                " |  +   + 8|\n" +
+                "  ~~~~~~~~~";
+        String actual = Rank.EIGHT.getAsciiValue();
+        Assert.assertEquals(expected, actual);
+    }
 }

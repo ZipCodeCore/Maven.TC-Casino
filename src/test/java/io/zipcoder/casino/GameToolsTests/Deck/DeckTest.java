@@ -1,9 +1,6 @@
 package io.zipcoder.casino.GameToolsTests.Deck;
 import io.zipcoder.casino.Factories.CardFactory;
-import io.zipcoder.casino.GameTools.Deck.Card;
-import io.zipcoder.casino.GameTools.Deck.Deck;
-import io.zipcoder.casino.GameTools.Deck.Rank;
-import io.zipcoder.casino.GameTools.Deck.Suit;
+import io.zipcoder.casino.GameTools.Deck.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
