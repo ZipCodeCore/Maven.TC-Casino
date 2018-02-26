@@ -4,7 +4,6 @@ import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
 import io.zipcoder.casino.Game.cardGame.utilities.CardRank;
-import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.House;
 import io.zipcoder.casino.Profile;
 
@@ -88,8 +87,8 @@ public class GoFish extends CardGame {
 
         Console.print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
         do {
-//            dealer.getHand().orderCards();
-//            Console.print(dealer.getHand().showHand());
+            dealer.getHand().orderCards();
+            Console.print(dealer.getHand().showHand());
             user.getHand().orderCards();
             Console.print(user.getHand().showHand());
             Console.print("Which card value would you like to ask for?");
@@ -125,13 +124,16 @@ public class GoFish extends CardGame {
         } else if (countMatchesInHand(playerBeingAsked, aCardRank) < 1) {
             Console.print("Go fish.");
             Console.print("You fished: " + getDeck().peek().toString());
+            aCardRank = getDeck().peek().getRank();
             fish(askingPlayer);
 
-            if (getHandForBook(user, aCardRank) > 0) {
-                Console.print("You made a book!!");
+
+            if (getHandForBook(askingPlayer, aCardRank) > 0) {
                 askingPlayer.getHand().orderCards();
                 Console.print(askingPlayer.getHand().showHand());
-                addCardToBookAndRemoveFromHand(askingPlayer, aCardRank);
+                Console.print("You made a book!!");
+                askingPlayer.buildBooks(askingPlayer, aCardRank);
+                removeFromHand(askingPlayer, aCardRank);
                 Console.print(askingPlayer.getHand().showHand());
             }
             isTurn = false;
@@ -139,9 +141,10 @@ public class GoFish extends CardGame {
         } else {
             transfer(aCardRank, playerBeingAsked, askingPlayer);
             Console.print("Good guess! Here you go!");
-            if (getHandForBook(user, aCardRank) > 0) {
+            if (getHandForBook(askingPlayer, aCardRank) > 0) {
                 Console.print("You made a book!!");
-                addCardToBookAndRemoveFromHand(askingPlayer, aCardRank);
+                askingPlayer.buildBooks(askingPlayer, aCardRank);
+                removeFromHand(askingPlayer, aCardRank);
                 askingPlayer.getHand().orderCards();
                 Console.print(askingPlayer.getHand().showHand());
             }
@@ -149,9 +152,9 @@ public class GoFish extends CardGame {
         if (askingPlayer.getHand().getCards().size() < 1 ||
                 playerBeingAsked.getHand().getCards().size() < 1 ||
                 (askingPlayer.getHand().getCards().size() + askingPlayer.getBook().size() +
-                 playerBeingAsked.getHand().getCards().size() + playerBeingAsked.getBook().size() >= 52)) {
+                        playerBeingAsked.getHand().getCards().size() + playerBeingAsked.getBook().size() >= 52)) {
 
-                decideWinner(askingPlayer, playerBeingAsked);
+            decideWinner(askingPlayer, playerBeingAsked);
         }
     }
 
@@ -185,10 +188,13 @@ public class GoFish extends CardGame {
         return books;
     }
 
-    public void addCardToBookAndRemoveFromHand(GoFishPlayer aPlayer, CardRank aCardRank) {
-        for (int i = 0; i < aPlayer.getHand().getCards().size(); i++) {
+    public void removeFromHand(GoFishPlayer aPlayer, CardRank aCardRank) {
+
+
+
+        for (int i = aPlayer.getHand().getCards().size() - 1; i >= 0; i--) {
             if (aPlayer.getHand().getCards().get(i).getRank() == aCardRank) {
-                aPlayer.buildBooks(aPlayer, aCardRank);
+                //aPlayer.buildBooks(aPlayer, aCardRank);
                 aPlayer.getHand().getCards().remove(aPlayer.getHand().getCards().get(i));
             }
 
