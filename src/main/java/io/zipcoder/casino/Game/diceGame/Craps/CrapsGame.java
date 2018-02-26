@@ -158,7 +158,7 @@ public class CrapsGame extends DiceGame {
         String rollOrBet;
         do {
             Console.print(bar);
-            Console.print("Would you like to [roll] [bet] or [leave] ?");
+            Console.print("Would you like to [roll] [bet] or [leave]?");
             rollOrBet = Console.getString();
             if (rollOrBet.equalsIgnoreCase("roll") && newRound) {
                 Console.print("You must make a Pass Line or Do Not Pass bet before starting a new round");
@@ -330,6 +330,62 @@ public class CrapsGame extends DiceGame {
                 }
                 break;
 
+            case "aces":
+                betType = CrapsBet.ACES;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setAces(true);
+                }
+                break;
+
+            case "ace deuce":
+                betType = CrapsBet.ACE_DEUCE;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setAceDeuce(true);
+                }
+                break;
+
+            case "yo eleven":
+                betType = CrapsBet.YO_ELEVEN;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setYoEleven(true);
+                }
+                break;
+
+            case "boxcar":
+                betType = CrapsBet.BOXCAR;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setBoxcar(true);
+                }
+                break;
+
+            case "horn":
+                betType = CrapsBet.HORN;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setHorn(true);
+                }
+                break;
+
+            case "any seven":
+                betType = CrapsBet.ANY_SEVEN;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setAnySeven(true);
+                }
+                break;
+
+            case "any craps":
+                betType = CrapsBet.ANY_CRAPS;
+                validBet = this.placeBet(betType);
+                if(validBet){
+                    currentPlayer.setAnyCraps(true);
+                }
+                break;
+
             default:
                 Console.print(invalidInput);
                 Console.print(bar);
@@ -367,13 +423,20 @@ public class CrapsGame extends DiceGame {
         if(!this.isComeOutPhase && !currentPlayer.isCome()){
             bettingMenu.append("[Do Not Come]\n");
         }
+        bettingMenu.append("[Field]\n");
         bettingMenu.append("[Big Six]\n");
         bettingMenu.append("[Big Eight]\n");
-        bettingMenu.append("[Field]\n");
         bettingMenu.append("[Hard Four]\n");
         bettingMenu.append("[Hard Six]\n");
         bettingMenu.append("[Hard Eight]\n");
         bettingMenu.append("[Hard Ten]\n");
+        bettingMenu.append("[Aces]\n");
+        bettingMenu.append("[Ace Deuce]\n");
+        bettingMenu.append("[Yo Eleven]\n");
+        bettingMenu.append("[Boxcar]\n");
+        bettingMenu.append("[Horn]\n");
+        bettingMenu.append("[Any Seven]\n");
+        bettingMenu.append("[Any Craps]\n");
         return bettingMenu.toString();
     }
 
@@ -951,6 +1014,135 @@ public class CrapsGame extends DiceGame {
 
     }
 
+    public void acesPayout(int roll){
+        if(currentPlayer.isAces()){
+            if(roll == 2){
+                Console.print("Your Aces bet pays 30:1!");
+                currentPlayer.win(CrapsBet.ACES,30);
+                currentPlayer.setAces(false);
+                Console.print(newBalance());
+            }
+            else{
+                Console.print("Your Aces bet loses");
+                currentPlayer.lose(CrapsBet.ACES);
+                currentPlayer.setAces(false);
+                Console.print(newBalance());
+            }
+        }
+    }
+
+    public void aceDeucePayout(int roll){
+        if(currentPlayer.isAceDeuce()){
+            if(roll == 3){
+                Console.print("Your Ace Deuce bet pays 15:1!");
+                currentPlayer.win(CrapsBet.ACE_DEUCE,15);
+                currentPlayer.setAceDeuce(false);
+                Console.print(newBalance());
+            }
+            else{
+                Console.print("Your Ace Deuce bet loses");
+                currentPlayer.lose(CrapsBet.ACE_DEUCE);
+                currentPlayer.setAceDeuce(false);
+                Console.print(newBalance());
+            }
+        }
+    }
+
+    public void yoElevenPayout(int roll){
+        if(currentPlayer.isYoEleven()){
+            if(roll == 11){
+                Console.print("Your Yo Eleven bet pays 15:1!");
+                currentPlayer.win(CrapsBet.YO_ELEVEN,15);
+                currentPlayer.setYoEleven(false);
+                Console.print(newBalance());
+            }
+            else{
+                Console.print("Your Yo Eleven bet loses");
+                currentPlayer.lose(CrapsBet.YO_ELEVEN);
+                currentPlayer.setYoEleven(false);
+                Console.print(newBalance());
+            }
+        }
+    }
+
+    public void boxcarPayout(int roll){
+        if(currentPlayer.isBoxcar()){
+            if(roll == 12){
+                Console.print("Your Boxcar bet pays 30:1!");
+                currentPlayer.win(CrapsBet.BOXCAR,30);
+                currentPlayer.setBoxcar(false);
+                Console.print(newBalance());
+            }
+            else{
+                Console.print("Your Boxcar bet loses");
+                currentPlayer.lose(CrapsBet.BOXCAR);
+                currentPlayer.setBoxcar(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
+    public void hornPayout(int roll){
+        if(currentPlayer.isHorn()){
+            if(roll == 2 || roll == 12){
+                Console.print("Your Horn bet pays 27:4 on a "+ roll +"!");
+                currentPlayer.win(CrapsBet.HORN, 6.75);
+                currentPlayer.setHorn(false);
+                Console.print(newBalance());
+            }
+            else if (roll == 3 || roll == 11){
+                Console.print("Your Horn bet pays 3:1 on a "+ roll +"!");
+                currentPlayer.win(CrapsBet.HORN, 3);
+                currentPlayer.setHorn(false);
+                Console.print(newBalance());
+            }
+            else{
+                Console.print("Your Horn bet loses");
+                currentPlayer.lose(CrapsBet.HORN);
+                currentPlayer.setHorn(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
+    public void anySevenPayout(int roll){
+        if(currentPlayer.isAnySeven()){
+            if(roll == 7){
+                Console.print("Your Any Seven bet pays 4:1!");
+                currentPlayer.win(CrapsBet.ANY_SEVEN, 4);
+                currentPlayer.setAnySeven(false);
+                Console.print(newBalance());
+            }
+            else{
+                Console.print("Your Any Seven bet loses");
+                currentPlayer.lose(CrapsBet.ANY_SEVEN);
+                currentPlayer.setAnySeven(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
+    public void anyCrapsPayout(int roll){
+        if(currentPlayer.isAnyCraps()){
+            if(roll == 2 || roll == 3 || roll == 12){
+                Console.print("Your Any Craps bet pays 7:1!");
+                currentPlayer.win(CrapsBet.ANY_CRAPS, 7);
+                currentPlayer.setAnyCraps(false);
+                Console.print(newBalance());
+            }
+            else{
+                Console.print("Your Any Craps bet loses");
+                currentPlayer.lose(CrapsBet.ANY_CRAPS);
+                currentPlayer.setAnyCraps(false);
+                Console.print(newBalance());
+            }
+        }
+
+    }
+
     public void hardWayPayouts(int roll){
         this.hardFourPayout(roll);
         this.hardSixPayout(roll);
@@ -960,6 +1152,13 @@ public class CrapsGame extends DiceGame {
 
     public void oneRollBetPayouts(int roll){
         this.fieldPayout(roll);
+        this.acesPayout(roll);
+        this.aceDeucePayout(roll);
+        this.yoElevenPayout(roll);
+        this.boxcarPayout(roll);
+        this.hornPayout(roll);
+        this.anySevenPayout(roll);
+        this.anyCrapsPayout(roll);
     }
 
 

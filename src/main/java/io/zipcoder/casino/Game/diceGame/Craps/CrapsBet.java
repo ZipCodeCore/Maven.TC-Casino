@@ -20,7 +20,7 @@ public enum CrapsBet implements TypeOfBet {
     HARD_TEN,
     FIELD,
     ANY_SEVEN,
-    ANY_ELEVEN,
+    YO_ELEVEN,
     ANY_CRAPS,
     ACE_DEUCE,
     ACES,
@@ -38,7 +38,8 @@ public enum CrapsBet implements TypeOfBet {
     DO_NOT_COME_SIX,
     DO_NOT_COME_EIGHT,
     DO_NOT_COME_NINE,
-    DO_NOT_COME_TEN
+    DO_NOT_COME_TEN,
+    HORN
 
 
 
