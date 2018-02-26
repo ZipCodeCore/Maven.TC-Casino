@@ -19,6 +19,7 @@ public class CrapsGame extends DiceGame {
 
     public CrapsGame(Profile profile) {
         this.currentPlayer = new CrapsPlayer(profile);
+        players.add(currentPlayer);
     }
 
     public static void main(String[] args) {

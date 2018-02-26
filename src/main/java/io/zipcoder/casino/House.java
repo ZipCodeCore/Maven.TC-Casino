@@ -33,28 +33,6 @@ public class House implements MainMenu {
         return null;
     }
 
-    public CardGame chooseCardGame(String cardGame, int id) {
-        Profile playerProfile = getProfileById(id);
-       /* if (cardGame.equalsIgnoreCase("Black Jack")) {
-            BlackJackGame blackjack = new BlackJackGame(playerProfile);
-            return blackjack;
-        } else if (cardGame.equalsIgnoreCase("Gold Fish")) {
-            GoFish goldFish = new GoFish(playerProfile);
-
-            return goldFish;
-        }*/
-        return null;
-    }
-
-    public DiceGame chooseDiceGame(String diceGame, int id) {
-
-        if (diceGame.equalsIgnoreCase("Craps")) {
-            //Craps game needs to take in a player
-//            CrapsGame craps = new CrapsGame(Player);
-//            return craps;
-        }
-        return null;
-    }
 
 
     public void createProfile(String name) {
@@ -74,6 +52,7 @@ public class House implements MainMenu {
     public void createProfile(Profile profile) {
         Console.print("Registering a new profile...");
         profiles.add(profile);
+        Console.print("");
     }
 
     public Profile selectExistingProfile(String name) {
@@ -131,7 +110,7 @@ public class House implements MainMenu {
             }
             else if(userInput.equalsIgnoreCase("leave")){
                 Console.print("Goodbye " + currentPlayer.getName());
-                Console.print("Your leaving our casino with $" + currentPlayer.getAccountBalance());
+                Console.print("You're leaving our casino with $" + currentPlayer.getAccountBalance());
                 if(currentPlayer.getAccountBalance()>initialBalance){
                     Console.print("That's $" + (currentPlayer.getAccountBalance()-initialBalance) + " more than you came here with!");
                     Console.print("Great job! Come again soon!");
@@ -169,8 +148,6 @@ public class House implements MainMenu {
             } else if (accountBalance < 0) {
                 Console.print("Cannot deposit negative values.  Please enter a valid deposit");
             }
-
-
         }
         while (keepRunning == true);
 

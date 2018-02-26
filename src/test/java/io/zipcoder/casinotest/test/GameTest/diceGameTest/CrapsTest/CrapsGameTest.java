@@ -18,7 +18,8 @@ public class CrapsGameTest {
     @Before
     public void setup(){
         testGame = new CrapsGame(stinkyProfile);
-        testGame.startGame();
+        testGame.createDie(6,2);
+
     }
 
 
