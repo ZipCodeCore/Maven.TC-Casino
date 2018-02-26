@@ -47,9 +47,9 @@ public class GoFishTest {
 
     @Test
     public void StartingDeckTest() {
-        GoFish goFishTest = new GoFish();
+        Person player1 = new Person("Joe");
+        GoFish goFishTest = new GoFish(player1);
         Deck deckTest = new Deck();
-        Person player1 = new Person();
         Person dealer = new Person();
 
         Hand dealerHandTest = new Hand();
@@ -64,8 +64,8 @@ public class GoFishTest {
 
     @Test
     public void doYouHaveTheCardThatIWant() {
-        GoFish goFishTest = new GoFish();
-        Person player1 = new Person();
+        Person player1 = new Person("Joe");
+        GoFish goFishTest = new GoFish(player1);
         Person dealer = new Person();
 
         // card counts as int 1
@@ -79,7 +79,8 @@ public class GoFishTest {
 
     @Test
     public void removeCardsFromComputerPlayerAndIntoHandTest () {
-        GoFish goFishTest = new GoFish();
+        Person player1 = new Person("Joe");
+        GoFish goFishTest = new GoFish(player1);
 
         Card cardSend = new Card(Rank.ACE, Suit.SPADES);
 
@@ -106,6 +107,7 @@ public class GoFishTest {
         Assert.assertEquals(expected, actual);
     }
 
+
     @Test
     public void goFishTest(){
         GoFish goFishTest = new GoFish();
@@ -120,7 +122,8 @@ public class GoFishTest {
 
     @Test
     public void checkNumberOfHandsTest(){
-        GoFish goFishTest = new GoFish();
+        Person player1 = new Person("Joe");
+        GoFish goFishTest = new GoFish(player1);
 
         int expected = 0;
         int actual = goFishTest.checkNumberOfCard();

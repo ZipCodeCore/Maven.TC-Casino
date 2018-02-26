@@ -29,11 +29,13 @@ public class Wallet {
         String isGambling;
         int walletAmount;
         Scanner in = new Scanner(System.in);
-        System.out.println("If you will be playing a gambling game press y, if not, press n.");
-        isGambling = in.nextLine();
+        do {
+            System.out.println("If you will be playing a gambling game press y, if not, press n.");
+            isGambling = in.nextLine();
+        } while (!(isGambling.equals("y")) && !(isGambling.equals("n")));
         if(isGambling.equals("y")) {
             System.out.println("Please enter number of chips you would like to begin with");
-            walletAmount = getUserInput()
+            walletAmount = getUserInput();
             addChipsToAmount(walletAmount);
         }
     }

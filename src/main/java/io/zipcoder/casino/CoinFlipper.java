@@ -8,7 +8,7 @@ public class CoinFlipper extends Game implements GameInterface{
     Scanner input = new Scanner(System.in);
 
     public CoinFlipper(Person player) {
-        // this.player = player;
+         this.player = player;
         // Un-note ^ this when added to main
     }
 

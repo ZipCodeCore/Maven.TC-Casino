@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class GoFish extends Game implements GameInterface, CardGameInterface {
 
-    private Person player1 = player;
+    private Person player1;
     private Person dealer = new Person("Dealer");
     private Deck houseDeck = new Deck();
 
@@ -24,6 +24,7 @@ public class GoFish extends Game implements GameInterface, CardGameInterface {
     public void GoFish(Person player) {
         this.player1 = player;
     }
+
     public void start() {
         System.out.println("*************************  Welcome to Go Fish!  *************************");
         System.out.println("\u270B\u270B\u270B\u270B\u270B\u270B\u270B\u270B\u270B\u270B\u270B\u270B" +
@@ -38,7 +39,7 @@ public class GoFish extends Game implements GameInterface, CardGameInterface {
     }
 
     public GoFish(Person player1) {
-         //this.player1 = player1;
+         this.player1 = player1;
     }
 
     public GoFish() {
@@ -48,6 +49,7 @@ public class GoFish extends Game implements GameInterface, CardGameInterface {
     public void startingDrawDeck(Deck houseDeck){
         // Add 7 cards to player1 hands
 
+        houseDeck.shuffleDeck();
         for (int i = 0; i < 7; i++){
             player1.getHand().getHandArrayList().add(houseDeck.drawCard());
         }

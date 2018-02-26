@@ -8,7 +8,7 @@ public class MainMenu {
 
     Game game;
 
-    public MainMenu(){
+    public MainMenu() {
         this.game = game;
     }
 
@@ -22,22 +22,26 @@ public class MainMenu {
 
     public String displayGameChoices() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Please choose a game from the following menu:\nWar\nGo Fish\nBlackJack\nCraps");
-        String choice = in.nextLine().toLowerCase();
+        String choice;
+        do {
+            System.out.println("Please choose a game from the following menu:\nWar\nGo Fish\nBlackJack\nCraps");
+            choice = in.nextLine().toLowerCase();
+        } while ( !(choice.equals("craps")) && !(choice.equals("go fish")) && !(choice.equals("war")) &&
+                !(choice.equals("blackjack")));
         return choice;
     }
+
 
 
     public static Game chooseGame(String choice, Person player) {
 
         Game game;
-        switch(choice)
-        {
+        switch (choice) {
             case "war":
                 game = new War(player);
                 break;
             case "go fish":
-                //game = new GoFish(player);
+                game = new GoFish(player);
                 break;
             case "blackjack":
                 game = new Blackjack(player);
@@ -45,11 +49,15 @@ public class MainMenu {
             case "craps":
                 game = new Craps(player);
                 break;
+            case "coin flipper":
+                game = new CoinFlipper(player);
+                break;
+
             default:
                 return null;
         }
 
-        return game = new Blackjack(player);
+        return game;
     }
 
 }

@@ -1,6 +1,8 @@
 package io.zipcoder.casino;
 
 
+import java.util.Scanner;
+
 import static io.zipcoder.casino.Person.createNewPlayerFromUserInput;
 
 
@@ -18,10 +20,29 @@ public class Casino {
     //first call newPlayer, then use the Person it returns as the parameter
     public static void sendPlayerToGame(Person player) {
         MainMenu menu = new MainMenu();
-        String choice = menu.displayGameChoices();
-        Game myGame = MainMenu.chooseGame(choice, player);
-        myGame.start();
+        boolean exitCasino = true;
+        do {
+
+
+            String choice = menu.displayGameChoices();
+            Game myGame = MainMenu.chooseGame(choice, player);
+            myGame.start();
+            exitCasino = exitCasino();
+        }while (exitCasino);
     }
 
+    private static boolean exitCasino() {
+        Scanner userInput = new Scanner(System.in);
+        String userChoice;
+        do {
+            System.out.println("Would you like to play a different game? Yes or no.");
+            userChoice = userInput.nextLine().toLowerCase();
+        } while (!(userChoice.equals("yes")) && !(userChoice.equals("no")));
+        if (userChoice.equals("yes")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

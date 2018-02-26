@@ -1,6 +1,7 @@
 package io.zipcoder.casino;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -8,6 +9,12 @@ import java.util.Arrays;
 public class BlackjackTest {
 
     private Blackjack blackjack;
+    Person player = new Person("test");
+
+    @Before public void setUp() {
+        player.getWallet().addChipsToAmount(500);
+
+    }
 
     @Test
     public void BlackJackDefaultConstructorTest() {
@@ -20,7 +27,7 @@ public class BlackjackTest {
         // Given
         String expectedPlayerName = "test";
         // When
-        Blackjack blackjack = new Blackjack("test", 100);
+        Blackjack blackjack = new Blackjack(player);
         String actualPlayerName = blackjack.getPlayer().getName();
         // Then
         Assert.assertEquals(expectedPlayerName, actualPlayerName);
@@ -28,7 +35,7 @@ public class BlackjackTest {
 
     @Test
     public void sumOfRanksInHandTest() {
-        Blackjack blackjack = new Blackjack("player1", 100);
+        Blackjack blackjack = new Blackjack(player);
         // Add cards to player1 Hand
         Card notShuffled0 = new Card(Rank.DEUCE, Suit.CLUBS);
         Card notShuffled1 = new Card(Rank.ACE, Suit.DIAMONDS);
@@ -56,7 +63,7 @@ public class BlackjackTest {
 
     @Test
     public void countRankRepetitionsInHandTest() {
-        Blackjack blackjack = new Blackjack("player1", 100);
+        Blackjack blackjack = new Blackjack(player);
 
         // Add cards to player1 Hand
         Card notShuffled0 = new Card(Rank.DEUCE, Suit.CLUBS);
@@ -86,7 +93,7 @@ public class BlackjackTest {
     @Test
     public void findSmallerOfTwoIntsTest() {
         // Given
-        Blackjack blackjack = new Blackjack("player1", 100);
+        Blackjack blackjack = new Blackjack(player);
         int expectedLowerInt = 5;
         int expectedHigherInt = 7;
         // When
@@ -98,7 +105,7 @@ public class BlackjackTest {
     @Test
     public void findGreaterOfTwoIntsTest() {
         // Given
-        Blackjack blackjack = new Blackjack("player1", 100);
+        Blackjack blackjack = new Blackjack(player);
         int expectedLowerInt = 5;
         int expectedHigherInt = 7;
         // When
@@ -109,17 +116,17 @@ public class BlackjackTest {
 
     @Test
     public void personDecisionTest() {
-        Blackjack blackjack = new Blackjack("player1", 100);
+        Blackjack blackjack = new Blackjack(player);
         //String playerDecisionString = blackjack.personDecision(blackjack.getPlayer());
     }
 
     @Test
     public void handToStringTest() {
         // Given
-        Blackjack blackjack = new Blackjack("testHandTosTring", 100);
+        Blackjack blackjack = new Blackjack(player);
         blackjack.getPlayer().getHand().receiveCards(new Card(Rank.DEUCE, Suit.CLUBS), new Card(Rank.THREE, Suit.DIAMONDS),
                 new Card(Rank.FOUR, Suit.HEARTS), new Card(Rank.FIVE, Suit.SPADES));
-        String expectedHandToString = "2\u2663 " + "3\u2666 " + "4\u2665 " + "5\u2660 ";
+        String expectedHandToString = "5♠ 4♥ 3♦ 2♣";
         // When
         String actualHandToString = blackjack.handToString(blackjack.getPlayer().getHand().getHandArrayList());
         System.out.println(actualHandToString);
@@ -131,7 +138,7 @@ public class BlackjackTest {
     public void hitTest() {
         // if playerSum < 21, player can hit
         // if playerDecision = "hit", then dealer draws card and player hand receives card
-        Blackjack blackjack = new Blackjack("player1", 100);
+        Blackjack blackjack = new Blackjack(player);
 
         // Add cards to player1 Hand
         Card playerCard0 = new Card(Rank.DEUCE, Suit.CLUBS);
@@ -177,7 +184,7 @@ public class BlackjackTest {
         int chipsToStart = 500;
         int expectedChipsRemaining = chipsToStart - betPlaced; // 499
         // When
-        Blackjack blackjack = new Blackjack("placeBetPlayer", chipsToStart);
+        Blackjack blackjack = new Blackjack(player);
         blackjack.placeBet(blackjack.getPlayer(), betPlaced); // will remove 1 chip
         int actualChipsRemaining = blackjack.getPlayer().getWallet().checkChipAmount();
         // Then

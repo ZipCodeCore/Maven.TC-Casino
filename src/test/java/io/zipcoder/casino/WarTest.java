@@ -6,11 +6,11 @@ import org.junit.Test;
 public class WarTest {
 
     // psvm for isolated War testing
-    public static void main(String[] args) {
-        Person player = new Person();
-        War war = new War(player);
-        war.start();
-    }
+//    public static void main(String[] args) {
+//        Person player = new Person();
+//        War war = new War(player);
+//        war.start();
+//    }
 
     @Test
     public void checkNumberOfCards() {
