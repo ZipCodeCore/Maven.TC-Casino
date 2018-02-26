@@ -8,8 +8,8 @@ public class Crazy8sMenu {
 
     public void showMenu() {
 
-        String userInput = IOHandler.promptForStringWithMessage(runWelcome());
-        handleInput(userInput);
+            String userInput = IOHandler.promptForStringWithMessage(runWelcome());
+            handleInput(userInput);
     }
 
     public String handleInput(String userInput) {
@@ -28,15 +28,20 @@ public class Crazy8sMenu {
                 Casino casino = new Casino();
                 casino.enter();
                 return userInput;
-            default:
-                showMenu();
+                default:
+                    showMenu();
         }
         return userInput;
     }
 
     public void playGame() {
         Player player = new Player();
+<<<<<<< HEAD
         Crazy8Play game = new Crazy8Play(true);
+=======
+        //Crazy8Play game = new Crazy8Play(true);
+        Crazy8Game game = new Crazy8Game(true);
+>>>>>>> d0d678eff7061b4c818d211fa46047a14fb68b2d
 
         game.play(player);
     }
