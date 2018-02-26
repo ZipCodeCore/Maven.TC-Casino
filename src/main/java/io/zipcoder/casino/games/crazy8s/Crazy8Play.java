@@ -63,6 +63,9 @@ public class Crazy8Play implements Game {
 
     public void cardSelect(int cardSelection) {
         switch (cardSelection) {
+            case 0:
+                matchThisCard = playersHand.get(0);
+                playersHand.remove(0);
             case 1:
                 matchThisCard = playersHand.get(1);
                 playersHand.remove(1);
@@ -165,6 +168,21 @@ public class Crazy8Play implements Game {
         return legalCard;
     }
 
+    public void changeSuitwithEight() {
+        if (matchThisCard == 8) { //card is eight, change suit
+            String newSuit =
+                    IOHandler.promptForStringWithMessage("Enter the 1st letter of the suit you want to change to: ");
+
+            if (newSuit.equalsIgnoreCase("S")) {
+                matchThisCard = "Spades";
+            } else if (newSuit.equalsIgnoreCase("H")) {
+                matchThisCard = "Hearts";
+            } else if (newSuit.equalsIgnoreCase("D")) {
+                matchThisCard = "Diamonds"; } else if (newSuit.equalsIgnoreCase("C")) {
+                matchThisCard = "Clubs";
+
+    }
+
     public boolean legalCardComputer (Card card) {
         //check whether card matches suit, rank of pile or is eight
         for (int i = 0; i < computerHand.size(); i++) {
@@ -220,7 +238,7 @@ public class Crazy8Play implements Game {
     }
 
     public void dealCards() {
-        int handSize = 9;
+        int handSize = 8;
 
         deck.shuffle();
 
@@ -231,7 +249,7 @@ public class Crazy8Play implements Game {
 
     public void displayPlayerHand() {
 
-        for (int i = 1; i < playersHand.size(); i++) {
+        for (int i = 0; i < playersHand.size(); i++) {
             IOHandler.printMessage(String.format("%2d: ", i));
             IOHandler.printMessage(playersHand.get(i).toString());
         }
