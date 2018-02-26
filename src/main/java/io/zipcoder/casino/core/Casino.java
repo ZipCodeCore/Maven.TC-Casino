@@ -3,6 +3,7 @@ package io.zipcoder.casino.core;
 import io.zipcoder.casino.games.blackjack.BlackJack;
 import io.zipcoder.casino.games.ceelo.CeeLo;
 import io.zipcoder.casino.interfaces.Game;
+import io.zipcoder.casino.shady.ManInBlack;
 import io.zipcoder.casino.utils.IOHandler;
 
 public class Casino {
@@ -10,9 +11,11 @@ public class Casino {
     private final String fSHADY_MESSAGE = "pssst...hey, you (type 666 to check it out. Something doesn't feel right...)";
     private Player player;
     private Game currentGameRunning;
+    private ManInBlack manInBlack;
 
     public Casino() {
         this.player = new Player();
+        this.manInBlack = new ManInBlack();
     }
 
     protected static boolean playerIsBroke(Player playerToCheck) {
@@ -77,7 +80,7 @@ public class Casino {
         return currentGameRunning;
     }
 
-    private void goodBye() {
+    public void goodBye() {
         IOHandler.getMessageFromFile("Goodbye.txt");
         System.exit(0);
     }
@@ -87,7 +90,7 @@ public class Casino {
     }
 
     protected void visitManInBlack() {
-        
+        manInBlack.proposition(player);
     }
 }
 
