@@ -5,7 +5,7 @@ public class Player {
     private Long chips;
 
     public Player() {
-        chips = 500l; //each chip is $5
+        chips = 500l;
     }
 
     public Boolean canCoverBet(Long minimumBetCharge) {
