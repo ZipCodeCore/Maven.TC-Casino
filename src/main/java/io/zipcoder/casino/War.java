@@ -89,24 +89,26 @@ public class War extends Game implements GameInterface, CardGameInterface {
     // Make private after testing / Make public for testing
     public void playerWins() {
         System.out.println("You won this round!");
-        while (playerPlayedCards.size()!=0) {
-            player.getHand().receiveCards(playerPlayedCards.remove(0));
-        }
-        while (dealerPlayedCards.size()!=0) {
-            player.getHand().receiveCards(dealerPlayedCards.remove(0));
-        }
-        System.out.println("You have " + player.getHand().getHandArrayList().size() + " cards and the dealer has " + dealer.getHand().getHandArrayList().size() + " cards");
+        giveCardsFromTheTableToTheWinner(playerPlayedCards, player);
+        giveCardsFromTheTableToTheWinner(dealerPlayedCards, dealer);
+        somebodyWonMessage();
     }
 
     // Make private after testing / Make public for testing
     public void dealerWins() {
         System.out.println("You lost this round!");
-        while (playerPlayedCards.size()!=0) {
-            dealer.getHand().receiveCards(playerPlayedCards.remove(0));
+        giveCardsFromTheTableToTheWinner(playerPlayedCards, dealer);
+        giveCardsFromTheTableToTheWinner(dealerPlayedCards, dealer);
+        somebodyWonMessage();
+    }
+
+    public void giveCardsFromTheTableToTheWinner(ArrayList<Card> tableDeck, Person person) {
+        while (tableDeck.size() != 0) {
+            person.getHand().receiveCards(tableDeck.remove(0));
         }
-        while (dealerPlayedCards.size()!=0) {
-            dealer.getHand().receiveCards(dealerPlayedCards.remove(0));
-        }
+    }
+
+    public void somebodyWonMessage() {
         System.out.println("You have " + player.getHand().getHandArrayList().size() + " cards and the dealer has " + dealer.getHand().getHandArrayList().size() + " cards");
     }
 
@@ -129,8 +131,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
     // Make private after testing / Make public for testing
     public int decideOnHowManyTimesToIterateBasedOn(int amountOfCardsAvailable) {
         if(amountOfCardsAvailable <= 4) {
-            int cardsAvailableInteger = amountOfCardsAvailable;
-            return cardsAvailableInteger;
+            return amountOfCardsAvailable;
         }
         return 4;
     }
