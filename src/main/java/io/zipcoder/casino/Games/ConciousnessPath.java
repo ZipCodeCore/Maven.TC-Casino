@@ -15,8 +15,15 @@ public class ConciousnessPath {
                 "You awaken to a grim reality: you've been trapped in blackjack limbo for " + this.player.getAge() + " years.\n" +
                         "The burden of this new found awareness weighs heavy on your mind.\n" +
                         "Are you even real? Are your memories?\n" +
-                        "What of your family and loved ones? What about THIS.PLAYER.GETSPOUSENAME ?\n" +
-                        "Your mind reels at the implications of this. Your world will never be the same.\n"
+                        "What of your family and loved ones? What about THIS.PLAYER.GETSPOUSENAME.REDACTED ?\n" +
+                        "Your mind reels at the implications of this. Your world will never be the same.\n" +
+                        "You stand up from the Blackjack table."
         );
+        firstChoice();
     }
+
+    public void firstChoice(){
+
+    }
+
 }

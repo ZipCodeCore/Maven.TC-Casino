@@ -3,7 +3,6 @@ package io.zipcoder.casino.Players;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Rank;
 import io.zipcoder.casino.GameTools.Util.BlackjackValueUtil;
-import io.zipcoder.casino.Games.Blackjack;
 
 import java.util.ArrayList;
 

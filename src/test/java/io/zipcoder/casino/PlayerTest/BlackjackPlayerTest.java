@@ -89,4 +89,20 @@ public class BlackjackPlayerTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void payoutWinTest(){
+        suebkjk.payoutWin(500);
+        int expected = 1000;
+        int actual = suebkjk.getRootPlayer().getBalance();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void payoutLossTest(){
+        suebkjk.payoutLoss(500);
+        int expected = 0;
+        int actual = suebkjk.getRootPlayer().getBalance();
+        Assert.assertEquals(expected, actual);
+    }
+
 }
