@@ -410,12 +410,12 @@ public class BlackJack implements Game {
 
     @Override
     public void runWelcome() {
-
+        welcomeToBlackJack();
     }
+
     @Override
     public String getRules() {
         return IOHandler.getMessageFromFile(fRULES_PATH);
-
     }
 }
 //    public void playerDoubleDown(){

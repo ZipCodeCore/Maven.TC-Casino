@@ -20,11 +20,16 @@ public final class IOHandler {
 
     private static int getInt() {
         Integer ret = 0;
-        try {
-            ret = Integer.parseInt(getInScanner().nextLine());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        boolean notValidInput = false;
+        do {
+            try {
+                ret = Integer.parseInt(getInScanner().nextLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (NumberFormatException nfe) {
+                notValidInput = true;
+            }
+        }while(!notValidInput);
         return ret;
     }
 

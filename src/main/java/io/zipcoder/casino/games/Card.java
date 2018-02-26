@@ -33,4 +33,7 @@ public class Card {
         return String.format("%s of %s", rank.toString(), suit.toString());
     }
 
+    public void setSuit(Suit suit) {
+        this.suit = suit;
+    }
 }
