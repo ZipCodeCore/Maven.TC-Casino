@@ -62,9 +62,8 @@ public class Crazy8Game implements Game{
     }
 
     private boolean playerTurn(Crazy8Player player) {
-
-        //Computer needs to select a card
-        if (player.isPlayerCardsValid()) {
+    //Player needs to select card if they have valid cards
+        if (matchDisplayCard(player.getPlayersHand())) {
             playerSelectCard(player);
         } else {
             pickUpCardFromDeck(player);
@@ -78,6 +77,7 @@ public class Crazy8Game implements Game{
         Card pulledCard = deck.pull();
 
         IOHandler.printMessage("Here - try this one: " +pulledCard.toString());
+        IOHandler.printMessage(" ");
         return pulledCard;
     }
 
@@ -112,7 +112,7 @@ public class Crazy8Game implements Game{
         player.setPlayerCardsValid(validateSelection(selectedCard));
 
         if(player.playerCardsValid){
-            matchThisCard = removeCard(cardSelection, player); // Set card to match to removed card
+            matchThisCard = removeCard(cardSelection,  player); // Set card to match to removed card
             if(selectedCard.getRank().equals(Rank.EIGHT)){
                 //Prompt playerOne to select a new suit
                 changeSuitwithEight();
@@ -127,13 +127,13 @@ public class Crazy8Game implements Game{
 
 
     private String displayPreSelectionMessage(Crazy8Player player) {
-        IOHandler.printMessage("*********************" + player.name + "**********************");
+        IOHandler.printMessage("**********" + player.name + "**********");
         IOHandler.printMessage("Your hand ");
         displayPlayerHand(player);
         IOHandler.printMessage("\nThe card to match is: ");
         displayCardToMatch();
         IOHandler.printMessage("\n");
-        IOHandler.printMessage("**************************************************************");
+        IOHandler.printMessage("**************************************\n");
         return "";
     }
 
