@@ -1,21 +1,20 @@
 package io.zipcoder.casino.Games;
 
-import io.zipcoder.casino.Players.CrapsPlayer;
-import org.junit.Assert;
-import org.junit.Before;
+
+import io.zipcoder.casino.Players.Player;
+
 import org.junit.Test;
 
 public class CrapsTest {
+    Craps game;
+    Integer dieValue = 7;
+    Player bob = new Player("Bob", 30, 500);
 
-    @Before
-    public void initialize(){
 
-        CrapsPlayer crapsPlayerTest = new CrapsPlayer();
-    }
 
     @Test
-    public void passLineLoseTest(){
-
+    public void passLineBetTurnSequenceTest(){
+        game.setDieValue(dieValue);
     }
 
     @Test

@@ -3,140 +3,157 @@ package io.zipcoder.casino.Games;
 import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.CrapsPlayer;
+import io.zipcoder.casino.Players.Player;
 
 
 public class Craps extends Dice implements Game {
-    private CrapsPlayer crapsPlayer = new CrapsPlayer();
-    private InputOutput inputOutput = new InputOutput();
-    private Integer playerBetAmount = 0;
-    private Integer playerDecision = 1;
+    private CrapsPlayer mainPlayer;
     private Integer betUserPlaces = 0;
+    private Integer playerBetAmount = 0;
+    private Integer dieValue = 0;
+    private Integer playerDecision = 1;
 
-
-    public Integer userPlacesBet() {
-        System.out.println("Hello!");
-        String askUserBet = "Please press\n 1 for Pass Line\n 2 for Don't Pass Line";
-        Integer betUserPlaces = inputOutput.promptForInt(askUserBet);
-        return betUserPlaces;
-    }
-
-    public Integer userBetAmount() {
-        String askForBetAmount = ("How much money do you bet?");
-        Integer playerBetAmount = inputOutput.promptForInt(askForBetAmount);
+    public Integer getPlayerBetAmount() {
         return playerBetAmount;
     }
 
-    public Integer addDiceValuesTogether() {
-        Integer dieValue = rollDice() + rollDice();
-        return dieValue;
+    public void setPlayerBetAmount(Integer playerBetAmount) {
+        this.playerBetAmount = playerBetAmount;
     }
 
-    public void passLineWin() {
-        if (userPlacesBet() == 1 && addDiceValuesTogether() == 7 || addDiceValuesTogether() == 11) {
+    protected void setDieValue(Integer dieValue) {
+        this.dieValue = dieValue;
+    }
 
-            System.out.println("You Win!");
-            addFundsToWallet();
-            willUserPlayAgain();
+    public void setBetUserPlaces(Integer betUserPlaces) {
+        this.betUserPlaces = betUserPlaces;
+    }
 
+
+    public Craps(Player player) {
+        this.mainPlayer = new CrapsPlayer(player);
+    }
+
+
+
+    private void userPlacesBet() {
+        System.out.println("Hello! " + mainPlayer.getName() + "\n Please press\n 1 for Pass Line\n 2 for Don't Pass Line");
+        InputOutput inputOutput = new InputOutput();
+        this.betUserPlaces = inputOutput.scanForInt();
+    }
+
+    private void userBetAmount() {
+        InputOutput inputOutput = new InputOutput();
+        this.playerBetAmount = inputOutput.promptForInt("How much money do you bet?");
+    }
+
+    private Integer addDiceValuesTogether() {
+        System.out.println("51");
+        return dieValue = rollDice() + rollDice();
+    }
+
+
+    protected void passLineBetTurnSequence(Integer dieValue) {
+        if (this.dieValue == 7 || this.dieValue == 11) {
+            playerWins();
+        } else if (this.dieValue == 2 || this.dieValue == 3 || this.dieValue == 12) {
+            playerLoses();
+        } else {
+            passLineBetRollsNonWinOrLoseNumber(this.dieValue);
         }
     }
 
-    public String passLineLose() {
-        if (userPlacesBet() == 1 && addDiceValuesTogether() == 2 || addDiceValuesTogether() == 3 || addDiceValuesTogether() == 12) {
-
-            System.out.println("You Lose!");
-            takeFundsFromWallet();
-            willUserPlayAgain();
+    protected void dontPassLineBetTurnSequence(Integer dieValue) {
+        if (this.dieValue == 2 || this.dieValue == 3) {
+            playerWins();
+        } else if (this.dieValue == 7 || this.dieValue == 11) {
+            playerLoses();
+        } else {
+            dontPassLineBetRollNonWinLoseNumber(this.dieValue);
         }
-        return null;
     }
 
-    public String passLineBetRollsNonWinOrLoseNumber() {
+
+    protected void playerWins() {
+
+        System.out.println("You Win!");
+        addFundsToWallet(this.playerBetAmount);
+        willUserPlayAgain();
+
+    }
+
+    protected void playerLoses() {
+
+        System.out.println("You Lose!");
+        takeFundsFromWallet(this.playerBetAmount);
+        willUserPlayAgain();
+    }
+
+    protected void passLineBetRollsNonWinOrLoseNumber(Integer dieValue) {
+
+        do {
+            addDiceValuesTogether();
+        } while (this.dieValue != 7 || this.dieValue != dieValue);
+
+        if (dieValue == 7) {
+            playerLoses();
+        } else if (this.dieValue == dieValue) {
+
+            playerWins();
+        }
+
+    }
+
+    protected void dontPassLineBetRollNonWinLoseNumber(Integer dieValue) {
 
         do {
             rollDice();
-        } while (addDiceValuesTogether() != 7 || addDiceValuesTogether() != addDiceValuesTogether());
+        } while (this.dieValue != 7 || this.dieValue != this.dieValue);
 
-        if (addDiceValuesTogether() == 7) {
-            System.out.println("You Lose!");
-            takeFundsFromWallet();
-            willUserPlayAgain();
-        } else if (addDiceValuesTogether() == addDiceValuesTogether()) {
-
-            System.out.println("You Win!");
-            addFundsToWallet();
-            willUserPlayAgain();
-        }
-        return null;
-    }
-
-    public String dontPassLineWin() {
-        if (userPlacesBet() == 2 && addDiceValuesTogether() == 2 || addDiceValuesTogether() == 3) {
-
-            System.out.println("You Win!");
-            addFundsToWallet();
-            willUserPlayAgain();
-
-        }
-        return null;
-    }
-
-    public String dontPassLineLose() {
-        if (userPlacesBet() == 2 && addDiceValuesTogether() == 7 || addDiceValuesTogether()== 11) {
-
-            System.out.println("You Lose!");
-            takeFundsFromWallet();
-            willUserPlayAgain();
-        }
-        return null;
-    }
-
-    public String dontPassLineBetRollNonWinLoseNumber() {
-
-        do {
-            rollDice();
-        } while (addDiceValuesTogether() != 7 || addDiceValuesTogether()!= addDiceValuesTogether());
-
-        if (addDiceValuesTogether()== 7) {
-            System.out.println("You Win!");
-            addFundsToWallet();
-            willUserPlayAgain();
-        } else if (addDiceValuesTogether() == addDiceValuesTogether()) {
-            System.out.println("You Lose!");
-            takeFundsFromWallet();
-            willUserPlayAgain();
+        if (this.dieValue == 7) {
+            playerWins();
+        } else if (this.dieValue == this.dieValue) {
+            playerLoses();
         }
 
-        return null;
     }
 
-    public void takeFundsFromWallet() {
-        crapsPlayer.getWallet().subtract(playerBetAmount);
+    protected void takeFundsFromWallet(Integer playerBetAmount) {
+        mainPlayer.lostMoney(this.playerBetAmount);
         System.out.println(playerBetAmount + " dollars were removed from your wallet!");
     }
 
-    public void addFundsToWallet() {
-        crapsPlayer.getWallet().add(playerBetAmount);
+    protected void addFundsToWallet(Integer playerBetAmount) {
+        mainPlayer.wonMoney(this.playerBetAmount);
         System.out.println("Your winnings of " + playerBetAmount + " dollars were added to you wallet!");
 
     }
 
-    public Integer willUserPlayAgain() {
+    protected void willUserPlayAgain() {
         String askPlayerToPlayAgain = "Do you want to play again?\n 1 for Yes!\n 2 for No!";
-        Integer playerDecision = inputOutput.promptForInt(askPlayerToPlayAgain);
-        return playerDecision;
+        InputOutput inputOutput = new InputOutput();
+        this.playerDecision = inputOutput.promptForInt(askPlayerToPlayAgain);
     }
 
     public void startGame() {
         do {
-           userPlacesBet();
+            userPlacesBet();
+            userBetAmount();
+            addDiceValuesTogether();
+            System.out.println("his");
+            if (this.betUserPlaces == 1) {
+                System.out.println("hdsjh");
+                passLineBetTurnSequence(this.dieValue);
+            } else {
+                dontPassLineBetTurnSequence(this.dieValue);
+            }
 
-        } while (playerDecision == 1);
-
+        } while (this.playerDecision == 1);
+        endGame();
 
     }
 
     public void endGame() {
-       String goodbye = "Thank you for playing!";
+        String goodbye = "Thank you for playing!";
     }
 }

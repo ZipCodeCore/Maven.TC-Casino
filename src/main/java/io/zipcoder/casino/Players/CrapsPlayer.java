@@ -5,17 +5,25 @@ import io.zipcoder.casino.Wallet;
 
 public class CrapsPlayer extends Player {
 
-    private String name;
-    private Integer age;
-    private Wallet wallet;
+    protected Player mainPlayer;
 
-    public CrapsPlayer() {
-        super.age = age;
-        super.name = name;
-        this.wallet = super.wallet;
+
+    public CrapsPlayer(Player mainPlayer) {
+        this.age = mainPlayer.getAge();
+        this.name = mainPlayer.getName();
+        this.mainPlayer = mainPlayer;
     }
 
-    public Wallet getWallet(){
-        return wallet;
+
+    public Player getMainPlayer() {
+        return mainPlayer;
+    }
+
+    public void lostMoney(int money) {
+        mainPlayer.wallet.subtract(money);
+    }
+
+    public void wonMoney(int money) {
+        mainPlayer.wallet.subtract(money);
     }
 }
