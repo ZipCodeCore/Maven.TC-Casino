@@ -128,8 +128,12 @@ public class RoulettePromptsTest {
         String input = "37";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
+        boolean actual = true;
+        try{
+            roulettePrompts.singleNumberPrompt();
+        }catch(NoSuchElementException e){ actual = false;}
 
-        Assert.assertEquals(null, roulettePrompts.singleNumberPrompt());
+        Assert.assertFalse(actual);
     }
 
     @Test
