@@ -45,7 +45,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
                     if (!nextLineIsNotExit()) {
                         end();
                     }
-                     checkIfGameIsOver();
+                    checkIfGameIsOver();
                 }
             }
         } else {end();}
@@ -153,7 +153,6 @@ public class War extends Game implements GameInterface, CardGameInterface {
     }
 
     public void end() {
-
         String winner = "";
         if (player.getHand().getHandArrayList().size() > 50) {
             winner += "you!";
@@ -167,7 +166,6 @@ public class War extends Game implements GameInterface, CardGameInterface {
         if (input.nextLine().equals("yes")) {
             start();
         }
-
         gameIsRunning = false;
     }
 
