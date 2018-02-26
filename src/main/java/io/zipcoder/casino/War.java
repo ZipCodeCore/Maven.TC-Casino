@@ -45,7 +45,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
                     if (!nextLineIsNotExit()) {
                         end();
                     }
-                    // checkIfGameIsOver();
+                     checkIfGameIsOver();
                 }
             }
         } else {end();}
