@@ -264,7 +264,7 @@ public class Blackjack implements Game{
         InputOutput inputOutput = new InputOutput();
         String credential = inputOutput.promptForString("ENTER ADMIN USER NAME");
         if (credential.equals("admin")) {
-            System.out.println("These violent delights have violent ends.");
+            System.out.println("These card based delights have card based ends.");
             BJKJSecret secret = new BJKJSecret();
             secret.start(this.player);
         }
