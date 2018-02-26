@@ -1,6 +1,7 @@
 package io.zipcoder.casino.Players;
 
 public class BlackjackPlayer extends Player{
+
     protected Player rootPlayer;
     //private Card[] hand;
     protected boolean canHit;

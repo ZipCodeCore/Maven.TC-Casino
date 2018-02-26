@@ -1,143 +1,155 @@
 package io.zipcoder.casino.Games;
-
-import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
+import io.zipcoder.casino.Interfaces.Game;
+import io.zipcoder.casino.Players.GoFishComputerPlayer;
+import io.zipcoder.casino.Players.GoFishHumanPlayer;
 import io.zipcoder.casino.Players.GoFishPlayer;
+import io.zipcoder.casino.InputOutput.InputOutput;
 import io.zipcoder.casino.Players.Player;
 
 import java.util.*;
 
-public class GoFish {
-    Queue<Card> stockPile;
-    private List<Card> cardHand;
-    ArrayList<Player> players;
 
 
-    public void play() {
-        Player rootPlayer = new Player("Bob", 45, 100);
-        Player goFishPlayer1 = new GoFishPlayer(rootPlayer);
+public class GoFish implements Game {
+    private int turnCounter;
+    private ArrayList<GoFishPlayer> players;
+    private InputOutput inputOutput;
+    private Deck deck;
 
-        cardHand = new ArrayList<Card>();
 
-        players = new ArrayList<Player>();
-        players.add(rootPlayer);
-        players.add(goFishPlayer1);
-
-        Deck deck = new Deck();
+    public GoFish(GoFishHumanPlayer player1) {
+        inputOutput = new InputOutput();
+        players = new ArrayList<>();
+        players.add(player1);
+        players.add(new GoFishComputerPlayer("Bob"));
+        players.add(new GoFishComputerPlayer("Sue"));
+        turnCounter = 0;
+        deck = new Deck();
         deck.shuffleDeck();
 
-
-
-        //while(goFishPlayer1.getNumPairs())
     }
 
-    public Queue<Card> buildStockPile = new Queue<Card>() {
-        public boolean add(Card card) {
-            return false;
-        }
-
-        public boolean offer(Card card) {
-            return false;
-        }
-
-        public Card remove() {
-            return null;
-        }
-
-        public Card poll() {
-            return null;
-        }
-
-        public Card element() {
-            return null;
-        }
-
-        public Card peek() {
-            return null;
-        }
-
-        public int size() {
-            return 0;
-        }
-
-        public boolean isEmpty() {
-            return false;
-        }
-
-        public boolean contains(Object o) {
-            return false;
-        }
-
-        public Iterator<Card> iterator() {
-            return null;
-        }
-
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-        public <T> T[] toArray(T[] a) {
-            return null;
-        }
-
-        public boolean remove(Object o) {
-            return false;
-        }
-
-        public boolean containsAll(Collection<?> c) {
-            return false;
-        }
-
-        public boolean addAll(Collection<? extends Card> c) {
-            return false;
-        }
-
-        public boolean removeAll(Collection<?> c) {
-            return false;
-        }
-
-        public boolean retainAll(Collection<?> c) {
-            return false;
-        }
-
-        public void clear() {
-
-        }
-    };
-
-    public void buildPlayerHand() {
+    public void welcomeMessage() {
+        System.out.println("Welcome to Go Fish!\nYou are playing with Bob and Sue today.\n");
 
     }
 
-    public void buildComputerHand() {
-
+    public void startGame() {
+        this.welcomeMessage();
+        this.deal();
+        while (gameIsNotOver()) {
+            takeTurn();
+        }
+        GoFishPlayer winner = this.determineWinner();
+        System.out.println("Congratulations, " + winner.getName() + " , you win!");
+        System.out.println("That was fun! Game over.");
+        this.endGame();
     }
 
 
     public void deal() {
-        this.buildPlayerHand();
-        this.buildComputerHand();
-        //this.buildStockPile();
-    }
+        System.out.println("Dealing out player hands.");
+        for (int i = 0; i < players.size(); i++) {
+            for(int j= 0; j < 5; j++) {
+                players.get(i).addCardToHand(deck.getTopCard());
+                deck.deck.remove(0);
+            }
 
-    public int deckSize() {
-        return cardHand.size();
-    }
-
-
-    public String displayCardHand() {
-        StringBuilder cardHandBuilder = new StringBuilder();
-        for (int i = 0; i < cardHand.size(); i++) {
-            cardHandBuilder.append("Card " + (i + 1) + cardHand.get(i) + "\n");
         }
-
-        return cardHandBuilder.toString();
     }
 
-    public boolean isGameOver() {
-        return false;
+    public boolean gameIsNotOver () {
+        int numPairsMatched = 0;
+        for (GoFishPlayer player : players) {
+            numPairsMatched += player.getNumPairs();
+
+        }
+        return numPairsMatched < 26;
+    }
+
+    public GoFishPlayer getCurrentPlayer() {
+        // turncount mod numplayers = index of currentplayer
+        return players.get(turnCounter % players.size());
     }
 
 
+    public void takeTurn () {
+        GoFishPlayer currentPlayer = getCurrentPlayer();
+        if(currentPlayer.isHandEmpty()) {
+            System.out.println(currentPlayer.getName() + " ran out of cards and there are no cards left in the deck. Skipping turn.");
+            turnCounter++;
+            return;
+        }
+        System.out.println("\nIt's " + currentPlayer.getName() + "'s turn.\n");
+
+        List<GoFishPlayer> opponents = new ArrayList<>(players);
+        opponents.remove(currentPlayer);
+        GoFishPlayer opponentToAsk = currentPlayer.pickOpponentToAsk(opponents);
+
+        Card cardPicked = currentPlayer.pickCard();
+
+        System.out.println("\n" + currentPlayer.getName() + " asked " + opponentToAsk.getName() + " for a " + cardPicked + ".");
+
+        if (opponentToAsk.hasCard(cardPicked)) {
+            opponentToAsk.removeCard(cardPicked);
+            currentPlayer.addCardToHand(cardPicked);
+            System.out.println("\n" + opponentToAsk.getName() + " had that card. " + currentPlayer.getName() + " goes again.\n");
+            this.fillPlayerHands();
+            this.takeTurn();
+        } else {
+            System.out.println("\n" + opponentToAsk.getName() + " did not have that card. Go fish.\n");
+            if (deck.deck.isEmpty()) {
+                System.out.println("The deck is empty. No cards to draw.");
+                turnCounter++;
+                return;
+            }
+            Card topCard = deck.getTopCard();
+            deck.deck.remove(0);
+            currentPlayer.addCardToHand(topCard);
+            if (topCard.getRankEnum().equals(cardPicked.getRankEnum())) {
+                System.out.println("\n" + currentPlayer.getName() + " picked their wish! " + currentPlayer.getName() + " gets a point. Go again.\n");
+                this.fillPlayerHands();
+                this.takeTurn();
+
+            } else {
+                this.fillPlayerHands();
+                turnCounter++;
+            }
+
+        }
+    }
+
+    public void fillPlayerHands() {
+            for (GoFishPlayer player : players) {
+                if (player.isHandEmpty() && deck.deck.size() > 0) {
+                    Card topCard = deck.getTopCard();
+                    deck.deck.remove(0);
+                    player.addCardToHand(topCard);
+
+                }
+            }
+
+    }
+
+    public GoFishPlayer determineWinner() {
+        GoFishPlayer winner = null;
+        int highestScore = 0;
+        for (GoFishPlayer player: players) {
+            int currentScore = player.getNumPairs();
+            if (currentScore > highestScore) {
+                highestScore = currentScore;
+                winner = player;
+            }
+        }
+        return winner;
+    }
+
+    public void endGame() {
+
+    }
 }
+
+
+

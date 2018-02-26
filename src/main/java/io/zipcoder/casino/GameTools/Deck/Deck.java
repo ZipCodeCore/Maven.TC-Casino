@@ -18,4 +18,8 @@ public class Deck {
     public void shuffleDeck() {
         Collections.shuffle(this.deck);
     }
+
+    public Card getTopCard() {
+        return this.deck.get(0);
+    }
 }
