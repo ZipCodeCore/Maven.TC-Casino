@@ -154,7 +154,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
 
     public void end() {
         String winner = "";
-        if (player.getHand().getHandArrayList().size() > 50) {
+        if (player.getHand().getHandArrayList().size() > 25) {
             winner += "you!";
         } else {
             winner += "the dealer!";
