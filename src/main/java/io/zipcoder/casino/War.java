@@ -90,7 +90,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
     public void playerWins() {
         System.out.println("You won this round!");
         giveCardsFromTheTableToTheWinner(playerPlayedCards, player);
-        giveCardsFromTheTableToTheWinner(dealerPlayedCards, dealer);
+        giveCardsFromTheTableToTheWinner(dealerPlayedCards, player);
         somebodyWonMessage();
     }
 
