@@ -21,6 +21,7 @@ public class Casino {
     protected String askUserName(){
         String name = inputOutput.promptForString("Hello Player! What is your name?");
         return name;
+
     }
 
     protected Integer askUserAge(){
@@ -37,7 +38,7 @@ public class Casino {
         String name = this.askUserName();
         Integer age = this.askUserAge();
 
-        if(age > 21) {
+        if(age >= 21) {
             Integer balance = this.askUserBalance();
             player = new Player(name, age, balance);
         } else {
@@ -73,7 +74,7 @@ public class Casino {
                 break;
 
             case "Craps":
-                game = new Craps();
+                game = new Craps(player);
                 break;
             case "Exit":
                 isPlaying = false;

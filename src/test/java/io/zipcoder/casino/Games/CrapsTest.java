@@ -1,42 +1,31 @@
 package io.zipcoder.casino.Games;
 
+
+import io.zipcoder.casino.Players.Player;
+
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CrapsTest {
+    Craps game;
+    Integer dieValue = 7;
+    Player bob = new Player("Bob", 30, 500);
 
-    @Test
-    public void userPlacesBetTest() {
-    Craps crapsTest = new Craps();
-    String expected = "Pass Line";
-    String actual = crapsTest.userPlacesBet();
 
-    Assert.assertEquals(expected, actual);
+    @Before
+    public void setup() {
+        game = new Craps(bob);
     }
 
     @Test
-    public void addDieValuesTogetherTest() {
+    public void setPlayerBetAmountTest() {
+        Integer expected = 500;
 
-    }
+        game.setPlayerBetAmount(expected);
+        Integer actual = game.getPlayerBetAmount();
 
-    @Test
-    public void ifPassLineTest() {
-
-    }
-
-    @Test
-    public void playAgainTest() {
-
-    }
-
-    @Test
-    public void ifDontPassLineTest() {
-
-    }
-
-    @Test
-    public void playDifferentGame() {
-
+        Assert.assertEquals(expected, actual);
     }
 
 }

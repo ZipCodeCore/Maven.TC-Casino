@@ -2,12 +2,16 @@ package io.zipcoder.casino.Games;
 
 import io.zipcoder.casino.GameTools.Deck.Card;
 import io.zipcoder.casino.GameTools.Deck.Deck;
+
 import io.zipcoder.casino.InputOutput.InputOutput;
+
 import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.Player;
 import io.zipcoder.casino.Players.WarPlayer;
 
+
 public class War implements Game {
+
 
    public WarPlayer player1;
    public WarPlayer player2;
@@ -136,6 +140,7 @@ public class War implements Game {
             this.isPlaying = false;
         }
     }
+
 
     public void displayWinner() {
         System.out.println(highestPoints());
