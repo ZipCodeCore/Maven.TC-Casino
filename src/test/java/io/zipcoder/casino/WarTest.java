@@ -5,6 +5,7 @@ import org.junit.Test;
 
 public class WarTest {
 
+    // psvm for isolated War testing
     public static void main(String[] args) {
         Person player = new Person();
         War war = new War(player);
@@ -60,11 +61,29 @@ public class WarTest {
     }
 
     @Test
-    public void decideHowManyYaddaYaddaTest() {
+    public void decideHowManyYaddaYaddaTest_handHasFourCards() {
         Person player = new Person();
         War warGame = new War(player);
         int expected = 4;
         int actual = warGame.decideOnHowManyTimesToIterateBasedOn(4);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void decideHowManyYaddaYaddaTest_handHasMoreThanFourCards() {
+        Person player = new Person();
+        War warGame = new War(player);
+        int expected = 4;
+        int actual = warGame.decideOnHowManyTimesToIterateBasedOn(7);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void decideHowManyYaddaYaddaTest_handHasLessThanFourCards() {
+        Person player = new Person();
+        War warGame = new War(player);
+        int expected = 2;
+        int actual = warGame.decideOnHowManyTimesToIterateBasedOn(2);
         Assert.assertEquals(expected, actual);
     }
 

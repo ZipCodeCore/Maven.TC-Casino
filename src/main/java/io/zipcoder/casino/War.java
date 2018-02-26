@@ -4,11 +4,12 @@ import java.util.*;
 
 public class War extends Game implements GameInterface, CardGameInterface {
 
+    // private boolean gameIsRunning;
     private Dealer dealer = new Dealer();
     private Person player = new Person("Joe");
     private ArrayList<Card> playerPlayedCards = new ArrayList<Card>();
     private ArrayList<Card> dealerPlayedCards = new ArrayList<Card>();
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
 
     public War(Person player) {
         // this.player = player;
@@ -16,6 +17,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
     }
 
     public void start() {
+        // gameIsRunning = true;
         System.out.println("Welcome to WAR! Enter anything into the console to play a card");
         System.out.println("Enter 'exit' at any time to end the game");
         Deck dealerDeck = new Deck();
@@ -160,6 +162,9 @@ public class War extends Game implements GameInterface, CardGameInterface {
         if (input.nextLine().equals("yes")) {
             start();
         }
+        // gameIsRunning = false;
+        this.player.getHand().clearHand();
+        this.dealer.getHand().clearHand();
     }
 
     public int checkNumberOfCards(Hand handToCheck) {
