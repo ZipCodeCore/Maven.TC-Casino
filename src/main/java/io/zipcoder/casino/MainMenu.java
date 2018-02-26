@@ -1,5 +1,6 @@
 package io.zipcoder.casino;
 
+import java.awt.*;
 import java.util.*;
 import java.util.Scanner;
 
@@ -24,10 +25,11 @@ public class MainMenu {
         Scanner in = new Scanner(System.in);
         String choice;
         do {
-            System.out.println("Please choose a game from the following menu:\nWar\nGo Fish\nBlackJack\nCraps");
+            System.out.println("Please choose a game from the following menu:\nWar\nGo Fish\nBlackJack\nCraps" +
+                    "\nCoin Flipper");
             choice = in.nextLine().toLowerCase();
         } while ( !(choice.equals("craps")) && !(choice.equals("go fish")) && !(choice.equals("war")) &&
-                !(choice.equals("blackjack")));
+                !(choice.equals("blackjack")) && !(choice.equals("coin flipper")));
         return choice;
     }
 

@@ -137,7 +137,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
 
     // Make private after testing / Make public for testing
     public void playCardInHandForPerson(ArrayList<Card> playedCards, Person person, int i) {
-        playedCards.add(person.getHand().getHandArrayList().remove(i));
+        playedCards.add(person.getHand().drawCardfromHand());
     }
 
     public void dealCards() {
