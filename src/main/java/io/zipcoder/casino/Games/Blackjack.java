@@ -29,10 +29,7 @@ public class Blackjack implements Game{
         do {
             splash();
             pregameReset();
-            if (player.getRootPlayer().getBalance() < 10) {
-                System.out.println("You haven't got the dough! ");
-                break;
-            }
+            if (outOfMoneyCheck()) break;
             if (player.bulkApperception) selfActualization();
             deck = new Deck();
             deck.shuffleDeck();
@@ -45,10 +42,18 @@ public class Blackjack implements Game{
         endGame();
     }
 
+    public boolean outOfMoneyCheck() {
+        if (player.getRootPlayer().getBalance() < 10) {
+            System.out.println("You haven't got the dough! ");
+            return true;
+        }
+        return false;
+    }
+
     private void splash(){
         if (titleSplash == true) {
             System.out.println(
-                    ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                        \n" +
+                            ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                        \n" +
                             "|  |) /_|  |    /  O  \\ '  .--./|  .'   /    |  |/  O  \\ '  .--./|  .'   /                                                        \n" +
                             "|  .-.  \\  |   |  .-.  ||  |    |  .   ',--. |  |  .-.  ||  |    |  .   '                                                         \n" +
                             "|  '--' /  '--.|  | |  |'  '--'\\|  |\\   \\  '-'  /  | |  |'  '--'\\|  |\\   \\                                                        \n" +
@@ -56,7 +61,7 @@ public class Blackjack implements Game{
             this.titleSplash = false;
         } else {
             System.out.println(
-                    ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                        \n" +
+                            ",-----. ,--.     ,---.   ,-----.,--. ,--.    ,--. ,---.   ,-----.,--. ,--.                                                          \n" +
                             "|  |) /_|  |    /  O  \\ '  .--./|  .'   /    |  |/  O  \\ '  .--./|  .'   /                                                        \n" +
                             "|  .-.  \\  |   |  .-.  ||  |    |  .   ',--. |  |  .-.  ||  |    |  .   '                                                         \n" +
                             "|  '--' /  '--.|  | |  |'  '--'\\|  |\\   \\  '-'  /  | |  |'  '--'\\|  |\\   \\                                                        \n" +
