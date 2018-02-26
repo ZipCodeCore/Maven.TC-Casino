@@ -19,6 +19,13 @@ public class CrapsPlayer extends Player implements Gambler {
     private boolean hardSix;
     private boolean hardEight;
     private boolean hardTen;
+    private boolean aces;
+    private boolean aceDeuce;
+    private boolean yoEleven;
+    private boolean boxcar;
+    private boolean horn;
+    private boolean anySeven;
+    private boolean anyCraps;
     private ArrayList<Integer> comePoints;
     private ArrayList<Integer> dontComePoints;
 
@@ -210,5 +217,62 @@ public class CrapsPlayer extends Player implements Gambler {
     public boolean isHardTen(){
         return this.hardTen;
     }
+
+    public void setAces(boolean input){
+        this.aces = input;
+    }
+
+    public boolean isAces(){
+        return this.aces;
+    }
+
+    public void setAceDeuce(boolean input){
+        this.aceDeuce = input;
+    }
+
+    public boolean isAceDeuce(){
+        return this.aceDeuce;
+    }
+
+    public void setYoEleven(boolean input){
+        this.yoEleven = input;
+    }
+
+    public boolean isYoEleven(){
+        return this.yoEleven;
+    }
+
+    public void setBoxcar(boolean input){
+        this.boxcar = input;
+    }
+
+    public boolean isBoxcar(){
+        return this.boxcar;
+    }
+
+    public void setHorn(boolean input){
+        this.horn = input;
+    }
+
+    public boolean isHorn(){
+        return this.horn;
+    }
+
+    public void setAnySeven(boolean input){
+        this.anySeven = input;
+    }
+
+    public boolean isAnySeven(){
+        return this.anySeven;
+    }
+
+    public void setAnyCraps(boolean input){
+        this.anyCraps = input;
+    }
+
+    public boolean isAnyCraps(){
+        return this.anyCraps;
+    }
+
 
 }

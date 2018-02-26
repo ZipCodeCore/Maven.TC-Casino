@@ -121,6 +121,7 @@ public class DiceGameTest {
         testGame.addPlayer(smellyPeter);
         testGame.addPlayer(smellyPeter);
         ArrayList<Player> actual = testGame.getPlayers();
+        System.out.println(actual.size());
 
         //Then
         Assert.assertTrue(actual.contains(expected2) && actual.size() == 2);

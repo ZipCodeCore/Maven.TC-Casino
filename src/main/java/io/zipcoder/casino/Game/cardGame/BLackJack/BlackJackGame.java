@@ -1,6 +1,5 @@
 package io.zipcoder.casino.Game.cardGame.BLackJack;
 
-import io.zipcoder.casino.BlackJackBet;
 import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
@@ -10,9 +9,6 @@ import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 import io.zipcoder.casino.TypeOfBet;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 public class BlackJackGame extends CardGame {
     private BlackJackPlayer player;

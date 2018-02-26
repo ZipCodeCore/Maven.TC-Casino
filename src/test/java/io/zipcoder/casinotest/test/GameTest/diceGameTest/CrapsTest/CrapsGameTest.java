@@ -1,15 +1,12 @@
 package io.zipcoder.casinotest.test.GameTest.diceGameTest.CrapsTest;
 
-import io.zipcoder.casino.CrapsBet;
+import io.zipcoder.casino.Game.diceGame.Craps.CrapsBet;
 import io.zipcoder.casino.Game.diceGame.Craps.CrapsGame;
-import io.zipcoder.casino.Game.diceGame.Craps.CrapsPlayer;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 public class CrapsGameTest {
 
@@ -21,7 +18,8 @@ public class CrapsGameTest {
     @Before
     public void setup(){
         testGame = new CrapsGame(stinkyProfile);
-        testGame.startGame();
+        testGame.createDie(6,2);
+
     }
 
 
@@ -866,6 +864,246 @@ public class CrapsGameTest {
 
         //Then
         Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.HARD_TEN) == 0);
+    }
+
+    @Test
+    public void acesPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.ACES,50);
+        testGame.getCurrentPlayer().setAces(true);
+
+        //When
+        testGame.acesPayout(2);
+        double expected = 1600;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void acesPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.ACES,50);
+        testGame.getCurrentPlayer().setAces(true);
+
+        //When
+        testGame.acesPayout(7);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.ACES) == 0);
+    }
+
+    @Test
+    public void aceDeucePayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.ACE_DEUCE,50);
+        testGame.getCurrentPlayer().setAceDeuce(true);
+
+        //When
+        testGame.aceDeucePayout(3);
+        double expected = 850;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void aceDeucePayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.ACE_DEUCE,50);
+        testGame.getCurrentPlayer().setAceDeuce(true);
+
+        //When
+        testGame.aceDeucePayout(7);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.ACE_DEUCE) == 0);
+    }
+
+    @Test
+    public void yoElevenPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.YO_ELEVEN,50);
+        testGame.getCurrentPlayer().setYoEleven(true);
+
+        //When
+        testGame.yoElevenPayout(11);
+        double expected = 850;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void yoElevenPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.YO_ELEVEN,50);
+        testGame.getCurrentPlayer().setYoEleven(true);
+
+        //When
+        testGame.yoElevenPayout(7);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.YO_ELEVEN) == 0);
+    }
+
+    @Test
+    public void boxcarPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.BOXCAR,50);
+        testGame.getCurrentPlayer().setBoxcar(true);
+
+        //When
+        testGame.boxcarPayout(12);
+        double expected = 1600;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void boxcarPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.BOXCAR,50);
+        testGame.getCurrentPlayer().setBoxcar(true);
+
+        //When
+        testGame.boxcarPayout(7);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.BOXCAR) == 0);
+    }
+
+    @Test
+    public void hornPayoutWinTest2(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.HORN,50);
+        testGame.getCurrentPlayer().setHorn(true);
+
+        //When
+        testGame.hornPayout(2);
+        double expected = 437.5;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void hornPayoutWinTest11(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.HORN,50);
+        testGame.getCurrentPlayer().setHorn(true);
+
+        //When
+        testGame.hornPayout(11);
+        double expected = 250;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void hornPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.HORN,50);
+        testGame.getCurrentPlayer().setHorn(true);
+
+        //When
+        testGame.hornPayout(7);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.HORN) == 0);
+    }
+
+    @Test
+    public void anySevenPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.ANY_SEVEN,50);
+        testGame.getCurrentPlayer().setAnySeven(true);
+
+        //When
+        testGame.anySevenPayout(7);
+        double expected = 300;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void anySevenPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.ANY_SEVEN,50);
+        testGame.getCurrentPlayer().setAnySeven(true);
+
+        //When
+        testGame.anySevenPayout(3);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.ANY_SEVEN) == 0);
+    }
+
+    @Test
+    public void anyCrapsPayoutWinTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.ANY_CRAPS,50);
+        testGame.getCurrentPlayer().setAnyCraps(true);
+
+        //When
+        testGame.anyCrapsPayout(2);
+        double expected = 450;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertEquals(expected,actual, 0.01);
+    }
+
+    @Test
+    public void anyCrapsPayoutLoseTest(){
+        //Given
+        //testGame
+        testGame.getCurrentPlayer().bet(CrapsBet.ANY_CRAPS,50);
+        testGame.getCurrentPlayer().setAnyCraps(true);
+
+        //When
+        testGame.anyCrapsPayout(5);
+        double expected = 50;
+        double actual = testGame.getCurrentPlayer().getProfile().getAccountBalance();
+
+        //Then
+        Assert.assertTrue(expected == actual && testGame.getCurrentPlayer().getEscrowBet(CrapsBet.ANY_CRAPS) == 0);
     }
 
     @Test
