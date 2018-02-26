@@ -42,13 +42,23 @@ public class GoFishHumanPlayer extends GoFishPlayer{
     public GoFishPlayer pickOpponentToAsk(List<GoFishPlayer> opponents) {
         this.showOpponents(opponents);
         int opponentIndex = inputOutput.promptForInt("Enter the number for the player you want to ask:");
-        return opponents.get(opponentIndex -1);
+        try {
+            return opponents.get(opponentIndex - 1);
+        } catch(IndexOutOfBoundsException name) {
+            System.out.println("\tTry again. Please enter one of the numbers shown.\n");
+            return pickOpponentToAsk(opponents);
+        }
     }
 
     public Card pickCard() {
         this.showCards();
         int cardIndex = inputOutput.promptForInt("Enter the number of your card choice:");
-        return cardHand.get(cardIndex -1);
+        try {
+            return cardHand.get(cardIndex - 1);
+        } catch (IndexOutOfBoundsException name) {
+            System.out.println("\tTry again. Please enter one of the numbers shown.\n");
+            return pickCard();
+        }
     }
 
 }
