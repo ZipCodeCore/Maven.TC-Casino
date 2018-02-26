@@ -192,7 +192,7 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
         int betPlaced = 0;
         do {
             System.out.println("How many chips do you want to bet?");
-            String inputString = scanner.nextLine();
+            String inputString = scanner.nextLine(); // changed to nextLine
             try {
                 betPlaced = Integer.parseInt(inputString);
                 if (betPlaced <= 0) {
