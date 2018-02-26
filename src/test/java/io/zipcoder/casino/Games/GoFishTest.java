@@ -10,6 +10,9 @@ import io.zipcoder.casino.Players.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GoFishTest {
 
     @Test
@@ -62,7 +65,32 @@ public class GoFishTest {
         int actual = goFishPlayer1.getCardHandSize();
 
         Assert.assertEquals(expected, actual);
+    }
 
+    @Test
+    public void displayScoresTest() {
+        Player player1 = new Player("Sally", 89);
+        GoFishHumanPlayer goFishPlayer1 = new GoFishHumanPlayer(player1);
+        GoFishComputerPlayer goFishPlayer2 = new GoFishComputerPlayer("Bob");
+        GoFishComputerPlayer goFishPlayer3 = new GoFishComputerPlayer("George");
+        GoFish testGame = new GoFish(goFishPlayer1);
+        ArrayList<GoFishPlayer> players = new ArrayList<GoFishPlayer>();
+        players.add(goFishPlayer1);
+        players.add(goFishPlayer2);
+        players.add(goFishPlayer3);
+
+
+        goFishPlayer1.addPair();
+        goFishPlayer1.addPair();
+        goFishPlayer1.addPair();
+        goFishPlayer2.addPair();
+        goFishPlayer3.addPair();
+        goFishPlayer3.addPair();
+
+        String expected = "\t>Sally: 3\n\t>Bob: 1\n\t>George: 2\n";
+        String actual = testGame.displayScores(players);
+
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -76,9 +104,11 @@ public class GoFishTest {
         goFishPlayer1.addPair();
         goFishPlayer2.addPair();
 
-        GoFishPlayer winner = testGame.determineWinner();
+        List<GoFishPlayer> winner = testGame.determineWinner();
 
-        String expected = "Sally";
-        String actual = winner.getName();
+        int expected = 1;
+        int actual = winner.size();
+
+        Assert.assertEquals(expected, actual);
     }
 }

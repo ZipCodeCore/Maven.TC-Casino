@@ -55,35 +55,91 @@ public class GoFishPlayerTest {
     }
 
     @Test
-    public void showCardsTest() {
+    public void getNumPairsTest() {
+        Player player1 = new Player("Phoebe", 24);
+        GoFishPlayer goFishPlayer1 = new GoFishHumanPlayer(player1);
+
+        int expected = 0;
+        int actual = goFishPlayer1.getNumPairs();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void addCardToHandTest() {
         Player player1 = new Player("Sue", 89);
         GoFishPlayer goFishPlayer1 = new GoFishHumanPlayer(player1);
 
         Card temp1 = new Card(Rank.ACE, Suit.HEARTS);
         goFishPlayer1.addCardToHand(temp1);
 
-        String expected = "\n1: ACE of HEARTS\n";
-        String actual = goFishPlayer1.showCards();
+        int expected = 1;
+        int actual = goFishPlayer1.getCardHandSize();
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void showOpponentsTest() {
-        List<GoFishPlayer> opponents = new ArrayList<>();
-
+    public void removeMatchesTest() {
         Player player1 = new Player("Sue", 89);
         GoFishPlayer goFishPlayer1 = new GoFishHumanPlayer(player1);
 
-        GoFishPlayer goFishPlayer2 = new GoFishHumanPlayer(new Player("Bob", 45));
+        Card temp1 = new Card(Rank.ACE, Suit.HEARTS);
+        Card temp2 = new Card(Rank.ACE, Suit.SPADE);
 
-        opponents.add(goFishPlayer1);
-        opponents.add(goFishPlayer2);
+        goFishPlayer1.addCardToHand(temp1);
+        goFishPlayer1.addCardToHand(temp2);
 
-        String expected = "1: Sue\n2: Bob\n";
-        String actual = goFishPlayer1.showOpponents(opponents);
+        goFishPlayer1.removeMatches(temp1.getRankEnum());
+
+        int expected = 0;
+        int actual = goFishPlayer1.getCardHandSize();
 
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getCardHandSizeTest() {
+        Player player1 = new Player("Sue", 89);
+        GoFishPlayer goFishPlayer1 = new GoFishHumanPlayer(player1);
+
+        Card temp1 = new Card(Rank.ACE, Suit.HEARTS);
+        Card temp2 = new Card(Rank.THREE, Suit.SPADE);
+
+        goFishPlayer1.addCardToHand(temp1);
+        goFishPlayer1.addCardToHand(temp2);
+
+        int expected = 2;
+        int actual = goFishPlayer1.getCardHandSize();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void isHandEmptyTest() {
+        Player player1 = new Player("Sue", 89);
+        GoFishPlayer goFishPlayer1 = new GoFishHumanPlayer(player1);
+
+        Card temp1 = new Card(Rank.ACE, Suit.HEARTS);
+        Card temp2 = new Card(Rank.THREE, Suit.SPADE);
+
+        goFishPlayer1.addCardToHand(temp1);
+        goFishPlayer1.addCardToHand(temp2);
+
+        Boolean answer = goFishPlayer1.isHandEmpty();
+
+        Assert.assertFalse(answer);
+    }
+
+    @Test
+    public void hasCardTest(){
+        Player player1 = new Player("Sue", 89);
+        GoFishPlayer goFishPlayer1 = new GoFishHumanPlayer(player1);
+
+        Card temp1 = new Card(Rank.ACE, Suit.HEARTS);
+        goFishPlayer1.addCardToHand(temp1);
+
+        Assert.assertTrue(goFishPlayer1.hasCard(temp1));
     }
 
     @Test
@@ -98,29 +154,5 @@ public class GoFishPlayerTest {
         int actual = goFishPlayer1.getCardHandSize();
 
         Assert.assertEquals(expected, actual);
-    }
-
-
-
-    @Test
-    public void getNumPairsTest() {
-        Player player1 = new Player("Phoebe", 24);
-        GoFishPlayer goFishPlayer1 = new GoFishHumanPlayer(player1);
-
-        int expected = 0;
-        int actual = goFishPlayer1.getNumPairs();
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void hasCardTest(){
-        Player player1 = new Player("Sue", 89);
-        GoFishPlayer goFishPlayer1 = new GoFishHumanPlayer(player1);
-
-        Card temp1 = new Card(Rank.ACE, Suit.HEARTS);
-        goFishPlayer1.addCardToHand(temp1);
-
-        Assert.assertTrue(goFishPlayer1.hasCard(temp1));
     }
 }
