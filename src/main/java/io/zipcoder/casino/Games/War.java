@@ -7,8 +7,6 @@ import io.zipcoder.casino.Interfaces.Game;
 import io.zipcoder.casino.Players.Player;
 import io.zipcoder.casino.Players.WarPlayer;
 
-import java.util.Scanner;
-
 public class War implements Game {
 
    public WarPlayer player1;
@@ -157,4 +155,5 @@ public class War implements Game {
                 "                          \n");
         return sb.toString();
     }
+
 }
