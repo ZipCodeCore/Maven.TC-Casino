@@ -22,13 +22,6 @@ public class CrapsGame extends DiceGame {
         players.add(currentPlayer);
     }
 
-    public static void main(String[] args) {
-        Profile stinkyProfile = new Profile("Stinky Pete", 1000, 11);
-        CrapsGame testGame = new CrapsGame(stinkyProfile);
-        testGame.startGame();
-
-    }
-
     public void comeOutPhase() {
         Console.print(bar);
         Console.print("The game is in the Come Out phase");
@@ -38,12 +31,7 @@ public class CrapsGame extends DiceGame {
         if (isNatural(roll)) {
             Console.print("You rolled a Natural");
             if(roll == 7){
-                this.comePointPayout(roll);
-                this.hardWayPayouts(roll);
-                this.dontComePointPayout(roll);
-                this.bigSixPayout(roll);
-                this.bigEightPayout(roll);
-                this.oneRollBetPayouts(roll);
+               this.comeOutSevenPayouts(roll);
             }
             this.oneRollBetPayouts(roll);
             this.rollIsNaturalPayout();
@@ -59,12 +47,7 @@ public class CrapsGame extends DiceGame {
             this.turn();
         } else {
             this.point = roll;
-            this.hardWayPayouts(roll);
-            this.oneRollBetPayouts(roll);
-            this.comePointPayout(roll);
-            this.dontComePointPayout(roll);
-            this.bigSixPayout(roll);
-            this.bigEightPayout(roll);
+            this.comeOutPointSetPayouts(roll);
             Console.print("The game is entering the Point phase");
             Console.print("The point is set to: [" + this.point +"]");
             this.isComeOutPhase = false;
@@ -81,47 +64,14 @@ public class CrapsGame extends DiceGame {
         this.printDontComePoints();
         int roll = this.getRollValue();
         if (roll == this.point) {
-            this.oneRollBetPayouts(roll);
-            this.hardWayPayouts(roll);
-            this.passLinePayout();
-            this.dontComePointPayout(roll);
-            this.comePointPayout(roll);
-            this.newComePoint(roll);
-            this.bigSixPayout(roll);
-            this.bigEightPayout(roll);
-
-            if(currentPlayer.hasOdds() && currentPlayer.isPassLine()){
-                this.passLineOddsPayout(roll);
-                currentPlayer.setOdds(false);
-            }
-            else if(currentPlayer.hasOdds() && !currentPlayer.isPassLine()){
-                this.doNotPassOddsPayout(1);
-                currentPlayer.setOdds(false);
-            }
-
+            this.pointPhasePointMadePayouts(roll);
             this.newRound = true;
             Console.print("The game is entering the Come Out Phase");
             this.isComeOutPhase = true;
             this.hardRoll = false;
             this.turn();
         } else if (roll == 7) {
-            this.oneRollBetPayouts(roll);
-            this.hardWayPayouts(roll);
-            this.doNotPassPayout();
-            this.comeNaturalPayout(roll);
-            this.comePointPayout(roll);
-            this.dontComePointPayout(roll);
-            this.bigSixPayout(roll);
-            this.bigEightPayout(roll);
-
-            if(currentPlayer.hasOdds() && !currentPlayer.isPassLine()){
-                this.doNotPassOddsPayout(this.point);
-                currentPlayer.setOdds(false);
-            }
-            else if(currentPlayer.hasOdds() && currentPlayer.isPassLine()){
-                this.passLineOddsPayout(1);
-                currentPlayer.setOdds(false);
-            }
+            this.pointPhaseSevenPayouts(roll);
 
             this.newRound = true;
             Console.print("The game is entering the Come Out Phase");
@@ -130,24 +80,12 @@ public class CrapsGame extends DiceGame {
             this.turn();
         }
         else if(!isCraps(roll) && roll != 11){
-            this.oneRollBetPayouts(roll);
-            this.hardWayPayouts(roll);
-            this.comePointPayout(roll);
-            this.dontComePointPayout(roll);
-            this.newComePoint(roll);
-            this.newDontComePoint(roll);
-            this.bigSixPayout(roll);
-            this.bigEightPayout(roll);
+            this.pointPhaseNotCrapsAndNotElevenPayouts(roll);
             this.hardRoll = false;
             this.turn();
         }
         else {
-            this.oneRollBetPayouts(roll);
-            this.hardWayPayouts(roll);
-            this.comeNaturalPayout(roll);
-            this.doNotComeCrapsPayout(roll);
-            this.bigSixPayout(roll);
-            this.bigEightPayout(roll);
+            this.pointPhaseRemainingPayouts(roll);
             this.hardRoll = false;
             this.turn();
         }
@@ -1150,6 +1088,15 @@ public class CrapsGame extends DiceGame {
         this.hardTenPayout(roll);
     }
 
+    public void comeOutSevenPayouts(int roll){
+        this.comePointPayout(roll);
+        this.hardWayPayouts(roll);
+        this.dontComePointPayout(roll);
+        this.bigSixPayout(roll);
+        this.bigEightPayout(roll);
+        this.oneRollBetPayouts(roll);
+    }
+
     public void oneRollBetPayouts(int roll){
         this.fieldPayout(roll);
         this.acesPayout(roll);
@@ -1159,6 +1106,77 @@ public class CrapsGame extends DiceGame {
         this.hornPayout(roll);
         this.anySevenPayout(roll);
         this.anyCrapsPayout(roll);
+    }
+
+    public void comeOutPointSetPayouts(int roll){
+        this.hardWayPayouts(roll);
+        this.oneRollBetPayouts(roll);
+        this.comePointPayout(roll);
+        this.dontComePointPayout(roll);
+        this.bigSixPayout(roll);
+        this.bigEightPayout(roll);
+    }
+
+    public void pointPhasePointMadePayouts(int roll){
+        this.oneRollBetPayouts(roll);
+        this.hardWayPayouts(roll);
+        this.passLinePayout();
+        this.dontComePointPayout(roll);
+        this.comePointPayout(roll);
+        this.newComePoint(roll);
+        this.bigSixPayout(roll);
+        this.bigEightPayout(roll);
+
+        if(currentPlayer.hasOdds() && currentPlayer.isPassLine()){
+            this.passLineOddsPayout(roll);
+            currentPlayer.setOdds(false);
+        }
+        else if(currentPlayer.hasOdds() && !currentPlayer.isPassLine()){
+            this.doNotPassOddsPayout(1);
+            currentPlayer.setOdds(false);
+        }
+
+    }
+
+    public void pointPhaseSevenPayouts(int roll){
+        this.oneRollBetPayouts(roll);
+        this.hardWayPayouts(roll);
+        this.doNotPassPayout();
+        this.comeNaturalPayout(roll);
+        this.comePointPayout(roll);
+        this.dontComePointPayout(roll);
+        this.bigSixPayout(roll);
+        this.bigEightPayout(roll);
+
+        if(currentPlayer.hasOdds() && !currentPlayer.isPassLine()){
+            this.doNotPassOddsPayout(this.point);
+            currentPlayer.setOdds(false);
+        }
+        else if(currentPlayer.hasOdds() && currentPlayer.isPassLine()){
+            this.passLineOddsPayout(1);
+            currentPlayer.setOdds(false);
+        }
+
+    }
+
+    public void pointPhaseNotCrapsAndNotElevenPayouts(int roll){
+        this.oneRollBetPayouts(roll);
+        this.hardWayPayouts(roll);
+        this.comePointPayout(roll);
+        this.dontComePointPayout(roll);
+        this.newComePoint(roll);
+        this.newDontComePoint(roll);
+        this.bigSixPayout(roll);
+        this.bigEightPayout(roll);
+    }
+
+    public void pointPhaseRemainingPayouts(int roll){
+        this.oneRollBetPayouts(roll);
+        this.hardWayPayouts(roll);
+        this.comeNaturalPayout(roll);
+        this.doNotComeCrapsPayout(roll);
+        this.bigSixPayout(roll);
+        this.bigEightPayout(roll);
     }
 
 

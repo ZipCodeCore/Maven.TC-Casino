@@ -6,6 +6,7 @@ import io.zipcoder.casino.Game.cardGame.utilities.Card;
 import io.zipcoder.casino.Game.cardGame.utilities.CardRank;
 import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 
+import io.zipcoder.casino.House;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 import io.zipcoder.casino.TypeOfBet;
@@ -16,98 +17,120 @@ public class BlackJackGame extends CardGame {
     private boolean playAnotherGame;
 
     public BlackJackGame(Profile profile) {
-
         player = new BlackJackPlayer(profile);
-        this.addPlayer(player);
         dealer = new BlackJackPlayer(null);
-
         player.setIsBusted(false);
         dealer.setIsBusted(false);
         playAnotherGame = true;
     }
 
+    @Override
+    public void startGame() {
+        Console.print("Welcome to BlackJack!" + " " + player.getProfile().getName().toString());
+
+        playBlackJack();
+        endGame();
+    }
+
     //TODO test this method
     public void playBlackJack() {
-        while (!playAnotherGame) {
-            round(player, dealer);
-            Console.print(player.getProfile().getName().toString() + "Enter [Yes] to try your luck at another Round");
+
+        while (playAnotherGame == true) {
+            reset();
+            String printThis;
+            while (placeInitialBet(player) == false) {
+                placeInitialBet(player);
+            }
+            printThis = round(player, dealer);
+            Console.print(printThis);
+
+            Console.print(player.getProfile().getName().toString() + " Play Again: Enter [Yes] : [NO] to end game");
 
             if (Console.getString().equalsIgnoreCase("YES")) {
-                playAnotherGame = true;
+                continue;
             } else if (Console.getString().equalsIgnoreCase("NO")) {
                 playAnotherGame = false;
             } else {
                 Console.print("Invalid entry");
             }
         }
-        endGame();
     }
 
-
+    /**
+     * changes
+     * when intial is blackJack needs to be auto win
+     * when hitting need to print hand
+     * need to print blackJack if blackJack occurs
+     * need to print bust if bust occurs
+     * isBust is not working properly loop should break if busted and should settle bets
+     * need to reset all values before each round
+     * need to handle if dealer gets black jack at start
+     *
+     * @param thePlayer
+     * @param theDealer
+     * @return
+     */
     //TODO test this method
     public String round(BlackJackPlayer thePlayer, BlackJackPlayer theDealer) {
-        boolean roundFinished = false;
+        String result = "";
         deal(thePlayer);
-        //player has blackjack upon first dealing
+        /*check to see if player or dealer has blackjack upon first dealing if so round ends by return result.*/
 
-        if(isBlackJack(theDealer)){
-           return settleBets(thePlayer, theDealer);
+        if (isBlackJack(thePlayer) == true) {
+            result = settlesIfBlackJAck(thePlayer, theDealer);
+            return result;
         }
+        /*player plays turn if player has blackjack or busts then round will end by returning result.*/
+        result = turn(thePlayer);
+        if (result != null) {
+            return result;
+        }/*dealer deals to self: ends round if dealer has blackJack or busts.*/
+        result = dealerBehavior(thePlayer, theDealer);
+        if (result != null) {
+            return result;
+        }/*determines winner and settles all the bets accordingly*/
+        result = settleBets(thePlayer, theDealer);
+        return result;
+    }
 
-        turn(thePlayer);
-        
-
-
-        //TODO
-         if(isBlackJack(thePlayer)){
+    //TODO test this method;
+    public String settlesIfBlackJAck(BlackJackPlayer thePlayer, BlackJackPlayer theDealer) {
+        if (isBlackJack(thePlayer) == true) {
             return settleBets(thePlayer, theDealer);
-         }
-
-        //TODO handle player wins if dealer busts
-        dealerBehavior();
-//TODO determine winner if dealer doesnt bust
-        thePlayer.getHand().clear();
-        theDealer.getHand().clear();
-        // dealer deals hand until cards are 17, busted or blackJack
-        // make a call to winner
-        // make a call to payOuts
-        // promt to play another round
-        // game should continue as long as player has money
-        // game
-        //TODO handle when deck isEmpty to sure game continues as long as players want to play
+        } else if (isBlackJack(theDealer)) {
+            return settleBets(thePlayer, theDealer);
+        }
         return null;
     }
 
-//    if its a player turn and player gets blackJack
-//     then the escrow should be settled
-//     the round should end and the player should have a choice to keep playing
-//
-
-    //TODO test this method;
-    public String checksIfPlayerHasBlackAfterDeal(BlackJackPlayer thePlayer, BlackJackPlayer theDealer){
-        if (isBlackJack(thePlayer)) {
-            return settleBets(thePlayer, theDealer);
-        }
-        return "";
-    }
-
-
     //TODO test this method
-    public void turn(BlackJackPlayer currentPlayer) {
-        currentPlayer.setCurrentPlayer(true);
 
-        while (currentPlayer.getIsBusted() != true & currentPlayer.getHasStood() != true) {
+    /**
+     * player takes turn by perfoming game actions until either Bust,BlackJack or Stands.
+     *
+     * @param currentPlayer
+     * @return
+     */
+    public String turn(BlackJackPlayer currentPlayer) {
+        String aResult = null;
+        // currentPlayer.setCurrentPlayer(true);
+        while (currentPlayer.getIsBusted() == false | currentPlayer.getHasStood() == false) {
+            if (currentPlayer.getScore() > 21) {
+                currentPlayer.setIsBusted(true);
+                Console.print(currentPlayer.getProfile().getName() + "You BUSTED!!!!");
+                aResult = settleBets(currentPlayer, dealer);
+                break;
+            }
+            else if (isBlackJack(currentPlayer) == true) {
+                Console.print("BLACKJACK!!!!!!!!");
+                aResult = settlesIfBlackJAck(currentPlayer, dealer);
+                  break;
+            }
             showListOfPlayerActions();
             String input = Console.getString();
-
-            // player has an ace the player can choose to change value to 1;
             if (input.equalsIgnoreCase("Hit") & currentPlayer.getScore() < 21) {
                 hit(currentPlayer);
-                if (isBlackJack(currentPlayer)) {
-                    Console.print("BLACKJACK!!!!!!!!!!!!!!!!!!!!!");
-
-                    break;
-                }
+                Console.print(currentPlayer.getProfile().getName() + " " + currentPlayer.getHand().showHand());
             } else if (input.equalsIgnoreCase("Stand")) {
                 stand(currentPlayer);
                 break;
@@ -115,11 +138,9 @@ public class BlackJackGame extends CardGame {
                 Console.print("Invalid input enter one of the following actions");
             }
 
-
         }
-        currentPlayer.setCurrentPlayer(false);
-        // player must choose to bet
-        // if player does not have any money promt the user to add more money or game is over.
+        //currentPlayer.setCurrentPlayer(false);
+        return aResult;
     }
 
 
@@ -154,10 +175,8 @@ public class BlackJackGame extends CardGame {
         return placeBet(BlackJackBet.INTIAL_BET, thePlayer);
     }
 
-
     public String hit(BlackJackPlayer thePlayer) {
         String currentScore = String.valueOf(dealACard(thePlayer));
-        Console.print(player.getProfile().getName() + " " + currentScore);
         return currentScore;
     }
 
@@ -169,12 +188,6 @@ public class BlackJackGame extends CardGame {
         thePlayer.setHasStood(true);
         return thePlayer.getHasStood();
     }
-
-    public void split() {
-
-    }
-
-
     /**
      * updates the current Score
      *
@@ -185,9 +198,10 @@ public class BlackJackGame extends CardGame {
     //makes changes to include aces
     // players hand has more than one ace add ace score as score plus 1
     public int updateScore(Card cardToScore, BlackJackPlayer thePlayer) {
-        int cardValue, updateScore;
+        int cardValue;
+        int updateScore;
 
-        if (cardToScore.getRank() == CardRank.ACE & countAcesInHand(thePlayer) < 2) {
+        if ((cardToScore.getRank() == CardRank.ACE ) & (countAcesInHand(thePlayer) > 1)) {
             cardValue = 1;
         } else {
             cardValue = cardToScore.getRank().getCardValue();
@@ -212,15 +226,19 @@ public class BlackJackGame extends CardGame {
         return numberOfAces;
     }
 
-    public void dealerBehavior() {
+    public String dealerBehavior(BlackJackPlayer thePlayer, BlackJackPlayer theDealer) {
+        String result = "";
         // TODO consider When dealer has a soft 17
-        while (dealer.getScore() < 17) {
-            dealACard(dealer);
-            Console.print("Dealers Hand: " + dealer.getHand().showHand());
+        while (theDealer.getScore() < 17) {
+            dealACard(theDealer);
+            Console.print("Dealers Hand: " + theDealer.getHand().showHand());
         }
-
-        isBusted(dealer);
-
+        if (isBusted(theDealer) | isBlackJack(theDealer)) {
+            result = settleBets(thePlayer, theDealer);
+            Console.print("Dealer Busts");
+            return result;
+        }
+        return null;
     }
 
     public int dealACard(BlackJackPlayer cardPlayer) {
@@ -239,7 +257,7 @@ public class BlackJackGame extends CardGame {
     }
 
     public String showListOfPlayerActions() {
-        String playerActions = "Choose Action: [Bet], [Hit], [Stand], [Spilt]";
+        String playerActions = "Choose Action: [Bet], [Hit], [Stand]";
 
         Console.print(playerActions);
 
@@ -273,15 +291,6 @@ public class BlackJackGame extends CardGame {
     }
 
 
-    @Override
-    public void startGame() {
-        Console.print("Welcome to BlackJack!" + " " + player.getProfile().getName().toString());
-        while (placeInitialBet(player) == false) {
-            placeInitialBet(player);
-        }
-        playBlackJack();
-
-    }
     //TODO test this
 
     /**
@@ -293,23 +302,23 @@ public class BlackJackGame extends CardGame {
      */
     public String settleBets(BlackJackPlayer thePlayer, BlackJackPlayer theDealer) {
         int payout = 0;
-        String result = "";
+        String theResult = "";
         //settle winning bets;
-        if (isBlackJack(thePlayer) || theDealer.getIsBusted() || decideWinner(thePlayer, theDealer) == thePlayer) {
+        if ((isBlackJack(thePlayer) == true) | (theDealer.getIsBusted() == true )| (decideWinner(thePlayer, theDealer) == thePlayer)) {
             payout = 1;
             settlingBets(thePlayer, payout);
-            result = winnerAsString(thePlayer);
+            theResult = winnerAsString(thePlayer);
         }//settle loosing bets
-        else if (thePlayer.getIsBusted() || decideWinner(thePlayer, theDealer) == theDealer) {
+        else if ((thePlayer.getIsBusted() == true) | (decideWinner(thePlayer, theDealer) == theDealer)){
             payout = 2;
             settlingBets(thePlayer, payout);
-            result = looserAsString(thePlayer);
+            theResult = looserAsString(thePlayer);
         } else if (decideWinner(thePlayer, theDealer) == null) {
             payout = 3;
             settlingBets(thePlayer, payout);
-            result = playPushAsString(thePlayer);
+            theResult = playPushAsString(thePlayer);
         }
-        return result;
+        return theResult;
     }
 
 
@@ -321,9 +330,9 @@ public class BlackJackGame extends CardGame {
     }
 
     public String playPushAsString(BlackJackPlayer thePlayer) {
-        String winner = thePlayer.getProfile().getName() + " YOU PUSH" + "\n"
+        String push = thePlayer.getProfile().getName() + " YOU PUSH" + "\n"
                 + "Your New Balance: " + thePlayer.getProfile().getAccountBalance();
-        return winner;
+        return push;
     }
 
     public String looserAsString(BlackJackPlayer thePlayer) {
@@ -376,21 +385,21 @@ public class BlackJackGame extends CardGame {
         int playerScore = thePlayer.getScore();
         int dealerScore = theDealer.getScore();
 
-        if (playerScore <= 21 & playerScore < dealerScore) {
+        if ((playerScore <= 21 & dealerScore <= 21) & (playerScore < dealerScore)) {
             return theDealer;
         }
         // score is equal game is a push no player wins or looses
-        else if (playerScore <= 21 & playerScore == dealerScore) {
-            return null;
+        else if ((playerScore <= 21 & dealerScore <= 21) & (playerScore > dealerScore)) {
+            return thePlayer;
         }
-        return thePlayer;
+        return null;
     }
 
-    public boolean isBusted(BlackJackPlayer player1) {
-        if (player1.getScore() > 21) {
-            player1.setIsBusted(true);
+    public boolean isBusted(BlackJackPlayer thePlayer) {
+        if (thePlayer.getScore() > 21) {
+            thePlayer.setIsBusted(true);
         }
-        return player1.getIsBusted();
+        return thePlayer.getIsBusted();
     }
 
 
@@ -402,9 +411,21 @@ public class BlackJackGame extends CardGame {
         return blackJack;
     }
 
+    //TODO test this
+    public void reset() {
+        player.setIsBusted(false);
+        dealer.setIsBusted(false);
+        player.setHasStood(false);
+        dealer.setHasStood(false);
+        player.getHand().clear();
+        dealer.getHand().clear();
+        player.setScore(0);
+        dealer.setScore(0);
+    }
+
 
     public void endGame() {
-
+        House.INSTANCE.gameSelection();
     }
 
     public String getRules() {
