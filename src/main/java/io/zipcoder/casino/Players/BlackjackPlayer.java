@@ -5,6 +5,7 @@ import io.zipcoder.casino.GameTools.Deck.Card;
 import java.util.ArrayList;
 
 public class BlackjackPlayer extends Player{
+
     protected Player rootPlayer;
     protected ArrayList<Card> hand;
     protected boolean canHit;
