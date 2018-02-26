@@ -24,6 +24,13 @@ public class WarPlayer extends Player {
         this.points = 0;
     }
 
+    public WarPlayer(Player player) {
+        this.name = player.getName();
+        this.age = player.getAge();
+        this.currentHand = new ArrayList<>();
+        this.points = 0;
+    }
+
     public void addToHand(Card card) {
         currentHand.add(card);
     }
@@ -48,8 +55,12 @@ public class WarPlayer extends Player {
         return this.points;
     }
 
-    public void addPoint() {
-        this.points += 1;
+    public void addPoint(Integer points) {
+        this.points += points;
+    }
+
+    public void resetPoints() {
+        this.points = 0;
     }
 
 }

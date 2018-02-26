@@ -61,7 +61,7 @@ public class Casino {
 
         switch (selectedGame) {
             case "War":
-                game = new War();
+                game = new War(player);
                 break;
             case "Go Fish":
                 game = new GoFish();
