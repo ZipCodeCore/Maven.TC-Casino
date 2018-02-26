@@ -156,9 +156,35 @@ public class BlackjackTest {
         Assert.assertEquals(expectedDealerHandSize, actualDealerHandSize);
     }
 
+//    @Test
+//    public void askForPlayerNameTest() {
+//        // Given
+//        String expectedName = "Luis";
+//        // When
+//        Blackjack blackjack = new Blackjack("Luis", 50);
+//        String askedName = blackjack.askForPlayerName();
+//        String actualName = blackjack.getPlayer().getName();
+//        // Then
+//        Assert.assertEquals(expectedName, actualName);
+//    }
+
+    // GamblingInterface
+    @Test
+    public void placeBetTest() {
+        // Given
+        int betPlaced = 1;
+        int chipsToStart = 500;
+        int expectedChipsRemaining = chipsToStart - betPlaced; // 499
+        // When
+        Blackjack blackjack = new Blackjack("placeBetPlayer", chipsToStart);
+        blackjack.placeBet(blackjack.getPlayer(), betPlaced); // will remove 1 chip
+        int actualChipsRemaining = blackjack.getPlayer().getWallet().checkChipAmount();
+        // Then
+        Assert.assertEquals(expectedChipsRemaining,actualChipsRemaining);
+    }
+
     @Test
     public void checkNumberOfCards() {
 
     }
-
 }

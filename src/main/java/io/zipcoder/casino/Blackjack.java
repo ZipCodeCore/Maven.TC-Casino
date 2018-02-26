@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class Blackjack extends Game implements GameInterface, CardGameInterface, GamblingInterface {
 
-    private Person player1;
-    private Hand player1Hand;
-    private Wallet player1Wallet;
-    private int player1Chips;
+    private Person player;
+    private Hand playerHand;
+    private Wallet playerWallet;
+    private int playerChips;
 
     private Dealer dealer;
     private Hand dealerHand;
@@ -19,11 +19,11 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
 
     // these 2 args are now in Person constructor for gambling games
     public Blackjack(String playerName, int chipsToStart) {
-        this.player1 = new Person(playerName);
-        this.player1Hand = player1.getHand();
-        this.player1Wallet = player1.getWallet();
-        player1Wallet.addChipsToAmount(chipsToStart); // add chipsToStart is now in Person constructor for gambl games
-        this.player1Chips = player1Wallet.checkChipAmount();
+        this.player = new Person(playerName);
+        this.playerHand = player.getHand();
+        this.playerWallet = player.getWallet();
+        playerWallet.addChipsToAmount(chipsToStart); // add chipsToStart is now in Person constructor for gambl games
+        this.playerChips = playerWallet.checkChipAmount();
 
         this.dealer = new Dealer();
         this.dealerHand = dealer.getHand();
@@ -36,7 +36,7 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
     // into an array of players and one dealer.
 
     public Person getPlayer() {
-        return player1;
+        return player;
     }
 
     public Dealer getDealer() {
@@ -156,7 +156,7 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
 
     // GamblingInterface
     public void placeBet(Person personPlacingBet, int betAmount) {
-
+        personPlacingBet.getWallet().removeChipsFromAmount(betAmount);
     }
 
     // GamblingInterface
@@ -174,17 +174,49 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
         return 0;
     }
 
+//    public String askForPlayerName() {
+//        return "nameTest";
+//    }
+
     // GameInterface or Game Class
     public void start() {
-        //Blackjack blackjack = new Blackjack("player1", 1000);
-        Person player1 = this.getPlayer();
-        Dealer dealer = this.getDealer();
         this.getDeck().shuffleDeck();
+        Scanner scanner = new Scanner(System.in);
 
-        this.hit(player1);
-        this.hit(player1);
-        this.hit(dealer);
-        this.hit(dealer);
+        if (this.getPlayer().getWallet().checkChipAmount() <= 0) {
+            System.out.println("You don't have anymore chips to play");
+            return; // THIS EXITS THE METHOD
+        }
+
+        // Check bet > 0
+        int betPlaced = 0;
+        do {
+            System.out.println("How many chips do you want to bet?");
+            String inputString = scanner.next();
+            try {
+                betPlaced = Integer.parseInt(inputString);
+                if (betPlaced <= 0) {
+                    System.out.println("Your bet must be a number greater than zero.");
+                    System.out.println();
+                    continue;
+                }
+                else if (betPlaced <= this.getPlayer().getWallet().checkChipAmount()) {
+                    this.placeBet(this.getPlayer(), betPlaced);
+                    break;
+                } else {
+                    System.out.println("You only have " + this.getPlayer().getWallet().checkChipAmount() + " chips");
+                    System.out.println();
+                }
+            } catch (NumberFormatException ne) {
+                System.out.println("Please try again.");
+                System.out.println();
+            }
+        } while (true);
+
+        this.hit(this.getPlayer());
+        this.hit(this.getPlayer());
+        this.hit(this.getDealer());
+        this.hit(this.getDealer());
 
         int personHandSum = 0;
         int dealerHandSum = 0;
@@ -198,7 +230,7 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
         do {
             personHandSum = this.sumOfRanksInHand(this.getPlayer());
             System.out.println();
-            System.out.print("Player1: " + "\u270B");
+            System.out.print(this.getPlayer().getName() + ": " + "\u270B");
             System.out.print(this.handToString(this.getPlayer().getHand().getHandArrayList()));
             System.out.print("\u270B" + ", hand = " + personHandSum);
 
@@ -208,25 +240,32 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
 
             if (personHandSum == 21) {
                 System.out.println();
-                System.out.println("+++++++++++++++++++++");
-                System.out.println("BLACKJACK!+++ You won");
-                System.out.println("+++++++++++++++++++++");
+                System.out.println("++++++++++++++++++++++++++++++++");
+                System.out.println("BLACKJACK!+++ You won " + betPlaced + " chip(s)");
+                System.out.println("++++++++++++++++++++++++++++++++");
+                this.getPlayer().getWallet().addChipsToAmount(2 * betPlaced);
                 break;
             } else if (personHandSum > 21){
                 System.out.println();
-                System.out.println("++++++++++++++");
-                System.out.println("BUST! You lost");
-                System.out.println("++++++++++++++");
+                System.out.println("+++++++++++++++++++++");
+                System.out.println("BUST! You lost " + betPlaced + " chip(s)");
+                System.out.println("+++++++++++++++++++++");
                 break;
             }
 
+            // get new deck if card number falls <= 16
+            if (this.getDeck().getDeckOfCards().size() <= 16) {
+                this.deck = new Deck();
+                getDeck().shuffleDeck();
+            }
+
             System.out.println();
-            Scanner scanner = new Scanner(System.in);
+//            Scanner scanner = new Scanner(System.in);
             System.out.println("Do you want to \"hit\" or \"stay\"?: ");
             playerDecisionString = scanner.nextLine();
 
             if (playerDecisionString.equals("hit")) {
-                this.hit(player1);
+                this.hit(this.getPlayer());
             } else if (playerDecisionString.equals("stay")) {
                 break;
             }
@@ -239,26 +278,31 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
             }
         }
 
+        dealerHandSum = this.sumOfRanksInHand(this.getDealer());
         if (playerDecisionString.equals("stay")) {
             if ( (dealerHandSum <= 21) && (dealerHandSum > personHandSum) ) {
-                System.out.println("++++++++++++");
+                System.out.println("++++++++++++++++++++++++");
                 System.out.println("Dealer wins!");
-                System.out.println("++++++++++++");
-            } else if (dealerHandSum == personHandSum) {
-                System.out.println("+++++++++++");
+                System.out.println("You lost " + betPlaced + " chip(s)");
+                System.out.println("++++++++++++++++++++++++");
+            } else if ( (dealerHandSum <= 21) && (dealerHandSum == personHandSum) ) {
+                System.out.println("++++++++++++++++++++++++");
                 System.out.println("It's a tie!");
-                System.out.println("+++++++++++");
+                System.out.println("You keep your " + betPlaced + " chip(s)");
+                System.out.println("++++++++++++++++++++++++");
+                this.getPlayer().getWallet().addChipsToAmount(betPlaced);
             } else {
-                System.out.println("+++++++++++++");
-                System.out.println("Player1 wins!");
-                System.out.println("+++++++++++++");
-            }
+                System.out.println("+++++++++++++++++++++++++");
+                System.out.println(this.getPlayer().getName() + " wins!");
+                System.out.println("You won " + betPlaced + " chip(s)");
+                System.out.println("+++++++++++++++++++++++++");
+                this.getPlayer().getWallet().addChipsToAmount(2 * betPlaced);            }
         }
 
         System.out.println();
         System.out.println("FINAL SCORE:");
         personHandSum = this.sumOfRanksInHand(this.getPlayer());
-        System.out.print("Player1: " + "\u270B");
+        System.out.print(this.getPlayer().getName() + ": " + "\u270B");
         System.out.print(this.handToString(this.getPlayer().getHand().getHandArrayList()));
         System.out.print("\u270B" + ", hand = " + personHandSum);
 
@@ -268,6 +312,10 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
         System.out.print(this.handToString(this.getDealer().getHand().getHandArrayList()));
         System.out.print("\u270B" + ", hand = " + dealerHandSum);
         System.out.println();
+        //System.out.println("Remaining deck size: " + this.getDeck().getDeckOfCards().size());
+        System.out.println();
+        System.out.print(this.getPlayer().getName() + " has ");
+        System.out.println(this.getPlayer().getWallet().checkChipAmount() + " chips");
 
         System.out.println();
         this.doYouWantToContinuePlaying();
@@ -281,8 +329,10 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
             System.out.println("Keep playing? (yes/no) ");
             test = scanner.nextLine();
             if (test.equals("yes")) {
-                Blackjack blackjack = new Blackjack("keepPlaying", 200);
-                blackjack.start();
+                //Blackjack blackjack = new Blackjack("keepPlaying", 200);
+                this.getPlayer().getHand().clearHand();
+                this.getDealer().getHand().clearHand();
+                this.start();
                 break;
             } if (test.equals("no")) {
                 break;
@@ -297,9 +347,8 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
     }
 
     public static void main (String[] args) {
-        Blackjack blackjack = new Blackjack("test", 500);
+        Blackjack blackjack = new Blackjack("Anyname", 10);
         blackjack.start();
         blackjack.end();
-
     }
 }
