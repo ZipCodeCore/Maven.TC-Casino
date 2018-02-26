@@ -7,14 +7,11 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class InputOutput {
-    Scanner input = new Scanner(System.in);
-    public ArrayList<String> under21Games = new ArrayList<String>();
 
-    //MUST INSTANTIATE IN CASINO
+    Scanner input = new Scanner(System.in);
 
     public String scanForString() {
         String stringReturn = input.nextLine();
-
         return stringReturn;
     }
 
@@ -28,21 +25,20 @@ public class InputOutput {
         InputOutput inputOutput = new InputOutput();
         TreeMap<Integer, String> games = new TreeMap<Integer, String>();
         Integer number;
+
         if(player.getAge() > 20) {
             games.put(1, "War");
             games.put(2, "Go Fish");
             games.put(3, "BlackJack");
             games.put(4, "Craps");
             games.put(5, "Exit");
-            number = inputOutput.promptForInt("Please select a game\n1.War\n2.Go Fish\n3.BlackJack\n4.Craps");
+            number = inputOutput.promptForInt("Please select a game\n1.War\n2.Go Fish\n3.BlackJack\n4.Craps\n5.Exit");
         } else {
             games.put(1, "War");
             games.put(2,"Go Fish");
             games.put(3, "Exit");
-            number = inputOutput.promptForInt("Please enter in a number between 1 - 2 to select a game");
-
+            number = inputOutput.promptForInt("Please select a game\n1.War\n2.Go Fish\n3. Exit");
         }
-        StringBuilder displayGames = new StringBuilder();
 
         return games.get(number);
     }
@@ -55,7 +51,8 @@ public class InputOutput {
 
     public int promptForInt(String message) {
         System.out.println(message);
-        return scanForInt();
+        int temp = input.nextInt();
+        return temp;
     }
 
 

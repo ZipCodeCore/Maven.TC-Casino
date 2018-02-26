@@ -17,7 +17,6 @@ import static io.zipcoder.casino.GameTools.Deck.Suit.HEARTS;
 
 public class GoFishPlayerTest {
 
-
     @Test
     public void constructorTestName() {
         String expectedName = "Bob";
