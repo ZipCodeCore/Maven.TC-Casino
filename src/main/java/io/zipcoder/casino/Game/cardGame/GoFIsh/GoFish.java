@@ -38,32 +38,38 @@ public class GoFish extends CardGame {
     public void startGame() {
         Console.print("Lets play Go Fish! Shuffle up and deal...");
         deal();
+
+    }
+
+    public static void main(String[] args) {
+        Profile luckyPlayer = new Profile("Kibret", 1000000, 11);
+        GoFish goFishGame = new GoFish(luckyPlayer);
+        goFishGame.playGame();
+
+    }
+
+    public void playGame() {
+        startGame();
+
         do {
             playUserTurn();
             playDealerTurn();
         } while (getDeck().countRemainingCards() > 0 &&
                 user.getHand().getCards().size() > 0 &&
                 dealer.getHand().getCards().size() > 0);
-    }
 
-    public static void main(String[] args) {
-        Profile luckyPlayer = new Profile("Kibret", 1000000, 11);
-        GoFish goFishGame = new GoFish(luckyPlayer);
-        goFishGame.startGame();
-        do {
-            goFishGame.playUserTurn();
-            goFishGame.playDealerTurn();
-        } while (goFishGame.getDeck().countRemainingCards() > 0 &&
-                goFishGame.user.getHand().getCards().size() > 0 &&
-                goFishGame.dealer.getHand().getCards().size() > 0);
+        decideWinner(user, dealer);
+
+        endGame();
+
     }
 
     public void playUserTurn() {
 
         Console.print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
         do {
-            dealer.getHand().orderCards();
-            Console.print(dealer.getHand().showHand());
+//            dealer.getHand().orderCards();
+//            Console.print(dealer.getHand().showHand());
             user.getHand().orderCards();
             Console.print(user.getHand().showHand());
             Console.print("Which card value would you like to ask for?");
@@ -100,7 +106,7 @@ public class GoFish extends CardGame {
             Console.print("Go fish.");
             Console.print("You fished: " + getDeck().peek().toString());
             fish(askingPlayer);
-            //Console.print(askingPlayer.getHand().showHand());
+            
             if (getHandForBook(user, aCardRank) > 0) {
                 Console.print("You made a book!!");
                 askingPlayer.getHand().orderCards();
