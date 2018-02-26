@@ -45,17 +45,17 @@ public class RouletteGamble {
     }
 
     public Integer lose(Integer betAmount, Integer winnings){
-        Integer losses = winnings - betAmount;
-        return losses;
+        Integer net = winnings - betAmount;
+        return net;
     }
 
 
 
-    public void printStats(Integer initialBalance, Integer currentBalance, Integer betAmount, Integer winnings, Integer losses){
+    public void printStats(Integer initialBalance, Integer currentBalance, Integer betAmount, Integer winnings, Integer net){
         String stats = "\n***HERE ARE YOUR STATS!***\n"+
                 "You bet " + betAmount + " chips.\n"+
                 "You won " + winnings + " chips. \n"+
-                "Net total: " + losses +
+                "Net total: " + net +
                 "\nYour chip balance at the start of the game: " + initialBalance +
                 "\nYour current balance: " + currentBalance + "\n\n\n";
         System.out.println(stats);

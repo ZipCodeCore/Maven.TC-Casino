@@ -18,8 +18,8 @@ public class Roulette implements Game {
     private String stringResponse = "";
     private int intResponse;
     private Integer earnings = 0;
-    private Integer losses = 0;
-    protected Integer initialBalance = player.getBalance().intValue();
+    private Integer net = 0;
+    protected Integer initialBalance;
     protected HashMap<String, ArrayList<Integer>> bettingMap = new HashMap<>();
     protected ArrayList<Integer> singleNumberSelection = new ArrayList<>();
     protected ArrayList<Integer> doubleNumberSelection = new ArrayList<>();
@@ -46,14 +46,19 @@ public class Roulette implements Game {
      */
 
     public void play(Player player) {
-        runWelcome();
-        try {
-            mainLoop();
-        } catch (InterruptedException e) {
+        this.player = player;
+        initialBalance = player.getBalance().intValue();
+        if (initialBalance == 0) {
+            System.out.println("\n\n\nYOU'RE BROKE!!!! GET OUT!\n\n");
+        } else {
+            runWelcome();
+            try {
+                mainLoop();
+            } catch (InterruptedException e) {
+            }
+            System.out.println("Thank you for playing Roulette!\n\n");
         }
-        System.out.println("Thank you for playing Roulette!\n\n");
     }
-
 
 
     public void mainLoop() throws InterruptedException {
@@ -66,8 +71,8 @@ public class Roulette implements Game {
                 System.out.println(getRules());
                 pressCtoContinue();
             } else if (stringResponse.equals("b")) {
-               System.out.println(getBettingInfo());
-               pressCtoContinue();
+                System.out.println(getBettingInfo());
+                pressCtoContinue();
             } else if (stringResponse.equals("y")) {
                 letsPlay();
             } else {
@@ -79,19 +84,23 @@ public class Roulette implements Game {
 
     public void letsPlay() throws InterruptedException {
         int turnCounter = 1;
-        do{
+        do {
             intResponse = prompts.firstSetOfOptionsPrompt(turnCounter);
             if (intResponse == 16) {
                 System.out.println(getBettingInfo());
                 pressCtoContinue();
-            } else if(intResponse != 17) {
+            } else if(intResponse == 17){
+                displayBoard();
+                pressCtoContinue();
+            } else if (intResponse != 18) {
+                displayBoard();
                 selectionOptions(intResponse);
                 turnCounter++;
             }
-        } while (intResponse != 17);
+        } while (intResponse != 18);
         calculateWinnersAndEarnings();
-        this.losses = rouletteGamble.lose((turnCounter-1)*10, this.earnings);
-        rouletteGamble.printStats(initialBalance, player.getBalance().intValue(), (turnCounter-1)*10, this.earnings, this.losses);
+        this.net = rouletteGamble.lose((turnCounter - 1) * 10, this.earnings);
+        rouletteGamble.printStats(initialBalance, player.getBalance().intValue(), (turnCounter - 1) * 10, this.earnings, this.net);
         pressCtoContinue();
         clearNumberArraysAndBettingMap();
     }
@@ -162,8 +171,12 @@ public class Roulette implements Game {
                     bettingMap.put("Red Numbers", redNumberSelection);
                     break;
             }
+        } else {
+            System.out.println("***OUT OF CHIPS***");
         }
     }
+
+
     public void runWelcome() {
         String welcomeResponse =
                 "********************* WELCOME TO **********************\n" +
@@ -192,18 +205,33 @@ public class Roulette implements Game {
         return prompts.rules();
     }
 
-    public String getBettingInfo(){
+    public String getBettingInfo() {
         return prompts.bettingInfo();
     }
 
-    public void pressCtoContinue(){
+    public void displayBoard(){
+        StringBuilder display = new StringBuilder();
+        display.append("----------------\n");
+        for(int[] array : rouletteBoardAndWheel.rouletteInnerBoard){
+
+            display.append("|");
+            for(int number: array){
+                display.append(String.format(" %-3d|", number));
+            }
+            display.append("\n");
+            display.append("----------------\n");
+        }
+        System.out.println(display);
+    }
+
+    public void pressCtoContinue() {
         String continueResponse;
         do {
             continueResponse = IOHandler.promptForStringWithMessage("Press 'c' to continue");
         } while (!continueResponse.equals("c"));
     }
 
-    public void clearNumberArraysAndBettingMap(){
+    public void clearNumberArraysAndBettingMap() {
         singleNumberSelection.clear();
         doubleNumberSelection.clear();
         cornerNumberSelection.clear();

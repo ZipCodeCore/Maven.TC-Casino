@@ -44,10 +44,7 @@ public class RoulettePromptsTest {
 
     @Test
     public void rulesTest(){
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        roulettePrompts.rules();
+        String actual = roulettePrompts.rules();
 
         String expected = "************************RULES**********************\n" +
                 "\n" +
@@ -84,9 +81,9 @@ public class RoulettePromptsTest {
                 "after which all losing bets are swept off the table. \n" +
                 "Then the croupier will pay all winning bets and, \n" +
                 "once all of the payouts are completed, players may \n" +
-                "place bets for the next spin.\n\n\n";
+                "place bets for the next spin.\n\n";
 
-        Assert.assertEquals(expected, outputStream.toString());
+        Assert.assertEquals(expected, actual);
     }
 
 
@@ -137,11 +134,7 @@ public class RoulettePromptsTest {
 
     @Test
     public void bettingInfoTest(){
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        roulettePrompts.bettingInfo();
-
+        String actual = roulettePrompts.bettingInfo();
         String expected = "***************** BETTING INFO *********************\n" +
                 "- Black, Red, 1-8, 19-36, Odd, and Even spaces payout evenly (1 to 1)\n" +
                 "- 1st 12, 2nd 12, and 3rd 12 payout 2 to 1\n" +
@@ -153,9 +146,9 @@ public class RoulettePromptsTest {
                 "\t- Basket (0, 00, and 2) wins 11 to 1\n" +
                 "\t- Corner (4 numbers) wins 8 to 1\n" +
                 "\t- 5 number bet ( 0, 00, 1, 2, 3) wins 6 to 1\n" +
-                "\t- line bet (6 numbers/2 rows) wins 5 to 1\n\n";
+                "\t- line bet (6 numbers/2 rows) wins 5 to 1\n";
 
-        Assert.assertEquals(expected, outputStream.toString());
+        Assert.assertEquals(expected, actual);
     }
 
 
@@ -174,16 +167,17 @@ public class RoulettePromptsTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        ArrayList<Integer> expected = new ArrayList<Integer>(){};
-
-        Assert.assertEquals(expected, roulettePrompts.singleNumberPrompt());
+        Assert.assertEquals(null, roulettePrompts.singleNumberPrompt());
     }
 
     @Test
     public void singleNumberPromptTest2(){
-        Integer expected = 1;
+        String input = "14";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        Integer expected = 14;
 
-        Assert.assertEquals(expected, roulettePrompts.singleNumberPromptAddArrayListEntry(1));
+        Assert.assertEquals(expected, roulettePrompts.singleNumberPrompt());
     }
 
 
@@ -272,4 +266,78 @@ public class RoulettePromptsTest {
 
         Assert.assertEquals(expected, roulettePrompts.straight());
     }
+
+    @Test
+    public void straightTest2(){
+        String input = "4";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] expected = {4,5,6};
+
+        Assert.assertEquals(expected, roulettePrompts.straight());
+    }
+
+
+
+
+
+    @Test
+    public void basketTest(){
+        String input = "c";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] basket = {0,00,2};
+
+        Assert.assertEquals(basket, roulettePrompts.basket());
+    }
+
+
+
+
+    @Test
+    public void fiveNumberBetTest(){
+        String input = "c";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] basket = {0,00,1,2,3};
+
+        Assert.assertEquals(basket, roulettePrompts.fiveNumberBet());
+    }
+
+
+
+
+    @Test
+    public void lineBetTest1(){
+        String input = "4";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.lineBet();
+        Integer[] expected = {4,5,6,7,8,9};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void lineBetTest2(){
+        String input = "13";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Integer[] actual = roulettePrompts.lineBet();
+        Integer[] expected = {13,14,15,16,17,18};
+
+        Assert.assertEquals(expected, actual);
+    }
+
+
+
+
+
+    @Test
+    public void
 }

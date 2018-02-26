@@ -108,7 +108,8 @@ public class RoulettePrompts {
                 "*                                          *\n" +
                 "* Other options:                           *\n" +
                 "* 16. Betting info                         *\n" +
-                "* 17. FINISH BETTING                       *\n" +
+                "* 17. Display board                        *\n" +
+                "* 18. FINISH BETTING                       *\n" +
                 "********************************************\n";
         return IOHandler.promptForIntWithMessage(options);
     }
@@ -137,21 +138,12 @@ public class RoulettePrompts {
                 "The payout for this bet is 35 to 1 if your \n" +
                 "selection is the winning number. \n\n";
         System.out.println(prompt);
-        Integer numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-36 or enter 37 to finish this bet:");
+        Integer numberChoice = IOHandler.promptForIntWithMessage("Please choose a number between 1-36:");
+        if(numberChoice > 36){
+            return null;
+        }
         return numberChoice;
     }
-
-    public Integer singleNumberPromptAddArrayListEntry(int numberChoice) {
-        if (numberChoice != 37) {
-            return numberChoice;
-        } else if (numberChoice > 37) {
-            System.out.println("ERROR! INVALID INPUT!");
-        } else {
-
-        }
-        return null;
-    }
-    //Single Number end
 
 
     //On the line start
@@ -200,8 +192,7 @@ public class RoulettePrompts {
         Integer[] result = new Integer[4];
         int counterForArray = 0;
         int startingNumber = IOHandler.promptForIntWithMessage(prompt);
-        if (startingNumber > 31 || lastColumn.contains(startingNumber)) ;
-        {
+        if (startingNumber > 31 || lastColumn.contains(startingNumber)){
             do {
                 System.out.println("\n\nERROR!\n\n");
                 startingNumber = IOHandler.promptForIntWithMessage(prompt);
@@ -247,6 +238,7 @@ public class RoulettePrompts {
                 "for this bet is 11 to 1 if your selection is the \n" +
                 "winning number. Press 'c' to continue and place bet.";
         String goOnAhead = IOHandler.promptForStringWithMessage(prompt);
+        whereYouGetStuckForJustNotPressingC(goOnAhead, prompt);
         if (goOnAhead.equals("c")) {
             Integer[] result = {0, 00, 2};
             return result;
@@ -288,6 +280,12 @@ public class RoulettePrompts {
                 "this bet is 5 to 1.\n\n";
         Integer[] result = new Integer[6];
         int startingNumber = IOHandler.promptForIntWithMessage(prompt);
+        if (startingNumber > 31 || secondColumn.contains(startingNumber) || lastColumn.contains(startingNumber)) {
+            do {
+                System.out.println("\n\nERROR!\n\n");
+                startingNumber = IOHandler.promptForIntWithMessage(prompt);
+            } while (startingNumber > 31 || secondColumn.contains(startingNumber) || lastColumn.contains(startingNumber));
+        }
         for (int i = 0; i < result.length; i++) {
             result[i] = startingNumber + i;
         }
@@ -416,5 +414,14 @@ public class RoulettePrompts {
             return result;
         }
         return null;
+    }
+
+    public void whereYouGetStuckForJustNotPressingC(String input, String prompt){
+        if (!input.equals("c")) {
+            do {
+                System.out.println("\n\nERROR!\n\n");
+                input = IOHandler.promptForStringWithMessage(prompt);
+            } while (!input.equals("c"));
+        }
     }
 }
