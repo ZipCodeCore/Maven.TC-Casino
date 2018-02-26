@@ -29,7 +29,7 @@ ArrayList<Card>books = new ArrayList<>();
 
 
     public void buildBooks(GoFishPlayer aPlayer, CardRank aCardRank){
-        for(int i =0; i<aPlayer.getHand().getCards().size();i++){
+        for(int i = aPlayer.getHand().getCards().size() - 1; i >= 0; i--){
             if(aPlayer.getHand().getCards().get(i).getRank()==aCardRank){
                 books.add(aPlayer.getHand().getCards().get(i));
             }
