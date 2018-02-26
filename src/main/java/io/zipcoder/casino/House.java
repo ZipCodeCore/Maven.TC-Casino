@@ -18,6 +18,7 @@ public class House implements MainMenu {
     private Profile profile;
     private ArrayList<Profile> profiles;
     private Profile currentPlayer;
+    private double initialBalance;
 
     public House() {
         profiles = new ArrayList<>();
@@ -96,6 +97,7 @@ public class House implements MainMenu {
         Console.print("How much money do you want to deposit with the house?");
         Console.print("The minimum deposit is $100");
         Double accountBalance = this.intakeBalance();
+        initialBalance = accountBalance;
         createProfile(profileName,accountBalance);
         currentPlayer = getProfileById(profiles.size());
         this.gameSelection();
@@ -108,29 +110,49 @@ public class House implements MainMenu {
         Console.print("[Craps]");
         Console.print("[Black Jack]");
         Console.print("[Go Fish]");
+        Console.print("Enter [leave] to cash out and go home");
        boolean keepRunning = true;
         do{
             String userInput = Console.getString();
             if(userInput.equalsIgnoreCase("craps")){
                 CrapsGame newGame = new CrapsGame(currentPlayer);
                 newGame.startGame();
-                keepRunning = false;
+                break;
             }
             else if(userInput.equalsIgnoreCase("black jack")){
                 BlackJackGame newGame = new BlackJackGame(currentPlayer);
                 newGame.startGame();
-                keepRunning = false;
+                break;
             }
             else if(userInput.equalsIgnoreCase("go fish")){
                 GoFish newGame = new GoFish(currentPlayer);
                 newGame.startGame();
-                keepRunning = false;
+                break;
+            }
+            else if(userInput.equalsIgnoreCase("leave")){
+                Console.print("Goodbye " + currentPlayer.getName());
+                Console.print("Your leaving our casino with $" + currentPlayer.getAccountBalance());
+                if(currentPlayer.getAccountBalance()>initialBalance){
+                    Console.print("That's $" + (currentPlayer.getAccountBalance()-initialBalance) + " more than you came here with!");
+                    Console.print("Great job! Come again soon!");
+                   System.exit(0);
+                }
+                else if (currentPlayer.getAccountBalance()<initialBalance){
+                    Console.print("That's $" + (initialBalance-currentPlayer.getAccountBalance()) + " less than you came here with");
+                    Console.print("Better luck next time.  Come again soon!");
+                    System.exit(0);
+                }
+                else{
+                    Console.print("That's exactly the amount you came here with");
+                    Console.print("Maybe next time you'll be a winner.  Come again soon!");
+                   System.exit(0);
+                }
             }
             else{
                 Console.print("Invalid selection: please enter your choice again");
             }
         }
-        while(keepRunning = true);
+        while(keepRunning);
     }
 
     public Double intakeBalance() {

@@ -1033,7 +1033,7 @@ public class CrapsGame extends DiceGame {
                 Console.print("Invalid response: please enter your answer again");
             }
         }
-        while(keepRunning == true);
+        while(keepRunning);
 
     }
 
