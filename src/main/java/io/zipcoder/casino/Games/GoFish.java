@@ -177,11 +177,13 @@ public class GoFish implements Game {
         if(winners.size() > 1) {
             System.out.println("There was a tie!");
             for (int i = 0; i < winners.size(); i++) {
-                System.out.println("\nCongratulations, " + winners.get(i).getName() + ", you tied!\n");
+                System.out.println(displayCongrats());
+                System.out.println("\n" + winners.get(i).getName() + ", you tied!\n");
             }
         }
         else {
-            System.out.println("\nCongratulations, " + winners.get(0).getName() + ", you win!\n");
+            System.out.println(displayCongrats());
+            System.out.println("\n" + winners.get(0).getName() + ", you win!\n");
         }
         this.displayScores(players);
         System.out.println("\nThat was fun! Game over.\n");
@@ -207,8 +209,15 @@ logo.append(" \\______/ \\______/         |__/      |__/|_______/ |__/  |__/\n")
         logo.append(" +-+-+ +-+-+-+-+\n");
         logo.append(" |G|o| |F|i|s|h|\n");
         logo.append(" +-+-+ +-+-+-+-+\n");
-        //System.out.println(logo.toString());
         return logo.toString();
+    }
+
+    public String displayCongrats() {
+        StringBuilder congrats = new StringBuilder("\n");
+        congrats.append("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n");
+        congrats.append("|C|o|n|g|r|a|t|u|l|a|t|i|o|n|s|\n");
+        congrats.append("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n");
+        return congrats.toString();
     }
 
     public void endGame() {
