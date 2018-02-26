@@ -18,11 +18,11 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
     private Deck deck;
 
     // these 2 args are now in Person constructor for gambling games
-    public Blackjack(String playerName, int chipsToStart) {
-        this.player1 = new Person(playerName);
+    public Blackjack(Person player) {
+        this.player1 = player;
         this.player1Hand = player1.getHand();
         this.player1Wallet = player1.getWallet();
-        player1Wallet.addChipsToAmount(chipsToStart); // add chipsToStart is now in Person constructor for gambl games
+        //player1Wallet.addChipsToAmount(chipsToStart); // add chipsToStart is now in Person constructor for gambl games
         this.player1Chips = player1Wallet.checkChipAmount();
 
         this.dealer = new Dealer();
@@ -141,6 +141,11 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
 
     // CardGameInterface
     public int checkNumberOfCards() {
+        return 0;
+    }
+
+    @Override
+    public int checkNumberOfCards(Hand hand) {
         return 0;
     }
 
@@ -270,25 +275,25 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
         System.out.println();
 
         System.out.println();
-        this.doYouWantToContinuePlaying();
+        //this.doYouWantToContinuePlaying();
         System.out.println();
     }
 
-    public void doYouWantToContinuePlaying() {
-        Scanner scanner = new Scanner(System.in);
-        String test = "";
-        do {
-            System.out.println("Keep playing? (yes/no) ");
-            test = scanner.nextLine();
-            if (test.equals("yes")) {
-                Blackjack blackjack = new Blackjack("keepPlaying", 200);
-                blackjack.start();
-                break;
-            } if (test.equals("no")) {
-                break;
-            }
-        } while(true);
-    }
+//    public void doYouWantToContinuePlaying() {
+//        Scanner scanner = new Scanner(System.in);
+//        String test = "";
+//        do {
+//            System.out.println("Keep playing? (yes/no) ");
+//            test = scanner.nextLine();
+//            if (test.equals("yes")) {
+//                Blackjack blackjack = new Blackjack("keepPlaying", 200);
+//                blackjack.start();
+//                break;
+//            } if (test.equals("no")) {
+//                break;
+//            }
+//        } while(true);
+//    }
 
     // Game Class
     public void end() {
@@ -296,10 +301,10 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
         System.out.println();
     }
 
-    public static void main (String[] args) {
-        Blackjack blackjack = new Blackjack("test", 500);
-        blackjack.start();
-        blackjack.end();
-
-    }
+//    public static void main (String[] args) {
+//       Blackjack blackjack = new Blackjack("test", 500);
+//        blackjack.start();
+//        blackjack.end();
+//
+//    }
 }

@@ -20,7 +20,7 @@ public class BlackjackTest {
         // Given
         String expectedPlayerName = "test";
         // When
-        Blackjack blackjack = new Blackjack("test", 100);
+       // Blackjack blackjack = new Blackjack("test", 100);
         String actualPlayerName = blackjack.getPlayer().getName();
         // Then
         Assert.assertEquals(expectedPlayerName, actualPlayerName);
@@ -28,7 +28,7 @@ public class BlackjackTest {
 
     @Test
     public void sumOfRanksInHandTest() {
-        Blackjack blackjack = new Blackjack("player1", 100);
+     //   Blackjack blackjack = new Blackjack("player1", 100);
         // Add cards to player1 Hand
         Card notShuffled0 = new Card(Rank.DEUCE, Suit.CLUBS);
         Card notShuffled1 = new Card(Rank.ACE, Suit.DIAMONDS);
@@ -56,7 +56,7 @@ public class BlackjackTest {
 
     @Test
     public void countRankRepetitionsInHandTest() {
-        Blackjack blackjack = new Blackjack("player1", 100);
+       // Blackjack blackjack = new Blackjack("player1", 100);
 
         // Add cards to player1 Hand
         Card notShuffled0 = new Card(Rank.DEUCE, Suit.CLUBS);
@@ -86,7 +86,7 @@ public class BlackjackTest {
     @Test
     public void findSmallerOfTwoIntsTest() {
         // Given
-        Blackjack blackjack = new Blackjack("player1", 100);
+       // Blackjack blackjack = new Blackjack("player1", 100);
         int expectedLowerInt = 5;
         int expectedHigherInt = 7;
         // When
@@ -98,7 +98,7 @@ public class BlackjackTest {
     @Test
     public void findGreaterOfTwoIntsTest() {
         // Given
-        Blackjack blackjack = new Blackjack("player1", 100);
+       // Blackjack blackjack = new Blackjack("player1", 100);
         int expectedLowerInt = 5;
         int expectedHigherInt = 7;
         // When
@@ -109,14 +109,14 @@ public class BlackjackTest {
 
     @Test
     public void personDecisionTest() {
-        Blackjack blackjack = new Blackjack("player1", 100);
+    //    Blackjack blackjack = new Blackjack("player1", 100);
         //String playerDecisionString = blackjack.personDecision(blackjack.getPlayer());
     }
 
     @Test
     public void handToStringTest() {
         // Given
-        Blackjack blackjack = new Blackjack("testHandTosTring", 100);
+       // Blackjack blackjack = new Blackjack("testHandTosTring", 100);
         blackjack.getPlayer().getHand().receiveCards(new Card(Rank.DEUCE, Suit.CLUBS), new Card(Rank.THREE, Suit.DIAMONDS),
                 new Card(Rank.FOUR, Suit.HEARTS), new Card(Rank.FIVE, Suit.SPADES));
         String expectedHandToString = "2\u2663 " + "3\u2666 " + "4\u2665 " + "5\u2660 ";
@@ -131,7 +131,7 @@ public class BlackjackTest {
     public void hitTest() {
         // if playerSum < 21, player can hit
         // if playerDecision = "hit", then dealer draws card and player hand receives card
-        Blackjack blackjack = new Blackjack("player1", 100);
+        //Blackjack blackjack = new Blackjack("player1", 100);
 
         // Add cards to player1 Hand
         Card playerCard0 = new Card(Rank.DEUCE, Suit.CLUBS);

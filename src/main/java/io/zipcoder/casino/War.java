@@ -19,7 +19,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
         System.out.println("Enter 'exit' at any time to end the game");
         Deck dealerDeck = new Deck();
         for (int i = 0; i < dealerDeck.getDeckOfCards().size(); i++) {
-            dealer.getHand().receiveCards(dealerDeck.drawCard());
+            dealer.getHand().receiveCards(dealerDeck.getDeckOfCards().get(i));
         }
         dealer.getHand().shuffleHand();
         dealCards();

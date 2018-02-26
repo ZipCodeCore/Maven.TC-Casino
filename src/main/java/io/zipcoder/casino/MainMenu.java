@@ -40,7 +40,7 @@ public class MainMenu {
                 //game = new GoFish(player);
                 break;
             case "blackjack":
-               // game = new Blackjack(player);
+                game = new Blackjack(player);
                 break;
             case "craps":
                 game = new Craps(player);
@@ -49,7 +49,7 @@ public class MainMenu {
                 return null;
         }
 
-        return game;
+        return game = new War(player);
     }
 
 }
