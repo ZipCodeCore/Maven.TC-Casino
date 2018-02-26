@@ -21,14 +21,11 @@ public class RouletteBoardAndWheel {
     //End array init
 
 
-    public RouletteBoardAndWheel() {
-    }
 
-
-    public Integer[] columnBetSelection(int column) {
+    public Integer[] columnSelection(int column) {
         Integer[] columnArray = new Integer[this.rouletteInnerBoard.length];
         for (int i = 0; i < columnArray.length; i++) {
-            columnArray[i] = this.rouletteInnerBoard[i][column];
+            columnArray[i] = this.rouletteInnerBoard[i][column-1];
         }
         return columnArray;
     }
@@ -37,18 +34,18 @@ public class RouletteBoardAndWheel {
         int start = 0;
         switch (boxSelection) {
             case 1:
-                start = 0;
+                start = 1;
                 break;
             case 2:
-                start = 4;
+                start = 13;
                 break;
             case 3:
-                start = 8;
+                start = 25;
                 break;
         }
         Integer[] numberSelection = new Integer[12];
         for (int i = 0; i < numberSelection.length; i++) {
-            numberSelection[i] = i + start;
+            numberSelection[i] = i+ start;
         }
         return numberSelection;
     }
@@ -56,7 +53,7 @@ public class RouletteBoardAndWheel {
     public Integer[] evenNumberSet() {
         Integer[] numberSelection = new Integer[18];
         int counterForArray = 0;
-        for (int i = 0; i < numberSelection.length * 2; i++) {
+        for (int i = 1; i <= numberSelection.length * 2; i++) {
             if (i % 2 == 0) {
                 numberSelection[counterForArray] = i;
                 counterForArray++;
@@ -91,12 +88,10 @@ public class RouletteBoardAndWheel {
     //Wheel portion of the table
 
     public Integer generateWinningNumber() throws InterruptedException {
-        long timeout1 = 2;
-        long timeout2 = 5;
-        System.out.println("\n\n\nSpinning the wheel...\n\n\n");
-        TimeUnit.SECONDS.sleep(timeout1);
+        System.out.println("\n\n\nAll bets are FINAL!\nSpinning the wheel...\n\n\n");
+        TimeUnit.SECONDS.sleep(2);
         System.out.println("\n\n\nWHOOSH (wheel spin sound)\n\n\n");
-        TimeUnit.SECONDS.sleep(timeout2);
+        TimeUnit.SECONDS.sleep(5);
         Integer winningNumber = (int) (Math.random() * 36);
         if (winningNumber == 0) {
             int whichZeroChoice = (int) ((Math.random() * 2) + 1);

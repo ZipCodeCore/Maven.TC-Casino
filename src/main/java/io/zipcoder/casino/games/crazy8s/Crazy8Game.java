@@ -11,7 +11,7 @@ import io.zipcoder.casino.utils.IOHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Crazy8Game implements Game{
+public class Crazy8Game implements Game {
 
     private Card matchThisCard;
     private Deck deck; //get new deck to play with
@@ -37,7 +37,7 @@ public class Crazy8Game implements Game{
     @Override
     public void play(Player player) {
 
-        IOHandler.printMessage(runWelcome());
+        runWelcome();
 
 
         boolean playerCardsValid = matchDisplayCard(playerOne.getPlayersHand());
@@ -62,7 +62,7 @@ public class Crazy8Game implements Game{
     }
 
     private boolean playerTurn(Crazy8Player player) {
-    //Player needs to select card if they have valid cards
+        //Player needs to select card if they have valid cards
         if (matchDisplayCard(player.getPlayersHand())) {
             playerSelectCard(player);
         } else {
@@ -76,23 +76,25 @@ public class Crazy8Game implements Game{
         IOHandler.printMessage("You don't have any cards to play.");
         Card pulledCard = deck.pull();
 
-        IOHandler.printMessage("Here - try this one: " +pulledCard.toString());
+
+        IOHandler.printMessage("Here - try this one: " + pulledCard.toString());
         IOHandler.printMessage(" ");
+
         return pulledCard;
     }
 
     private Crazy8Player displayWinner() {
         String winningResults;
         Crazy8Player winner = new Crazy8Player("Nobody");
-        if(playerOne.getPlayersHand().size() == 0){
+        if (playerOne.getPlayersHand().size() == 0) {
             //player 1 won
             winningResults = "Player 1 Won!";
             winner = playerOne;
-        }else if(playerTwo.getPlayersHand().size() == 0){
+        } else if (playerTwo.getPlayersHand().size() == 0) {
             //player 2 won
             winningResults = "Player 2 Won!";
             winner = playerTwo;
-        }else{
+        } else {
             //ain't nobody win
             winningResults = "Ain't nobody winning today";
         }
@@ -103,7 +105,7 @@ public class Crazy8Game implements Game{
         return winner;
     }
 
-    public Card playerSelectCard(Crazy8Player player){
+    public Card playerSelectCard(Crazy8Player player) {
         displayPreSelectionMessage(player);
         int cardSelection = IOHandler.promptForIntWithMessage("Select which card you would like to play: ");
         Card selectedCard = player.getPlayersHand().get(cardSelection);
@@ -111,13 +113,14 @@ public class Crazy8Game implements Game{
         //make sure that card played is valid
         player.setPlayerCardsValid(validateSelection(selectedCard));
 
-        if(player.playerCardsValid){
-            matchThisCard = removeCard(cardSelection,  player); // Set card to match to removed card
-            if(selectedCard.getRank().equals(Rank.EIGHT)){
+        if (player.playerCardsValid) {
+            matchThisCard = removeCard(cardSelection, player); // Set card to match to removed card
+            if (selectedCard.getRank().equals(Rank.EIGHT)) {
+
                 //Prompt playerOne to select a new suit
                 changeSuitwithEight();
             }
-        }else {
+        } else {
             IOHandler.printMessage("That is not a legal play.");
             playerSelectCard(player);
         }
@@ -138,40 +141,40 @@ public class Crazy8Game implements Game{
     }
 
     public void changeSuitwithEight() {
-     String newSuit =
-                    IOHandler.promptForStringWithMessage("Enter the 1st letter of the suit you want to change to: ");
+        String newSuit =
+                IOHandler.promptForStringWithMessage("Enter the 1st letter of the suit you want to change to: ");
 
-            if (newSuit.equalsIgnoreCase("S")) {
-                this.matchThisCard.setSuit(Suit.SPADES);
-            } else if (newSuit.equalsIgnoreCase("H")) {
-                this.matchThisCard.setSuit(Suit.HEARTS);
-            } else if (newSuit.equalsIgnoreCase("D")) {
-                this.matchThisCard.setSuit(Suit.DIAMONDS);
-            } else if (newSuit.equalsIgnoreCase("C")) {
-                this.matchThisCard.setSuit(Suit.CLUBS);
+        if (newSuit.equalsIgnoreCase("S")) {
+            this.matchThisCard.setSuit(Suit.SPADES);
+        } else if (newSuit.equalsIgnoreCase("H")) {
+            this.matchThisCard.setSuit(Suit.HEARTS);
+        } else if (newSuit.equalsIgnoreCase("D")) {
+            this.matchThisCard.setSuit(Suit.DIAMONDS);
+        } else if (newSuit.equalsIgnoreCase("C")) {
+            this.matchThisCard.setSuit(Suit.CLUBS);
 
-            }
+        }
     }
 
-    private Card removeCard(int cardSelected,Crazy8Player player ) {
+    private Card removeCard(int cardSelected, Crazy8Player player) {
         return player.getPlayersHand().remove(cardSelected);
     }
 
-    private boolean matchDisplayCard(ArrayList<Card> cards){
-        for(Card card : cards) {
+    private boolean matchDisplayCard(ArrayList<Card> cards) {
+        for (Card card : cards) {
             if (card.getRank().equals(matchThisCard.getRank())
                     || card.getSuit().equals(matchThisCard.getSuit())
-                    || card.getRank().equals(Rank.EIGHT)){
+                    || card.getRank().equals(Rank.EIGHT)) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean validateSelection(Card card){
+    private boolean validateSelection(Card card) {
         if (card.getRank().equals(matchThisCard.getRank())
                 || card.getSuit().equals(matchThisCard.getSuit())
-                || card.getRank().equals(Rank.EIGHT)){
+                || card.getRank().equals(Rank.EIGHT)) {
             return true;
         }
         return false;
@@ -189,8 +192,8 @@ public class Crazy8Game implements Game{
     }
 
     @Override
-    public String runWelcome() {
-        return IOHandler.getMessageFromFile("Crazy8Start");
+    public void runWelcome() {
+        IOHandler.printMessage(IOHandler.getMessageFromFile("Crazy8Start"));
     }
 
 

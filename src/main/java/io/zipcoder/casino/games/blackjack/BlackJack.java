@@ -409,15 +409,13 @@ public class BlackJack implements Game {
     }
 
     @Override
-    public String runWelcome() {
+    public void runWelcome() {
         welcomeToBlackJack();
-        return null;
     }
 
     @Override
     public String getRules() {
         return IOHandler.getMessageFromFile(fRULES_PATH);
-
     }
 }
 //    public void playerDoubleDown(){
