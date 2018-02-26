@@ -1,6 +1,5 @@
 package io.zipcoder.casino.Game.cardGame.BLackJack;
 
-import io.zipcoder.casino.BlackJackBet;
 import io.zipcoder.casino.CasinoUtilities.Console;
 import io.zipcoder.casino.Game.cardGame.CardGame;
 import io.zipcoder.casino.Game.cardGame.utilities.Card;
@@ -10,9 +9,6 @@ import io.zipcoder.casino.Game.cardGame.utilities.Hand;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.Profile;
 import io.zipcoder.casino.TypeOfBet;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 public class BlackJackGame extends CardGame {
     private BlackJackPlayer player;
@@ -47,22 +43,25 @@ public class BlackJackGame extends CardGame {
         endGame();
     }
 
+
     //TODO test this method
-    public void round(BlackJackPlayer thePlayer, BlackJackPlayer theDealer) {
-
+    public String round(BlackJackPlayer thePlayer, BlackJackPlayer theDealer) {
+        boolean roundFinished = false;
         deal(thePlayer);
-        //TODO handel if player or dealer has blackJack after deal
-        turn(thePlayer);
-        //TODO handel if player has blackJack at anypoint in his turn
+        //player has blackjack upon first dealing
 
-        // need to account for all the types of bets played in the round;
-        if (thePlayer.getIsBusted()) {
-
-            for (TypeOfBet key : thePlayer.getAllBets().keySet()) {
-                thePlayer.lose(key);
-            }
-            thePlayer.setIsBusted(false);
+        if(isBlackJack(theDealer)){
+           return settleBets(thePlayer, theDealer);
         }
+
+        turn(thePlayer);
+        
+
+
+        //TODO
+         if(isBlackJack(thePlayer)){
+            return settleBets(thePlayer, theDealer);
+         }
 
         //TODO handle player wins if dealer busts
         dealerBehavior();
@@ -76,7 +75,22 @@ public class BlackJackGame extends CardGame {
         // game should continue as long as player has money
         // game
         //TODO handle when deck isEmpty to sure game continues as long as players want to play
+        return null;
     }
+
+//    if its a player turn and player gets blackJack
+//     then the escrow should be settled
+//     the round should end and the player should have a choice to keep playing
+//
+
+    //TODO test this method;
+    public String checksIfPlayerHasBlackAfterDeal(BlackJackPlayer thePlayer, BlackJackPlayer theDealer){
+        if (isBlackJack(thePlayer)) {
+            return settleBets(thePlayer, theDealer);
+        }
+        return "";
+    }
+
 
     //TODO test this method
     public void turn(BlackJackPlayer currentPlayer) {
@@ -89,7 +103,7 @@ public class BlackJackGame extends CardGame {
             // player has an ace the player can choose to change value to 1;
             if (input.equalsIgnoreCase("Hit") & currentPlayer.getScore() < 21) {
                 hit(currentPlayer);
-                if(isBlackJack(currentPlayer)){
+                if (isBlackJack(currentPlayer)) {
                     Console.print("BLACKJACK!!!!!!!!!!!!!!!!!!!!!");
 
                     break;
@@ -205,6 +219,8 @@ public class BlackJackGame extends CardGame {
             Console.print("Dealers Hand: " + dealer.getHand().showHand());
         }
 
+        isBusted(dealer);
+
     }
 
     public int dealACard(BlackJackPlayer cardPlayer) {
@@ -266,21 +282,108 @@ public class BlackJackGame extends CardGame {
         playBlackJack();
 
     }
-//if Player score is > 21 console print score you loose play
-    // if Player Score is <
+    //TODO test this
 
-    public Player decideWinner(BlackJackPlayer player1, BlackJackPlayer player2) {
-        int player1Score = player1.getScore();
-        int player2Score = player2.getScore();
+    /**
+     * Only time this method should be called is when both players have not busted
+     *
+     * @param thePlayer
+     * @param theDealer
+     * @return
+     */
+    public String settleBets(BlackJackPlayer thePlayer, BlackJackPlayer theDealer) {
+        int payout = 0;
+        String result = "";
+        //settle winning bets;
+        if (isBlackJack(thePlayer) || theDealer.getIsBusted() || decideWinner(thePlayer, theDealer) == thePlayer) {
+            payout = 1;
+            settlingBets(thePlayer, payout);
+            result = winnerAsString(thePlayer);
+        }//settle loosing bets
+        else if (thePlayer.getIsBusted() || decideWinner(thePlayer, theDealer) == theDealer) {
+            payout = 2;
+            settlingBets(thePlayer, payout);
+            result = looserAsString(thePlayer);
+        } else if (decideWinner(thePlayer, theDealer) == null) {
+            payout = 3;
+            settlingBets(thePlayer, payout);
+            result = playPushAsString(thePlayer);
+        }
+        return result;
+    }
 
-        if (player1Score <= 21 & player1Score < player2Score) {
-            return player2;
+
+    //TODO test this
+    public String winnerAsString(BlackJackPlayer thePlayer) {
+        String winner = thePlayer.getProfile().getName() + " YOU WIN" + "\n"
+                + "Your New Balance: " + thePlayer.getProfile().getAccountBalance();
+        return winner;
+    }
+
+    public String playPushAsString(BlackJackPlayer thePlayer) {
+        String winner = thePlayer.getProfile().getName() + " YOU PUSH" + "\n"
+                + "Your New Balance: " + thePlayer.getProfile().getAccountBalance();
+        return winner;
+    }
+
+    public String looserAsString(BlackJackPlayer thePlayer) {
+        String looser = thePlayer.getProfile().getName() + "You Loose!!" + "\n"
+                + "Your New Balance: " + thePlayer.getProfile().getAccountBalance();
+        return looser;
+    }
+
+
+//TODO test this
+
+    /**
+     * @param thePlayer
+     */
+    public void settlingBets(BlackJackPlayer thePlayer, int payout) {
+        for (TypeOfBet key : thePlayer.getAllBets().keySet()) {
+            if (payout == 1) {
+                settleBetsPlayerWins(thePlayer, key);
+            } else if (payout == 2) {
+                settleBetsPlayerLooses(thePlayer, key);
+            } else {
+                settleBetsPlayerPushes(thePlayer, key);
+            }
+        }
+    }
+
+    //TODO test this
+    public void settleBetsPlayerLooses(BlackJackPlayer thePlayer, TypeOfBet key) {
+        thePlayer.lose(key);
+        thePlayer.setIsBusted(false);
+    }
+
+    //TODO test this
+
+    public void settleBetsPlayerWins(BlackJackPlayer thePlayer, TypeOfBet key) {
+        if (key == BlackJackBet.INTIAL_BET) {
+            thePlayer.win(key, 3 / 2);
+        } else if (key == BlackJackBet.DOUBLE_DOWN) {
+            thePlayer.win(key, 2);
+        }
+    }
+
+    //TODO test this
+    public void settleBetsPlayerPushes(BlackJackPlayer thePlayer, TypeOfBet key) {
+        thePlayer.win(key, 0);
+    }
+
+    //TODO test this
+    public Player decideWinner(BlackJackPlayer thePlayer, BlackJackPlayer theDealer) {
+        int playerScore = thePlayer.getScore();
+        int dealerScore = theDealer.getScore();
+
+        if (playerScore <= 21 & playerScore < dealerScore) {
+            return theDealer;
         }
         // score is equal game is a push no player wins or looses
-        else if (player1Score <= 21 & player1Score == player2Score) {
+        else if (playerScore <= 21 & playerScore == dealerScore) {
             return null;
         }
-        return player1;
+        return thePlayer;
     }
 
     public boolean isBusted(BlackJackPlayer player1) {
@@ -289,6 +392,7 @@ public class BlackJackGame extends CardGame {
         }
         return player1.getIsBusted();
     }
+
 
     public boolean isBlackJack(BlackJackPlayer currentPlayer) {
         boolean blackJack = false;

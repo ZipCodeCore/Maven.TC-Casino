@@ -1,6 +1,6 @@
 package io.zipcoder.casinotest.test.GameTest.diceGameTest.CrapsTest;
 
-import io.zipcoder.casino.CrapsBet;
+import io.zipcoder.casino.Game.diceGame.Craps.CrapsBet;
 import io.zipcoder.casino.Game.diceGame.Craps.CrapsPlayer;
 import io.zipcoder.casino.Profile;
 import org.junit.Assert;

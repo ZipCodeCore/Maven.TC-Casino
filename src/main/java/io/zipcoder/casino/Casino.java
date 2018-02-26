@@ -1,13 +1,10 @@
 package io.zipcoder.casino;
 
-enum BlackJackChoices {
-    BET,
-    HIT,
-    STAND,
-    SPILT;
+public class Casino {
 
 
-    public String toString() {
-        return name().replaceAll("_", " ");
+
+    public static void main(String[] args) {
+        House.INSTANCE.startCasino();
     }
 }
