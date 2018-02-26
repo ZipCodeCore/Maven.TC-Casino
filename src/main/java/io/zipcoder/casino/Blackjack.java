@@ -192,7 +192,7 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
         int betPlaced = 0;
         do {
             System.out.println("How many chips do you want to bet?");
-            String inputString = scanner.next();
+            String inputString = scanner.nextLine();
             try {
                 betPlaced = Integer.parseInt(inputString);
                 if (betPlaced <= 0) {
@@ -204,7 +204,7 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
                     this.placeBet(this.getPlayer(), betPlaced);
                     break;
                 } else {
-                    System.out.println("You only have " + this.getPlayer().getWallet().checkChipAmount() + " chips");
+                    System.out.println("You only have " + this.getPlayer().getWallet().checkChipAmount() + " chip(s)");
                     System.out.println();
                 }
             } catch (NumberFormatException ne) {
@@ -260,7 +260,6 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
             }
 
             System.out.println();
-//            Scanner scanner = new Scanner(System.in);
             System.out.println("Do you want to \"hit\" or \"stay\"?: ");
             playerDecisionString = scanner.nextLine();
 
@@ -312,10 +311,9 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
         System.out.print(this.handToString(this.getDealer().getHand().getHandArrayList()));
         System.out.print("\u270B" + ", hand = " + dealerHandSum);
         System.out.println();
-        //System.out.println("Remaining deck size: " + this.getDeck().getDeckOfCards().size());
         System.out.println();
         System.out.print(this.getPlayer().getName() + " has ");
-        System.out.println(this.getPlayer().getWallet().checkChipAmount() + " chips");
+        System.out.println(this.getPlayer().getWallet().checkChipAmount() + " chip(s)");
 
         System.out.println();
         this.doYouWantToContinuePlaying();
@@ -329,7 +327,6 @@ public class Blackjack extends Game implements GameInterface, CardGameInterface,
             System.out.println("Keep playing? (yes/no) ");
             test = scanner.nextLine();
             if (test.equals("yes")) {
-                //Blackjack blackjack = new Blackjack("keepPlaying", 200);
                 this.getPlayer().getHand().clearHand();
                 this.getDealer().getHand().clearHand();
                 this.start();
