@@ -129,7 +129,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
     // Make private after testing / Make public for testing
     public int decideOnHowManyTimesToIterateBasedOn(int amountOfCardsAvailable) {
         if(amountOfCardsAvailable <= 4) {
-            int cardsAvailableInteger = amountOfCardsAvailable;
+            int cardsAvailableInteger = amountOfCardsAvailable -1;
             return cardsAvailableInteger;
         }
         return 4;
