@@ -34,15 +34,17 @@ public class CoinFlipper extends Game implements GameInterface{
                 System.out.println("Invalid input!  Bye-bye!");
                 end();
             }
-            String coinFace = coin.flip();
-            if (coinFace.equals("heads")) {
-                int payout  = thisRoundsBet*2;
-                System.out.println("Heads!  You win!  Your payout: " + payout);
-                player.getWallet().addChipsToAmount(payout);
-            } else {
-                System.out.println("Tails!  You lose!");
+            if (gameIsRunning) {
+                String coinFace = coin.flip();
+                if (coinFace.equals("heads")) {
+                    int payout = thisRoundsBet * 2;
+                    System.out.println("Heads!  You win!  Your payout: " + payout);
+                    player.getWallet().addChipsToAmount(payout);
+                } else {
+                    System.out.println("Tails!  You lose!");
+                }
+                System.out.println("Enter another bet to play again, or enter anything else to quit");
             }
-            System.out.println("Enter another bet to play again, or enter anything else to quit");
         }
     }
 
