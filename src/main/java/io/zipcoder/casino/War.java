@@ -4,7 +4,7 @@ import java.util.*;
 
 public class War extends Game implements GameInterface, CardGameInterface {
 
-    // private boolean gameIsRunning;
+    private boolean gameIsRunning;
     private Dealer dealer = new Dealer();
     private Person player = new Person("Joe");
     private ArrayList<Card> playerPlayedCards = new ArrayList<Card>();
@@ -17,7 +17,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
     }
 
     public void start() {
-        // gameIsRunning = true;
+        gameIsRunning = true;
         System.out.println("Welcome to WAR! Enter anything into the console to play a card");
         System.out.println("Enter 'exit' at any time to end the game");
         Deck dealerDeck = new Deck();
@@ -33,19 +33,21 @@ public class War extends Game implements GameInterface, CardGameInterface {
     public void engine() {
         // String playerInput = input.nextLine();
         if (nextLineIsNotExit()) {
-            while (!handOfPersonIsEmpty(dealer) && !handOfPersonIsEmpty(player)) {
-                playerPlayedCards.add(player.getHand().drawCardfromHand());
-                dealerPlayedCards.add(dealer.getHand().drawCardfromHand());
-                System.out.println("You played " + playerPlayedCards + " and the dealer played " + dealerPlayedCards);
-                int winner =
-                        compareCards(
-                                getLastCardPlayedOnTable(playerPlayedCards),
-                                getLastCardPlayedOnTable(dealerPlayedCards));
-                announceWinner(winner);
-                if (!nextLineIsNotExit()) {
-                    end();
+            while (gameIsRunning == true) {
+                while (!handOfPersonIsEmpty(dealer) && !handOfPersonIsEmpty(player)) {
+                    playerPlayedCards.add(player.getHand().drawCardfromHand());
+                    dealerPlayedCards.add(dealer.getHand().drawCardfromHand());
+                    System.out.println("You played " + playerPlayedCards + " and the dealer played " + dealerPlayedCards);
+                    int winner =
+                            compareCards(
+                                    getLastCardPlayedOnTable(playerPlayedCards),
+                                    getLastCardPlayedOnTable(dealerPlayedCards));
+                    announceWinner(winner);
+                    if (!nextLineIsNotExit()) {
+                        end();
+                    }
+                    // checkIfGameIsOver();
                 }
-                checkIfGameIsOver();
             }
         } else {end();}
     }
@@ -151,6 +153,8 @@ public class War extends Game implements GameInterface, CardGameInterface {
     }
 
     public void end() {
+        player.getHand().clearHand();
+        dealer.getHand().clearHand();
         String winner = "";
         if (player.getHand().getHandArrayList().size() > 50) {
             winner += "you!";
@@ -162,9 +166,7 @@ public class War extends Game implements GameInterface, CardGameInterface {
         if (input.nextLine().equals("yes")) {
             start();
         }
-        // gameIsRunning = false;
-        this.player.getHand().clearHand();
-        this.dealer.getHand().clearHand();
+        gameIsRunning = false;
     }
 
     public int checkNumberOfCards(Hand handToCheck) {
