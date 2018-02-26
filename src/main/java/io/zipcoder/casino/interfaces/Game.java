@@ -14,7 +14,7 @@ public interface Game {
     /**
      * The game must have a welcome prompt.
      */
-    String runWelcome();
+    void runWelcome();
 
     /**
      * Makes it so that every game has a way to pullMany up the rules for the game.

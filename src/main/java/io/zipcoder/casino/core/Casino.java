@@ -2,6 +2,7 @@ package io.zipcoder.casino.core;
 
 import io.zipcoder.casino.games.blackjack.BlackJack;
 import io.zipcoder.casino.games.ceelo.CeeLo;
+import io.zipcoder.casino.games.crazy8s.Crazy8Game;
 import io.zipcoder.casino.interfaces.Game;
 import io.zipcoder.casino.utils.IOHandler;
 
@@ -46,7 +47,7 @@ public class Casino {
                 currentGameRunning = new BlackJack();
                 break;
             case 2:
-                //currentGameRunning = new Crazy8Play();
+                currentGameRunning = new Crazy8Game();
                 System.out.println("[ SORRY! OUT OF ORDER! ]\n");
                 break;
             case 3:
