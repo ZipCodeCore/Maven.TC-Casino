@@ -1,0 +1,62 @@
+Casino User Stories
+
+
+As a player…
+
+Go Fish
+
+I want to receive 5 cards so I can play a hand.
+I want to recognize matches so that I can put down my pairs
+I want to ask other players for cards so I can match with my cards to make pairs
+I want to check my hand for cards that others ask for to give them the matching requested card
+I want to give matching cards to the player that requested the card
+I want to pull a card from the deck to replenish my hand when I failed in my request
+I want to pair and discard all my matches to win the game
+
+Black Jack
+
+I want to place a bet to mark myself as a player
+I want to receive 2 cards in order to play the game
+I want to add the numeric values of my cards to determine my points
+I want to take a hit to get my value closer to 21 without going over
+I want to stay if my cards are close to 21 so that I don’t go over
+I want to immediately show my hand if I have an Ace and a 10,Q,J or K
+
+
+Craps
+I want to place a bet
+I want to roll a “Snake Eyes”, 7 or 11 to win outright
+I want to roll the dice to set my point
+I want to roll the dice try to match the set point
+I don’t want to roll a “Snake Eyes”, 7 or 11 after the point is set
+
+
+As the computer... I want to
+
+Ask the user if they want to play a game
+Ask the user what type of game they want to play (card, dice)
+Ask the user what type of card game they want to play (black jack, go fish)
+Get the number of players playing.
+Get the player names.
+
+Go fish
+Deal five cards to each player
+
+Black jack
+Ask players to place bets
+Deal to cards to each player.
+Ask first player if they want to hit or stay.
+Give card to player that wants to hit.
+Move to next player if previous player wants to stay.
+Count each player total.
+Pay users that beat dealer hand but are under 21.
+Collect bets from players that go over 21.
+Collect bets from players that lose to the dealer.
+
+
+
+
+
+
+
+
